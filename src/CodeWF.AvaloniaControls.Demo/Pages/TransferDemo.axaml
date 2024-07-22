@@ -1,0 +1,16 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:codewf="https://codewf.com"
+             xmlns:local="clr-namespace:CodeWF.AvaloniaControls.Demo.Pages"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CodeWF.AvaloniaControls.Demo.Pages.TransferDemo">
+	<Grid RowDefinitions="Auto, *">
+        <StackPanel Orientation="Horizontal">
+            <Button Content="查看选择数据" Click="ShowSelectedInfo_OnClick"></Button>
+            <TextBlock Text="{Binding $parent[local:TransferDemo].SelectedInfo}"></TextBlock>
+        </StackPanel>
+        <codewf:Transfer x:Name="MyTransfer" Grid.Row="1" LeftHeader="数据源" RightHeader="选择结果" ItemsSource="{Binding $parent[local:TransferDemo].Items}"  />
+    </Grid>
+</UserControl>

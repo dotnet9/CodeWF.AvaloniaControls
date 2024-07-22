@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:CodeWF.AvaloniaControls.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CodeWF.AvaloniaControls.Controls.SearchListBox">
+    <Grid RowDefinitions="Auto, Auto, *">
+        <TextBox Watermark="搜索" KeyUp="ChangeSearchKey_OnKeyUp" />
+        <TextBlock Grid.Row="1">
+            <Run Text="总个数：" />
+            <Run Text="{Binding $parent[local:SearchListBox].TotalCount}" />
+            <Run Text="，已选个数：" />
+            <Run Text="{Binding #MyListBox.SelectedItems.Count}" />
+        </TextBlock>
+        <ListBox x:Name="MyListBox" Grid.Row="2" ItemsSource="{Binding $parent[local:SearchListBox].BindingItemsSource}"
+                 SelectedItems="{Binding $parent[local:SearchListBox].SelectedItems, Mode=TwoWay}" SelectionMode="Multiple" />
+    </Grid>
+</UserControl>

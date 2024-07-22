@@ -1,0 +1,18 @@
+﻿<Project>
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net8.0;net9.0;netstandard2.0</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<Version>0.0.1</Version>
+		<Authors>沙漠尽头的狼</Authors>
+		<Description>Avalonia Custom Controls</Description>
+		<RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageProjectUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="logo.png" Pack="true" PackagePath=""/>
+	</ItemGroup>
+</Project>

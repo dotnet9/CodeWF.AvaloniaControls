@@ -1,0 +1,112 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Markup.Xaml;
+using CodeWF.AvaloniaControls.Extensions;
+
+namespace CodeWF.AvaloniaControls.Controls;
+
+public partial class SearchListBox : UserControl, INotifyPropertyChanged
+{
+    private readonly ListBox? _listBox;
+
+    static SearchListBox()
+    {
+        ItemsSourceProperty.Changed.AddClassHandler<SearchListBox, RangeObservableCollection<string>?>((box, args) =>
+            box.OnItemSourceChanged(args));
+    }
+
+    public SearchListBox()
+    {
+        InitializeComponent();
+        _listBox = this.FindControl<ListBox>("MyListBox");
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
+    }
+
+    private void OnItemSourceChanged(AvaloniaPropertyChangedEventArgs<RangeObservableCollection<string>?> args)
+    {
+        if (_listBox == null) return;
+
+        ChangeSearchKey_OnKeyUp(null, null);
+    }
+
+    private void ChangeSearchKey_OnKeyUp(object? sender, KeyEventArgs e)
+    {
+        if (_listBox == null || ItemsSource == null) return;
+
+        var searchKey = string.Empty;
+        if (sender is TextBox txtBox) searchKey = txtBox.Text?.Trim().ToLower();
+
+        BindingItemsSource.Clear();
+        BindingItemsSource.Add(string.IsNullOrWhiteSpace(searchKey)
+            ? ItemsSource
+            : ItemsSource.Where(item => item.ToLower().Contains(searchKey)));
+        TotalCount = BindingItemsSource.Count;
+    }
+
+    #region 公开属性
+
+    public static readonly StyledProperty<RangeObservableCollection<string>?> ItemsSourceProperty =
+        AvaloniaProperty.Register<Transfer, RangeObservableCollection<string>?>(
+            nameof(ItemsSource));
+
+    public RangeObservableCollection<string>? ItemsSource
+    {
+        get => GetValue(ItemsSourceProperty);
+        set => SetValue(ItemsSourceProperty, value);
+    }
+
+    public List<string>? SelectedItems => _listBox?.SelectedItems?.Cast<string>().ToList();
+
+    #endregion
+
+    #region 公开方法
+
+    public void Add(List<string> items)
+    {
+        ItemsSource.Add(items);
+        BindingItemsSource.Add(items);
+    }
+
+    public void Remove(List<string> items)
+    {
+        foreach (var item in items)
+        {
+            ItemsSource.Remove(item);
+            BindingItemsSource.Remove(item);
+        }
+    }
+
+    #endregion
+
+    #region 内部使用
+
+    private readonly List<string>? _sourceItemSources;
+
+    public RangeObservableCollection<string> BindingItemsSource { get; } = new();
+
+    private int _totalCount;
+
+    private int TotalCount
+    {
+        get => _totalCount;
+
+        set
+        {
+            if (_totalCount == value) return;
+            _totalCount = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TotalCount)));
+        }
+    }
+
+    #endregion
+}
