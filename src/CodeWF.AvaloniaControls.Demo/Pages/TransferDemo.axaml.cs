@@ -17,7 +17,9 @@ public partial class TransferDemo : UserControl, INotifyPropertyChanged
         InitializeComponent();
     }
 
-    public RangeObservableCollection<string> Items { get; set; } = ["Ding", "Otter", "Husky", "Mr.17", "Cass"];
+    public RangeObservableCollection<string> LeftItems { get; set; } = ["codewf.com", "dotnet9.com", "dotnetools.com", "dotnet.chat", "Ding", "Otter",];
+
+    public RangeObservableCollection<string> RightItems { get; set; } = ["Husky", "Mr.17", "Cass"];
 
     public string? SelectedInfo
     {
@@ -40,7 +42,6 @@ public partial class TransferDemo : UserControl, INotifyPropertyChanged
 
     private void ShowSelectedInfo_OnClick(object? sender, RoutedEventArgs e)
     {
-        var selectedItems = _transfer.SelectedItems;
-        SelectedInfo = selectedItems == null ? "нч" : string.Join(',', selectedItems);
+        SelectedInfo = RightItems == null ? "нч" : string.Join(',', RightItems);
     }
 }

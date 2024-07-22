@@ -11,6 +11,8 @@
             <Button Content="查看选择数据" Click="ShowSelectedInfo_OnClick"></Button>
             <TextBlock Text="{Binding $parent[local:TransferDemo].SelectedInfo}"></TextBlock>
         </StackPanel>
-        <codewf:Transfer x:Name="MyTransfer" Grid.Row="1" LeftHeader="数据源" RightHeader="选择结果" ItemsSource="{Binding $parent[local:TransferDemo].Items}"  />
+        <codewf:Transfer x:Name="MyTransfer" Grid.Row="1" LeftHeader="数据源" RightHeader="选择结果" 
+                         LeftItemsSource="{Binding $parent[local:TransferDemo].LeftItems}"  
+                         RightItemsSource="{Binding $parent[local:TransferDemo].RightItems}"/>
     </Grid>
 </UserControl>

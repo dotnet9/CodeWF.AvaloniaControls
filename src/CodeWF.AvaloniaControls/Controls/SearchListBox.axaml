@@ -9,11 +9,18 @@
         <TextBox Watermark="搜索" KeyUp="ChangeSearchKey_OnKeyUp" />
         <TextBlock Grid.Row="1">
             <Run Text="总个数：" />
+            <Run Text="{Binding $parent[local:SearchListBox].SearchCount}" />
+            <Run Text="/" />
             <Run Text="{Binding $parent[local:SearchListBox].TotalCount}" />
             <Run Text="，已选个数：" />
             <Run Text="{Binding #MyListBox.SelectedItems.Count}" />
         </TextBlock>
-        <ListBox x:Name="MyListBox" Grid.Row="2" ItemsSource="{Binding $parent[local:SearchListBox].BindingItemsSource}"
-                 SelectedItems="{Binding $parent[local:SearchListBox].SelectedItems, Mode=TwoWay}" SelectionMode="Multiple" />
+        <ListBox x:Name="MyListBox" Grid.Row="2" 
+                 ItemsSource="{Binding $parent[local:SearchListBox].BindingItemsSource}"
+                 SelectedItems="{Binding $parent[local:SearchListBox].SelectedItems, Mode=TwoWay}"
+                 DoubleTapped="MyListBox_OnDoubleTapped"
+                 SelectionMode="Multiple">
+            
+        </ListBox>
     </Grid>
 </UserControl>
