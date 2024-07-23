@@ -16,10 +16,4 @@
 	  <PackageReference Include="Avalonia" Version="11.1.0" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Compile Update="Controls\SearchListBox.axaml.cs">
-	    <DependentUpon>SearchListBox.axaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
 </Project>
