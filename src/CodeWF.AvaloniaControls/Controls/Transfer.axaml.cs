@@ -1,11 +1,9 @@
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using CodeWF.AvaloniaControls.Extensions;
+using System.ComponentModel;
 
 namespace CodeWF.AvaloniaControls.Controls;
 

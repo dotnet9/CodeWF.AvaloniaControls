@@ -1,13 +1,12 @@
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Markup.Xaml;
+using CodeWF.AvaloniaControls.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Input;
-using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
-using CodeWF.AvaloniaControls.Extensions;
 
 namespace CodeWF.AvaloniaControls.Controls;
 
