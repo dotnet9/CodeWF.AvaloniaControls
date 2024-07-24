@@ -49,6 +49,11 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
         SearchData();
     }
 
+    private void TextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        ChangeSearchKey_OnKeyUp(sender, null);
+    }
+
     private void MyListBox_OnDoubleTapped(object? sender, TappedEventArgs e)
     {
         ListItemDoubleTapped?.Invoke(sender, e);

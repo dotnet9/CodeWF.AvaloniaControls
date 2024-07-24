@@ -6,13 +6,13 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.Controls.SearchListBox">
     <Grid RowDefinitions="Auto, Auto, *">
-        <TextBox Watermark="搜索" KeyUp="ChangeSearchKey_OnKeyUp" />
+        <TextBox Watermark="搜索" KeyUp="ChangeSearchKey_OnKeyUp" TextChanged="TextBox_OnTextChanged" Classes="clearButton" />
         <TextBlock Grid.Row="1" Margin="5">
-            <Run Text="总个数：" />
+            <Run Text="筛选/总：" />
             <Run Text="{Binding $parent[local:SearchListBox].SearchCount}" />
             <Run Text="/" />
             <Run Text="{Binding $parent[local:SearchListBox].TotalCount}" />
-            <Run Text="，已选个数：" />
+            <Run Text="，已选：" />
             <Run Text="{Binding #MyListBox.SelectedItems.Count}" />
         </TextBlock>
         <ListBox x:Name="MyListBox" Grid.Row="2" 
