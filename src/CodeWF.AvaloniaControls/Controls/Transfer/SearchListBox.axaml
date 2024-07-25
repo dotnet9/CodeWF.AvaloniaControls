@@ -6,7 +6,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.Controls.SearchListBox">
     <Grid RowDefinitions="Auto, Auto, *">
-        <TextBox Watermark="搜索" KeyUp="ChangeSearchKey_OnKeyUp" TextChanged="TextBox_OnTextChanged" Classes="clearButton" />
+        <TextBox Watermark="搜索" KeyUp="ChangeSearchKey_OnKeyUp" TextChanged="TextBox_OnTextChanged"
+                 Classes="clearButton" />
         <TextBlock Grid.Row="1" Margin="5">
             <Run Text="筛选/总：" />
             <Run Text="{Binding $parent[local:SearchListBox].SearchCount}" />
@@ -15,12 +16,12 @@
             <Run Text="，已选：" />
             <Run Text="{Binding #MyListBox.SelectedItems.Count}" />
         </TextBlock>
-        <ListBox x:Name="MyListBox" Grid.Row="2" 
-                 ItemsSource="{Binding $parent[local:SearchListBox].BindingItemsSource}"
-                 SelectedItems="{Binding $parent[local:SearchListBox].SelectedItems, Mode=TwoWay}"
-                 DoubleTapped="MyListBox_OnDoubleTapped"
-                 SelectionMode="Multiple">
-            
-        </ListBox>
+        <Border Grid.Row="2" Classes="Shadow" Theme="{StaticResource CardBorder}">
+            <ListBox x:Name="MyListBox"
+                     ItemsSource="{Binding $parent[local:SearchListBox].BindingItemsSource}"
+                     SelectedItems="{Binding $parent[local:SearchListBox].SelectedItems, Mode=TwoWay}"
+                     DoubleTapped="MyListBox_OnDoubleTapped"
+                     SelectionMode="Multiple" />
+        </Border>
     </Grid>
 </UserControl>

@@ -4,15 +4,44 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:codewf="https://codewf.com"
              xmlns:local="clr-namespace:CodeWF.AvaloniaControls.Demo.Pages"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             Width="800" Height="600" HorizontalAlignment="Left"
+             VerticalAlignment="Top"
              x:Class="CodeWF.AvaloniaControls.Demo.Pages.TransferDemo">
-	<Grid RowDefinitions="Auto, *">
-        <StackPanel Orientation="Horizontal">
-            <Button Content="查看选择数据" Click="ShowSelectedInfo_OnClick"></Button>
-            <TextBlock Text="{Binding $parent[local:TransferDemo].SelectedInfo}"></TextBlock>
-        </StackPanel>
-        <codewf:Transfer x:Name="MyTransfer" Grid.Row="1" LeftHeader="数据源" RightHeader="选择结果" 
-                         LeftItemsSource="{Binding $parent[local:TransferDemo].LeftItems}"  
-                         RightItemsSource="{Binding $parent[local:TransferDemo].RightItems}"/>
+    <Grid ColumnDefinitions="* 1 300">
+        <Border Theme="{StaticResource CardBorder}">
+            <codewf:Transfer x:Name="MyTransfer" Grid.Row="1" LeftHeader="数据源" RightHeader="选择结果"
+                             LeftItemsSource="{Binding $parent[local:TransferDemo].LeftItems}"
+                             RightItemsSource="{Binding $parent[local:TransferDemo].RightItems}" />
+        </Border>
+
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="#01ffffff" VerticalAlignment="Stretch" />
+
+        <Border Grid.Column="2" Theme="{StaticResource CardBorder}">
+            <Grid RowDefinitions="35 35 35 *" ColumnDefinitions="90 *">
+                <Grid.Styles>
+                    <Style Selector="TextBlock">
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                    </Style>
+                    <Style Selector="TextBox">
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    </Style>
+                </Grid.Styles>
+                <TextBlock Text="左侧分组头：" />
+                <TextBox Text="{Binding ElementName=MyTransfer, Path=LeftHeader, Mode=TwoWay}" Grid.Row="0"
+                         Grid.Column="1" />
+
+                <TextBlock Text="右侧分组头：" Grid.Row="1" Grid.Column="0" />
+                <TextBox Text="{Binding ElementName=MyTransfer, Path=RightHeader, Mode=TwoWay}" Grid.Row="1"
+                         Grid.Column="1" />
+
+                <TextBlock Text="已筛选数据：" Grid.Row="2" Grid.Column="0" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"
+                           Text="{Binding $parent[local:TransferDemo].SelectedInfo}"
+                           TextWrapping="Wrap" VerticalAlignment="Top" Margin="0 8 0 0">
+                </TextBlock>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

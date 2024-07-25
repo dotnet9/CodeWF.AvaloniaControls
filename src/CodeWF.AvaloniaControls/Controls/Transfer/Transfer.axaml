@@ -13,17 +13,17 @@
     </UserControl.Styles>
     <Grid ColumnDefinitions="* Auto *">
         <HeaderedContentControl Header="{Binding $parent[local:Transfer].LeftHeader}">
-            <local:SearchListBox x:Name="LeftSearchListBox" ItemsSource="{Binding $parent[local:Transfer].LeftItemsSource}"
-                                 />
+            <local:SearchListBox x:Name="LeftSearchListBox"
+                                 ItemsSource="{Binding $parent[local:Transfer].LeftItemsSource}" />
         </HeaderedContentControl>
-        <GridSplitter Grid.Column="1" Background="#11cccccc" />
+        <GridSplitter Grid.Column="1" Background="White" />
         <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="5 0">
             <Button Content="&gt;&gt;" Click="MoveLeftToRight_OnClick" />
-            <Button Content="&lt;&lt;" Click="MoveRightToLeft_OnClick"/>
+            <Button Content="&lt;&lt;" Click="MoveRightToLeft_OnClick" />
         </StackPanel>
         <HeaderedContentControl Grid.Column="2" Header="{Binding $parent[local:Transfer].RightHeader}">
-            <local:SearchListBox x:Name="RightSearchListBox" ItemsSource="{Binding $parent[local:Transfer].RightItemsSource}"
-                                 />
+            <local:SearchListBox x:Name="RightSearchListBox"
+                                 ItemsSource="{Binding $parent[local:Transfer].RightItemsSource}" />
         </HeaderedContentControl>
     </Grid>
 </UserControl>

@@ -15,6 +15,10 @@ public partial class TransferDemo : UserControl, INotifyPropertyChanged
     public TransferDemo()
     {
         InitializeComponent();
+        RightItems.CollectionChanged += (s, e) =>
+        {
+            UpdateSelectedCount();
+        };
     }
 
     public RangeObservableCollection<string> LeftItems { get; set; } = ["codewf.com", "dotnet9.com", "dotnetools.com", "dotnet.chat", "Ding", "Otter",];
@@ -38,10 +42,11 @@ public partial class TransferDemo : UserControl, INotifyPropertyChanged
     {
         AvaloniaXamlLoader.Load(this);
         _transfer = this.FindControl<Transfer>("MyTransfer")!;
+        UpdateSelectedCount();
     }
 
-    private void ShowSelectedInfo_OnClick(object? sender, RoutedEventArgs e)
+    private void UpdateSelectedCount()
     {
-        SelectedInfo = RightItems == null ? "нч" : string.Join(',', RightItems);
+        SelectedInfo = RightItems.Count <= 0 ? "нч" : string.Join(',', RightItems);
     }
 }

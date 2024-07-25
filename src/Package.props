@@ -3,7 +3,7 @@
 		<TargetFrameworks>net6.0;net8.0;net9.0;netstandard2.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
-		<Version>0.0.2</Version>
+		<Version>0.0.3</Version>
 		<Authors>沙漠尽头的狼</Authors>
 		<Description>Avalonia Custom Controls</Description>
 		<RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</RepositoryUrl>

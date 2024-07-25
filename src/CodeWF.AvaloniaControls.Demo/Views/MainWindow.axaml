@@ -5,15 +5,13 @@
         xmlns:pages="clr-namespace:CodeWF.AvaloniaControls.Demo.Pages"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="CodeWF.AvaloniaControls.Demo.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="CodeWF.AvaloniaControls.Demo">
-    
-    <TabControl TabStripPlacement="Left">
-        <TabItem Header="SearchListBox">
-            <pages:SearchListBoxDemo/>
-        </TabItem>
-        <TabItem Header="Transfer">
-			<pages:TransferDemo/>
-        </TabItem>
-    </TabControl>
+        Icon="/Assets/logo.ico"
+        Title="CodeWF.AvaloniaControls">
+    <Border Background="{StaticResource CloudDrawingBrush}" Classes="Shadow" Theme="{StaticResource CardBorder}">
+        <TabControl TabStripPlacement="Left">
+            <TabItem Header="Transfer">
+                <pages:TransferDemo />
+            </TabItem>
+        </TabControl>
+    </Border>
 </Window>

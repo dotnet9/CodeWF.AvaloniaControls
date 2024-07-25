@@ -1,12 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using CodeWF.AvaloniaControls.Extensions;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 
 namespace CodeWF.AvaloniaControls.Controls;
 
@@ -41,10 +41,7 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
 
     private void ChangeSearchKey_OnKeyUp(object? sender, KeyEventArgs e)
     {
-        if (sender is TextBox txtBox)
-        {
-            _searchKey = txtBox.Text?.Trim().ToLower();
-        }
+        if (sender is TextBox txtBox) _searchKey = txtBox.Text?.Trim().ToLower();
 
         SearchData();
     }
