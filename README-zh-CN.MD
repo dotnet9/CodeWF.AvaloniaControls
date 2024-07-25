@@ -2,7 +2,7 @@
 
 一个自定义的Avalonia UI控件库
 
-简体中文 | [English](README.md)
+简体中文 | [English](README.MD)
 
 ## 安装
 

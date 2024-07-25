@@ -18,7 +18,7 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Copyright>https://codewf.com</Copyright>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReadmeFile>README.MD</PackageReadmeFile>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
 		<IsAotCompatible>true</IsAotCompatible>
@@ -31,7 +31,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<!-- The nuget package icon -->
-		<None Include="..\..\README.md" Pack="true" PackagePath="" />
+		<None Include="..\..\README.MD" Pack="true" PackagePath="" />
 		<None Include="logo.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 </Project>
