@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeWF.AvaloniaControls.Dem
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{3A88F1C2-198E-4976-85B8-D9B8EABE88D9}"
 	ProjectSection(SolutionItems) = preProject
-		..\README-zh-CN.MD = ..\README-zh-CN.MD
+		..\README-zh-CN.md = ..\README-zh-CN.md
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
