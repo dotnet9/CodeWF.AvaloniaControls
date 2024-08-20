@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:pages="clr-namespace:CodeWF.AvaloniaControls.Demo.Pages"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="1000" Height="800"
         x:Class="CodeWF.AvaloniaControls.Demo.Views.MainWindow"
         Icon="/Assets/logo.ico"
         Title="CodeWF.AvaloniaControls">
