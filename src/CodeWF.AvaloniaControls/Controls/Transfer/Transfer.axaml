@@ -16,7 +16,7 @@
             <local:SearchListBox x:Name="LeftSearchListBox"
                                  ItemsSource="{Binding $parent[local:Transfer].LeftItemsSource}" />
         </HeaderedContentControl>
-        <GridSplitter Grid.Column="1" Background="White" />
+        <GridSplitter Grid.Column="1" />
         <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="5 0">
             <Button Content="&gt;&gt;" Click="MoveLeftToRight_OnClick" />
             <Button Content="&lt;&lt;" Click="MoveRightToLeft_OnClick" />
