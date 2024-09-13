@@ -32,4 +32,17 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
         SuppressNotification = false;
         OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
     }
+
+    public void Insert(int index, IEnumerable<T> collection)
+    {
+        if (collection == null)
+            throw new ArgumentNullException(nameof(collection));
+
+        SuppressNotification = true;
+
+        foreach (var item in collection) Items.Insert(index, item);
+
+        SuppressNotification = false;
+        OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+    }
 }
