@@ -1,27 +1,39 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:CodeWF.AvaloniaControls.Controls"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CodeWF.AvaloniaControls.Controls.SearchListBox">
+<UserControl
+    x:Class="CodeWF.AvaloniaControls.Controls.SearchListBox"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CodeWF.AvaloniaControls.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:CompileBindings="True"
+    mc:Ignorable="d">
     <Grid RowDefinitions="Auto, Auto, *">
-        <TextBox Watermark="搜索" KeyUp="ChangeSearchKey_OnKeyUp" TextChanged="TextBox_OnTextChanged"
-                 Classes="clearButton" />
+        <TextBox
+            Classes="clearButton"
+            KeyUp="ChangeSearchKey_OnKeyUp"
+            TextChanged="TextBox_OnTextChanged"
+            Watermark="搜索" />
         <TextBlock Grid.Row="1" Margin="5">
             <Run Text="筛选/总：" />
-            <Run Text="{Binding $parent[local:SearchListBox].SearchCount}" />
+            <Run Text="{CompiledBinding $parent[local:SearchListBox].SearchCount}" />
             <Run Text="/" />
-            <Run Text="{Binding $parent[local:SearchListBox].TotalCount}" />
+            <Run Text="{CompiledBinding $parent[local:SearchListBox].TotalCount}" />
             <Run Text="，已选：" />
-            <Run Text="{Binding #MyListBox.SelectedItems.Count}" />
+            <Run Text="{CompiledBinding #MyListBox.SelectedItems.Count}" />
         </TextBlock>
-        <Border Grid.Row="2" Classes="Shadow" Theme="{StaticResource CardBorder}">
-            <ListBox x:Name="MyListBox"
-                     ItemsSource="{Binding $parent[local:SearchListBox].BindingItemsSource}"
-                     SelectedItems="{Binding $parent[local:SearchListBox].SelectedItems, Mode=TwoWay}"
-                     DoubleTapped="MyListBox_OnDoubleTapped"
-                     SelectionMode="Multiple" />
+        <Border
+            Grid.Row="2"
+            Classes="Shadow"
+            Theme="{StaticResource CardBorder}">
+            <ListBox
+                x:Name="MyListBox"
+                DoubleTapped="MyListBox_OnDoubleTapped"
+                ItemsSource="{CompiledBinding $parent[local:SearchListBox].BindingItemsSource}"
+                SelectedItems="{CompiledBinding $parent[local:SearchListBox].SelectedItems,
+                                                Mode=TwoWay}"
+                SelectionMode="Multiple" />
         </Border>
     </Grid>
 </UserControl>

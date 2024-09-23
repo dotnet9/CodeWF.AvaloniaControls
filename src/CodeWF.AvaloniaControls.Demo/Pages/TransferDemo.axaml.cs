@@ -10,7 +10,6 @@ namespace CodeWF.AvaloniaControls.Demo.Pages;
 public partial class TransferDemo : UserControl, INotifyPropertyChanged
 {
     private string? _selectedInfo;
-    private Transfer _transfer;
 
     public TransferDemo()
     {
@@ -36,12 +35,11 @@ public partial class TransferDemo : UserControl, INotifyPropertyChanged
         }
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
+    public new event PropertyChangedEventHandler? PropertyChanged;
 
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
-        _transfer = this.FindControl<Transfer>("MyTransfer")!;
         UpdateSelectedCount();
     }
 

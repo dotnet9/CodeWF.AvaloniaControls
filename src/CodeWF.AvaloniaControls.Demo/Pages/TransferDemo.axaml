@@ -11,8 +11,8 @@
     <Grid ColumnDefinitions="* 1 300">
         <Border Theme="{StaticResource CardBorder}">
             <codewf:Transfer x:Name="MyTransfer" Grid.Row="1" LeftHeader="数据源" RightHeader="选择结果"
-                             LeftItemsSource="{Binding $parent[local:TransferDemo].LeftItems}"
-                             RightItemsSource="{Binding $parent[local:TransferDemo].RightItems}" />
+                             LeftItemsSource="{CompiledBinding $parent[local:TransferDemo].LeftItems}"
+                             RightItemsSource="{CompiledBinding $parent[local:TransferDemo].RightItems}" />
         </Border>
 
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="#01ffffff" VerticalAlignment="Stretch" />
@@ -29,16 +29,16 @@
                     </Style>
                 </Grid.Styles>
                 <TextBlock Text="左侧分组头：" />
-                <TextBox Text="{Binding ElementName=MyTransfer, Path=LeftHeader, Mode=TwoWay}" Grid.Row="0"
+                <TextBox Text="{CompiledBinding ElementName=MyTransfer, Path=LeftHeader, Mode=TwoWay}" Grid.Row="0"
                          Grid.Column="1" />
 
                 <TextBlock Text="右侧分组头：" Grid.Row="1" Grid.Column="0" />
-                <TextBox Text="{Binding ElementName=MyTransfer, Path=RightHeader, Mode=TwoWay}" Grid.Row="1"
+                <TextBox Text="{CompiledBinding ElementName=MyTransfer, Path=RightHeader, Mode=TwoWay}" Grid.Row="1"
                          Grid.Column="1" />
 
                 <TextBlock Text="已筛选数据：" Grid.Row="2" Grid.Column="0" />
                 <TextBlock Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"
-                           Text="{Binding $parent[local:TransferDemo].SelectedInfo}"
+                           Text="{CompiledBinding $parent[local:TransferDemo].SelectedInfo}"
                            TextWrapping="Wrap" VerticalAlignment="Top" Margin="0 8 0 0">
                 </TextBlock>
             </Grid>

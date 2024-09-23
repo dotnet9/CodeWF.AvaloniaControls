@@ -1,10 +1,14 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:CodeWF.AvaloniaControls.Controls"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CodeWF.AvaloniaControls.Controls.Transfer">
+<UserControl
+    x:Class="CodeWF.AvaloniaControls.Controls.Transfer"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CodeWF.AvaloniaControls.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:CompileBindings="True"
+    mc:Ignorable="d">
     <UserControl.Styles>
         <Style Selector="Button">
             <Setter Property="Margin" Value="0 10" />
@@ -12,18 +16,19 @@
         </Style>
     </UserControl.Styles>
     <Grid ColumnDefinitions="* Auto *">
-        <HeaderedContentControl Header="{Binding $parent[local:Transfer].LeftHeader}">
-            <local:SearchListBox x:Name="LeftSearchListBox"
-                                 ItemsSource="{Binding $parent[local:Transfer].LeftItemsSource}" />
+        <HeaderedContentControl Header="{CompiledBinding $parent[local:Transfer].LeftHeader}">
+            <local:SearchListBox x:Name="LeftSearchListBox" ItemsSource="{CompiledBinding $parent[local:Transfer].LeftItemsSource}" />
         </HeaderedContentControl>
         <GridSplitter Grid.Column="1" />
-        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="5 0">
-            <Button Content="&gt;&gt;" Click="MoveLeftToRight_OnClick" />
-            <Button Content="&lt;&lt;" Click="MoveRightToLeft_OnClick" />
+        <StackPanel
+            Grid.Column="1"
+            Margin="5,0"
+            VerticalAlignment="Center">
+            <Button Click="MoveLeftToRight_OnClick" Content="&gt;&gt;" />
+            <Button Click="MoveRightToLeft_OnClick" Content="&lt;&lt;" />
         </StackPanel>
-        <HeaderedContentControl Grid.Column="2" Header="{Binding $parent[local:Transfer].RightHeader}">
-            <local:SearchListBox x:Name="RightSearchListBox"
-                                 ItemsSource="{Binding $parent[local:Transfer].RightItemsSource}" />
+        <HeaderedContentControl Grid.Column="2" Header="{CompiledBinding $parent[local:Transfer].RightHeader}">
+            <local:SearchListBox x:Name="RightSearchListBox" ItemsSource="{CompiledBinding $parent[local:Transfer].RightItemsSource}" />
         </HeaderedContentControl>
     </Grid>
 </UserControl>
