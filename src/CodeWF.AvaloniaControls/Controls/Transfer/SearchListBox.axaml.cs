@@ -111,9 +111,9 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
 
     public RangeObservableCollection<string> BindingItemsSource { get; } = new();
 
-    private int? _totalCount;
+    private int _totalCount;
 
-    private int? TotalCount
+    public int TotalCount
     {
         get => _totalCount;
 
@@ -127,7 +127,7 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
 
     private int _searchCount;
 
-    private int SearchCount
+    public int SearchCount
     {
         get => _searchCount;
 
@@ -141,7 +141,7 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
 
     private void ChangeCountInfo()
     {
-        TotalCount = ItemsSource?.Count;
+        TotalCount = ItemsSource?.Count ?? default;
         SearchCount = BindingItemsSource.Count;
     }
 
