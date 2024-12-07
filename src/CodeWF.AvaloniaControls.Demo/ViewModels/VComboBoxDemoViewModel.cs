@@ -1,13 +1,16 @@
-﻿using System;
+﻿using Avalonia.Media;
+using CodeWF.AvaloniaControls.Demo.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeWF.AvaloniaControls.Demo.ViewModels
 {
     internal class VComboBoxDemoViewModel
     {
-        public List<string> Numbers { get; } = new List<string>() { "正常", "告警", "异常" };
+        public List<WarningItem> WarningItems { get; } = new List<WarningItem>()
+        {
+            new() { Color = new SolidColorBrush(Colors.Black), Name = "显示所有" },
+            new() { Color = new SolidColorBrush(Colors.Red), Name = "筛选告警" },
+            new() { Color = new SolidColorBrush(Colors.Green), Name = "筛选正常" }
+        };
     }
 }

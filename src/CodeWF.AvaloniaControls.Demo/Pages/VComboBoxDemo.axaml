@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.Demo.ViewModels"
+             xmlns:model="clr-namespace:CodeWF.AvaloniaControls.Demo.Models"
              x:DataType="vm:VComboBoxDemoViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.Demo.Pages.VComboBoxDemo">
@@ -11,25 +12,25 @@
     </UserControl.DataContext>
     <StackPanel HorizontalAlignment="Left">
         <TextBlock Text="Normal ComboBox" />
-        <ComboBox SelectedIndex="0" ItemsSource="{Binding Numbers}" />
+        <ComboBox SelectedIndex="0" ItemsSource="{Binding WarningItems}" />
         <TextBlock Text="VComboBox" Margin="0 30 0 0" />
-        <ComboBox Theme="{StaticResource VComboBox}" SelectedIndex="0" ItemsSource="{Binding Numbers}" Padding="5"
+        <ComboBox Theme="{StaticResource VComboBox}" SelectedIndex="0" ItemsSource="{Binding WarningItems}" Padding="5"
                   MinWidth="85">
             <ComboBox.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate DataType="model:WarningItem">
                     <Grid ColumnDefinitions="Auto Auto">
-                        <Rectangle Grid.Column="0" Fill="DarkOrange" Width="24" Height="24" Margin="0 0 5 0"
+                        <Rectangle Grid.Column="0" Fill="{Binding Color}" Width="24" Height="24" Margin="0 0 5 0"
                                    VerticalAlignment="Center" />
-                        <TextBlock Grid.Column="1" Text="{Binding}" Margin="5 0 0 0" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Text="{Binding Name}" Margin="5 0 0 0" VerticalAlignment="Center" />
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
             <ComboBox.SelectionBoxItemTemplate>
-                <DataTemplate>
+                <DataTemplate DataType="model:WarningItem">
                     <Grid RowDefinitions="Auto Auto">
-                        <Rectangle Grid.Row="0" Fill="DarkOrange" Width="24" Height="24" Margin="0 0 0 5"
+                        <Rectangle Grid.Row="0" Fill="{Binding Color}" Width="24" Height="24" Margin="0 0 0 5"
                                    HorizontalAlignment="Center" />
-                        <TextBlock Grid.Row="1" Text="{Binding}" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="1" Text="超时告警" HorizontalAlignment="Center" />
                     </Grid>
                 </DataTemplate>
             </ComboBox.SelectionBoxItemTemplate>
