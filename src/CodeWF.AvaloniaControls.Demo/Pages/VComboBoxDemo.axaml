@@ -2,20 +2,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.Demo.ViewModels"
+             x:DataType="vm:VComboBoxDemoViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.Demo.Pages.VComboBoxDemo">
+    <UserControl.DataContext>
+        <vm:VComboBoxDemoViewModel />
+    </UserControl.DataContext>
     <StackPanel HorizontalAlignment="Left">
         <TextBlock Text="Normal ComboBox" />
-        <ComboBox SelectedIndex="0">
-            <ComboBoxItem Content="1" />
-            <ComboBoxItem Content="2" />
-            <ComboBoxItem Content="3" />
-        </ComboBox>
+        <ComboBox SelectedIndex="0" ItemsSource="{Binding Numbers}" />
         <TextBlock Text="VComboBox" Margin="0 30 0 0" />
-        <ComboBox Theme="{StaticResource VComboBox}" SelectedIndex="0">
-            <ComboBoxItem Content="1" />
-            <ComboBoxItem Content="2" />
-            <ComboBoxItem Content="3" />
+        <ComboBox Theme="{StaticResource VComboBox}" SelectedIndex="0" ItemsSource="{Binding Numbers}" Padding="5"
+                  MinWidth="85">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="Auto Auto">
+                        <Rectangle Grid.Column="0" Fill="DarkOrange" Width="24" Height="24" Margin="0 0 5 0"
+                                   VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Text="{Binding}" Margin="5 0 0 0" VerticalAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+            <ComboBox.SelectionBoxItemTemplate>
+                <DataTemplate>
+                    <Grid RowDefinitions="Auto Auto">
+                        <Rectangle Grid.Row="0" Fill="DarkOrange" Width="24" Height="24" Margin="0 0 0 5"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="1" Text="{Binding}" HorizontalAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </ComboBox.SelectionBoxItemTemplate>
         </ComboBox>
     </StackPanel>
 </UserControl>

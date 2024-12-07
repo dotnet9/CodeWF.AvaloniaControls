@@ -13,7 +13,7 @@
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="MinHeight" Value="{DynamicResource ComboBoxDefaultHeight}" />
         <Setter Property="Template">
@@ -22,6 +22,7 @@
                     <Grid RowDefinitions="*, Auto">
                         <Border
                             Name="Background"
+                            Grid.RowSpan="2"
                             MinHeight="{TemplateBinding MinHeight}"
                             Background="{TemplateBinding Background}"
                             BackgroundSizing="{TemplateBinding BackgroundSizing}"
@@ -68,7 +69,7 @@
 
                         <Popup
                             Name="PART_Popup"
-                            Grid.Column="0"
+                            Grid.Column="0" Grid.Row="1"
                             MaxHeight="{TemplateBinding MaxDropDownHeight}"
                             InheritsTransform="True"
                             IsLightDismissEnabled="True"
