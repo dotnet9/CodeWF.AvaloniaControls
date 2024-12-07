@@ -10,30 +10,39 @@
     <UserControl.DataContext>
         <vm:VComboBoxDemoViewModel />
     </UserControl.DataContext>
+    <UserControl.Styles>
+        <Style Selector="ComboBox">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="model:WarningItem">
+                        <Grid ColumnDefinitions="Auto Auto">
+                            <Rectangle Grid.Column="0" Fill="{Binding Color}" Width="24" Height="24" Margin="0 0 5 0"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Text="{Binding Name}" Margin="5 0 0 0"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SelectionBoxItemTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="model:WarningItem">
+                        <Grid RowDefinitions="Auto Auto">
+                            <Rectangle Grid.Row="0" Fill="{Binding Color}" Width="24" Height="24" Margin="0 0 0 5"
+                                       HorizontalAlignment="Center" />
+                            <TextBlock Grid.Row="1" Text="超时告警" HorizontalAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Styles>
     <StackPanel HorizontalAlignment="Left">
         <TextBlock Text="Normal ComboBox" />
-        <ComboBox SelectedIndex="0" ItemsSource="{Binding WarningItems}" />
+        <ComboBox ItemsSource="{Binding WarningItems}" SelectedIndex="0" />
+
         <TextBlock Text="VComboBox" Margin="0 30 0 0" />
-        <ComboBox Theme="{StaticResource VComboBox}" SelectedIndex="0" ItemsSource="{Binding WarningItems}" Padding="5"
-                  MinWidth="85">
-            <ComboBox.ItemTemplate>
-                <DataTemplate DataType="model:WarningItem">
-                    <Grid ColumnDefinitions="Auto Auto">
-                        <Rectangle Grid.Column="0" Fill="{Binding Color}" Width="24" Height="24" Margin="0 0 5 0"
-                                   VerticalAlignment="Center" />
-                        <TextBlock Grid.Column="1" Text="{Binding Name}" Margin="5 0 0 0" VerticalAlignment="Center" />
-                    </Grid>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-            <ComboBox.SelectionBoxItemTemplate>
-                <DataTemplate DataType="model:WarningItem">
-                    <Grid RowDefinitions="Auto Auto">
-                        <Rectangle Grid.Row="0" Fill="{Binding Color}" Width="24" Height="24" Margin="0 0 0 5"
-                                   HorizontalAlignment="Center" />
-                        <TextBlock Grid.Row="1" Text="超时告警" HorizontalAlignment="Center" />
-                    </Grid>
-                </DataTemplate>
-            </ComboBox.SelectionBoxItemTemplate>
-        </ComboBox>
+        <ComboBox ItemsSource="{Binding WarningItems}" SelectedIndex="0" Theme="{StaticResource VComboBox}" Padding="5"
+                  MinWidth="85" />
     </StackPanel>
 </UserControl>
