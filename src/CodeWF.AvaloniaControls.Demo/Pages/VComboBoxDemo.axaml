@@ -4,14 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.Demo.ViewModels"
              xmlns:model="clr-namespace:CodeWF.AvaloniaControls.Demo.Models"
+             xmlns:u="https://irihi.tech/ursa"
              x:DataType="vm:VComboBoxDemoViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.Demo.Pages.VComboBoxDemo">
     <UserControl.DataContext>
         <vm:VComboBoxDemoViewModel />
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="MenuForeground">Black</SolidColorBrush>
+        <x:Double x:Key="MenuFontSize">14</x:Double>
+		<FontWeight x:Key="MenuFontWeight">Normal</FontWeight>
+    </UserControl.Resources>
     <UserControl.Styles>
+        
+        <Style Selector="u|IconButton">
+            <Setter Property="Foreground" Value="{StaticResource MenuForeground}" />
+            <Setter Property="FontSize" Value="{StaticResource MenuFontSize}" />
+            <Setter Property="FontWeight" Value="{StaticResource MenuFontWeight}" />
+        </Style>
         <Style Selector="ComboBox">
+            <Setter Property="Foreground" Value="{StaticResource MenuForeground}" />
+            <Setter Property="FontSize" Value="{StaticResource MenuFontSize}" />
+            <Setter Property="FontWeight" Value="{StaticResource MenuFontWeight}" />
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate DataType="model:WarningItem">
@@ -27,9 +42,9 @@
             <Setter Property="SelectionBoxItemTemplate">
                 <Setter.Value>
                     <DataTemplate DataType="model:WarningItem">
-                        <Grid RowDefinitions="Auto Auto">
-                            <Rectangle Grid.Row="0" Fill="{Binding Color}" Width="24" Height="24" Margin="0 0 0 5"
-                                       HorizontalAlignment="Center" />
+                        <Grid RowDefinitions="Auto Auto" VerticalAlignment="Bottom" >
+                            <Rectangle Grid.Row="0" Fill="{Binding Color}" Width="24" Height="24"
+                                       HorizontalAlignment="Center" Margin="0 15 0 10" />
                             <TextBlock Grid.Row="1" Text="超时告警" HorizontalAlignment="Center" />
                         </Grid>
                     </DataTemplate>
@@ -37,12 +52,30 @@
             </Setter>
         </Style>
     </UserControl.Styles>
-    <StackPanel HorizontalAlignment="Left">
-        <TextBlock Text="Normal ComboBox" />
-        <ComboBox ItemsSource="{Binding WarningItems}" SelectedIndex="0" />
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+        <u:IconButton Content="Add" IconPlacement="Top">
+            <u:IconButton.Icon>
+                <Rectangle Grid.Row="0" Fill="Red" Width="24" Height="24" Margin="0 0 0 5"
+                           HorizontalAlignment="Center" />
+            </u:IconButton.Icon>
+        </u:IconButton>
+        <u:IconButton Content="Edit" IconPlacement="Top">
+            <u:IconButton.Icon>
+                <Rectangle Grid.Row="0" Fill="Red" Width="24" Height="24" Margin="0 0 0 5"
+                           HorizontalAlignment="Center" />
+            </u:IconButton.Icon>
+        </u:IconButton>
+        <u:IconButton Content="Update" IconPlacement="Top">
+            <u:IconButton.Icon>
+                <Rectangle Grid.Row="0" Fill="Red" Width="24" Height="24" Margin="0 0 0 5"
+                           HorizontalAlignment="Center" />
+            </u:IconButton.Icon>
+        </u:IconButton>
 
-        <TextBlock Text="VComboBox" Margin="0 30 0 0" />
-        <ComboBox ItemsSource="{Binding WarningItems}" SelectedIndex="0" Theme="{StaticResource VComboBox}" Padding="5"
+        <ComboBox ItemsSource="{Binding WarningItems}" 
+                  SelectedIndex="0" 
+                  Theme="{StaticResource VComboBox}" 
                   MinWidth="85" />
+        <ComboBox ItemsSource="{Binding WarningItems}" SelectedIndex="0" VerticalAlignment="Center" />
     </StackPanel>
 </UserControl>
