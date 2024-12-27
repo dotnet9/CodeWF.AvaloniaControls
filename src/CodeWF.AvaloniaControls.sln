@@ -11,10 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeWF.AvaloniaControls", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeWF.AvaloniaControls.Demo", "CodeWF.AvaloniaControls.Demo\CodeWF.AvaloniaControls.Demo.csproj", "{EFEB51EE-0B3B-4651-895F-13B200E4CC60}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{3A88F1C2-198E-4976-85B8-D9B8EABE88D9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A88F1C2-198E-4976-85B8-D9B8EABE88D9}"
 	ProjectSection(SolutionItems) = preProject
 		..\README-zh_CN.MD = ..\README-zh_CN.MD
 		..\README.MD = ..\README.MD
+		..\UpdateLog.md = ..\UpdateLog.md
 	EndProjectSection
 EndProject
 Global
