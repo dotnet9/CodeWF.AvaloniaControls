@@ -7,7 +7,7 @@
     <Application.Styles>
         <semi:SemiTheme Locale="zh-CN" />
         <u-semi:SemiTheme Locale="zh-CN"/>
-        <StyleInclude Source="avares://CodeWF.AvaloniaControls/Styles.axaml" />
+        <StyleInclude Source="avares://CodeWF.AvaloniaControls/Themes/Index.axaml" />
     </Application.Styles>
     <Application.Resources>
         <ResourceDictionary>

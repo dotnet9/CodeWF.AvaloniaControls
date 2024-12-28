@@ -16,9 +16,6 @@
             <TabItem Header="ComboBox">
 				<pages:VComboBoxDemo />
             </TabItem>
-            <TabItem Header="Markdown">
-				<pages:MarkdownDemo />
-            </TabItem>
         </TabControl>
     </Border>
 </Window>
