@@ -6,7 +6,7 @@
 		<LangVersion>latest</LangVersion>
 		<OutputType>Library</OutputType>
 		<IsPackable>true</IsPackable>
-		<Version>0.0.7.0</Version>
+		<Version>0.0.7.1</Version>
 		<Authors>沙漠尽头的狼</Authors>
 		<Description>Avalonia Custom Controls</Description>
 		<RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</RepositoryUrl>
@@ -29,8 +29,6 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Avalonia" Version="11.2.3" />
-		<PackageReference Include="Avalonia.Controls.DataGrid" Version="11.2.3" />
-		<PackageReference Include="Markdig" Version="0.39.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<!-- The nuget package icon -->
