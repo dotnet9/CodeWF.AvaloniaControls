@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<Title>CodeWF.AvaloniaControls</Title>
-		<TargetFrameworks>netstandard2.0;netstandard2.1;net8;net9</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0;net10.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<OutputType>Library</OutputType>
 		<IsPackable>true</IsPackable>
-		<Version>0.0.7.1</Version>
+		<Version>0.0.8.0</Version>
 		<Authors>沙漠尽头的狼</Authors>
 		<Description>Avalonia Custom Controls</Description>
 		<RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</RepositoryUrl>
@@ -27,8 +27,11 @@
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))">
 		<IsAotCompatible>true</IsAotCompatible>
 	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))">
+		<IsAotCompatible>true</IsAotCompatible>
+	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="11.2.3" />
+		<PackageReference Include="Avalonia" Version="11.2.4" />
 	</ItemGroup>
 	<ItemGroup>
 		<!-- The nuget package icon -->
