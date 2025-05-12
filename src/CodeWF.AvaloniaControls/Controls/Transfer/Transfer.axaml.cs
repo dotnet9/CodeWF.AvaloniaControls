@@ -31,15 +31,15 @@ public partial class Transfer : UserControl, INotifyPropertyChanged
     private void MoveLeftToRight_OnClick(object? sender, RoutedEventArgs e)
     {
         var leftSelectedItems = _leftSearchListBox!.SelectedItems;
-        _leftSearchListBox!.Remove(leftSelectedItems);
-        _rightSearchListBox.Add(leftSelectedItems);
+        _leftSearchListBox!.RemoveRange(leftSelectedItems);
+        _rightSearchListBox.AddRange(leftSelectedItems);
     }
 
     private void MoveRightToLeft_OnClick(object? sender, RoutedEventArgs e)
     {
         var rightSelectedItems = _rightSearchListBox!.SelectedItems;
-        _rightSearchListBox.Remove(rightSelectedItems);
-        _leftSearchListBox.Add(rightSelectedItems);
+        _rightSearchListBox.RemoveRange(rightSelectedItems);
+        _leftSearchListBox.AddRange(rightSelectedItems);
     }
 
     #region 对外提供属性

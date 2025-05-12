@@ -61,7 +61,7 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
         if (_listBox == null || ItemsSource == null) return;
 
         BindingItemsSource.Clear();
-        BindingItemsSource.Add(string.IsNullOrWhiteSpace(_searchKey)
+        BindingItemsSource.AddRange(string.IsNullOrWhiteSpace(_searchKey)
             ? ItemsSource
             : ItemsSource.Where(item => item.ToLower().Contains(_searchKey)));
         ChangeCountInfo();
@@ -87,20 +87,17 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
 
     #region 公开方法
 
-    public void Add(List<string> items)
+    public void AddRange(List<string> items)
     {
-        ItemsSource.Add(items);
-        BindingItemsSource.Add(items);
+        ItemsSource.AddRange(items);
+        BindingItemsSource.AddRange(items);
         ChangeCountInfo();
     }
 
-    public void Remove(List<string> items)
+    public void RemoveRange(List<string> items)
     {
-        foreach (var item in items)
-        {
-            ItemsSource.Remove(item);
-            BindingItemsSource.Remove(item);
-        }
+        ItemsSource.RemoveRange(items);
+        BindingItemsSource.RemoveRange(items);
 
         ChangeCountInfo();
     }
