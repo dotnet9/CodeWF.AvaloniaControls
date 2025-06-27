@@ -16,6 +16,12 @@
             <TabItem Header="ComboBox">
 				<pages:VComboBoxDemo />
             </TabItem>
+            <TabItem Header="TabControl">
+				<pages:TabControlDemo />
+            </TabItem>
+            <TabItem Header="TabStrip">
+                <pages:TabStripDemo />
+            </TabItem>
         </TabControl>
     </Border>
 </Window>

@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:codewf="https://codewf.com"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CodeWF.AvaloniaControls.Demo.Pages.TabControlDemo">
+    <Border>
+        <TabControl Background="#1890FF" VerticalAlignment="Top">
+			<TabControl.Styles>
+				<Style Selector="codewf|Level1TabItem">
+					<Setter Property="CornerRadius" Value="10 10 0 0" />
+					<Setter Property="Foreground" Value="#FFFFFF" />
+					<Setter Property="Padding" Value="12 8" />
+				</Style>
+			</TabControl.Styles>
+			<codewf:Level1TabItem Header="Item1">
+                <Border Background="White" />
+            </codewf:Level1TabItem>
+            <codewf:Level1TabItem Header="Item2">
+                <Border Background="White" />
+            </codewf:Level1TabItem>
+            <codewf:Level1TabItem Header="Item3">
+                <Border Background="White" />
+            </codewf:Level1TabItem>
+            <codewf:Level1TabItem Header="Item4">
+                <Border Background="White" />
+            </codewf:Level1TabItem>
+        </TabControl>
+    </Border>
+</UserControl>
