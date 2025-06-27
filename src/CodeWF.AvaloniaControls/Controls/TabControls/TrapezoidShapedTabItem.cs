@@ -4,7 +4,7 @@ using Avalonia.Controls.Metadata;
 namespace CodeWF.AvaloniaControls.Controls.TabControls;
 
 [PseudoClasses(":previewSelected", ":firstSelected")]
-public class Level1TabItem : TabItem
+public class TrapezoidShapedTabItem : TabItem
 {
     public void SetSelectionPseudoClasses(bool isPreviewSelected, bool isFirstSelected)
     {

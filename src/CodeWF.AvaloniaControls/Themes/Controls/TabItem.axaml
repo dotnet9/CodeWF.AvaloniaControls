@@ -3,7 +3,7 @@
                     xmlns:controls="clr-namespace:CodeWF.AvaloniaControls.Controls"
                     xmlns:tabControls="clr-namespace:CodeWF.AvaloniaControls.Controls.TabControls"
                     x:CompileBindings="True">
-	<ControlTheme x:Key="{x:Type tabControls:Level1TabItem}" TargetType="tabControls:Level1TabItem">
+	<ControlTheme x:Key="{x:Type tabControls:TrapezoidShapedTabItem}" TargetType="tabControls:TrapezoidShapedTabItem">
 		<Setter Property="TabItem.Foreground" Value="{DynamicResource Brush.C2}" />
 		<Setter Property="TabItem.Background" Value="{DynamicResource Brush.F4}" />
 		<Setter Property="TabItem.Height" Value="30"></Setter>
@@ -15,14 +15,14 @@
 		<Setter Property="TabItem.Template">
 			<ControlTemplate TargetType="TabItem">
 				<Grid Background="{TemplateBinding Background}">
-					<tabControls:TabItemBorder
+					<tabControls:TrapezoidShapedTabItemBorder
                         Name="PART_LayoutRoot"
                         BorderBrush="{DynamicResource Brush.DivideLine1}"
                         Background="{DynamicResource Brush.TabSelected1}"
                         CornerRadius="10"
                         BorderThickness="1"
                         IsVisible="False">
-					</tabControls:TabItemBorder>
+					</tabControls:TrapezoidShapedTabItemBorder>
 					<ContentPresenter
                         x:Name="PART_ContentPresenter"
                         Padding="{TemplateBinding Padding}"
@@ -51,11 +51,11 @@
 		</Setter>
 
 		<!--  Selected state  -->
-		<Style Selector="^:firstSelected /template/ tabControls|TabItemBorder#PART_LayoutRoot">
+		<Style Selector="^:firstSelected /template/ tabControls|TrapezoidShapedTabItemBorder#PART_LayoutRoot">
 			<Setter Property="IsFirstItem" Value="True" />
 		</Style>
 
-		<Style Selector="^:selected /template/ tabControls|TabItemBorder#PART_LayoutRoot">
+		<Style Selector="^:selected /template/ tabControls|TrapezoidShapedTabItemBorder#PART_LayoutRoot">
 			<Setter Property="IsVisible" Value="True" />
 		</Style>
 
