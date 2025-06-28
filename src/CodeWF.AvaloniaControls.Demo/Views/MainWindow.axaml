@@ -9,7 +9,7 @@
     xmlns:views="clr-namespace:CodeWF.AvaloniaControls.Demo.Views"
     Title="CodeWF.AvaloniaControls"
     Width="1000"
-    Height="800"
+    Height="800" WindowStartupLocation="CenterScreen"
     d:DesignHeight="450"
     d:DesignWidth="800"
     Icon="/Assets/logo.ico"

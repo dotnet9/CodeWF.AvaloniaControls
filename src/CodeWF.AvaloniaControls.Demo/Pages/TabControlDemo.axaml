@@ -23,6 +23,16 @@
                     <Setter Property="BorderThickness" Value="1" />
                 </Style>
             </TabControl.Styles>
+            <TabControl.Resources>
+                <LinearGradientBrush x:Key="Brushes.TabItem.SelectedBackground" StartPoint="50%, 0%" EndPoint="50%, 100%">
+                    <GradientStops>
+                        <GradientStop Color="#BAE7FF" Offset="0" />
+                        <GradientStop Color="#FFFFFF" Offset="1" />
+                    </GradientStops>
+                </LinearGradientBrush>
+                <SolidColorBrush x:Key="Brushes.TabItem.SelectedBorderBrush">#05CCCCCC</SolidColorBrush>
+                <SolidColorBrush x:Key="Brushes.TabItem.SelectedForeground">#1890FF</SolidColorBrush>
+            </TabControl.Resources>
             <codewf:TrapezoidShapedTabItem Header="数据管理" />
             <codewf:TrapezoidShapedTabItem Header="系统设置" />
             <codewf:TrapezoidShapedTabItem Header="用户中心" />

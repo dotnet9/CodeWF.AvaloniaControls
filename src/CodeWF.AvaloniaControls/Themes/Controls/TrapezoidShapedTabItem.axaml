@@ -18,8 +18,8 @@
                 <Grid Background="{TemplateBinding Background}">
                     <codewf:TrapezoidShapedTabItemBorder
                         Name="PART_LayoutRoot"
-                        Background="{DynamicResource Brush.TabSelected1}"
-                        BorderBrush="{DynamicResource Brush.DivideLine1}"
+                        Background="{DynamicResource Brushes.TabItem.SelectedBackground}"
+                        BorderBrush="{DynamicResource Brushes.TabItem.SelectedBorderBrush}"
                         BorderThickness="1"
                         IsVisible="False" />
                     <ContentPresenter
@@ -36,13 +36,13 @@
                         Name="PART_SelectedPipe"
                         Margin="0"
                         Background="Transparent"
-                        BorderBrush="{DynamicResource Brush.DivideLine1}"
+                        BorderBrush="{DynamicResource Brushes.TabItem.SelectedBorderBrush}"
                         BorderThickness="0,0,0,1" />
                     <Border
                         Name="PART_RightSplit"
                         Margin="0,6,0,6"
                         Background="Transparent"
-                        BorderBrush="{DynamicResource Brush.DivideLine1}"
+                        BorderBrush="{DynamicResource Brushes.TabItem.SelectedBorderBrush}"
                         BorderThickness="0,0,1,0"
                         IsVisible="True" />
                 </Grid>
@@ -59,7 +59,7 @@
         </Style>
 
         <Style Selector="^:selected /template/ Border#PART_SelectedPipe">
-            <Setter Property="BorderBrush" Value="{DynamicResource Brush.TabSelected1}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource Brushes.TabItem.SelectedBackground}" />
             <Setter Property="Margin" Value="3 0 3  0" />
         </Style>
 
@@ -68,13 +68,13 @@
         </Style>
 
         <Style Selector="^:selected">
-            <Setter Property="Foreground" Value="{DynamicResource Brush.C1}" />
+            <Setter Property="Foreground" Value="{DynamicResource Brushes.TabItem.SelectedForeground}" />
         </Style>
 
         <Style Selector="^:not(:selected)">
             <Setter Property="Cursor" Value="Hand" />
             <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource Brush.C1}" />
+                <Setter Property="Foreground" Value="{DynamicResource Brushes.TabItem.SelectedForeground}" />
             </Style>
         </Style>
 

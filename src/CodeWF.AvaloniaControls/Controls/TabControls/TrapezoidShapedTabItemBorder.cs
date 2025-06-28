@@ -16,16 +16,7 @@ public partial class TrapezoidShapedTabItemBorder : Control
         AvaloniaProperty.Register<TrapezoidShapedTabItemBorder, double>(nameof(BorderThickness), 1);
 
     public static readonly StyledProperty<IBrush> BackgroundProperty =
-        AvaloniaProperty.Register<TrapezoidShapedTabItemBorder, IBrush>(nameof(Background), new LinearGradientBrush()
-        {
-            StartPoint = new RelativePoint(0.5, 0, RelativeUnit.Relative),
-            EndPoint = new RelativePoint(0.5, 1, RelativeUnit.Relative),
-            GradientStops =
-            [
-                new GradientStop(Color.Parse("#BAE7FF"), 0),
-                new GradientStop(Color.Parse("#FFFFFF"), 1)
-            ]
-        });
+        AvaloniaProperty.Register<TrapezoidShapedTabItemBorder, IBrush>(nameof(Background), Brushes.DarkGreen);
 
     public static readonly StyledProperty<bool> IsFirstItemProperty =
         AvaloniaProperty.Register<TrapezoidShapedTabItemBorder, bool>(nameof(IsFirstItem), false);
