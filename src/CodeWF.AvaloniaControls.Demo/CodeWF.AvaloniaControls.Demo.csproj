@@ -23,7 +23,7 @@
 		<PackageReference Include="Avalonia.ReactiveUI" Version="11.3.2" />
 		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.11.1" />
 		<PackageReference Include="Semi.Avalonia" Version="11.2.1.8" />
-		<PackageReference Include="YY-Thunks" Version="1.1.8-Beta1" />
+		<PackageReference Include="YY-Thunks" Version="1.1.8-Beta2" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\CodeWF.AvaloniaControls\CodeWF.AvaloniaControls.csproj" />

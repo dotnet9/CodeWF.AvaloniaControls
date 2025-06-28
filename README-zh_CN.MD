@@ -12,6 +12,14 @@ Install-Package CodeWF.AvaloniaControls
 
 ## 控件Demo
 
-### 穿梭框
+### Transfer
 
 ![](doc/Images/Transfer.gif)
+
+### ComboBox
+
+![](doc/Images/ComboBox.gif)
+
+### TabControl
+
+![](doc/Images/TabControl.gif)

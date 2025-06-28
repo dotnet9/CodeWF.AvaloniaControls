@@ -15,3 +15,11 @@ Install-Package CodeWF.AvaloniaControls
 ### Transfer
 
 ![](doc/Images/Transfer.gif)
+
+### ComboBox
+
+![](doc/Images/ComboBox.gif)
+
+### TabControl
+
+![](doc/Images/TabControl.gif)
