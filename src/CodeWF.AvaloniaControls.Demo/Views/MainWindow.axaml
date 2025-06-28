@@ -43,7 +43,7 @@
     <Border BorderBrush="LightGray" BorderThickness="1">
         <Grid RowDefinitions="40 72 *">
             <Border Background="#1890FF" Grid.RowSpan="2" />
-            <Border Grid.Row="1"  >
+            <Border Grid.Row="1">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="50% 0%" EndPoint="50% 100%">
                         <GradientStop Color="#1890FF" Offset="0" />
@@ -53,10 +53,10 @@
             </Border>
 
             <TabControl Margin="8 0"
-                Grid.Row="1" Grid.RowSpan="2" CornerRadius="10"
-                TabStripPlacement="Left" Background="White"
-                Theme="{StaticResource LineTabControl}"
-                Classes.ReverseSeparator="False">
+                        Grid.Row="1" Grid.RowSpan="2" CornerRadius="10"
+                        TabStripPlacement="Left" Background="White"
+                        Theme="{StaticResource LineTabControl}"
+                        Classes.ReverseSeparator="False">
                 <TabItem Header="Transfer">
                     <pages:TransferDemo />
                 </TabItem>
@@ -65,9 +65,6 @@
                 </TabItem>
                 <TabItem Header="TabControl">
                     <pages:TabControlDemo />
-                </TabItem>
-                <TabItem Header="TabStrip">
-                    <pages:TabStripDemo />
                 </TabItem>
             </TabControl>
         </Grid>

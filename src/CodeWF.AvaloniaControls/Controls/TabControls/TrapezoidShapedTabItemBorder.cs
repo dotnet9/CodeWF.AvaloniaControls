@@ -4,14 +4,13 @@ using Avalonia.Media;
 
 namespace CodeWF.AvaloniaControls.Controls.TabControls;
 
-public class TrapezoidShapedTabItemBorder : Control
+public partial class TrapezoidShapedTabItemBorder : Control
 {
-    // 定义依赖属性用于设置圆角半径和边框颜色
-    public static readonly StyledProperty<double> CornerRadiusProperty =
-        AvaloniaProperty.Register<TrapezoidShapedTabItemBorder, double>(nameof(CornerRadius), 2);
+    public const double DiagonalFilletRatio = 0.8;
 
     public static readonly StyledProperty<IBrush> BorderBrushProperty =
-        AvaloniaProperty.Register<TrapezoidShapedTabItemBorder, IBrush>(nameof(BorderBrush), new SolidColorBrush(Color.Parse("#05CCCCCC")));
+        AvaloniaProperty.Register<TrapezoidShapedTabItemBorder, IBrush>(nameof(BorderBrush),
+            new SolidColorBrush(Color.Parse("#05CCCCCC")));
 
     public static readonly StyledProperty<double> BorderThicknessProperty =
         AvaloniaProperty.Register<TrapezoidShapedTabItemBorder, double>(nameof(BorderThickness), 1);
@@ -30,12 +29,6 @@ public class TrapezoidShapedTabItemBorder : Control
 
     public static readonly StyledProperty<bool> IsFirstItemProperty =
         AvaloniaProperty.Register<TrapezoidShapedTabItemBorder, bool>(nameof(IsFirstItem), false);
-
-    public double CornerRadius
-    {
-        get => GetValue(CornerRadiusProperty);
-        set => SetValue(CornerRadiusProperty, value);
-    }
 
     public IBrush BorderBrush
     {
@@ -79,17 +72,16 @@ public class TrapezoidShapedTabItemBorder : Control
             return;
         }
 
-        var tabControl = Parent?.Parent?.Parent as TabControl;
-        var currentTabItem = Parent?.Parent as TrapezoidShapedTabItem;
-        var isFirst = false;
-        var isLast = false;
-        if (tabControl != null && currentTabItem != null)
+        if (Parent?.Parent?.Parent is not TabControl tabControl ||
+            Parent?.Parent is not TrapezoidShapedTabItem currentTabItem)
         {
-            var index = tabControl.Items.IndexOf(currentTabItem);
-            isFirst = index == 0;
-            isLast = index == tabControl.Items.Count - 1;
+            return;
         }
-        var radius = CornerRadius;
+
+        var index = tabControl.Items.IndexOf(currentTabItem);
+        var isFirst = index == 0;
+        var isLast = index == tabControl.Items.Count - 1;
+        var radius = currentTabItem.CornerRadius;
 
         // 获取控件的尺寸
         var rect = new Rect(Bounds.Size);
@@ -104,16 +96,29 @@ public class TrapezoidShapedTabItemBorder : Control
         {
             if (isFirst & !isLast)
             {
-                DrawFirstTabItemBorder(ctx, adjustedRect, radius, rect);
+                if (tabControl.TabStripPlacement == Dock.Top)
+                {
+                    DrawTopFirstTabItemBorder(ctx, adjustedRect, radius, rect);
+                }
             }
             else if (!isFirst && isLast)
             {
-                DrawLastTabItemBorder(ctx, adjustedRect, radius, rect);
+                if (tabControl.TabStripPlacement == Dock.Top)
+                {
+                    DrawTopLastTabItemBorder(ctx, adjustedRect, radius, rect);
+                }
             }
             else
             {
-                DrawOtherTabItemBorder(ctx, adjustedRect, radius, rect);
+                if (tabControl.TabStripPlacement == Dock.Top)
+                {
+                    DrawTopOtherTabItemBorder(ctx, adjustedRect, radius, rect);
+                }
             }
+
+            // 底边消失（不绘制）
+            // 这里直接跳过底边路径，确保底边消失
+            ctx.EndFigure(isClosed: true);
         }
 
         // 绘制边框
@@ -123,111 +128,5 @@ public class TrapezoidShapedTabItemBorder : Control
             LineJoin = PenLineJoin.Round, // 圆角连接
             LineCap = PenLineCap.Round // 圆角端点
         }, pathGeometry);
-    }
-
-    private static void DrawFirstTabItemBorder(StreamGeometryContext ctx, Rect adjustedRect, double radius, Rect rect)
-    {
-        // 开始路径，左下角
-        ctx.BeginFigure(new Point(adjustedRect.Left, adjustedRect.Bottom), isFilled: true);
-        
-        // 左边直线
-        ctx.LineTo(new Point(adjustedRect.Left, adjustedRect.Top + radius));
-
-        // 左上角内圆角
-        ctx.ArcTo(
-            new Point(rect.Left + radius, adjustedRect.Top),
-            new Size(radius, radius),
-            0,
-            false,
-            SweepDirection.Clockwise);
-
-        // 上边直线
-        ctx.LineTo(new Point(adjustedRect.Right - radius - radius, adjustedRect.Top));
-
-        // 右上角内圆角
-        ctx.ArcTo(
-            new Point(adjustedRect.Right - radius, adjustedRect.Top + radius * 0.8),
-            new Size(radius, radius),
-            0,
-            false,
-            SweepDirection.Clockwise);
-
-        // 右边斜线
-        ctx.LineTo(new Point(adjustedRect.Right, adjustedRect.Bottom));
-
-        // 底边消失（不绘制）
-        // 这里直接跳过底边路径，确保底边消失
-        ctx.EndFigure(isClosed: true);
-    }
-
-    private static void DrawLastTabItemBorder(StreamGeometryContext ctx, Rect adjustedRect, double radius, Rect rect)
-    {
-        // 开始路径，左下角
-        ctx.BeginFigure(new Point(adjustedRect.Left, adjustedRect.Bottom), isFilled: true);
-        
-        // 左边斜线
-        ctx.LineTo(new Point(adjustedRect.Left + radius, adjustedRect.Top + radius * 0.8));
-
-        // 左上角内圆角
-        ctx.ArcTo(
-            new Point(rect.Left + radius + radius, adjustedRect.Top),
-            new Size(radius, radius),
-            0,
-            false,
-            SweepDirection.Clockwise);
-
-        // 上边直线
-        ctx.LineTo(new Point(adjustedRect.Right - radius, adjustedRect.Top));
-
-        // 右上角内圆角
-        ctx.ArcTo(
-            new Point(adjustedRect.Right, adjustedRect.Top + radius),
-            new Size(radius, radius),
-            0,
-            false,
-            SweepDirection.Clockwise);
-
-        // 右边直线
-        ctx.LineTo(new Point(adjustedRect.Right, adjustedRect.Bottom));
-
-        // 底边消失（不绘制）
-        // 这里直接跳过底边路径，确保底边消失
-        ctx.EndFigure(isClosed: true);
-    }
-
-
-    private static void DrawOtherTabItemBorder(StreamGeometryContext ctx, Rect adjustedRect, double radius, Rect rect)
-    {
-        // 开始路径，左下角
-        ctx.BeginFigure(new Point(adjustedRect.Left, adjustedRect.Bottom), isFilled: true);
-        
-        // 左边斜线
-        ctx.LineTo(new Point(adjustedRect.Left + radius, adjustedRect.Top + radius * 0.8));
-
-        // 左上角内圆角
-        ctx.ArcTo(
-            new Point(rect.Left + radius + radius, adjustedRect.Top),
-            new Size(radius, radius),
-            0,
-            false,
-            SweepDirection.Clockwise);
-
-        // 上边直线
-        ctx.LineTo(new Point(adjustedRect.Right - radius - radius, adjustedRect.Top));
-
-        // 右上角内圆角
-        ctx.ArcTo(
-            new Point(adjustedRect.Right - radius, adjustedRect.Top + radius * 0.8),
-            new Size(radius, radius),
-            0,
-            false,
-            SweepDirection.Clockwise);
-
-        // 右边斜线
-        ctx.LineTo(new Point(adjustedRect.Right, adjustedRect.Bottom));
-
-        // 底边消失（不绘制）
-        // 这里直接跳过底边路径，确保底边消失
-        ctx.EndFigure(isClosed: true);
     }
 }

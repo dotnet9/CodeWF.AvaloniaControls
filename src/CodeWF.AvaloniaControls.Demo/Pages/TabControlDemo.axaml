@@ -5,29 +5,29 @@
              xmlns:codewf="https://codewf.com"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.Demo.Pages.TabControlDemo">
-    <TabControl Background="#551890FF" VerticalAlignment="Top" CornerRadius="10 10 0 0">
-        <TabControl.Styles>
-            <Style Selector="codewf|TrapezoidShapedTabItem">
-                <Setter Property="MinWidth" Value="95" />
-                <Setter Property="CornerRadius" Value="10 10 0 0" />
-                <Setter Property="Foreground" Value="#FFFFFF" />
-                <Setter Property="Padding" Value="12 8" />
+
+    <Grid RowDefinitions="Auto * Auto" ColumnDefinitions="Auto * Auto">
+        <Grid.Styles>
+            <Style Selector="TabControl">
+                <Setter Property="Background" Value="#551890FF"></Setter>
             </Style>
-        </TabControl.Styles>
-        <codewf:TrapezoidShapedTabItem Header="数据管理">
-            <Border Background="White" />
-        </codewf:TrapezoidShapedTabItem>
-        <codewf:TrapezoidShapedTabItem Header="系统设置">
-            <Border Background="White" />
-        </codewf:TrapezoidShapedTabItem>
-        <codewf:TrapezoidShapedTabItem Header="用户中心">
-            <Border Background="White" />
-        </codewf:TrapezoidShapedTabItem>
-        <codewf:TrapezoidShapedTabItem Header="日志记录">
-            <Border Background="White" />
-        </codewf:TrapezoidShapedTabItem>
-        <codewf:TrapezoidShapedTabItem Header="帮助文档">
-            <Border Background="White" />
-        </codewf:TrapezoidShapedTabItem>
-    </TabControl>
+        </Grid.Styles>
+
+
+        <TabControl Grid.Column="1" VerticalAlignment="Top" CornerRadius="10 10 0 0" TabStripPlacement="Top">
+            <TabControl.Styles>
+                <Style Selector="codewf|TrapezoidShapedTabItem">
+                    <Setter Property="CornerRadius" Value="10 10 0 0" />
+                    <Setter Property="Foreground" Value="#FFFFFF" />
+                    <Setter Property="Padding" Value="12 8" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Style>
+            </TabControl.Styles>
+            <codewf:TrapezoidShapedTabItem Header="数据管理" />
+            <codewf:TrapezoidShapedTabItem Header="系统设置" />
+            <codewf:TrapezoidShapedTabItem Header="用户中心" />
+            <codewf:TrapezoidShapedTabItem Header="日志记录" />
+            <codewf:TrapezoidShapedTabItem Header="帮助文档" />
+        </TabControl>
+    </Grid>
 </UserControl>
