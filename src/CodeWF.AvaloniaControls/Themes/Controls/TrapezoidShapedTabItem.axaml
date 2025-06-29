@@ -7,18 +7,13 @@
     <ControlTheme x:Key="{x:Type codewf:TrapezoidShapedTabItem}" TargetType="codewf:TrapezoidShapedTabItem">
         <Setter Property="TabItem.Foreground" Value="{DynamicResource TabItemLineHeaderForeground}" />
         <Setter Property="TabItem.Background" Value="{DynamicResource TabItemLinePipeBackground}" />
-        <Setter Property="TabItem.Height" Value="30" />
-        <Setter Property="TabItem.BorderThickness" Value="0" />
-        <Setter Property="TabItem.MinHeight" Value="5" />
-        <Setter Property="TabItem.HorizontalContentAlignment" Value="Center" />
-        <Setter Property="TabItem.VerticalContentAlignment" Value="Center" />
         <Setter Property="TabItem.Template">
             <ControlTemplate TargetType="TabItem">
                 <Grid Background="{TemplateBinding Background}">
                     <codewf:TrapezoidShapedTabItemBorder
                         Name="PART_LayoutRoot"
                         Background="{DynamicResource TabItemCardHeaderSelectedBackground}"
-                        BorderBrush="{DynamicResource Brushes.TabItem.SelectedBorderBrush}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
                         IsVisible="False" />
                     <ContentPresenter
@@ -31,19 +26,6 @@
                         FontFamily="{TemplateBinding FontFamily}"
                         FontWeight="{TemplateBinding FontWeight}"
                         Foreground="{TemplateBinding Foreground}" />
-                    <Border
-                        Name="PART_SelectedPipe"
-                        Margin="0"
-                        Background="Transparent"
-                        BorderBrush="{DynamicResource Brushes.TabItem.SelectedBorderBrush}"
-                        BorderThickness="0,0,0,1" />
-                    <Border
-                        Name="PART_RightSplit"
-                        Margin="0,6,0,6"
-                        Background="Transparent"
-                        BorderBrush="{DynamicResource Brushes.TabItem.SelectedBorderBrush}"
-                        BorderThickness="0,0,1,0"
-                        IsVisible="True" />
                 </Grid>
             </ControlTemplate>
         </Setter>
@@ -57,23 +39,19 @@
             <Setter Property="IsVisible" Value="True" />
         </Style>
 
-        <Style Selector="^:selected /template/ Border#PART_SelectedPipe">
-            <Setter Property="BorderBrush" Value="{DynamicResource TabItemCardHeaderSelectedBackground}" />
-            <Setter Property="Margin" Value="3 0 3  0" />
-        </Style>
-
-        <Style Selector="^:previewSelected /template/ Border#PART_RightSplit">
-            <Setter Property="IsVisible" Value="False" />
-        </Style>
-
         <Style Selector="^:selected">
             <Setter Property="Foreground" Value="{DynamicResource TabItemLineHeaderSelectedForeground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource TabItemLinePipeSelectedBackground}" />
         </Style>
 
         <Style Selector="^:not(:selected)">
             <Setter Property="Cursor" Value="Hand" />
-            <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Style Selector="^:pointerover">
                 <Setter Property="Foreground" Value="{DynamicResource TabItemLineHeaderPointeroverForeground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource TabItemLinePipePointeroverBorderBrush}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="BorderBrush" Value="{DynamicResource TabItemLinePipePressedBorderBrush}" />
             </Style>
         </Style>
 

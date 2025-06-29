@@ -22,6 +22,7 @@
                     <Setter Property="Padding" Value="12 8" />
                     <Setter Property="MinHeight" Value="40" />
                     <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
                 </Style>
             </TabControl.Styles>
             <TabControl.Resources>
@@ -33,7 +34,7 @@
                 </LinearGradientBrush>
                 <SolidColorBrush x:Key="TabItemLineHeaderPointeroverForeground">#1890FF</SolidColorBrush>
                 <SolidColorBrush x:Key="TabItemLineHeaderSelectedForeground">#1890FF</SolidColorBrush>
-                
+                <SolidColorBrush x:Key="TabItemLinePipeSelectedBackground">Transparent</SolidColorBrush>
             </TabControl.Resources>
             <codewf:TrapezoidShapedTabItem Header="数据管理" />
             <codewf:TrapezoidShapedTabItem Header="系统设置" />
