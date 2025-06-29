@@ -20,6 +20,7 @@
                     <Setter Property="CornerRadius" Value="10 10 0 0" />
                     <Setter Property="Foreground" Value="#FFFFFF" />
                     <Setter Property="Padding" Value="12 8" />
+                    <Setter Property="MinHeight" Value="40" />
                     <Setter Property="BorderThickness" Value="1" />
                 </Style>
             </TabControl.Styles>
