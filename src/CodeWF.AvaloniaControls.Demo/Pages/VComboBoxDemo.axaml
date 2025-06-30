@@ -14,10 +14,10 @@
     <UserControl.Resources>
         <SolidColorBrush x:Key="MenuForeground">Black</SolidColorBrush>
         <x:Double x:Key="MenuFontSize">14</x:Double>
-		<FontWeight x:Key="MenuFontWeight">Normal</FontWeight>
+        <FontWeight x:Key="MenuFontWeight">Normal</FontWeight>
     </UserControl.Resources>
     <UserControl.Styles>
-        
+
         <Style Selector="u|IconButton">
             <Setter Property="Foreground" Value="{StaticResource MenuForeground}" />
             <Setter Property="FontSize" Value="{StaticResource MenuFontSize}" />
@@ -42,7 +42,7 @@
             <Setter Property="SelectionBoxItemTemplate">
                 <Setter.Value>
                     <DataTemplate DataType="model:WarningItem">
-                        <Grid RowDefinitions="Auto Auto" VerticalAlignment="Bottom" >
+                        <Grid RowDefinitions="Auto Auto" VerticalAlignment="Bottom">
                             <Rectangle Grid.Row="0" Fill="{Binding Color}" Width="24" Height="24"
                                        HorizontalAlignment="Center" Margin="0 15 0 10" />
                             <TextBlock Grid.Row="1" Text="超时告警" HorizontalAlignment="Center" />
@@ -59,6 +59,29 @@
                            HorizontalAlignment="Center" />
             </u:IconButton.Icon>
         </u:IconButton>
+        <Grid>
+            <u:IconButton Content="Add" IconPlacement="Top">
+                <u:IconButton.Icon>
+                    <Rectangle Grid.Row="0" Fill="Red" Width="24" Height="24" Margin="0 0 0 5"
+                               HorizontalAlignment="Center" />
+                </u:IconButton.Icon>
+            </u:IconButton>
+            <u:PopConfirm PopupHeader="设置值"
+                          Placement="Bottom">
+                <u:PopConfirm.PopupContent>
+                    <TextBox />
+                </u:PopConfirm.PopupContent>
+                <Button VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+                        Theme="{DynamicResource BorderlessButton}"
+                        Classes="Small" MinHeight="0">
+                    <PathIcon Foreground="{DynamicResource ComboBoxIconDefaultForeground}"
+                              Data="{DynamicResource ComboBoxIcon}"
+                              IsHitTestVisible="False"
+                              Theme="{DynamicResource InnerPathIcon}"
+                              UseLayoutRounding="False" />
+                </Button>
+            </u:PopConfirm>
+        </Grid>
         <u:IconButton Content="Edit" IconPlacement="Top">
             <u:IconButton.Icon>
                 <Rectangle Grid.Row="0" Fill="Red" Width="24" Height="24" Margin="0 0 0 5"
@@ -72,9 +95,9 @@
             </u:IconButton.Icon>
         </u:IconButton>
 
-        <ComboBox ItemsSource="{Binding WarningItems}" 
-                  SelectedIndex="0" 
-                  Theme="{StaticResource VComboBox}" 
+        <ComboBox ItemsSource="{Binding WarningItems}"
+                  SelectedIndex="0"
+                  Theme="{StaticResource VComboBox}"
                   MinWidth="85" />
         <ComboBox ItemsSource="{Binding WarningItems}" SelectedIndex="0" VerticalAlignment="Center" />
     </StackPanel>
