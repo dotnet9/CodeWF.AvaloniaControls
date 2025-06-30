@@ -2,21 +2,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:codewf="https://codewf.com"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.Demo.Pages.TabControlDemo">
 
-    <Grid RowDefinitions="Auto * Auto" ColumnDefinitions="Auto * Auto">
-        <Grid.Styles>
-            <Style Selector="TabControl">
-                <Setter Property="Background" Value="#551890FF"></Setter>
-            </Style>
-        </Grid.Styles>
+    <Grid RowDefinitions="20 Auto 20 Auto" ColumnDefinitions="20 * 20">
 
 
-        <TabControl Grid.Column="1" VerticalAlignment="Top" CornerRadius="10 10 0 0" TabStripPlacement="Top">
+        <TabControl Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"
+                    Theme="{StaticResource TrapezoidShapedTabControl}"
+                    CornerRadius="10 10 0 0" TabStripPlacement="Top">
             <TabControl.Styles>
-                <Style Selector="codewf|TrapezoidShapedTabItem">
+                <Style Selector="TabItem">
+                    <Setter Property="CornerRadius" Value="10 10 0 0" />
+                    <Setter Property="Padding" Value="12 8" />
+                </Style>
+            </TabControl.Styles>
+            <TabControl.Resources>
+                <SolidColorBrush x:Key="TabItemLinePipeSelectedBackground">#CCC</SolidColorBrush>
+            </TabControl.Resources>
+            <TabItem Header="数据管理" />
+            <TabItem Header="系统设置" />
+            <TabItem Header="用户中心" />
+            <TabItem Header="日志记录" />
+            <TabItem Header="帮助文档" />
+        </TabControl>
+
+
+        <TabControl Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"
+                    Theme="{StaticResource TrapezoidShapedTabControl}"
+                    CornerRadius="10 10 0 0" TabStripPlacement="Top">
+            <TabControl.Styles>
+                <Style Selector="TabControl">
+                    <Setter Property="Background" Value="#551890FF"></Setter>
+                </Style>
+                <Style Selector="TabItem">
                     <Setter Property="CornerRadius" Value="10 10 0 0" />
                     <Setter Property="Foreground" Value="#FFFFFF" />
                     <Setter Property="Padding" Value="12 8" />
@@ -26,7 +45,8 @@
                 </Style>
             </TabControl.Styles>
             <TabControl.Resources>
-                <LinearGradientBrush x:Key="TabItemCardHeaderSelectedBackground" StartPoint="50%, 0%" EndPoint="50%, 100%">
+                <LinearGradientBrush x:Key="TabItemCardHeaderSelectedBackground" StartPoint="50%, 0%"
+                                     EndPoint="50%, 100%">
                     <GradientStops>
                         <GradientStop Color="#BAE7FF" Offset="0" />
                         <GradientStop Color="#FFFFFF" Offset="1" />
@@ -36,11 +56,11 @@
                 <SolidColorBrush x:Key="TabItemLineHeaderSelectedForeground">#1890FF</SolidColorBrush>
                 <SolidColorBrush x:Key="TabItemLinePipeSelectedBackground">Transparent</SolidColorBrush>
             </TabControl.Resources>
-            <codewf:TrapezoidShapedTabItem Header="数据管理" />
-            <codewf:TrapezoidShapedTabItem Header="系统设置" />
-            <codewf:TrapezoidShapedTabItem Header="用户中心" />
-            <codewf:TrapezoidShapedTabItem Header="日志记录" />
-            <codewf:TrapezoidShapedTabItem Header="帮助文档" />
+            <TabItem Header="数据管理" />
+            <TabItem Header="系统设置" />
+            <TabItem Header="用户中心" />
+            <TabItem Header="日志记录" />
+            <TabItem Header="帮助文档" />
         </TabControl>
     </Grid>
 </UserControl>

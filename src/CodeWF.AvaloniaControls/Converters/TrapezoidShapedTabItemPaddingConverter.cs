@@ -1,9 +1,8 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Data.Converters;
 using System;
 using System.Globalization;
-using Avalonia.Controls;
-using CodeWF.AvaloniaControls.Controls.TabControls;
 
 namespace CodeWF.AvaloniaControls.Converters;
 
@@ -11,7 +10,7 @@ public class TrapezoidShapedTabItemPaddingConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not TrapezoidShapedTabItem { Parent: TabControl tabControl } tabItem)
+        if (value is not TabItem { Parent: TabControl tabControl } tabItem)
         {
             return new Thickness(0);
         }

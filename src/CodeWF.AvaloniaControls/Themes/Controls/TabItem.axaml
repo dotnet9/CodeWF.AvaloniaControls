@@ -4,7 +4,7 @@
     xmlns:codewf="https://codewf.com"
     x:CompileBindings="True">
     <codewf:TrapezoidShapedTabItemPaddingConverter x:Key="TrapezoidShapedTabItemPaddingConverter" />
-    <ControlTheme x:Key="{x:Type codewf:TrapezoidShapedTabItem}" TargetType="codewf:TrapezoidShapedTabItem">
+    <ControlTheme x:Key="TrapezoidShapedTabItem" TargetType="TabItem">
         <Setter Property="TabItem.Foreground" Value="{DynamicResource TabItemLineHeaderForeground}" />
         <Setter Property="TabItem.Background" Value="{DynamicResource TabItemLinePipeBackground}" />
         <Setter Property="TabItem.Template">
@@ -31,9 +31,6 @@
         </Setter>
 
         <!--  Selected state  -->
-        <Style Selector="^:firstSelected /template/ codewf|TrapezoidShapedTabItemBorder#PART_LayoutRoot">
-            <Setter Property="IsFirstItem" Value="True" />
-        </Style>
 
         <Style Selector="^:selected /template/ codewf|TrapezoidShapedTabItemBorder#PART_LayoutRoot">
             <Setter Property="IsVisible" Value="True" />

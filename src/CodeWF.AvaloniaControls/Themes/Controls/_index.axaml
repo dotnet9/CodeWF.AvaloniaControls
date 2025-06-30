@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <ResourceDictionary.MergedDictionaries>
       <ResourceInclude Source="VComboBox.axaml" />
-      <ResourceInclude Source="TrapezoidShapedTabItem.axaml" />
+      <ResourceInclude Source="TabItem.axaml" />
+      <ResourceInclude Source="TabControl.axaml" />
   </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

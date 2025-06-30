@@ -18,9 +18,6 @@ public partial class TrapezoidShapedTabItemBorder : Control
     public static readonly StyledProperty<IBrush> BackgroundProperty =
         AvaloniaProperty.Register<TrapezoidShapedTabItemBorder, IBrush>(nameof(Background), Brushes.DarkGreen);
 
-    public static readonly StyledProperty<bool> IsFirstItemProperty =
-        AvaloniaProperty.Register<TrapezoidShapedTabItemBorder, bool>(nameof(IsFirstItem), false);
-
     public IBrush BorderBrush
     {
         get => GetValue(BorderBrushProperty);
@@ -39,22 +36,6 @@ public partial class TrapezoidShapedTabItemBorder : Control
         set => SetValue(BackgroundProperty, value);
     }
 
-    public bool IsFirstItem
-    {
-        get => GetValue(IsFirstItemProperty);
-        set => SetValue(IsFirstItemProperty, value);
-    }
-
-    public TrapezoidShapedTabItemBorder()
-    {
-        //MessageCenter.Messenger.Register<string, string>(this, MessageToken.ThemeColorChanged, OnThemeColorChanged);
-    }
-
-    private void OnThemeColorChanged(object? sender, string e)
-    {
-        this.InvalidateVisual();
-    }
-
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -64,7 +45,7 @@ public partial class TrapezoidShapedTabItemBorder : Control
         }
 
         if (Parent?.Parent?.Parent is not TabControl tabControl ||
-            Parent?.Parent is not TrapezoidShapedTabItem currentTabItem)
+            Parent?.Parent is not TabItem currentTabItem)
         {
             return;
         }
