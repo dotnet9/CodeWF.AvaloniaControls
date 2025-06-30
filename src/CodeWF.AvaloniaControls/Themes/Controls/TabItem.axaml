@@ -5,19 +5,21 @@
     x:CompileBindings="True">
     <codewf:TrapezoidShapedTabItemPaddingConverter x:Key="TrapezoidShapedTabItemPaddingConverter" />
     <ControlTheme x:Key="TrapezoidShapedTabItem" TargetType="TabItem">
-        <Setter Property="TabItem.Foreground" Value="{DynamicResource TabItemLineHeaderForeground}" />
-        <Setter Property="TabItem.Background" Value="{DynamicResource TabItemLinePipeBackground}" />
-        <Setter Property="TabItem.Template">
+        <Setter Property="Foreground" Value="{DynamicResource TabItemLineHeaderForeground}" />
+        <Setter Property="Background" Value="{DynamicResource TabItemLinePipeBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TabControlSeparatorBorderBrush}" />
+        <Setter Property="Template">
             <ControlTemplate TargetType="TabItem">
-                <Grid Background="{TemplateBinding Background}">
+                <Grid>
                     <codewf:TrapezoidShapedTabItemBorder
                         Name="PART_LayoutRoot"
-                        Background="{DynamicResource TabItemCardHeaderSelectedBackground}"
+                        Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
                         IsVisible="False" />
                     <ContentPresenter
                         x:Name="PART_ContentPresenter"
+                        Background="#01FFFFFF"
                         Padding="{TemplateBinding Converter={StaticResource TrapezoidShapedTabItemPaddingConverter}}"
                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -38,7 +40,6 @@
 
         <Style Selector="^:selected">
             <Setter Property="Foreground" Value="{DynamicResource TabItemLineHeaderSelectedForeground}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource TabItemLinePipeSelectedBackground}" />
         </Style>
 
         <Style Selector="^:not(:selected)">

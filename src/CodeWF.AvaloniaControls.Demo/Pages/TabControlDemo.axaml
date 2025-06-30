@@ -17,9 +17,6 @@
                     <Setter Property="Padding" Value="12 8" />
                 </Style>
             </TabControl.Styles>
-            <TabControl.Resources>
-                <SolidColorBrush x:Key="TabItemLinePipeSelectedBackground">#CCC</SolidColorBrush>
-            </TabControl.Resources>
             <TabItem Header="数据管理" />
             <TabItem Header="系统设置" />
             <TabItem Header="用户中心" />
@@ -42,19 +39,22 @@
                     <Setter Property="MinHeight" Value="40" />
                     <Setter Property="BorderThickness" Value="1" />
                     <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="50%, 0%"
+                                                 EndPoint="50%, 100%">
+                                <GradientStops>
+                                    <GradientStop Color="#BAE7FF" Offset="0" />
+                                    <GradientStop Color="#FFFFFF" Offset="1" />
+                                </GradientStops>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
             </TabControl.Styles>
             <TabControl.Resources>
-                <LinearGradientBrush x:Key="TabItemCardHeaderSelectedBackground" StartPoint="50%, 0%"
-                                     EndPoint="50%, 100%">
-                    <GradientStops>
-                        <GradientStop Color="#BAE7FF" Offset="0" />
-                        <GradientStop Color="#FFFFFF" Offset="1" />
-                    </GradientStops>
-                </LinearGradientBrush>
                 <SolidColorBrush x:Key="TabItemLineHeaderPointeroverForeground">#1890FF</SolidColorBrush>
                 <SolidColorBrush x:Key="TabItemLineHeaderSelectedForeground">#1890FF</SolidColorBrush>
-                <SolidColorBrush x:Key="TabItemLinePipeSelectedBackground">Transparent</SolidColorBrush>
             </TabControl.Resources>
             <TabItem Header="数据管理" />
             <TabItem Header="系统设置" />
