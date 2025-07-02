@@ -8,7 +8,7 @@
 		<IsPackable>true</IsPackable>
 		<Version>0.1.1.6</Version>
 		<Authors>沙漠尽头的狼</Authors>
-		<Description>Avalonia Custom Controls</Description>
+		<Description>封装一些Avalonia控件，比如穿梭框、异形TabControl等。Encapsulate some Avalonia controls, such as shuttle boxes, alien TabControls, etc.</Description>
 		<RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageIcon>logo.png</PackageIcon>
@@ -20,6 +20,9 @@
 		<Copyright>https://codewf.com</Copyright>
 		<PackageReadmeFile>README.MD</PackageReadmeFile>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<AssemblyVersion>0.1.1.6</AssemblyVersion>
+		<FileVersion>0.1.1.6</FileVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
 		<IsAotCompatible>true</IsAotCompatible>

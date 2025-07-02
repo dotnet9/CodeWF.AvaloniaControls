@@ -15,6 +15,7 @@
         <SolidColorBrush x:Key="MenuForeground">Black</SolidColorBrush>
         <x:Double x:Key="MenuFontSize">14</x:Double>
         <FontWeight x:Key="MenuFontWeight">Normal</FontWeight>
+        <x:Double x:Key="IconButtonInnerSpacing">4</x:Double>
     </UserControl.Resources>
     <UserControl.Styles>
 
@@ -53,9 +54,9 @@
         </Style>
     </UserControl.Styles>
     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-        <u:IconButton Content="Add" IconPlacement="Top">
+        <u:IconButton Content="Add" IconPlacement="Top" VerticalAlignment="Top" Padding="0">
             <u:IconButton.Icon>
-                <Rectangle Grid.Row="0" Fill="Red" Width="24" Height="24" Margin="0 0 0 5"
+                <Rectangle Grid.Row="0" Fill="Red" Width="24" Height="24" Margin="0 0 0 -4"
                            HorizontalAlignment="Center" />
             </u:IconButton.Icon>
         </u:IconButton>
