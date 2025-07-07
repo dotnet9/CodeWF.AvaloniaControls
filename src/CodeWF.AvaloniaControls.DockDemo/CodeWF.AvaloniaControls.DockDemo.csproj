@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFrameworks>net9.0;net9.0-windows;net10.0;net10.0-windows</TargetFrameworks>
+		<LangVersion>preview</LangVersion>
+		<Nullable>enable</Nullable>
+		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<ApplicationIcon>Assets\logo.ico</ApplicationIcon>
+		<PublishAot>true</PublishAot>
+	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0-windows'))">
+		<IsTrimmable>true</IsTrimmable>
+		<PublishTrimmed>true</PublishTrimmed>
+	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0-windows'))">
+		<IsTrimmable>true</IsTrimmable>
+		<PublishTrimmed>true</PublishTrimmed>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="11.3.2" />
+		<PackageReference Include="Avalonia.Desktop" Version="11.3.2" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.2" />
+		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.2" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="11.3.2" />
+		<PackageReference Include="Dock.Model.Mvvm" Version="11.3.0.8" />
+		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.11.1" />
+		<PackageReference Include="Semi.Avalonia" Version="11.2.1.8" />
+		<PackageReference Include="Semi.Avalonia.Dock" Version="11.3.0.4" />
+		<PackageReference Include="YY-Thunks" Version="1.1.8-Beta3" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\CodeWF.AvaloniaControls\CodeWF.AvaloniaControls.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Assets\logo.ico" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,5 @@
+<linker>
+	<assembly fullname="CodeWF.AvaloniaControls.DockDemo" preserve="All" />
+	<assembly fullname="Ursa.PrismExtension" preserve="All" />
+	<assembly fullname="AvaloniaXmlTranslator" preserve="All" />
+</linker>
