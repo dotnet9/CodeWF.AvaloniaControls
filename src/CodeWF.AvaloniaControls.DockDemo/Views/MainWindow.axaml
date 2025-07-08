@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:u="https://irihi.tech/ursa"
+    xmlns:views="clr-namespace:CodeWF.AvaloniaControls.DockDemo.Views"
     xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockDemo.ViewModels"
     prism:ViewModelLocator.AutoWireViewModel="True"
     x:DataType="vm:MainWindowViewModel"
@@ -42,7 +43,7 @@
         </Grid>
     </u:UrsaWindow.LeftContent>
     <Border BorderBrush="LightGray" BorderThickness="1">
-        <Grid RowDefinitions="40 72 * Auto">
+        <Grid RowDefinitions="40 * Auto">
             <Border Background="#1890FF" Grid.RowSpan="2" />
             <Border Grid.Row="1">
                 <Border.Background>
@@ -53,7 +54,9 @@
                 </Border.Background>
             </Border>
 
-            <Border Name="TaskPanel" Grid.Row="3">
+            <views:MainView Grid.Row="1" Margin="20 0" />
+
+            <Border Name="TaskPanel" Grid.Row="2">
 				<TextBlock Text="{Binding Title}" Margin="20 4" VerticalAlignment="Center"/>
             </Border>
         </Grid>
