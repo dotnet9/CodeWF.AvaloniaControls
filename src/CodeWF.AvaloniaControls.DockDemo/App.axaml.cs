@@ -1,22 +1,28 @@
 using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using CodeWF.AvaloniaControls.DockDemo.Views;
+using Prism.DryIoc;
+using Prism.Ioc;
 
 namespace CodeWF.AvaloniaControls.DockDemo;
 
-public class App : Application
+public partial class App : PrismApplication
 {
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        base.Initialize(); // <-- Required
     }
 
-    public override void OnFrameworkInitializationCompleted()
-    {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            desktop.MainWindow = new MainWindow();
 
-        base.OnFrameworkInitializationCompleted();
+    protected override AvaloniaObject CreateShell()
+    {
+        return Container.Resolve<MainWindow>();
+    }
+
+
+    protected override void RegisterTypes(IContainerRegistry containerRegistry)
+    {
+        containerRegistry.Register<MainWindow>();
     }
 }

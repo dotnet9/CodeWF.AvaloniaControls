@@ -1,12 +1,13 @@
-<Application xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="CodeWF.AvaloniaControls.DockDemo.App"
-             xmlns:semi="https://irihi.tech/semi"
-             xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
-             xmlns:codewf="https://codewf.com">
-    <Application.Styles>
+<prism:PrismApplication xmlns="https://github.com/avaloniaui"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        x:Class="CodeWF.AvaloniaControls.DockDemo.App"
+                        xmlns:prism="http://prismlibrary.com/"
+                        xmlns:semi="https://irihi.tech/semi"
+                        xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
+                        xmlns:codewf="https://codewf.com">
+	<prism:PrismApplication.Styles>
         <semi:SemiTheme Locale="zh-CN" />
         <u-semi:SemiTheme Locale="zh-CN"/>
 		<codewf:CodeWFTheme />
-    </Application.Styles>
-</Application>
+    </prism:PrismApplication.Styles>
+</prism:PrismApplication>
