@@ -8,6 +8,5 @@
         <semi:SemiTheme Locale="zh-CN" />
         <u-semi:SemiTheme Locale="zh-CN"/>
 		<codewf:CodeWFTheme />
-        <semi:DockSemiTheme />
     </Application.Styles>
 </Application>
