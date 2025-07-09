@@ -6,6 +6,17 @@
              x:Class="CodeWF.AvaloniaControls.DockDemo.Views.DockMainView"
              x:CompileBindings="True" x:DataType="DockControl">
     <DockControl x:Name="DockControl" InitializeLayout="True" InitializeFactory="True">
+		<DockControl.Styles>
+            <Style Selector="DocumentTabStrip">
+                <Setter Property="Background" Value="#551890FF"></Setter>
+            </Style>
+            <Style Selector="DocumentTabStripItem">
+                <Setter Property="CornerRadius" Value="10 10 0 0" />
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="Padding" Value="12 8" />
+                <Setter Property="Background" Value="Red" />
+            </Style>
+		</DockControl.Styles>
         <DockControl.Factory>
             <Factory HideToolsOnClose="True" HideDocumentsOnClose="True" />
         </DockControl.Factory>
@@ -20,7 +31,7 @@
                     <ProportionalDock x:Name="RightPane" Id="RightPane" Orientation="Horizontal">
                         <DocumentDock x:Name="DocumentsPane" Id="DocumentsPane" CanCreateDocument="False" ActiveDockable="DataManagementDocument">
                             
-							<Document x:Name="DataManagementDocument" Id="DataManagementDocument" Title="数据管理" CanClose="False">
+                            <Document x:Name="DataManagementDocument" Id="DataManagementDocument" Title="数据管理" CanClose="False">
 								<TextBlock Text="数据管理" />
                             </Document>
                             <Document x:Name="SystemSettingsDocument" Id="SystemSettingsDocument" Title="系统设置" CanClose="False">
