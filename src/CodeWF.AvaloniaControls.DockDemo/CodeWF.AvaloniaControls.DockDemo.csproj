@@ -25,7 +25,6 @@
 		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
 		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.2" />
 		<PackageReference Include="Avalonia.ReactiveUI" Version="11.3.2" />
-		<PackageReference Include="Semi.Avalonia.Dock" Version="11.3.0.4" />
 		<PackageReference Include="Dock.Model.Avalonia" Version="11.3.0.10" />
 		<PackageReference Include="Dock.Serializer" Version="11.3.0.10" />
 		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.11.1" />
@@ -34,13 +33,11 @@
 		<PackageReference Include="YY-Thunks" Version="1.1.8-Beta3" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\CodeWF.AvaloniaControls\CodeWF.AvaloniaControls.csproj" />
-	</ItemGroup>
-	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="Assets\logo.ico" />
+		<ProjectReference Include="..\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" />
 		<TrimmerRootDescriptor Include="Roots.xml" />
 	</ItemGroup>
 </Project>

@@ -8,7 +8,7 @@
 	<prism:PrismApplication.Styles>
         <semi:SemiTheme Locale="zh-CN" />
         <u-semi:SemiTheme Locale="zh-CN"/>
-		<codewf:CodeWFTheme />
         <semi:DockSemiTheme />
+		<codewf:DockCodeWFTheme />
     </prism:PrismApplication.Styles>
 </prism:PrismApplication>

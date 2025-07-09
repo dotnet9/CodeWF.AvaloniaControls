@@ -1,0 +1,55 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dmc="clr-namespace:Dock.Model.Controls;assembly=Dock.Model">
+	<ControlTheme x:Key="{x:Type DocumentTabStrip}" TargetType="DocumentTabStrip">
+
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Focusable" Value="False" />
+		<Setter Property="ClipToBounds" Value="False" />
+		<Setter Property="ZIndex" Value="1" />
+		<Setter Property="MinHeight" Value="{StaticResource DocumentTabStripMinHeight}" />
+
+		<Setter Property="Template">
+			<ControlTemplate>
+				<DockPanel
+                    x:CompileBindings="True"
+                    x:DataType="dmc:IDocumentDock"
+                    Background="Transparent"
+                    ClipToBounds="False">
+					<Button
+                        Name="PART_ButtonCreate"
+                        DockPanel.Dock="Right"
+                        Theme="{StaticResource BorderlessButton}"
+                        VerticalAlignment="Top"
+                        MinWidth="{Binding $self.MinHeight}"
+                        Width="{Binding $self.Height}"
+                        Padding="0"
+                        Command="{Binding CreateDocument}"
+                        IsVisible="{Binding CanCreateDocument}">
+						<Button.Content>
+							<PathIcon
+                                Theme="{StaticResource InnerPathIcon}"
+                                Data="{StaticResource SemiIconPlus}" />
+						</Button.Content>
+					</Button>
+					<ItemsPresenter
+                        Name="PART_ItemsPresenter"
+                        VerticalAlignment="Bottom"
+                        ItemsPanel="{TemplateBinding ItemsPanel}" />
+				</DockPanel>
+			</ControlTemplate>
+		</Setter>
+
+		<Setter Property="ItemsPanel">
+			<ItemsPanelTemplate>
+				<WrapPanel ClipToBounds="False" />
+			</ItemsPanelTemplate>
+		</Setter>
+
+		<Style Selector="^:not(:create):empty">
+			<Setter Property="IsVisible" Value="False" />
+		</Style>
+
+	</ControlTheme>
+</ResourceDictionary>

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Title>CodeWF.AvaloniaControls</Title>
+		<Title>CodeWF.AvaloniaControls.Dock</Title>
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0;net10.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
@@ -9,10 +9,10 @@
 		<Version>0.1.1.6</Version>
 		<Authors>沙漠尽头的狼</Authors>
 		<Description>封装一些Avalonia控件，比如穿梭框、异形TabControl等。Encapsulate some Avalonia controls, such as shuttle boxes, alien TabControls, etc.</Description>
-		<RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</RepositoryUrl>
+		<RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls.Dock</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageIcon>logo.png</PackageIcon>
-		<PackageProjectUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls.Dock</PackageProjectUrl>
 		<PackageTags>avalonia ui,controls,custom</PackageTags>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<RepositoryType>git</RepositoryType>
@@ -34,7 +34,7 @@
 		<IsAotCompatible>true</IsAotCompatible>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Semi.Avalonia" Version="11.2.1.8" />
+		<PackageReference Include="Semi.Avalonia.Dock" Version="11.3.0.4" />
 	</ItemGroup>
 	<ItemGroup>
 		<!-- The nuget package icon -->
