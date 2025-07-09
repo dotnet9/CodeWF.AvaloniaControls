@@ -1,6 +1,6 @@
 ﻿using CodeWF.AvaloniaControls.DockDemo.ViewModels.Documents;
-using CommunityToolkit.Mvvm.Input;
-using Dock.Model.Mvvm.Controls;
+using Dock.Model.Prism.Controls;
+using Prism.Commands;
 
 namespace CodeWF.AvaloniaControls.DockDemo.ViewModels.Docks;
 
@@ -8,7 +8,7 @@ public class CustomDocumentDock : DocumentDock
 {
     public CustomDocumentDock()
     {
-        CreateDocument = new RelayCommand(CreateNewDocument);
+        CreateDocument = new DelegateCommand(CreateNewDocument);
     }
 
     private void CreateNewDocument()

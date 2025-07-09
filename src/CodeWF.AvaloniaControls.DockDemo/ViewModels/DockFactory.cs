@@ -5,10 +5,10 @@ using CodeWF.AvaloniaControls.DockDemo.ViewModels.Views;
 using Dock.Avalonia.Controls;
 using Dock.Model.Controls;
 using Dock.Model.Core;
-using Dock.Model.Mvvm;
-using Dock.Model.Mvvm.Controls;
 using System;
 using System.Collections.Generic;
+using Dock.Model.Prism;
+using Dock.Model.Prism.Controls;
 
 namespace CodeWF.AvaloniaControls.DockDemo.ViewModels;
 

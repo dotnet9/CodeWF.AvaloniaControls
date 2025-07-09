@@ -1,10 +1,10 @@
 ﻿using CodeWF.AvaloniaControls.DockDemo.Models;
-using CommunityToolkit.Mvvm.Input;
 using Dock.Model.Controls;
 using Dock.Model.Core;
 using ReactiveUI;
 using System.Diagnostics;
 using System.Windows.Input;
+using Prism.Commands;
 
 namespace CodeWF.AvaloniaControls.DockDemo.ViewModels;
 
@@ -36,7 +36,7 @@ public class MainViewModel : ReactiveObject
             root.Navigate.Execute("Home");
         }
 
-        NewLayout = new RelayCommand(ResetLayout);
+        NewLayout = new DelegateCommand(ResetLayout);
     }
 
     public void InitLayout()

@@ -1,4 +1,4 @@
-﻿using Dock.Model.Mvvm.Controls;
+﻿using Dock.Model.Prism.Controls;
 
 namespace CodeWF.AvaloniaControls.DockDemo.ViewModels.Documents;
 
