@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CodeWF.AvaloniaControls.DockDemo.Views.DockMainView"
+             x:CompileBindings="True" x:DataType="DockControl">
+    <DockControl x:Name="DockControl" InitializeLayout="True" InitializeFactory="True">
+        <DockControl.Factory>
+            <Factory HideToolsOnClose="True" HideDocumentsOnClose="True" />
+        </DockControl.Factory>
+
+        <RootDock x:Name="Root" Id="Root" IsCollapsable="False" DefaultDockable="{Binding #MainLayout}">
+            <RootDock.Windows>
+
+            </RootDock.Windows>
+            <ProportionalDock x:Name="MainLayout" Id="MainLayout" Orientation="Horizontal">
+
+                <ProportionalDock x:Name="TopPane" Id="TopPane" Orientation="Vertical">
+                    <ProportionalDock x:Name="RightPane" Id="RightPane" Orientation="Horizontal">
+                        <DocumentDock x:Name="DocumentsPane" Id="DocumentsPane" CanCreateDocument="False" ActiveDockable="DataManagementDocument">
+                            <DocumentDock.DocumentTemplate>
+                                <DocumentTemplate>
+                                    <StackPanel x:DataType="Document">
+                                        <TextBlock Text="Title" />
+                                        <TextBox Text="{Binding Title}" />
+                                        <TextBlock Text="Context" />
+                                        <TextBox Text="{Binding Context}" AcceptsReturn="True" />
+                                    </StackPanel>
+                                </DocumentTemplate>
+                            </DocumentDock.DocumentTemplate>
+							<Document x:Name="DataManagementDocument" Id="DataManagementDocument" Title="数据管理" CanClose="False">
+                                <TextBox Text="数据管理" AcceptsReturn="True"/>
+                            </Document>
+                            <Document x:Name="SystemSettingsDocument" Id="SystemSettingsDocument" Title="系统设置" CanClose="False">
+                                <TextBox Text="系统设置" AcceptsReturn="True"/>
+                            </Document>
+                            <Document x:Name="UserCenterDocument" Id="UserCenterDocument" Title="用户中心" CanClose="False">
+                                <TextBox Text="用户中心" AcceptsReturn="True"/>
+                            </Document>
+                            <Document x:Name="LogRecordsDocument" Id="LogRecordsDocument" Title="日志记录" CanClose="False">
+                                <TextBox Text="日志记录" AcceptsReturn="True"/>
+                            </Document>
+                            <Document x:Name="HelpDocumentationDocument" Id="HelpDocumentationDocument" Title="帮助文档" CanClose="False">
+                                <TextBox Text="帮助文档" AcceptsReturn="True"/>
+                            </Document>
+                        </DocumentDock>
+                    </ProportionalDock>
+                </ProportionalDock>
+            </ProportionalDock>
+        </RootDock>
+    </DockControl>
+</UserControl>
