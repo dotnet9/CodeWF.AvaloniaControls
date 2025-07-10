@@ -5,7 +5,7 @@
              xmlns:v="clr-namespace:CodeWF.AvaloniaControls.DockDemo.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.DockDemo.Views.MainView">
-    <Border Background="White" CornerRadius="10">
+    <Border Background="#66FFFFFF" CornerRadius="10">
         <v:DockMainView />
     </Border>
 </UserControl>

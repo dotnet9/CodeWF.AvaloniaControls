@@ -1,0 +1,69 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="clr-namespace:Dock.Model.Core;assembly=Dock.Model"
+    xmlns:dmc="clr-namespace:Dock.Model.Controls;assembly=Dock.Model">
+	<ControlTheme x:Key="{x:Type DocumentControl}" TargetType="DocumentControl">
+		<Setter Property="HeaderTemplate">
+			<DataTemplate DataType="core:IDockable">
+				<TextBlock Padding="2" Text="{Binding Title}" />
+			</DataTemplate>
+		</Setter>
+		<Setter Property="Template">
+			<ControlTemplate>
+				<DockPanel
+                    Name="PART_DockPanel"
+                    x:CompileBindings="True"
+                    x:DataType="dmc:IDocumentDock"
+                    Background="Transparent"
+                    DockProperties.IsDockTarget="True"
+                    DockProperties.IsDropArea="True"
+                    ZIndex="1">
+					<DocumentTabStrip
+                        Name="PART_TabStrip"
+                        CanCreateItem="{Binding CanCreateDocument}"
+                        DockPanel.Dock="Top"
+                        DockProperties.IsDropArea="True"
+                        IsActive="{TemplateBinding IsActive}"
+                        ItemsSource="{Binding VisibleDockables}"
+                        SelectedItem="{Binding ActiveDockable, Mode=TwoWay}">
+						<DocumentTabStrip.Styles>
+							<Style Selector="DocumentTabStripItem">
+								<Setter Property="IsActive" Value="{Binding $parent[DocumentTabStrip].IsActive}" />
+							</Style>
+						</DocumentTabStrip.Styles>
+					</DocumentTabStrip>
+					<Border
+                        Name="PART_Divider"
+                        DockPanel.Dock="Top"
+                        Height="{DynamicResource DocumentControlDividerHeight}"
+                        Background="{DynamicResource DocumentControlDividerBackground}"
+                        IsVisible="{Binding #PART_TabStrip.IsVisible}" />
+					<Border
+                        Name="PART_Border"
+                        Background="{DynamicResource DocumentControlContentBackground}"
+                        BorderBrush="{DynamicResource DocumentControlContentBorderBrush}"
+                        CornerRadius="{StaticResource DocumentControlContentCornerRadius}"
+                        BorderThickness="{StaticResource DocumentControlContentBorderThickness}">
+						<DockableControl DataContext="{Binding ActiveDockable}" TrackingMode="Visible">
+							<ContentControl
+                                Name="PART_ContentPresenter"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Content="{Binding}">
+								<ContentControl.ContentTemplate>
+									<ControlRecyclingDataTemplate Parent="{Binding #PART_ContentPresenter}" />
+								</ContentControl.ContentTemplate>
+							</ContentControl>
+						</DockableControl>
+					</Border>
+				</DockPanel>
+			</ControlTemplate>
+		</Setter>
+
+		<Style Selector="^:active /template/ Border#PART_Divider">
+			<Setter Property="Background" Value="{DynamicResource DocumentControlDividerActiveBackground}" />
+		</Style>
+
+	</ControlTheme>
+</ResourceDictionary>

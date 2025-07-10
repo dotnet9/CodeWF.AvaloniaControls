@@ -10,5 +10,6 @@
         <u-semi:SemiTheme Locale="zh-CN"/>
         <semi:DockSemiTheme />
 		<codewf:DockCodeWFTheme />
+        <StyleInclude Source="Index.axaml" />
     </prism:PrismApplication.Styles>
 </prism:PrismApplication>

@@ -12,6 +12,8 @@
             </StackPanel>
         </Border>
     </Design.PreviewWith>
+
+    <codewf:TrapezoidShapedDocumentTabStripItemPaddingConverter x:Key="TrapezoidShapedDocumentTabStripItemPaddingConverter" />
     <ContextMenu
         x:Key="DocumentTabStripItemContextMenu"
         x:CompileBindings="True"
@@ -72,7 +74,9 @@
                             DockProperties.IsDropArea="True"
                             Orientation="Horizontal"
                             Spacing="{StaticResource DocumentTabStripItemHeaderSpacing}">
-                            <ContentPresenter
+							<ContentPresenter
+                                Background="#01FFFFFF"
+                                Padding="{TemplateBinding Converter={StaticResource TrapezoidShapedDocumentTabStripItemPaddingConverter}}"
                                 Margin="{StaticResource DocumentTabStripItemHeaderMargin}"
                                 Content="{Binding}"
                                 ContentTemplate="{Binding $parent[DocumentControl].HeaderTemplate}" />
@@ -99,6 +103,7 @@
             <Setter Property="FontWeight" Value="{StaticResource DocumentTabStripItemSelectedFontWeight}" />
         </Style>
         <Style Selector="^:selected:not(:active)">
+            <Setter Property="Foreground" Value="{DynamicResource DocumentTabStripItemSelectedActiveForeground}" />
             <Setter Property="Background" Value="{DynamicResource DocumentTabStripItemSelectedInactiveBackground}" />
         </Style>
         <Style Selector="^:selected:active">

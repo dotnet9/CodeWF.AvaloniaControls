@@ -1,0 +1,21 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--选择的Item背景色-->
+    <LinearGradientBrush x:Key="DocumentTabStripItemSelectedActiveBackground"
+                         StartPoint="50%, 0%"
+                         EndPoint="50%, 100%">
+        <GradientStops>
+            <GradientStop Color="#BAE7FF" Offset="0" />
+            <GradientStop Color="#FFFFFF" Offset="1" />
+        </GradientStops>
+    </LinearGradientBrush>
+    <!--选择的Item，未激活时的背景色-->
+    <StaticResource x:Key="DocumentTabStripItemSelectedInactiveBackground"
+                    ResourceKey="DocumentTabStripItemSelectedActiveBackground" />
+    <!--Item前景色-->
+    <SolidColorBrush x:Key="DocumentTabStripItemForeground">White</SolidColorBrush>
+    <!--Item悬停时的前景色-->
+    <SolidColorBrush x:Key="DocumentTabStripItemSelectedActiveForeground">#1890FF</SolidColorBrush>
+    <StaticResource x:Key="DocumentTabStripItemUnselectedPointeroverForeground"
+                    ResourceKey="DocumentTabStripItemSelectedActiveForeground" />
+</ResourceDictionary>
