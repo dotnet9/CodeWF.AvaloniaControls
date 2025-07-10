@@ -16,7 +16,6 @@
 		<PackageTags>avalonia ui,controls,custom</PackageTags>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<RepositoryType>git</RepositoryType>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Copyright>https://codewf.com</Copyright>
 		<PackageReadmeFile>README.MD</PackageReadmeFile>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
