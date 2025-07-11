@@ -15,6 +15,7 @@ public partial class DockMainView : UserControl
 {
     private IFactory? _factory;
     private const string _testDocId = "SystemSettingsDocument";
+
     public DockMainView()
     {
         InitializeComponent();
@@ -26,7 +27,7 @@ public partial class DockMainView : UserControl
     {
         _factory = DocumentsPane.Factory;
     }
-    
+
 
     [EventHandler]
     private void ReceiveCreateDocumentCommand(CreateDocumentCommand command)
@@ -39,6 +40,7 @@ public partial class DockMainView : UserControl
             DocumentsPane.ActiveDockable = existing;
             return;
         }
+
         var view = ContainerLocator.Container.Resolve<SystemSettingsDocumentView>();
         var document = new Document
         {
@@ -48,10 +50,9 @@ public partial class DockMainView : UserControl
             CanClose = false,
             Content = view
         };
+
         _factory?.AddDockable(DocumentsPane, document);
         _factory?.SetActiveDockable(document);
         _factory?.SetFocusedDockable(DocumentsPane, document);
     }
-
 }
-

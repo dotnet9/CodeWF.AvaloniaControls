@@ -8,19 +8,15 @@
              x:CompileBindings="True" x:DataType="DockControl">
     <DockControl x:Name="DockControl" InitializeLayout="True" InitializeFactory="True">
         <DockControl.Factory>
-            <Factory HideToolsOnClose="True" HideDocumentsOnClose="True" />
+            <Factory />
         </DockControl.Factory>
-
-        <RootDock x:Name="Root" Id="Root" IsCollapsable="False" DefaultDockable="{Binding #MainLayout}">
+        <RootDock DefaultDockable="{Binding #MainLayout}">
             <ProportionalDock x:Name="MainLayout" Id="MainLayout" Orientation="Horizontal">
-
                 <DocumentDock x:Name="DocumentsPane" Id="DocumentsPane" CanCreateDocument="False"
                               ActiveDockable="DataManagementDocument">
-
                     <Document x:Name="DataManagementDocument" Id="DataManagementDocument" Title="数据管理"
                               CanClose="False">
-                        <docViews:DataManagementView>
-                        </docViews:DataManagementView>
+                        <docViews:DataManagementView />
                     </Document>
                     <Document x:Name="SystemSettingsDocument" Id="SystemSettingsDocument" Title="系统设置"
                               CanClose="False">
