@@ -11,37 +11,31 @@
         </DockControl.Factory>
 
         <RootDock x:Name="Root" Id="Root" IsCollapsable="False" DefaultDockable="{Binding #MainLayout}">
-            <RootDock.Windows>
-
-            </RootDock.Windows>
             <ProportionalDock x:Name="MainLayout" Id="MainLayout" Orientation="Horizontal">
 
-                <ProportionalDock x:Name="TopPane" Id="TopPane" Orientation="Vertical">
-                    <ProportionalDock x:Name="RightPane" Id="RightPane" Orientation="Horizontal">
-                        <DocumentDock x:Name="DocumentsPane" Id="DocumentsPane" CanCreateDocument="False"
-                                      ActiveDockable="DataManagementDocument">
+                <DocumentDock x:Name="DocumentsPane" Id="DocumentsPane" CanCreateDocument="False"
+                              ActiveDockable="DataManagementDocument">
 
-                            <Document x:Name="DataManagementDocument" Id="DataManagementDocument" Title="数据管理"
-                                      CanClose="False">
-                                <TextBlock Text="数据管理" />
-                            </Document>
-                            <Document x:Name="SystemSettingsDocument" Id="SystemSettingsDocument" Title="系统设置"
-                                      CanClose="False">
-                                <TextBlock Text="系统设置" />
-                            </Document>
-                            <Document x:Name="UserCenterDocument" Id="UserCenterDocument" Title="用户中心" CanClose="False">
-                                <TextBlock Text="用户中心" />
-                            </Document>
-                            <Document x:Name="LogRecordsDocument" Id="LogRecordsDocument" Title="日志记录" CanClose="False">
-                                <TextBlock Text="日志记录" />
-                            </Document>
-                            <Document x:Name="HelpDocumentationDocument" Id="HelpDocumentationDocument" Title="帮助文档"
-                                      CanClose="False">
-                                <TextBlock Text="帮助文档" />
-                            </Document>
-                        </DocumentDock>
-                    </ProportionalDock>
-                </ProportionalDock>
+                    <Document x:Name="DataManagementDocument" Id="DataManagementDocument" Title="数据管理"
+                              CanClose="False">
+                        <TextBlock Text="数据管理" />
+
+                    </Document>
+                    <Document x:Name="SystemSettingsDocument" Id="SystemSettingsDocument" Title="系统设置"
+                              CanClose="False">
+                        <TextBlock Text="系统设置" />
+                    </Document>
+                    <Document x:Name="UserCenterDocument" Id="UserCenterDocument" Title="用户中心" CanClose="False">
+                        <TextBlock Text="用户中心" />
+                    </Document>
+                    <Document x:Name="LogRecordsDocument" Id="LogRecordsDocument" Title="日志记录" CanClose="False">
+                        <TextBlock Text="日志记录" />
+                    </Document>
+                    <Document x:Name="HelpDocumentationDocument" Id="HelpDocumentationDocument" Title="帮助文档"
+                              CanClose="False">
+                        <TextBlock Text="帮助文档" />
+                    </Document>
+                </DocumentDock>
             </ProportionalDock>
         </RootDock>
     </DockControl>

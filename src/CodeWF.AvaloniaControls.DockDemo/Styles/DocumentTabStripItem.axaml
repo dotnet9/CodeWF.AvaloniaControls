@@ -10,7 +10,7 @@
   <Style Selector="DocumentTabStripItem">
       <!--设置Item圆角，只需要左上、右上-->
       <Setter Property="CornerRadius" Value="10 10 0 0" />
-      <!--考虑斜线-->
+      <!--考虑斜线占用空间-->
       <Setter Property="Padding" Value="12 8" />
   </Style>
 </Styles>
