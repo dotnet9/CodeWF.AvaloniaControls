@@ -1,13 +1,13 @@
-﻿using CodeWF.AvaloniaControls.DockMVVMDemo.Models.Documents;
+﻿using System;
+using System.Collections.Generic;
+using CodeWF.AvaloniaControls.DockMVVMDemo.Models.Documents;
 using CodeWF.AvaloniaControls.DockMVVMDemo.ViewModels.Docks;
 using CodeWF.AvaloniaControls.DockMVVMDemo.ViewModels.Documents;
 using Dock.Avalonia.Controls;
-using Dock.Model.Avalonia;
-using Dock.Model.Avalonia.Controls;
 using Dock.Model.Controls;
 using Dock.Model.Core;
-using System;
-using System.Collections.Generic;
+using Dock.Model.ReactiveUI;
+using Dock.Model.ReactiveUI.Controls;
 
 namespace CodeWF.AvaloniaControls.DockMVVMDemo.ViewModels;
 
@@ -43,7 +43,7 @@ public class DockFactory : Factory
             IsCollapsable = false,
             ActiveDockable = document1,
             VisibleDockables = CreateList<IDockable>(document1, document2, document3, document4, document5),
-            CanCreateDocument = true,
+            CanCreateDocument = false,
             // CanDrop = false,
             EnableWindowDrag = true,
         };

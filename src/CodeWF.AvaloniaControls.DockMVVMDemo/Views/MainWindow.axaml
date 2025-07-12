@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:u="https://irihi.tech/ursa"
-    xmlns:views="clr-namespace:CodeWF.AvaloniaControls.DockMVVMDemo.Views"
     xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockMVVMDemo.ViewModels"
     x:DataType="vm:MainWindowViewModel"
     Width="1000" Height="800" WindowStartupLocation="CenterScreen"
@@ -52,7 +51,9 @@
                 </Border.Background>
             </Border>
 
-            <views:MainView Grid.Row="1" Margin="20 0" />
+            <Border Grid.Row="1" Margin="20 0" Background="#66FFFFFF" CornerRadius="10">
+                <DockControl x:Name="DockControl" Layout="{Binding Layout}" />
+            </Border>
 
             <Border Name="TaskPanel" Grid.Row="2">
 				<TextBlock Text="{Binding Title}" Margin="20 4" VerticalAlignment="Center"/>

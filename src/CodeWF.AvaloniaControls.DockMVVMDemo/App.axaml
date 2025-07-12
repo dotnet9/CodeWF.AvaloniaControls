@@ -1,19 +1,19 @@
-<Application xmlns="https://github.com/avaloniaui"
-                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                        x:Class="CodeWF.AvaloniaControls.DockMVVMDemo.App"
-                        xmlns:semi="https://irihi.tech/semi"
-                        xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
-                        xmlns:codewf="https://codewf.com"
-                        xmlns:local="clr-namespace:CodeWF.AvaloniaControls.DockMVVMDemo">
-
+<Application
+    x:Class="CodeWF.AvaloniaControls.DockMVVMDemo.App"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:codewf="https://codewf.com"
+    xmlns:local="clr-namespace:CodeWF.AvaloniaControls.DockMVVMDemo"
+    xmlns:semi="https://irihi.tech/semi"
+    xmlns:u-semi="https://irihi.tech/ursa/themes/semi">
     <Application.DataTemplates>
-		<local:ViewLocator />
+        <local:ViewLocator />
     </Application.DataTemplates>
-	<Application.Styles>
+    <Application.Styles>
         <semi:SemiTheme Locale="zh-CN" />
-        <u-semi:SemiTheme Locale="zh-CN"/>
+        <u-semi:SemiTheme Locale="zh-CN" />
         <semi:DockSemiTheme />
-		<codewf:DockCodeWFTheme />
+        <codewf:DockCodeWFTheme />
         <StyleInclude Source="Index.axaml" />
     </Application.Styles>
 </Application>

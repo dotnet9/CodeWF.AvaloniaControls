@@ -5,7 +5,7 @@
              xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockMVVMDemo.ViewModels.Documents"
              x:DataType="vm:SystemSettingsViewModel" x:CompileBindings="True"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CodeWF.AvaloniaControls.DockMVVMDemo.Views.Documents.SystemSettingsDocumentView">
+             x:Class="CodeWF.AvaloniaControls.DockMVVMDemo.Views.Documents.SystemSettingsView">
 
     <StackPanel>
         <TextBlock Text="{Binding Title}" />

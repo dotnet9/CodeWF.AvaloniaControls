@@ -32,17 +32,6 @@ public partial class App : Application
 
                 break;
             }
-            case ISingleViewApplicationLifetime singleViewLifetime:
-            {
-                var mainView = new MainView()
-                {
-                    DataContext = mainWindowViewModel
-                };
-
-                singleViewLifetime.MainView = mainView;
-
-                break;
-            }
         }
 
         base.OnFrameworkInitializationCompleted();

@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace CodeWF.AvaloniaControls.DockMVVMDemo.Views.Documents;
 
-public partial class SystemSettingsDocumentView : UserControl
+public partial class SystemSettingsView : UserControl
 {
-    public SystemSettingsDocumentView()
+    public SystemSettingsView()
     {
         InitializeComponent();
     }
