@@ -1,14 +1,13 @@
 ﻿using CodeWF.AvaloniaControls.DockMVVMDemo.Models;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Dock.Model.Controls;
 using Dock.Model.Core;
+using ReactiveUI;
 using System.Diagnostics;
 using System.Windows.Input;
 
 namespace CodeWF.AvaloniaControls.DockMVVMDemo.ViewModels;
 
-public class MainWindowViewModel : ObservableObject
+public class MainWindowViewModel : ReactiveObject
 {
     public string Title { get; set; } = "Avalonia Dock MVVM Demo";
     private readonly IFactory? _factory;
@@ -17,7 +16,7 @@ public class MainWindowViewModel : ObservableObject
     public IRootDock? Layout
     {
         get => _layout;
-        set => this.SetProperty(ref _layout, value);
+        set => this.RaiseAndSetIfChanged(ref _layout, value);
     }
 
     public ICommand NewLayout { get; }
@@ -37,7 +36,7 @@ public class MainWindowViewModel : ObservableObject
             root.Navigate.Execute("Home");
         }
 
-        NewLayout = new RelayCommand(ResetLayout);
+        NewLayout = ReactiveCommand.Create(ResetLayout);
     }
 
     public void InitLayout()

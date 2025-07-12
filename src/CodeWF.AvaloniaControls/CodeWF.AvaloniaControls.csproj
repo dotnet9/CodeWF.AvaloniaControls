@@ -33,7 +33,7 @@
 		<IsAotCompatible>true</IsAotCompatible>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Semi.Avalonia" Version="11.2.1.8" />
+		<PackageReference Include="Semi.Avalonia" Version="11.2.1.9" />
 	</ItemGroup>
 	<ItemGroup>
 		<!-- The nuget package icon -->

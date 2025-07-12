@@ -1,6 +1,6 @@
 ﻿using CodeWF.AvaloniaControls.DockMVVMDemo.ViewModels.Documents;
-using CommunityToolkit.Mvvm.Input;
 using Dock.Model.Avalonia.Controls;
+using ReactiveUI;
 
 namespace CodeWF.AvaloniaControls.DockMVVMDemo.ViewModels.Docks;
 
@@ -8,7 +8,7 @@ public class CustomDocumentDock : DocumentDock
 {
     public CustomDocumentDock()
     {
-        CreateDocument = new RelayCommand(CreateNewDocument);
+        CreateDocument = ReactiveCommand.Create(CreateNewDocument);
     }
 
     private void CreateNewDocument()

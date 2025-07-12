@@ -1,9 +1,10 @@
-﻿using System;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using CommunityToolkit.Mvvm.ComponentModel;
 using Dock.Model.Core;
+using ReactiveUI;
 using StaticViewLocator;
+using System;
+
 namespace CodeWF.AvaloniaControls.DockMVVMDemo;
 
 [StaticViewLocator]
@@ -28,6 +29,6 @@ public partial class ViewLocator : IDataTemplate
 
     public bool Match(object? data)
     {
-        return data is ObservableObject || data is IDockable;
+        return data is ReactiveObject || data is IDockable;
     }
 }

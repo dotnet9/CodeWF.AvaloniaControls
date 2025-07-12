@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using Avalonia.ReactiveUI;
 using System;
 
 namespace CodeWF.AvaloniaControls.DockMVVMDemo;
@@ -18,5 +19,6 @@ internal sealed class Program
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
+            .UseReactiveUI()
             .LogToTrace();
 }
