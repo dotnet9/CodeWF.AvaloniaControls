@@ -1,0 +1,17 @@
+using Avalonia.Markup.Xaml;
+using Ursa.Controls;
+
+namespace CodeWF.AvaloniaControls.DockMVVMDemo.Views;
+
+public partial class MainWindow : UrsaWindow
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+    }
+    
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
+    }
+}
