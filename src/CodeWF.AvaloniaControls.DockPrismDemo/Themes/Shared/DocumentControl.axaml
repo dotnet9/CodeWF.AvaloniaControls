@@ -1,0 +1,6 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--隐藏DocumentControl的分隔条-->
+    <x:Double x:Key="DocumentControlDividerHeight">0</x:Double>
+</ResourceDictionary>

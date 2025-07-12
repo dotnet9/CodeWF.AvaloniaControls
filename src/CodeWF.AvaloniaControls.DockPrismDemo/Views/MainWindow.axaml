@@ -1,0 +1,65 @@
+<u:UrsaWindow
+    x:Class="CodeWF.AvaloniaControls.DockPrismDemo.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockPrismDemo.ViewModels"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    x:DataType="vm:MainWindowViewModel"
+    Width="1000" Height="800" WindowStartupLocation="CenterScreen"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Icon="/Assets/logo.ico"
+    mc:Ignorable="d"
+    Title="{Binding Title}">
+    <u:UrsaWindow.Resources>
+        <Color x:Key="CaptionButtonForeground">#FFFFFF</Color>
+    </u:UrsaWindow.Resources>
+    <u:UrsaWindow.LeftContent>
+        <Grid
+            Height="40"
+            Margin="3"
+            ColumnDefinitions="*, Auto, *">
+            <Image
+                Width="24"
+                Height="24"
+                Margin="8"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                IsHitTestVisible="False"
+                RenderOptions.BitmapInterpolationMode="HighQuality"
+                Source="/Assets/logo.png" />
+            <TextBlock
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                FontSize="14"
+                Foreground="White"
+                IsHitTestVisible="False"
+                Text="{Binding Title}" />
+        </Grid>
+    </u:UrsaWindow.LeftContent>
+    <Border BorderBrush="LightGray" BorderThickness="1">
+        <Grid RowDefinitions="40 * Auto">
+            <Border Background="#1890FF" Grid.RowSpan="2" />
+            <Border Grid.Row="1">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="50% 0%" EndPoint="50% 100%">
+                        <GradientStop Color="#1890FF" Offset="0" />
+                        <GradientStop Color="#FFFFFF" Offset="100" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <Border Grid.Row="1" Margin="20 0" Background="#66FFFFFF" CornerRadius="10">
+                <DockControl x:Name="DockControl" Layout="{Binding Layout}" />
+            </Border>
+
+            <Border Name="TaskPanel" Grid.Row="2">
+				<TextBlock Text="{Binding Title}" Margin="20 4" VerticalAlignment="Center"/>
+            </Border>
+        </Grid>
+    </Border>
+</u:UrsaWindow>

@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFrameworks>net9.0-windows;net10.0-windows</TargetFrameworks>
+		<LangVersion>preview</LangVersion>
+		<Nullable>enable</Nullable>
+		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<ApplicationIcon>Assets\logo.ico</ApplicationIcon>
+		<PublishAot>true</PublishAot>
+	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0-windows'))">
+		<IsTrimmable>true</IsTrimmable>
+		<PublishTrimmed>true</PublishTrimmed>
+	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0-windows'))">
+		<IsTrimmable>true</IsTrimmable>
+		<PublishTrimmed>true</PublishTrimmed>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="11.3.2" />
+		<PackageReference Include="Avalonia.Desktop" Version="11.3.2" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.2" />
+		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.2" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="11.3.2" />
+		<PackageReference Include="CodeWF.EventBus" Version="3.4.5" />
+		<PackageReference Include="Dock.Model.Avalonia" Version="11.3.0.13" />
+		<PackageReference Include="Dock.Serializer" Version="11.3.0.12" />
+		<PackageReference Include="Prism.Avalonia" Version="9.0.537.11300-pre" />
+		<PackageReference Include="Prism.DryIoc.Avalonia" Version="9.0.537.11300-pre" />
+		<PackageReference Include="Dock.Model.Prism" Version="11.3.0.13" />
+		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.12.0" />
+		<PackageReference Include="Semi.Avalonia" Version="11.2.1.9" />
+		<PackageReference Include="YY-Thunks" Version="1.1.8-Beta3" />
+	</ItemGroup>
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Assets\logo.ico" />
+		<ProjectReference Include="..\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" />
+		<TrimmerRootDescriptor Include="Roots.xml" />
+	</ItemGroup>
+</Project>

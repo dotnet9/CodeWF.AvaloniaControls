@@ -1,0 +1,16 @@
+<prism:PrismApplication
+    x:Class="CodeWF.AvaloniaControls.DockPrismDemo.App"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:codewf="https://codewf.com"
+    xmlns:semi="https://irihi.tech/semi"
+    xmlns:u-semi="https://irihi.tech/ursa/themes/semi">
+	<prism:PrismApplication.Styles>
+        <semi:SemiTheme Locale="zh-CN" />
+        <u-semi:SemiTheme Locale="zh-CN" />
+        <semi:DockSemiTheme />
+        <codewf:DockCodeWFTheme />
+        <StyleInclude Source="Index.axaml" />
+    </prism:PrismApplication.Styles>
+</prism:PrismApplication>

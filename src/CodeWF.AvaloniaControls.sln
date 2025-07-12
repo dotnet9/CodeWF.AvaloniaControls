@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.Doc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.DockMVVMDemo", "CodeWF.AvaloniaControls.DockMVVMDemo\CodeWF.AvaloniaControls.DockMVVMDemo.csproj", "{8CC83A8C-6C49-ED25-28B2-713611ED9D12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.DockPrismDemo", "CodeWF.AvaloniaControls.DockPrismDemo\CodeWF.AvaloniaControls.DockPrismDemo.csproj", "{3328A8E3-C2FD-9C0C-D6CE-943B8D716223}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{8CC83A8C-6C49-ED25-28B2-713611ED9D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CC83A8C-6C49-ED25-28B2-713611ED9D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CC83A8C-6C49-ED25-28B2-713611ED9D12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3328A8E3-C2FD-9C0C-D6CE-943B8D716223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3328A8E3-C2FD-9C0C-D6CE-943B8D716223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3328A8E3-C2FD-9C0C-D6CE-943B8D716223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3328A8E3-C2FD-9C0C-D6CE-943B8D716223}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{439C96D9-89FA-A06C-FFF4-025888A33299} = {B9682F4C-2180-4D85-B3A5-A4920B38DB12}
 		{043B8D0F-44E5-8368-16B7-8D3DB293058A} = {BDC4F320-8B10-4E13-8D66-52D5D30F631E}
 		{8CC83A8C-6C49-ED25-28B2-713611ED9D12} = {B9682F4C-2180-4D85-B3A5-A4920B38DB12}
+		{3328A8E3-C2FD-9C0C-D6CE-943B8D716223} = {B9682F4C-2180-4D85-B3A5-A4920B38DB12}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {52B7E82F-A984-4385-8626-6812F586F3C5}
