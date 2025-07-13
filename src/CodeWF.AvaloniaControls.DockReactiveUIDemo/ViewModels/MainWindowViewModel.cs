@@ -10,7 +10,7 @@ namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels;
 public class MainWindowViewModel : ReactiveObject
 {
     public string Title { get; set; } = "Avalonia Dock ReactiveUI Demo";
-    private readonly IFactory? _factory;
+    public DockFactory? Factory { get; }
     private IRootDock? _layout;
 
     public IRootDock? Layout
@@ -21,13 +21,16 @@ public class MainWindowViewModel : ReactiveObject
 
     public ICommand NewLayout { get; }
 
+    public static MainWindowViewModel? Instance { get; private set; }
+
     public MainWindowViewModel()
     {
-        _factory = new DockFactory(new DemoData());
+        Instance = this;
+        Factory = new DockFactory(new DemoData());
 
-        DebugFactoryEvents(_factory);
+        DebugFactoryEvents(Factory);
 
-        Layout = _factory?.CreateLayout();
+        Layout = Factory?.CreateLayout();
 
         InitLayout();
 
@@ -46,7 +49,7 @@ public class MainWindowViewModel : ReactiveObject
             return;
         }
 
-        _factory?.InitLayout(Layout);
+        Factory?.InitLayout(Layout);
     }
 
     public void CloseLayout()
@@ -70,10 +73,10 @@ public class MainWindowViewModel : ReactiveObject
             }
         }
 
-        var layout = _factory?.CreateLayout();
+        var layout = Factory?.CreateLayout();
         if (layout is not null)
         {
-            _factory?.InitLayout(layout);
+            Factory?.InitLayout(layout);
             Layout = layout;
         }
     }

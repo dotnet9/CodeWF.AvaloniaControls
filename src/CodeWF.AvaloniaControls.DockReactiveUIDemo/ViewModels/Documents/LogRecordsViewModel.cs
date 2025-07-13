@@ -1,4 +1,4 @@
-﻿using Dock.Model.Avalonia.Controls;
+﻿using Dock.Model.ReactiveUI.Controls;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
 

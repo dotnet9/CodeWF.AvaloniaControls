@@ -16,6 +16,7 @@ public class DockFactory : Factory
     private readonly object _context;
     private IRootDock? _rootDock;
     private IDocumentDock? _documentDock;
+    public const string DocumentsKey = "Documents";
 
     public DockFactory(object context)
     {
@@ -95,6 +96,7 @@ public class DockFactory : Factory
 
         DockableLocator = new Dictionary<string, Func<IDockable?>>()
         {
+            [DocumentsKey] = () => _documentDock
         };
 
         HostWindowLocator = new Dictionary<string, Func<IHostWindow?>>
