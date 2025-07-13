@@ -77,7 +77,7 @@ public class DockFactory : Factory
 
         if (window != null)
         {
-            window.Title = "Dock Avalonia Demo";
+            window.Title = "Dock Avalonia ReactiveUI Demo";
         }
 
         return window;
