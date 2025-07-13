@@ -6,12 +6,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels"
+    xmlns:converters="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.Converters"
     d:DesignHeight="450"
     d:DesignWidth="800"
     prism:ViewModelLocator.AutoWireViewModel="True"
     x:CompileBindings="True"
     x:DataType="vm:TitleBarRightContentViewModel"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:VisibilityToForegroundConverter x:Key="VisibilityToForegroundConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
     <StackPanel Orientation="Horizontal">
         <Grid>
             <Image
@@ -82,8 +88,9 @@
                         CommandParameter="DataManagementViewModel">
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="数据管理" />
-                                <TextBlock Text="-点击恢复" IsVisible="{Binding !IsDataManagementVisible}" />
+                                <TextBlock Text="数据管理"
+                                           Foreground="{Binding IsDataManagementVisible, 
+                    Converter={StaticResource VisibilityToForegroundConverter}}" />
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>
@@ -92,8 +99,9 @@
                         CommandParameter="SystemSettingsViewModel">
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="系统设置" />
-                                <TextBlock Text="-点击恢复" IsVisible="{Binding !IsSystemSettingsVisible}" />
+                                <TextBlock Text="系统设置"
+                                           Foreground="{Binding IsSystemSettingsVisible, 
+                    Converter={StaticResource VisibilityToForegroundConverter}}" />
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>
@@ -102,8 +110,9 @@
                         CommandParameter="UserCenterViewModel">
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="用户中心" />
-                                <TextBlock Text="-点击恢复" IsVisible="{Binding !IsUserCenterVisible}" />
+                                <TextBlock Text="用户中心"
+                                           Foreground="{Binding IsUserCenterVisible, 
+                    Converter={StaticResource VisibilityToForegroundConverter}}" />
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>
@@ -112,8 +121,9 @@
                         CommandParameter="LogRecordsViewModel">
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="日志记录" />
-                                <TextBlock Text="-点击恢复" IsVisible="{Binding !IsLogRecordsVisible}" />
+                                <TextBlock Text="日志记录"
+                                           Foreground="{Binding IsLogRecordsVisible, 
+                    Converter={StaticResource VisibilityToForegroundConverter}}" />
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>
@@ -122,8 +132,9 @@
                         CommandParameter="HelpDocumentationViewModel">
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="帮助文档" />
-                                <TextBlock Text="-点击恢复" IsVisible="{Binding !IsHelpDocumentationVisible}" />
+                                <TextBlock Text="帮助文档"
+                                           Foreground="{Binding IsHelpDocumentationVisible, 
+                    Converter={StaticResource VisibilityToForegroundConverter}}" />
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>
