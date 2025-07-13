@@ -1,42 +1,24 @@
 using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.Views;
+using Prism.DryIoc;
+using Prism.Ioc;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo;
 
-public partial class App : Application
+public partial class App : PrismApplication
 {
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        base.Initialize(); // <-- Required
     }
 
-    public override void OnFrameworkInitializationCompleted()
+    protected override AvaloniaObject CreateShell()
     {
-        // DockManager.s_enableSplitToWindow = true;
-
-        var mainWindowViewModel = new MainWindowViewModel();
-
-        switch (ApplicationLifetime)
-        {
-            case IClassicDesktopStyleApplicationLifetime desktopLifetime:
-            {
-                var mainWindow = new MainWindow
-                {
-                    DataContext = mainWindowViewModel
-                };
-
-                desktopLifetime.MainWindow = mainWindow;
-
-                break;
-            }
-        }
-
-        base.OnFrameworkInitializationCompleted();
 #if DEBUG
         this.AttachDevTools();
 #endif
+        return Container.Resolve<MainWindow>();
     }
 }

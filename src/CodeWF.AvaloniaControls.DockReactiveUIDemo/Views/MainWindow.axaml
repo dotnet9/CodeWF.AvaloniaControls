@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:u="https://irihi.tech/ursa"
+    xmlns:views="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.Views"
     xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels"
     x:DataType="vm:MainWindowViewModel"
     Width="1000" Height="800" WindowStartupLocation="CenterScreen"
@@ -39,6 +40,9 @@
                 Text="{Binding Title}" />
         </Grid>
     </u:UrsaWindow.LeftContent>
+    <u:UrsaWindow.RightContent>
+        <views:TitleBarRightContentView VerticalAlignment="Top" />
+    </u:UrsaWindow.RightContent>
     <Border BorderBrush="LightGray" BorderThickness="1">
         <Grid RowDefinitions="40 * Auto">
             <Border Background="#1890FF" Grid.RowSpan="2" />

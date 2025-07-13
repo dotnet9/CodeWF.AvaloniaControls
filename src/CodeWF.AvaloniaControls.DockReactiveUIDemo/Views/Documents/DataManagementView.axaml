@@ -9,6 +9,5 @@
 
     <StackPanel>
         <TextBlock Text="{Binding Title}" />
-        <Button Content="创建Document" Command="{Binding CreateDocumentHandler}" />
     </StackPanel>
 </UserControl>

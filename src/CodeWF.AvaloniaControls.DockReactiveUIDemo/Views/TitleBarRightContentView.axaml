@@ -1,0 +1,134 @@
+<UserControl
+    x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.TitleBarRightContentView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    x:CompileBindings="True"
+    x:DataType="vm:TitleBarRightContentViewModel"
+    mc:Ignorable="d">
+    <StackPanel Orientation="Horizontal">
+        <Grid>
+            <Image
+                Width="16"
+                Height="16"
+                Source="/Assets/setting.png" />
+            <Menu>
+                <MenuItem>
+                    <MenuItem.Icon>
+                        <Image
+                            Width="16"
+                            Height="16"
+                            Source="avares://CodeWF.AvaloniaControls.DockReactiveUIDemo/Assets/setting.png" />
+                    </MenuItem.Icon>
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        FontWeight="SemiBold"
+                        Foreground="#262626"
+                        Text="设置与连接" />
+                    <Separator />
+                    <MenuItem Header="网络设置">
+                        <MenuItem.Icon>
+                            <Image
+                                Width="16"
+                                Height="16"
+                                Source="avares://CodeWF.AvaloniaControls.DockReactiveUIDemo/Assets/net.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="连接">
+                        <MenuItem.Icon>
+                            <Image
+                                Width="16"
+                                Height="16"
+                                Source="avares://CodeWF.AvaloniaControls.DockReactiveUIDemo/Assets/connect.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="断开">
+                        <MenuItem.Icon>
+                            <Image
+                                Width="16"
+                                Height="16"
+                                Source="avares://CodeWF.AvaloniaControls.DockReactiveUIDemo/Assets/disconnect.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="其他客户端设置">
+                        <MenuItem.Icon>
+                            <Image
+                                Width="16"
+                                Height="16"
+                                Source="avares://CodeWF.AvaloniaControls.DockReactiveUIDemo/Assets/other.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="更新日志和版本信息">
+                        <MenuItem.Icon>
+                            <Image
+                                Width="16"
+                                Height="16"
+                                Source="avares://CodeWF.AvaloniaControls.DockReactiveUIDemo/Assets/about.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <TextBlock
+                        FontWeight="SemiBold"
+                        Foreground="#262626"
+                        Text="菜单管理" />
+                    <Separator />
+                    <MenuItem
+                        Command="{Binding RaiseOpenOrLocateDocumentHandler}"
+                        CommandParameter="DataManagementViewModel">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="数据管理" />
+                                <TextBlock Text="-点击恢复" IsVisible="{Binding !IsDataManagementVisible}" />
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem
+                        Command="{Binding RaiseOpenOrLocateDocumentHandler}"
+                        CommandParameter="SystemSettingsViewModel">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="系统设置" />
+                                <TextBlock Text="-点击恢复" IsVisible="{Binding !IsSystemSettingsVisible}" />
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem
+                        Command="{Binding RaiseOpenOrLocateDocumentHandler}"
+                        CommandParameter="UserCenterViewModel">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="用户中心" />
+                                <TextBlock Text="-点击恢复" IsVisible="{Binding !IsUserCenterVisible}" />
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem
+                        Command="{Binding RaiseOpenOrLocateDocumentHandler}"
+                        CommandParameter="LogRecordsViewModel">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="日志记录" />
+                                <TextBlock Text="-点击恢复" IsVisible="{Binding !IsLogRecordsVisible}" />
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem
+                        Command="{Binding RaiseOpenOrLocateDocumentHandler}"
+                        CommandParameter="HelpDocumentationViewModel">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="帮助文档" />
+                                <TextBlock Text="-点击恢复" IsVisible="{Binding !IsHelpDocumentationVisible}" />
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+        </Grid>
+    </StackPanel>
+</UserControl>
