@@ -5,6 +5,7 @@ using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
 using CodeWF.EventBus;
 using Dock.Model.Controls;
 using Dock.Model.ReactiveUI.Controls;
+using DryIoc.ImTools;
 using ReactiveUI;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels;
@@ -120,16 +121,18 @@ public class TitleBarRightContentViewModel : ReactiveObject
         var existDocument = documents?.VisibleDockables?.OfType<IDocument>()
             .FirstOrDefault(d => d.Id == documentKey);
 
-        if (existDocument == null)
-        {
-            existDocument = MainWindowViewModel.Instance?.Factory?.DocumentWindows
-                .Keys.OfType<IDocument>().FirstOrDefault(d => d.Id == documentKey);
-        }
         if (existDocument != null)
         {
             documents?.ActiveDockable = existDocument;
             return;
         }
+
+        if (existDocument == null && MainWindowViewModel.Instance?.Factory?.DocumentWindows
+                .Keys.OfType<IDocument>().FindFirst(d => d.Id == documentKey) != null)
+        {
+            return;
+        }
+
         existDocument = createDocAction.Invoke();
         MainWindowViewModel.Instance?.Factory?.AddDockable(documents, existDocument);
         MainWindowViewModel.Instance?.Factory?.SetActiveDockable(existDocument);
