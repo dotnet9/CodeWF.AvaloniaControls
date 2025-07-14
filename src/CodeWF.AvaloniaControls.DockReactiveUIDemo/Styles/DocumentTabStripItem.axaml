@@ -8,6 +8,7 @@
 
   <!-- Add Styles Here -->
   <Style Selector="DocumentTabStripItem">
+      <Setter Property="MinWidth" Value="150" />
       <!--设置Item圆角，只需要左上、右上-->
       <Setter Property="CornerRadius" Value="10 10 0 0" />
       <!--考虑斜线占用空间-->

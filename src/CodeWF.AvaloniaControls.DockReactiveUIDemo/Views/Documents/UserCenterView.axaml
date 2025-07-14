@@ -8,6 +8,7 @@
              x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.UserCenterView">
 
     <StackPanel>
-        <TextBlock Text="{Binding Title}" />
+		<TextBox Text="{Binding Title}" />
+        <TextBox Text="Test" Width="200" />
     </StackPanel>
 </UserControl>
