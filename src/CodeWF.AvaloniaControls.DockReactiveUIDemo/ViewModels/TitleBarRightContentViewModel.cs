@@ -67,23 +67,18 @@ public class TitleBarRightContentViewModel : ReactiveObject
         {
             case nameof(DataManagementViewModel):
                 OpenOrLocateDocument(documentKey, () => new DataManagementViewModel());
-                IsDataManagementVisible = true;
                 break;
             case nameof(HelpDocumentationViewModel):
                 OpenOrLocateDocument(documentKey, () => new HelpDocumentationViewModel());
-                IsHelpDocumentationVisible = true;
                 break;
             case nameof(LogRecordsViewModel):
                 OpenOrLocateDocument(documentKey, () => new LogRecordsViewModel());
-                IsLogRecordsVisible = true;
                 break;
             case nameof(SystemSettingsViewModel):
                 OpenOrLocateDocument(documentKey, () => new SystemSettingsViewModel());
-                IsSystemSettingsVisible = true;
                 break;
             case nameof(UserCenterViewModel):
-                OpenOrLocateDocument(documentKey, () => new UserCenterViewModel());
-                IsUserCenterVisible = true;
+                OpenOrLocateDocument(documentKey, () => new UserCenterViewModel()); 
                 break;
         }
     }

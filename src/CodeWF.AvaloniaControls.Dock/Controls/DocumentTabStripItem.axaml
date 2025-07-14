@@ -69,6 +69,7 @@
                         IsVisible="False" />
                     <DockableControl TrackingMode="Tab">
                         <StackPanel
+                            HorizontalAlignment="Center"
                             Background="Transparent"
                             DockProperties.IsDragArea="True"
                             DockProperties.IsDropArea="True"

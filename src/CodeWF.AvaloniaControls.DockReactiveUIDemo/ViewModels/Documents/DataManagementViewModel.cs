@@ -8,7 +8,6 @@ public class DataManagementViewModel : Document
     {
         Id = nameof(DataManagementViewModel);
         Title = "数据管理";
-        CanClose = false;
         CanFloat = false;
         CanDrag = false;
     }

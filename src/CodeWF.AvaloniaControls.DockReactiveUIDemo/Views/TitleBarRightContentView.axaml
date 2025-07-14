@@ -20,12 +20,6 @@
                 Source="/Assets/setting.png" />
             <Menu>
                 <MenuItem>
-                    <MenuItem.Icon>
-                        <Image
-                            Width="16"
-                            Height="16"
-                            Source="avares://CodeWF.AvaloniaControls.DockReactiveUIDemo/Assets/setting.png" />
-                    </MenuItem.Icon>
                     <TextBlock
                         HorizontalAlignment="Left"
                         FontWeight="SemiBold"
