@@ -8,6 +8,11 @@ public class HelpDocumentationViewModel : Document
     {
         Id = nameof(HelpDocumentationViewModel);
         Title = "帮助文档";
-        CanClose = false;
+        CanClose = true;
+    }
+
+    public override bool OnClose()
+    {
+        return base.OnClose();
     }
 }
