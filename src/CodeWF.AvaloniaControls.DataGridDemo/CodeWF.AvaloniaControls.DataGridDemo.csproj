@@ -27,6 +27,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\CodeWF.AvaloniaControls.DataGrid\CodeWF.AvaloniaControls.DataGrid.csproj" />
+		<ProjectReference Include="..\CodeWF.AvaloniaControls\CodeWF.AvaloniaControls.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />

@@ -1,0 +1,28 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.ViewModels.Pages"
+             xmlns:model="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.Models"
+             x:DataType="vm:SortingViewModel" x:CompileBindings="True"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Background="White"
+             x:Class="CodeWF.AvaloniaControls.DataGridDemo.Pages.SortingView">
+	<StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Button Classes="Success" Theme="{DynamicResource OutlineButton}"
+                    Content="AddSorting"
+                    Command="{Binding RaiseAddSortingHandler}"
+                    CommandParameter="{Binding #StudentDataGrid}"/>
+        </StackPanel>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding Students}" x:Name="StudentDataGrid">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" x:DataType="model:Student" Binding="{Binding Id}"
+                                    SortMemberPath="Id" />
+                <DataGridTextColumn Header="Name" x:DataType="model:Student" Binding="{Binding Name}"
+                                    SortMemberPath="Name" />
+                <DataGridTextColumn Header="Address" x:DataType="model:Student" Binding="{Binding Address}"
+                                    SortMemberPath="Address" />
+            </DataGrid.Columns>
+        </DataGrid>
+	</StackPanel>
+</UserControl>

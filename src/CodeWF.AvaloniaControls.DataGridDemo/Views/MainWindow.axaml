@@ -4,9 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:view="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.Views"
+    xmlns:pages="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.Pages"
     xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.ViewModels"
-    xmlns:model="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.Models"
     xmlns:u="https://irihi.tech/ursa"
     x:DataType="vm:MainWindowViewModel" x:CompileBindings="True"
     Title="DataGrid Demo"
@@ -53,23 +52,43 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-            <StackPanel Orientation="Horizontal" Grid.Row="1">
-                <Button Classes="Success" Theme="{DynamicResource OutlineButton}" 
-                        Content="AddSorting" 
-                        Command="{Binding RaiseAddSortingHandler}"
-                        CommandParameter="{Binding #StudentDataGrid}"/>
-            </StackPanel>
-            <DataGrid Grid.Row="2" ItemsSource="{Binding Students}" x:Name="StudentDataGrid">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" x:DataType="model:Student" Binding="{Binding Id}"
-                                        SortMemberPath="Id" />
-                    <DataGridTextColumn Header="Name" x:DataType="model:Student" Binding="{Binding Name}"
-                                        SortMemberPath="Name" />
-                    <DataGridTextColumn Header="Address" x:DataType="model:Student" Binding="{Binding Address}"
-                                        SortMemberPath="Address" />
-                </DataGrid.Columns>
-            </DataGrid>
-
+            <TabControl TabStripPlacement="Top" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Top"
+                        Theme="{StaticResource TrapezoidShapedTabControl}"
+                        Margin="8 0" CornerRadius="10 10 0 0">
+                <TabControl.Styles>
+                    <Style Selector="TabControl">
+                        <Setter Property="Background" Value="#551890FF"></Setter>
+                    </Style>
+                    <Style Selector="TabItem">
+                        <Setter Property="CornerRadius" Value="10 10 0 0" />
+                        <Setter Property="Foreground" Value="#FFFFFF" />
+                        <Setter Property="Padding" Value="12 8" />
+                        <Setter Property="MinHeight" Value="40" />
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="50%, 0%"
+                                                     EndPoint="50%, 100%">
+                                    <GradientStops>
+                                        <GradientStop Color="#BAE7FF" Offset="0" />
+                                        <GradientStop Color="#FFFFFF" Offset="1" />
+                                    </GradientStops>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Styles>
+                <TabControl.Resources>
+                    <SolidColorBrush x:Key="TabItemLineHeaderPointeroverForeground">#1890FF</SolidColorBrush>
+                    <SolidColorBrush x:Key="TabItemLineHeaderSelectedForeground">#1890FF</SolidColorBrush>
+                </TabControl.Resources>
+                <TabItem Header="可取消排序">
+                    <pages:SortingView Margin="10" />
+                </TabItem>
+                <TabItem Header="跨行跨列">
+                </TabItem>
+            </TabControl>
         </Grid>
     </Border>
 </u:UrsaWindow>

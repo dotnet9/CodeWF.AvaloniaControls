@@ -2,10 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="CodeWF.AvaloniaControls.DataGridDemo.App"
              xmlns:semi="https://irihi.tech/semi"
-             xmlns:u-semi="https://irihi.tech/ursa/themes/semi">
-    <Application.Styles>
+             xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
+             xmlns:codewf="https://codewf.com">
+	<Application.Styles>
         <semi:SemiTheme Locale="zh-CN" />
         <u-semi:SemiTheme Locale="zh-CN"/>
 		<semi:DataGridSemiTheme />
+        <codewf:CodeWFTheme />
     </Application.Styles>
 </Application>
