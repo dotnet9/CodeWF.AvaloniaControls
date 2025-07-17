@@ -4,27 +4,166 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.ViewModels.Pages"
-             xmlns:model="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.Models"
+             xmlns:models="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.Models"
              prism:ViewModelLocator.AutoWireViewModel="True"
              x:DataType="vm:CrossRowsAndColumnsViewModel" x:CompileBindings="True"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Background="White"
              x:Class="CodeWF.AvaloniaControls.DataGridDemo.Views.Pages.CrossRowsAndColumnsView">
-	<StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Button Classes="Success" Theme="{DynamicResource OutlineButton}"
-                    Content="AddSorting"
-                    Command="{Binding RaiseAddSortingHandler}"
-                    CommandParameter="{Binding #StudentDataGrid}"/>
-        </StackPanel>
-        <DataGrid Grid.Row="2" ItemsSource="{Binding Students}" x:Name="StudentDataGrid">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" x:DataType="model:Student" Binding="{Binding Id}"
-                                    SortMemberPath="Id" />
-                <DataGridTextColumn Header="Name" x:DataType="model:Student" Binding="{Binding Name}"
-                                    SortMemberPath="Name" />
-                <DataGridTextColumn Header="Address" x:DataType="model:Student" Binding="{Binding Address}"
-                                    SortMemberPath="Address" />
-            </DataGrid.Columns>
-        </DataGrid>
-	</StackPanel>
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="Colors.Border.BorderBrush">#F0F0F0</SolidColorBrush>
+		<SolidColorBrush x:Key="DataGridColumnHeaderForeground">#262626</SolidColorBrush>
+    </UserControl.Resources>
+    <UserControl.Styles>
+        <Style Selector="TextBlock.Header">
+            <Setter Property="Foreground" Value="#262626" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="TextBlock.Content">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="15 0 0 0" />
+        </Style>
+        <Style Selector="Grid.Content">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="15 0 0 0" />
+        </Style>
+        <Style Selector="Border.DataGrid">
+            <Setter Property="BorderBrush" Value="{StaticResource Colors.Border.BorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="Rectangle.VBorder">
+            <Setter Property="Width" Value="1" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="0 0 15 0" />
+            <Setter Property="Fill" Value="{StaticResource Colors.Border.BorderBrush}" />
+        </Style>
+        <Style Selector="Rectangle.HBorder">
+            <Setter Property="Height" Value="1" />
+            <Setter Property="Margin" Value="-15 0 15 0" />
+            <Setter Property="Fill" Value="{StaticResource Colors.Border.BorderBrush}" />
+        </Style>
+    </UserControl.Styles>
+    <DataGrid ItemsSource="{Binding GroupItems}" x:Name="ProcessDataGrid">
+        <DataGrid.Columns>
+			<DataGridTemplateColumn CanUserSort="False" >
+                <DataGridTemplateColumn.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="组号" Classes="Header" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.HeaderTemplate>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate x:DataType="models:GroupItem">
+                        <Grid>
+                            <TextBlock Text="{Binding Id}" Classes="Content" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn CanUserSort="False">
+                <DataGridTemplateColumn.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="关键组" Classes="Header" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.HeaderTemplate>
+                <DataGridTemplateColumn.CellTemplate>
+					<DataTemplate x:DataType="models:GroupItem">
+						<Grid Classes="Content">
+                            <Image Source="/Assets/success.png" Width="16" Height="16" IsVisible="{Binding IsKeyGroup}" />
+                            <Image Source="/Assets/error.png" Width="16" Height="16" IsVisible="{Binding !IsKeyGroup}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn CanUserSort="False" >
+                <DataGridTemplateColumn.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="周期" Classes="Header" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.HeaderTemplate>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate x:DataType="models:GroupItem">
+                        <Grid>
+                            <TextBlock Text="{Binding Cycle}" Classes="Content" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn CanUserSort="False">
+                <DataGridTemplateColumn.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid RowDefinitions="40 40" ColumnDefinitions="150 50 80 80 120    200 200    80 80    200 200     80">
+                            <TextBlock Grid.RowSpan="2" Text="名称" Classes="Header" />
+							<TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Text="启用" Classes="Header" />
+							<TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Text="源节点号" Classes="Header" />
+							<TextBlock Grid.Row="0" Grid.RowSpan="2"  Grid.Column="3" Text="组内序号" Classes="Header" />
+							<TextBlock Grid.Row="0" Grid.RowSpan="2"  Grid.Column="4" Text="主机" Classes="Header" />
+
+                            <Rectangle Grid.Row="0" Grid.RowSpan="2" Grid.Column="4"  HorizontalAlignment="Right" Classes="VBorder" />
+
+							<TextBlock Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Text="路径" Classes="Header"  />
+                            <Rectangle Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Classes="HBorder" />
+                            <TextBlock Grid.Row="1" Grid.Column="5" Text="程序路径" Classes="Header" />
+                            <TextBlock  Grid.Row="1" Grid.Column="6" Text="工作路径" Classes="Header" />
+
+                            <Rectangle Grid.Row="0" Grid.RowSpan="2" Grid.Column="6"  HorizontalAlignment="Right" Classes="VBorder" />
+
+                            <TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="7" Text="参数" Classes="Header" />
+                            <TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="8" Text="自启动" Classes="Header" />
+
+                            <Rectangle Grid.Row="0" Grid.RowSpan="2" Grid.Column="8"  HorizontalAlignment="Right" Classes="VBorder" />
+
+                            <TextBlock Grid.Row="0" Grid.Column="9" Grid.ColumnSpan="2" Text="处理方式" Classes="Header"  />
+                            <Rectangle Grid.Row="0" Grid.Column="9" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Classes="HBorder" />
+                            <TextBlock Grid.Row="1" Grid.Column="9" Text="前处理" Classes="Header" />
+                            <TextBlock  Grid.Row="1" Grid.Column="10" Text="后处理" Classes="Header" />
+
+                            <Rectangle Grid.Row="0" Grid.RowSpan="2" Grid.Column="10"  HorizontalAlignment="Right" Classes="VBorder" />
+
+                            <TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="11" Text="描述" Classes="Header" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.HeaderTemplate>
+                <DataGridTemplateColumn.CellTemplate>
+					<DataTemplate x:DataType="models:GroupItem">
+                        <DataGrid ItemsSource="{Binding Items}" GridLinesVisibility="None" BorderThickness="0" HeadersVisibility="None">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="150" Binding="{Binding Name}" CanUserSort="False" CanUserResize="False" IsReadOnly="True" />
+                                <DataGridCheckBoxColumn Width="50" x:DataType="models:ProcessItem" Binding="{Binding Enabled}" CanUserSort="False" CanUserResize="False" />
+                                <DataGridTextColumn Width="80" Binding="{Binding SourceNode}" CanUserSort="False" CanUserResize="False" IsReadOnly="True" />
+                                <DataGridTextColumn Width="80" Binding="{Binding Id}" CanUserSort="False" CanUserResize="False" IsReadOnly="True" />
+                                <DataGridTextColumn Width="120" Binding="{Binding Host}" CanUserSort="False" CanUserResize="False" IsReadOnly="True" />
+
+                                <DataGridTextColumn Width="200" Binding="{Binding ProgramPath}" CanUserSort="False" CanUserResize="False" IsReadOnly="True" />
+                                <DataGridTextColumn Width="200" Binding="{Binding WorkPath}" CanUserSort="False" CanUserResize="False" IsReadOnly="True" />
+
+                                <DataGridTextColumn Width="80" Binding="{Binding Params}" CanUserSort="False" CanUserResize="False" IsReadOnly="True" />
+                                <DataGridTemplateColumn Width="80" CanUserResize="False">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate x:DataType="models:ProcessItem">
+                                            <Grid Classes="Content">
+                                                <Image Source="/Assets/success.png" Width="16" Height="16" IsVisible="{Binding AutoStart}" />
+                                                <Image Source="/Assets/error.png" Width="16" Height="16" IsVisible="{Binding !AutoStart}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTextColumn Width="200" Binding="{Binding PreProcess}" CanUserSort="False" CanUserResize="False" IsReadOnly="True" />
+                                <DataGridTextColumn Width="200" Binding="{Binding PostProcess}" CanUserSort="False" CanUserResize="False" IsReadOnly="True" />
+
+                                <DataGridTextColumn Width="80" Binding="{Binding Description}" CanUserSort="False" CanUserResize="False" IsReadOnly="True" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
 </UserControl>

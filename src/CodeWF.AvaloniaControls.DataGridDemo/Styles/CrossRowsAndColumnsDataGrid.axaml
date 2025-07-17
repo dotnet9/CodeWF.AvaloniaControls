@@ -7,6 +7,4 @@
   </Design.PreviewWith>
 
   <!-- Add Styles Here -->
-  <StyleInclude Source="DataGrid.axaml" />
-  <StyleInclude Source="CrossRowsAndColumnsDataGrid.axaml" />
 </Styles>

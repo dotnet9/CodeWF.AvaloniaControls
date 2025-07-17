@@ -40,7 +40,7 @@
                 FontSize="14"
                 Foreground="White"
                 IsHitTestVisible="False"
-                Text="Avalonia控件Demo" />
+                Text="Avalonia DataGrid Demo" />
         </Grid>
     </u:UrsaWindow.LeftContent>
     <Border BorderBrush="LightGray" BorderThickness="1">
