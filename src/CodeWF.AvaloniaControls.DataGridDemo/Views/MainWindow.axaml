@@ -4,9 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pages="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.Pages"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:pages="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.Views.Pages"
     xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.ViewModels"
     xmlns:u="https://irihi.tech/ursa"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     x:DataType="vm:MainWindowViewModel" x:CompileBindings="True"
     Title="DataGrid Demo"
     Width="1000"
@@ -57,7 +59,7 @@
                         Margin="8 0" CornerRadius="10 10 0 0">
                 <TabControl.Styles>
                     <Style Selector="TabControl">
-                        <Setter Property="Background" Value="#551890FF"></Setter>
+                        <Setter Property="Background" Value="#55FFFFFF"></Setter>
                     </Style>
                     <Style Selector="TabItem">
                         <Setter Property="CornerRadius" Value="10 10 0 0" />
@@ -84,9 +86,10 @@
                     <SolidColorBrush x:Key="TabItemLineHeaderSelectedForeground">#1890FF</SolidColorBrush>
                 </TabControl.Resources>
                 <TabItem Header="可取消排序">
-                    <pages:SortingView Margin="10" />
+                    <pages:SortingView Margin="10" Padding="10" />
                 </TabItem>
                 <TabItem Header="跨行跨列">
+                    <pages:CrossRowsAndColumnsView Margin="10" Padding="10" />
                 </TabItem>
             </TabControl>
         </Grid>

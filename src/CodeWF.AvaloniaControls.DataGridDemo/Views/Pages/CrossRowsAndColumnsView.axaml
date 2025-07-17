@@ -2,11 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prism="http://prismlibrary.com/"
              xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.ViewModels.Pages"
              xmlns:model="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.Models"
-             x:DataType="vm:SortingViewModel" x:CompileBindings="True"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             x:DataType="vm:CrossRowsAndColumnsViewModel" x:CompileBindings="True"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Background="White"
-             x:Class="CodeWF.AvaloniaControls.DataGridDemo.Pages.SortingView">
+             x:Class="CodeWF.AvaloniaControls.DataGridDemo.Views.Pages.CrossRowsAndColumnsView">
 	<StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <Button Classes="Success" Theme="{DynamicResource OutlineButton}"

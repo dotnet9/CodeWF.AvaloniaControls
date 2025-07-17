@@ -1,23 +1,24 @@
 using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using CodeWF.AvaloniaControls.DataGridDemo.ViewModels;
 using CodeWF.AvaloniaControls.DataGridDemo.Views;
+using Prism.DryIoc;
+using Prism.Ioc;
 
 namespace CodeWF.AvaloniaControls.DataGridDemo;
 
-public class App : Application
+public partial class App : PrismApplication
 {
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        base.Initialize(); // <-- Required
     }
 
-    public override void OnFrameworkInitializationCompleted()
+    protected override AvaloniaObject CreateShell()
     {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            desktop.MainWindow = new MainWindow { DataContext = new MainWindowViewModel() };
-
-        base.OnFrameworkInitializationCompleted();
+#if DEBUG
+        this.AttachDevTools();
+#endif
+        return Container.Resolve<MainWindow>();
     }
 }

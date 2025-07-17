@@ -3,11 +3,13 @@
              x:Class="CodeWF.AvaloniaControls.DataGridDemo.App"
              xmlns:semi="https://irihi.tech/semi"
              xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
-             xmlns:codewf="https://codewf.com">
+             xmlns:codewf="https://codewf.com"
+             xmlns:local="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo">
 	<Application.Styles>
         <semi:SemiTheme Locale="zh-CN" />
         <u-semi:SemiTheme Locale="zh-CN"/>
 		<semi:DataGridSemiTheme />
         <codewf:CodeWFTheme />
+        <local:OwnerTheme />
     </Application.Styles>
 </Application>
