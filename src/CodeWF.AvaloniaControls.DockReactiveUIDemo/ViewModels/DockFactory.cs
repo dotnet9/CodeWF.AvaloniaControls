@@ -5,6 +5,7 @@ using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.Models.Documents;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Docks;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
+using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents.Homes;
 using Dock.Avalonia.Controls;
 using Dock.Model.Controls;
 using Dock.Model.Core;
@@ -31,6 +32,7 @@ public class DockFactory : Factory
 
     public override IRootDock CreateLayout()
     {
+        var document0 = new HomeViewModel();
         var document1 = new DataManagementViewModel();
         var document2 = new SystemSettingsViewModel();
         var document3 = new UserCenterViewModel();
@@ -41,8 +43,8 @@ public class DockFactory : Factory
         var documentDock = new CustomDocumentDock
         {
             IsCollapsable = false,
-            ActiveDockable = document1,
-            VisibleDockables = CreateList<IDockable>(document1, document2, document3, document4, document5),
+            ActiveDockable = document0,
+            VisibleDockables = CreateList<IDockable>(document0, document1, document2, document3, document4, document5),
             CanCreateDocument = false,
             // CanDrop = false,
             EnableWindowDrag = true,
@@ -107,6 +109,7 @@ public class DockFactory : Factory
     {
         ContextLocator = new Dictionary<string, Func<object?>>
         {
+            [nameof(HomeViewModel)] = () => new DemoDocument(),
             [nameof(DataManagementViewModel)] = () => new DemoDocument(),
             [nameof(HelpDocumentationViewModel)] = () => new DemoDocument(),
             [nameof(LogRecordsViewModel)] = () => new DemoDocument(),

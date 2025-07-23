@@ -40,6 +40,12 @@
 		<AvaloniaResource Include="Assets\**" />
 	</ItemGroup>
 	<ItemGroup>
+	  <AvaloniaXaml Remove="Models\新文件夹\**" />
+	  <Compile Remove="Models\新文件夹\**" />
+	  <EmbeddedResource Remove="Models\新文件夹\**" />
+	  <None Remove="Models\新文件夹\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<Content Include="Assets\logo.ico" />
 		<ProjectReference Include="..\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" />
 		<TrimmerRootDescriptor Include="Roots.xml" />
@@ -49,5 +55,28 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Views\Documents\Homes\HomeView.axaml.cs">
+	    <DependentUpon>HomeView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Documents\Homes\Tools\AlertLatestView.axaml.cs">
+	    <DependentUpon>AlertLatestView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Documents\Homes\Tools\SysInfoView.axaml.cs">
+	    <DependentUpon>SysInfoView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Documents\Homes\Tools\ProgInfoView.axaml.cs">
+	    <DependentUpon>ProgInfoView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Documents\Homes\Tools\ParamRealTimeView.axaml.cs">
+	    <DependentUpon>ParamRealTimeView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Documents\Homes\Tools\ManageStatusView.axaml.cs">
+	    <DependentUpon>ManageStatusView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Documents\Homes\Tools\LogView.axaml.cs">
+	    <DependentUpon>LogView.axaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 </Project>
