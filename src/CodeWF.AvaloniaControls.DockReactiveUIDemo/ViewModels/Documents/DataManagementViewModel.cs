@@ -12,4 +12,9 @@ public class DataManagementViewModel : Document
         CanFloat = false;
         CanDrag = false;
     }
+
+    public override bool OnClose()
+    {
+        return base.OnClose();
+    }
 }

@@ -10,4 +10,9 @@ public class UserCenterViewModel : Document
         Title = "用户中心";
         CanClose = false;
     }
+
+    public override bool OnClose()
+    {
+        return base.OnClose();
+    }
 }

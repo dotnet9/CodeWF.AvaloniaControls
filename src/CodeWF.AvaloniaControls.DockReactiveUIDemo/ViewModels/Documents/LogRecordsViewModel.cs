@@ -10,4 +10,9 @@ public class LogRecordsViewModel : Document
         Title = "日志记录";
         CanClose = false;
     }
+
+    public override bool OnClose()
+    {
+        return base.OnClose();
+    }
 }

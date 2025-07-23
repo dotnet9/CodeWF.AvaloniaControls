@@ -10,4 +10,8 @@ public class SystemSettingsViewModel : Document
         Title = "系统设置";
         CanClose = false;
     }
+    public override bool OnClose()
+    {
+        return base.OnClose();
+    }
 }
