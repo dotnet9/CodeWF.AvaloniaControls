@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:codewf="https://codewf.com" FontSize="12"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CodeWF.AvaloniaControls.Controls.StatusLabel">
+    <Border CornerRadius="15" BorderThickness="1"
+            BorderBrush="{CompiledBinding $parent[codewf:StatusLabel].Kind, Converter={StaticResource StatusLabelKindBackgroundConverter}}"
+            Background="{CompiledBinding $parent[codewf:StatusLabel].Kind, Converter={StaticResource StatusLabelKindLightBackgroundConverter}}">
+        <StackPanel Orientation="Horizontal">
+            <Border CornerRadius="15 0 0 15" Padding="8 1"
+                    Background="{CompiledBinding $parent[codewf:StatusLabel].Kind, Converter={StaticResource StatusLabelKindBackgroundConverter}}">
+                <SelectableTextBlock Foreground="White" Text="{CompiledBinding $parent[codewf:StatusLabel].LeftText}" />
+            </Border>
+            <SelectableTextBlock Padding="8 1" Text="{CompiledBinding $parent[codewf:StatusLabel].RightText}" />
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -2,7 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Media;
 
-namespace CodeWF.AvaloniaControls.Controls.TabControls;
+namespace CodeWF.AvaloniaControls.Controls;
 
 public partial class TrapezoidShapedTabItemBorder : Control
 {

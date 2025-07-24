@@ -3,7 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:codewf="https://codewf.com"
     x:CompileBindings="True">
-    <codewf:TrapezoidShapedTabItemPaddingConverter x:Key="TrapezoidShapedTabItemPaddingConverter" />
     <ControlTheme x:Key="TrapezoidShapedTabItem" TargetType="TabItem">
         <Setter Property="Foreground" Value="{DynamicResource TabItemLineHeaderForeground}" />
         <Setter Property="Background" Value="{DynamicResource TabItemLinePipeBackground}" />
