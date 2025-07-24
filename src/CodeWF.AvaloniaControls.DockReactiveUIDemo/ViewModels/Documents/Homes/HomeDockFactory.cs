@@ -36,20 +36,36 @@ public class HomeDockFactory : Factory
             ActiveDockable = null,
             VisibleDockables = CreateList<IDockable>
             (
-                new ToolDock
+                new ProportionalDock
                 {
-                    
-                    ActiveDockable = tool1,
-                    VisibleDockables = CreateList<IDockable>(tool1),
+                    Proportion = 0.2,
+                    ActiveDockable = null,
+                    VisibleDockables = CreateList<IDockable>
+                        (
+                            new ToolDock
+                            {
+
+                                ActiveDockable = tool1,
+                                VisibleDockables = CreateList<IDockable>(tool1),
+                            }
+                        )
                 },
-                new ProportionalDockSplitter { CanResize = true },
-                new ToolDock
+                new ProportionalDockSplitter(),
+                new ProportionalDock
                 {
-                    ActiveDockable = tool2,
-                    VisibleDockables = CreateList<IDockable>(tool2),
+                    Proportion = 0.8,
+                    ActiveDockable = null,
+                    VisibleDockables = CreateList<IDockable>
+                    (
+                        new ToolDock
+                        {
+
+                            ActiveDockable = tool2,
+                            VisibleDockables = CreateList<IDockable>(tool2),
+                        }
+                    )
                 }
-            ),
-            // CanDrop = false
+            )
         };
         var rightDock = new ProportionalDock
         {
@@ -58,28 +74,64 @@ public class HomeDockFactory : Factory
             ActiveDockable = null,
             VisibleDockables = CreateList<IDockable>
             (
-                new ToolDock
+                new ProportionalDock
                 {
-                    ActiveDockable = tool3,
-                    VisibleDockables = CreateList<IDockable>(tool3),
+                    Proportion = 0.13,
+                    ActiveDockable = null,
+                    VisibleDockables = CreateList<IDockable>
+                    (
+                        new ToolDock
+                        {
+
+                            ActiveDockable = tool3,
+                            VisibleDockables = CreateList<IDockable>(tool3),
+                        }
+                    )
                 },
                 new ProportionalDockSplitter(),
-                new ToolDock
+                new ProportionalDock
                 {
-                    ActiveDockable = tool4,
-                    VisibleDockables = CreateList<IDockable>(tool4),
+                    Proportion = 0.27,
+                    ActiveDockable = null,
+                    VisibleDockables = CreateList<IDockable>
+                    (
+                        new ToolDock
+                        {
+
+                            ActiveDockable = tool4,
+                            VisibleDockables = CreateList<IDockable>(tool4),
+                        }
+                    )
                 },
                 new ProportionalDockSplitter(),
-                new ToolDock
+                new ProportionalDock
                 {
-                    ActiveDockable = tool5,
-                    VisibleDockables = CreateList<IDockable>(tool5),
+                    Proportion = 0.33,
+                    ActiveDockable = null,
+                    VisibleDockables = CreateList<IDockable>
+                    (
+                        new ToolDock
+                        {
+
+                            ActiveDockable = tool5,
+                            VisibleDockables = CreateList<IDockable>(tool5),
+                        }
+                    )
                 },
                 new ProportionalDockSplitter(),
-                new ToolDock
+                new ProportionalDock
                 {
-                    ActiveDockable = tool6,
-                    VisibleDockables = CreateList<IDockable>(tool6),
+                    Proportion = 0.27,
+                    ActiveDockable = null,
+                    VisibleDockables = CreateList<IDockable>
+                    (
+                        new ToolDock
+                        {
+
+                            ActiveDockable = tool6,
+                            VisibleDockables = CreateList<IDockable>(tool6),
+                        }
+                    )
                 }
             ),
         };
