@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
+﻿using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.Models.Documents;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Docks;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
@@ -11,22 +8,18 @@ using Dock.Model.Controls;
 using Dock.Model.Core;
 using Dock.Model.ReactiveUI;
 using Dock.Model.ReactiveUI.Controls;
-using DryIoc.ImTools;
+using System;
+using System.Collections.Generic;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels;
 
 public class DockFactory : Factory
 {
-    private readonly object _context;
     private IRootDock? _rootDock;
     private IDocumentDock? _documentDock;
     public const string DocumentsKey = "Documents";
     public Dictionary<IDockable, IDockWindow> DocumentWindows { get; private set; } = new();
 
-    public DockFactory(object context)
-    {
-        _context = context;
-    }
 
     public override IDocumentDock CreateDocumentDock() => new CustomDocumentDock();
 

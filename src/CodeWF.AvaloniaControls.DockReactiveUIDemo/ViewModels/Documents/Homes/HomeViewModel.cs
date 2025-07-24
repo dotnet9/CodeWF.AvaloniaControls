@@ -17,7 +17,7 @@ public class HomeViewModel : Document
 
 
         Instance = this;
-        Factory = new HomeDockFactory(new DemoData());
+        Factory = new HomeDockFactory();
 
         Layout = Factory?.CreateLayout();
 

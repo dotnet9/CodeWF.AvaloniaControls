@@ -26,7 +26,7 @@ public class MainWindowViewModel : ReactiveObject
     public MainWindowViewModel()
     {
         Instance = this;
-        Factory = new DockFactory(new DemoData());
+        Factory = new DockFactory();
 
         DebugFactoryEvents(Factory);
 
