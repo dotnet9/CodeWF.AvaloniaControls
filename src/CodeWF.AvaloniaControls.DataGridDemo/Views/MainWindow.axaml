@@ -91,6 +91,9 @@
                 <TabItem Header="跨行跨列">
                     <pages:CrossRowsAndColumnsView Margin="10" Padding="10" />
                 </TabItem>
+                <TabItem Header="动态列">
+					<pages:DynamicColumnsView Margin="10" Padding="10" />
+                </TabItem>
             </TabControl>
         </Grid>
     </Border>

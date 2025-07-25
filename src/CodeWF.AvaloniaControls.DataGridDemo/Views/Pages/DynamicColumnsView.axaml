@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.ViewModels.Pages"
+             xmlns:models="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.Models"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             x:DataType="vm:DynamicColumnsViewModel" x:CompileBindings="True"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Background="White"
+             x:Class="CodeWF.AvaloniaControls.DataGridDemo.Views.Pages.DynamicColumnsView">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="Colors.Border.BorderBrush">#F0F0F0</SolidColorBrush>
+		<SolidColorBrush x:Key="DataGridColumnHeaderForeground">#262626</SolidColorBrush>
+    </UserControl.Resources>
+
+    <DataGrid ItemsSource="{Binding DynamicItems}" x:Name="MyDataGrid">
+        <Interaction.Behaviors>
+            <EventTriggerBehavior EventName="Loaded" SourceObject="MyDataGrid">
+                <InvokeCommandAction Command="{Binding RaiseDataGridLoadHandler}"
+                                     CommandParameter="{Binding ElementName=MyDataGrid}" />
+            </EventTriggerBehavior>
+        </Interaction.Behaviors>
+        <DataGrid.Columns>
+			<DataGridTemplateColumn CanUserSort="False" >
+                <DataGridTemplateColumn.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="组号" Classes="Header" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.HeaderTemplate>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate x:DataType="models:DynamicItem">
+                        <Grid>
+                            <TextBlock Text="{Binding Name}" Classes="Content" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>
