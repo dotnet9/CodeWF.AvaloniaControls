@@ -6,8 +6,12 @@ using CodeWF.AvaloniaControls.DataGridDemo.Models;
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
+using Avalonia.Controls.Templates;
+using Avalonia.Data;
+using Avalonia.Markup.Xaml.Templates;
 
 namespace CodeWF.AvaloniaControls.DataGridDemo.ViewModels.Pages;
 
@@ -54,6 +58,7 @@ public class DynamicColumnsViewModel : ReactiveObject, IDisposable
                     item.Values[key] = $"value{Random.Shared.Next(1000, 9999)}";
                 }
             }
+
             // 通知UI Values属性已更改
             item.RaisePropertyChanged(nameof(DynamicItem.Values));
         }
@@ -83,29 +88,40 @@ public class DynamicColumnsViewModel : ReactiveObject, IDisposable
         _isFirstLoadDataGrid = true;
 
         var dynamicColumnNames = DynamicItems.First().Values!.Keys;
-        var dynamicColumns = dynamicColumnNames.Select(columnName => new DataGridTextColumn()
+        var dynamicColumns = dynamicColumnNames.Select(columnName =>
         {
-            Header = columnName,
-            Binding = new CompiledBindingExtension(new CompiledBindingPathBuilder()
-                .Property(new ClrPropertyInfo(nameof(DynamicItem.Values),
-                        obj =>
-                        {
-                            ((DynamicItem)obj).Values!.TryGetValue(columnName, out var value);
-                            return value;
-                        },
-                        (obj, value) =>
-                        {
-                            if (value is string newValue)
+            var column = new DataGridTemplateColumn();
+            column.IsReadOnly = false;
+            column.HeaderTemplate = new FuncDataTemplate<DynamicItem>((_, _) => new TextBlock()
+            {
+                Classes = { "Header" },
+                Text = columnName
+            });
+            column.CellTemplate = new FuncDataTemplate<DynamicItem>((_, _) => new TextBlock()
+            {
+                Classes = { "Content" },
+                [!TextBlock.TextProperty] = new CompiledBindingExtension(new CompiledBindingPathBuilder()
+                    .Property(new ClrPropertyInfo(nameof(DynamicItem.Values),
+                            obj =>
                             {
-                                var item = (DynamicItem)obj;
-                                item.Values[columnName] = newValue;
-                                item.RaisePropertyChanged(nameof(DynamicItem.Values));
-                            }
-                        },
-                        typeof(string)),
-                    PropertyInfoAccessorFactory.CreateInpcPropertyAccessor)
-                .Build()),
-            IsReadOnly = false
+                                ((DynamicItem)obj).Values!.TryGetValue(columnName, out var value);
+                                return value;
+                            },
+                            (obj, value) =>
+                            {
+                                if (value is string newValue)
+                                {
+                                    var item = (DynamicItem)obj;
+                                    item.Values[columnName] = newValue;
+                                    item.RaisePropertyChanged(nameof(DynamicItem.Values));
+                                }
+                            },
+                            typeof(string)),
+                        PropertyInfoAccessorFactory.CreateInpcPropertyAccessor)
+                    .Build())
+            });
+
+            return column;
         });
         foreach (var column in dynamicColumns)
         {

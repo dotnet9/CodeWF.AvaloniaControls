@@ -28,10 +28,11 @@
             <Setter Property="Foreground" Value="#262626" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20 0" />
         </Style>
         <Style Selector="TextBlock.Content">
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="15 0 0 0" />
+            <Setter Property="Margin" Value="20 0" />
         </Style>
     </UserControl.Styles>
 
