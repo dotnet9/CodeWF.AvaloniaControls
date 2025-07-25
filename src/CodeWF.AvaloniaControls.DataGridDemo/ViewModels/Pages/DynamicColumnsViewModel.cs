@@ -55,7 +55,7 @@ public class DynamicColumnsViewModel : ReactiveObject, IDisposable
                 }
             }
             // 通知UI Values属性已更改
-            item.RaisePropertyChanged(nameof(item.Values));
+            item.RaisePropertyChanged(nameof(DynamicItem.Values));
         }
     }
 
@@ -87,7 +87,7 @@ public class DynamicColumnsViewModel : ReactiveObject, IDisposable
         {
             Header = columnName,
             Binding = new CompiledBindingExtension(new CompiledBindingPathBuilder()
-                .Property(new ClrPropertyInfo(columnName,
+                .Property(new ClrPropertyInfo(nameof(DynamicItem.Values),
                         obj =>
                         {
                             ((DynamicItem)obj).Values!.TryGetValue(columnName, out var value);
@@ -97,7 +97,9 @@ public class DynamicColumnsViewModel : ReactiveObject, IDisposable
                         {
                             if (value is string newValue)
                             {
-                                ((DynamicItem)obj).Values[columnName] = newValue;
+                                var item = (DynamicItem)obj;
+                                item.Values[columnName] = newValue;
+                                item.RaisePropertyChanged(nameof(DynamicItem.Values));
                             }
                         },
                         typeof(string)),
