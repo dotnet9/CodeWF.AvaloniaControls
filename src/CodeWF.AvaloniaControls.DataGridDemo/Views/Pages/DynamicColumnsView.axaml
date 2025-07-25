@@ -1,15 +1,20 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:prism="http://prismlibrary.com/"
-             xmlns:codewf="https://codewf.com"
-             xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.ViewModels.Pages"
-             xmlns:models="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.Models"
-             prism:ViewModelLocator.AutoWireViewModel="True"
-             x:DataType="vm:DynamicColumnsViewModel" x:CompileBindings="True"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Background="White"
-             x:Class="CodeWF.AvaloniaControls.DataGridDemo.Views.Pages.DynamicColumnsView">
+<UserControl
+    x:Class="CodeWF.AvaloniaControls.DataGridDemo.Views.Pages.DynamicColumnsView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:codewf="https://codewf.com"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.Models"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DataGridDemo.ViewModels.Pages"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    x:CompileBindings="True"
+    x:DataType="vm:DynamicColumnsViewModel"
+    Background="White"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <SolidColorBrush x:Key="Colors.Border.BorderBrush">#F0F0F0</SolidColorBrush>
         <SolidColorBrush x:Key="DataGridColumnHeaderForeground">#262626</SolidColorBrush>
@@ -19,17 +24,18 @@
             <Setter Property="Margin" Value="0" />
             <Setter Property="Padding" Value="0" />
         </Style>
+        <Style Selector="TextBlock.Header">
+            <Setter Property="Foreground" Value="#262626" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="TextBlock.Content">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="15 0 0 0" />
+        </Style>
     </UserControl.Styles>
 
-    <DataGrid ItemsSource="{Binding DynamicItems}" x:Name="MyDataGrid">
-        <DataGrid.Resources>
-
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceInclude Source="/Styles/DynamicColumnDataGrid.axaml" />
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-        </DataGrid.Resources>
+    <DataGrid x:Name="MyDataGrid" ItemsSource="{Binding DynamicItems}">
         <Interaction.Behaviors>
             <EventTriggerBehavior EventName="Loaded" SourceObject="MyDataGrid">
                 <InvokeCommandAction Command="{Binding RaiseDataGridLoadHandler}"
@@ -37,23 +43,39 @@
             </EventTriggerBehavior>
         </Interaction.Behaviors>
         <DataGrid.Columns>
-            <DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="116">
                 <DataGridTemplateColumn.HeaderTemplate>
                     <DataTemplate>
-                        <Border>
-                            <Grid>
-
-                                <TextBlock Text="状态" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                                           FontSize="12" />
-                                <TextBlock Text="参数" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="12" />
-                            </Grid>
-                        </Border>
+                        <Grid
+                            Margin="0,0,-23,0"
+                            ColumnDefinitions="* *"
+                            RowDefinitions="* *">
+                            <codewf:LeftTop2RightBottomLine Grid.RowSpan="2" Grid.ColumnSpan="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Margin="20,0,0,4"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Classes="Header"
+                                FontSize="12"
+                                Text="状态" />
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="0,4,20,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Classes="Header"
+                                FontSize="12"
+                                Text="参数" />
+                        </Grid>
                     </DataTemplate>
                 </DataGridTemplateColumn.HeaderTemplate>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="models:DynamicItem">
                         <Grid>
-                            <TextBlock Text="{Binding Name}" Classes="Content" />
+                            <TextBlock Classes="Content" Text="{Binding Name}" />
                         </Grid>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
