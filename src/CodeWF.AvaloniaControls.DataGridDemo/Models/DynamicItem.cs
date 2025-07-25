@@ -1,9 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using ReactiveUI;
+using System.Collections.Generic;
 
 namespace CodeWF.AvaloniaControls.DataGridDemo.Models;
 
-public class DynamicItem
+public class DynamicItem : ReactiveObject
 {
-    public string? Name { get; set; }
-    public Dictionary<string, string>? Values { get; set; }
+    public string? Name
+    {
+        get;
+        set => this.RaiseAndSetIfChanged(ref field, value);
+    }
+
+    public Dictionary<string, string>? Values
+    {
+        get;
+        set => this.RaiseAndSetIfChanged(ref field, value);
+    }
 }

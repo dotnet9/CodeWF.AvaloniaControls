@@ -7,13 +7,15 @@ using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 
 namespace CodeWF.AvaloniaControls.DataGridDemo.ViewModels.Pages;
 
-public class DynamicColumnsViewModel : ReactiveObject
+public class DynamicColumnsViewModel : ReactiveObject, IDisposable
 {
     private bool _isFirstLoadDataGrid = true;
     private Avalonia.Controls.DataGrid? _myDataGrid;
+    private IDisposable? _updateTimerDisposable;
 
     public DynamicColumnsViewModel()
     {
@@ -31,6 +33,35 @@ public class DynamicColumnsViewModel : ReactiveObject
                 item.Values[$"p{j}"] = $"value{i}-{j}";
             }
         }
+
+        _updateTimerDisposable = Observable.Interval(TimeSpan.FromSeconds(1))
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(_ => UpdateDynamicItemValues());
+    }
+
+    private void UpdateDynamicItemValues()
+    {
+        foreach (var item in DynamicItems)
+        {
+            foreach (var key in item.Values!.Keys.ToList())
+            {
+                if (int.TryParse(item.Values[key], out int currentValue))
+                {
+                    item.Values[key] = (currentValue + Random.Shared.Next(-5, 10)).ToString();
+                }
+                else
+                {
+                    item.Values[key] = $"value{Random.Shared.Next(1000, 9999)}";
+                }
+            }
+            // 通知UI Values属性已更改
+            item.RaisePropertyChanged(nameof(item.Values));
+        }
+    }
+
+    public void Dispose()
+    {
+        _updateTimerDisposable?.Dispose();
     }
 
     public ObservableCollection<DynamicItem> DynamicItems { get; } = [];
