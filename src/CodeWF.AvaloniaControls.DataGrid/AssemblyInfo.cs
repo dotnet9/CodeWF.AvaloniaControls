@@ -1,4 +1,4 @@
 ﻿using Avalonia.Metadata;
 
-[assembly: XmlnsPrefix("https://codewf.com", "CodeWF.AvaloniaControls.DataGrid")]
-[assembly: XmlnsDefinition("https://codewf.com", "CodeWF.AvaloniaControls.DataGrid")]
+[assembly: XmlnsPrefix("https://codewf.com", "CodeWF.AvaloniaControls")]
+[assembly: XmlnsDefinition("https://codewf.com", "CodeWF.AvaloniaControls")]
