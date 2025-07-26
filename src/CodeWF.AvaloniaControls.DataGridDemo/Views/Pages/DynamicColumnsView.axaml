@@ -36,7 +36,7 @@
         </Style>
     </UserControl.Styles>
 
-    <DataGrid x:Name="MyDataGrid" ItemsSource="{Binding DynamicItems}">
+    <DataGrid x:Name="MyDataGrid" ItemsSource="{Binding DynamicGroups}">
         <Interaction.Behaviors>
             <EventTriggerBehavior EventName="Loaded" SourceObject="MyDataGrid">
                 <InvokeCommandAction Command="{Binding RaiseDataGridLoadHandler}"
@@ -74,7 +74,7 @@
                     </DataTemplate>
                 </DataGridTemplateColumn.HeaderTemplate>
                 <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate x:DataType="models:DynamicItem">
+                    <DataTemplate x:DataType="models:DynamicGroup">
                         <Grid>
                             <TextBlock Classes="Content" Text="{Binding Name}" />
                         </Grid>

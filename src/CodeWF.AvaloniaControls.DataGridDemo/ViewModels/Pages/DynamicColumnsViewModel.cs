@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Controls.Templates;
 using Avalonia.Data.Core;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Markup.Xaml.MarkupExtensions.CompiledBindings;
@@ -6,12 +7,8 @@ using CodeWF.AvaloniaControls.DataGridDemo.Models;
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
-using Avalonia.Controls.Templates;
-using Avalonia.Data;
-using Avalonia.Markup.Xaml.Templates;
 
 namespace CodeWF.AvaloniaControls.DataGridDemo.ViewModels.Pages;
 
@@ -25,16 +22,21 @@ public class DynamicColumnsViewModel : ReactiveObject, IDisposable
     {
         for (var i = 0; i < Random.Shared.Next(10, 30); i++)
         {
-            var item = new DynamicItem()
+            var item = new DynamicGroup()
             {
                 Name = $"name{i}",
-                Values = new()
+                Items = new()
             };
-            DynamicItems.Add(item);
+            DynamicGroups.Add(item);
 
             for (var j = 0; j < 10; j++)
             {
-                item.Values[$"p{j}"] = $"value{i}-{j}";
+                item.Items.Add(new DynamicItem()
+                {
+                    Key = $"p{j}",
+                    Name = $"p{j}",
+                    Value = $"value{i}-{j}"
+                });
             }
         }
 
@@ -45,22 +47,15 @@ public class DynamicColumnsViewModel : ReactiveObject, IDisposable
 
     private void UpdateDynamicItemValues()
     {
-        foreach (var item in DynamicItems)
+        foreach (var group in DynamicGroups)
         {
-            foreach (var key in item.Values!.Keys.ToList())
+            foreach (var item in group.Items!)
             {
-                if (int.TryParse(item.Values[key], out int currentValue))
-                {
-                    item.Values[key] = (currentValue + Random.Shared.Next(-5, 10)).ToString();
-                }
-                else
-                {
-                    item.Values[key] = $"value{Random.Shared.Next(1000, 9999)}";
-                }
+                item.Value = $"value{Random.Shared.Next(1000, 9999)}";
             }
 
             // 通知UI Values属性已更改
-            item.RaisePropertyChanged(nameof(DynamicItem.Values));
+            group.RaisePropertyChanged(nameof(DynamicGroup.Items));
         }
     }
 
@@ -69,7 +64,7 @@ public class DynamicColumnsViewModel : ReactiveObject, IDisposable
         _updateTimerDisposable?.Dispose();
     }
 
-    public ObservableCollection<DynamicItem> DynamicItems { get; } = [];
+    public ObservableCollection<DynamicGroup> DynamicGroups { get; } = [];
 
     public void RaiseDataGridLoadHandler(Avalonia.Controls.DataGrid dataGrid)
     {
@@ -79,41 +74,42 @@ public class DynamicColumnsViewModel : ReactiveObject, IDisposable
 
     private void InitDynamicDataGrid()
     {
-        if (_myDataGrid == null || !_isFirstLoadDataGrid || !DynamicItems.Any() ||
-            DynamicItems.First().Values?.Any() != true)
+        if (_myDataGrid == null || !_isFirstLoadDataGrid || !DynamicGroups.Any() ||
+            DynamicGroups.First().Items?.Any() != true)
         {
             return;
         }
 
         _isFirstLoadDataGrid = true;
 
-        var dynamicColumnNames = DynamicItems.First().Values!.Keys;
-        var dynamicColumns = dynamicColumnNames.Select(columnName =>
+        var dynamicColumns = DynamicGroups.First().Items!.Select(item =>
         {
             var column = new DataGridTemplateColumn();
             column.IsReadOnly = false;
-            column.HeaderTemplate = new FuncDataTemplate<DynamicItem>((_, _) => new TextBlock()
+            column.HeaderTemplate = new FuncDataTemplate<DynamicGroup>((_, _) => new TextBlock()
             {
                 Classes = { "Header" },
-                Text = columnName
+                Text = item.Name
             });
-            column.CellTemplate = new FuncDataTemplate<DynamicItem>((_, _) => new TextBlock()
+            column.CellTemplate = new FuncDataTemplate<DynamicGroup>((_, _) => new TextBlock()
             {
                 Classes = { "Content" },
                 [!TextBlock.TextProperty] = new CompiledBindingExtension(new CompiledBindingPathBuilder()
-                    .Property(new ClrPropertyInfo(nameof(DynamicItem.Values),
+                    .Property(new ClrPropertyInfo(nameof(DynamicGroup.Items),
                             obj =>
                             {
-                                ((DynamicItem)obj).Values!.TryGetValue(columnName, out var value);
-                                return value;
+                                var currentGroup = (DynamicGroup)obj;
+                                var currentItem = currentGroup.Items!.FirstOrDefault(i => i.Key == item.Key);
+                                return currentItem.Value;
                             },
                             (obj, value) =>
                             {
                                 if (value is string newValue)
                                 {
-                                    var item = (DynamicItem)obj;
-                                    item.Values[columnName] = newValue;
-                                    item.RaisePropertyChanged(nameof(DynamicItem.Values));
+                                    var currentGroup = (DynamicGroup)obj;
+                                    var currentItem = currentGroup.Items!.FirstOrDefault(i => i.Key == item.Key);
+                                    currentItem.Value = newValue;
+                                    item.RaisePropertyChanged(nameof(DynamicGroup.Items));
                                 }
                             },
                             typeof(string)),
