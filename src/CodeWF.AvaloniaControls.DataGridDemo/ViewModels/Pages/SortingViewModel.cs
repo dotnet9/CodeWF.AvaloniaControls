@@ -1,5 +1,4 @@
-﻿using CodeWF.AvaloniaControls.DataGrid;
-using CodeWF.AvaloniaControls.DataGridDemo.Models;
+﻿using CodeWF.AvaloniaControls.DataGridDemo.Models;
 using ReactiveUI;
 using System.Collections.ObjectModel;
 

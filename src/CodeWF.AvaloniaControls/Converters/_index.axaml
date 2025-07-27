@@ -4,4 +4,6 @@
     <codewf:TrapezoidShapedTabItemPaddingConverter x:Key="TrapezoidShapedTabItemPaddingConverter" />
 	<codewf:StatusLabelKindLightBackgroundConverter x:Key="StatusLabelKindLightBackgroundConverter" />
 	<codewf:StatusLabelKindBackgroundConverter x:Key="StatusLabelKindBackgroundConverter" />
+    <codewf:StatusCardKindForegroundConverter x:Key="StatusCardKindForegroundConverter" />
+    <codewf:StatusCardKindBackgroundConverter x:Key="StatusCardKindBackgroundConverter" />
 </ResourceDictionary>

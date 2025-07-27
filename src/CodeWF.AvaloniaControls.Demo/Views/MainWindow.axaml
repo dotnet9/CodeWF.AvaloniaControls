@@ -69,6 +69,9 @@
                 <TabItem Header="StatusLabel">
 					<pages:StatusLabelDemo />
                 </TabItem>
+                <TabItem Header="StatusCard">
+                    <pages:StatusCardDemo />
+                </TabItem>
             </TabControl>
         </Grid>
     </Border>
