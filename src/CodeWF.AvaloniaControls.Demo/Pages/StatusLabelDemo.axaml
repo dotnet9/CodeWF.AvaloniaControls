@@ -6,8 +6,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.Demo.Pages.StatusLabelDemo">
 	<StackPanel Margin="20" Spacing="10" HorizontalAlignment="Left">
-		<codewf:StatusLabel LeftText="Server" RightText="Normal" Kind="{x:Static codewf:StatusLabelKind.Normal}" />
-        <codewf:StatusLabel LeftText="Server" RightText="Alarm" Kind="{x:Static codewf:StatusLabelKind.Alarm}" />
-        <codewf:StatusLabel LeftText="Server" RightText="Error" Kind="{x:Static codewf:StatusLabelKind.Error}" />
+        <codewf:StatusLabel LeftText="Server" RightText="Normal" Kind="{x:Static codewf:StatusLabelKind.Normal}" HorizontalAlignment="Left" />
+        <codewf:StatusLabel LeftText="Server" RightText="Normal" Kind="{x:Static codewf:StatusLabelKind.Normal}" FontSize="16" CornerRadius="4" Padding="6 2"  />
+        <codewf:StatusLabel LeftText="Server" RightText="Alarm" Kind="{x:Static codewf:StatusLabelKind.Alarm}" FontSize="24" CornerRadius="8" Padding="10 4" />
+        <codewf:StatusLabel LeftText="Server" RightText="Error" Kind="{x:Static codewf:StatusLabelKind.Error}" FontSize="32" CornerRadius="18" Padding="15 4" />
 	</StackPanel>
 </UserControl>
