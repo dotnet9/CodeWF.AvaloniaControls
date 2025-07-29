@@ -7,20 +7,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    FontSize="12"
+    CornerRadius="4"
     mc:Ignorable="d">
     <Border
         Background="{CompiledBinding $parent[codewf:StatusCard].Kind, Converter={StaticResource StatusCardKindBackgroundConverter}}"
-        CornerRadius="4">
+        CornerRadius="{CompiledBinding $parent[codewf:StatusCard].CornerRadius}">
         <Grid RowDefinitions="* *">
             <SelectableTextBlock
-                Margin="8" FontSize="12"
+                Margin="{CompiledBinding $parent[codewf:StatusCard].TopTextMargin}"
+                FontSize="{CompiledBinding $parent[codewf:StatusCard].TopTextFontSize}"
                 VerticalAlignment="Center"
                 Foreground="#595959"
                 Text="{CompiledBinding $parent[codewf:StatusCard].TopText}" />
             <SelectableTextBlock
                 Grid.Row="1"
-                Margin="8" FontSize="16"
+                Margin="{CompiledBinding $parent[codewf:StatusCard].BottomTextMargin}" 
+                FontSize="{CompiledBinding $parent[codewf:StatusCard].BottomTextFontSize}"
                 VerticalAlignment="Center"
                 Foreground="{CompiledBinding $parent[codewf:StatusCard].Kind,
                                              Converter={StaticResource StatusCardKindForegroundConverter}}"

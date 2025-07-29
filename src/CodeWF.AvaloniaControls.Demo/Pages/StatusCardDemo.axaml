@@ -5,9 +5,15 @@
              xmlns:codewf="https://codewf.com"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.Demo.Pages.StatusCardDemo">
-	<StackPanel Margin="20" Spacing="10" HorizontalAlignment="Left">
-		<codewf:StatusCard TopText="Server" BottomText="Normal" Kind="{x:Static codewf:StatusLabelKind.Normal}" />
-        <codewf:StatusCard TopText="Server" BottomText="Alarm" Kind="{x:Static codewf:StatusLabelKind.Alarm}" />
-        <codewf:StatusCard TopText="Server" BottomText="Error" Kind="{x:Static codewf:StatusLabelKind.Error}" />
-	</StackPanel>
+    <StackPanel Margin="20" Spacing="10" HorizontalAlignment="Left">
+        <codewf:StatusCard TopText="Server" BottomText="Normal" Kind="{x:Static codewf:StatusLabelKind.Normal}"
+                           TopTextFontSize="10" BottomTextFontSize="12" />
+        <codewf:StatusCard TopText="Server" BottomText="Normal" Kind="{x:Static codewf:StatusLabelKind.Normal}" />
+        <codewf:StatusCard TopText="Server" BottomText="Alarm" Kind="{x:Static codewf:StatusLabelKind.Alarm}"
+                           TopTextFontSize="16" BottomTextFontSize="20" TopTextMargin="10 10 10 5 "
+                           BottomTextMargin="10 5 10 10" CornerRadius="8" />
+        <codewf:StatusCard TopText="Server" BottomText="Error" Kind="{x:Static codewf:StatusLabelKind.Error}"
+                           TopTextFontSize="20" BottomTextFontSize="24" TopTextMargin="16 16 16 8"
+                           BottomTextMargin="16 8 16 16" CornerRadius="12" />
+    </StackPanel>
 </UserControl>
