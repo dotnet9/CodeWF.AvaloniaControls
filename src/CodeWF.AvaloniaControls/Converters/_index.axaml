@@ -8,4 +8,5 @@
 	<codewf:StatusLabelKindBackgroundConverter x:Key="StatusLabelKindBackgroundConverter" />
     <codewf:StatusCardKindForegroundConverter x:Key="StatusCardKindForegroundConverter" />
     <codewf:StatusCardKindBackgroundConverter x:Key="StatusCardKindBackgroundConverter" />
+	<codewf:String2ImageConverter x:Key="String2ImageConverter" />
 </ResourceDictionary>

@@ -12,16 +12,21 @@
     <Border
         Background="{CompiledBinding $parent[codewf:StatusCard].Kind, Converter={StaticResource StatusCardKindBackgroundConverter}}"
         CornerRadius="{CompiledBinding $parent[codewf:StatusCard].CornerRadius}">
-        <Grid RowDefinitions="* *">
+        <Grid RowDefinitions="* *" ColumnDefinitions="Auto *">
+            <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
+                   Margin="{CompiledBinding $parent[codewf:StatusCard].IconMargin}"
+                   Width="{CompiledBinding $parent[codewf:StatusCard].IconWidth}"
+                   Height="{CompiledBinding $parent[codewf:StatusCard].IconWidth}"
+                   Source="{CompiledBinding $parent[codewf:StatusCard].IconPath, Converter={StaticResource String2ImageConverter}}" />
+            <SelectableTextBlock Grid.Row="0" Grid.Column="1"
+                                 Margin="{CompiledBinding $parent[codewf:StatusCard].TopTextMargin}"
+                                 FontSize="{CompiledBinding $parent[codewf:StatusCard].TopTextFontSize}"
+                                 VerticalAlignment="Center"
+                                 Foreground="#595959"
+                                 Text="{CompiledBinding $parent[codewf:StatusCard].TopText}" />
             <SelectableTextBlock
-                Margin="{CompiledBinding $parent[codewf:StatusCard].TopTextMargin}"
-                FontSize="{CompiledBinding $parent[codewf:StatusCard].TopTextFontSize}"
-                VerticalAlignment="Center"
-                Foreground="#595959"
-                Text="{CompiledBinding $parent[codewf:StatusCard].TopText}" />
-            <SelectableTextBlock
-                Grid.Row="1"
-                Margin="{CompiledBinding $parent[codewf:StatusCard].BottomTextMargin}" 
+                Grid.Row="1" Grid.Column="1"
+                Margin="{CompiledBinding $parent[codewf:StatusCard].BottomTextMargin}"
                 FontSize="{CompiledBinding $parent[codewf:StatusCard].BottomTextFontSize}"
                 VerticalAlignment="Center"
                 Foreground="{CompiledBinding $parent[codewf:StatusCard].Kind,

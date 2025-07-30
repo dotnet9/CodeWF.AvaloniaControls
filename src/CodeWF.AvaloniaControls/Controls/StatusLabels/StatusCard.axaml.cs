@@ -10,6 +10,32 @@ public partial class StatusCard : UserControl
     {
         InitializeComponent();
     }
+    public static readonly StyledProperty<string?> IconPathProperty =
+        AvaloniaProperty.Register<StatusCard, string?>(nameof(IconPath), string.Empty);
+
+    public string? IconPath
+    {
+        get => GetValue(IconPathProperty);
+        set => SetValue(IconPathProperty, value);
+    }
+    
+    public static readonly StyledProperty<int> IconWidthProperty =
+        AvaloniaProperty.Register<StatusCard, int>(nameof(IconWidth), 32);
+
+    public int IconWidth
+    {
+        get => GetValue(IconWidthProperty);
+        set => SetValue(IconWidthProperty, value);
+    }
+
+    public static readonly StyledProperty<Thickness> IconMarginProperty =
+        AvaloniaProperty.Register<StatusCard, Thickness>(nameof(IconMargin), new Thickness(8, 12));
+
+    public Thickness IconMargin
+    {
+        get => GetValue(IconMarginProperty);
+        set => SetValue(IconMarginProperty, value);
+    }
 
     public static readonly StyledProperty<string?> TopTextProperty =
         AvaloniaProperty.Register<StatusCard, string?>(nameof(TopText), nameof(TopText));
