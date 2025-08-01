@@ -1,0 +1,28 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Grid ColumnDefinitions="50 50">
+            <Grid.Styles>
+                <Style Selector="Rectangle">
+                    <Setter Property="Width" Value="30" />
+                    <Setter Property="Height" Value="10" />
+                </Style>
+            </Grid.Styles>
+            <StackPanel>
+                <Rectangle Name="DebugBorder" Fill="#1890FF" />
+                <Rectangle Name="InfoBorder" Fill="#52C41A" />
+                <Rectangle Name="WarnBorder" Fill="#FAAD14" />
+                <Rectangle Name="ErrorBorder" Fill="#FF4D4F" />
+                <Rectangle Name="FatalBorder" Fill="#FF4D4F" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <Rectangle Name="DebugBackground" Fill="#E6F7FF" />
+                <Rectangle Name="InfoBackground" Fill="#F6FFED" />
+                <Rectangle Name="WarnBackground" Fill="#FFF7E6" />
+                <Rectangle Name="ErrorBackground" Fill="#FFF1F0" />
+                <Rectangle Name="FatalBackground" Fill="#19FF4D4F" />
+            </StackPanel>
+        </Grid>
+    </Design.PreviewWith>
+</ResourceDictionary>

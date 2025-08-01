@@ -8,21 +8,26 @@
     <StackPanel Margin="20" Spacing="10" HorizontalAlignment="Left">
         <codewf:StatusCard IconPath="avares://CodeWF.AvaloniaControls.Demo/Assets/warning.png"
                            TopText="Server" TopTextFontSize="10"
-                           BottomText="Normal" BottomTextFontSize="12"
-                           Kind="{x:Static codewf:StatusLabelKind.Normal}" />
+                           BottomText="Debug" BottomTextFontSize="12"
+                           Kind="{x:Static codewf:StatusLabelKind.Debug}" />
         <codewf:StatusCard IconPath="avares://CodeWF.AvaloniaControls.Demo/Assets/slot-machine.png"
                            TopText="Server"
-                           BottomText="Normal"
-                           Kind="{x:Static codewf:StatusLabelKind.Normal}" />
+                           BottomText="Info"
+                           Kind="{x:Static codewf:StatusLabelKind.Info}" />
         <codewf:StatusCard IconPath="avares://CodeWF.AvaloniaControls.Demo/Assets/warning.png" IconWidth="36" IconMargin="20 16 16 16"
                            TopText="Server" TopTextFontSize="16" TopTextMargin="10 10 10 5 "
-                           BottomText="Alarm" BottomTextFontSize="20" BottomTextMargin="10 5 10 10"
+                           BottomText="Warn" BottomTextFontSize="20" BottomTextMargin="10 5 10 10"
                            CornerRadius="8"
-                           Kind="{x:Static codewf:StatusLabelKind.Alarm}" />
+                           Kind="{x:Static codewf:StatusLabelKind.Warn}" />
         <codewf:StatusCard IconPath="avares://CodeWF.AvaloniaControls.Demo/Assets/slot-machine.png" IconWidth="48" IconMargin="24 16 16 16"
                            TopText="Server" TopTextFontSize="20" TopTextMargin="16 16 16 8"
                            BottomText="Error" BottomTextFontSize="24" BottomTextMargin="16 8 16 16"
                            CornerRadius="12"
                            Kind="{x:Static codewf:StatusLabelKind.Error}" />
+        <codewf:StatusCard IconPath="avares://CodeWF.AvaloniaControls.Demo/Assets/warning.png" IconWidth="36" IconMargin="20 16 16 16"
+                           TopText="Server" TopTextFontSize="16" TopTextMargin="10 10 10 5 "
+                           BottomText="Fatal" BottomTextFontSize="20" BottomTextMargin="10 5 10 10"
+                           CornerRadius="8"
+                           Kind="{x:Static codewf:StatusLabelKind.Fatal}" />
     </StackPanel>
 </UserControl>

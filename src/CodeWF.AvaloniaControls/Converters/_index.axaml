@@ -4,9 +4,8 @@
     <codewf:TrapezoidShapedTabItemPaddingConverter x:Key="TrapezoidShapedTabItemPaddingConverter" />
 	<codewf:StatusLabelCornerRadiusConverter x:Key="StatusLabelCornerRadiusConverter" />
 	<codewf:StatusLabelLeftTextCornerRadiusConverter x:Key="StatusLabelLeftTextCornerRadiusConverter" />
-	<codewf:StatusLabelKindLightBackgroundConverter x:Key="StatusLabelKindLightBackgroundConverter" />
+	<codewf:StatusCardKindForegroundConverter x:Key="StatusCardKindForegroundConverter" />
+	<codewf:StatusLabelKindBorderBrushConverter x:Key="StatusLabelKindBorderBrushConverter" />
 	<codewf:StatusLabelKindBackgroundConverter x:Key="StatusLabelKindBackgroundConverter" />
-    <codewf:StatusCardKindForegroundConverter x:Key="StatusCardKindForegroundConverter" />
-    <codewf:StatusCardKindBackgroundConverter x:Key="StatusCardKindBackgroundConverter" />
 	<codewf:String2ImageConverter x:Key="String2ImageConverter" />
 </ResourceDictionary>

@@ -3,18 +3,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:codewf="https://codewf.com"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="150" d:DesignHeight="50"
              x:Class="CodeWF.AvaloniaControls.Controls.StatusLabel">
     <Border
         CornerRadius="{CompiledBinding $parent[codewf:StatusLabel].CornerRadius, Converter={StaticResource StatusLabelCornerRadiusConverter}}"
         BorderThickness="1"
-        BorderBrush="{CompiledBinding $parent[codewf:StatusLabel].Kind, Converter={StaticResource StatusLabelKindBackgroundConverter}}"
-        Background="{CompiledBinding $parent[codewf:StatusLabel].Kind, Converter={StaticResource StatusLabelKindLightBackgroundConverter}}">
+        BorderBrush="{CompiledBinding $parent[codewf:StatusLabel].Kind, Converter={StaticResource StatusLabelKindBorderBrushConverter}}"
+        Background="{CompiledBinding $parent[codewf:StatusLabel].Kind, Converter={StaticResource StatusLabelKindBackgroundConverter}}">
         <Grid ColumnDefinitions="Auto auto">
             <Border
                 CornerRadius="{CompiledBinding $parent[codewf:StatusLabel].CornerRadius, Converter={StaticResource StatusLabelLeftTextCornerRadiusConverter}}"
                 Padding="{CompiledBinding $parent[codewf:StatusLabel].Padding}"
-                Background="{CompiledBinding $parent[codewf:StatusLabel].Kind, Converter={StaticResource StatusLabelKindBackgroundConverter}}">
+                Background="{CompiledBinding $parent[codewf:StatusLabel].Kind, Converter={StaticResource StatusLabelKindBorderBrushConverter}}">
                 <SelectableTextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"
                                      Text="{CompiledBinding $parent[codewf:StatusLabel].LeftText}"
                                      FontSize="{CompiledBinding $parent[codewf:StatusLabel].FontSize}" />

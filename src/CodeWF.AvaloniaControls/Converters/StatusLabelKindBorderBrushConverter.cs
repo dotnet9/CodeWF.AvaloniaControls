@@ -7,13 +7,13 @@ using System.Linq;
 
 namespace CodeWF.AvaloniaControls.Converters;
 
-public class StatusLabelKindBackgroundConverter : IValueConverter
+public class StatusLabelKindBorderBrushConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         var color = value is not StatusLabelKind kind
-            ? StatusLabelKindBrushes.KindBackgrounds.First().Value
-            : StatusLabelKindBrushes.KindBackgrounds[kind];
+            ? StatusLabelKindBrushes.KindBorderBrushes.First().Value
+            : StatusLabelKindBrushes.KindBorderBrushes[kind];
         return new SolidColorBrush(Color.Parse(color));
     }
 

@@ -57,7 +57,7 @@ public partial class StatusLabel : UserControl
     }
 
     public static readonly StyledProperty<StatusLabelKind?> KindProperty =
-        AvaloniaProperty.Register<StatusLabel, StatusLabelKind?>(nameof(Kind), StatusLabelKind.Normal);
+        AvaloniaProperty.Register<StatusLabel, StatusLabelKind?>(nameof(Kind), StatusLabelKind.Debug);
 
     public StatusLabelKind? Kind
     {
