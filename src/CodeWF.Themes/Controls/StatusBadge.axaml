@@ -1,0 +1,95 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="https://codewf.com">
+    <Design.PreviewWith>
+        <StackPanel>
+            <c:StatusBadge
+                Width="150"
+                Height="50"
+                Classes="Debug"
+                LeftText="CodeWF"
+                RightText="66" />
+        </StackPanel>
+    </Design.PreviewWith>
+    <ControlTheme x:Key="{x:Type c:StatusBadge}" TargetType="c:StatusBadge">
+        <Setter Property="CornerRadius" Value="{DynamicResource StatusBadgeDefaultCornerRadius}" />
+        <Setter Property="Padding" Value="{DynamicResource StatusBadgeDefaultPadding}" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="{x:Type c:StatusBadge}">
+                <Border
+                    Name="PART_OuterBorder"
+                    BorderThickness="1"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+                    <Grid ColumnDefinitions="Auto auto">
+                        <Border 
+                            Name="PART_LeftTextBorder" 
+                            CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource StatusBadgeLeftTextBorderCornerRadiusConverter}}"
+                            Padding="{TemplateBinding Padding}">
+                            <SelectableTextBlock
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                FontSize="{TemplateBinding FontSize}"
+                                Text="{TemplateBinding LeftText}" />
+                        </Border>
+                        <SelectableTextBlock
+                            Grid.Column="1"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Foreground="#262626"
+                            FontSize="{TemplateBinding FontSize}"
+                            Text="{TemplateBinding RightText}" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Style Selector="^.Debug">
+            <Style Selector="^ /template/ Border#PART_OuterBorder">
+                <Setter Property="BorderBrush" Value="{DynamicResource StatusBadgeDebugBorderBrush}" />
+                <Setter Property="Background" Value="{DynamicResource StatusBadgeDebugBackground}" />
+            </Style>
+            <Style Selector="^ /template/ Border#PART_LeftTextBorder">
+                <Setter Property="Background" Value="{DynamicResource StatusBadgeDebugBorderBrush}" />
+            </Style>
+        </Style>
+        <Style Selector="^.Info">
+            <Style Selector="^ /template/ Border#PART_OuterBorder">
+                <Setter Property="BorderBrush" Value="{DynamicResource StatusBadgeInfoBorderBrush}" />
+                <Setter Property="Background" Value="{DynamicResource StatusBadgeInfoBackground}" />
+            </Style>
+            <Style Selector="^ /template/ Border#PART_LeftTextBorder">
+                <Setter Property="Background" Value="{DynamicResource StatusBadgeInfoBorderBrush}" />
+            </Style>
+        </Style>
+        <Style Selector="^.Warn">
+            <Style Selector="^ /template/ Border#PART_OuterBorder">
+                <Setter Property="BorderBrush" Value="{DynamicResource StatusBadgeWarnBorderBrush}" />
+                <Setter Property="Background" Value="{DynamicResource StatusBadgeWarnBackground}" />
+            </Style>
+            <Style Selector="^ /template/ Border#PART_LeftTextBorder">
+                <Setter Property="Background" Value="{DynamicResource StatusBadgeWarnBorderBrush}" />
+            </Style>
+        </Style>
+        <Style Selector="^.Error">
+            <Style Selector="^ /template/ Border#PART_OuterBorder">
+                <Setter Property="BorderBrush" Value="{DynamicResource StatusBadgeErrorBorderBrush}" />
+                <Setter Property="Background" Value="{DynamicResource StatusBadgeErrorBackground}" />
+            </Style>
+            <Style Selector="^ /template/ Border#PART_LeftTextBorder">
+                <Setter Property="Background" Value="{DynamicResource StatusBadgeErrorBorderBrush}" />
+            </Style>
+        </Style>
+        <Style Selector="^.Fatal">
+            <Style Selector="^ /template/ Border#PART_OuterBorder">
+                <Setter Property="BorderBrush" Value="{DynamicResource StatusBadgeFatalBorderBrush}" />
+                <Setter Property="Background" Value="{DynamicResource StatusBadgeFatalBackground}" />
+            </Style>
+            <Style Selector="^ /template/ Border#PART_LeftTextBorder">
+                <Setter Property="Background" Value="{DynamicResource StatusBadgeFatalBorderBrush}" />
+            </Style>
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

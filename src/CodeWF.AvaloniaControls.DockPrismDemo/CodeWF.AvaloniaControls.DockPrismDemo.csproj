@@ -9,6 +9,7 @@
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 		<ApplicationIcon>Assets\logo.ico</ApplicationIcon>
 		<PublishAot>true</PublishAot>
+		<Platforms>AnyCPU;x64;x86</Platforms>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0-windows'))">
 		<IsTrimmable>true</IsTrimmable>

@@ -24,6 +24,7 @@
 		<FileVersion>11.3.0.12</FileVersion>
 		<RootNamespace>CodeWF.AvaloniaControls.Dock</RootNamespace>
 		<AssemblyName>CodeWF.AvaloniaControls.Dock</AssemblyName>
+		<Platforms>AnyCPU;x64;x86</Platforms>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
 		<IsAotCompatible>true</IsAotCompatible>

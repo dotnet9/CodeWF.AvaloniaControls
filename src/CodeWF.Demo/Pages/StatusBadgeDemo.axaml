@@ -1,0 +1,46 @@
+<UserControl
+    x:Class="CodeWF.Demo.Pages.StatusBadgeDemo"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="https://codewf.com"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="c|StatusBadge">
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        </Style>
+    </UserControl.Styles>
+    <ScrollViewer>
+        <StackPanel HorizontalAlignment="Left">
+            <c:StatusBadge
+                Classes="Debug"
+                FontSize="12"
+                LeftText="Downloads"
+                RightText="35k" />
+            <c:StatusBadge
+                Classes="Info"
+                FontSize="14"
+                LeftText="Downloads"
+                RightText="35k" />
+            <c:StatusBadge
+                Classes="Warn"
+                FontSize="16"
+                LeftText="Downloads"
+                RightText="35k" />
+            <c:StatusBadge
+                Classes="Error"
+                FontSize="18"
+                LeftText="Downloads"
+                RightText="35k" />
+            <c:StatusBadge
+                Classes="Fatal"
+                FontSize="20"
+                LeftText="Downloads"
+                RightText="35k" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,13 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="StatusBadgeDebugBorderBrush" Color="#1890FF" />
+    <SolidColorBrush x:Key="StatusBadgeInfoBorderBrush" Color="#52C41A" />
+    <SolidColorBrush x:Key="StatusBadgeWarnBorderBrush" Color="#FAAD14" />
+    <SolidColorBrush x:Key="StatusBadgeErrorBorderBrush" Color="#FF4D4F" />
+    <SolidColorBrush x:Key="StatusBadgeFatalBorderBrush" Color="#FF4D4F" />
+    <SolidColorBrush x:Key="StatusBadgeDebugBackground" Color="#E6F7FF" />
+    <SolidColorBrush x:Key="StatusBadgeInfoBackground" Color="#F6FFED" />
+    <SolidColorBrush x:Key="StatusBadgeWarnBackground" Color="#FFF7E6" />
+    <SolidColorBrush x:Key="StatusBadgeErrorBackground" Color="#FFF1F0" />
+    <SolidColorBrush x:Key="StatusBadgeFatalBackground" Color="#19FF4D4F" />
+</ResourceDictionary>

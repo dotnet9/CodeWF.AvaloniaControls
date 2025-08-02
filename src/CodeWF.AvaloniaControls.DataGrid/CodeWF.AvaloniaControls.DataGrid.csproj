@@ -24,6 +24,7 @@
 		<FileVersion>11.2.1.9</FileVersion>
 		<RootNamespace>CodeWF.AvaloniaControls.DataGrid</RootNamespace>
 		<AssemblyName>CodeWF.AvaloniaControls.DataGrid</AssemblyName>
+		<Platforms>AnyCPU;x64;x86</Platforms>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
 		<IsAotCompatible>true</IsAotCompatible>
