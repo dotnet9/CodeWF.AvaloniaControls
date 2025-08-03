@@ -57,6 +57,8 @@
                 Grid.Row="1"
                 Grid.RowSpan="2"
                 Margin="20"
+                CornerRadius="10"
+                Background="White"
                 TabStripPlacement="Left"
                 Classes.ReverseSeparator="True">
                 <TabItem Header="StatusBadge">

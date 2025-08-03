@@ -35,6 +35,7 @@
                                 Text="{TemplateBinding LeftText}" />
                         </Border>
                         <SelectableTextBlock
+                            Name="PART_RightText"
                             Grid.Column="1"
                             Padding="{TemplateBinding Padding}"
                             HorizontalAlignment="Right"
