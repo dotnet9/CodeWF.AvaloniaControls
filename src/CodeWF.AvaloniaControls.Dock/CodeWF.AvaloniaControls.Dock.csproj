@@ -19,9 +19,7 @@
 		<PackageReadmeFile>README.MD</PackageReadmeFile>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>11.3.0.12</Version>
-		<AssemblyVersion>11.3.0.12</AssemblyVersion>
-		<FileVersion>11.3.0.12</FileVersion>
+		<Version>11.3.2-preview21</Version>
 		<RootNamespace>CodeWF.AvaloniaControls.Dock</RootNamespace>
 		<AssemblyName>CodeWF.AvaloniaControls.Dock</AssemblyName>
 		<Platforms>AnyCPU;x64;x86</Platforms>
@@ -36,7 +34,7 @@
 		<IsAotCompatible>true</IsAotCompatible>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Semi.Avalonia.Dock" Version="11.3.0.11" />
+		<PackageReference Include="Semi.Avalonia.Dock" Version="11.3.2" />
 	</ItemGroup>
 	<ItemGroup>
 		<!-- The nuget package icon -->
