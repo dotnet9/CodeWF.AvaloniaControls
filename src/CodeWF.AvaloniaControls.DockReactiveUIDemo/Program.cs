@@ -1,6 +1,8 @@
 ﻿using Avalonia;
 using Avalonia.ReactiveUI;
 using System;
+using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedWindows;
+using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedWindows.Windows;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo;
 
@@ -20,5 +22,13 @@ internal sealed class Program
             .UsePlatformDetect()
             .WithInterFont()
             .UseReactiveUI()
-            .LogToTrace();
+            .LogToTrace()
+            .AfterSetup(builder =>
+            {
+                if (OperatingSystem.IsWindows())
+                {
+                    EmbedWindow.Implementation = new EmbedWin();
+                }
+                
+            });
 }

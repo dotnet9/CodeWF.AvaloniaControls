@@ -1,14 +1,23 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents"
-             x:DataType="vm:HelpDocumentationViewModel" x:CompileBindings="True"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.HelpDocumentationView">
+<UserControl
+    x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.HelpDocumentationView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:CompileBindings="True"
+    x:DataType="vm:HelpDocumentationViewModel"
+    mc:Ignorable="d">
 
-    <StackPanel>
-		<TextBox Text="{Binding Title}" />
-        <TextBox Text="Test" Width="200" />
-    </StackPanel>
+    <Grid ColumnDefinitions="* *">
+        <ContentControl Name="HostProcessWin">
+            <Interaction.Behaviors>
+                <EventTriggerBehavior EventName="Loaded" SourceObject="HostProcessWin">
+                    <InvokeCommandAction Command="{Binding RaiseLoadHostHandler}" CommandParameter="{Binding ElementName=HostProcessWin}" />
+                </EventTriggerBehavior>
+            </Interaction.Behaviors>
+        </ContentControl>
+    </Grid>
 </UserControl>

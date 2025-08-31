@@ -10,6 +10,7 @@
 		<ApplicationIcon>Assets\logo.ico</ApplicationIcon>
 		<PublishAot>true</PublishAot>
 		<Platforms>AnyCPU;x64;x86</Platforms>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0-windows'))">
 		<IsTrimmable>true</IsTrimmable>
@@ -28,6 +29,7 @@
 		<PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
 		<PackageReference Include="Prism.Avalonia" Version="9.0.537.11300-pre" />
 		<PackageReference Include="Prism.DryIoc.Avalonia" Version="9.0.537.11300-pre" />
+		<PackageReference Include="Xaml.Behaviors" Version="$(AvaloniaThirdVersion)" />
 		<PackageReference Include="CodeWF.EventBus" Version="3.4.5" />
 		<PackageReference Include="Dock.Avalonia" Version="11.3.2.2" />
 		<PackageReference Include="Dock.Serializer" Version="11.3.0.12" />
