@@ -8,6 +8,7 @@ namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
 public class HelpDocumentationViewModel : Document
 {
     private bool _isFirstLoad = true;
+    private EmbedWindow? _embedWindow;
     public const string BeHostProcessPath = @"AppsToHost\CodeWF.AvaloniaControls.Demo\CodeWF.AvaloniaControls.Demo.exe";
 
     public HelpDocumentationViewModel()
@@ -25,13 +26,14 @@ public class HelpDocumentationViewModel : Document
         }
 
         _isFirstLoad = false;
-        var embeddedProcessWindow =
+        _embedWindow =
             new EmbedWindow(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, BeHostProcessPath));
-        control.Content = embeddedProcessWindow;
+        control.Content = _embedWindow;
     }
 
     public override bool OnClose()
     {
+        _embedWindow?.Implementation?.CloseWindow();
         return base.OnClose();
     }
 }

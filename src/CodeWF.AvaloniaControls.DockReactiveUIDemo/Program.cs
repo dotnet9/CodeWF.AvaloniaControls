@@ -22,13 +22,5 @@ internal sealed class Program
             .UsePlatformDetect()
             .WithInterFont()
             .UseReactiveUI()
-            .LogToTrace()
-            .AfterSetup(builder =>
-            {
-                if (OperatingSystem.IsWindows())
-                {
-                    EmbedWindow.Implementation = new EmbedWin();
-                }
-                
-            });
+            .LogToTrace();
 }

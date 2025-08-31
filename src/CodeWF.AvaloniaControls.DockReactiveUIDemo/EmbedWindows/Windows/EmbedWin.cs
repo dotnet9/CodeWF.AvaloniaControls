@@ -9,20 +9,19 @@ namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedWindows.Windows;
 public class EmbedWin : INativeWindow
 {
     private Process? _p;
+    private string _processPath;
 
     public IntPtr ProcessWindowHandle { get; private set; }
 
-    public EmbedWin()
+    public EmbedWin(string processPath)
     {
+        _processPath = processPath;
     }
 
-    public IPlatformHandle CreateWindow(string processPath, IPlatformHandle parent, Func<IPlatformHandle> createDefault)
+    public IPlatformHandle CreateWindow(IPlatformHandle parent, Func<IPlatformHandle> createDefault)
     {
         // start the process
-        var p = Process.Start(processPath);
-
-        _p = p;
-
+        _p = Process.Start(_processPath);
         _p.Exited += _p_Exited;
 
         // wait until p.MainWindowHandle is non-zero
@@ -30,12 +29,12 @@ public class EmbedWin : INativeWindow
         {
             Thread.Sleep(200);
 
-            if (p.MainWindowHandle != (IntPtr)0)
+            if (_p.MainWindowHandle != (IntPtr)0)
                 break;
         }
 
         // set ProcessWindowHandle to the MainWindowHandle of the process
-        ProcessWindowHandle = p.MainWindowHandle;
+        ProcessWindowHandle = _p.MainWindowHandle;
 
         long style = WinApi.GetWindowLongPtr(ProcessWindowHandle, -16);
 
@@ -64,5 +63,12 @@ public class EmbedWin : INativeWindow
 
     private void _p_Exited(object? sender, System.EventArgs e)
     {
+    }
+
+    public void CloseWindow()
+    {
+        _p?.CloseMainWindow();
+        _p?.Close();
+        _p = null;
     }
 }
