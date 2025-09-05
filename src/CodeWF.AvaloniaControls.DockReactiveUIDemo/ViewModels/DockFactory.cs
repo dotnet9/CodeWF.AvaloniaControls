@@ -1,6 +1,5 @@
 ﻿using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.Models.Documents;
-using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Docks;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents.Homes;
 using Dock.Avalonia.Controls;
@@ -21,7 +20,7 @@ public class DockFactory : Factory
     public Dictionary<IDockable, IDockWindow> DocumentWindows { get; private set; } = new();
 
 
-    public override IDocumentDock CreateDocumentDock() => new CustomDocumentDock();
+    public static List<Document> Documents { get; } = new();
 
     public override IRootDock CreateLayout()
     {
@@ -33,7 +32,7 @@ public class DockFactory : Factory
         var document5 = new HelpDocumentationViewModel();
 
 
-        var documentDock = new CustomDocumentDock
+        var documentDock = new DocumentDock
         {
             IsCollapsable = false,
             ActiveDockable = document0,

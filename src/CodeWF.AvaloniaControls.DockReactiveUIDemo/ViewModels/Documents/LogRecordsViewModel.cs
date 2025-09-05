@@ -8,7 +8,8 @@ public class LogRecordsViewModel : Document
     {
         Id = nameof(LogRecordsViewModel);
         Title = "日志记录";
-        CanClose = false;
+
+        DockFactory.Documents.Add(this);
     }
 
     public override bool OnClose()

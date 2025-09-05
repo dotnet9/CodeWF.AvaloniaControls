@@ -29,6 +29,8 @@ public class HomeViewModel : Document
         }
 
         NewLayout = ReactiveCommand.Create(ResetLayout);
+
+        DockFactory.Documents.Add(this);
     }
     public HomeDockFactory? Factory { get; }
     private IRootDock? _layout;

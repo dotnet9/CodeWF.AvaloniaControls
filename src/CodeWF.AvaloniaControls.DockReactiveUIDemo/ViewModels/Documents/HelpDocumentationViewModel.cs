@@ -7,7 +7,7 @@ namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
 
 public class HelpDocumentationViewModel : Document
 {
-    private bool _isFirstLoad = true;
+    private bool _isFirstLoad = false;
     private EmbedWindow? _embedWindow;
     public const string BeHostProcessPath = @"AppsToHost\CodeWF.AvaloniaControls.Demo\CodeWF.AvaloniaControls.Demo.exe";
 
@@ -15,7 +15,8 @@ public class HelpDocumentationViewModel : Document
     {
         Id = nameof(HelpDocumentationViewModel);
         Title = "帮助文档";
-        CanClose = true;
+
+        DockFactory.Documents.Add(this);
     }
 
     public void RaiseLoadHostHandler(ContentControl control)
