@@ -9,6 +9,7 @@ public class SystemSettingsViewModel : Document
     {
         Id = nameof(SystemSettingsViewModel);
         Title = "系统设置";
+        CanClose = false;
 
         DockFactory.Documents.Add(this);
     }

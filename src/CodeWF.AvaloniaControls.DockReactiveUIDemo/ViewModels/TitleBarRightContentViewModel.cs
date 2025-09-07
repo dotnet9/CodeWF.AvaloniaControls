@@ -129,7 +129,7 @@ public class TitleBarRightContentViewModel : ReactiveObject
             return;
         }
 
-        // 2、从打开的HostWindow里找
+        // 2、从打开的DockWindow里找
         if (IsExistInDockWindows(documentKey))
         {
             return;
@@ -146,16 +146,16 @@ public class TitleBarRightContentViewModel : ReactiveObject
 
     private bool IsExistInDockWindows(string documentKey)
     {
-        foreach (IDockWindow hostWindow in DockFactory.DockWindows)
+        foreach (var dockWindow in DockFactory.DockWindows)
         {
-            if (hostWindow.Layout is not IDock layout)
+            if (dockWindow.Layout is not IDock layout)
             {
                 continue;
             }
 
-            if (IsExist(layout, documentKey))
+            if (IsExistInDocck(layout, documentKey))
             {
-                hostWindow.SetActive();
+                dockWindow.SetActive();
                 return true;
             }
         }
@@ -163,7 +163,7 @@ public class TitleBarRightContentViewModel : ReactiveObject
         return false;
     }
 
-    private bool IsExist(IDock dock, string documentKey)
+    private bool IsExistInDocck(IDock dock, string documentKey)
     {
         if (dock.VisibleDockables is null)
         {
@@ -174,7 +174,7 @@ public class TitleBarRightContentViewModel : ReactiveObject
         {
             if (item is IDock subDock)
             {
-                if (IsExist(subDock, documentKey))
+                if (IsExistInDocck(subDock, documentKey))
                 {
                     return true;
                 }

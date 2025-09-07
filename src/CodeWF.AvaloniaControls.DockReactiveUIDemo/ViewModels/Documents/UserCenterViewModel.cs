@@ -9,6 +9,7 @@ public class UserCenterViewModel : Document
     {
         Id = nameof(UserCenterViewModel);
         Title = "用户中心";
+        CanClose = false;
 
         DockFactory.Documents.Add(this);
     }

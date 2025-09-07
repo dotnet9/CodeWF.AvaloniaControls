@@ -10,6 +10,7 @@ using Dock.Model.ReactiveUI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ReactiveUI;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels;
 
@@ -96,6 +97,10 @@ public class DockFactory : Factory
                         CloseDock(subDock);
                     }
 
+                    if (item is IDocument document)
+                    {
+                        EventBus.EventBus.Default.Publish(new CloseDocumentCommand(document.Id));
+                    }
                     CloseDockable(item);
                 }
             }
