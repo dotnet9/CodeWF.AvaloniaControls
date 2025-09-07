@@ -1,8 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.ReactiveUI;
 using System;
-using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedWindows;
-using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedWindows.Windows;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo;
 

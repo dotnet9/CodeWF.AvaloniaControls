@@ -9,6 +9,7 @@ using Dock.Model.ReactiveUI;
 using Dock.Model.ReactiveUI.Controls;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels;
 
@@ -17,10 +18,10 @@ public class DockFactory : Factory
     private IRootDock? _rootDock;
     private IDocumentDock? _documentDock;
     public const string DocumentsKey = "Documents";
-    public Dictionary<IDockable, IDockWindow> DocumentWindows { get; private set; } = new();
 
 
     public static List<Document> Documents { get; } = new();
+    public static List<IDockWindow> DockWindows { get; }= new();
 
     public override IRootDock CreateLayout()
     {
@@ -72,28 +73,37 @@ public class DockFactory : Factory
         {
             window.Title = "Dock Avalonia ReactiveUI Demo";
         }
+        DockWindows.Add(window);
 
-        DocumentWindows[dockable] = window;
         return window;
     }
 
     public override void OnWindowClosed(IDockWindow? window)
     {
-        IDockable? document = null;
-        foreach (var item in DocumentWindows)
+        if (window?.Layout is IDock layout)
         {
-            if (item.Value == window)
+            void CloseDock(IDock dock)
             {
-                document = item.Key;
+                if (dock.VisibleDockables is null)
+                {
+                    return;
+                }
+
+                foreach (var item in dock.VisibleDockables.ToList())
+                {
+                    if (item is IDock subDock)
+                    {
+                        CloseDock(subDock);
+                    }
+
+                    CloseDockable(item);
+                }
             }
+
+            CloseDock(layout);
         }
 
-        if (document != null)
-        {
-            EventBus.EventBus.Default.Publish(new CloseDocumentCommand(document.Id));
-            DocumentWindows.Remove(document);
-        }
-
+        DockWindows.Remove(window);
         base.OnWindowClosed(window);
     }
 

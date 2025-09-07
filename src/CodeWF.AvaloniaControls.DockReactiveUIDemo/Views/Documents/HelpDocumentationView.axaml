@@ -10,7 +10,6 @@
     x:CompileBindings="True"
     x:DataType="vm:HelpDocumentationViewModel"
     mc:Ignorable="d">
-
     <Grid ColumnDefinitions="* *">
         <ContentControl Name="HostProcessWin">
             <Interaction.Behaviors>

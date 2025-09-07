@@ -1,7 +1,8 @@
-﻿using System;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedWindows;
 using Dock.Model.ReactiveUI.Controls;
+using System;
+using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
 
@@ -35,6 +36,7 @@ public class HelpDocumentationViewModel : Document
     public override bool OnClose()
     {
         _embedWindow?.Implementation?.CloseWindow();
+        EventBus.EventBus.Default.Publish(new CloseDocumentCommand(Id));
         return base.OnClose();
     }
 }

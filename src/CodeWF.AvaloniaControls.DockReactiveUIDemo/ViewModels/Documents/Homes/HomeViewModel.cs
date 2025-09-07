@@ -1,9 +1,9 @@
-﻿using Dock.Model.Controls;
+﻿using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
+using Dock.Model.Controls;
 using Dock.Model.Core;
 using Dock.Model.ReactiveUI.Controls;
 using ReactiveUI;
 using System.Windows.Input;
-using CodeWF.AvaloniaControls.DockReactiveUIDemo.Models;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents.Homes;
 
@@ -83,5 +83,10 @@ public class HomeViewModel : Document
             Factory?.InitLayout(layout);
             Layout = layout;
         }
+    }
+    public override bool OnClose()
+    {
+        EventBus.EventBus.Default.Publish(new CloseDocumentCommand(Id));
+        return base.OnClose();
     }
 }

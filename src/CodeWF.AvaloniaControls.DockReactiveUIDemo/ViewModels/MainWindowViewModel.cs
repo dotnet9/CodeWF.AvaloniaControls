@@ -101,6 +101,7 @@ public class MainWindowViewModel : ReactiveObject
         factory.DockableRemoved += (_, args) =>
         {
             Debug.WriteLine($"[DockableRemoved] Title='{args.Dockable?.Title}'");
+
         };
 
         factory.DockableClosed += (_, args) =>
