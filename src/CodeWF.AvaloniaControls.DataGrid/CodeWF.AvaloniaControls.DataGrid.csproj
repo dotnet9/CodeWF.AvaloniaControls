@@ -34,7 +34,7 @@
 		<IsAotCompatible>true</IsAotCompatible>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Semi.Avalonia.DataGrid" Version="11.2.1.9" />
+		<PackageReference Include="Semi.Avalonia.DataGrid" Version="11.2.1.10" />
 	</ItemGroup>
 	<ItemGroup>
 		<!-- The nuget package icon -->
