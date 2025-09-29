@@ -97,7 +97,7 @@ public class WindowResizeHelper
             var pixelDeltaY = (int)Math.Round(delta.Y * scaling);
             DestWindow.Position = new PixelPoint(
                 WindowStartPosition.X + pixelDeltaX,
-                WindowStartPosition.Y + pixelDeltaX
+                WindowStartPosition.Y + pixelDeltaY
             );
             return;
         }
@@ -232,6 +232,7 @@ public class WindowResizeHelper
         var point = e.GetPosition(DestWindow);
         var resizeDirection = GetResizeDirection(point);
 
+        // TODO其他方向缩放有问题，待优化
         if(resizeDirection == ResizeDirection.Bottom || resizeDirection == ResizeDirection.Right || resizeDirection == ResizeDirection.BottomRight)
         {
             _isResizing = true;
