@@ -32,6 +32,7 @@
 		<IsAotCompatible>true</IsAotCompatible>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="Avalonia.ReactiveUI" Version="11.3.6" />
 		<PackageReference Include="Semi.Avalonia" Version="11.2.1.10" />
 	</ItemGroup>
 	<ItemGroup>
