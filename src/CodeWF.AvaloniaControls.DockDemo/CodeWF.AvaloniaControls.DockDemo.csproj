@@ -27,12 +27,12 @@
 		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
 		<PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
 		<PackageReference Include="CodeWF.EventBus" Version="3.4.5" />
-		<PackageReference Include="Dock.Model.Avalonia" Version="11.3.2.2" />
+		<PackageReference Include="Dock.Model.Avalonia" Version="11.3.6.3" />
 		<PackageReference Include="Dock.Serializer" Version="11.3.0.12" />
 		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.13.0" />
-		<PackageReference Include="Semi.Avalonia" Version="11.2.1.10" />
+		<PackageReference Include="Semi.Avalonia" Version="11.3.7" />
 		<PackageReference Include="Prism.DryIoc.Avalonia" Version="9.0.537.11300-pre" />
-		<PackageReference Include="YY-Thunks" Version="1.1.8" />
+		<PackageReference Include="YY-Thunks" Version="1.1.9-Beta1" />
 	</ItemGroup>
 	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />
