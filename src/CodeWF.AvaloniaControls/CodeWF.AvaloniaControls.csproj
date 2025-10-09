@@ -19,7 +19,7 @@
 		<PackageReadmeFile>README.MD</PackageReadmeFile>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>0.1.1.16</Version>
+		<Version>0.1.1.17</Version>
 		<Platforms>AnyCPU;x64;x86</Platforms>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
@@ -32,8 +32,8 @@
 		<IsAotCompatible>true</IsAotCompatible>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Avalonia.ReactiveUI" Version="11.3.6" />
-		<PackageReference Include="Semi.Avalonia" Version="11.2.1.10" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="11.3.7" />
+		<PackageReference Include="Semi.Avalonia" Version="11.3.7" />
 	</ItemGroup>
 	<ItemGroup>
 		<!-- The nuget package icon -->
