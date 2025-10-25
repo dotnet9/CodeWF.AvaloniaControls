@@ -35,7 +35,7 @@
 		<PackageReference Include="Prism.DryIoc.Avalonia" Version="9.0.537.11300-pre" />
 		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.13.0" />
 		<PackageReference Include="Semi.Avalonia" Version="11.3.7" />
-		<PackageReference Include="YY-Thunks" Version="1.1.9-Beta1" />
+		<PackageReference Include="YY-Thunks" Version="1.1.9-Beta2" />
 		<PackageReference Include="VC-LTL" Version="5.2.2" />
 	</ItemGroup>
 

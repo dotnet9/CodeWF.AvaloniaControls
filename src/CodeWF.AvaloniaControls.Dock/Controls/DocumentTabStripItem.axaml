@@ -68,13 +68,11 @@
                         BorderThickness="1"
                         IsVisible="False" />
                     <DockableControl TrackingMode="Tab">
-                        <StackPanel
+                        <Grid ColumnDefinitions="* 32"
                             HorizontalAlignment="Center"
                             Background="Transparent"
                             DockProperties.IsDragArea="True"
-                            DockProperties.IsDropArea="True"
-                            Orientation="Horizontal"
-                            Spacing="{StaticResource DocumentTabStripItemHeaderSpacing}">
+                            DockProperties.IsDropArea="True">
 							<ContentPresenter
                                 Background="#01FFFFFF"
                                 Padding="{TemplateBinding Converter={StaticResource TrapezoidShapedDocumentTabStripItemPaddingConverter}}"
@@ -82,15 +80,15 @@
                                 Content="{Binding}"
                                 ContentTemplate="{Binding $parent[DocumentControl].HeaderTemplate}" />
                             <Button
-                                Name="PART_CloseButton"
+                                Name="PART_CloseButton" Grid.Column="1"
                                 Width="{StaticResource DocumentTabStripItemCloseButtonSize}"
                                 Height="{StaticResource DocumentTabStripItemCloseButtonSize}"
                                 Theme="{StaticResource InnerIconButton}"
                                 Content="{StaticResource SemiIconClose}"
                                 Command="{Binding Owner.Factory.CloseDockable}"
                                 CommandParameter="{Binding}"
-                                IsVisible="{Binding CanClose}" />
-                        </StackPanel>
+                                IsVisible="False" />
+                        </Grid>
                     </DockableControl>
                 </Grid>
 
@@ -99,6 +97,12 @@
 
         <Style Selector="^:selected /template/ codewf|TrapezoidShapedDocumentTabStripItemBorder#PART_LayoutRoot">
             <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^:selected /template/ Button#PART_CloseButton">
+            <Setter Property="IsVisible" Value="{ReflectionBinding CanClose}" />
+        </Style>
+        <Style Selector="^:not(:selected):pointerover /template/ Button#PART_CloseButton">
+            <Setter Property="IsVisible" Value="{ReflectionBinding CanClose}" />
         </Style>
         <Style Selector="^:selected">
             <Setter Property="FontWeight" Value="{StaticResource DocumentTabStripItemSelectedFontWeight}" />

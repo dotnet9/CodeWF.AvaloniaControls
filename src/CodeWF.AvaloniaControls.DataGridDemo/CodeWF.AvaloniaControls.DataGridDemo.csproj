@@ -21,13 +21,13 @@
 		<PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
 		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
 		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
-		<PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="ReactiveUI.Avalonia" Version="11.3.0" />
 		<PackageReference Include="Prism.Avalonia" Version="9.0.537.11300-pre" />
 		<PackageReference Include="Prism.DryIoc.Avalonia" Version="9.0.537.11300-pre" />
 		<PackageReference Include="Semi.Avalonia" Version="11.3.7" />
 		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.13.0" />
-		<PackageReference Include="Xaml.Behaviors" Version="11.3.6.5" />
-		<PackageReference Include="YY-Thunks" Version="1.1.9-Beta1" />
+		<PackageReference Include="Xaml.Behaviors" Version="11.3.6.6" />
+		<PackageReference Include="YY-Thunks" Version="1.1.9-Beta2" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\CodeWF.AvaloniaControls.DataGrid\CodeWF.AvaloniaControls.DataGrid.csproj" />
