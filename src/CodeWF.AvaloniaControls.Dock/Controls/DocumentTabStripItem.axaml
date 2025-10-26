@@ -101,7 +101,7 @@
                         BorderThickness="1"
                         IsVisible="False" />
                     <DockableControl TrackingMode="Tab">
-                        <Grid ColumnDefinitions="* 32"
+                        <Grid
                             HorizontalAlignment="Center"
                             Background="Transparent"
                             DockProperties.IsDragArea="True"
@@ -113,11 +113,12 @@
                                 Content="{Binding}"
                                 ContentTemplate="{Binding $parent[DocumentControl].HeaderTemplate}" />
                             <Button
-                                Name="PART_CloseButton" Grid.Column="1"
+                                Name="PART_CloseButton"
+                                HorizontalAlignment="Right"
                                 Width="{DynamicResource DocumentTabStripCloseButtonWidth}"
                                 Height="{DynamicResource DocumentTabStripCloseButtonWidth}"
                                 Margin="{DynamicResource DocumentTabStripCloseButtonContentMargin}"
-                                CornerRadius="{DynamicResource DocumentTabStripCloseButtonCorderRadius}"
+                                CornerRadius="{DynamicResource DocumentTabStripCloseButtonCornerRadius}"
                                 Theme="{StaticResource CloseInnerIconButton}"
                                 Content="{StaticResource SemiIconClose}"
                                 Command="{Binding Owner.Factory.CloseDockable}"
