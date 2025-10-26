@@ -19,7 +19,7 @@
 		<PackageReadmeFile>README.MD</PackageReadmeFile>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>11.3.6.3</Version>
+		<Version>11.3.6.4</Version>
 		<RootNamespace>CodeWF.AvaloniaControls.Dock</RootNamespace>
 		<AssemblyName>CodeWF.AvaloniaControls.Dock</AssemblyName>
 		<Platforms>AnyCPU;x64;x86</Platforms>

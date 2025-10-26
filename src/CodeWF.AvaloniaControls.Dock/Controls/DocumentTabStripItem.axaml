@@ -50,6 +50,39 @@
             IsVisible="{Binding CanClose}" />
     </ContextMenu>
 
+    <ControlTheme x:Key="CloseInnerIconButton" TargetType="Button">
+        <Setter Property="Width" Value="{DynamicResource SemiWidthIconMedium}" />
+        <Setter Property="Height" Value="{DynamicResource SemiWidthIconMedium}" />
+        <Setter Property="Foreground" Value="#595959" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="Button">
+				<Border
+                    Width="{TemplateBinding Width}"
+                    Height="{TemplateBinding Height}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Background="{TemplateBinding Background}">
+                    <PathIcon
+                        Theme="{DynamicResource InnerPathIcon}"
+                        Width="16"
+                        Height="16" 
+                        HorizontalAlignment="Center"
+						VerticalAlignment="Center"
+                        Data="{TemplateBinding Content}"
+                        Foreground="{TemplateBinding Foreground}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Style Selector="^:pointerover">
+            <Setter Property="Foreground" Value="#FF4D4F" />
+            <Setter Property="Background" Value="White" />
+        </Style>
+        <Style Selector="^:pressed">
+            <Setter Property="Foreground" Value="{DynamicResource ButtonInputInnerPressedForeground}" />
+        </Style>
+    </ControlTheme>
+
     <ControlTheme x:Key="{x:Type DocumentTabStripItem}" TargetType="DocumentTabStripItem">
 
         <Setter Property="MinHeight" Value="{StaticResource DocumentTabStripItemMinHeight}" />
@@ -81,9 +114,11 @@
                                 ContentTemplate="{Binding $parent[DocumentControl].HeaderTemplate}" />
                             <Button
                                 Name="PART_CloseButton" Grid.Column="1"
-                                Width="{StaticResource DocumentTabStripItemCloseButtonSize}"
-                                Height="{StaticResource DocumentTabStripItemCloseButtonSize}"
-                                Theme="{StaticResource InnerIconButton}"
+                                Width="18"
+                                Height="18"
+                                Margin="0 0 6 0"
+                                CornerRadius="9"
+                                Theme="{StaticResource CloseInnerIconButton}"
                                 Content="{StaticResource SemiIconClose}"
                                 Command="{Binding Owner.Factory.CloseDockable}"
                                 CommandParameter="{Binding}"
