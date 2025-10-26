@@ -18,4 +18,10 @@
     <SolidColorBrush x:Key="DocumentTabStripItemSelectedActiveForeground">#1890FF</SolidColorBrush>
     <StaticResource x:Key="DocumentTabStripItemUnselectedPointeroverForeground"
                     ResourceKey="DocumentTabStripItemSelectedActiveForeground" />
+
+	<!--关闭按钮-->
+	<x:Double x:Key="DocumentTabStripCloseButtonWidth">18</x:Double>
+    <x:Double x:Key="DocumentTabStripCloseButtonContentWidth">16</x:Double>
+    <CornerRadius x:Key="DocumentTabStripCloseButtonCorderRadius">9</CornerRadius>
+    <Thickness x:Key="DocumentTabStripCloseButtonContentMargin">-10 0 20 0</Thickness>
 </ResourceDictionary>

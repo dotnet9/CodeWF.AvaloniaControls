@@ -65,8 +65,8 @@
                     Background="{TemplateBinding Background}">
                     <PathIcon
                         Theme="{DynamicResource InnerPathIcon}"
-                        Width="16"
-                        Height="16" 
+                        Width="{DynamicResource DocumentTabStripCloseButtonContentWidth}"
+                        Height="{DynamicResource DocumentTabStripCloseButtonContentWidth}" 
                         HorizontalAlignment="Center"
 						VerticalAlignment="Center"
                         Data="{TemplateBinding Content}"
@@ -114,10 +114,10 @@
                                 ContentTemplate="{Binding $parent[DocumentControl].HeaderTemplate}" />
                             <Button
                                 Name="PART_CloseButton" Grid.Column="1"
-                                Width="18"
-                                Height="18"
-                                Margin="0 0 6 0"
-                                CornerRadius="9"
+                                Width="{DynamicResource DocumentTabStripCloseButtonWidth}"
+                                Height="{DynamicResource DocumentTabStripCloseButtonWidth}"
+                                Margin="{DynamicResource DocumentTabStripCloseButtonContentMargin}"
+                                CornerRadius="{DynamicResource DocumentTabStripCloseButtonCorderRadius}"
                                 Theme="{StaticResource CloseInnerIconButton}"
                                 Content="{StaticResource SemiIconClose}"
                                 Command="{Binding Owner.Factory.CloseDockable}"
