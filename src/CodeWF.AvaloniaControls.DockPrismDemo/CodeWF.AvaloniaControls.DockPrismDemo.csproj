@@ -34,7 +34,7 @@
 		<PackageReference Include="Dock.Model.Prism" Version="11.3.6.5" />
 		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.13.0" />
 		<PackageReference Include="Semi.Avalonia" Version="11.3.7" />
-		<PackageReference Include="YY-Thunks" Version="1.1.9-Beta2" />
+		<PackageReference Include="YY-Thunks" Version="1.1.9-Beta3" />
 	</ItemGroup>
 	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />
