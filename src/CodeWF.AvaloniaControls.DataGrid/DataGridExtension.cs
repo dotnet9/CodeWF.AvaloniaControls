@@ -120,7 +120,7 @@ public static class DataGridExtension
 
         textBlock.Tag = true;
         textBlock.TextTrimming = TextTrimming.CharacterEllipsis;
-        textBlock.FontFamily = FontFamily.Default;
+        //textBlock.FontFamily = FontFamily.Default;
 
         UpdateToolTip(textBlock);
         textBlock.GetObservable(TextBlock.TextProperty)
