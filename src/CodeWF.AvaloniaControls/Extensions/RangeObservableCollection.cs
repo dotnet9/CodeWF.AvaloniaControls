@@ -38,6 +38,14 @@ namespace CodeWF.AvaloniaControls.Extensions
             }
         }
 
+        public void Sort(Comparison<T> comparer)
+        {
+            if (Items is List<T> items)
+            {
+                items.Sort(comparer);
+            }
+        }
+
         public void AddRange(IEnumerable<T> collection)
         {
             if (collection == null)
