@@ -32,7 +32,7 @@
 		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.13.0" />
 		<PackageReference Include="Semi.Avalonia" Version="11.3.7" />
 		<PackageReference Include="Prism.DryIoc.Avalonia" Version="9.0.537.11300-pre" />
-		<PackageReference Include="YY-Thunks" Version="1.1.9-Beta3" />
+		<PackageReference Include="YY-Thunks" Version="1.1.9-Beta4" />
 	</ItemGroup>
 	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />

@@ -15,6 +15,12 @@
 		<SolidColorBrush x:Key="DataGridColumnHeaderForeground">#262626</SolidColorBrush>
     </UserControl.Resources>
     <UserControl.Styles>
+        <Style Selector="TextBlock.Header">
+            <Setter Property="Foreground" Value="#262626" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5 0 0 0" />
+        </Style>
         <Style Selector="TextBlock.Content">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="5 0 0 0" />
@@ -26,29 +32,25 @@
         <Style Selector="Rectangle.VBorder">
             <Setter Property="Width" Value="1" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
-            <Setter Property="Margin" Value="0 0 15 0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="0 -10 0 -10" />
             <Setter Property="Fill" Value="{StaticResource Colors.Border.BorderBrush}" />
         </Style>
         <Style Selector="Rectangle.HBorder">
             <Setter Property="Height" Value="1" />
-            <Setter Property="Margin" Value="-15 0 15 0" />
+            <Setter Property="Margin" Value="-15 0 0 0" />
             <Setter Property="Fill" Value="{StaticResource Colors.Border.BorderBrush}" />
         </Style>
         <Style Selector="DataGridCell">
             <Setter Property="Padding" Value="0" />
         </Style>
-        <!-- 移除所有列头的边框 -->
+        <!-- 移除所有列头的默认边框 -->
         <Style Selector="DataGridColumnHeader">
             <Setter Property="Template">
                 <ControlTemplate>
-                    <Border x:Name="PART_Border" 
-                            BorderBrush="Transparent" 
-                            BorderThickness="0" 
-                            Background="White">
-                        <ContentPresenter Content="{TemplateBinding Content}" 
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                    </Border>
+                    <ContentPresenter Content="{TemplateBinding Content}" 
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />                    
                 </ControlTemplate>
             </Setter>
         </Style>
@@ -57,9 +59,9 @@
               GridLinesVisibility="None">
         <DataGrid.Columns>
             <!-- 组信息列 -->
-            <DataGridTemplateColumn Width="80" CanUserSort="False">
+            <DataGridTemplateColumn Width="80">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="组号" VerticalAlignment="Center" />
+				    <TextBlock Text="组号" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="vm:FlattenedProcessItem">
@@ -77,7 +79,7 @@
             <!-- 关键组列 -->
             <DataGridTemplateColumn Width="90" CanUserSort="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="关键组" VerticalAlignment="Center" />
+                    <TextBlock Text="关键组" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="vm:FlattenedProcessItem">
@@ -97,10 +99,10 @@
             <!-- 周期列 -->
             <DataGridTemplateColumn Width="80" CanUserSort="False">
                 <DataGridTemplateColumn.Header>
-                    <Grid>
-                        <TextBlock Text="周期" VerticalAlignment="Center" />
-                        <Rectangle HorizontalAlignment="Right" Classes="VBorder" />
-                   </Grid>
+                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                         <TextBlock Text="周期" Classes="Header" />
+                         <Rectangle Classes="VBorder" />
+                    </Grid>
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="vm:FlattenedProcessItem">
@@ -118,7 +120,7 @@
             <!-- 基本信息 - 名称 -->
             <DataGridTemplateColumn Width="150" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="名称" VerticalAlignment="Center" />
+                    <TextBlock Text="名称" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="vm:FlattenedProcessItem">
@@ -134,13 +136,13 @@
             <!-- 基本信息 - 启用 -->
             <DataGridTemplateColumn Width="80" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="启用" VerticalAlignment="Center" />
+                    <TextBlock Text="启用" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="vm:FlattenedProcessItem">
                         <Border BorderBrush="{StaticResource Colors.Border.BorderBrush}" 
                                 BorderThickness="{Binding RowBorderThickness}">
-                            <CheckBox IsChecked="{Binding Enabled}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <CheckBox IsChecked="{Binding Enabled}" VerticalAlignment="Center" />
                         </Border>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
@@ -149,7 +151,7 @@
             <!-- 基本信息 - 源节点号 -->
             <DataGridTemplateColumn Width="90" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="源节点号" VerticalAlignment="Center" />
+                    <TextBlock Text="源节点号" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="vm:FlattenedProcessItem">
@@ -164,7 +166,7 @@
             <!-- 运行配置 - 组内序号 -->
             <DataGridTemplateColumn Width="90" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="组内序号" VerticalAlignment="Center" />
+                    <TextBlock Text="组内序号" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="vm:FlattenedProcessItem">
@@ -180,7 +182,7 @@
             <DataGridTemplateColumn Width="120" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
                     <Grid>
-                        <TextBlock Text="主机" VerticalAlignment="Center" />
+                        <TextBlock Text="主机" Classes="Header" />
                         <Rectangle HorizontalAlignment="Right" Classes="VBorder" />
                     </Grid>
                 </DataGridTemplateColumn.Header>
@@ -197,10 +199,10 @@
             <!-- 运行配置 - 程序路径 -->
             <DataGridTemplateColumn Width="200" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <Grid RowDefinitions="*,*">
-                        <TextBlock Text="路径" VerticalAlignment="Center" />
+                    <Grid RowDefinitions="20,20">
+                        <TextBlock Text="路径" Classes="Header" />
                         <Rectangle VerticalAlignment="Bottom" Classes="HBorder" />
-                        <TextBlock Grid.Row="1" Text="程序路径" VerticalAlignment="Center" />
+                        <TextBlock Grid.Row="1" Text="程序路径" Classes="Header" />
                     </Grid>
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
@@ -216,10 +218,10 @@
             <!-- 运行配置 - 工作路径 -->
             <DataGridTemplateColumn Width="200" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <Grid RowDefinitions="*,*">
+                    <Grid RowDefinitions="20,20">
                         <Rectangle VerticalAlignment="Bottom" Classes="HBorder" />
-                        <TextBlock Grid.Row="1" Text="工作路径" VerticalAlignment="Center" />
-                        <Rectangle HorizontalAlignment="Right" Classes="VBorder" />
+                        <TextBlock Grid.Row="1" Text="工作路径" Classes="Header" />
+                        <Rectangle Grid.RowSpan="2" HorizontalAlignment="Right" Classes="VBorder" />
                     </Grid>
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
@@ -235,7 +237,7 @@
             <!-- 运行配置 - 参数 -->
             <DataGridTemplateColumn Width="80" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="参数" VerticalAlignment="Center" />
+                    <TextBlock Text="参数" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="vm:FlattenedProcessItem">
@@ -251,7 +253,7 @@
             <DataGridTemplateColumn Width="90" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
                     <Grid>
-                        <TextBlock Text="自启动" VerticalAlignment="Center" />
+                        <TextBlock Text="自启动" Classes="Header" />
                         <Rectangle HorizontalAlignment="Right" Classes="VBorder" />
                    </Grid>
                 </DataGridTemplateColumn.Header>
@@ -271,10 +273,10 @@
             <!-- 处理配置 - 前处理 -->
             <DataGridTemplateColumn Width="200" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <Grid RowDefinitions="*,*">
-                        <TextBlock Text="路径" VerticalAlignment="Center" />
+                    <Grid RowDefinitions="20,20">
+                        <TextBlock Text="处理方式" Classes="Header" />
                         <Rectangle VerticalAlignment="Bottom" Classes="HBorder" />
-                        <TextBlock Grid.Row="1" Text="前处理" VerticalAlignment="Center" />
+                        <TextBlock Grid.Row="1" Text="前处理" Classes="Content"  />
                     </Grid>
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
@@ -290,10 +292,10 @@
             <!-- 处理配置 - 后处理 -->
             <DataGridTemplateColumn Width="200" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <Grid RowDefinitions="*,*">
+                    <Grid RowDefinitions="20,20">
                         <Rectangle VerticalAlignment="Bottom" Classes="HBorder" />
-                        <TextBlock Grid.Row="1" Text="后处理" VerticalAlignment="Center" />
-                        <Rectangle HorizontalAlignment="Right" Classes="VBorder" />
+                        <TextBlock Grid.Row="1" Text="后处理" Classes="Header" />
+                        <Rectangle Grid.RowSpan="2" HorizontalAlignment="Right" Classes="VBorder" />
                     </Grid>
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
@@ -309,7 +311,7 @@
             <!-- 操作 - 描述 -->
             <DataGridTemplateColumn Width="80" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="描述" VerticalAlignment="Center" />
+                    <TextBlock Text="描述" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="vm:FlattenedProcessItem">
