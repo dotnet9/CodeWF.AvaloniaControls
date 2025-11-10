@@ -16,6 +16,28 @@ namespace CodeWF.AvaloniaControls.Extensions
                 base.OnCollectionChanged(e);
         }
 
+        protected override void ClearItems()
+        {
+            base.ClearItems();
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
+
+        public void Sort()
+        {
+            if (Items is List<T> items)
+            {
+                items.Sort();
+            }
+        }
+
+        public void Sort(Comparer<T> comparer)
+        {
+            if (Items is List<T> items)
+            {
+                items.Sort(comparer);
+            }
+        }
+
         public void AddRange(IEnumerable<T> collection)
         {
             if (collection == null)
