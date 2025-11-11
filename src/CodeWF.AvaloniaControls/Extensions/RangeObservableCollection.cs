@@ -27,6 +27,7 @@ namespace CodeWF.AvaloniaControls.Extensions
             if (Items is List<T> items)
             {
                 items.Sort();
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
 
@@ -35,6 +36,7 @@ namespace CodeWF.AvaloniaControls.Extensions
             if (Items is List<T> items)
             {
                 items.Sort(comparer);
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
 
@@ -43,6 +45,7 @@ namespace CodeWF.AvaloniaControls.Extensions
             if (Items is List<T> items)
             {
                 items.Sort(comparer);
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
 
