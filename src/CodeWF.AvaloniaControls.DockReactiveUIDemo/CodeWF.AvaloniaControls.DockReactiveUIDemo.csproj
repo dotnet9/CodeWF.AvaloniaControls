@@ -26,20 +26,20 @@
 		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
 		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
 		<PackageReference Include="ReactiveUI.Avalonia" Version="11.3.8" />
-		<PackageReference Include="Dock.Model" Version="11.3.6.5" />
-		<PackageReference Include="Dock.Model.ReactiveUI" Version="11.3.6.5" />
-		<PackageReference Include="Dock.Avalonia" Version="11.3.6.5" />
+		<PackageReference Include="Dock.Model" Version="11.3.8" />
+		<PackageReference Include="Dock.Model.ReactiveUI" Version="11.3.8" />
+		<PackageReference Include="Dock.Avalonia" Version="11.3.8" />
 		<PackageReference Include="Prism.Avalonia" Version="9.0.537.11300-pre" />
 		<PackageReference Include="Prism.DryIoc.Avalonia" Version="9.0.537.11300-pre" />
 		<PackageReference Include="StaticViewLocator" Version="0.1.0">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Xaml.Behaviors" Version="11.3.6.6" />
+		<PackageReference Include="Xaml.Behaviors" Version="11.3.8.2" />
 		<PackageReference Include="CodeWF.EventBus" Version="3.4.5" />
-		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.13.0" />
-		<PackageReference Include="Semi.Avalonia" Version="11.3.7" />
-		<PackageReference Include="YY-Thunks" Version="1.1.9-Beta4" />
+		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.14.0" />
+		<PackageReference Include="Semi.Avalonia" Version="11.3.7.1" />
+		<PackageReference Include="YY-Thunks" Version="1.1.9" />
 	</ItemGroup>
 	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />

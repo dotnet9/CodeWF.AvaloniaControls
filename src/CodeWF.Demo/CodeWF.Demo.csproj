@@ -33,10 +33,10 @@
 		<PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
 		<PackageReference Include="Prism.Avalonia" Version="9.0.537.11300-pre" />
 		<PackageReference Include="Prism.DryIoc.Avalonia" Version="9.0.537.11300-pre" />
-		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.13.0" />
-		<PackageReference Include="Semi.Avalonia" Version="11.3.7" />
-		<PackageReference Include="YY-Thunks" Version="1.1.9-Beta4" />
-		<PackageReference Include="VC-LTL" Version="5.2.2" />
+		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.14.0" />
+		<PackageReference Include="Semi.Avalonia" Version="11.3.7.1" />
+		<PackageReference Include="YY-Thunks" Version="1.1.9" />
+		<PackageReference Include="VC-LTL" Version="5.3.1-Beta1" />
 	</ItemGroup>
 
 	<ItemGroup>
