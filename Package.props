@@ -1,7 +1,7 @@
 <Project>
     <PropertyGroup>
         <Version>0.0.1.4</Version>
-		<AvaloniaVersion>11.3.8</AvaloniaVersion>
+		<AvaloniaVersion>11.3.9</AvaloniaVersion>
 		<DataGridVersion>11.3.8</DataGridVersion>
 		<AvaloniaThirdVersion>11.3.6.5</AvaloniaThirdVersion>
         <Authors>沙漠尽头的狼</Authors>

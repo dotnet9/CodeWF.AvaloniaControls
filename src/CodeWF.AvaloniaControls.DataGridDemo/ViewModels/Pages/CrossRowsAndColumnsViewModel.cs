@@ -45,9 +45,10 @@ public class CrossRowsAndColumnsViewModel : ReactiveObject
         // 性能优化1：使用List<T>进行中间计算，然后一次性添加到ObservableCollection
         // ObservableCollection的添加操作会触发UI更新，避免频繁触发
         var allGroups = new List<GroupItem>();
+        var id = 1;
         
         // 先生成所有组数据
-        for (var i = 0; i < Random.Shared.Next(10, 30); i++)
+        for (var i = 0; i < Random.Shared.Next(20, 50); i++)
         {
             var group = new GroupItem
             {
@@ -58,15 +59,16 @@ public class CrossRowsAndColumnsViewModel : ReactiveObject
             allGroups.Add(group);
 
             // 预分配内部列表容量，减少动态扩容开销
-            var processItems = new List<ProcessItem>(Random.Shared.Next(1, 10));
+            var processItems = new List<ProcessItem>(Random.Shared.Next(5, 20));
             
             for (var j = 0; j < processItems.Capacity; j++)
             {
+                id++;
                 // 使用对象初始值设定项一次性初始化对象，避免多次属性赋值
                 processItems.Add(new ProcessItem
                 {
-                    Id = j,
-                    Name = $"Process {j}",
+                    Id = id,
+                    Name = $"Process {id}",
                     Enabled = j % Random.Shared.Next(3, 8) == 0,
                     SourceNode = j % Random.Shared.Next(3, 8),
                     Host = "127.0.0.1:89333",

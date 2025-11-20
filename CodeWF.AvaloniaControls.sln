@@ -7,40 +7,40 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BDC4F320-8B1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B9682F4C-2180-4D85-B3A5-A4920B38DB12}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeWF.AvaloniaControls", "CodeWF.AvaloniaControls\CodeWF.AvaloniaControls.csproj", "{4D513B19-13CF-4E79-B14D-8408036969EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeWF.AvaloniaControls", "src\CodeWF.AvaloniaControls\CodeWF.AvaloniaControls.csproj", "{4D513B19-13CF-4E79-B14D-8408036969EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeWF.AvaloniaControls.Demo", "CodeWF.AvaloniaControls.Demo\CodeWF.AvaloniaControls.Demo.csproj", "{EFEB51EE-0B3B-4651-895F-13B200E4CC60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeWF.AvaloniaControls.Demo", "src\CodeWF.AvaloniaControls.Demo\CodeWF.AvaloniaControls.Demo.csproj", "{EFEB51EE-0B3B-4651-895F-13B200E4CC60}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{3A88F1C2-198E-4976-85B8-D9B8EABE88D9}"
 	ProjectSection(SolutionItems) = preProject
-		..\Directory.Build.props = ..\Directory.Build.props
-		..\Package.props = ..\Package.props
-		..\README-zh_CN.MD = ..\README-zh_CN.MD
-		..\README.MD = ..\README.MD
-		..\UpdateLog.md = ..\UpdateLog.md
+		Directory.Build.props = Directory.Build.props
+		Package.props = Package.props
+		README-zh_CN.MD = README-zh_CN.MD
+		README.MD = README.MD
+		UpdateLog.md = UpdateLog.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.DockDemo", "CodeWF.AvaloniaControls.DockDemo\CodeWF.AvaloniaControls.DockDemo.csproj", "{439C96D9-89FA-A06C-FFF4-025888A33299}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.DockDemo", "src\CodeWF.AvaloniaControls.DockDemo\CodeWF.AvaloniaControls.DockDemo.csproj", "{439C96D9-89FA-A06C-FFF4-025888A33299}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.Dock", "CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj", "{043B8D0F-44E5-8368-16B7-8D3DB293058A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.Dock", "src\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj", "{043B8D0F-44E5-8368-16B7-8D3DB293058A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.DockReactiveUIDemo", "CodeWF.AvaloniaControls.DockReactiveUIDemo\CodeWF.AvaloniaControls.DockReactiveUIDemo.csproj", "{8CC83A8C-6C49-ED25-28B2-713611ED9D12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.DockReactiveUIDemo", "src\CodeWF.AvaloniaControls.DockReactiveUIDemo\CodeWF.AvaloniaControls.DockReactiveUIDemo.csproj", "{8CC83A8C-6C49-ED25-28B2-713611ED9D12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.DockPrismDemo", "CodeWF.AvaloniaControls.DockPrismDemo\CodeWF.AvaloniaControls.DockPrismDemo.csproj", "{3328A8E3-C2FD-9C0C-D6CE-943B8D716223}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.DockPrismDemo", "src\CodeWF.AvaloniaControls.DockPrismDemo\CodeWF.AvaloniaControls.DockPrismDemo.csproj", "{3328A8E3-C2FD-9C0C-D6CE-943B8D716223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.DataGrid", "CodeWF.AvaloniaControls.DataGrid\CodeWF.AvaloniaControls.DataGrid.csproj", "{74BEADBB-7B96-703E-4222-2CD93EACD41D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.DataGrid", "src\CodeWF.AvaloniaControls.DataGrid\CodeWF.AvaloniaControls.DataGrid.csproj", "{74BEADBB-7B96-703E-4222-2CD93EACD41D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.DataGridDemo", "CodeWF.AvaloniaControls.DataGridDemo\CodeWF.AvaloniaControls.DataGridDemo.csproj", "{260B463F-3B23-D3C0-2EEA-509FD98BDED0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.AvaloniaControls.DataGridDemo", "src\CodeWF.AvaloniaControls.DataGridDemo\CodeWF.AvaloniaControls.DataGridDemo.csproj", "{260B463F-3B23-D3C0-2EEA-509FD98BDED0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF", "CodeWF\CodeWF.csproj", "{A950C0DA-1CFA-4F1D-A898-D23115C6DBBF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF", "src\CodeWF\CodeWF.csproj", "{A950C0DA-1CFA-4F1D-A898-D23115C6DBBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.Themes", "CodeWF.Themes\CodeWF.Themes.csproj", "{546C1A0F-9FD9-4AFC-8195-9A862CEDE1AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.Themes", "src\CodeWF.Themes\CodeWF.Themes.csproj", "{546C1A0F-9FD9-4AFC-8195-9A862CEDE1AD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.Demo", "CodeWF.Demo\CodeWF.Demo.csproj", "{12B9B59F-4DB4-4092-A32F-8EB8757F6BD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWF.Demo", "src\CodeWF.Demo\CodeWF.Demo.csproj", "{12B9B59F-4DB4-4092-A32F-8EB8757F6BD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentDemo", "FluentDemo\FluentDemo.csproj", "{82CC2D24-4A96-471B-8FAB-106CA90FC6DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentDemo", "src\FluentDemo\FluentDemo.csproj", "{82CC2D24-4A96-471B-8FAB-106CA90FC6DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
