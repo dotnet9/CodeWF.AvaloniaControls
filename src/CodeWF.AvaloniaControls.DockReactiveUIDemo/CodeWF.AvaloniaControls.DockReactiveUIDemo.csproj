@@ -35,7 +35,7 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Xaml.Behaviors" Version="11.3.8.2" />
+		<PackageReference Include="Xaml.Behaviors" Version="11.3.9" />
 		<PackageReference Include="CodeWF.EventBus" Version="3.4.5" />
 		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.14.0" />
 		<PackageReference Include="Semi.Avalonia" Version="11.3.7.1" />
