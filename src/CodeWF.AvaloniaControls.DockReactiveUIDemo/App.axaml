@@ -13,7 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
-                    <ControlRecycling x:Key="ControlRecyclingKey" />
+                    <ControlRecycling x:Key="ControlRecyclingKey" TryToUseIdAsKey="True" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -25,7 +25,8 @@
         <codewf:DockCodeWFTheme />
         <StyleInclude Source="Index.axaml" />
         <Style Selector="DockControl">
-            <Setter Property="(ControlRecyclingDataTemplate.ControlRecycling)" Value="{StaticResource ControlRecyclingKey}" />
+            <Setter Property="(ControlRecyclingDataTemplate.ControlRecycling)" 
+                    Value="{StaticResource ControlRecyclingKey}" />
         </Style>
     </Application.Styles>
 </Application>
