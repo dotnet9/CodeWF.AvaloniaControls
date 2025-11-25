@@ -4,14 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents"
+    xmlns:vm="using:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents"
+    xmlns:pages="using:CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Pages"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:CompileBindings="True"
     x:DataType="vm:LogRecordsViewModel"
     mc:Ignorable="d">
-    <StackPanel>
+    <Grid RowDefinitions="30 *">
         <TextBox Text="{Binding Title}" />
-        <TextBox Width="200" Text="Test" />
-    </StackPanel>
+        <pages:CrossRowsAndColumnsView Grid.Row="1" />
+    </Grid>
 </UserControl>

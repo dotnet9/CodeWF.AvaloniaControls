@@ -47,6 +47,8 @@
 	<ItemGroup>
 		<Content Include="Assets\logo.ico" />
 		<ProjectReference Include="..\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" />
+		<ProjectReference Include="..\CodeWF.AvaloniaControls.DataGrid\CodeWF.AvaloniaControls.DataGrid.csproj" />
+		<ProjectReference Include="..\CodeWF.AvaloniaControls\CodeWF.AvaloniaControls.csproj" />
 		<TrimmerRootDescriptor Include="Roots.xml" />
 	</ItemGroup>
 </Project>
