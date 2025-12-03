@@ -19,7 +19,7 @@ public class HomeDockFactory : Factory
 
         var leftDock = new ProportionalDock
         {
-            Proportion = 0.75,
+            Proportion = 0.7,
             Orientation = Orientation.Vertical,
             VisibleDockables = CreateList<IDockable>
             (
@@ -40,7 +40,9 @@ public class HomeDockFactory : Factory
         };
         var rightDock = new ProportionalDock
         {
-            Proportion = 0.25,
+            MinWidth = 200,
+            // 移除MaxWidth限制，允许拖动调整大小
+            Proportion = 0.3, // 设置合适的比例值
             Orientation = Orientation.Vertical,
             VisibleDockables = CreateList<IDockable>
             (

@@ -4,12 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents.Homes.Tools"
+             xmlns:models="using:CodeWF.AvaloniaControls.DockReactiveUIDemo.Models.Documents.Homes.Tools"
              x:DataType="vm:ProgInfoViewModel" x:CompileBindings="True"
              x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.Homes.Tools.ProgInfoView">
-    <Grid Focusable="True">
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="{Binding Title}" Padding="2" />
-            <TextBox Text="Tool5" />
-        </StackPanel>
-    </Grid>
+    <Border Grid.Column="2" Theme="{StaticResource CardBorder}">
+            <TreeView ItemsSource="{Binding MultipleLevelItems}">
+                <TreeView.DataTemplates>
+                    <TreeDataTemplate DataType="models:FirstItem" ItemsSource="{Binding SecondItems}">
+                        <TextBlock Text="{Binding Name}" />
+                    </TreeDataTemplate>
+                    <TreeDataTemplate DataType="models:SecondItem" ItemsSource="{Binding ThirdItemItems}">
+                        <TextBlock Text="{Binding Name}" />
+                    </TreeDataTemplate>
+                    <TreeDataTemplate DataType="models:ThirdItem">
+                        <TextBlock Text="{Binding Name}" />
+                    </TreeDataTemplate>
+                </TreeView.DataTemplates>
+            </TreeView>
+        </Border>
 </UserControl>
