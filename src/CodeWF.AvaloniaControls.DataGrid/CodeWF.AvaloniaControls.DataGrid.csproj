@@ -19,7 +19,6 @@
 		<PackageReadmeFile>README.MD</PackageReadmeFile>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>11.3.7.2</Version>
 		<RootNamespace>CodeWF.AvaloniaControls.DataGrid</RootNamespace>
 		<AssemblyName>CodeWF.AvaloniaControls.DataGrid</AssemblyName>
 		<Platforms>AnyCPU;x64;x86</Platforms>

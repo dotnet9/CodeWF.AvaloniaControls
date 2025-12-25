@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using CodeWF.AvaloniaControls.Extensions;
+using ReactiveUI;
 
 namespace CodeWF.AvaloniaControls.Controls;
 
@@ -14,6 +17,8 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
 {
     private readonly ListBox? _listBox;
     private string? _searchKey;
+
+    private Subject<string?> _searchSubject;
 
     static SearchListBox()
     {
@@ -25,6 +30,11 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
     {
         InitializeComponent();
         _listBox = this.FindControl<ListBox>("MyListBox");
+
+        _searchSubject = new Subject<string?>();
+        _searchSubject.Throttle(TimeSpan.FromMilliseconds(400))
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(_ => SearchData());
     }
 
     public new event PropertyChangedEventHandler? PropertyChanged;
@@ -43,7 +53,8 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
     {
         if (sender is TextBox txtBox) _searchKey = txtBox.Text?.Trim().ToLower();
 
-        SearchData();
+        _searchSubject.OnNext(_searchKey);
+        //SearchData();
     }
 
     private void TextBox_OnTextChanged(object sender, TextChangedEventArgs e)
