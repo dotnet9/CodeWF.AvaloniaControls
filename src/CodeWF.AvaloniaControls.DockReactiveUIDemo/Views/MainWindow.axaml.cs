@@ -11,7 +11,7 @@ public partial class MainWindow : UrsaWindow
     public MainWindow()
     {
         InitializeComponent();
-        this.AddEscClose();
+        this.RegisterGlobalKeyDownHandler();
     }
     
     private void InitializeComponent()
