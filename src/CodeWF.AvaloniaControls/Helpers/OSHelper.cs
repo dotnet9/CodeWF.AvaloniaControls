@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using System;
+using Ursa.Controls;
 
 namespace CodeWF.AvaloniaControls.Helpers;
 
@@ -23,13 +24,12 @@ public static class OSHelper
     /// <typeparam name="T"></typeparam>
     /// <param name="window"></param>
     /// <returns></returns>
-    public static T EnableOSVersionAwareDecorations<T>(this T window) where T : Window
+    public static T EnableOSVersionAwareDecorations<T>(this T window) where T : UrsaWindow
     {
         window.SystemDecorations = IsModernWindowSystem ? SystemDecorations.Full : SystemDecorations.None;
         if(!IsModernWindowSystem && window.CanResize)
         {
-            var helper = new WindowResizeHelper(window);
-            helper.EnableResizing();
+            window.IsManagedResizerVisible = true;
         }
         return window;
     }
