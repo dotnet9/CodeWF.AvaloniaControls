@@ -7,5 +7,7 @@
               Width="400" Height="300" SystemDecorations="None"
               x:Class="CodeWF.AvaloniaControls.Demo.TestWindow"
               Title="TestWindow">
-  Welcome to Avalonia!
+    <Border BorderBrush="LightGray" BorderThickness="1">
+      <TextBlock Text="Hello Avalonia!" />
+    </Border>
 </u:UrsaWindow>
