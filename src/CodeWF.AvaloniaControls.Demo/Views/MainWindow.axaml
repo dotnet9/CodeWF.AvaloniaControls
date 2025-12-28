@@ -72,6 +72,9 @@
                 <TabItem Header="StatusCard">
                     <pages:StatusCardDemo />
                 </TabItem>
+                <TabItem Header="无装饰窗体">
+                    <pages:TestNoneWindowDemo />
+                </TabItem>
             </TabControl>
         </Grid>
     </Border>
