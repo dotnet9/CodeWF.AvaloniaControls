@@ -11,8 +11,5 @@
     x:CompileBindings="True"
     x:DataType="vm:DataManagementViewModel"
     mc:Ignorable="d">
-    <Grid RowDefinitions="30 *">
-        <TextBox Text="{Binding Title}" />
-        <pages:CrossRowsAndColumnsView Grid.Row="1" />
-    </Grid>
+    <pages:DataGridDemoView />
 </UserControl>

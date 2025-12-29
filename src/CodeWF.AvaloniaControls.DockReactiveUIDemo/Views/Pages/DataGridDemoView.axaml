@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Pages"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             x:DataType="vm:DataGridDemoViewModel" x:CompileBindings="True"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Pages.DataGridDemoView">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="Colors.Border.BorderBrush">#F0F0F0</SolidColorBrush>
+        <SolidColorBrush x:Key="DataGridColumnHeaderForeground">#262626</SolidColorBrush>
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock Text="{Binding Count}" />
+        <DataGrid ItemsSource="{Binding Items}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Width="80" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Name" Width="100" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Enabled" Width="80" Binding="{Binding Enabled}" />
+                <DataGridTextColumn Header="SourceNode" Width="80" Binding="{Binding SourceNode}" />
+                <DataGridTextColumn Header="Host" Width="100" Binding="{Binding Host}" />
+                <DataGridTextColumn Header="ProgramPath" Width="120" Binding="{Binding ProgramPath}" />
+                <DataGridTextColumn Header="WorkPath" Width="120" Binding="{Binding WorkPath}" />
+                <DataGridTextColumn Header="Params" Width="120" Binding="{Binding Params}" />
+                <DataGridTextColumn Header="AutoStart" Width="80" Binding="{Binding AutoStart}" />
+                <DataGridTextColumn Header="PreProcess" Width="120" Binding="{Binding PreProcess}" />
+                <DataGridTextColumn Header="PostProcess" Width="120" Binding="{Binding PostProcess}" />
+                <DataGridTextColumn Header="Description" Width="120" Binding="{Binding Description}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>

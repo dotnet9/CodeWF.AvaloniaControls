@@ -22,6 +22,7 @@
         <semi:SemiTheme Locale="zh-CN" />
         <u-semi:SemiTheme Locale="zh-CN" />
         <semi:DockSemiTheme />
+        <semi:DataGridSemiTheme />
         <codewf:DockCodeWFTheme />
         <StyleInclude Source="Index.axaml" />
         <Style Selector="DockControl">
