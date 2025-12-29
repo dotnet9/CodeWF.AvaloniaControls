@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="src/CodeWF.AvaloniaControls.Demo/Pages/TestNoneWindowDemo.axaml" value="src/CodeWF.AvaloniaControls.Demo/CodeWF.AvaloniaControls.Demo.csproj" />
+        <entry key="src/CodeWF.AvaloniaControls.Demo/Views/TestNoneWindowDemos/NativeWindowDemo.axaml" value="src/CodeWF.AvaloniaControls.Demo/CodeWF.AvaloniaControls.Demo.csproj" />
+        <entry key="src/CodeWF.AvaloniaControls.Demo/Views/TestNoneWindowDemos/UrsaWindowDefault.axaml" value="src/CodeWF.AvaloniaControls.Demo/CodeWF.AvaloniaControls.Demo.csproj" />
+        <entry key="src/CodeWF.AvaloniaControls.Demo/Views/TestNoneWindowDemos/UrsaWindowWithNone.axaml" value="src/CodeWF.AvaloniaControls.Demo/CodeWF.AvaloniaControls.Demo.csproj" />
+        <entry key="src/CodeWF.AvaloniaControls.Demo/Views/TestNoneWindowDemos/UrsaWindowWithNoneAndMove.axaml" value="src/CodeWF.AvaloniaControls.Demo/CodeWF.AvaloniaControls.Demo.csproj" />
+        <entry key="src/CodeWF.AvaloniaControls.Demo/Views/TestWindow.axaml" value="src/CodeWF.AvaloniaControls.Demo/CodeWF.AvaloniaControls.Demo.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

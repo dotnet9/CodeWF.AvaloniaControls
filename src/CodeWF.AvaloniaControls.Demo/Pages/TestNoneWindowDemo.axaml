@@ -5,5 +5,10 @@
              xmlns:codewf="https://codewf.com"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.Demo.Pages.TestNoneWindowDemo">
-    <Button Content="显示无装饰窗体" Click="ShowNoneWindow_OnClick" />
+    <StackPanel>
+        <Button Content="原生窗体" Click="ShowNativeWindow_OnClick" />
+        <Button Content="UrsaWindow无修改" Click="ShowUrsaWindow_OnClick" />
+        <Button Content="UrsaWindow+SystemDecorations=None" Click="ShowUrsaWindowWithNone_OnClick" />
+        <Button Content="UrsaWindow+SystemDecorations=None+拖拽" Click="ShowUrsaWindowWithNoneAndMove_OnClick" />
+    </StackPanel>
 </UserControl>
