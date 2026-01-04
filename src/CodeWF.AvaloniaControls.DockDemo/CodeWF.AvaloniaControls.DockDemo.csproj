@@ -29,8 +29,8 @@
 		<PackageReference Include="CodeWF.EventBus" Version="3.4.5" />
 		<PackageReference Include="Dock.Model.Avalonia" Version="11.3.8" />
 		<PackageReference Include="Dock.Serializer" Version="11.3.0.12" />
-		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.14.0" />
-		<PackageReference Include="Semi.Avalonia" Version="11.3.7.1" />
+		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.14.1" />
+		<PackageReference Include="Semi.Avalonia" Version="11.3.7.2" />
 		<PackageReference Include="Prism.DryIoc.Avalonia" Version="9.0.537.11300-pre" />
 		<PackageReference Include="YY-Thunks" Version="1.1.10-Beta1" />
 	</ItemGroup>

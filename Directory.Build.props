@@ -2,7 +2,6 @@
 	<PropertyGroup>
 		<Version>11.3.10.3</Version>
 		<AvaloniaVersion>11.3.10</AvaloniaVersion>
-		<DataGridVersion>11.3.10</DataGridVersion>
 		<AvaloniaThirdVersion>11.3.6.5</AvaloniaThirdVersion>
 		<Authors>沙漠尽头的狼</Authors>
 		<RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</RepositoryUrl>
