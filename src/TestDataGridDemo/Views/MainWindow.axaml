@@ -16,17 +16,15 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <StackPanel>
-        <TabControl>
-            <TabItem Header="DataGrid1">
-                <views:DataGridDemo />
-            </TabItem>
-            <TabItem Header="DataGrid2">
-                <views:DataGridDemo />
-            </TabItem>
-            <TabItem Header="DataGrid3">
-                <views:DataGridDemo />
-            </TabItem>
-        </TabControl>
-    </StackPanel>
+    <TabControl>
+        <TabItem Header="DataGrid1">
+            <views:DataGridDemo />
+        </TabItem>
+        <TabItem Header="DataGrid2">
+            <views:DataGridDemo />
+        </TabItem>
+        <TabItem Header="DataGrid3">
+            <views:DataGridDemo />
+        </TabItem>
+    </TabControl>
 </Window>
