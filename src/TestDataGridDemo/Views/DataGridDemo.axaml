@@ -6,9 +6,20 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:DataGridDemoViewModel"
              x:Class="TestDataGridDemo.Views.DataGridDemo">
-    <DataGrid Margin="20" ItemsSource="{Binding People}" 
-              AutoGenerateColumns="True" IsReadOnly="True" 
-              GridLinesVisibility="All"
-              BorderThickness="1" BorderBrush="Gray">
+    <DataGrid ItemsSource="{Binding Items}">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Id" Width="80" Binding="{Binding Id}" />
+            <DataGridTextColumn Header="Name" Width="100" Binding="{Binding Name}" />
+            <DataGridTextColumn Header="Enabled" Width="90" Binding="{Binding Enabled}" />
+            <DataGridTextColumn Header="SourceNode" Width="90" Binding="{Binding SourceNode}" />
+            <DataGridTextColumn Header="Host" Width="150" Binding="{Binding Host}" />
+            <DataGridTextColumn Header="ProgramPath" Width="160" Binding="{Binding ProgramPath}" />
+            <DataGridTextColumn Header="WorkPath" Width="120" Binding="{Binding WorkPath}" />
+            <DataGridTextColumn Header="Params" Width="120" Binding="{Binding Params}" />
+            <DataGridTextColumn Header="AutoStart" Width="80" Binding="{Binding AutoStart}" />
+            <DataGridTextColumn Header="PreProcess" Width="120" Binding="{Binding PreProcess}" />
+            <DataGridTextColumn Header="PostProcess" Width="120" Binding="{Binding PostProcess}" />
+            <DataGridTextColumn Header="Description" Width="120" Binding="{Binding Description}" />
+        </DataGrid.Columns>
     </DataGrid>
 </UserControl>
