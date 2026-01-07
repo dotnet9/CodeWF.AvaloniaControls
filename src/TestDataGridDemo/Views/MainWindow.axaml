@@ -26,5 +26,14 @@
         <TabItem Header="DataGrid3">
             <views:DataGridDemo />
         </TabItem>
+		<TabItem Header="TreeDataGrid1">
+			<views:TreeDataGridDemoView />
+		</TabItem>
+		<TabItem Header="TreeDataGrid2">
+			<views:TreeDataGridDemoView />
+		</TabItem>
+		<TabItem Header="TreeDataGrid3">
+			<views:TreeDataGridDemoView />
+		</TabItem>
     </TabControl>
 </Window>
