@@ -6,7 +6,7 @@
   
     <Application.Styles>
 		<semi:SemiTheme Locale="zh-CN" />
-		<semi:DataGridSemiTheme />
+		<semi:ProDataGridSemiTheme />
 		<semi:TreeDataGridSemiTheme />
     </Application.Styles>
 </Application>

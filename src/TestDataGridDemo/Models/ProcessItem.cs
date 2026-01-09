@@ -15,3 +15,21 @@ public class ProcessItem
     public string? PostProcess { get; set; }
     public string? Description { get; set; }
 }
+
+public class NameHeader
+{
+    public NameHeader(string name)
+    {
+        Name = name;
+    }
+    public string Name { get; set; }
+}
+
+public class IdHeader
+{
+    public IdHeader(string name)
+    {
+        Name = name;
+    }
+    public string Name { get; set; }
+}

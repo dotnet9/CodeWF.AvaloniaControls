@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<Title>CodeWF.AvaloniaControls.DataGrid</Title>
-		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0;net10.0</TargetFrameworks>
+		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<OutputType>Library</OutputType>
@@ -33,7 +33,9 @@
 		<IsAotCompatible>true</IsAotCompatible>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="Avalonia.Controls.DataGrid" Version="11.3.10" />
 		<PackageReference Include="Semi.Avalonia.DataGrid" Version="11.3.7.2" />
+		<PackageReference Include="Semi.Avalonia.TreeDataGrid" Version="11.1.1.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<!-- The nuget package icon -->

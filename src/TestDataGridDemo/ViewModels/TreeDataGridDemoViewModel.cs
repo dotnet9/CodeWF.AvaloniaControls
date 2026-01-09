@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using Avalonia.Controls;
 using TestDataGridDemo.Models;
 using Avalonia.Controls.Models.TreeDataGrid;
+using System.Threading.Tasks;
+using Avalonia.Threading;
 
 namespace TestDataGridDemo.ViewModels;
 
@@ -10,27 +12,8 @@ public class TreeDataGridDemoViewModel : ViewModelBase
 {
     public TreeDataGridDemoViewModel()
     {
-        var count = short.MaxValue / 2;
-
-        for (var j = 0; j < count; j++)
-        {
-            Items.Add(new ProcessItem
-            {
-                Id = j,
-                Name = $"Process {j}",
-                Enabled = j % Random.Shared.Next(3, 8) == 0,
-                SourceNode = j % Random.Shared.Next(3, 8),
-                Host = "127.0.0.1:89333",
-                ProgramPath = "../../test/bb.exe",
-                WorkPath = "../../test",
-                Params = j % Random.Shared.Next(3, 8) == 0 ? "---" : "-type 1",
-                AutoStart = j % Random.Shared.Next(3, 8) == 0,
-                PreProcess = j % Random.Shared.Next(3, 8) == 0 ? "---" : "make dir",
-                PostProcess = j % Random.Shared.Next(3, 8) == 0 ? "---" : "remove file",
-                Description = j % Random.Shared.Next(3, 8) == 0 ? "---" : "用于测试 ",
-            });
-        }
-        Count = Items.Count;
+        AddData();
+        
     }
 
     public ObservableCollection<ProcessItem> Items { get; } = [];
@@ -44,8 +27,8 @@ public class TreeDataGridDemoViewModel : ViewModelBase
             {
                 Columns =
                 {
-                    new TextColumn<ProcessItem, int>("Id", x => x.Id),
-                    new TextColumn<ProcessItem, string>("Name", x => x.Name),
+                    new TextColumn<ProcessItem, int>(new IdHeader("ID"), x => x.Id),
+                    new TextColumn<ProcessItem, string>(new NameHeader("名称"), x => x.Name),
                     new TextColumn<ProcessItem, bool>("Enabled", x => x.Enabled),
                     new TextColumn<ProcessItem, int>("SourceNode", x => x.SourceNode),
                     new TextColumn<ProcessItem, string>("Host", x => x.Host),
@@ -59,5 +42,34 @@ public class TreeDataGridDemoViewModel : ViewModelBase
                 }
             };
         }
+    }
+
+    private void AddData()
+    {
+        Task.Run(async () => 
+        {
+            while(true)
+            {
+                Dispatcher.UIThread.Post(() => {
+                    var j = DateTime.Now.Millisecond;
+                    Items.Add(new ProcessItem
+                    {
+                        Id = j,
+                        Name = $"Process {j}",
+                        Enabled = j % Random.Shared.Next(3, 8) == 0,
+                        SourceNode = j % Random.Shared.Next(3, 8),
+                        Host = "127.0.0.1:89333",
+                        ProgramPath = "../../test/bb.exe",
+                        WorkPath = "../../test",
+                        Params = j % Random.Shared.Next(3, 8) == 0 ? "---" : "-type 1",
+                        AutoStart = j % Random.Shared.Next(3, 8) == 0,
+                        PreProcess = j % Random.Shared.Next(3, 8) == 0 ? "---" : "make dir",
+                        PostProcess = j % Random.Shared.Next(3, 8) == 0 ? "---" : "remove file",
+                        Description = j % Random.Shared.Next(3, 8) == 0 ? "---" : "用于测试 ",
+                    });
+                });
+                await Task.Delay(1000);
+            }
+        });
     }
 }

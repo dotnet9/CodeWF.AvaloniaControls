@@ -1,6 +1,6 @@
 <Project>
 	<PropertyGroup>
-		<Version>11.3.10.4</Version>
+		<Version>11.3.10.5</Version>
 		<AvaloniaVersion>11.3.10</AvaloniaVersion>
 		<Authors>沙漠尽头的狼</Authors>
 		<RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</RepositoryUrl>
