@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using Avalonia.Controls;
-using TestDataGridDemo.Models;
+﻿using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
-using System.Threading.Tasks;
+using Avalonia.Media.TextFormatting;
 using Avalonia.Threading;
+using ReactiveUI;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using TestDataGridDemo.Models;
 
 namespace TestDataGridDemo.ViewModels;
 
@@ -13,7 +16,8 @@ public class TreeDataGridDemoViewModel : ViewModelBase
     public TreeDataGridDemoViewModel()
     {
         AddData();
-        
+
+        ItemsSource.RowSelection.SingleSelect = false;
     }
 
     public ObservableCollection<ProcessItem> Items { get; } = [];
@@ -44,6 +48,15 @@ public class TreeDataGridDemoViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// 选择内容
+    /// </summary>
+    public string? SelectedInfo
+    { 
+        get;
+        set => this.RaiseAndSetIfChanged(ref field, value);
+    }
+
     private void AddData()
     {
         Task.Run(async () => 
@@ -71,5 +84,17 @@ public class TreeDataGridDemoViewModel : ViewModelBase
                 await Task.Delay(1000);
             }
         });
+    }
+
+    public async Task RaiseGetSelectedItemsHandlerAsync()
+    {
+        if (ItemsSource.RowSelection?.SelectedItems.Any() == true)
+        {
+            SelectedInfo = string.Join(",", ItemsSource.RowSelection.SelectedItems.Select(p => p.Id));
+        }
+        else
+        {
+            SelectedInfo = "-";
+        }
     }
 }
