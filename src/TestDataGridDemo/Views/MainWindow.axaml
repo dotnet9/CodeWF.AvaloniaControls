@@ -29,8 +29,8 @@
 		<TabItem Header="TreeDataGrid1">
 			<views:TreeDataGridDemoView />
 		</TabItem>
-		<TabItem Header="TreeDataGrid2">
-			<views:TreeDataGridDemoView />
+		<TabItem Header="TreeDataGrid Dynamic Columns">
+			<views:TreeDataGridDynamicDemoView />
 		</TabItem>
 		<TabItem Header="TreeDataGrid3">
 			<views:TreeDataGridDemoView />
