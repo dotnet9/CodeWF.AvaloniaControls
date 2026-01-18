@@ -92,10 +92,43 @@ public class TreeDataGridDynamicDemoViewModel : ViewModelBase
                 {
                     foreach (var rowData in Items)
                     {
-                        foreach (var column in rowData.DynamicColumns)
+                        // 1、添加或更新
+                        foreach (var dynamicColumnName in DynamicColumnNames)
                         {
-                            column.Value = Random.Shared.NextDouble();
+                            var value = Random.Shared.NextDouble();
+                            var existDynamicColumn =
+                                rowData.DynamicColumns.FirstOrDefault(col => col.Name == dynamicColumnName);
+                            if (existDynamicColumn == default)
+                            {
+                                rowData.DynamicColumns.Add(new DynamicColumnInfo()
+                                {
+                                    Name = dynamicColumnName,
+                                    Value = value
+                                });
+                            }
+                            else
+                            {
+                                existDynamicColumn.Value = value;
+                            }
                         }
+
+                        // 2、清除再添加也行
+                        //rowData.DynamicColumns.Clear();
+
+                        //for (var j = 0; j < DynamicColumnNames.Count; j++)
+                        //{
+                        //    rowData.DynamicColumns.Add(new DynamicColumnInfo()
+                        //    {
+                        //        Name = DynamicColumnNames[j],
+                        //        DisplayName = $"动态列 {j}",
+                        //        Value = Random.Shared.NextDouble()
+                        //    });
+                        //    rowData.UpdatedAt = DateTime.Now;
+                        //}
+                        //foreach (var column in rowData.DynamicColumns)
+                        //{
+                        //    column.Value = Random.Shared.NextDouble();
+                        //}
 
                         rowData.UpdatedAt = DateTime.Now;
                     }
