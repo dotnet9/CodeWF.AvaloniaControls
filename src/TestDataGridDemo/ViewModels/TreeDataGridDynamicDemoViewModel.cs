@@ -5,6 +5,7 @@ using Avalonia.Controls.Models.TreeDataGrid;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Threading;
 using ReactiveUI;
 using TestDataGridDemo.Models;
 
@@ -35,6 +36,7 @@ public class TreeDataGridDynamicDemoViewModel : ViewModelBase
                     new TextColumn<DynamicItem, int>("ID", x => x.Id),
                     new TextColumn<DynamicItem, string>("名称", x => x.Name),
                     new TextColumn<DynamicItem, string>("创建时间", x => $"{x.CreatedAt:yyyy-MM-dd HH:mm:ss}"),
+                    new TextColumn<DynamicItem, string>("更新时间", x => $"{x.UpdatedAt:yyyy-MM-dd HH:mm:ss}"),
                 }
             };
         }
@@ -73,6 +75,7 @@ public class TreeDataGridDynamicDemoViewModel : ViewModelBase
                     DisplayName = $"动态列 {j}",
                     Value = Random.Shared.NextDouble()
                 });
+                rowData.UpdatedAt = DateTime.Now;
             }
 
             Items.Add(rowData);
@@ -85,17 +88,20 @@ public class TreeDataGridDynamicDemoViewModel : ViewModelBase
         {
             while (true)
             {
-                foreach (var item in Items)
+                Dispatcher.UIThread.Post(() =>
                 {
-                    foreach (var column in item.DynamicColumns)
+                    foreach (var rowData in Items)
                     {
-                        column.Value = Random.Shared.NextDouble();
+                        foreach (var column in rowData.DynamicColumns)
+                        {
+                            column.Value = Random.Shared.NextDouble();
+                        }
+
+                        rowData.UpdatedAt = DateTime.Now;
                     }
+                });
 
-                    item.RaisePropertyChanged(nameof(item.DynamicColumns));
-                }
-
-                await Task.Delay(50);
+                await Task.Delay(200);
             }
         });
     }

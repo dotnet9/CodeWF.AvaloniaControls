@@ -16,6 +16,11 @@ public class DynamicItem : ReactiveObject
     }
 
     public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt
+    {
+        get;
+        set => this.RaiseAndSetIfChanged(ref field, value);
+    }
 }
 
 public class DynamicColumnInfo : ReactiveObject
