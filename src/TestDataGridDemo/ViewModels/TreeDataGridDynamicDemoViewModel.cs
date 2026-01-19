@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 using Avalonia.Threading;
-using ReactiveUI;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using TestDataGridDemo.Models;
 
 namespace TestDataGridDemo.ViewModels;
@@ -51,7 +49,7 @@ public class TreeDataGridDynamicDemoViewModel : ViewModelBase
             DynamicColumnNames.Add(columnName);
             ItemsSource?.Columns.Add(
                 new TextColumn<DynamicItem, double>(displayName,
-                    item => item.DynamicColumns.First(col => col.Name == columnName).Value)
+                    item => item.DynamicColumns[columnName].Value)
             );
         }
     }
@@ -64,17 +62,16 @@ public class TreeDataGridDynamicDemoViewModel : ViewModelBase
             {
                 Id = i,
                 Name = $"Item {i}",
-                CreatedAt = DateTime.Now.AddSeconds(Random.Shared.Next(2, 200000)),
-                DynamicColumns = new ObservableCollection<DynamicColumnInfo>()
+                CreatedAt = DateTime.Now.AddSeconds(Random.Shared.Next(2, 200000))
             };
             for (var j = 0; j < DynamicColumnNames.Count; j++)
             {
-                rowData.DynamicColumns.Add(new DynamicColumnInfo()
+                rowData.DynamicColumns[DynamicColumnNames[j]] = new DynamicColumnInfo()
                 {
                     Name = DynamicColumnNames[j],
                     DisplayName = $"动态列 {j}",
                     Value = Random.Shared.NextDouble()
-                });
+                };
                 rowData.UpdatedAt = DateTime.Now;
             }
 
@@ -92,45 +89,25 @@ public class TreeDataGridDynamicDemoViewModel : ViewModelBase
                 {
                     foreach (var rowData in Items)
                     {
+
+                        rowData.UpdatedAt = DateTime.Now;
                         // 1、添加或更新
                         foreach (var dynamicColumnName in DynamicColumnNames)
                         {
                             var value = Random.Shared.NextDouble();
-                            var existDynamicColumn =
-                                rowData.DynamicColumns.FirstOrDefault(col => col.Name == dynamicColumnName);
-                            if (existDynamicColumn == default)
+                            if (rowData.DynamicColumns.ContainsKey(dynamicColumnName))
                             {
-                                rowData.DynamicColumns.Add(new DynamicColumnInfo()
-                                {
-                                    Name = dynamicColumnName,
-                                    Value = value
-                                });
+                                rowData.DynamicColumns[dynamicColumnName].Value = value;
                             }
                             else
                             {
-                                existDynamicColumn.Value = value;
+                                rowData.DynamicColumns[dynamicColumnName] = new DynamicColumnInfo()
+                                {
+                                    Name = dynamicColumnName,
+                                    Value = value
+                                };
                             }
                         }
-
-                        // 2、清除再添加也行
-                        //rowData.DynamicColumns.Clear();
-
-                        //for (var j = 0; j < DynamicColumnNames.Count; j++)
-                        //{
-                        //    rowData.DynamicColumns.Add(new DynamicColumnInfo()
-                        //    {
-                        //        Name = DynamicColumnNames[j],
-                        //        DisplayName = $"动态列 {j}",
-                        //        Value = Random.Shared.NextDouble()
-                        //    });
-                        //    rowData.UpdatedAt = DateTime.Now;
-                        //}
-                        //foreach (var column in rowData.DynamicColumns)
-                        //{
-                        //    column.Value = Random.Shared.NextDouble();
-                        //}
-
-                        rowData.UpdatedAt = DateTime.Now;
                     }
                 });
 

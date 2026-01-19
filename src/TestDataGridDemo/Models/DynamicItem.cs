@@ -1,6 +1,8 @@
 ﻿using ReactiveUI;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Tmds.DBus.Protocol;
 
 namespace TestDataGridDemo.Models;
 
@@ -9,11 +11,7 @@ public class DynamicItem : ReactiveObject
     public int Id { get; set; }
     public string Name { get; set; }
 
-    public ObservableCollection<DynamicColumnInfo> DynamicColumns
-    {
-        get;
-        set => this.RaiseAndSetIfChanged(ref field, value);
-    }
+    public Dictionary<string, DynamicColumnInfo> DynamicColumns { get; } = new ();
 
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt
