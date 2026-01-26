@@ -1,7 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
-using System;
-using System.Linq;
+using Avalonia.Interactivity;
 
 namespace CodeWF.AvaloniaControls;
 
@@ -21,13 +20,12 @@ public static class TreeDataGridExtension
                 }
                 itemSource.RowSelection?.EndBatchUpdate();
                 e.Handled = true;
-                itemSource?.RowSelection?.Select(new IndexPath(Enumerable.Range(1, itemSource.Items.Count())));
             }
-            else if ((e.KeyModifiers == (KeyModifiers.Control | KeyModifiers.Shift)) && e.Key == Key.A)
+            else if (e.KeyModifiers == (KeyModifiers.Control | KeyModifiers.Shift) && e.Key == Key.A)
             {
                 itemSource?.RowSelection?.Clear();
                 e.Handled = true;
             }
-        }, Avalonia.Interactivity.RoutingStrategies.Tunnel);
+        }, RoutingStrategies.Tunnel);
     }
 }
