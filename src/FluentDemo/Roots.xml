@@ -1,0 +1,5 @@
+<linker>
+	<assembly fullname="FluentDemo" preserve="All" />
+	<assembly fullname="Avalonia.Themes.Fluent" preserve="All" />
+	<assembly fullname="CommunityToolkit.Mvvm" preserve="All" />
+</linker>

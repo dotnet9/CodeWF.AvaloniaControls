@@ -2,7 +2,7 @@
 using Avalonia.Platform;
 using System;
 
-namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedWindows.Windows;
+namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Win32;
 
 internal class Win32WindowHandle : PlatformHandle, INativeControlHostDestroyableControlHandle
 {

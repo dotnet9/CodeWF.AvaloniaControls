@@ -10,8 +10,9 @@
     x:CompileBindings="True"
     x:DataType="vm:HelpDocumentationViewModel"
     mc:Ignorable="d">
-    <Grid ColumnDefinitions="* *">
-        <ContentControl Name="HostProcessWin">
+    <Grid RowDefinitions="30 *">
+        <TextBlock Text="{Binding Tip}" />
+        <ContentControl Name="HostProcessWin" Grid.Row="1">
             <Interaction.Behaviors>
                 <EventTriggerBehavior EventName="Loaded" SourceObject="HostProcessWin">
                     <InvokeCommandAction Command="{Binding RaiseLoadHostHandler}" CommandParameter="{Binding ElementName=HostProcessWin}" />

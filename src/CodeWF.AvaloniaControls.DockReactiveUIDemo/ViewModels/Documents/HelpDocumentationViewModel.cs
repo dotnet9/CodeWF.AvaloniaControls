@@ -1,16 +1,17 @@
-﻿using Avalonia.Controls;
-using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedWindows;
-using Dock.Model.ReactiveUI.Controls;
-using System;
+﻿using System.IO;
+using System.Runtime.InteropServices;
+using Avalonia.Controls;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
+using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows;
+using Dock.Model.ReactiveUI.Controls;
+using ReactiveUI;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
 
 public class HelpDocumentationViewModel : Document
 {
     private bool _isFirstLoad = true;
-    private EmbedWindow? _embedWindow;
-    public const string BeHostProcessPath = @"AppsToHost\CodeWF.AvaloniaControls.Demo\CodeWF.AvaloniaControls.Demo.exe";
+    private EmbedProcessWindowNativeControl? _embedWindow;
 
     public HelpDocumentationViewModel()
     {
@@ -18,6 +19,12 @@ public class HelpDocumentationViewModel : Document
         Title = "帮助文档";
 
         DockFactory.Documents.Add(this);
+    }
+
+    public string Tip
+    { 
+        get;
+        set => this.RaiseAndSetIfChanged(ref field, value);
     }
 
     public void RaiseLoadHostHandler(ContentControl control)
@@ -28,16 +35,29 @@ public class HelpDocumentationViewModel : Document
         }
 
         _isFirstLoad = false;
-        //var exe = "E:\\github\\avalonia\\CodeWF.AvaloniaControls\\src\\CodeWF.AvaloniaControls.Demo\\bin\\Debug\\net10.0-windows\\CodeWF.AvaloniaControls.Demo.exe";
-        var exe = @"E:\github\avalonia\CodeWF.AvaloniaControls\src\FluentDemo\bin\Debug\net10.0\FluentDemo.exe";
+        var exe = string.Empty;
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            exe = Path.Combine(Directory.GetCurrentDirectory(), "FluentDemo.exe");
+        }
+        else
+        {
+            exe = Path.Combine(Directory.GetCurrentDirectory(), "FluentDemo");
+        }
+        Tip = exe;
+        if (!File.Exists(exe))
+        {
+            Tip += $"：文件不存在";
+            return;
+        }
         _embedWindow =
-            new EmbedWindow(exe);
+            new EmbedProcessWindowNativeControl(exe, Path.GetDirectoryName(exe), string.Empty);
         control.Content = _embedWindow;
     }
 
     public override bool OnClose()
     {
-        _embedWindow?.Implementation?.CloseWindow();
+        _embedWindow?.Creator?.CloseWindow();
         EventBus.EventBus.Default.Publish(new CloseDocumentCommand(Id));
         return base.OnClose();
     }
