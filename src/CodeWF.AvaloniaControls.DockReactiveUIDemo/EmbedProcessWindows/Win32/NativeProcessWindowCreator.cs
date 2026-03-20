@@ -1,4 +1,4 @@
-﻿using Avalonia.Platform;
+using Avalonia.Platform;
 using CodeWF.Log.Core;
 using System;
 using System.Diagnostics;
@@ -8,9 +8,9 @@ using System.Threading;
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Win32;
 
 /// <summary>
-/// Windows平台启动进程、主窗体嵌入
+/// Windows 平台进程窗口嵌入实现
 /// </summary>
-public class Win32NativeProcessWindowCreator : INativeProcessWindowCreator
+public class NativeProcessWindowCreator : INativeProcessWindowCreator
 {
     private Process? _currentProcess;
     private string _processPath;
@@ -22,7 +22,7 @@ public class Win32NativeProcessWindowCreator : INativeProcessWindowCreator
     /// </summary>
     public IntPtr ProcessWindowHandle { get; private set; }
 
-    public Win32NativeProcessWindowCreator(string processPath, string workDir, string? arguments)
+    public NativeProcessWindowCreator(string processPath, string workDir, string? arguments)
     {
         _processPath = processPath;
         _workDir = workDir;
@@ -30,15 +30,11 @@ public class Win32NativeProcessWindowCreator : INativeProcessWindowCreator
     }
 
     /// <summary>
-    /// 启动三方进程，并将进程主窗口嵌入控件
+    /// 启动第三方进程，并将进程主窗口嵌入控件
     /// </summary>
-    /// <param name="parent"></param>
-    /// <param name="createDefault"></param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     public IPlatformHandle CreateWindow(IPlatformHandle parent, Func<IPlatformHandle> createDefault)
     {
-        Win32WindowHandle? windowHandle = null;
+        WindowHandle? windowHandle = null;
         try
         {
             // 1. 启动第三方进程并获取主窗口句柄
@@ -76,7 +72,7 @@ public class Win32NativeProcessWindowCreator : INativeProcessWindowCreator
             }
 
             // 2. 调整基础窗口样式（GWL_STYLE=-16）
-            long style = WinApi.GetWindowLongPtr(ProcessWindowHandle, Win32Constants.GWL_STYLE);
+            long style = Win32Api.GetWindowLongPtr(ProcessWindowHandle, Win32Constants.GWL_STYLE);
 
             // 修改主窗口样式，比如窗口边框、不在任务栏显示等
             style &= ~Win32Constants.WS_THICKFRAME; // 移除可调整大小的边框
@@ -94,26 +90,25 @@ public class Win32NativeProcessWindowCreator : INativeProcessWindowCreator
             var handleRef = new HandleRef(null, ProcessWindowHandle);
 
             // 应用主窗口样式更新
-            WinApi.SetWindowLongPtr(handleRef, Win32Constants.GWL_STYLE, (IntPtr)style);
+            Win32Api.SetWindowLongPtr(handleRef, Win32Constants.GWL_STYLE, (IntPtr)style);
 
             // 3. 调整扩展窗口样式为工具窗口
-            long exStyle = WinApi.GetWindowLongPtr(ProcessWindowHandle, Win32Constants.GWL_EXSTYLE);
+            long exStyle = Win32Api.GetWindowLongPtr(ProcessWindowHandle, Win32Constants.GWL_EXSTYLE);
             exStyle &= ~Win32Constants.WS_EX_APPWINDOW; // 移除任务栏图标
             exStyle |= Win32Constants.WS_EX_TOOLWINDOW; // 添加工具窗口样式
 
             // 应用扩展样式修改
-            WinApi.SetWindowLongPtr(handleRef, Win32Constants.GWL_EXSTYLE, (IntPtr)exStyle);
+            Win32Api.SetWindowLongPtr(handleRef, Win32Constants.GWL_EXSTYLE, (IntPtr)exStyle);
 
             // 4. 刷新窗口样式（确保修改生效）
-            WinApi.SetWindowPos(handleRef, IntPtr.Zero, 0, 0, 0, 0,
+            Win32Api.SetWindowPos(handleRef, IntPtr.Zero, 0, 0, 0, 0,
                 Win32Constants.SWP_NOMOVE | Win32Constants.SWP_NOSIZE | Win32Constants.SWP_FRAMECHANGED);
-            //WinApi.SendMessage(ProcessWindowHandle, Win32Constants.WM_SETTINGCHANGE, IntPtr.Zero, IntPtr.Zero);
 
             // 5. 将主窗口贴在本地控件内
-            WinApi.SetParent(ProcessWindowHandle, parent.Handle);
+            Win32Api.SetParent(ProcessWindowHandle, parent.Handle);
 
             // 6. 返回包装后的窗口句柄
-            windowHandle = new Win32WindowHandle(ProcessWindowHandle, "ProcWinHandle");
+            windowHandle = new WindowHandle(ProcessWindowHandle, "ProcWinHandle");
         }
         catch (Exception ex)
         {
