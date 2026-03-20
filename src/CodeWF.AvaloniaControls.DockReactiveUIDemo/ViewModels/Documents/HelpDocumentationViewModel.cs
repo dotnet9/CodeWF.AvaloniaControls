@@ -1,8 +1,8 @@
-﻿using System.IO;
+using System.IO;
 using System.Runtime.InteropServices;
 using Avalonia.Controls;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
-using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows;
+using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Core;
 using Dock.Model.ReactiveUI.Controls;
 using ReactiveUI;
 
@@ -11,7 +11,7 @@ namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
 public class HelpDocumentationViewModel : Document
 {
     private bool _isFirstLoad = true;
-    private EmbedProcessWindowNativeControl? _embedWindow;
+    private ProcessEmbedHost? _embedWindow;
 
     public HelpDocumentationViewModel()
     {
@@ -22,7 +22,7 @@ public class HelpDocumentationViewModel : Document
     }
 
     public string Tip
-    { 
+    {
         get;
         set => this.RaiseAndSetIfChanged(ref field, value);
     }
@@ -50,14 +50,13 @@ public class HelpDocumentationViewModel : Document
             Tip += $"：文件不存在";
             return;
         }
-        _embedWindow =
-            new EmbedProcessWindowNativeControl(exe, Path.GetDirectoryName(exe), string.Empty);
+        _embedWindow = new ProcessEmbedHost(exe, Path.GetDirectoryName(exe), string.Empty);
         control.Content = _embedWindow;
     }
 
     public override bool OnClose()
     {
-        _embedWindow?.Creator?.CloseWindow();
+        _embedWindow?.Embedder?.Close();
         EventBus.EventBus.Default.Publish(new CloseDocumentCommand(Id));
         return base.OnClose();
     }

@@ -1,12 +1,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.X11;
+namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Platforms.Linux;
 
 /// <summary>
 /// X11 API P/Invoke 声明
 /// </summary>
-public static class NativeMethods
+public static class X11Api
 {
     private const string LibX11 = "libX11.so.6";
 

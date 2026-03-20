@@ -1,5 +1,5 @@
 using Avalonia.Markup.Xaml;
-using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows;
+using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Core;
 using CodeWF.AvaloniaControls.Extensions;
 using System;
 using Ursa.Controls;
@@ -13,7 +13,7 @@ public partial class MainWindow : UrsaWindow
         InitializeComponent();
         this.RegisterGlobalKeyDownHandler();
     }
-    
+
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
@@ -21,7 +21,7 @@ public partial class MainWindow : UrsaWindow
 
     protected override void OnClosed(EventArgs e)
     {
-        EmbedProcessWindowNativeControl.CloseAll();
+        ProcessEmbedHost.CloseAll();
         base.OnClosed(e);
     }
 }
