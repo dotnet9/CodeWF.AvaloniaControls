@@ -71,6 +71,10 @@ public class LinuxEmbedder : INativeProcessEmbedder
             Logger.Info($"XMapWindow 结果: {mapResult}");
             X11Api.XFlush(_x11Display);
 
+            // 设置窗口位置和大小，使其铺满父容器
+            ResizeWindowToParent(parent);
+            X11Api.XFlush(_x11Display);
+
             _windowHandle = new LinuxWindowHandle(ProcessWindowHandle, "ProcWinHandle", _x11Display);
             Logger.Info($"创建窗口句柄完成");
             return _windowHandle;
@@ -118,6 +122,28 @@ public class LinuxEmbedder : INativeProcessEmbedder
         catch (Exception ex)
         {
             Logger.Error("修改窗口属性异常", ex);
+        }
+    }
+
+    private void ResizeWindowToParent(IPlatformHandle parent)
+    {
+        try
+        {
+            // 获取父窗口的几何属性
+            X11Api.XGetGeometry(_x11Display, parent.Handle, out _, out int x, out int y, out uint width, out uint height, out uint borderWidth, out uint depth);
+
+            Logger.Info($"父窗口大小: {width}x{height}, 位置: ({x}, {y})");
+
+            // 调整嵌入窗口的位置和大小
+            int moveResult = X11Api.XMoveWindow(_x11Display, ProcessWindowHandle, 0, 0);
+            Logger.Info($"XMoveWindow 结果: {moveResult}");
+
+            int resizeResult = X11Api.XResizeWindow(_x11Display, ProcessWindowHandle, width, height);
+            Logger.Info($"XResizeWindow 结果: {resizeResult}");
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("调整窗口大小异常", ex);
         }
     }
 

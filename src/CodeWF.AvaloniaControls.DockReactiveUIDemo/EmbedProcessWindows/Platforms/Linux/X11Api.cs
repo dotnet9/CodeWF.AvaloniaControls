@@ -70,6 +70,14 @@ public static class X11Api
     public static extern int XResizeWindow(IntPtr display, IntPtr window, uint width, uint height);
 
     [DllImport(LibX11)]
+    public static extern int XGetGeometry(
+        IntPtr display, IntPtr window,
+        out IntPtr rootReturn,
+        out int x, out int y,
+        out uint width, out uint height,
+        out uint borderWidth, out uint depth);
+
+    [DllImport(LibX11)]
     public static extern int XSetWindowBackground(IntPtr display, IntPtr window, ulong background);
 
     [DllImport(LibX11)]
