@@ -30,26 +30,94 @@ public class LinuxEmbedder : INativeProcessEmbedder
     {
         try
         {
+            Logger.Info($"开始嵌入进程: {_options.ProcessPath}");
+
             _x11Display = X11Api.XOpenDisplay(IntPtr.Zero);
             if (_x11Display == IntPtr.Zero)
             {
                 throw new InvalidOperationException("无法打开 X11 显示");
             }
+            Logger.Info($"X11 显示打开成功: {_x11Display}");
 
             _process = StartProcess();
-            ProcessWindowHandle = FindWindowByPID(_process.Id);
+            Logger.Info($"进程启动成功，PID: {_process.Id}");
 
-            ConfigureWindowEvents();
+            ProcessWindowHandle = FindWindowByPID(_process.Id);
+            Logger.Info($"找到窗口句柄: {ProcessWindowHandle}");
+
+            if (ProcessWindowHandle == IntPtr.Zero)
+            {
+                throw new InvalidOperationException("找不到第三方进程窗口");
+            }
+
+            Logger.Info($"父窗口句柄: {parent.Handle}");
+
+            // 修改窗口属性，确保窗口正确嵌入
+            ModifyWindowAttributes();
+            X11Api.XFlush(_x11Display);
+            Thread.Sleep(50);
+
+            // 先取消映射窗口，再重父化，最后重新映射
+            int unmapResult = X11Api.XUnmapWindow(_x11Display, ProcessWindowHandle);
+            Logger.Info($"XUnmapWindow 结果: {unmapResult}");
+            X11Api.XFlush(_x11Display);
+            Thread.Sleep(50);
+
             ReParentWindow(parent);
-            MapWindow();
+            X11Api.XFlush(_x11Display);
+            Thread.Sleep(50);
+
+            int mapResult = X11Api.XMapWindow(_x11Display, ProcessWindowHandle);
+            Logger.Info($"XMapWindow 结果: {mapResult}");
+            X11Api.XFlush(_x11Display);
 
             _windowHandle = new LinuxWindowHandle(ProcessWindowHandle, "ProcWinHandle", _x11Display);
+            Logger.Info($"创建窗口句柄完成");
             return _windowHandle;
         }
         catch (Exception ex)
         {
             Logger.Error($"Linux 平台嵌入进程异常({_options.ProcessPath})", ex, "启动第三方进程异常，请联系管理员！");
             return createDefault();
+        }
+    }
+
+    private void ReParentWindow(IPlatformHandle parent)
+    {
+        try
+        {
+            int result = X11Api.XReparentWindow(_x11Display, ProcessWindowHandle, parent.Handle, 0, 0);
+            Logger.Info($"XReparentWindow 结果: {result}");
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("重父化窗口异常", ex);
+            throw;
+        }
+    }
+
+    private void ModifyWindowAttributes()
+    {
+        try
+        {
+            // 移除窗口的边框和标题栏
+            var swa = new XSetWindowAttributes
+            {
+                override_redirect = 1 // 覆盖窗口管理器的重定向
+            };
+
+            // 设置窗口属性
+            int result = X11Api.XChangeWindowAttributes(
+                _x11Display,
+                ProcessWindowHandle,
+                X11Constants.CWOverrideRedirect, // 覆盖窗口管理器的重定向
+                ref swa);
+
+            Logger.Info($"修改窗口属性结果: {result}");
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("修改窗口属性异常", ex);
         }
     }
 
@@ -67,11 +135,6 @@ public class LinuxEmbedder : INativeProcessEmbedder
             throw new InvalidOperationException("无法启动第三方进程");
         }
 
-        if (!_process.WaitForInputIdle(_options.WindowReadyTimeoutMs))
-        {
-            throw new TimeoutException("第三方进程窗口初始化超时");
-        }
-
         Thread.Sleep(_options.WindowSearchDelayMs);
         return _process;
     }
@@ -81,7 +144,20 @@ public class LinuxEmbedder : INativeProcessEmbedder
         var screen = X11Api.XDefaultScreen(_x11Display);
         var rootWindow = X11Api.XRootWindow(_x11Display, screen);
 
-        return SearchWindowTree(rootWindow, pid);
+        // 多次尝试查找窗口，增加找到窗口的概率
+        for (int i = 0; i < 10; i++)
+        {
+            Logger.Info($"尝试查找窗口 (尝试 {i + 1}/10)");
+            var window = SearchWindowTree(rootWindow, pid);
+            if (window != IntPtr.Zero)
+            {
+                Logger.Info($"找到窗口: {window}");
+                return window;
+            }
+            Thread.Sleep(200);
+        }
+        Logger.Warn($"无法找到PID为 {pid} 的窗口");
+        return IntPtr.Zero;
     }
 
     private IntPtr SearchWindowTree(IntPtr window, int targetPid)
@@ -146,34 +222,7 @@ public class LinuxEmbedder : INativeProcessEmbedder
         return -1;
     }
 
-    private void ConfigureWindowEvents()
-    {
-        var swa = new XSetWindowAttributes
-        {
-            event_mask = (IntPtr)(
-                X11Constants.ExposureMask |
-                X11Constants.KeyPressMask |
-                X11Constants.KeyReleaseMask |
-                X11Constants.ButtonPressMask |
-                X11Constants.ButtonReleaseMask |
-                X11Constants.EnterWindowMask |
-                X11Constants.LeaveWindowMask |
-                X11Constants.PointerMotionMask)
-        };
 
-        X11Api.XChangeWindowAttributes(_x11Display, ProcessWindowHandle, X11Constants.CWEventMask, ref swa);
-    }
-
-    private void ReParentWindow(IPlatformHandle parent)
-    {
-        X11Api.XReparentWindow(_x11Display, ProcessWindowHandle, parent.Handle, 0, 0);
-        X11Api.XFlush(_x11Display);
-    }
-
-    private void MapWindow()
-    {
-        X11Api.XMapWindow(_x11Display, ProcessWindowHandle);
-    }
 
     public void Close()
     {

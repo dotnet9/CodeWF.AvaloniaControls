@@ -116,6 +116,7 @@ public struct XSetWindowAttributes
 public static class X11Constants
 {
     public const uint CWEventMask = 0x00000001;
+    public const uint CWOverrideRedirect = 0x00000100;
 
     public const uint ExposureMask = 0x00000001;
     public const uint KeyPressMask = 0x00000001;
