@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFrameworks>net11.0;net11.0-windows</TargetFrameworks>
@@ -10,6 +10,9 @@
 		<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
 		<ApplicationIcon>Assets\logo.ico</ApplicationIcon>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<WindowsSupportedOSPlatformVersion>6.1</WindowsSupportedOSPlatformVersion>
+		<!-- Win7 版本号 -->
+		<TargetPlatformMinVersion>6.1</TargetPlatformMinVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net11.0-windows'))">
 		<IsTrimmable>true</IsTrimmable>
@@ -36,7 +39,8 @@
 		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.14.1" />
 		<PackageReference Include="Semi.Avalonia" Version="11.3.7.2" />
 		<PackageReference Include="CodeWF.Log.Core" Version="11.3.12.2" />
-		<PackageReference Include="YY-Thunks" Version="1.1.10-Beta3" />
+		<PackageReference Include="YY-Thunks" Version="1.2.1-Beta.2" />
+		<PackageReference Include="VC-LTL" Version="5.3.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />

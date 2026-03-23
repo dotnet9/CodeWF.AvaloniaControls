@@ -38,11 +38,11 @@ public class HelpDocumentationViewModel : Document
         var exe = string.Empty;
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            exe = Path.Combine(Directory.GetCurrentDirectory(), "FluentDemo.exe");
+            exe = Path.Combine(Directory.GetCurrentDirectory(), "CodeWF.AvaloniaControls.DockReactiveUIDemo.exe");
         }
         else
         {
-            exe = Path.Combine(Directory.GetCurrentDirectory(), "FluentDemo");
+            exe = Path.Combine(Directory.GetCurrentDirectory(), "CodeWF.AvaloniaControls.DockReactiveUIDemo");
         }
         Tip = exe;
         if (!File.Exists(exe))
