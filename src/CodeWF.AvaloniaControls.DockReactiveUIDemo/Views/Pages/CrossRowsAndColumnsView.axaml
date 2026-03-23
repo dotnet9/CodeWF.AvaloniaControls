@@ -44,7 +44,7 @@
         <Style Selector="DataGridCell">
             <Setter Property="Padding" Value="0" />
         </Style>
-        <!-- ÒÆ³ýËùÓÐÁÐÍ·µÄÄ¬ÈÏ±ß¿ò -->
+        <!-- ç§»é™¤æ‰€æœ‰åˆ—å¤´çš„é»˜è®¤è¾¹æ¡† -->
         <Style Selector="DataGridColumnHeader">
             <Setter Property="Template">
                 <ControlTemplate>
@@ -58,17 +58,17 @@
     <DataGrid ItemsSource="{Binding FlattenedItems}" x:Name="ProcessDataGrid"
               GridLinesVisibility="None">
         <DataGrid.Columns>
-            <!-- ×éÐÅÏ¢ÁÐ -->
+            <!-- ç»„ä¿¡æ¯åˆ— -->
             <DataGridTemplateColumn Width="80">
                 <DataGridTemplateColumn.Header>
-				    <TextBlock Text="×éºÅ" Classes="Header" />
+				    <TextBlock Text="ç»„å·" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="models:FlattenedProcessItem">
-                        <!-- Îª×éµÄµÚÒ»ÐÐÌí¼ÓÉÏ±ß¿ò£¬×îºóÒ»ÐÐÌí¼ÓÏÂ±ß¿ò -->
+                        <!-- ä¸ºç»„çš„ç¬¬ä¸€è¡Œæ·»åŠ ä¸Šè¾¹æ¡†ï¼Œæœ€åŽä¸€è¡Œæ·»åŠ ä¸‹è¾¹æ¡† -->
                         <Border BorderBrush="{StaticResource Colors.Border.BorderBrush}"
                                 BorderThickness="{Binding RowBorderThickness}">
-                            <!-- ×éºÅÖ»ÔÚ×éµÄÖÐ¼äÐÐÏÔÊ¾ -->
+                            <!-- ç»„å·åªåœ¨ç»„çš„ä¸­é—´è¡Œæ˜¾ç¤º -->
                             <TextBlock Text="{Binding GroupId}" Classes="Content" 
                                       IsVisible="{Binding IsMiddleOfGroup}" />
                         </Border>
@@ -76,17 +76,17 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- ¹Ø¼ü×éÁÐ -->
+            <!-- å…³é”®ç»„åˆ— -->
             <DataGridTemplateColumn Width="90" CanUserSort="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="¹Ø¼ü×é" Classes="Header" />
+                    <TextBlock Text="å…³é”®ç»„" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="models:FlattenedProcessItem">
-                        <!-- Îª×éµÄµÚÒ»ÐÐÌí¼ÓÉÏ±ß¿ò£¬×îºóÒ»ÐÐÌí¼ÓÏÂ±ß¿ò -->
+                        <!-- ä¸ºç»„çš„ç¬¬ä¸€è¡Œæ·»åŠ ä¸Šè¾¹æ¡†ï¼Œæœ€åŽä¸€è¡Œæ·»åŠ ä¸‹è¾¹æ¡† -->
                         <Border BorderBrush="{StaticResource Colors.Border.BorderBrush}"
                                 BorderThickness="{Binding RowBorderThickness}">
-                            <!-- ¹Ø¼ü×é±êÖ¾Ö»ÔÚ×éµÄÖÐ¼äÐÐÏÔÊ¾ -->
+                            <!-- å…³é”®ç»„æ ‡å¿—åªåœ¨ç»„çš„ä¸­é—´è¡Œæ˜¾ç¤º -->
                             <Grid Classes="Content" IsVisible="{Binding IsMiddleOfGroup}">
                                 <Image Source="/Assets/success.png" Width="16" Height="16" IsVisible="{Binding IsKeyGroup}" />
                                 <Image Source="/Assets/error.png" Width="16" Height="16" IsVisible="{Binding !IsKeyGroup}" />
@@ -96,20 +96,20 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- ÖÜÆÚÁÐ -->
+            <!-- å‘¨æœŸåˆ— -->
             <DataGridTemplateColumn Width="80" CanUserSort="False">
                 <DataGridTemplateColumn.Header>
                     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                         <TextBlock Text="ÖÜÆÚ" Classes="Header" />
+                         <TextBlock Text="å‘¨æœŸ" Classes="Header" />
                          <Rectangle Classes="VBorder" />
                     </Grid>
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="models:FlattenedProcessItem">
-                        <!-- Îª×éµÄµÚÒ»ÐÐÌí¼ÓÉÏ±ß¿ò£¬×îºóÒ»ÐÐÌí¼ÓÏÂ±ß¿ò -->
+                        <!-- ä¸ºç»„çš„ç¬¬ä¸€è¡Œæ·»åŠ ä¸Šè¾¹æ¡†ï¼Œæœ€åŽä¸€è¡Œæ·»åŠ ä¸‹è¾¹æ¡† -->
                         <Border BorderBrush="{StaticResource Colors.Border.BorderBrush}"
                                 BorderThickness="{Binding RowBorderThickness}">
-                            <!-- ÖÜÆÚÖ»ÔÚ×éµÄÖÐ¼äÐÐÏÔÊ¾ -->
+                            <!-- å‘¨æœŸåªåœ¨ç»„çš„ä¸­é—´è¡Œæ˜¾ç¤º -->
                             <TextBlock Text="{Binding Cycle}" Classes="Content" 
                                       IsVisible="{Binding IsMiddleOfGroup}" />
 						</Border>
@@ -117,14 +117,14 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- »ù±¾ÐÅÏ¢ - Ãû³Æ -->
+            <!-- åŸºæœ¬ä¿¡æ¯ - åç§° -->
             <DataGridTemplateColumn Width="150" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="Ãû³Æ" Classes="Header" />
+                    <TextBlock Text="åç§°" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="models:FlattenedProcessItem">
-                        <!-- Îª×éµÄµÚÒ»ÐÐÌí¼ÓÉÏ±ß¿ò£¬×îºóÒ»ÐÐÌí¼ÓÏÂ±ß¿ò -->
+                        <!-- ä¸ºç»„çš„ç¬¬ä¸€è¡Œæ·»åŠ ä¸Šè¾¹æ¡†ï¼Œæœ€åŽä¸€è¡Œæ·»åŠ ä¸‹è¾¹æ¡† -->
                         <Border BorderBrush="{StaticResource Colors.Border.BorderBrush}" 
                                 BorderThickness="{Binding RowBorderThickness}">
                             <TextBlock Text="{Binding Name}" Classes="Content" />
@@ -133,10 +133,10 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- »ù±¾ÐÅÏ¢ - ÆôÓÃ -->
+            <!-- åŸºæœ¬ä¿¡æ¯ - å¯ç”¨ -->
             <DataGridTemplateColumn Width="80" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="ÆôÓÃ" Classes="Header" />
+                    <TextBlock Text="å¯ç”¨" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="models:FlattenedProcessItem">
@@ -148,10 +148,10 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- »ù±¾ÐÅÏ¢ - Ô´½ÚµãºÅ -->
+            <!-- åŸºæœ¬ä¿¡æ¯ - æºèŠ‚ç‚¹å· -->
             <DataGridTemplateColumn Width="90" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="Ô´½ÚµãºÅ" Classes="Header" />
+                    <TextBlock Text="æºèŠ‚ç‚¹å·" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="models:FlattenedProcessItem">
@@ -163,10 +163,10 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- ÔËÐÐÅäÖÃ - ×éÄÚÐòºÅ -->
+            <!-- è¿è¡Œé…ç½® - ç»„å†…åºå· -->
             <DataGridTemplateColumn Width="90" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="×éÄÚÐòºÅ" Classes="Header" />
+                    <TextBlock Text="ç»„å†…åºå·" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="models:FlattenedProcessItem">
@@ -178,11 +178,11 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- ÔËÐÐÅäÖÃ - Ö÷»ú -->
+            <!-- è¿è¡Œé…ç½® - ä¸»æœº -->
             <DataGridTemplateColumn Width="120" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
                     <Grid>
-                        <TextBlock Text="Ö÷»ú" Classes="Header" />
+                        <TextBlock Text="ä¸»æœº" Classes="Header" />
                         <Rectangle HorizontalAlignment="Right" Classes="VBorder" />
                     </Grid>
                 </DataGridTemplateColumn.Header>
@@ -196,13 +196,13 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- ÔËÐÐÅäÖÃ - ³ÌÐòÂ·¾¶ -->
+            <!-- è¿è¡Œé…ç½® - ç¨‹åºè·¯å¾„ -->
             <DataGridTemplateColumn Width="200" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
                     <Grid RowDefinitions="20,20">
-                        <TextBlock Text="Â·¾¶" Classes="Header" />
+                        <TextBlock Text="è·¯å¾„" Classes="Header" />
                         <Rectangle VerticalAlignment="Bottom" Classes="HBorder" />
-                        <TextBlock Grid.Row="1" Text="³ÌÐòÂ·¾¶" Classes="Header" />
+                        <TextBlock Grid.Row="1" Text="ç¨‹åºè·¯å¾„" Classes="Header" />
                     </Grid>
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
@@ -215,12 +215,12 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- ÔËÐÐÅäÖÃ - ¹¤×÷Â·¾¶ -->
+            <!-- è¿è¡Œé…ç½® - å·¥ä½œè·¯å¾„ -->
             <DataGridTemplateColumn Width="200" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
                     <Grid RowDefinitions="20,20">
                         <Rectangle VerticalAlignment="Bottom" Classes="HBorder" />
-                        <TextBlock Grid.Row="1" Text="¹¤×÷Â·¾¶" Classes="Header" />
+                        <TextBlock Grid.Row="1" Text="å·¥ä½œè·¯å¾„" Classes="Header" />
                         <Rectangle Grid.RowSpan="2" HorizontalAlignment="Right" Classes="VBorder" />
                     </Grid>
                 </DataGridTemplateColumn.Header>
@@ -234,10 +234,10 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- ÔËÐÐÅäÖÃ - ²ÎÊý -->
+            <!-- è¿è¡Œé…ç½® - å‚æ•° -->
             <DataGridTemplateColumn Width="80" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="²ÎÊý" Classes="Header" />
+                    <TextBlock Text="å‚æ•°" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="models:FlattenedProcessItem">
@@ -249,11 +249,11 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- ÔËÐÐÅäÖÃ - ×ÔÆô¶¯ -->
+            <!-- è¿è¡Œé…ç½® - è‡ªå¯åŠ¨ -->
             <DataGridTemplateColumn Width="90" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
                     <Grid>
-                        <TextBlock Text="×ÔÆô¶¯" Classes="Header" />
+                        <TextBlock Text="è‡ªå¯åŠ¨" Classes="Header" />
                         <Rectangle HorizontalAlignment="Right" Classes="VBorder" />
                    </Grid>
                 </DataGridTemplateColumn.Header>
@@ -270,13 +270,13 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- ´¦ÀíÅäÖÃ - Ç°´¦Àí -->
+            <!-- å¤„ç†é…ç½® - å‰å¤„ç† -->
             <DataGridTemplateColumn Width="200" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
                     <Grid RowDefinitions="20,20">
-                        <TextBlock Text="´¦Àí·½Ê½" Classes="Header" />
+                        <TextBlock Text="å¤„ç†æ–¹å¼" Classes="Header" />
                         <Rectangle VerticalAlignment="Bottom" Classes="HBorder" />
-                        <TextBlock Grid.Row="1" Text="Ç°´¦Àí" Classes="Content"  />
+                        <TextBlock Grid.Row="1" Text="å‰å¤„ç†" Classes="Content"  />
                     </Grid>
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
@@ -289,12 +289,12 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- ´¦ÀíÅäÖÃ - ºó´¦Àí -->
+            <!-- å¤„ç†é…ç½® - åŽå¤„ç† -->
             <DataGridTemplateColumn Width="200" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
                     <Grid RowDefinitions="20,20">
                         <Rectangle VerticalAlignment="Bottom" Classes="HBorder" />
-                        <TextBlock Grid.Row="1" Text="ºó´¦Àí" Classes="Header" />
+                        <TextBlock Grid.Row="1" Text="åŽå¤„ç†" Classes="Header" />
                         <Rectangle Grid.RowSpan="2" HorizontalAlignment="Right" Classes="VBorder" />
                     </Grid>
                 </DataGridTemplateColumn.Header>
@@ -308,10 +308,10 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             
-            <!-- ²Ù×÷ - ÃèÊö -->
+            <!-- æ“ä½œ - æè¿° -->
             <DataGridTemplateColumn Width="80" CanUserSort="False" CanUserResize="False">
                 <DataGridTemplateColumn.Header>
-                    <TextBlock Text="ÃèÊö" Classes="Header" />
+                    <TextBlock Text="æè¿°" Classes="Header" />
                 </DataGridTemplateColumn.Header>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate x:DataType="models:FlattenedProcessItem">

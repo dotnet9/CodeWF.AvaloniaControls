@@ -1,4 +1,4 @@
-﻿using CodeWF.AvaloniaControls.DockReactiveUIDemo.Models.Pages;
+using CodeWF.AvaloniaControls.DockReactiveUIDemo.Models.Pages;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
