@@ -86,6 +86,9 @@ EmbedProcessWindows/
 - 在 `CreateNativeControlCore` 中调用嵌入器创建窗口
 - 提供 `CloseAll()` 静态方法关闭所有已创建的嵌入窗口
 
+**平台特定行为**：
+- **Linux**：在 `OnLoaded` 生命周期中，通过短暂调整主窗口宽度（+1/-1）触发 X11 窗口布局刷新，解决子进程窗口初始尺寸不正确的问题
+
 **使用方式**：
 ```csharp
 var embedHost = new ProcessEmbedHost("path/to/app.exe", workDir, args);
@@ -110,7 +113,8 @@ var embedder = ProcessEmbedderFactory.Create(options);
 - `WorkingDirectory` - 工作目录
 - `Arguments` - 命令行参数
 - `WindowReadyTimeoutMs` - 等待窗口就绪超时（默认 5000ms）
-- `WindowSearchDelayMs` - 查找窗口前等待时间（默认 200ms）
+- `WindowSearchDelayMs` - 查找窗口重试间隔（默认 50ms）
+- `WindowSearchTimeoutMs` - 查找窗口总超时时间（默认 30000ms）
 
 ### Platforms
 

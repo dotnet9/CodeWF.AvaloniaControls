@@ -8,6 +8,7 @@ namespace CodeWF.AvaloniaControls.DockReactiveUIDemo;
 
 public partial class App : PrismApplication
 {
+    public static MainWindow? MainWin { get; private set; }
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -19,6 +20,7 @@ public partial class App : PrismApplication
 #if DEBUG
         this.AttachDevTools();
 #endif
-        return Container.Resolve<MainWindow>();
+        MainWin = Container.Resolve<MainWindow>();
+        return MainWin;
     }
 }

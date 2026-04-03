@@ -1,10 +1,14 @@
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Platform;
+using Avalonia.Threading;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Contracts;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Models;
 using CodeWF.Log.Core;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Core;
 
@@ -55,12 +59,29 @@ public class ProcessEmbedHost : Avalonia.Controls.NativeControlHost
 
         _isCreated = true;
         _processWindowHandle = Embedder.CreateWindow(parent, () => base.CreateNativeControlCore(parent));
+
         return _processWindowHandle;
     }
 
     protected override void DestroyNativeControlCore(IPlatformHandle control)
     {
         base.DestroyNativeControlCore(control);
+    }
+
+    protected override void OnLoaded(RoutedEventArgs e)
+    {
+        base.OnLoaded(e);
+        if (OperatingSystem.IsLinux())
+        {
+            Dispatcher.UIThread.Post(async () =>
+            {
+                Logger.Info($"子进程加载完成，刷新布局");
+                await Task.Delay(1500);
+                App.MainWin?.Width += 1;
+                await Task.Delay(150);
+                App.MainWin?.Width -= 1;
+            });
+        }
     }
 
     /// <summary>

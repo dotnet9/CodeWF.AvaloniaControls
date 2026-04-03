@@ -77,6 +77,7 @@ public class LinuxEmbedder : INativeProcessEmbedder
 
             _windowHandle = new LinuxWindowHandle(ProcessWindowHandle, "ProcWinHandle", _x11Display);
             Logger.Info($"创建窗口句柄完成");
+        
             return _windowHandle;
         }
         catch (Exception ex)
@@ -170,19 +171,30 @@ public class LinuxEmbedder : INativeProcessEmbedder
         var screen = X11Api.XDefaultScreen(_x11Display);
         var rootWindow = X11Api.XRootWindow(_x11Display, screen);
 
-        // 多次尝试查找窗口，增加找到窗口的概率
-        for (int i = 0; i < 10; i++)
+        var stopwatch = Stopwatch.StartNew();
+        var iteration = 0;
+        while (stopwatch.ElapsedMilliseconds < _options.WindowSearchTimeoutMs)
         {
-            Logger.Info($"尝试查找窗口 (尝试 {i + 1}/10)");
+            iteration++;
+            Logger.Info($"尝试查找窗口 (尝试 {iteration})");
             var window = SearchWindowTree(rootWindow, pid);
             if (window != IntPtr.Zero)
             {
                 Logger.Info($"找到窗口: {window}");
                 return window;
             }
-            Thread.Sleep(200);
+
+            var remainingTime = _options.WindowSearchTimeoutMs - stopwatch.ElapsedMilliseconds;
+            if (remainingTime > _options.WindowSearchDelayMs)
+            {
+                Thread.Sleep(_options.WindowSearchDelayMs);
+            }
+            else if (remainingTime > 0)
+            {
+                Thread.Sleep((int)remainingTime);
+            }
         }
-        Logger.Warn($"无法找到PID为 {pid} 的窗口");
+        Logger.Warn($"无法找到PID为 {pid} 的窗口，已尝试 {iteration} 次");
         return IntPtr.Zero;
     }
 
@@ -247,7 +259,6 @@ public class LinuxEmbedder : INativeProcessEmbedder
 
         return -1;
     }
-
 
 
     public void Close()

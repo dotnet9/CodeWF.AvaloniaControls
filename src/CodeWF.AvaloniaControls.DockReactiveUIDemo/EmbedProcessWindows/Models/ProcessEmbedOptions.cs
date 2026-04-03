@@ -30,7 +30,12 @@ public class ProcessEmbedOptions
     /// <summary>
     /// 查找窗口前的等待时间（毫秒）
     /// </summary>
-    public int WindowSearchDelayMs { get; init; } = 200;
+    public int WindowSearchDelayMs { get; init; } = 50;
+
+    /// <summary>
+    /// 查找窗口的总超时时间（毫秒），默认 30 秒
+    /// </summary>
+    public int WindowSearchTimeoutMs { get; init; } = 30000;
 
     /// <summary>
     /// 创建配置

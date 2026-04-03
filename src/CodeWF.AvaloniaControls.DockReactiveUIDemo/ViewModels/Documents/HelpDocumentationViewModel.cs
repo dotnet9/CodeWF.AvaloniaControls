@@ -1,10 +1,13 @@
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Threading;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Core;
 using Dock.Model.ReactiveUI.Controls;
 using ReactiveUI;
+using CodeWF.Log.Core;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
 
