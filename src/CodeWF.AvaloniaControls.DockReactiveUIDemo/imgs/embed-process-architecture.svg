@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500">
+  <defs>
+    <style>
+      .box { fill: #e3f2fd; stroke: #1976d2; stroke-width: 2; rx: 8; }
+      .box-win { fill: #fff3e0; stroke: #f57c00; }
+      .box-linux { fill: #e8f5e9; stroke: #388e3c; }
+      .box-interface { fill: #f3e5f5; stroke: #7b1fa2; }
+      .box-factory { fill: #fff8e1; stroke: #fbc02d; }
+      .arrow { stroke: #333; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .label { font-family: Consolas, monospace; font-size: 12px; fill: #333; }
+      .title { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #333; }
+      .comment { font-family: Arial, sans-serif; font-size: 11px; fill: #666; font-style: italic; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- ProcessEmbedHost -->
+  <rect x="200" y="20" width="200" height="50" class="box"/>
+  <text x="300" y="50" text-anchor="middle" class="title">ProcessEmbedHost</text>
+  <text x="300" y="65" text-anchor="middle" class="comment">Avalonia.NativeControlHost</text>
+
+  <!-- Arrow down to Factory -->
+  <line x1="300" y1="70" x2="300" y2="100" class="arrow"/>
+
+  <!-- ProcessEmbedderFactory -->
+  <rect x="200" y="100" width="200" height="50" class="box-factory"/>
+  <text x="300" y="130" text-anchor="middle" class="title">ProcessEmbedderFactory</text>
+
+  <!-- Arrow down to INativeProcessEmbedder -->
+  <line x1="300" y1="150" x2="300" y2="180" class="arrow"/>
+  <text x="320" y="168" class="label">Create(options)</text>
+
+  <!-- INativeProcessEmbedder -->
+  <rect x="180" y="180" width="240" height="60" class="box-interface"/>
+  <text x="300" y="205" text-anchor="middle" class="title">INativeProcessEmbedder</text>
+  <text x="300" y="225" text-anchor="middle" class="label">+ CreateWindow()</text>
+  <text x="300" y="238" text-anchor="middle" class="label">+ Close()</text>
+
+  <!-- Two arrows down to implementations -->
+  <line x1="240" y1="240" x2="150" y2="280" class="arrow"/>
+  <line x1="360" y1="240" x2="450" y2="280" class="arrow"/>
+
+  <!-- WindowsEmbedder -->
+  <rect x="50" y="280" width="200" height="50" class="box-win"/>
+  <text x="150" y="305" text-anchor="middle" class="title">WindowsEmbedder</text>
+  <text x="150" y="320" text-anchor="middle" class="comment">SetParent / Win32 API</text>
+
+  <!-- LinuxEmbedder -->
+  <rect x="350" y="280" width="200" height="50" class="box-linux"/>
+  <text x="450" y="305" text-anchor="middle" class="title">LinuxEmbedder</text>
+  <text x="450" y="320" text-anchor="middle" class="comment">XReparentWindow / X11 API</text>
+
+  <!-- Sub-layers for Windows -->
+  <rect x="50" y="350" width="90" height="30" class="box-win" style="fill:#ffe0b2"/>
+  <text x="95" y="370" text-anchor="middle" class="label">Win32Api</text>
+
+  <rect x="160" y="350" width="90" height="30" class="box-win" style="fill:#ffe0b2"/>
+  <text x="205" y="370" text-anchor="middle" class="label">WindowHandle</text>
+
+  <!-- Sub-layers for Linux -->
+  <rect x="350" y="350" width="90" height="30" class="box-linux" style="fill:#c8e6c9"/>
+  <text x="395" y="370" text-anchor="middle" class="label">X11Api</text>
+
+  <rect x="460" y="350" width="90" height="30" class="box-linux" style="fill:#c8e6c9"/>
+  <text x="505" y="370" text-anchor="middle" class="label">WindowHandle</text>
+
+  <!-- Contracts box -->
+  <rect x="20" y="400" width="140" height="70" class="box-interface" style="fill:#ede7f6"/>
+  <text x="90" y="425" text-anchor="middle" class="title">Contracts/</text>
+  <text x="90" y="445" text-anchor="middle" class="label">INativeProcessEmbedder</text>
+  <text x="90" y="462" text-anchor="middle" class="label">INativeWindowHandle</text>
+
+  <!-- Core box -->
+  <rect x="180" y="400" width="120" height="70" class="box-factory" style="fill:#fff9c4"/>
+  <text x="240" y="425" text-anchor="middle" class="title">Core/</text>
+  <text x="240" y="445" text-anchor="middle" class="label">ProcessEmbedHost</text>
+  <text x="240" y="462" text-anchor="middle" class="label">Factory</text>
+
+  <!-- Models box -->
+  <rect x="320" y="400" width="100" height="70" class="box" style="fill:#bbdefb"/>
+  <text x="370" y="425" text-anchor="middle" class="title">Models/</text>
+  <text x="370" y="445" text-anchor="middle" class="label">ProcessEmbed</text>
+  <text x="370" y="462" text-anchor="middle" class="label">Options</text>
+
+  <!-- Platforms box -->
+  <rect x="440" y="400" width="140" height="70" class="box" style="fill:#e0e0e0"/>
+  <text x="510" y="425" text-anchor="middle" class="title">Platforms/</text>
+  <text x="510" y="445" text-anchor="middle" class="label">Windows/ Linux/</text>
+  <text x="510" y="462" text-anchor="middle" class="label">APIs + Handles</text>
+</svg>
