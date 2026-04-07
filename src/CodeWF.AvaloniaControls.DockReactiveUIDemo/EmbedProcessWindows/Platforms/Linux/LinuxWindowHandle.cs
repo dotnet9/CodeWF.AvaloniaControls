@@ -9,7 +9,7 @@ namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Platfor
 /// </summary>
 internal class LinuxWindowHandle : PlatformHandle, INativeControlHostDestroyableControlHandle
 {
-    private readonly IntPtr _x11Display;
+    private IntPtr _x11Display;
 
     public LinuxWindowHandle(IntPtr handle, string? descriptor, IntPtr x11Display = default) : base(handle, descriptor)
     {
@@ -18,9 +18,16 @@ internal class LinuxWindowHandle : PlatformHandle, INativeControlHostDestroyable
 
     public void Destroy()
     {
-        if (Handle != IntPtr.Zero && _x11Display != IntPtr.Zero)
+        if (_x11Display == IntPtr.Zero || Handle == IntPtr.Zero)
         {
-            X11Api.XDestroyWindow(_x11Display, Handle);
+            return;
         }
+
+        X11Api.XDestroyWindow(_x11Display, Handle);
+    }
+
+    public void SetDisplayInvalid()
+    {
+        _x11Display = IntPtr.Zero;
     }
 }

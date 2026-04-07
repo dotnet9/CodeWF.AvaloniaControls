@@ -265,17 +265,18 @@ public class LinuxEmbedder : INativeProcessEmbedder
     {
         try
         {
+            if (ProcessWindowHandle != IntPtr.Zero)
+            {
+                var rootReturn = X11Api.XDefaultRootWindow(_x11Display);
+                X11Api.XReparentWindow(_x11Display, ProcessWindowHandle, rootReturn, 0, 0);
+                X11Api.XFlush(_x11Display);
+            }
+
             if (_x11Display != IntPtr.Zero)
             {
-                if (ProcessWindowHandle != IntPtr.Zero)
-                {
-                    var rootReturn = X11Api.XDefaultRootWindow(_x11Display);
-                    X11Api.XReparentWindow(_x11Display, ProcessWindowHandle, rootReturn, 0, 0);
-                    X11Api.XFlush(_x11Display);
-                }
-
                 X11Api.XCloseDisplay(_x11Display);
                 _x11Display = IntPtr.Zero;
+                _windowHandle?.SetDisplayInvalid();
             }
 
             if (_process is not { HasExited: true })
