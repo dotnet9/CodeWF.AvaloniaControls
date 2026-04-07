@@ -10,7 +10,6 @@ using Dock.Model.ReactiveUI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ReactiveUI;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels;
 
@@ -32,13 +31,14 @@ public class DockFactory : Factory
         var document3 = new UserCenterViewModel();
         var document4 = new LogRecordsViewModel();
         var document5 = new HelpDocumentationViewModel();
+        var document6 = new HelpDocumentationViewModel();
 
 
         var documentDock = new DocumentDock
         {
             IsCollapsable = false,
             ActiveDockable = document0,
-            VisibleDockables = CreateList<IDockable>(document0, document1, document2, document3, document4, document5),
+            VisibleDockables = CreateList<IDockable>(document0, document1, document2, document3, document4, document5, document6),
             CanCreateDocument = false,
             // CanDrop = false,
             EnableWindowDrag = true,

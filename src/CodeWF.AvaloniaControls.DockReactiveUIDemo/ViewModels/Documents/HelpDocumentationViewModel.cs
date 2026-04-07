@@ -1,13 +1,11 @@
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using Avalonia.Controls;
-using Avalonia.Threading;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Core;
 using Dock.Model.ReactiveUI.Controls;
 using ReactiveUI;
-using CodeWF.Log.Core;
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
 
@@ -18,7 +16,7 @@ public class HelpDocumentationViewModel : Document
 
     public HelpDocumentationViewModel()
     {
-        Id = nameof(HelpDocumentationViewModel);
+        Id = nameof(HelpDocumentationViewModel) + Guid.NewGuid().ToString();
         Title = "帮助文档";
 
         DockFactory.Documents.Add(this);
