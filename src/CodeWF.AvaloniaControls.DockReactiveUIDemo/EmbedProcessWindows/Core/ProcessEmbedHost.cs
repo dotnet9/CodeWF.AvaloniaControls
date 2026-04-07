@@ -1,5 +1,3 @@
-using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform;
 using Avalonia.Threading;
@@ -68,11 +66,13 @@ public class ProcessEmbedHost : Avalonia.Controls.NativeControlHost
         base.DestroyNativeControlCore(control);
     }
 
+    private bool _isFirstLoaded = true;
     protected override void OnLoaded(RoutedEventArgs e)
     {
         base.OnLoaded(e);
-        if (OperatingSystem.IsLinux())
+        if (OperatingSystem.IsLinux() && _isFirstLoaded)
         {
+            _isFirstLoaded = false;
             Dispatcher.UIThread.Post(async () =>
             {
                 Logger.Info($"子进程加载完成，刷新布局");
