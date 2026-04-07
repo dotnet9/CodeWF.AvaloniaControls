@@ -8,6 +8,7 @@ namespace CodeWF.AvaloniaControls.DockReactiveUIDemo;
 
 public partial class App : PrismApplication
 {
+    public static App? Instance { get; private set; }
     public static MainWindow? MainWin { get; private set; }
     public override void Initialize()
     {
@@ -17,6 +18,7 @@ public partial class App : PrismApplication
 
     protected override AvaloniaObject CreateShell()
     {
+        Instance = this;
 #if DEBUG
         this.AttachDevTools();
 #endif
