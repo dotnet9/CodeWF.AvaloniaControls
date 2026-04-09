@@ -15,6 +15,24 @@ public partial class MainWindow : UrsaWindow
         InitializeComponent();
         this.RegisterGlobalKeyDownHandler();
         this.EnableOSVersionAwareDecorations();
+
+        PropertyChanged += async (s, e) => 
+        {
+            if(e.Property == WindowStateProperty && OperatingSystem.IsWindows())
+            {
+                if(WindowState == WindowState.Minimized)
+                {
+                    Hide();
+                    ShowInTaskbar = false;
+                }
+                else
+                {
+                    Show();
+                    Activate();
+                    ShowInTaskbar = true;
+                }
+            }
+        };
     }
 
     private void InitializeComponent()
@@ -27,9 +45,7 @@ public partial class MainWindow : UrsaWindow
         // 如果打开了第三方进程的窗口，使用遮罩提示框会被第三方窗口覆盖，导致用户无法看到提示框，因此这里直接使用普通的消息框。
         //await MessageBox.ShowOverlayAsync("Are you sure you want to exit?", "Confirm Exit");
         await MessageBox.ShowAsync("Are you sure you want to exit?", "Confirm Exit");
-#if DEBUG
         Environment.Exit(0);
-#endif
     }
     protected override void OnClosed(EventArgs e)
     {

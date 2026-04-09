@@ -30,4 +30,18 @@
                     Value="{StaticResource ControlRecyclingKey}" />
         </Style>
     </Application.Styles>
+    <TrayIcon.Icons>
+        <TrayIcons>
+            <TrayIcon Icon="/Assets/logo.ico" Clicked="OpenMainWindow_Clicked" >
+                <TrayIcon.Menu>
+                    <NativeMenu>
+                        <NativeMenuItem Header="Test App" />
+                        <NativeMenuItem Header="Show MainWindow" Click="OpenMainWindow_Clicked" />
+                        <NativeMenuItemSeparator />
+                        <NativeMenuItem Header="Exit" Click="Exit_Clicked" />
+                    </NativeMenu>
+                </TrayIcon.Menu>
+            </TrayIcon>
+        </TrayIcons>
+    </TrayIcon.Icons>
 </Application>
