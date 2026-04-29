@@ -41,6 +41,7 @@ public class WindowsEmbedder : INativeProcessEmbedder
         catch (Exception ex)
         {
             Logger.Error($"Windows 平台嵌入进程异常({_options.ProcessPath})", ex, "启动第三方进程异常，请联系管理员！");
+            Close();
             return createDefault();
         }
     }
@@ -69,12 +70,24 @@ public class WindowsEmbedder : INativeProcessEmbedder
 
     private IntPtr GetMainWindowHandle()
     {
-        while (_process!.MainWindowHandle == IntPtr.Zero)
+        var stopwatch = Stopwatch.StartNew();
+        while (_process is { HasExited: false } && _process.MainWindowHandle == IntPtr.Zero)
         {
+            if (stopwatch.ElapsedMilliseconds >= _options.WindowSearchTimeoutMs)
+            {
+                throw new TimeoutException("获取第三方进程窗口句柄超时");
+            }
+
             Thread.Sleep(50);
+            _process.Refresh();
         }
 
-        var handle = _process.MainWindowHandle;
+        if (_process is { HasExited: true })
+        {
+            throw new InvalidOperationException("第三方进程已退出，无法获取窗口句柄");
+        }
+
+        var handle = _process?.MainWindowHandle ?? IntPtr.Zero;
         if (handle == IntPtr.Zero)
         {
             throw new InvalidOperationException("无法获取第三方进程窗口句柄");

@@ -49,7 +49,7 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
         SearchData();
     }
 
-    private void ChangeSearchKey_OnKeyUp(object? sender, KeyEventArgs e)
+    private void ChangeSearchKey_OnKeyUp(object? sender, KeyEventArgs? e)
     {
         if (sender is TextBox txtBox) _searchKey = txtBox.Text?.Trim().ToLower();
 
@@ -78,12 +78,12 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
         ChangeCountInfo();
     }
 
-    #region ¹«¿ªÊôÐÔ
+    #region å…¬å¼€å±žæ€§
 
     public event Action<object?, TappedEventArgs>? ListItemDoubleTapped;
 
     public static readonly StyledProperty<RangeObservableCollection<string>?> ItemsSourceProperty =
-        AvaloniaProperty.Register<Transfer, RangeObservableCollection<string>?>(
+        AvaloniaProperty.Register<SearchListBox, RangeObservableCollection<string>?>(
             nameof(ItemsSource));
 
     public RangeObservableCollection<string>? ItemsSource
@@ -96,26 +96,48 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
 
     #endregion
 
-    #region ¹«¿ª·½·¨
+    #region å…¬å¼€æ–¹æ³•
 
-    public void AddRange(List<string> items)
+    public void AddRange(IEnumerable<string>? items)
     {
-        ItemsSource.AddRange(items);
-        BindingItemsSource.AddRange(items);
+        if (ItemsSource is null || items is null)
+        {
+            return;
+        }
+
+        var itemList = items.ToList();
+        if (itemList.Count == 0)
+        {
+            return;
+        }
+
+        ItemsSource.AddRange(itemList);
+        BindingItemsSource.AddRange(itemList);
         ChangeCountInfo();
     }
 
-    public void RemoveRange(List<string> items)
+    public void RemoveRange(IEnumerable<string>? items)
     {
-        ItemsSource.RemoveRange(items);
-        BindingItemsSource.RemoveRange(items);
+        if (ItemsSource is null || items is null)
+        {
+            return;
+        }
+
+        var itemList = items.ToList();
+        if (itemList.Count == 0)
+        {
+            return;
+        }
+
+        ItemsSource.RemoveRange(itemList);
+        BindingItemsSource.RemoveRange(itemList);
 
         ChangeCountInfo();
     }
 
     #endregion
 
-    #region ÄÚ²¿Ê¹ÓÃ
+    #region å†…éƒ¨ä½¿ç”¨
 
     public RangeObservableCollection<string> BindingItemsSource { get; } = new();
 

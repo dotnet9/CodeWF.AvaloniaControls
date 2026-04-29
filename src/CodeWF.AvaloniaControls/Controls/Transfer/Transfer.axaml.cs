@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -7,7 +6,7 @@ using CodeWF.AvaloniaControls.Extensions;
 
 namespace CodeWF.AvaloniaControls.Controls;
 
-public partial class Transfer : UserControl, INotifyPropertyChanged
+public partial class Transfer : UserControl
 {
     private readonly SearchListBox? _leftSearchListBox;
     private readonly SearchListBox? _rightSearchListBox;
@@ -17,36 +16,47 @@ public partial class Transfer : UserControl, INotifyPropertyChanged
         InitializeComponent();
         _leftSearchListBox = this.FindControl<SearchListBox>("LeftSearchListBox");
         _rightSearchListBox = this.FindControl<SearchListBox>("RightSearchListBox");
-        _leftSearchListBox.ListItemDoubleTapped += (s, e) => MoveLeftToRight_OnClick(null, null);
-        _rightSearchListBox.ListItemDoubleTapped += (s, e) => MoveRightToLeft_OnClick(null, null);
-    }
+        if (_leftSearchListBox is not null)
+        {
+            _leftSearchListBox.ListItemDoubleTapped += (s, e) => MoveLeftToRight_OnClick(null, null);
+        }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
+        if (_rightSearchListBox is not null)
+        {
+            _rightSearchListBox.ListItemDoubleTapped += (s, e) => MoveRightToLeft_OnClick(null, null);
+        }
+    }
 
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
     }
 
-    private void MoveLeftToRight_OnClick(object? sender, RoutedEventArgs e)
+    private void MoveLeftToRight_OnClick(object? sender, RoutedEventArgs? e)
     {
-        var leftSelectedItems = _leftSearchListBox!.SelectedItems;
-        _leftSearchListBox!.RemoveRange(leftSelectedItems);
-        _rightSearchListBox.AddRange(leftSelectedItems);
+        var leftSelectedItems = _leftSearchListBox?.SelectedItems;
+        if (leftSelectedItems?.Count > 0)
+        {
+            _leftSearchListBox?.RemoveRange(leftSelectedItems);
+            _rightSearchListBox?.AddRange(leftSelectedItems);
+        }
     }
 
-    private void MoveRightToLeft_OnClick(object? sender, RoutedEventArgs e)
+    private void MoveRightToLeft_OnClick(object? sender, RoutedEventArgs? e)
     {
-        var rightSelectedItems = _rightSearchListBox!.SelectedItems;
-        _rightSearchListBox.RemoveRange(rightSelectedItems);
-        _leftSearchListBox.AddRange(rightSelectedItems);
+        var rightSelectedItems = _rightSearchListBox?.SelectedItems;
+        if (rightSelectedItems?.Count > 0)
+        {
+            _rightSearchListBox?.RemoveRange(rightSelectedItems);
+            _leftSearchListBox?.AddRange(rightSelectedItems);
+        }
     }
 
-    #region ¶ÔÍâÌá¹©ÊôĞÔ
+    #region å¯¹å¤–æä¾›å±æ€§
 
     public static readonly StyledProperty<string?> LeftHeaderProperty =
         AvaloniaProperty.Register<Transfer, string?>(
-            nameof(LeftHeader), "Ô´Êı¾İ");
+            nameof(LeftHeader), "æºæ•°æ®");
 
     public string? LeftHeader
     {
@@ -56,7 +66,7 @@ public partial class Transfer : UserControl, INotifyPropertyChanged
 
     public static readonly StyledProperty<string?> RightHeaderProperty =
         AvaloniaProperty.Register<Transfer, string?>(
-            nameof(RightHeader), "Ñ¡ÔñÊı¾İ");
+            nameof(RightHeader), "é€‰æ‹©æ•°æ®");
 
     public string? RightHeader
     {

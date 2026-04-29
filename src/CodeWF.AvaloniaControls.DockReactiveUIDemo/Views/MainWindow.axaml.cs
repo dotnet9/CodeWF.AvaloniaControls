@@ -10,6 +10,8 @@ namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.Views;
 
 public partial class MainWindow : UrsaWindow
 {
+    private bool _isCloseConfirmed;
+
     public MainWindow()
     {
         InitializeComponent();
@@ -41,17 +43,37 @@ public partial class MainWindow : UrsaWindow
     }
     protected override async void OnClosing(WindowClosingEventArgs e)
     {
-        e.Cancel = true;
-        if (IsVisible)
+        if (_isCloseConfirmed)
         {
-            // 如果打开了第三方进程的窗口，使用遮罩提示框会被第三方窗口覆盖，导致用户无法看到提示框，因此这里直接使用普通的消息框。
-            //await MessageBox.ShowOverlayAsync("Are you sure you want to exit?", "Confirm Exit");
-            await MessageBox.ShowAsync("Are you sure you want to exit?", "Confirm Exit");
+            base.OnClosing(e);
+            return;
         }
-        Environment.Exit(0);
+
+        e.Cancel = true;
+        if (!IsVisible)
+        {
+            Show();
+            ShowInTaskbar = true;
+            Activate();
+        }
+
+        var result = await MessageBox.ShowAsync(
+            "Are you sure you want to exit?",
+            "Confirm Exit",
+            MessageBoxIcon.Question,
+            MessageBoxButton.YesNo);
+        if (result != MessageBoxResult.Yes)
+        {
+            return;
+        }
+
+        _isCloseConfirmed = true;
+        Close();
     }
+
     protected override void OnClosed(EventArgs e)
     {
+        this.RemoveGlobalKeyDownHandler();
         ProcessEmbedHost.CloseAll();
         base.OnClosed(e);
     }

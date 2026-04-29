@@ -83,9 +83,15 @@ public static class DataGridExtension
             return;
         }
 
-        for(var i = 0; i <targetColumnIndexes.Length;i++)
+        for(var i = 0; i < targetColumnIndexes.Length; i++)
         {
-            var cell = cells[i];
+            var columnIndex = targetColumnIndexes[i];
+            if (columnIndex < 0 || columnIndex >= cells.Count)
+            {
+                continue;
+            }
+
+            var cell = cells[columnIndex];
             ProcessCell(cell);
         }
     }
@@ -150,7 +156,7 @@ public static class DataGridExtension
 
             ToolTip.SetTip(textBlock, formattedText.Width > textBlock.Bounds.Width ? textBlock.Text : null);
         }
-        catch(Exception ex)
+        catch
         {
 
         }

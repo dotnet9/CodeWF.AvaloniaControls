@@ -50,6 +50,11 @@ public partial class TrapezoidShapedTabItemBorder : Control
             return;
         }
 
+        if (tabControl.TabStripPlacement != Dock.Top)
+        {
+            return;
+        }
+
         var index = tabControl.Items.IndexOf(currentTabItem);
         var isFirst = index == 0;
         var isLast = index == tabControl.Items.Count - 1;
@@ -66,26 +71,17 @@ public partial class TrapezoidShapedTabItemBorder : Control
         var pathGeometry = new StreamGeometry();
         using (var ctx = pathGeometry.Open())
         {
-            if (isFirst & !isLast)
+            if (isFirst && !isLast)
             {
-                if (tabControl.TabStripPlacement == Dock.Top)
-                {
-                    DrawTopFirstTabItemBorder(ctx, adjustedRect, radius, rect);
-                }
+                DrawTopFirstTabItemBorder(ctx, adjustedRect, radius, rect);
             }
             else if (!isFirst && isLast)
             {
-                if (tabControl.TabStripPlacement == Dock.Top)
-                {
-                    DrawTopLastTabItemBorder(ctx, adjustedRect, radius, rect);
-                }
+                DrawTopLastTabItemBorder(ctx, adjustedRect, radius, rect);
             }
             else
             {
-                if (tabControl.TabStripPlacement == Dock.Top)
-                {
-                    DrawTopOtherTabItemBorder(ctx, adjustedRect, radius, rect);
-                }
+                DrawTopOtherTabItemBorder(ctx, adjustedRect, radius, rect);
             }
 
             // 底边消失（不绘制）

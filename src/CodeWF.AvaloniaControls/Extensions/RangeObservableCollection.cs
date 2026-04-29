@@ -18,7 +18,19 @@ namespace CodeWF.AvaloniaControls.Extensions
 
         protected override void ClearItems()
         {
-            base.ClearItems();
+            if (Count == 0)
+                return;
+
+            _suppressNotification = true;
+            try
+            {
+                base.ClearItems();
+            }
+            finally
+            {
+                _suppressNotification = false;
+            }
+
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
