@@ -9,6 +9,7 @@
     Title="CodeWF 控件展示馆"
     Width="1280"
     Height="860"
+    Background="#F3F6FB"
     FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
     WindowStartupLocation="CenterScreen"
     d:DesignHeight="860"
@@ -16,7 +17,7 @@
     Icon="/Assets/logo.ico"
     mc:Ignorable="d">
     <u:UrsaWindow.Resources>
-        <Color x:Key="CaptionButtonForeground">#FFFFFF</Color>
+        <Color x:Key="CaptionButtonForeground">#0F172A</Color>
         <SolidColorBrush x:Key="PanelBorderBrush">#DCE3EE</SolidColorBrush>
         <LinearGradientBrush x:Key="HeroBackground" StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#0F172A" Offset="0" />
@@ -52,7 +53,7 @@
                    Source="/Assets/logo.png" />
             <TextBlock Grid.Column="1"
                        VerticalAlignment="Center"
-                       Foreground="White"
+                       Foreground="#0F172A"
                        FontSize="18"
                        FontWeight="Bold"
                        IsHitTestVisible="False"
@@ -146,5 +147,3 @@
         </Grid>
     </Border>
 </u:UrsaWindow>
-
-

@@ -2,35 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:semi="https://irihi.tech/semi"
              x:Class="CodeWF.AvaloniaControls.ProDataGridPerformanceDemo.App">
-    <Application.Resources>
-        <x:Double x:Key="ScrollBarSize">22</x:Double>
-    </Application.Resources>
     <Application.Styles>
         <semi:SemiTheme Locale="zh-CN" />
         <semi:ProDataGridSemiTheme />
         <!-- 无障碍滚动条：默认常显且加宽，方便老年用户识别和拖动。 -->
         <Style Selector="ScrollViewer">
             <Setter Property="AllowAutoHide" Value="False" />
-        </Style>
-        <Style Selector="ScrollBar">
-            <Setter Property="AllowAutoHide" Value="False" />
-            <Setter Property="Opacity" Value="1" />
-        </Style>
-        <Style Selector="ScrollBar:vertical">
-            <Setter Property="IsExpanded" Value="True" />
-            <Setter Property="Width" Value="22" />
-            <Setter Property="MinWidth" Value="22" />
-        </Style>
-        <Style Selector="ScrollBar:horizontal">
-            <Setter Property="IsExpanded" Value="True" />
-            <Setter Property="Height" Value="22" />
-            <Setter Property="MinHeight" Value="22" />
-        </Style>
-        <Style Selector="ScrollBar:vertical /template/ Thumb">
-            <Setter Property="MinWidth" Value="14" />
-        </Style>
-        <Style Selector="ScrollBar:horizontal /template/ Thumb">
-            <Setter Property="MinHeight" Value="14" />
         </Style>
     </Application.Styles>
 </Application>

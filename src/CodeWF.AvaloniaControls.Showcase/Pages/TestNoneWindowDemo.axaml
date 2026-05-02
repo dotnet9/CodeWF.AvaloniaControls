@@ -15,7 +15,7 @@
             <StackPanel Spacing="6">
                 <TextBlock FontSize="20" FontWeight="SemiBold" Text="窗口装饰样式示例" />
                 <TextBlock Foreground="#5B6472"
-                           Text="快速对比默认原生窗口、标准 Ursa 窗口，以及常用于自定义桌面外壳的无装饰窗口变体。" />
+                           Text="快速对比默认原生窗口、标准 Ursa 窗口，以及常用于自定义界面外壳的无装饰窗口变体。" />
             </StackPanel>
         </Border>
 
@@ -49,4 +49,3 @@
         </Grid>
     </Grid>
 </UserControl>
-

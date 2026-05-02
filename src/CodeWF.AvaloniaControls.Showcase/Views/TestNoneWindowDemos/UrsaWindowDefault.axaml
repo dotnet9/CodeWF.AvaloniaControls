@@ -10,6 +10,9 @@
               Height="320"
               x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.UrsaWindowDefault"
               Title="标准 Ursa 窗口">
+    <u:UrsaWindow.Resources>
+        <Color x:Key="CaptionButtonForeground">#0F172A</Color>
+    </u:UrsaWindow.Resources>
     <Border Background="#F8FAFC" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="14" Padding="24">
         <StackPanel Spacing="8" VerticalAlignment="Center">
             <TextBlock FontSize="22" FontWeight="Bold" Text="标准 Ursa 窗口" />
@@ -18,5 +21,3 @@
         </StackPanel>
     </Border>
 </u:UrsaWindow>
-
-

@@ -11,13 +11,14 @@
               WindowDecorations="None"
               x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.UrsaWindowWithNone"
               Title="无边框 Ursa 窗口">
+    <u:UrsaWindow.Resources>
+        <Color x:Key="CaptionButtonForeground">#0F172A</Color>
+    </u:UrsaWindow.Resources>
     <Border Background="#F8FAFC" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="14" Padding="24">
         <StackPanel Spacing="8" VerticalAlignment="Center">
             <TextBlock FontSize="22" FontWeight="Bold" Text="无边框 Ursa 窗口" />
             <TextBlock Foreground="#64748B"
-                       Text="系统边框被完全移除，这种模式适合沉浸式外壳、启动页或拥有自定义顶部栏和拖动区域的品牌化应用。" />
+                       Text="系统边框被完全移除，这种模式适合沉浸式外壳、启动页，或拥有自定义顶部栏与拖动区域的品牌化应用。" />
         </StackPanel>
     </Border>
 </u:UrsaWindow>
-
-
