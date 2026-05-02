@@ -1,19 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<Title>CodeWF.Themes</Title>
 		<TargetFrameworks>net8.0;net9.0;net10.0;net11.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
-		<Authors>沙漠尽头的狼</Authors>
 		<PackageId>CodeWF.Themes</PackageId>
 		<PackageIcon>codewf.png</PackageIcon>
 		<PackageReadmeFile>PACKAGE_README.md</PackageReadmeFile>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<Platforms>AnyCPU;x64;x86</Platforms>
-		<IsAotCompatible>true</IsAotCompatible>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -27,5 +24,4 @@
 	<ItemGroup>
 		<ProjectReference Include="..\CodeWF\CodeWF.csproj" />
 	</ItemGroup>
-
 </Project>

@@ -6,9 +6,13 @@
 - Migrated the solution to `.slnx` and pinned the .NET 11 preview SDK with `global.json`.
 - Upgraded the repository baseline to .NET 11 and the Avalonia 12 package ecosystem.
 - Reorganized the repository into an open source friendly layout: all projects now live physically under `src/`, while sample applications are grouped logically in the `.slnx` solution view.
+- Added the `CodeWF.AvaloniaControls.ProDataGrid` package plus the `CodeWF.AvaloniaControls.ProDataGridShowcase` and `CodeWF.AvaloniaControls.ProDataGridPerformanceDemo` sample projects.
 - Renamed sample applications to clearer open source facing names such as `CodeWF.AvaloniaControls.Showcase`, `CodeWF.AvaloniaControls.ProDataGridShowcase`, `CodeWF.AvaloniaControls.FluentStarterDemo`, and `CodeWF.Themes.StatusBadgeDemo`.
 - Added the dedicated `CodeWF.AvaloniaControls.ProDataGridPerformanceDemo` sample for Avalonia 12 large-table tab and document switching verification.
 - Added a root `pack.bat` script for one-click restore, build, and NuGet packing.
+- Added `publish_all.bat` and `publishbase.bat` for one-click sample publishing.
+- Added per-project `CHANGELOG.md` files across the repository.
+- Centralized shared pack metadata and root README/CHANGELOG injection through `Directory.Build.props` and `Directory.Build.targets`.
 
 ## 11.3.14.1 - 2026-04-29
 
