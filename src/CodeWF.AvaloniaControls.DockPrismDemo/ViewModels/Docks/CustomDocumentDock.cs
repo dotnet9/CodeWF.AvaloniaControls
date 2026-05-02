@@ -1,5 +1,5 @@
 ﻿using CodeWF.AvaloniaControls.DockPrismDemo.ViewModels.Documents;
-using Dock.Model.Prism.Controls;
+using Dock.Model.Avalonia.Controls;
 using ReactiveUI;
 
 namespace CodeWF.AvaloniaControls.DockPrismDemo.ViewModels.Docks;

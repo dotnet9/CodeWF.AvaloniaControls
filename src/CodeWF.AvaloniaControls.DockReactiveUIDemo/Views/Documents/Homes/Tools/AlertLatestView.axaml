@@ -1,15 +1,39 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents.Homes.Tools"
-             x:DataType="vm:AlertLatestViewModel" x:CompileBindings="True"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:DataType="vm:AlertLatestViewModel"
+             x:CompileBindings="True"
              x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.Homes.Tools.AlertLatestView">
-    <Grid Focusable="True">
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="{Binding Title}" Padding="2" />
-            <TextBox Text="Tool1" />
+    <Border Padding="14" Background="White" CornerRadius="16">
+        <StackPanel Spacing="12">
+            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding Title}" />
+            <Border Padding="10" Background="#FEF2F2" CornerRadius="12">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                    <Border Width="10" Height="10" Background="#DC2626" CornerRadius="999" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="冷却回路压力低于阈值。" />
+                    <TextBlock Grid.Column="2" Foreground="#B91C1C" Text="P1" />
+                </Grid>
+            </Border>
+            <Border Padding="10" Background="#FFF7ED" CornerRadius="12">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                    <Border Width="10" Height="10" Background="#F97316" CornerRadius="999" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="备份流程延迟 3 分钟。" />
+                    <TextBlock Grid.Column="2" Foreground="#C2410C" Text="P2" />
+                </Grid>
+            </Border>
+            <Border Padding="10" Background="#EFF6FF" CornerRadius="12">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                    <Border Width="10" Height="10" Background="#2563EB" CornerRadius="999" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="维护窗口将于 23:30 开始。" />
+                    <TextBlock Grid.Column="2" Foreground="#1D4ED8" Text="信息" />
+                </Grid>
+            </Border>
         </StackPanel>
-    </Grid>
+    </Border>
 </UserControl>
+

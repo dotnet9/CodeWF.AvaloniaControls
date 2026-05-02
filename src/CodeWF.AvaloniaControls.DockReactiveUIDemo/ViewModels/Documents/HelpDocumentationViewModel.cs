@@ -1,4 +1,4 @@
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Core;
 using Dock.Model.ReactiveUI.Controls;
@@ -26,7 +26,7 @@ public class HelpDocumentationViewModel : Document
     {
         get;
         set => this.RaiseAndSetIfChanged(ref field, value);
-    }
+    } = string.Empty;
 
     public void RaiseLoadHostHandler(ContentControl control)
     {
@@ -45,12 +45,14 @@ public class HelpDocumentationViewModel : Document
         {
             exe = Path.Combine(Directory.GetCurrentDirectory(), "CodeWF.AvaloniaControls.DockReactiveUIDemo");
         }
+
         Tip = exe;
         if (!File.Exists(exe))
         {
-            Tip += $"：文件不存在";
+            Tip += "：未找到可执行文件";
             return;
         }
+
         _embedWindow = new ProcessEmbedHost(exe, Path.GetDirectoryName(exe), string.Empty);
         control.Content = _embedWindow;
     }
@@ -62,3 +64,4 @@ public class HelpDocumentationViewModel : Document
         return base.OnClose();
     }
 }
+

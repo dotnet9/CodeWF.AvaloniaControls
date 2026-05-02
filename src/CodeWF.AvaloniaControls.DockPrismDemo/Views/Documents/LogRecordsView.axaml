@@ -1,15 +1,52 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockPrismDemo.ViewModels.Documents"
-             x:DataType="vm:LogRecordsViewModel" x:CompileBindings="True"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:LogRecordsViewModel"
+             x:CompileBindings="True"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.DockPrismDemo.Views.Documents.LogRecordsView">
+    <ScrollViewer>
+        <StackPanel Margin="20" Spacing="16">
+            <Border Padding="24" Background="#0F172A" CornerRadius="20">
+                <StackPanel Spacing="8">
+                    <TextBlock FontSize="28" FontWeight="Bold" Foreground="White" Text="{Binding Title}" />
+                    <TextBlock Foreground="#CBD5E1"
+                               Text="在一个适合 Dock 页签的布局中展示结构化事件、运维反馈和发布审计记录。" />
+                </StackPanel>
+            </Border>
 
-    <StackPanel>
-        <TextBlock Text="{Binding Title}" />
-    </StackPanel>
+            <Border Padding="18" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="16">
+                <StackPanel Spacing="12">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <TextBlock FontWeight="SemiBold" Text="10:02:15" />
+                        <TextBlock Grid.Column="1" Text="窗口宿主已注册，文档上下文已恢复。" />
+                        <Border Grid.Column="2" Padding="8,4" Background="#DCFCE7" CornerRadius="999">
+                            <TextBlock Foreground="#166534" Text="信息" />
+                        </Border>
+                    </Grid>
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <TextBlock FontWeight="SemiBold" Text="10:04:31" />
+                        <TextBlock Grid.Column="1" Text="用户请求在独立窗口中进行文档对比。" />
+                        <Border Grid.Column="2" Padding="8,4" Background="#DBEAFE" CornerRadius="999">
+                            <TextBlock Foreground="#1D4ED8" Text="跟踪" />
+                        </Border>
+                    </Grid>
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <TextBlock FontWeight="SemiBold" Text="10:07:02" />
+                        <TextBlock Grid.Column="1" Text="启动迁移过程中已替换过期布局快照。" />
+                        <Border Grid.Column="2" Padding="8,4" Background="#FEF3C7" CornerRadius="999">
+                            <TextBlock Foreground="#92400E" Text="警告" />
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
+

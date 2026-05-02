@@ -18,7 +18,7 @@ public interface INativeWindowHandle : IPlatformHandle, INativeControlHostDestro
     /// <summary>
     /// 句柄描述符
     /// </summary>
-    new string? Descriptor { get; }
+    string? Descriptor { get; }
 
     /// <summary>
     /// 销毁窗口句柄

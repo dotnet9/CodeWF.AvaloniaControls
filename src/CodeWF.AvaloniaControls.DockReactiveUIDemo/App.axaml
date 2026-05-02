@@ -1,16 +1,18 @@
-<Application
+﻿<Application
     x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.App"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:codewf="https://codewf.com"
+    xmlns:fluent="clr-namespace:Avalonia.Themes.Fluent;assembly=Avalonia.Themes.Fluent"
     xmlns:local="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo"
-    xmlns:semi="https://irihi.tech/semi"
-    xmlns:u-semi="https://irihi.tech/ursa/themes/semi">
+    xmlns:uSemi="https://irihi.tech/ursa/themes/semi"
+    xmlns:semi="https://irihi.tech/semi">
     <Application.DataTemplates>
         <local:ViewLocator />
     </Application.DataTemplates>
     <Application.Resources>
         <ResourceDictionary>
+            <x:Double x:Key="ScrollBarSize">22</x:Double>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <ControlRecycling x:Key="ControlRecyclingKey" TryToUseIdAsKey="True" />
@@ -19,12 +21,36 @@
         </ResourceDictionary>
     </Application.Resources>
     <Application.Styles>
+        <fluent:FluentTheme />
         <semi:SemiTheme Locale="zh-CN" />
-        <u-semi:SemiTheme Locale="zh-CN" />
+        <uSemi:SemiTheme Locale="zh-CN" />
         <semi:DockSemiTheme />
-        <semi:DataGridSemiTheme />
         <codewf:DockCodeWFTheme />
         <StyleInclude Source="Index.axaml" />
+        <!-- 无障碍滚动条：默认常显且加宽，方便老年用户识别和拖动。 -->
+        <Style Selector="ScrollViewer">
+            <Setter Property="AllowAutoHide" Value="False" />
+        </Style>
+        <Style Selector="ScrollBar">
+            <Setter Property="AllowAutoHide" Value="False" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="ScrollBar:vertical">
+            <Setter Property="IsExpanded" Value="True" />
+            <Setter Property="Width" Value="22" />
+            <Setter Property="MinWidth" Value="22" />
+        </Style>
+        <Style Selector="ScrollBar:horizontal">
+            <Setter Property="IsExpanded" Value="True" />
+            <Setter Property="Height" Value="22" />
+            <Setter Property="MinHeight" Value="22" />
+        </Style>
+        <Style Selector="ScrollBar:vertical /template/ Thumb">
+            <Setter Property="MinWidth" Value="14" />
+        </Style>
+        <Style Selector="ScrollBar:horizontal /template/ Thumb">
+            <Setter Property="MinHeight" Value="14" />
+        </Style>
         <Style Selector="DockControl">
             <Setter Property="(ControlRecyclingDataTemplate.ControlRecycling)" 
                     Value="{StaticResource ControlRecyclingKey}" />
@@ -35,13 +61,14 @@
             <TrayIcon Icon="/Assets/logo.ico" Clicked="OpenMainWindow_Clicked" >
                 <TrayIcon.Menu>
                     <NativeMenu>
-                        <NativeMenuItem Header="Test App" />
-                        <NativeMenuItem Header="Show MainWindow" Click="OpenMainWindow_Clicked" />
+                        <NativeMenuItem Header="测试应用" />
+                        <NativeMenuItem Header="显示主窗口" Click="OpenMainWindow_Clicked" />
                         <NativeMenuItemSeparator />
-                        <NativeMenuItem Header="Exit" Click="Exit_Clicked" />
+                        <NativeMenuItem Header="退出" Click="Exit_Clicked" />
                     </NativeMenu>
                 </TrayIcon.Menu>
             </TrayIcon>
         </TrayIcons>
     </TrayIcon.Icons>
 </Application>
+

@@ -17,8 +17,12 @@ public partial class App : PrismApplication
     protected override AvaloniaObject CreateShell()
     {
 #if DEBUG
-        this.AttachDevTools();
+        this.AttachDeveloperTools();
 #endif
         return Container.Resolve<MainWindow>();
+    }
+
+    protected override void RegisterTypes(IContainerRegistry containerRegistry)
+    {
     }
 }

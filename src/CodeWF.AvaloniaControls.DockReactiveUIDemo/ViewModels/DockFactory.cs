@@ -1,4 +1,4 @@
-﻿using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
+using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.Models.Documents;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents.Homes;
@@ -17,11 +17,11 @@ public class DockFactory : Factory
 {
     private IRootDock? _rootDock;
     private IDocumentDock? _documentDock;
+
     public const string DocumentsKey = "Documents";
 
-
-    public static List<Document> Documents { get; } = new();
-    public static List<IDockWindow> DockWindows { get; }= new();
+    public static List<Document> Documents { get; } = [];
+    public static List<IDockWindow> DockWindows { get; } = [];
 
     public override IRootDock CreateLayout()
     {
@@ -31,30 +31,23 @@ public class DockFactory : Factory
         var document3 = new UserCenterViewModel();
         var document4 = new LogRecordsViewModel();
         var document5 = new HelpDocumentationViewModel();
-        var document6 = new HelpDocumentationViewModel();
-
 
         var documentDock = new DocumentDock
         {
             IsCollapsable = false,
             ActiveDockable = document0,
-            VisibleDockables = CreateList<IDockable>(document0, document1, document2, document3, document4, document5, document6),
+            VisibleDockables = CreateList<IDockable>(document0, document1, document2, document3, document4, document5),
             CanCreateDocument = false,
-            // CanDrop = false,
             EnableWindowDrag = true,
         };
 
         var mainLayout = new ProportionalDock
         {
             Orientation = Orientation.Horizontal,
-            VisibleDockables = CreateList<IDockable>
-            (
-                documentDock
-            )
+            VisibleDockables = CreateList<IDockable>(documentDock)
         };
 
         var rootDock = CreateRootDock();
-
         rootDock.IsCollapsable = false;
         rootDock.ActiveDockable = mainLayout;
         rootDock.DefaultDockable = mainLayout;
@@ -70,12 +63,13 @@ public class DockFactory : Factory
     {
         var window = base.CreateWindowFrom(dockable);
 
-        if (window != null)
+        if (window is null)
         {
-            window.Title = "Dock Avalonia ReactiveUI Demo";
+            return null;
         }
-        DockWindows.Add(window);
 
+        window.Title = "Dock Avalonia ReactiveUI 示例";
+        DockWindows.Add(window);
         return window;
     }
 
@@ -92,15 +86,16 @@ public class DockFactory : Factory
 
                 foreach (var item in dock.VisibleDockables.ToList())
                 {
-                    if (item is IDock subDock)
+                    if (item is IDock childDock)
                     {
-                        CloseDock(subDock);
+                        CloseDock(childDock);
                     }
 
                     if (item is IDocument document)
                     {
                         EventBus.EventBus.Default.Publish(new CloseDocumentCommand(document.Id));
                     }
+
                     CloseDockable(item);
                 }
             }
@@ -108,7 +103,11 @@ public class DockFactory : Factory
             CloseDock(layout);
         }
 
-        DockWindows.Remove(window);
+        if (window is not null)
+        {
+            DockWindows.Remove(window);
+        }
+
         base.OnWindowClosed(window);
     }
 
@@ -124,7 +123,7 @@ public class DockFactory : Factory
             [nameof(UserCenterViewModel)] = () => new DemoDocument(),
         };
 
-        DockableLocator = new Dictionary<string, Func<IDockable?>>()
+        DockableLocator = new Dictionary<string, Func<IDockable?>>
         {
             [DocumentsKey] = () => _documentDock
         };

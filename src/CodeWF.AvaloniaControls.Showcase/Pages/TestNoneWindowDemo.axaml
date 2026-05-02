@@ -1,0 +1,52 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="920"
+             d:DesignHeight="520"
+             x:Class="CodeWF.AvaloniaControls.Showcase.Pages.TestNoneWindowDemo">
+    <Grid RowDefinitions="Auto,*" RowSpacing="14">
+        <Border Padding="16"
+                Background="#F8FAFC"
+                BorderBrush="#E4E9F2"
+                BorderThickness="1"
+                CornerRadius="14">
+            <StackPanel Spacing="6">
+                <TextBlock FontSize="20" FontWeight="SemiBold" Text="窗口装饰样式示例" />
+                <TextBlock Foreground="#5B6472"
+                           Text="快速对比默认原生窗口、标准 Ursa 窗口，以及常用于自定义桌面外壳的无装饰窗口变体。" />
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="14">
+            <Border Padding="18"
+                    Background="White"
+                    BorderBrush="#E4E9F2"
+                    BorderThickness="1"
+                    CornerRadius="14">
+                <StackPanel Spacing="12">
+                    <Button Content="打开原生窗口" Click="ShowNativeWindow_OnClick" />
+                    <Button Content="打开标准 Ursa 窗口" Click="ShowUrsaWindow_OnClick" />
+                    <Button Content="打开无边框 Ursa 窗口" Click="ShowUrsaWindowWithNone_OnClick" />
+                    <Button Content="打开可拖动无边框 Ursa 窗口" Click="ShowUrsaWindowWithNoneAndMove_OnClick" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1"
+                    Padding="18"
+                    Background="White"
+                    BorderBrush="#E4E9F2"
+                    BorderThickness="1"
+                    CornerRadius="14">
+                <StackPanel Spacing="10">
+                    <TextBlock FontSize="18" FontWeight="SemiBold" Text="对比重点" />
+                    <TextBlock Foreground="#64748B" Text="原生标题栏按钮与自定义标题栏渲染效果。" />
+                    <TextBlock Foreground="#64748B" Text="适用于沉浸式应用外壳的无装饰模式。" />
+                    <TextBlock Foreground="#64748B" Text="移除系统边框后窗口拖动和缩放的行为表现。" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
+

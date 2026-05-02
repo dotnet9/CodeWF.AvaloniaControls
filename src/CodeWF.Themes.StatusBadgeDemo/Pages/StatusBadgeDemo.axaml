@@ -1,0 +1,123 @@
+<UserControl
+    x:Class="CodeWF.Themes.StatusBadgeDemo.Pages.StatusBadgeDemo"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="https://codewf.com"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="600"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="c|StatusBadge">
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+        <Style Selector="TextBlock.SectionTitle">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="0,16,0,8" />
+            <Setter Property="Foreground" Value="#111827" />
+        </Style>
+        <Style Selector="TextBlock.SectionDescription">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="0,0,0,8" />
+            <Setter Property="Foreground" Value="#64748B" />
+            <Setter Property="MaxWidth" Value="760" />
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer Padding="24">
+        <StackPanel Spacing="12">
+            <TextBlock Margin="0,0,0,16"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Text="状态徽章组件展示" />
+
+            <TextBlock Classes="SectionTitle" Text="语义状态" />
+            <TextBlock Classes="SectionDescription"
+                       Text="五种标准严重级别，适合仪表板、流程表格和紧凑型监控视图中的内联状态展示。" />
+            <WrapPanel Orientation="Horizontal">
+                <c:StatusBadge Classes="Debug" FontSize="14" LeftText="调试" RightText="运行中" />
+                <c:StatusBadge Classes="Info" FontSize="14" LeftText="信息" RightText="已完成" />
+                <c:StatusBadge Classes="Warn" FontSize="14" LeftText="警告" RightText="待复核" />
+                <c:StatusBadge Classes="Error" FontSize="14" LeftText="错误" RightText="待修复" />
+                <c:StatusBadge Classes="Fatal" FontSize="14" LeftText="严重" RightText="关键" />
+            </WrapPanel>
+
+            <TextBlock Classes="SectionTitle" Text="尺寸变化" />
+            <TextBlock Classes="SectionDescription"
+                       Text="通过调整字号适配不同数据密度，从紧凑表格到更醒目的重点状态区域。" />
+            <WrapPanel Orientation="Horizontal">
+                <c:StatusBadge Classes="Debug" FontSize="10" LeftText="XS" RightText="10px" />
+                <c:StatusBadge Classes="Debug" FontSize="12" LeftText="S" RightText="12px" />
+                <c:StatusBadge Classes="Debug" FontSize="14" LeftText="M" RightText="14px" />
+                <c:StatusBadge Classes="Debug" FontSize="16" LeftText="L" RightText="16px" />
+                <c:StatusBadge Classes="Debug" FontSize="18" LeftText="XL" RightText="18px" />
+                <c:StatusBadge Classes="Debug" FontSize="20" LeftText="2XL" RightText="20px" />
+                <c:StatusBadge Classes="Debug" FontSize="24" LeftText="强调" RightText="24px" />
+            </WrapPanel>
+
+            <TextBlock Classes="SectionTitle" Text="内容长度" />
+            <TextBlock Classes="SectionDescription"
+                       Text="较长的左右文本仍然保持可读，适合展示指标值或分类说明。" />
+            <WrapPanel Orientation="Vertical">
+                <c:StatusBadge Classes="Info" FontSize="14" LeftText="短文本" RightText="1" />
+                <c:StatusBadge Classes="Info" FontSize="14" LeftText="中等标签" RightText="100" />
+                <c:StatusBadge Classes="Info" FontSize="14" LeftText="较长分类值" RightText="1,234" />
+                <c:StatusBadge Classes="Info" FontSize="14" LeftText="更长状态示例" RightText="99,876" />
+            </WrapPanel>
+
+            <TextBlock Classes="SectionTitle" Text="外观控制" />
+            <TextBlock Classes="SectionDescription"
+                       Text="可通过圆角和内边距调节出方形、圆角或胶囊型徽章，以适配不同产品语言。" />
+
+            <TextBlock FontSize="14" FontWeight="SemiBold" Text="圆角" />
+            <WrapPanel Orientation="Horizontal">
+                <c:StatusBadge Classes="Warn" CornerRadius="0" FontSize="14" LeftText="锐角" RightText="0px" />
+                <c:StatusBadge Classes="Warn" CornerRadius="2" FontSize="14" LeftText="轻圆角" RightText="2px" />
+                <c:StatusBadge Classes="Warn" CornerRadius="4" FontSize="14" LeftText="小圆角" RightText="4px" />
+                <c:StatusBadge Classes="Warn" CornerRadius="8" FontSize="14" LeftText="中圆角" RightText="8px" />
+                <c:StatusBadge Classes="Warn" CornerRadius="16" FontSize="14" LeftText="圆润" RightText="16px" />
+                <c:StatusBadge Classes="Warn" CornerRadius="999" FontSize="14" LeftText="胶囊" RightText="999" />
+            </WrapPanel>
+
+            <TextBlock FontSize="14" FontWeight="SemiBold" Text="内边距密度" />
+            <WrapPanel Orientation="Horizontal">
+                <c:StatusBadge Classes="Error" Padding="2,1" FontSize="14" LeftText="紧凑" RightText="2,1" />
+                <c:StatusBadge Classes="Error" Padding="4,2" FontSize="14" LeftText="高密度" RightText="4,2" />
+                <c:StatusBadge Classes="Error" Padding="6,3" FontSize="14" LeftText="均衡" RightText="6,3" />
+                <c:StatusBadge Classes="Error" Padding="8,4" FontSize="14" LeftText="宽松" RightText="8,4" />
+                <c:StatusBadge Classes="Error" Padding="12,6" FontSize="14" LeftText="舒展" RightText="12,6" />
+            </WrapPanel>
+
+            <TextBlock Classes="SectionTitle" Text="应用场景" />
+            <TextBlock Classes="SectionDescription"
+                       Text="下面的示例展示徽章在指标展示、系统状态和任务跟踪界面中的使用方式。" />
+
+            <TextBlock FontSize="14" FontWeight="SemiBold" Text="指标" />
+            <WrapPanel Orientation="Horizontal">
+                <c:StatusBadge Classes="Info" FontSize="14" LeftText="下载量" RightText="35.4k" />
+                <c:StatusBadge Classes="Info" FontSize="14" LeftText="活跃用户" RightText="1,287" />
+                <c:StatusBadge Classes="Info" FontSize="14" LeftText="转化率" RightText="23.7%" />
+                <c:StatusBadge Classes="Info" FontSize="14" LeftText="满意度" RightText="4.8/5" />
+            </WrapPanel>
+
+            <TextBlock FontSize="14" FontWeight="SemiBold" Text="系统状态" />
+            <WrapPanel Orientation="Horizontal">
+                <c:StatusBadge Classes="Debug" FontSize="14" LeftText="系统" RightText="运行中" />
+                <c:StatusBadge Classes="Warn" FontSize="14" LeftText="存储" RightText="空间不足" />
+                <c:StatusBadge Classes="Error" FontSize="14" LeftText="同步" RightText="失败" />
+                <c:StatusBadge Classes="Fatal" FontSize="14" LeftText="数据库" RightText="已断开" />
+            </WrapPanel>
+
+            <TextBlock FontSize="14" FontWeight="SemiBold" Text="任务跟踪" />
+            <WrapPanel Orientation="Horizontal">
+                <c:StatusBadge Classes="Info" FontSize="14" LeftText="已完成" RightText="12/20" />
+                <c:StatusBadge Classes="Warn" FontSize="14" LeftText="进行中" RightText="5/20" />
+                <c:StatusBadge Classes="Error" FontSize="14" LeftText="已逾期" RightText="3/20" />
+            </WrapPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
+

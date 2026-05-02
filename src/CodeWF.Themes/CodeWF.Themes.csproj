@@ -8,28 +8,21 @@
 		<Authors>沙漠尽头的狼</Authors>
 		<PackageId>CodeWF.Themes</PackageId>
 		<PackageIcon>codewf.png</PackageIcon>
+		<PackageReadmeFile>PACKAGE_README.md</PackageReadmeFile>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<Platforms>AnyCPU;x64;x86</Platforms>
-	</PropertyGroup>
-	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
-		<IsAotCompatible>true</IsAotCompatible>
-	</PropertyGroup>
-	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))">
-		<IsAotCompatible>true</IsAotCompatible>
-	</PropertyGroup>
-	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))">
-		<IsAotCompatible>true</IsAotCompatible>
-	</PropertyGroup>
-	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net11.0'))">
 		<IsAotCompatible>true</IsAotCompatible>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Include="PACKAGE_README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\CodeWF\CodeWF.csproj" />

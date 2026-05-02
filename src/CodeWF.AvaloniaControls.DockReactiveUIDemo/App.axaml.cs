@@ -22,10 +22,14 @@ public partial class App : PrismApplication
     {
         Instance = this;
 #if DEBUG
-        this.AttachDevTools();
+        this.AttachDeveloperTools();
 #endif
         MainWin = Container.Resolve<MainWindow>();
         return MainWin;
+    }
+
+    protected override void RegisterTypes(IContainerRegistry containerRegistry)
+    {
     }
 
     private void OpenMainWindow_Clicked(object? sender, EventArgs e)

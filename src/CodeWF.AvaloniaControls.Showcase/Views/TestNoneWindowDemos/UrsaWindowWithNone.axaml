@@ -1,0 +1,23 @@
+<u:UrsaWindow xmlns="https://github.com/avaloniaui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:u="https://irihi.tech/ursa"
+              mc:Ignorable="d"
+              d:DesignWidth="800"
+              d:DesignHeight="450"
+              Width="460"
+              Height="320"
+              WindowDecorations="None"
+              x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.UrsaWindowWithNone"
+              Title="无边框 Ursa 窗口">
+    <Border Background="#F8FAFC" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="14" Padding="24">
+        <StackPanel Spacing="8" VerticalAlignment="Center">
+            <TextBlock FontSize="22" FontWeight="Bold" Text="无边框 Ursa 窗口" />
+            <TextBlock Foreground="#64748B"
+                       Text="系统边框被完全移除，这种模式适合沉浸式外壳、启动页或拥有自定义顶部栏和拖动区域的品牌化应用。" />
+        </StackPanel>
+    </Border>
+</u:UrsaWindow>
+
+

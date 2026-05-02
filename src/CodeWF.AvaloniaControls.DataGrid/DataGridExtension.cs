@@ -31,6 +31,7 @@ public static class DataGridExtension
             var sortDescription = view.SortDescriptions.FirstOrDefault(d => d.PropertyPath == memberPath);
             if (sortDescription is not null && sortDescription.Direction == ListSortDirection.Descending)
             {
+                // 第三次点击同一列时清空排序，实现“未排序”状态。
                 view.SortDescriptions.Clear();
                 e.Handled = true;
             }
@@ -124,6 +125,7 @@ public static class DataGridExtension
     {
         if (textBlock.Tag != null) return;
 
+        // 使用 Tag 作为一次性标记，避免重复订阅同一个 TextBlock。
         textBlock.Tag = true;
         textBlock.TextTrimming = TextTrimming.CharacterEllipsis;
         //textBlock.FontFamily = FontFamily.Default;

@@ -1,15 +1,47 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockPrismDemo.ViewModels.Documents"
-             x:DataType="vm:SystemSettingsViewModel" x:CompileBindings="True"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:SystemSettingsViewModel"
+             x:CompileBindings="True"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
              x:Class="CodeWF.AvaloniaControls.DockPrismDemo.Views.Documents.SystemSettingsView">
+    <ScrollViewer>
+        <StackPanel Margin="20" Spacing="16">
+            <Border Padding="24" Background="#111827" CornerRadius="20">
+                <StackPanel Spacing="8">
+                    <TextBlock FontSize="28" FontWeight="Bold" Foreground="White" Text="{Binding Title}" />
+                    <TextBlock Foreground="#D1D5DB"
+                               Text="这是一个更像真实产品界面的设置文档页，而不只是占位页签。" />
+                </StackPanel>
+            </Border>
 
-    <StackPanel>
-        <TextBlock Text="{Binding Title}" />
-    </StackPanel>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
+                <Border Padding="18" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="16">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontWeight="SemiBold" Text="安全控制" />
+                        <CheckBox IsChecked="True" Content="关闭关键页签前需要确认" />
+                        <CheckBox IsChecked="True" Content="保存最后一次成功的布局快照" />
+                        <CheckBox IsChecked="False" Content="启用实验性命令路由" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Padding="18" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="16">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontWeight="SemiBold" Text="主题配置" />
+                        <ComboBox SelectedIndex="0">
+                            <ComboBoxItem Content="开源浅色" />
+                            <ComboBoxItem Content="开源深色" />
+                        </ComboBox>
+                        <TextBlock Foreground="#64748B" Text="该页面刻意只使用当前依赖链路中的免费样式能力。" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
+

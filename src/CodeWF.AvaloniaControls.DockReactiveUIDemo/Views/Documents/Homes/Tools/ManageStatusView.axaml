@@ -1,15 +1,36 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents.Homes.Tools"
-             x:DataType="vm:ManageStatusViewModel" x:CompileBindings="True"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:DataType="vm:ManageStatusViewModel"
+             x:CompileBindings="True"
              x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.Homes.Tools.ManageStatusView">
-    <Grid Focusable="True">
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="{Binding Title}" Padding="2" />
-            <TextBox Text="Tool3" />
+    <Border Padding="14" Background="White" CornerRadius="16">
+        <StackPanel Spacing="12">
+            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding Title}" />
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <TextBlock Text="外壳路由服务" />
+                <Border Grid.Column="1" Padding="8,4" Background="#DCFCE7" CornerRadius="999">
+                    <TextBlock Foreground="#166534" Text="健康" />
+                </Border>
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <TextBlock Text="遥测聚合服务" />
+                <Border Grid.Column="1" Padding="8,4" Background="#FEF3C7" CornerRadius="999">
+                    <TextBlock Foreground="#92400E" Text="需关注" />
+                </Border>
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <TextBlock Text="外部同步网关" />
+                <Border Grid.Column="1" Padding="8,4" Background="#FEE2E2" CornerRadius="999">
+                    <TextBlock Foreground="#B91C1C" Text="待检查" />
+                </Border>
+            </Grid>
         </StackPanel>
-    </Grid>
+    </Border>
 </UserControl>
+

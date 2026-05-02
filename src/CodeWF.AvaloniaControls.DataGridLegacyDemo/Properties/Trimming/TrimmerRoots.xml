@@ -1,0 +1,3 @@
+<linker>
+  <assembly fullname="CodeWF.AvaloniaControls.DataGridLegacyDemo" preserve="all" />
+</linker>

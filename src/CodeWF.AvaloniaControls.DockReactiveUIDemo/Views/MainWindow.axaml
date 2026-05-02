@@ -1,4 +1,4 @@
-<u:UrsaWindow
+﻿<u:UrsaWindow
     x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,9 +8,12 @@
     xmlns:views="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.Views"
     xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels"
     x:DataType="vm:MainWindowViewModel"
-    Width="1000" Height="800" WindowStartupLocation="CenterScreen"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    Width="1240"
+    Height="880"
+    FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+    WindowStartupLocation="CenterScreen"
+    d:DesignHeight="880"
+    d:DesignWidth="1240"
     Icon="/Assets/logo.ico"
     mc:Ignorable="d"
     Title="{Binding Title}">
@@ -18,50 +21,87 @@
         <Color x:Key="CaptionButtonForeground">#FFFFFF</Color>
     </u:UrsaWindow.Resources>
     <u:UrsaWindow.LeftContent>
-        <Grid
-            Height="40"
-            Margin="3"
-            ColumnDefinitions="*, Auto, *">
-            <Image
-                Width="24"
-                Height="24"
-                Margin="8"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                IsHitTestVisible="False"
-                RenderOptions.BitmapInterpolationMode="HighQuality"
-                Source="/Assets/logo.png" />
-            <TextBlock
-                Grid.Column="1"
-                VerticalAlignment="Center"
-                FontSize="14"
-                Foreground="White"
-                IsHitTestVisible="False"
-                Text="{Binding Title}" />
+        <Grid Height="40" Margin="3" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="10">
+            <Image Width="24"
+                   Height="24"
+                   Margin="8,0,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   IsHitTestVisible="False"
+                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                   Source="/Assets/logo.png" />
+            <TextBlock Grid.Column="1"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       IsHitTestVisible="False"
+                       Text="{Binding Title}" />
         </Grid>
     </u:UrsaWindow.LeftContent>
     <u:UrsaWindow.RightContent>
         <views:TitleBarRightContentView VerticalAlignment="Top" />
     </u:UrsaWindow.RightContent>
-    <Border BorderBrush="LightGray" BorderThickness="1">
-        <Grid RowDefinitions="40 * Auto">
-            <Border Background="#1890FF" Grid.RowSpan="2" />
-            <Border Grid.Row="1">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="50% 0%" EndPoint="50% 100%">
-                        <GradientStop Color="#1890FF" Offset="0" />
-                        <GradientStop Color="#FFFFFF" Offset="100" />
-                    </LinearGradientBrush>
-                </Border.Background>
+    <Border Background="#F3F6FB">
+        <Grid Margin="22" RowDefinitions="Auto,*" RowSpacing="18">
+            <Border Padding="28"
+                    CornerRadius="24"
+                    Background="#111827">
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="18">
+                    <StackPanel Spacing="8">
+                        <TextBlock FontSize="34"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   Text="ReactiveUI 运维工作区" />
+                        <TextBlock MaxWidth="760"
+                                   Foreground="#BFDBFE"
+                                   Text="这是一个适合监控类桌面工作区的 Dock + ReactiveUI 示例，将总览面板、活动流、工具面板和可拆分文档整合在同一外壳中。" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Top">
+                        <Border Padding="12,6" Background="#1D4ED855" CornerRadius="999">
+                            <TextBlock Foreground="White" FontWeight="SemiBold" Text="ReactiveUI" />
+                        </Border>
+                        <Border Padding="12,6" Background="#0F766E55" CornerRadius="999">
+                            <TextBlock Foreground="White" FontWeight="SemiBold" Text="Dock 工作区" />
+                        </Border>
+                        <Border Padding="12,6" Background="#B4530955" CornerRadius="999">
+                            <TextBlock Foreground="White" FontWeight="SemiBold" Text="Ursa 标题栏" />
+                        </Border>
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2" ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                        <Border Padding="16" Background="#F8FBFF" CornerRadius="16">
+                            <StackPanel Spacing="6">
+                                <TextBlock FontWeight="SemiBold" Text="总览看板" />
+                                <TextBlock Foreground="#64748B" Text="适合承载 KPI 卡片、实时状态和一目了然的运行概览。" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1" Padding="16" Background="#F8FBFF" CornerRadius="16">
+                            <StackPanel Spacing="6">
+                                <TextBlock FontWeight="SemiBold" Text="文档与工具" />
+                                <TextBlock Foreground="#64748B" Text="将日志、设置、用户信息和重点数据任务作为可拆分文档保留下来。" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="2" Padding="16" Background="#F8FBFF" CornerRadius="16">
+                            <StackPanel Spacing="6">
+                                <TextBlock FontWeight="SemiBold" Text="开源基线" />
+                                <TextBlock Foreground="#64748B" Text="在坚持免费依赖链路的同时保持可信的产品化视觉表现。" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Grid>
             </Border>
 
-            <Border Grid.Row="1" Margin="20 0" Background="#66FFFFFF" CornerRadius="10">
+            <Border Grid.Row="1"
+                    Background="White"
+                    BorderBrush="#DCE3EE"
+                    BorderThickness="1"
+                    CornerRadius="22"
+                    Padding="18">
                 <DockControl x:Name="DockControl" Layout="{Binding Layout}" />
-            </Border>
-
-            <Border Name="TaskPanel" Grid.Row="2">
-				<TextBlock Text="{Binding Title}" Margin="20 4" VerticalAlignment="Center"/>
             </Border>
         </Grid>
     </Border>
 </u:UrsaWindow>
+

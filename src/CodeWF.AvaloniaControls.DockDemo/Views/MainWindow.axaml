@@ -10,54 +10,94 @@
     xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockDemo.ViewModels"
     prism:ViewModelLocator.AutoWireViewModel="True"
     x:DataType="vm:MainWindowViewModel"
-    Width="1000" Height="800" WindowStartupLocation="CenterScreen"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    Width="1200"
+    Height="860"
+    FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+    WindowStartupLocation="CenterScreen"
+    d:DesignHeight="860"
+    d:DesignWidth="1200"
     Icon="/Assets/logo.ico"
     mc:Ignorable="d"
     Title="{Binding Title}">
     <u:UrsaWindow.Resources>
         <Color x:Key="CaptionButtonForeground">#FFFFFF</Color>
+        <SolidColorBrush x:Key="HeroTextBrush">#D5EAFE</SolidColorBrush>
     </u:UrsaWindow.Resources>
+
     <u:UrsaWindow.LeftContent>
-        <Grid
-            Height="40"
-            Margin="3"
-            ColumnDefinitions="*, Auto, *">
-            <Image
-                Width="24"
-                Height="24"
-                Margin="8"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                IsHitTestVisible="False"
-                RenderOptions.BitmapInterpolationMode="HighQuality"
-                Source="/Assets/logo.png" />
-            <TextBlock
-                Grid.Column="1"
-                VerticalAlignment="Center"
-                FontSize="14"
-                Foreground="White"
-                IsHitTestVisible="False"
-                Text="{Binding Title}" />
+        <Grid Height="40" Margin="3" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="10">
+            <Image Width="24"
+                   Height="24"
+                   Margin="8,0,0,0"
+                   VerticalAlignment="Center"
+                   IsHitTestVisible="False"
+                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                   Source="/Assets/logo.png" />
+            <TextBlock Grid.Column="1"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       IsHitTestVisible="False"
+                       Text="{Binding Title}" />
         </Grid>
     </u:UrsaWindow.LeftContent>
-    <Border BorderBrush="LightGray" BorderThickness="1">
-        <Grid RowDefinitions="40 * Auto">
-            <Border Background="#1890FF" Grid.RowSpan="2" />
-            <Border Grid.Row="1">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="50% 0%" EndPoint="50% 100%">
-                        <GradientStop Color="#1890FF" Offset="0" />
-                        <GradientStop Color="#FFFFFF" Offset="100" />
-                    </LinearGradientBrush>
-                </Border.Background>
+
+    <Border Background="#F3F6FB">
+        <Grid RowDefinitions="Auto,*" Margin="22" RowSpacing="18">
+            <Border Padding="28"
+                    CornerRadius="24"
+                    Background="#0F172A">
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="18">
+                    <StackPanel Spacing="8">
+                        <TextBlock FontSize="34"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   Text="Dock 布局工作台示例" />
+                        <TextBlock MaxWidth="760"
+                                   Foreground="{StaticResource HeroTextBrush}"
+                                   Text="展示文档区、工具区与工作区的可停靠布局能力，适合验证后台管理端、工业桌面和多文档工具型应用的外壳设计。" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Top">
+                        <Border Padding="12,6" Background="#1D4ED855" CornerRadius="999">
+                            <TextBlock Foreground="White" FontWeight="SemiBold" Text="Dock 布局" />
+                        </Border>
+                        <Border Padding="12,6" Background="#0F766E55" CornerRadius="999">
+                            <TextBlock Foreground="White" FontWeight="SemiBold" Text="Ursa 外壳" />
+                        </Border>
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2" ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                        <Border Padding="16" Background="#F8FBFF" CornerRadius="16">
+                            <StackPanel Spacing="6">
+                                <TextBlock FontWeight="SemiBold" Text="文档区" />
+                                <TextBlock Foreground="#64748B" Text="适合承载报表、编辑器和业务详情等核心内容。" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1" Padding="16" Background="#F8FBFF" CornerRadius="16">
+                            <StackPanel Spacing="6">
+                                <TextBlock FontWeight="SemiBold" Text="工具区" />
+                                <TextBlock Foreground="#64748B" Text="用于日志、导航、监控状态和辅助操作面板。" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="2" Padding="16" Background="#F8FBFF" CornerRadius="16">
+                            <StackPanel Spacing="6">
+                                <TextBlock FontWeight="SemiBold" Text="可扩展外壳" />
+                                <TextBlock Foreground="#64748B" Text="标题栏、背景层与底部状态区都可按产品需求继续扩展。" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Grid>
             </Border>
 
-            <views:MainView Grid.Row="1" Margin="20 0" />
-
-            <Border Name="TaskPanel" Grid.Row="2">
-				<TextBlock Text="{Binding Title}" Margin="20 4" VerticalAlignment="Center"/>
+            <Border Grid.Row="1"
+                    Background="White"
+                    BorderBrush="#DCE3EE"
+                    BorderThickness="1"
+                    CornerRadius="22"
+                    Padding="18">
+                <views:MainView />
             </Border>
         </Grid>
     </Border>

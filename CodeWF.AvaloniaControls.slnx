@@ -1,0 +1,40 @@
+<Solution>
+  <Folder Name="/samples/" />
+  <Folder Name="/samples/datagrid/">
+    <Project Path="src/CodeWF.AvaloniaControls.DataGridLegacyDemo/CodeWF.AvaloniaControls.DataGridLegacyDemo.csproj" />
+    <Project Path="src/CodeWF.AvaloniaControls.ProDataGridPerformanceDemo/CodeWF.AvaloniaControls.ProDataGridPerformanceDemo.csproj" />
+    <Project Path="src/CodeWF.AvaloniaControls.ProDataGridShowcase/CodeWF.AvaloniaControls.ProDataGridShowcase.csproj" />
+    <Project Path="src/CodeWF.AvaloniaControls.TreeDataGridLegacyDemo/CodeWF.AvaloniaControls.TreeDataGridLegacyDemo.csproj" />
+  </Folder>
+  <Folder Name="/samples/docking/">
+    <Project Path="src/CodeWF.AvaloniaControls.DockDemo/CodeWF.AvaloniaControls.DockDemo.csproj" />
+    <Project Path="src/CodeWF.AvaloniaControls.DockPrismDemo/CodeWF.AvaloniaControls.DockPrismDemo.csproj" />
+    <Project Path="src/CodeWF.AvaloniaControls.DockReactiveUIDemo/CodeWF.AvaloniaControls.DockReactiveUIDemo.csproj" />
+  </Folder>
+  <Folder Name="/samples/showcase/">
+    <Project Path="src/CodeWF.AvaloniaControls.FluentStarterDemo/CodeWF.AvaloniaControls.FluentStarterDemo.csproj" />
+    <Project Path="src/CodeWF.AvaloniaControls.Showcase/CodeWF.AvaloniaControls.Showcase.csproj" />
+    <Project Path="src/CodeWF.Themes.StatusBadgeDemo/CodeWF.Themes.StatusBadgeDemo.csproj" />
+  </Folder>
+  <Folder Name="/solution/">
+    <File Path=".gitignore" />
+    <File Path="CHANGELOG.md" />
+    <File Path="codewf.png" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="pack.bat" />
+    <File Path="publish.bat" />
+    <File Path="Publish.Common.pubxml" />
+    <File Path="publish_all.bat" />
+    <File Path="README.md" />
+    <File Path="README.zh-CN.md" />
+    <File Path="UpdateAssemblyVersion.ps1" />
+  </Folder>
+  <Project Path="src/CodeWF.AvaloniaControls.DataGrid/CodeWF.AvaloniaControls.DataGrid.csproj" />
+  <Project Path="src/CodeWF.AvaloniaControls.Dock/CodeWF.AvaloniaControls.Dock.csproj" />
+  <Project Path="src/CodeWF.AvaloniaControls.ProDataGrid/CodeWF.AvaloniaControls.ProDataGrid.csproj" />
+  <Project Path="src/CodeWF.AvaloniaControls/CodeWF.AvaloniaControls.csproj" />
+  <Project Path="src/CodeWF.Themes/CodeWF.Themes.csproj" />
+  <Project Path="src/CodeWF/CodeWF.csproj" />
+</Solution>

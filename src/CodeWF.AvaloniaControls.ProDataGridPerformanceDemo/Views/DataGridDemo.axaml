@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:CodeWF.AvaloniaControls.ProDataGridPerformanceDemo.ViewModels"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:DataType="vm:DataGridDemoViewModel"
+             x:CompileBindings="True"
+             x:Class="CodeWF.AvaloniaControls.ProDataGridPerformanceDemo.Views.DataGridDemo">
+    <Grid RowDefinitions="Auto,*" RowSpacing="14">
+        <Border Padding="16"
+                Background="#F8FAFC"
+                BorderBrush="#E4E9F2"
+                BorderThickness="1"
+                CornerRadius="14">
+            <StackPanel Spacing="6">
+                <TextBlock FontSize="20" FontWeight="SemiBold" Text="基础交互样例" />
+                <TextBlock Foreground="#5B6472"
+                           Text="使用 12,000 行数据验证 ProDataGrid 在 Avalonia 12 主线上的基础滚动、排序和列宽行为，作为后续大数据页签切换场景的基线。" />
+                <TextBlock Foreground="#334155"
+                           FontWeight="SemiBold"
+                           Text="{Binding Count, StringFormat=当前已载入 {0:N0} 行数据}" />
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1"
+                Background="White"
+                BorderBrush="#E4E9F2"
+                BorderThickness="1"
+                CornerRadius="14"
+                Padding="0">
+            <DataGrid x:Name="ProcessDataGrid" ItemsSource="{Binding Items}" />
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,97 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:codewf="https://codewf.com"
+             mc:Ignorable="d"
+             d:DesignWidth="920"
+             d:DesignHeight="560"
+             x:Class="CodeWF.AvaloniaControls.Showcase.Pages.StatusCardDemo">
+    <UserControl.Styles>
+        <Style Selector="TextBlock.Caption">
+            <Setter Property="Foreground" Value="#64748B" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="Auto,*" RowSpacing="14">
+        <Border Padding="16"
+                Background="#F8FAFC"
+                BorderBrush="#E4E9F2"
+                BorderThickness="1"
+                CornerRadius="14">
+            <StackPanel Spacing="6">
+                <TextBlock FontSize="20" FontWeight="SemiBold" Text="状态卡片" />
+                <TextBlock Classes="Caption"
+                           Text="适用于运行健康、告警和服务状态的紧凑卡片形式，下面展示同一组件在不同严重级别和密度下的表现。" />
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1" ColumnDefinitions="2*,*" ColumnSpacing="14">
+            <WrapPanel ItemWidth="240" ItemHeight="122" Orientation="Horizontal">
+                <codewf:StatusCard Width="220"
+                                   IconPath="avares://CodeWF.AvaloniaControls.Showcase/Assets/warning.png"
+                                   TopText="网关"
+                                   TopTextFontSize="11"
+                                   BottomText="调试"
+                                   BottomTextFontSize="14"
+                                   Kind="{x:Static codewf:StatusLabelKind.Debug}" />
+                <codewf:StatusCard Width="220"
+                                   IconPath="avares://CodeWF.AvaloniaControls.Showcase/Assets/slot-machine.png"
+                                   TopText="采集器"
+                                   BottomText="信息"
+                                   Kind="{x:Static codewf:StatusLabelKind.Info}" />
+                <codewf:StatusCard Width="220"
+                                   IconPath="avares://CodeWF.AvaloniaControls.Showcase/Assets/warning.png"
+                                   IconWidth="36"
+                                   IconMargin="20 16 16 16"
+                                   TopText="存储"
+                                   TopTextFontSize="16"
+                                   TopTextMargin="10 10 10 5"
+                                   BottomText="警告"
+                                   BottomTextFontSize="20"
+                                   BottomTextMargin="10 5 10 10"
+                                   CornerRadius="8"
+                                   Kind="{x:Static codewf:StatusLabelKind.Warn}" />
+                <codewf:StatusCard Width="220"
+                                   IconPath="avares://CodeWF.AvaloniaControls.Showcase/Assets/slot-machine.png"
+                                   IconWidth="48"
+                                   IconMargin="24 16 16 16"
+                                   TopText="计算节点"
+                                   TopTextFontSize="20"
+                                   TopTextMargin="16 16 16 8"
+                                   BottomText="错误"
+                                   BottomTextFontSize="24"
+                                   BottomTextMargin="16 8 16 16"
+                                   CornerRadius="12"
+                                   Kind="{x:Static codewf:StatusLabelKind.Error}" />
+                <codewf:StatusCard Width="220"
+                                   IconPath="avares://CodeWF.AvaloniaControls.Showcase/Assets/warning.png"
+                                   IconWidth="36"
+                                   IconMargin="20 16 16 16"
+                                   TopText="数据库"
+                                   TopTextFontSize="16"
+                                   TopTextMargin="10 10 10 5"
+                                   BottomText="严重"
+                                   BottomTextFontSize="20"
+                                   BottomTextMargin="10 5 10 10"
+                                   CornerRadius="8"
+                                   Kind="{x:Static codewf:StatusLabelKind.Fatal}" />
+            </WrapPanel>
+
+            <Border Grid.Column="1"
+                    Padding="18"
+                    Background="#FFFFFF"
+                    BorderBrush="#E4E9F2"
+                    BorderThickness="1"
+                    CornerRadius="14">
+                <StackPanel Spacing="10">
+                    <TextBlock FontSize="18" FontWeight="SemiBold" Text="推荐用法" />
+                    <TextBlock Classes="Caption" Text="当状态信息需要比轻量徽章或标签更强的视觉权重时，优先使用卡片。" />
+                    <TextBlock Classes="Caption" Text="适合仪表板、服务总览、集群节点和健康面板。" />
+                    <TextBlock Classes="Caption" Text="更大的图标和字体组合适合告警状态以及值班监控大屏场景。" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
+

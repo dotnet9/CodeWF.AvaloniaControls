@@ -1,0 +1,23 @@
+<u:UrsaWindow xmlns="https://github.com/avaloniaui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:u="https://irihi.tech/ursa"
+              mc:Ignorable="d"
+              d:DesignWidth="800"
+              d:DesignHeight="450"
+              Width="460"
+              Height="320"
+              WindowDecorations="None"
+              x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.UrsaWindowWithNoneAndMove"
+        Title="无边框可移动窗口">
+    <Border Background="#F8FAFC" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="14" Padding="24">
+        <StackPanel Spacing="8" VerticalAlignment="Center">
+            <TextBlock FontSize="22" FontWeight="Bold" Text="无边框且可拖动" />
+            <TextBlock Foreground="#64748B"
+                       Text="当你需要完全自定义外观，同时保留熟悉的桌面窗口拖动与缩放行为时，可使用此变体。" />
+        </StackPanel>
+    </Border>
+</u:UrsaWindow>
+
+

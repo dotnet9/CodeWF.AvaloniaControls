@@ -1,0 +1,94 @@
+<Window
+    x:Class="CodeWF.AvaloniaControls.DataGridLegacyDemo.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width="1380"
+    Height="920"
+    Background="#F4F7FB"
+    FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+    Title="DataGrid 免费开源版切换压力演示">
+    <Window.Styles>
+        <Style Selector="Border.Panel">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#DCE3EE" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="20" />
+        </Style>
+    </Window.Styles>
+
+    <Grid Margin="22" RowDefinitions="Auto,Auto,*" RowSpacing="18">
+        <Border Classes="Panel" Padding="28" Background="#0F172A">
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="18">
+                <StackPanel Spacing="8">
+                    <TextBlock FontSize="32" FontWeight="Bold" Foreground="White" Text="DataGrid 大数据量页签切换对比" />
+                    <TextBlock MaxWidth="820"
+                               Foreground="#CBD5E1"
+                               Text="本示例固定使用 Avalonia 11 与最后一个免费开源 DataGrid 链路，专门放大多页签常驻大表格时的切换卡顿问题，作为 TreeDataGrid 示例的对照组。" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Top">
+                    <Border Padding="12,6" Background="#1D4ED855" CornerRadius="999">
+                        <TextBlock Foreground="White" FontWeight="SemiBold" Text="Avalonia 11.3.7" />
+                    </Border>
+                    <Border Padding="12,6" Background="#B4530955" CornerRadius="999">
+                        <TextBlock Foreground="White" FontWeight="SemiBold" Text="免费 DataGrid" />
+                    </Border>
+                </StackPanel>
+                <Grid Grid.Row="1" Grid.ColumnSpan="2" ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                    <Border Padding="16" Background="#F8FBFF" CornerRadius="16">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="SemiBold" Text="切换观察点" />
+                            <TextBlock Foreground="#64748B" Text="保持多个大表格页签常驻，然后快速来回切换，观察重绘和回收压力。" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="1" Padding="16" Background="#F8FBFF" CornerRadius="16">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="SemiBold" Text="数据量" />
+                            <TextBlock Foreground="#64748B" Text="从六万行逐步放大到十八万行，便于稳定复现页签切换压力。" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="2" Padding="16" Background="#F8FBFF" CornerRadius="16">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="SemiBold" Text="扩展能力" />
+                            <TextBlock Foreground="#64748B" Text="保留三态排序与智能提示，方便继续验证你自己的扩展方法。" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*" ColumnSpacing="12">
+            <Border Padding="16" Background="#F8FBFF" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="16">
+                <StackPanel Spacing="6">
+                    <TextBlock FontWeight="SemiBold" Text="六万行场景" />
+                    <TextBlock x:Name="ScenarioOneSummary" Foreground="#64748B" Text="准备中..." />
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" Padding="16" Background="#F8FBFF" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="16">
+                <StackPanel Spacing="6">
+                    <TextBlock FontWeight="SemiBold" Text="十二万行场景" />
+                    <TextBlock x:Name="ScenarioTwoSummary" Foreground="#64748B" Text="准备中..." />
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="2" Padding="16" Background="#F8FBFF" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="16">
+                <StackPanel Spacing="6">
+                    <TextBlock FontWeight="SemiBold" Text="十八万行场景" />
+                    <TextBlock x:Name="ScenarioThreeSummary" Foreground="#64748B" Text="准备中..." />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" Classes="Panel" Padding="14">
+            <TabControl>
+                <TabItem Header="六万行切换">
+                    <DataGrid x:Name="ScenarioOneDataGrid" />
+                </TabItem>
+                <TabItem Header="十二万行切换">
+                    <DataGrid x:Name="ScenarioTwoDataGrid" />
+                </TabItem>
+                <TabItem Header="十八万行切换">
+                    <DataGrid x:Name="ScenarioThreeDataGrid" />
+                </TabItem>
+            </TabControl>
+        </Border>
+    </Grid>
+</Window>

@@ -4,6 +4,5 @@
       <ResourceInclude Source="HostWindow.axaml" />
       <ResourceInclude Source="DocumentControl.axaml" />
       <ResourceInclude Source="DocumentTabStripItem.axaml" />
-      <ResourceInclude Source="MessageBox.axaml" />
   </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

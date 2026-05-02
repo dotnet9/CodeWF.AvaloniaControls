@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="using:CodeWF.AvaloniaControls.ProDataGridPerformanceDemo.Views"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:Class="CodeWF.AvaloniaControls.ProDataGridPerformanceDemo.Views.DocumentWorkspaceView">
+    <Grid RowDefinitions="Auto,*" RowSpacing="14">
+        <Border Padding="16"
+                Background="#F8FAFC"
+                BorderBrush="#E4E9F2"
+                BorderThickness="1"
+                CornerRadius="14">
+            <StackPanel Spacing="6">
+                <TextBlock FontSize="20" FontWeight="SemiBold" Text="文档工作区切换" />
+                <TextBlock Foreground="#5B6472"
+                           Text="模拟 Dock 或多文档工作区常见的“多个表格文档常驻内存、频繁切换前台”的场景，重点观察切换时是否出现明显顿挫。" />
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1"
+                Background="White"
+                BorderBrush="#E4E9F2"
+                BorderThickness="1"
+                CornerRadius="14"
+                Padding="14">
+            <TabControl>
+                <TabItem Header="产线总览">
+                    <views:LargeDataGridView HeaderTitle="产线总览文档"
+                                             HeaderDescription="90,000 行实时监控数据，模拟总览页签常驻。"
+                                             RowCount="90000"
+                                             Seed="31" />
+                </TabItem>
+                <TabItem Header="告警追踪">
+                    <views:LargeDataGridView HeaderTitle="告警追踪文档"
+                                             HeaderDescription="110,000 行告警记录，模拟值守人员在多文档之间快速切换。"
+                                             RowCount="110000"
+                                             Seed="37" />
+                </TabItem>
+                <TabItem Header="工艺参数">
+                    <views:LargeDataGridView HeaderTitle="工艺参数文档"
+                                             HeaderDescription="140,000 行工艺参数，模拟频繁查看和横向滚动。"
+                                             RowCount="140000"
+                                             Seed="41" />
+                </TabItem>
+                <TabItem Header="执行日志">
+                    <views:LargeDataGridView HeaderTitle="执行日志文档"
+                                             HeaderDescription="160,000 行执行日志，专门压测大数据量文档回切场景。"
+                                             RowCount="160000"
+                                             Seed="47" />
+                </TabItem>
+            </TabControl>
+        </Border>
+    </Grid>
+</UserControl>

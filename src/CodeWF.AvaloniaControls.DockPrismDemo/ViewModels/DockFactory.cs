@@ -4,10 +4,10 @@ using CodeWF.AvaloniaControls.DockPrismDemo.Models.Documents;
 using CodeWF.AvaloniaControls.DockPrismDemo.ViewModels.Docks;
 using CodeWF.AvaloniaControls.DockPrismDemo.ViewModels.Documents;
 using Dock.Avalonia.Controls;
+using Dock.Model.Avalonia;
+using Dock.Model.Avalonia.Controls;
 using Dock.Model.Controls;
 using Dock.Model.Core;
-using Dock.Model.Prism;
-using Dock.Model.Prism.Controls;
 
 namespace CodeWF.AvaloniaControls.DockPrismDemo.ViewModels;
 
@@ -77,7 +77,7 @@ public class DockFactory : Factory
 
         if (window != null)
         {
-            window.Title = "Dock Avalonia Prism Demo";
+            window.Title = "Dock Avalonia Prism 示例";
         }
 
         return window;
@@ -107,3 +107,4 @@ public class DockFactory : Factory
         base.InitLayout(layout);
     }
 }
+

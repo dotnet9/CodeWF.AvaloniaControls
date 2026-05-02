@@ -12,7 +12,7 @@ public class ProgInfoViewModel : Tool
     public ProgInfoViewModel()
     {
         Id = nameof(ProgInfoViewModel);
-        Title = "程序信息";
+        Title = "进程视图";
 
         CreateTestData();
     }
@@ -21,7 +21,7 @@ public class ProgInfoViewModel : Tool
 
     private void CreateTestData()
     {
-        Task.Run(() => 
+        Task.Run(() =>
         {
             List<FirstItem> testDatas = [];
             for (var i = 1; i < 6; i++)
@@ -29,7 +29,7 @@ public class ProgInfoViewModel : Tool
                 var firstItem = new FirstItem
                 {
                     Id = i,
-                    Name = $"FirstItem {i}",
+                    Name = $"一级项 {i}",
                     SecondItems = []
                 };
                 for (var j = 1; j < 6; j++)
@@ -37,12 +37,12 @@ public class ProgInfoViewModel : Tool
                     var secondItem = new SecondItem
                     {
                         Id = j,
-                        Name = $"SecondItem {j}",
+                        Name = $"二级项 {j}",
                         ThirdItemItems = []
                     };
                     for (var k = 1; k < 6; k++)
                     {
-                        var thirdItem = new ThirdItem { Id = k, Name = $"ThirdItem {k}" };
+                        var thirdItem = new ThirdItem { Id = k, Name = $"三级项 {k}" };
                         secondItem.ThirdItemItems.Add(thirdItem);
                     }
 
@@ -52,9 +52,11 @@ public class ProgInfoViewModel : Tool
                 testDatas.Add(firstItem);
             }
 
-            Dispatcher.UIThread.Post(() => { 
+            Dispatcher.UIThread.Post(() =>
+            {
                 MultipleLevelItems?.AddRange(testDatas);
             });
         });
     }
 }
+

@@ -42,7 +42,7 @@ public static class OSHelper
     /// <returns></returns>
     public static T EnableOSVersionAwareDecorations<T>(this T window) where T : UrsaWindow
     {
-        window.SystemDecorations = IsModernWindowSystem ? SystemDecorations.Full : SystemDecorations.None;
+        window.WindowDecorations = IsModernWindowSystem ? WindowDecorations.Full : WindowDecorations.None;
         if(!IsModernWindowSystem && window.CanResize)
         {
             window.IsManagedResizerVisible = true;

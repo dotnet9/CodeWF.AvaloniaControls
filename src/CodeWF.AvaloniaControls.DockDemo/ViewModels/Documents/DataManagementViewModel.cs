@@ -5,8 +5,7 @@ namespace CodeWF.AvaloniaControls.DockDemo.ViewModels.Documents;
 
 public class DataManagementViewModel : ReactiveObject
 {
-    public string Title { get; set; } = "Documents管理";
-
+    public string Title { get; set; } = "Document Operations";
 
     public void CreateDocumentHandler()
     {

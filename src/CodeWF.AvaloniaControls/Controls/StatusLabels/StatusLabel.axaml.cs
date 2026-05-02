@@ -29,28 +29,28 @@ public partial class StatusLabel : UserControl
         set => SetValue(RightTextProperty, value);
     }
 
-    public static readonly StyledProperty<int> FontSizeProperty =
+    public new static readonly StyledProperty<int> FontSizeProperty =
         AvaloniaProperty.Register<StatusLabel, int>(nameof(FontSize), 12);
 
-    public int FontSize
+    public new int FontSize
     {
         get => GetValue(FontSizeProperty);
         set => SetValue(FontSizeProperty, value);
     }
 
-    public static readonly StyledProperty<int> CornerRadiusProperty =
+    public new static readonly StyledProperty<int> CornerRadiusProperty =
         AvaloniaProperty.Register<StatusLabel, int>(nameof(CornerRadius), 8);
 
-    public int CornerRadius
+    public new int CornerRadius
     {
         get => GetValue(CornerRadiusProperty);
         set => SetValue(CornerRadiusProperty, value);
     }
 
-    public static readonly StyledProperty<Thickness> PaddingProperty =
+    public new static readonly StyledProperty<Thickness> PaddingProperty =
         AvaloniaProperty.Register<StatusLabel, Thickness>(nameof(Padding), new Thickness(4, 1));
 
-    public Thickness Padding
+    public new Thickness Padding
     {
         get => GetValue(PaddingProperty);
         set => SetValue(PaddingProperty, value);

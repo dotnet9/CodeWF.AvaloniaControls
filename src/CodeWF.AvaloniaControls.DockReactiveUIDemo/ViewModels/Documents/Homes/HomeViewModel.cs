@@ -1,4 +1,4 @@
-﻿using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
+using CodeWF.AvaloniaControls.DockReactiveUIDemo.Commands;
 using Dock.Model.Controls;
 using Dock.Model.Core;
 using Dock.Model.ReactiveUI.Controls;
@@ -12,14 +12,12 @@ public class HomeViewModel : Document
     public HomeViewModel()
     {
         Id = nameof(HomeViewModel);
-        Title = "首页";
+        Title = "总览看板";
         CanClose = false;
-
 
         Instance = this;
         Factory = new HomeDockFactory();
-
-        Layout = Factory?.CreateLayout();
+        Layout = Factory.CreateLayout();
 
         InitLayout();
 
@@ -29,10 +27,11 @@ public class HomeViewModel : Document
         }
 
         NewLayout = ReactiveCommand.Create(ResetLayout);
-
         DockFactory.Documents.Add(this);
     }
-    public HomeDockFactory? Factory { get; }
+
+    public new HomeDockFactory Factory { get; }
+
     private IRootDock? _layout;
 
     public IRootDock? Layout
@@ -45,7 +44,6 @@ public class HomeViewModel : Document
 
     public static HomeViewModel? Instance { get; private set; }
 
-
     public void InitLayout()
     {
         if (Layout is null)
@@ -53,37 +51,29 @@ public class HomeViewModel : Document
             return;
         }
 
-        Factory?.InitLayout(Layout);
+        Factory.InitLayout(Layout);
     }
 
     public void CloseLayout()
     {
-        if (Layout is IDock dock)
+        if (Layout is IDock dock && dock.Close.CanExecute(null))
         {
-            if (dock.Close.CanExecute(null))
-            {
-                dock.Close.Execute(null);
-            }
+            dock.Close.Execute(null);
         }
     }
 
     public void ResetLayout()
     {
-        if (Layout is not null)
+        if (Layout is not null && Layout.Close.CanExecute(null))
         {
-            if (Layout.Close.CanExecute(null))
-            {
-                Layout.Close.Execute(null);
-            }
+            Layout.Close.Execute(null);
         }
 
-        var layout = Factory?.CreateLayout();
-        if (layout is not null)
-        {
-            Factory?.InitLayout(layout);
-            Layout = layout;
-        }
+        var layout = Factory.CreateLayout();
+        Factory.InitLayout(layout);
+        Layout = layout;
     }
+
     public override bool OnClose()
     {
         EventBus.EventBus.Default.Publish(new CloseDocumentCommand(Id));

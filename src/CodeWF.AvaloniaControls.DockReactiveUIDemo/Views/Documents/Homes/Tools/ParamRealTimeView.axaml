@@ -1,15 +1,30 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents.Homes.Tools"
-             x:DataType="vm:ParamRealTimeViewModel" x:CompileBindings="True"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:DataType="vm:ParamRealTimeViewModel"
+             x:CompileBindings="True"
              x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.Homes.Tools.ParamRealTimeView">
-    <Grid Focusable="True">
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="{Binding Title}" Padding="2" />
-            <TextBox Text="Tool4" />
+    <Border Padding="14" Background="White" CornerRadius="16">
+        <StackPanel Spacing="12">
+            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding Title}" />
+            <StackPanel Spacing="6">
+                <TextBlock Text="CPU 负载 42%" />
+                <ProgressBar Minimum="0" Maximum="100" Value="42" />
+            </StackPanel>
+            <StackPanel Spacing="6">
+                <TextBlock Text="内存使用率 68%" />
+                <ProgressBar Minimum="0" Maximum="100" Value="68" />
+            </StackPanel>
+            <StackPanel Spacing="6">
+                <TextBlock Text="队列深度 23%" />
+                <ProgressBar Minimum="0" Maximum="100" Value="23" />
+            </StackPanel>
         </StackPanel>
-    </Grid>
+    </Border>
 </UserControl>
+

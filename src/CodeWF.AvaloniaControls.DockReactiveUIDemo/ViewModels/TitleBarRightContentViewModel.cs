@@ -116,7 +116,9 @@ public class TitleBarRightContentViewModel : ReactiveObject
 
     private void OpenOrLocateDocument(string documentKey)
     {
-        var documents = MainWindowViewModel.Instance?.Factory?.GetDockable<IDocumentDock>(DockFactory.DocumentsKey);
+        var mainWindow = MainWindowViewModel.Instance;
+        var factory = mainWindow?.Factory;
+        var documents = factory?.GetDockable<IDocumentDock>(DockFactory.DocumentsKey);
 
         // 1、先从主窗口Tab找
         var existDocument = documents?.VisibleDockables?.OfType<IDocument>()
@@ -137,11 +139,14 @@ public class TitleBarRightContentViewModel : ReactiveObject
         
         // 3、从所有文档中查找，Dock没有完全释放，不需要重新实例化
         existDocument = DockFactory.Documents.FirstOrDefault(d => d.Id == documentKey);
+        if (factory is null || documents is null || existDocument is null || mainWindow?.Layout is null)
+        {
+            return;
+        }
 
-        MainWindowViewModel.Instance?.Factory?.AddDockable(documents, existDocument);
-        MainWindowViewModel.Instance?.Factory?.SetActiveDockable(existDocument);
-        MainWindowViewModel.Instance?.Factory?.SetFocusedDockable(MainWindowViewModel.Instance.Layout!,
-            existDocument);
+        factory.AddDockable(documents, existDocument);
+        factory.SetActiveDockable(existDocument);
+        factory.SetFocusedDockable(mainWindow.Layout, existDocument);
     }
 
     private bool IsExistInDockWindows(string documentKey)

@@ -12,10 +12,13 @@
     <!--选择的Item，未激活时的背景色-->
     <StaticResource x:Key="DocumentTabStripItemSelectedInactiveBackground"
                     ResourceKey="DocumentTabStripItemSelectedActiveBackground" />
+    <!--未选择时也给轻微底色，避免在浅色工作区里边界不清-->
+    <SolidColorBrush x:Key="DocumentTabStripItemBackground">#EEF4FB</SolidColorBrush>
+    <SolidColorBrush x:Key="DocumentTabStripItemUnselectedPointeroverBackground">#E2E8F0</SolidColorBrush>
     <!--Item前景色-->
-    <SolidColorBrush x:Key="DocumentTabStripItemForeground">White</SolidColorBrush>
+    <SolidColorBrush x:Key="DocumentTabStripItemForeground">#1E293B</SolidColorBrush>
     <!--Item悬停时的前景色-->
-    <SolidColorBrush x:Key="DocumentTabStripItemSelectedActiveForeground">#1890FF</SolidColorBrush>
+    <SolidColorBrush x:Key="DocumentTabStripItemSelectedActiveForeground">#0F172A</SolidColorBrush>
     <StaticResource x:Key="DocumentTabStripItemUnselectedPointeroverForeground"
                     ResourceKey="DocumentTabStripItemSelectedActiveForeground" />
 </ResourceDictionary>

@@ -1,0 +1,100 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="920"
+             d:DesignHeight="520"
+             x:Class="CodeWF.AvaloniaControls.Showcase.Pages.TabControlDemo">
+    <Grid RowDefinitions="Auto,*,*" RowSpacing="14">
+        <Border Padding="16"
+                Background="#F8FAFC"
+                BorderBrush="#E4E9F2"
+                BorderThickness="1"
+                CornerRadius="14">
+            <StackPanel Spacing="6">
+                <TextBlock FontSize="20" FontWeight="SemiBold" Text="TabControl 主题" />
+                <TextBlock Foreground="#5B6472"
+                           Text="基于同一套自定义主题构建了两种更专业的页签风格：第一种偏商务克制，第二种更强调品牌感。" />
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1"
+                Padding="18"
+                Background="White"
+                BorderBrush="#E4E9F2"
+                BorderThickness="1"
+                CornerRadius="14">
+            <Grid RowDefinitions="Auto,*" RowSpacing="12">
+                <TextBlock FontWeight="SemiBold" Text="均衡商务风格" />
+                <TabControl Grid.Row="1"
+                            VerticalAlignment="Top"
+                            Theme="{StaticResource TrapezoidShapedTabControl}"
+                            CornerRadius="10 10 0 0"
+                            TabStripPlacement="Top">
+                    <TabControl.Styles>
+                        <Style Selector="TabItem">
+                            <Setter Property="CornerRadius" Value="10 10 0 0" />
+                            <Setter Property="Padding" Value="12 8" />
+                        </Style>
+                    </TabControl.Styles>
+                    <TabItem Header="数据管理" />
+                    <TabItem Header="系统设置" />
+                    <TabItem Header="用户中心" />
+                    <TabItem Header="日志记录" />
+                    <TabItem Header="帮助文档" />
+                </TabControl>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2"
+                Padding="18"
+                Background="White"
+                BorderBrush="#E4E9F2"
+                BorderThickness="1"
+                CornerRadius="14">
+            <Grid RowDefinitions="Auto,*" RowSpacing="12">
+                <TextBlock FontWeight="SemiBold" Text="品牌强调风格" />
+                <TabControl Grid.Row="1"
+                            VerticalAlignment="Top"
+                            Theme="{StaticResource TrapezoidShapedTabControl}"
+                            CornerRadius="10 10 0 0"
+                            TabStripPlacement="Top">
+                    <TabControl.Styles>
+                        <Style Selector="TabControl">
+                            <Setter Property="Background" Value="#551890FF" />
+                        </Style>
+                        <Style Selector="TabItem">
+                            <Setter Property="CornerRadius" Value="10 10 0 0" />
+                            <Setter Property="Foreground" Value="#FFFFFF" />
+                            <Setter Property="Padding" Value="12 8" />
+                            <Setter Property="MinHeight" Value="40" />
+                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStops>
+                                            <GradientStop Color="#BAE7FF" Offset="0" />
+                                            <GradientStop Color="#FFFFFF" Offset="1" />
+                                        </GradientStops>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabControl.Styles>
+                    <TabControl.Resources>
+                        <SolidColorBrush x:Key="TabItemLineHeaderPointeroverForeground">#1890FF</SolidColorBrush>
+                        <SolidColorBrush x:Key="TabItemLineHeaderSelectedForeground">#1890FF</SolidColorBrush>
+                    </TabControl.Resources>
+                    <TabItem Header="数据管理" />
+                    <TabItem Header="系统设置" />
+                    <TabItem Header="用户中心" />
+                    <TabItem Header="日志记录" />
+                    <TabItem Header="帮助文档" />
+                </TabControl>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
+

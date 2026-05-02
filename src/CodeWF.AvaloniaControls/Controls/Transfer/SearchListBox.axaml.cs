@@ -8,8 +8,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Avalonia.Threading;
 using CodeWF.AvaloniaControls.Extensions;
-using ReactiveUI;
 
 namespace CodeWF.AvaloniaControls.Controls;
 
@@ -33,8 +33,7 @@ public partial class SearchListBox : UserControl, INotifyPropertyChanged
 
         _searchSubject = new Subject<string?>();
         _searchSubject.Throttle(TimeSpan.FromMilliseconds(400))
-            .ObserveOn(RxApp.MainThreadScheduler)
-            .Subscribe(_ => SearchData());
+            .Subscribe(_ => Dispatcher.UIThread.Post(SearchData));
     }
 
     public new event PropertyChangedEventHandler? PropertyChanged;

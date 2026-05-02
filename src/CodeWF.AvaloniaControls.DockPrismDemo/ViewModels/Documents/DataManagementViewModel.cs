@@ -1,5 +1,5 @@
 ﻿using CodeWF.AvaloniaControls.DockPrismDemo.Commands;
-using Dock.Model.Prism.Controls;
+using Dock.Model.Avalonia.Controls;
 
 namespace CodeWF.AvaloniaControls.DockPrismDemo.ViewModels.Documents;
 

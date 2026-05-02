@@ -13,10 +13,10 @@
         <TextBox
             Classes="clearButton"
             KeyUp="ChangeSearchKey_OnKeyUp"
-            TextChanged="TextBox_OnTextChanged"
-            Watermark="搜索" />
+            PlaceholderText="搜索"
+            TextChanged="TextBox_OnTextChanged" />
         <TextBlock Grid.Row="1" Margin="5">
-            <Run Text="筛选/总：" />
+            <Run Text="筛选总数：" />
             <Run Text="{CompiledBinding $parent[local:SearchListBox].SearchCount}" />
             <Run Text="/" />
             <Run Text="{CompiledBinding $parent[local:SearchListBox].TotalCount}" />

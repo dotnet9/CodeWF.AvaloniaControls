@@ -1,0 +1,156 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.Showcase.ViewModels"
+             xmlns:model="clr-namespace:CodeWF.AvaloniaControls.Showcase.Models"
+             xmlns:u="https://irihi.tech/ursa"
+             x:Class="CodeWF.AvaloniaControls.Showcase.Pages.VComboBoxDemo"
+             x:DataType="vm:VComboBoxDemoViewModel"
+             d:DesignWidth="980"
+             d:DesignHeight="520"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:VComboBoxDemoViewModel />
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="MenuForeground">Black</SolidColorBrush>
+        <x:Double x:Key="MenuFontSize">14</x:Double>
+        <FontWeight x:Key="MenuFontWeight">Normal</FontWeight>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="u|IconButton">
+            <Setter Property="Foreground" Value="{StaticResource MenuForeground}" />
+            <Setter Property="FontSize" Value="{StaticResource MenuFontSize}" />
+            <Setter Property="FontWeight" Value="{StaticResource MenuFontWeight}" />
+        </Style>
+        <Style Selector="ComboBox">
+            <Setter Property="Foreground" Value="{StaticResource MenuForeground}" />
+            <Setter Property="FontSize" Value="{StaticResource MenuFontSize}" />
+            <Setter Property="FontWeight" Value="{StaticResource MenuFontWeight}" />
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="model:WarningItem">
+                        <Grid ColumnDefinitions="Auto,Auto">
+                            <Rectangle Grid.Column="0"
+                                       Width="24"
+                                       Height="24"
+                                       Margin="0,0,5,0"
+                                       VerticalAlignment="Center"
+                                       Fill="{Binding Color}" />
+                            <TextBlock Grid.Column="1"
+                                       Margin="5,0,0,0"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Name}" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SelectionBoxItemTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="model:WarningItem">
+                        <Grid RowDefinitions="Auto,Auto" VerticalAlignment="Bottom">
+                            <Rectangle Grid.Row="0"
+                                       Width="24"
+                                       Height="24"
+                                       Margin="0,15,0,10"
+                                       HorizontalAlignment="Center"
+                                       Fill="{Binding Color}" />
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="超时告警" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="Auto,*" RowSpacing="14">
+        <Border Padding="16"
+                Background="#F8FAFC"
+                BorderBrush="#E4E9F2"
+                BorderThickness="1"
+                CornerRadius="14">
+            <StackPanel Spacing="6">
+                <TextBlock FontSize="20" FontWeight="SemiBold" Text="VComboBox 与图标操作" />
+                <TextBlock Foreground="#5B6472"
+                           Text="演示紧凑型图标命令、行内弹出确认，以及适用于告警选择器的纵向选择框布局。" />
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1" ColumnDefinitions="2*,*" ColumnSpacing="14">
+            <Border Padding="20"
+                    Background="White"
+                    BorderBrush="#E4E9F2"
+                    BorderThickness="1"
+                    CornerRadius="14">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Spacing="14">
+                    <u:IconButton Content="新建" IconPlacement="Top" VerticalAlignment="Top" Padding="0">
+                        <u:IconButton.Icon>
+                            <Rectangle Width="24" Height="24" Margin="0,0,0,-4" HorizontalAlignment="Center" Fill="#EF4444" />
+                        </u:IconButton.Icon>
+                    </u:IconButton>
+
+                    <Grid>
+                        <u:IconButton Content="配置" IconPlacement="Top">
+                            <u:IconButton.Icon>
+                                <Rectangle Width="24" Height="24" Margin="0,0,0,5" HorizontalAlignment="Center" Fill="#F59E0B" />
+                            </u:IconButton.Icon>
+                        </u:IconButton>
+                        <u:PopConfirm PopupHeader="编辑数值" Placement="Bottom">
+                            <u:PopConfirm.PopupContent>
+                                <TextBox Watermark="Input new value" />
+                            </u:PopConfirm.PopupContent>
+                            <Button VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Stretch"
+                                    MinHeight="0"
+                                    Classes="Small"
+                                    Theme="{DynamicResource BorderlessButton}">
+                                <PathIcon Foreground="{DynamicResource ComboBoxIconDefaultForeground}"
+                                          Data="{DynamicResource ComboBoxIcon}"
+                                          IsHitTestVisible="False"
+                                          Theme="{DynamicResource InnerPathIcon}"
+                                          UseLayoutRounding="False" />
+                            </Button>
+                        </u:PopConfirm>
+                    </Grid>
+
+                    <u:IconButton Content="编辑" IconPlacement="Top">
+                        <u:IconButton.Icon>
+                            <Rectangle Width="24" Height="24" Margin="0,0,0,5" HorizontalAlignment="Center" Fill="#3B82F6" />
+                        </u:IconButton.Icon>
+                    </u:IconButton>
+
+                    <u:IconButton Content="刷新" IconPlacement="Top">
+                        <u:IconButton.Icon>
+                            <Rectangle Width="24" Height="24" Margin="0,0,0,5" HorizontalAlignment="Center" Fill="#10B981" />
+                        </u:IconButton.Icon>
+                    </u:IconButton>
+
+                    <ComboBox ItemsSource="{Binding WarningItems}"
+                              MinWidth="140"
+                              SelectedIndex="0"
+                              Theme="{StaticResource VComboBox}" />
+                    <ComboBox ItemsSource="{Binding WarningItems}" SelectedIndex="0" VerticalAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1"
+                    Padding="18"
+                    Background="#FFFFFF"
+                    BorderBrush="#E4E9F2"
+                    BorderThickness="1"
+                    CornerRadius="14">
+                <StackPanel Spacing="10">
+                    <TextBlock FontSize="18" FontWeight="SemiBold" Text="适用场景" />
+                    <TextBlock Foreground="#64748B" Text="适用于告警类型选择和紧凑命令栏。" />
+                    <TextBlock Foreground="#64748B" Text="适用于图标位于文字上方的工具栏式控件。" />
+                    <TextBlock Foreground="#64748B" Text="适用于需要额外确认步骤的弹出式编辑流程。" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
+
+

@@ -1,4 +1,4 @@
-<UserControl
+﻿<UserControl
     x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.Homes.HomeView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,5 +10,52 @@
     x:CompileBindings="True"
     x:DataType="vm:HomeViewModel"
     mc:Ignorable="d">
-    <DockControl x:Name="DockControl" Layout="{Binding Layout}" />
+    <Grid RowDefinitions="Auto,Auto,*" RowSpacing="16">
+        <Border Padding="22" Background="#0F172A" CornerRadius="20">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="18">
+                <StackPanel Spacing="8">
+                    <TextBlock FontSize="26" FontWeight="Bold" Foreground="White" Text="{Binding Title}" />
+                    <TextBlock Foreground="#CBD5E1"
+                               Text="这是一个受监控看板启发的首页，包含工具面板、告警摘要和可重置的嵌套 Dock 工作区。" />
+                </StackPanel>
+                <Button VerticalAlignment="Top"
+                        Padding="16,10"
+                        Background="#38BDF8"
+                        Command="{Binding NewLayout}"
+                        Content="重置嵌套布局"
+                        CornerRadius="12"
+                        Foreground="#082F49"
+                        FontWeight="SemiBold" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*" ColumnSpacing="12">
+            <Border Padding="16" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="16">
+                <StackPanel Spacing="6">
+                    <TextBlock FontSize="13" Foreground="#64748B" Text="关键告警" />
+                    <TextBlock FontSize="26" FontWeight="Bold" Text="2" />
+                    <TextBlock Foreground="#475569" Text="需要在五分钟内由运维人员处理。" />
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" Padding="16" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="16">
+                <StackPanel Spacing="6">
+                    <TextBlock FontSize="13" Foreground="#64748B" Text="在线工具" />
+                    <TextBlock FontSize="26" FontWeight="Bold" Text="6" />
+                    <TextBlock Foreground="#475569" Text="由嵌套 Dock 承载的紧凑工具面板数量。" />
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="2" Padding="16" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="16">
+                <StackPanel Spacing="6">
+                    <TextBlock FontSize="13" Foreground="#64748B" Text="工作区可用性" />
+                    <TextBlock FontSize="26" FontWeight="Bold" Text="99.98%" />
+                    <TextBlock Foreground="#475569" Text="用于演示外壳健康度的示意指标。" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" Padding="12" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="18">
+            <DockControl x:Name="DockControl" Layout="{Binding Layout}" />
+        </Border>
+    </Grid>
 </UserControl>
+
