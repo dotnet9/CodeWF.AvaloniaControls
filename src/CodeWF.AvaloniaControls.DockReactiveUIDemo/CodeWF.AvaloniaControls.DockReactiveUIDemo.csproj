@@ -51,6 +51,5 @@
 		<Content Include="Assets\logo.ico" />
 		<ProjectReference Include="..\..\src\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" />
 		<ProjectReference Include="..\..\src\CodeWF.AvaloniaControls\CodeWF.AvaloniaControls.csproj" />
-		<TrimmerRootDescriptor Include="Roots.xml" />
 	</ItemGroup>
 </Project>

@@ -25,6 +25,7 @@ for %%P in (
     "src\CodeWF.AvaloniaControls\CodeWF.AvaloniaControls.csproj"
     "src\CodeWF.AvaloniaControls.DataGrid\CodeWF.AvaloniaControls.DataGrid.csproj"
     "src\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj"
+    "src\CodeWF.AvaloniaControls.ProDataGrid\CodeWF.AvaloniaControls.ProDataGrid.csproj"
 ) do (
     dotnet pack %%~P -c %CONFIGURATION% --no-build -o "%PACKAGES_DIR%"
     if errorlevel 1 goto :error

@@ -9,7 +9,6 @@
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 		<ApplicationIcon>Assets\logo.ico</ApplicationIcon>
-		<PublishAot>true</PublishAot>
 		<Platforms>AnyCPU;x64;x86</Platforms>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net11.0-windows'))">
@@ -29,6 +28,7 @@
 		<PackageReference Include="Semi.Avalonia.ProDataGrid" />
 		<PackageReference Include="System.Drawing.Common" />
 		<PackageReference Include="YY-Thunks" />
+		<PackageReference Include="VC-LTL"  />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\CodeWF.AvaloniaControls.ProDataGrid\CodeWF.AvaloniaControls.ProDataGrid.csproj" />

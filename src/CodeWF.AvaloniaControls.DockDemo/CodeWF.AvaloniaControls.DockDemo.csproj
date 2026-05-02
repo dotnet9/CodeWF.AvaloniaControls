@@ -9,7 +9,6 @@
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 		<ApplicationIcon>Assets\logo.ico</ApplicationIcon>
-		<PublishAot>true</PublishAot>
 		<Platforms>AnyCPU;x64;x86</Platforms>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net11.0-windows'))">
@@ -32,6 +31,7 @@
 		<PackageReference Include="Prism.DryIoc.Avalonia" />
 		<PackageReference Include="System.Drawing.Common" />
 		<PackageReference Include="YY-Thunks" />
+		<PackageReference Include="VC-LTL"  />
 	</ItemGroup>
 	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />
@@ -39,6 +39,5 @@
 	<ItemGroup>
 		<Content Include="Assets\logo.ico" />
 		<ProjectReference Include="..\..\src\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" />
-		<TrimmerRootDescriptor Include="Roots.xml" />
 	</ItemGroup>
 </Project>

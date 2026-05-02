@@ -15,6 +15,7 @@
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.3.7" />
     <PackageReference Include="Semi.Avalonia" Version="11.3.7.3" />
     <PackageReference Include="Semi.Avalonia.DataGrid" Version="11.3.7.3" />
+    <PackageReference Include="VC-LTL" Version="5.3.1" />
   </ItemGroup>
 
   <ItemGroup>

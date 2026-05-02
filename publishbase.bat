@@ -14,6 +14,7 @@ if "%~2"=="" (
 )
 
 set "publish_root=%~dp0publish"
+set "publish_failed=0"
 
 for %%p in (%platforms%) do (
     set "rid=%%p"
@@ -29,10 +30,18 @@ for %%p in (%platforms%) do (
         call :publish_with_profile "%%d" "!rid!" "!project_name!"
         if errorlevel 1 (
             echo Error: Failed to publish %%d for %%p
-            goto :error
+            set "publish_failed=1"
         )
     )
     echo.
+)
+
+if "%publish_failed%"=="1" (
+    echo ========================================
+    echo Build failed. Please check the errors above.
+    echo ========================================
+    call :maybe_pause
+    exit /b 1
 )
 
 echo ========================================
@@ -96,18 +105,11 @@ if exist "%publish_root%" (
         del /q "%%f" 2>nul
         if not exist "%%f" set /a removed_pdb_count+=1
     )
-    if !removed_pdb_count! gtr 0 echo   - Removed !removed_pdb_count! *.pdb file(s)
+    if !removed_pdb_count! gtr 0 echo   - Removed !removed_pdb_count! *.pdb file(s^)
 )
 
 echo   - Success: %project_name% / %rid%
 exit /b 0
-
-:error
-echo ========================================
-echo Build failed. Please check the errors above.
-echo ========================================
-call :maybe_pause
-exit /b 1
 
 :maybe_pause
 if /i not "%CODEX_NO_PAUSE%"=="1" pause

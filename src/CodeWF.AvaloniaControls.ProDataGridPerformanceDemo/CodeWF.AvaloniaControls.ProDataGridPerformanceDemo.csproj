@@ -6,7 +6,6 @@
 		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-		<PublishAot>true</PublishAot>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net11.0-windows'))">
 		<IsTrimmable>true</IsTrimmable>
@@ -30,6 +29,7 @@
 		<PackageReference Include="ReactiveUI.Avalonia" />
 		<PackageReference Include="Semi.Avalonia" />
 		<PackageReference Include="Semi.Avalonia.ProDataGrid" />
+		<PackageReference Include="VC-LTL"  />
 	</ItemGroup>
 
 	<ItemGroup>

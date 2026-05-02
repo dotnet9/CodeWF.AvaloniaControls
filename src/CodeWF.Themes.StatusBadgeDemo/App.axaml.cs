@@ -16,9 +16,6 @@ public partial class App : PrismApplication
 
     protected override AvaloniaObject CreateShell()
     {
-#if DEBUG
-        this.AttachDeveloperTools();
-#endif
         return Container.Resolve<MainWindow>();
     }
 

@@ -24,7 +24,7 @@
     <File Path="Directory.Packages.props" />
     <File Path="global.json" />
     <File Path="pack.bat" />
-    <File Path="publish.bat" />
+    <File Path="publishbase.bat" />
     <File Path="Publish.Common.pubxml" />
     <File Path="publish_all.bat" />
     <File Path="README.md" />
