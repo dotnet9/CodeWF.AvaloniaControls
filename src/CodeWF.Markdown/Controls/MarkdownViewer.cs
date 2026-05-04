@@ -126,6 +126,33 @@ public class MarkdownViewer : TemplatedControl
             nameof(CodeFontFamily),
             new FontFamily("Consolas, Cascadia Mono, JetBrains Mono, monospace"));
 
+    public static readonly StyledProperty<double> CodeBlockFontSizeProperty =
+        AvaloniaProperty.Register<MarkdownViewer, double>(nameof(CodeBlockFontSize), 13);
+
+    public static readonly StyledProperty<double> CodeBlockLineHeightProperty =
+        AvaloniaProperty.Register<MarkdownViewer, double>(nameof(CodeBlockLineHeight), 20);
+
+    public static readonly StyledProperty<double> CodeLanguageFontSizeProperty =
+        AvaloniaProperty.Register<MarkdownViewer, double>(nameof(CodeLanguageFontSize), 12);
+
+    public static readonly StyledProperty<double> UnorderedListMarkerWidthProperty =
+        AvaloniaProperty.Register<MarkdownViewer, double>(nameof(UnorderedListMarkerWidth), 24);
+
+    public static readonly StyledProperty<double> OrderedListMarkerMinWidthProperty =
+        AvaloniaProperty.Register<MarkdownViewer, double>(nameof(OrderedListMarkerMinWidth), 28);
+
+    public static readonly StyledProperty<double> OrderedListMarkerCharacterWidthProperty =
+        AvaloniaProperty.Register<MarkdownViewer, double>(nameof(OrderedListMarkerCharacterWidth), 9);
+
+    public static readonly StyledProperty<double> OrderedListMarkerExtraWidthProperty =
+        AvaloniaProperty.Register<MarkdownViewer, double>(nameof(OrderedListMarkerExtraWidth), 6);
+
+    public static readonly StyledProperty<Thickness> ListFirstParagraphMarginProperty =
+        AvaloniaProperty.Register<MarkdownViewer, Thickness>(nameof(ListFirstParagraphMargin), new Thickness(0, 0, 0, 2));
+
+    public static readonly StyledProperty<Thickness> ListNestedParagraphMarginProperty =
+        AvaloniaProperty.Register<MarkdownViewer, Thickness>(nameof(ListNestedParagraphMargin), new Thickness(0, 2, 0, 2));
+
     public string? Markdown
     {
         get => GetValue(MarkdownProperty);
@@ -289,6 +316,60 @@ public class MarkdownViewer : TemplatedControl
     {
         get => GetValue(CodeFontFamilyProperty);
         set => SetValue(CodeFontFamilyProperty, value);
+    }
+
+    public double CodeBlockFontSize
+    {
+        get => GetValue(CodeBlockFontSizeProperty);
+        set => SetValue(CodeBlockFontSizeProperty, value);
+    }
+
+    public double CodeBlockLineHeight
+    {
+        get => GetValue(CodeBlockLineHeightProperty);
+        set => SetValue(CodeBlockLineHeightProperty, value);
+    }
+
+    public double CodeLanguageFontSize
+    {
+        get => GetValue(CodeLanguageFontSizeProperty);
+        set => SetValue(CodeLanguageFontSizeProperty, value);
+    }
+
+    public double UnorderedListMarkerWidth
+    {
+        get => GetValue(UnorderedListMarkerWidthProperty);
+        set => SetValue(UnorderedListMarkerWidthProperty, value);
+    }
+
+    public double OrderedListMarkerMinWidth
+    {
+        get => GetValue(OrderedListMarkerMinWidthProperty);
+        set => SetValue(OrderedListMarkerMinWidthProperty, value);
+    }
+
+    public double OrderedListMarkerCharacterWidth
+    {
+        get => GetValue(OrderedListMarkerCharacterWidthProperty);
+        set => SetValue(OrderedListMarkerCharacterWidthProperty, value);
+    }
+
+    public double OrderedListMarkerExtraWidth
+    {
+        get => GetValue(OrderedListMarkerExtraWidthProperty);
+        set => SetValue(OrderedListMarkerExtraWidthProperty, value);
+    }
+
+    public Thickness ListFirstParagraphMargin
+    {
+        get => GetValue(ListFirstParagraphMarginProperty);
+        set => SetValue(ListFirstParagraphMarginProperty, value);
+    }
+
+    public Thickness ListNestedParagraphMargin
+    {
+        get => GetValue(ListNestedParagraphMarginProperty);
+        set => SetValue(ListNestedParagraphMarginProperty, value);
     }
 
     public event EventHandler? CopyClick;
@@ -768,11 +849,7 @@ public class MarkdownViewer : TemplatedControl
 
     private Control CreateHeading(HeadingBlock heading)
     {
-        var border = new Border
-        {
-            BorderThickness = heading.Level == 2 ? new Thickness(0, 0, 0, 2) : new Thickness(0),
-            Padding = heading.Level == 2 ? new Thickness(0, 0, 0, 6) : new Thickness(0)
-        };
+        var border = new Border();
         AddMarkdownClass(
             border,
             MarkdownStyleKeys.HeadingBorder,
@@ -800,38 +877,29 @@ public class MarkdownViewer : TemplatedControl
         var code = codeBlock.Lines.ToString();
         var language = codeBlock is FencedCodeBlock fenced ? fenced.Info ?? "text" : "text";
 
-        var border = new Border
-        {
-            CornerRadius = new CornerRadius(8),
-            BorderThickness = new Thickness(1),
-            Padding = new Thickness(12),
-            Margin = new Thickness(0, 8, 0, 12)
-        };
+        var border = new Border();
         AddMarkdownClass(border, MarkdownStyleKeys.CodeBlock);
         BindTheme(border, Border.BackgroundProperty, CodeBackgroundBrushProperty);
         BindTheme(border, Border.BorderBrushProperty, BorderLineBrushProperty);
 
-        var stack = new StackPanel { Orientation = Orientation.Vertical, Spacing = 8 };
+        var stack = new StackPanel { Orientation = Orientation.Vertical };
+        AddMarkdownClass(stack, MarkdownStyleKeys.CodeBlockContent);
         var header = new StackPanel
         {
             Orientation = Orientation.Horizontal,
-            HorizontalAlignment = HorizontalAlignment.Right,
-            Spacing = 8
+            HorizontalAlignment = HorizontalAlignment.Right
         };
+        AddMarkdownClass(header, MarkdownStyleKeys.CodeBlockHeader);
 
         var languageText = CreateSelectableText(MarkdownStyleKeys.CodeLanguage);
         languageText.Text = string.IsNullOrWhiteSpace(language) ? "text" : language;
         languageText.VerticalAlignment = VerticalAlignment.Center;
-        languageText.FontSize = 12;
         BindTheme(languageText, SelectableTextBlock.ForegroundProperty, MutedTextBrushProperty);
+        BindTheme(languageText, SelectableTextBlock.FontSizeProperty, CodeLanguageFontSizeProperty);
 
         var copyButton = new Button
         {
             Content = "复制",
-            MinWidth = 54,
-            Height = 28,
-            Padding = new Thickness(10, 0),
-            CornerRadius = new CornerRadius(5)
         };
         AddMarkdownClass(copyButton, MarkdownStyleKeys.CopyButton);
         BindTheme(copyButton, Button.BackgroundProperty, AccentBrushProperty);
@@ -848,7 +916,13 @@ public class MarkdownViewer : TemplatedControl
         header.Children.Add(languageText);
         header.Children.Add(copyButton);
         stack.Children.Add(header);
-        stack.Children.Add(CodeHighlighter.Render(code, language, ActualThemeVariant == ThemeVariant.Dark));
+        stack.Children.Add(CodeHighlighter.Render(
+            code,
+            language,
+            ActualThemeVariant == ThemeVariant.Dark,
+            CodeFontFamily,
+            CodeBlockFontSize,
+            CodeBlockLineHeight));
 
         CodeBlockToolRender?.Invoke(this, new CodeBlockToolRenderEventArgs(header, stack, codeBlock));
 
@@ -863,9 +937,7 @@ public class MarkdownViewer : TemplatedControl
         var markerWidth = CalculateListMarkerWidth(list.IsOrdered, startIndex, items.Count);
         var panel = new StackPanel
         {
-            Orientation = Orientation.Vertical,
-            Spacing = 6,
-            Margin = new Thickness(0, 2, 0, 8)
+            Orientation = Orientation.Vertical
         };
         AddMarkdownClass(panel, MarkdownStyleKeys.List);
 
@@ -885,8 +957,7 @@ public class MarkdownViewer : TemplatedControl
             {
                 new ColumnDefinition(GridLength.Auto),
                 new ColumnDefinition(new GridLength(1, GridUnitType.Star))
-            },
-            Margin = new Thickness(0, 2, 0, 2)
+            }
         };
         AddMarkdownClass(itemGrid, MarkdownStyleKeys.ListItem);
 
@@ -898,7 +969,8 @@ public class MarkdownViewer : TemplatedControl
         Grid.SetColumn(marker, 0);
         itemGrid.Children.Add(marker);
 
-        var content = new StackPanel { Orientation = Orientation.Vertical, Spacing = 4 };
+        var content = new StackPanel { Orientation = Orientation.Vertical };
+        AddMarkdownClass(content, MarkdownStyleKeys.ListItemContent);
         var firstParagraph = true;
         foreach (var block in item)
         {
@@ -925,15 +997,14 @@ public class MarkdownViewer : TemplatedControl
             IsChecked = isChecked,
             IsHitTestVisible = false,
             HorizontalAlignment = HorizontalAlignment.Right,
-            VerticalAlignment = VerticalAlignment.Top,
-            Margin = new Thickness(0, 1, 0, 0)
+            VerticalAlignment = VerticalAlignment.Top
         };
+        AddMarkdownClass(checkBox, MarkdownStyleKeys.TaskMarkerBox);
 
         var marker = new Border
         {
             Child = checkBox,
             MinWidth = markerWidth,
-            Margin = new Thickness(0, 0, 8, 0),
             VerticalAlignment = VerticalAlignment.Top
         };
         AddMarkdownClass(marker, MarkdownStyleKeys.ListMarker);
@@ -945,7 +1016,6 @@ public class MarkdownViewer : TemplatedControl
         var marker = CreateSelectableText(MarkdownStyleKeys.ListMarker);
         marker.Text = text;
         marker.FontWeight = FontWeight.Bold;
-        marker.Margin = new Thickness(0, 0, 8, 0);
         marker.MinWidth = markerWidth;
         marker.TextAlignment = TextAlignment.Right;
         marker.VerticalAlignment = VerticalAlignment.Top;
@@ -965,36 +1035,33 @@ public class MarkdownViewer : TemplatedControl
             : 1;
     }
 
-    private static double CalculateListMarkerWidth(bool ordered, int startIndex, int itemCount)
+    private double CalculateListMarkerWidth(bool ordered, int startIndex, int itemCount)
     {
         if (!ordered)
         {
-            return 24;
+            return UnorderedListMarkerWidth;
         }
 
         var lastMarkerLength = $"{Math.Max(startIndex, startIndex + itemCount - 1)}.".Length;
-        return Math.Max(28, lastMarkerLength * 9 + 6);
+        return Math.Max(
+            OrderedListMarkerMinWidth,
+            lastMarkerLength * OrderedListMarkerCharacterWidth + OrderedListMarkerExtraWidth);
     }
 
-    private static Thickness GetListParagraphMargin(bool firstParagraph)
+    private Thickness GetListParagraphMargin(bool firstParagraph)
     {
-        return firstParagraph ? new Thickness(0, 0, 0, 2) : new Thickness(0, 2, 0, 2);
+        return firstParagraph ? ListFirstParagraphMargin : ListNestedParagraphMargin;
     }
 
     private Control CreateQuote(QuoteBlock quote)
     {
-        var border = new Border
-        {
-            BorderThickness = new Thickness(4, 0, 0, 0),
-            CornerRadius = new CornerRadius(6),
-            Padding = new Thickness(12, 8),
-            Margin = new Thickness(0, 6, 0, 12)
-        };
+        var border = new Border();
         AddMarkdownClass(border, MarkdownStyleKeys.Quote);
         BindTheme(border, Border.BorderBrushProperty, AccentBrushProperty);
         BindTheme(border, Border.BackgroundProperty, QuoteBackgroundBrushProperty);
 
-        var stack = new StackPanel { Orientation = Orientation.Vertical, Spacing = 4 };
+        var stack = new StackPanel { Orientation = Orientation.Vertical };
+        AddMarkdownClass(stack, MarkdownStyleKeys.QuoteContent);
         foreach (var block in quote)
         {
             var child = ConvertBlock(block);
@@ -1010,11 +1077,7 @@ public class MarkdownViewer : TemplatedControl
 
     private Control CreateThematicBreak()
     {
-        var border = new Border
-        {
-            Height = 1,
-            Margin = new Thickness(0, 16, 0, 16)
-        };
+        var border = new Border();
         AddMarkdownClass(border, MarkdownStyleKeys.ThematicBreak);
         BindTheme(border, Border.BackgroundProperty, BorderLineBrushProperty);
         return border;
@@ -1024,10 +1087,7 @@ public class MarkdownViewer : TemplatedControl
     {
         var rows = table.OfType<TableRow>().ToList();
         var columnCount = rows.Select(row => row.Count).DefaultIfEmpty(0).Max();
-        var grid = new Grid
-        {
-            Margin = new Thickness(0, 8, 0, 14)
-        };
+        var grid = new Grid();
         AddMarkdownClass(grid, MarkdownStyleKeys.Table);
 
         for (var i = 0; i < columnCount; i++)
@@ -1058,12 +1118,7 @@ public class MarkdownViewer : TemplatedControl
 
     private Border CreateTableCell(TableCell cell, bool isHeader)
     {
-        var border = new Border
-        {
-            BorderThickness = new Thickness(1),
-            Padding = new Thickness(10, 8),
-            MinHeight = 38
-        };
+        var border = new Border();
         AddMarkdownClass(border, isHeader ? MarkdownStyleKeys.TableHeaderCell : MarkdownStyleKeys.TableCell);
         BindTheme(border, Border.BorderBrushProperty, BorderLineBrushProperty);
         if (isHeader)
@@ -1071,7 +1126,8 @@ public class MarkdownViewer : TemplatedControl
             BindTheme(border, Border.BackgroundProperty, TableHeaderBackgroundBrushProperty);
         }
 
-        var stack = new StackPanel { Orientation = Orientation.Vertical, Spacing = 4 };
+        var stack = new StackPanel { Orientation = Orientation.Vertical };
+        AddMarkdownClass(stack, MarkdownStyleKeys.TableCellContent);
         foreach (var block in cell)
         {
             var child = ConvertBlock(block);

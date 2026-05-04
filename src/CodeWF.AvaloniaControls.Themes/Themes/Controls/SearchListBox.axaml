@@ -1,0 +1,38 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:codewf="https://codewf.com">
+    <Design.PreviewWith>
+        <codewf:SearchListBox Width="240" Height="320" />
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type codewf:SearchListBox}" TargetType="codewf:SearchListBox">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="codewf:SearchListBox">
+                <Grid RowDefinitions="Auto,Auto,*">
+                    <TextBox
+                        Name="PART_SearchBox"
+                        Classes="clearButton"
+                        PlaceholderText="Search" />
+                    <TextBlock Grid.Row="1" Margin="5">
+                        <Run Text="Filtered: " />
+                        <Run Text="{Binding SearchCount, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Run Text="/" />
+                        <Run Text="{Binding TotalCount, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </TextBlock>
+                    <Border
+                        Grid.Row="2"
+                        Background="White"
+                        BorderBrush="#DCE3EE"
+                        BorderThickness="1"
+                        CornerRadius="6">
+                        <ListBox
+                            Name="PART_ListBox"
+                            ItemsSource="{Binding BindingItemsSource, RelativeSource={RelativeSource TemplatedParent}}"
+                            SelectionMode="Multiple" />
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

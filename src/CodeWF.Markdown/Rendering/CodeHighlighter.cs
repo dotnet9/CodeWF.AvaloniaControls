@@ -6,6 +6,8 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using Avalonia.Media.Immutable;
 
+using CodeWF.Markdown;
+
 using TextMateSharp.Grammars;
 using TextMateSharp.Registry;
 using TextMateSharp.Themes;
@@ -19,7 +21,13 @@ internal static class CodeHighlighter
 {
     private static readonly Dictionary<(string Language, ThemeName Theme), (IGrammar? Grammar, Theme Theme)> Cache = new();
 
-    public static Control Render(string code, string language, bool isDark)
+    public static Control Render(
+        string code,
+        string language,
+        bool isDark,
+        FontFamily fontFamily,
+        double fontSize,
+        double lineHeight)
     {
         var themeName = isDark ? ThemeName.DarkPlus : ThemeName.LightPlus;
         var (grammar, theme) = GetOrCreateGrammar(NormalizeLanguage(language), themeName);
@@ -28,10 +36,11 @@ internal static class CodeHighlighter
         {
             Inlines = new InlineCollection(),
             TextWrapping = TextWrapping.NoWrap,
-            FontFamily = new FontFamily("Consolas, Cascadia Mono, JetBrains Mono, monospace"),
-            FontSize = 13,
-            LineHeight = 20
+            FontFamily = fontFamily,
+            FontSize = fontSize,
+            LineHeight = lineHeight
         };
+        textBlock.Classes.Add(MarkdownStyleKeys.CodeBlockText);
         TextOptions.SetBaselinePixelAlignment(textBlock, BaselinePixelAlignment.Aligned);
         textBlock.ContextMenu = CreateCopyContextMenu(textBlock);
 
@@ -68,12 +77,14 @@ internal static class CodeHighlighter
 
     private static Control Wrap(Control content)
     {
-        return new ScrollViewer
+        var scrollViewer = new ScrollViewer
         {
             Content = content,
             HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
             VerticalScrollBarVisibility = ScrollBarVisibility.Disabled
         };
+        scrollViewer.Classes.Add(MarkdownStyleKeys.CodeBlockScrollViewer);
+        return scrollViewer;
     }
 
     private static ContextMenu CreateCopyContextMenu(SelectableTextBlock textBlock)

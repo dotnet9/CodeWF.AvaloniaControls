@@ -20,9 +20,8 @@ if errorlevel 1 goto :error
 
 echo [3/3] Packing libraries...
 for %%P in (
-    "src\CodeWF\CodeWF.csproj"
-    "src\CodeWF.Themes\CodeWF.Themes.csproj"
     "src\CodeWF.AvaloniaControls\CodeWF.AvaloniaControls.csproj"
+    "src\CodeWF.AvaloniaControls.Themes\CodeWF.AvaloniaControls.Themes.csproj"
     "src\CodeWF.AvaloniaControls.DataGrid\CodeWF.AvaloniaControls.DataGrid.csproj"
     "src\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj"
     "src\CodeWF.AvaloniaControls.ProDataGrid\CodeWF.AvaloniaControls.ProDataGrid.csproj"

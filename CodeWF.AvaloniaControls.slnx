@@ -17,7 +17,6 @@
   <Folder Name="/samples/showcase/">
     <Project Path="src/CodeWF.AvaloniaControls.FluentStarterDemo/CodeWF.AvaloniaControls.FluentStarterDemo.csproj" />
     <Project Path="src/CodeWF.AvaloniaControls.Showcase/CodeWF.AvaloniaControls.Showcase.csproj" />
-    <Project Path="src/CodeWF.Themes.StatusBadgeDemo/CodeWF.Themes.StatusBadgeDemo.csproj" />
   </Folder>
   <Folder Name="/solution/">
     <File Path=".gitignore" />
@@ -37,9 +36,8 @@
   <Project Path="src/CodeWF.AvaloniaControls.DataGrid/CodeWF.AvaloniaControls.DataGrid.csproj" />
   <Project Path="src/CodeWF.AvaloniaControls.Dock/CodeWF.AvaloniaControls.Dock.csproj" />
   <Project Path="src/CodeWF.AvaloniaControls.ProDataGrid/CodeWF.AvaloniaControls.ProDataGrid.csproj" />
+  <Project Path="src/CodeWF.AvaloniaControls.Themes/CodeWF.AvaloniaControls.Themes.csproj" />
   <Project Path="src/CodeWF.AvaloniaControls/CodeWF.AvaloniaControls.csproj" />
   <Project Path="src/CodeWF.Markdown.Themes/CodeWF.Markdown.Themes.csproj" />
   <Project Path="src/CodeWF.Markdown/CodeWF.Markdown.csproj" />
-  <Project Path="src/CodeWF.Themes/CodeWF.Themes.csproj" />
-  <Project Path="src/CodeWF/CodeWF.csproj" />
 </Solution>

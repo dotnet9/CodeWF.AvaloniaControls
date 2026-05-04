@@ -1,0 +1,48 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:codewf="https://codewf.com">
+    <Design.PreviewWith>
+        <codewf:Transfer Width="800" Height="450" />
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type codewf:Transfer}" TargetType="codewf:Transfer">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="codewf:Transfer">
+                <Grid ColumnDefinitions="*,Auto,*">
+                    <HeaderedContentControl Header="{TemplateBinding LeftHeader}">
+                        <codewf:SearchListBox
+                            Name="PART_LeftSearchListBox"
+                            ItemsSource="{TemplateBinding LeftItemsSource}" />
+                    </HeaderedContentControl>
+
+                    <GridSplitter Grid.Column="1" />
+
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="5,0"
+                        VerticalAlignment="Center">
+                        <Button
+                            Name="PART_MoveLeftToRightButton"
+                            Margin="0,10"
+                            Padding="8,0"
+                            Content="&gt;&gt;" />
+                        <Button
+                            Name="PART_MoveRightToLeftButton"
+                            Margin="0,10"
+                            Padding="8,0"
+                            Content="&lt;&lt;" />
+                    </StackPanel>
+
+                    <HeaderedContentControl
+                        Grid.Column="2"
+                        Header="{TemplateBinding RightHeader}">
+                        <codewf:SearchListBox
+                            Name="PART_RightSearchListBox"
+                            ItemsSource="{TemplateBinding RightItemsSource}" />
+                    </HeaderedContentControl>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

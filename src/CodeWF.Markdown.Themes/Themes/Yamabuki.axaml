@@ -16,6 +16,7 @@
                     <SolidColorBrush x:Key="CodeWFMarkdownYamabukiHeaderBrush" Color="#523914" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
+            <x:Double x:Key="CodeWFMarkdownYamabukiHeading1FontSize">31</x:Double>
         </ResourceDictionary>
     </Styles.Resources>
 
@@ -24,6 +25,6 @@
         <Setter Property="QuoteBackgroundBrush" Value="{DynamicResource CodeWFMarkdownYamabukiSoftBrush}" />
         <Setter Property="InlineCodeBackgroundBrush" Value="{DynamicResource CodeWFMarkdownYamabukiSoftBrush}" />
         <Setter Property="TableHeaderBackgroundBrush" Value="{DynamicResource CodeWFMarkdownYamabukiHeaderBrush}" />
-        <Setter Property="Heading1FontSize" Value="31" />
+        <Setter Property="Heading1FontSize" Value="{DynamicResource CodeWFMarkdownYamabukiHeading1FontSize}" />
     </Style>
 </Styles>

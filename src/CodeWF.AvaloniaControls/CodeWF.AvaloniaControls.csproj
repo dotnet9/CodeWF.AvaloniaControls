@@ -6,17 +6,16 @@
 		<LangVersion>latest</LangVersion>
 		<OutputType>Library</OutputType>
 		<IsPackable>true</IsPackable>
-		<Description>封装一些 Avalonia 控件，比如穿梭框、异形 TabControl 等。Encapsulate some Avalonia controls, such as shuttle boxes and custom TabControls.</Description>
+		<Description>Avalonia custom control core library for CodeWF controls. It defines control APIs, state models, helpers, and drawing logic; concrete templates and visual resources are provided by CodeWF.AvaloniaControls.Themes.</Description>
 		<PackageIcon>logo.png</PackageIcon>
 		<PackageTags>avalonia ui,controls,custom</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ReactiveUI.Avalonia" />
-		<PackageReference Include="Semi.Avalonia" />
-		<PackageReference Include="Irihi.Ursa.Themes.Semi" />
+		<PackageReference Include="Avalonia" />
 	</ItemGroup>
 
 	<ItemGroup>

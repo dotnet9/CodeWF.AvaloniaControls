@@ -114,11 +114,9 @@ public class MarkdownImage : TemplatedControl
                     Source = bitmap,
                     Stretch = Stretch.Uniform,
                     HorizontalAlignment = HorizontalAlignment.Left,
-                    MaxWidth = 900,
-                    MaxHeight = 520,
-                    Margin = new Thickness(0, 6, 0, 10),
                     Cursor = new Cursor(StandardCursorType.Hand)
                 };
+                image.Classes.Add(MarkdownStyleKeys.ImageContent);
                 image.PointerReleased += OnImagePointerReleased;
                 SetContent(image);
             });
@@ -263,19 +261,21 @@ public class MarkdownImage : TemplatedControl
             _imageBytes = null;
             _fileName = null;
 
-            SetContent(new Border
+            var fallback = new Border
             {
-                BorderThickness = new Thickness(1),
-                CornerRadius = new CornerRadius(6),
-                Padding = new Thickness(10),
-                Margin = new Thickness(0, 6, 0, 10),
                 Child = new TextBlock
                 {
                     Text = $"{message}: {AltText ?? source}",
-                    TextWrapping = TextWrapping.Wrap,
-                    Opacity = 0.72
+                    TextWrapping = TextWrapping.Wrap
                 }
-            });
+            };
+            fallback.Classes.Add(MarkdownStyleKeys.ImageFallback);
+            if (fallback.Child is TextBlock textBlock)
+            {
+                textBlock.Classes.Add(MarkdownStyleKeys.ImageFallbackText);
+            }
+
+            SetContent(fallback);
         });
     }
 

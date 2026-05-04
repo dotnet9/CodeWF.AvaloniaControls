@@ -27,21 +27,37 @@ public static class MarkdownStyleKeys
     public const string Heading5Border = "MdH5Border";
     public const string Heading6Border = "MdH6Border";
     public const string CodeBlock = "MdCodeBlock";
+    public const string CodeBlockContent = "MdCodeBlockContent";
+    public const string CodeBlockHeader = "MdCodeBlockHeader";
+    public const string CodeBlockScrollViewer = "MdCodeBlockScrollViewer";
+    public const string CodeBlockText = "MdCodeBlockText";
     public const string CodeLanguage = "MdCodeLanguage";
     public const string CopyButton = "MdCopyButton";
     public const string List = "MdList";
     public const string ListItem = "MdListItem";
+    public const string ListItemContent = "MdListItemContent";
     public const string ListMarker = "MdListMarker";
+    public const string TaskMarkerBox = "MdTaskMarkerBox";
     public const string Quote = "MdQuote";
+    public const string QuoteContent = "MdQuoteContent";
     public const string ThematicBreak = "MdThematicBreak";
     public const string Table = "MdTable";
     public const string TableHeaderCell = "MdTableHeaderCell";
     public const string TableCell = "MdTableCell";
+    public const string TableCellContent = "MdTableCellContent";
     public const string HtmlBlock = "MdHtmlBlock";
     public const string UnknownBlock = "MdUnknownBlock";
     public const string InlineCode = "MdInlineCode";
     public const string InlineCodeText = "MdInlineCodeText";
     public const string Image = "MdImage";
+    public const string ImageContent = "MdImageContent";
+    public const string ImageFallback = "MdImageFallback";
+    public const string ImageFallbackText = "MdImageFallbackText";
+    public const string ImagePreviewWindow = "MdImagePreviewWindow";
+    public const string ImagePreviewToolbar = "MdImagePreviewToolbar";
+    public const string ImagePreviewButton = "MdImagePreviewButton";
+    public const string ImagePreviewZoomText = "MdImagePreviewZoomText";
+    public const string ImagePreviewContent = "MdImagePreviewContent";
     public const string Link = "MdLink";
 
     public static string GetHeadingClass(int level)

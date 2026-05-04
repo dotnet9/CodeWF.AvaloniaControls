@@ -16,6 +16,7 @@
                     <SolidColorBrush x:Key="CodeWFMarkdownRedScarletHeaderBrush" Color="#522522" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
+            <x:Double x:Key="CodeWFMarkdownRedScarletHeading1FontSize">31</x:Double>
         </ResourceDictionary>
     </Styles.Resources>
 
@@ -24,6 +25,6 @@
         <Setter Property="QuoteBackgroundBrush" Value="{DynamicResource CodeWFMarkdownRedScarletSoftBrush}" />
         <Setter Property="InlineCodeBackgroundBrush" Value="{DynamicResource CodeWFMarkdownRedScarletSoftBrush}" />
         <Setter Property="TableHeaderBackgroundBrush" Value="{DynamicResource CodeWFMarkdownRedScarletHeaderBrush}" />
-        <Setter Property="Heading1FontSize" Value="31" />
+        <Setter Property="Heading1FontSize" Value="{DynamicResource CodeWFMarkdownRedScarletHeading1FontSize}" />
     </Style>
 </Styles>

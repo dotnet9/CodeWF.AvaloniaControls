@@ -3,11 +3,10 @@
 | 名称 | NuGet | 下载量 |
 |------|-------|--------|
 | CodeWF.AvaloniaControls | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls)](https://www.nuget.org/packages/CodeWF.AvaloniaControls/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls)](https://www.nuget.org/packages/CodeWF.AvaloniaControls/) |
+| CodeWF.AvaloniaControls.Themes | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Themes/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Themes/) |
 | CodeWF.AvaloniaControls.DataGrid | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.DataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.DataGrid/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.DataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.DataGrid/) |
 | CodeWF.AvaloniaControls.Dock | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) |
 | CodeWF.AvaloniaControls.ProDataGrid | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) |
-| CodeWF.Core | [![NuGet](https://img.shields.io/nuget/v/CodeWF.Core.svg)](https://www.nuget.org/packages/CodeWF.Core/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.Core.svg)](https://www.nuget.org/packages/CodeWF.Core/) |
-| CodeWF.Themes | [![NuGet](https://img.shields.io/nuget/v/CodeWF.Themes.svg)](https://www.nuget.org/packages/CodeWF.Themes/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.Themes.svg)](https://www.nuget.org/packages/CodeWF.Themes/) |
 
 这是一个基于 .NET 11 与 Avalonia 12 的开源控件仓库，包含可复用类库、兼容旧版免费表格链路的辅助封装，以及可直接运行的示例工程。
 
@@ -34,7 +33,7 @@ Install-Package CodeWF.AvaloniaControls
 - `CodeWF.AvaloniaControls`：通用自定义控件
 - `CodeWF.AvaloniaControls.Dock`：适配 Semi 主题的 Dock 扩展控件
 - `CodeWF.AvaloniaControls.ProDataGrid`：基于 `ProDataGrid` 的开源高性能表格辅助包
-- `CodeWF.Core` 与 `CodeWF.Themes`：共享基础包与主题支持包
+- `CodeWF.AvaloniaControls.Themes`：`CodeWF.AvaloniaControls` 的控件模板与主题资源包
 
 ### 旧版免费 DataGrid / TreeDataGrid 链路
 
@@ -50,7 +49,6 @@ Install-Package CodeWF.AvaloniaControls
 - `CodeWF.AvaloniaControls.TreeDataGridLegacyDemo`：旧版免费 TreeDataGrid 示例
 - `CodeWF.AvaloniaControls.DockDemo`、`CodeWF.AvaloniaControls.DockPrismDemo`、`CodeWF.AvaloniaControls.DockReactiveUIDemo`：Dock 集成示例
 - `CodeWF.AvaloniaControls.FluentStarterDemo`：轻量启动窗口示例
-- `CodeWF.Themes.StatusBadgeDemo`：StatusBadge 专项示例
 
 ## 公共配置
 

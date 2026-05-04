@@ -16,6 +16,7 @@
                     <SolidColorBrush x:Key="CodeWFMarkdownTechnologyBlueHeaderBrush" Color="#153A64" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
+            <x:Double x:Key="CodeWFMarkdownTechnologyBlueParagraphLineHeight">29</x:Double>
         </ResourceDictionary>
     </Styles.Resources>
 
@@ -24,6 +25,6 @@
         <Setter Property="QuoteBackgroundBrush" Value="{DynamicResource CodeWFMarkdownTechnologyBlueSoftBrush}" />
         <Setter Property="InlineCodeBackgroundBrush" Value="{DynamicResource CodeWFMarkdownTechnologyBlueSoftBrush}" />
         <Setter Property="TableHeaderBackgroundBrush" Value="{DynamicResource CodeWFMarkdownTechnologyBlueHeaderBrush}" />
-        <Setter Property="ParagraphLineHeight" Value="29" />
+        <Setter Property="ParagraphLineHeight" Value="{DynamicResource CodeWFMarkdownTechnologyBlueParagraphLineHeight}" />
     </Style>
 </Styles>

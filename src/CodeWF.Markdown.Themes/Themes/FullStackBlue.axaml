@@ -16,6 +16,7 @@
                     <SolidColorBrush x:Key="CodeWFMarkdownFullStackBlueHeaderBrush" Color="#1B3163" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
+            <x:Double x:Key="CodeWFMarkdownFullStackBlueHeading1FontSize">32</x:Double>
         </ResourceDictionary>
     </Styles.Resources>
 
@@ -24,6 +25,6 @@
         <Setter Property="QuoteBackgroundBrush" Value="{DynamicResource CodeWFMarkdownFullStackBlueSoftBrush}" />
         <Setter Property="InlineCodeBackgroundBrush" Value="{DynamicResource CodeWFMarkdownFullStackBlueSoftBrush}" />
         <Setter Property="TableHeaderBackgroundBrush" Value="{DynamicResource CodeWFMarkdownFullStackBlueHeaderBrush}" />
-        <Setter Property="Heading1FontSize" Value="32" />
+        <Setter Property="Heading1FontSize" Value="{DynamicResource CodeWFMarkdownFullStackBlueHeading1FontSize}" />
     </Style>
 </Styles>

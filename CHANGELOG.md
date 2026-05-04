@@ -1,5 +1,12 @@
 # Changelog
 
+## 12.0.2 - 2026-05-05
+
+- Split `CodeWF.AvaloniaControls` into a core control package and the new `CodeWF.AvaloniaControls.Themes` template/resource package.
+- Moved `StatusBadge` from the obsolete `CodeWF.Core` / `CodeWF.Themes` package line into `CodeWF.AvaloniaControls`.
+- Removed the obsolete `CodeWF.Core`, `CodeWF.Themes`, and `CodeWF.Themes.StatusBadgeDemo` projects from the solution and scripts.
+- Added the `StatusBadge` sample to `CodeWF.AvaloniaControls.Showcase`.
+
 ## 12.0.2 - 2026-05-02
 
 - Switched the repository to central NuGet package management with `Directory.Packages.props`.

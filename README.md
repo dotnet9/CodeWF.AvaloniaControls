@@ -3,11 +3,10 @@
 | Name | NuGet | Download |
 |------|-------|----------|
 | CodeWF.AvaloniaControls | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls)](https://www.nuget.org/packages/CodeWF.AvaloniaControls/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls)](https://www.nuget.org/packages/CodeWF.AvaloniaControls/) |
+| CodeWF.AvaloniaControls.Themes | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Themes/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Themes/) |
 | CodeWF.AvaloniaControls.DataGrid | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.DataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.DataGrid/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.DataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.DataGrid/) |
 | CodeWF.AvaloniaControls.Dock | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) |
 | CodeWF.AvaloniaControls.ProDataGrid | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) |
-| CodeWF.Core | [![NuGet](https://img.shields.io/nuget/v/CodeWF.Core.svg)](https://www.nuget.org/packages/CodeWF.Core/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.Core.svg)](https://www.nuget.org/packages/CodeWF.Core/) |
-| CodeWF.Themes | [![NuGet](https://img.shields.io/nuget/v/CodeWF.Themes.svg)](https://www.nuget.org/packages/CodeWF.Themes/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.Themes.svg)](https://www.nuget.org/packages/CodeWF.Themes/) |
 
 An open-source Avalonia control repository based on .NET 11 and Avalonia 12, including reusable libraries, legacy free-grid compatibility helpers, and runnable samples.
 
@@ -31,10 +30,10 @@ Install-Package CodeWF.AvaloniaControls
 
 ### Avalonia 12 main line
 
-- `CodeWF.AvaloniaControls`: general-purpose custom controls
+- `CodeWF.AvaloniaControls`: general-purpose custom control APIs, state models, helpers, and drawing logic
+- `CodeWF.AvaloniaControls.Themes`: control templates and visual resources for the main control package
 - `CodeWF.AvaloniaControls.Dock`: Dock extension controls styled for the Semi theme line
 - `CodeWF.AvaloniaControls.ProDataGrid`: open-source high-performance grid helper package built on `ProDataGrid`
-- `CodeWF.Core` and `CodeWF.Themes`: shared base and theme support packages
 
 ### Legacy free DataGrid / TreeDataGrid line
 
@@ -50,7 +49,6 @@ Install-Package CodeWF.AvaloniaControls
 - `CodeWF.AvaloniaControls.TreeDataGridLegacyDemo`: legacy free TreeDataGrid sample
 - `CodeWF.AvaloniaControls.DockDemo`, `CodeWF.AvaloniaControls.DockPrismDemo`, `CodeWF.AvaloniaControls.DockReactiveUIDemo`: Dock integration samples
 - `CodeWF.AvaloniaControls.FluentStarterDemo`: lightweight starter-window sample
-- `CodeWF.Themes.StatusBadgeDemo`: focused StatusBadge sample
 
 ## Shared Configuration
 

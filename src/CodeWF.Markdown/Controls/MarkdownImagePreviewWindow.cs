@@ -31,18 +31,15 @@ internal sealed class MarkdownImagePreviewWindow : Window
         _originalHeight = Math.Max(1, bitmap.PixelSize.Height);
 
         Title = string.IsNullOrWhiteSpace(title) ? "图片预览" : title;
-        Width = 1120;
-        Height = 760;
-        MinWidth = 720;
-        MinHeight = 480;
+        Classes.Add(MarkdownStyleKeys.ImagePreviewWindow);
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
         _zoomText = new TextBlock
         {
-            MinWidth = 58,
             TextAlignment = TextAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center
         };
+        _zoomText.Classes.Add(MarkdownStyleKeys.ImagePreviewZoomText);
 
         _image = new Image
         {
@@ -52,13 +49,15 @@ internal sealed class MarkdownImagePreviewWindow : Window
             VerticalAlignment = VerticalAlignment.Center
         };
 
+        var imageHost = new Border
+        {
+            Child = _image
+        };
+        imageHost.Classes.Add(MarkdownStyleKeys.ImagePreviewContent);
+
         _scrollViewer = new ScrollViewer
         {
-            Content = new Border
-            {
-                Padding = new Thickness(24),
-                Child = _image
-            },
+            Content = imageHost,
             HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto,
             VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto
         };
@@ -82,10 +81,9 @@ internal sealed class MarkdownImagePreviewWindow : Window
         var toolbar = new StackPanel
         {
             Orientation = Orientation.Horizontal,
-            Spacing = 8,
-            Margin = new Thickness(12),
             HorizontalAlignment = HorizontalAlignment.Left
         };
+        toolbar.Classes.Add(MarkdownStyleKeys.ImagePreviewToolbar);
 
         toolbar.Children.Add(CreateButton("缩小", () => SetZoom(_zoom / ZoomStep)));
         toolbar.Children.Add(CreateButton("放大", () => SetZoom(_zoom * ZoomStep)));
@@ -106,9 +104,9 @@ internal sealed class MarkdownImagePreviewWindow : Window
         var button = new Button
         {
             Content = text,
-            Padding = new Thickness(12, 6),
             VerticalAlignment = VerticalAlignment.Center
         };
+        button.Classes.Add(MarkdownStyleKeys.ImagePreviewButton);
         button.Click += (_, _) => action();
         return button;
     }
@@ -126,8 +124,9 @@ internal sealed class MarkdownImagePreviewWindow : Window
 
     private void FitToWindow()
     {
-        var availableWidth = Math.Max(1, _scrollViewer.Bounds.Width - 64);
-        var availableHeight = Math.Max(1, _scrollViewer.Bounds.Height - 64);
+        var padding = (_scrollViewer.Content as Border)?.Padding ?? default;
+        var availableWidth = Math.Max(1, _scrollViewer.Bounds.Width - padding.Left - padding.Right);
+        var availableHeight = Math.Max(1, _scrollViewer.Bounds.Height - padding.Top - padding.Bottom);
         SetZoom(Math.Min(availableWidth / _originalWidth, availableHeight / _originalHeight));
     }
 
