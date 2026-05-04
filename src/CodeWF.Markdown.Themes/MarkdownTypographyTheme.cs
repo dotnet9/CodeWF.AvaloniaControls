@@ -1,7 +1,7 @@
 namespace CodeWF.Markdown.Themes;
 
 /// <summary>
-/// Describes one typography theme shipped by CodeWF.Markdown.Themes.
+/// Describes one typography resource set shipped by CodeWF.Markdown.Themes.
 /// </summary>
 public sealed record MarkdownTypographyTheme(string Name, string Key);
 
@@ -28,17 +28,17 @@ public static class MarkdownTypographyThemes
     [
         new("橙心", OrangeHeart),
         new("墨黑", InkBlack),
-        new("姹紫", ColorfulPurple),
+        new("彩紫", ColorfulPurple),
         new("嫩青", TenderGreen),
         new("绿意", Verdant),
         new("红绯", RedScarlet),
-        new("蓝莓", BlueGlow),
+        new("蓝萤", BlueGlow),
         new("科技蓝", TechnologyBlue),
         new("兰青", LanQing),
         new("山吹", Yamabuki),
-        new("前端之巅同款", FrontendPeak),
+        new("前端之峰", FrontendPeak),
         new("极客黑", GeekBlack),
-        new("简", Simple),
+        new("简洁", Simple),
         new("蔷薇紫", RosePurple),
         new("萌绿", CuteGreen),
         new("全栈蓝", FullStackBlue),

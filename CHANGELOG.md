@@ -2,6 +2,10 @@
 
 ## 12.0.2 - 2026-05-05
 
+- Split package versioning into five independently maintained version groups: controls/themes, DataGrid, Dock, ProDataGrid, and Markdown/themes.
+- Added Markdown packages to the root packing script so `CodeWF.Markdown` and `CodeWF.Markdown.Themes` are emitted with the other library packages.
+- Added a `GridSplitter` between the Markdown sample editor and preview panes for live layout testing.
+- Improved Markdown rendering for bottom padding, long link wrapping, Markdig task/reference nodes, incremental stress testing, and code-block selection readability.
 - Split `CodeWF.AvaloniaControls` into a core control package and the new `CodeWF.AvaloniaControls.Themes` template/resource package.
 - Moved `StatusBadge` from the obsolete `CodeWF.Core` / `CodeWF.Themes` package line into `CodeWF.AvaloniaControls`.
 - Removed the obsolete `CodeWF.Core`, `CodeWF.Themes`, and `CodeWF.Themes.StatusBadgeDemo` projects from the solution and scripts.

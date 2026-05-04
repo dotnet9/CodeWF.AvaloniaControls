@@ -1,6 +1,11 @@
 <Project>
 	<PropertyGroup>
-		<Version>12.0.2</Version>
+		<CodeWFAvaloniaControlsVersion>12.0.2</CodeWFAvaloniaControlsVersion>
+		<CodeWFAvaloniaControlsDataGridVersion>12.0.2</CodeWFAvaloniaControlsDataGridVersion>
+		<CodeWFAvaloniaControlsDockVersion>12.0.2</CodeWFAvaloniaControlsDockVersion>
+		<CodeWFAvaloniaControlsProDataGridVersion>12.0.2</CodeWFAvaloniaControlsProDataGridVersion>
+		<CodeWFMarkdownVersion>12.0.2</CodeWFMarkdownVersion>
+		<Version Condition="'$(Version)' == ''">$(CodeWFAvaloniaControlsVersion)</Version>
 		<Authors>沙漠尽头的狼</Authors>
 		<RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>

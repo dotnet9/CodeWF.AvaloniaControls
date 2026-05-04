@@ -2,6 +2,7 @@
 	<PropertyGroup>
 		<Title>CodeWF.AvaloniaControls.DataGrid</Title>
 		<TargetFrameworks>net8.0;net9.0;net10.0;net11.0</TargetFrameworks>
+		<Version>$(CodeWFAvaloniaControlsDataGridVersion)</Version>
 		<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>

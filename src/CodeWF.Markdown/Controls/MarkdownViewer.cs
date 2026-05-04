@@ -17,6 +17,7 @@ using CodeWF.Markdown.Helpers;
 using CodeWF.Markdown.Rendering;
 
 using Markdig;
+using Markdig.Extensions.TaskLists;
 using Markdig.Extensions.Tables;
 using Markdig.Syntax;
 using Markdig.Syntax.Inlines;
@@ -51,9 +52,6 @@ public class MarkdownViewer : TemplatedControl
 
     public static readonly StyledProperty<string?> ValueProperty =
         AvaloniaProperty.Register<MarkdownViewer, string?>(nameof(Value));
-
-    public static readonly StyledProperty<string> TypographyThemeProperty =
-        AvaloniaProperty.Register<MarkdownViewer, string>(nameof(TypographyTheme), MarkdownStyleKeys.DefaultTypographyTheme);
 
     public static readonly StyledProperty<string?> BasePathProperty =
         AvaloniaProperty.Register<MarkdownViewer, string?>(nameof(BasePath));
@@ -166,15 +164,6 @@ public class MarkdownViewer : TemplatedControl
     {
         get => GetValue(ValueProperty);
         set => SetValue(ValueProperty, value);
-    }
-
-    /// <summary>
-    /// 排版主题 Key 会映射为 MdTheme{Key} 样式类，应用侧可以用同样规则追加自己的排版主题。
-    /// </summary>
-    public string TypographyTheme
-    {
-        get => GetValue(TypographyThemeProperty);
-        set => SetValue(TypographyThemeProperty, value);
     }
 
     /// <summary>
@@ -386,11 +375,6 @@ public class MarkdownViewer : TemplatedControl
                 viewer.Markdown = e.NewValue as string;
             }
         });
-        TypographyThemeProperty.Changed.AddClassHandler<MarkdownViewer>((viewer, _) =>
-        {
-            viewer.UpdateThemeClass();
-            viewer.QueueRenderDocument(MarkdownRenderMode.Full);
-        });
         BasePathProperty.Changed.AddClassHandler<MarkdownViewer>((viewer, _) => viewer.QueueRenderDocument(MarkdownRenderMode.Full));
     }
 
@@ -399,7 +383,6 @@ public class MarkdownViewer : TemplatedControl
         Focusable = true;
         ContextMenu = CreateViewerContextMenu();
         TextOptions.SetBaselinePixelAlignment(this, BaselinePixelAlignment.Aligned);
-        UpdateThemeClass();
     }
 
     /// <summary>
@@ -809,6 +792,8 @@ public class MarkdownViewer : TemplatedControl
         {
             ParagraphBlock paragraph => CreateParagraph(paragraph),
             HeadingBlock heading => CreateHeading(heading),
+            LinkReferenceDefinitionGroup => null,
+            LinkReferenceDefinition => null,
             FencedCodeBlock codeBlock => CreateCodeBlock(codeBlock),
             CodeBlock codeBlock => CreateCodeBlock(codeBlock),
             ListBlock list => CreateList(list),
@@ -816,7 +801,7 @@ public class MarkdownViewer : TemplatedControl
             ThematicBreakBlock => CreateThematicBreak(),
             Table table => CreateTable(table),
             HtmlBlock htmlBlock => CreateFallbackText(htmlBlock.Lines.ToString(), MarkdownStyleKeys.HtmlBlock),
-            _ => CreateFallbackText(block.ToString() ?? string.Empty, MarkdownStyleKeys.UnknownBlock)
+            _ => CreateUnknownBlock(block)
         };
     }
 
@@ -842,6 +827,20 @@ public class MarkdownViewer : TemplatedControl
         foreach (var inline in ConvertInlines(paragraph.Inline, stripTaskPrefix))
         {
             textBlock.Inlines?.Add(inline);
+        }
+
+        if (TryGetSingleTextLink(paragraph.Inline, out var linkUrl))
+        {
+            textBlock.Cursor = new Cursor(StandardCursorType.Hand);
+            textBlock.PointerReleased += (_, e) =>
+            {
+                if (e.InitialPressMouseButton == MouseButton.Left
+                    && string.IsNullOrEmpty(textBlock.SelectedText)
+                    && !string.IsNullOrWhiteSpace(linkUrl))
+                {
+                    UrlHelper.Open(linkUrl);
+                }
+            };
         }
 
         return textBlock;
@@ -1148,7 +1147,16 @@ public class MarkdownViewer : TemplatedControl
         BindTheme(textBlock, SelectableTextBlock.ForegroundProperty, MutedTextBrushProperty);
         BindTheme(textBlock, SelectableTextBlock.FontFamilyProperty, ContentFontFamilyProperty);
         BindTheme(textBlock, SelectableTextBlock.FontSizeProperty, ParagraphFontSizeProperty);
+        BindTheme(textBlock, SelectableTextBlock.LineHeightProperty, ParagraphLineHeightProperty);
         return textBlock;
+    }
+
+    private Control? CreateUnknownBlock(Block block)
+    {
+        var text = block.ToString() ?? string.Empty;
+        return IsTypeNameFallback(text, block.GetType())
+            ? null
+            : CreateFallbackText(text, MarkdownStyleKeys.UnknownBlock);
     }
 
     private IEnumerable<Inline> ConvertInlines(ContainerInline? container, bool stripTaskPrefix = false)
@@ -1198,6 +1206,10 @@ public class MarkdownViewer : TemplatedControl
                 result.Add(CreateInlineCode(code.Content));
                 return result;
 
+            case TaskList:
+                stripTaskPrefix = false;
+                return result;
+
             case EmphasisInline emphasis:
                 stripTaskPrefix = false;
                 result.Add(CreateEmphasis(emphasis));
@@ -1218,11 +1230,32 @@ public class MarkdownViewer : TemplatedControl
                 result.Add(new Run(html.Tag));
                 return result;
 
+            case ContainerInline container:
+                stripTaskPrefix = false;
+                result.Add(CreateContainerSpan(container));
+                return result;
+
             default:
                 stripTaskPrefix = false;
-                result.Add(new Run(inline.ToString()));
+                var text = inline.ToString() ?? string.Empty;
+                if (!IsTypeNameFallback(text, inline.GetType()))
+                {
+                    result.Add(new Run(text));
+                }
+
                 return result;
         }
+    }
+
+    private Span CreateContainerSpan(ContainerInline container)
+    {
+        var span = new Span();
+        foreach (var inline in ConvertInlines(container))
+        {
+            span.Inlines.Add(inline);
+        }
+
+        return span;
     }
 
     private Span CreateEmphasis(EmphasisInline emphasis)
@@ -1278,25 +1311,25 @@ public class MarkdownViewer : TemplatedControl
 
     private Inline CreateLink(LinkInline linkInline)
     {
-        var text = CreateSelectableText(MarkdownStyleKeys.Link);
-        text.Text = ExtractPlainText(linkInline);
-        text.Cursor = new Cursor(StandardCursorType.Hand);
-        text.TextDecorations = TextDecorations.Underline;
-        BindTheme(text, SelectableTextBlock.ForegroundProperty, AccentBrushProperty);
-        BindTheme(text, SelectableTextBlock.FontFamilyProperty, ContentFontFamilyProperty);
-        BindTheme(text, SelectableTextBlock.FontSizeProperty, ParagraphFontSizeProperty);
-        BindTheme(text, SelectableTextBlock.LineHeightProperty, ParagraphLineHeightProperty);
-        text.PointerReleased += (_, e) =>
+        var span = new Span
         {
-            if (e.InitialPressMouseButton == MouseButton.Left
-                && string.IsNullOrEmpty(text.SelectedText)
-                && !string.IsNullOrWhiteSpace(linkInline.Url))
-            {
-                UrlHelper.Open(linkInline.Url);
-            }
+            TextDecorations = TextDecorations.Underline
         };
+        BindTheme(span, TextElement.ForegroundProperty, AccentBrushProperty);
+        BindTheme(span, TextElement.FontFamilyProperty, ContentFontFamilyProperty);
+        BindTheme(span, TextElement.FontSizeProperty, ParagraphFontSizeProperty);
 
-        return CreateInlineContainer(text);
+        foreach (var inline in ConvertInlines(linkInline))
+        {
+            span.Inlines.Add(inline);
+        }
+
+        if (span.Inlines.Count == 0)
+        {
+            span.Inlines.Add(new Run(linkInline.Url ?? string.Empty));
+        }
+
+        return span;
     }
 
     private static InlineUIContainer CreateInlineContainer(Control control)
@@ -1325,8 +1358,11 @@ public class MarkdownViewer : TemplatedControl
                 LiteralInline literal => literal.Content.ToString(),
                 CodeInline code => code.Content,
                 LineBreakInline => Environment.NewLine,
+                TaskList => string.Empty,
                 ContainerInline nested => ExtractPlainText(nested),
-                _ => child.ToString() ?? string.Empty
+                _ => IsTypeNameFallback(child.ToString() ?? string.Empty, child.GetType())
+                    ? string.Empty
+                    : child.ToString() ?? string.Empty
             });
             child = child.NextSibling;
         }
@@ -1370,27 +1406,24 @@ public class MarkdownViewer : TemplatedControl
         foreach (var className in classes.Where(name => !string.IsNullOrWhiteSpace(name)))
         {
             control.Classes.Add(className);
-            control.Classes.Add(MarkdownStyleKeys.GetThemedElementClass(className, TypographyTheme));
         }
-    }
-
-    private void UpdateThemeClass()
-    {
-        foreach (var className in Classes
-                     .Where(name => name.StartsWith(MarkdownStyleKeys.ThemeClassPrefix, StringComparison.Ordinal))
-                     .ToList())
-        {
-            Classes.Remove(className);
-        }
-
-        Classes.Add(MarkdownStyleKeys.GetThemeClass(TypographyTheme));
     }
 
     private static bool TryReadTaskState(ListItemBlock item, out bool isChecked)
     {
         isChecked = false;
-        if (item.FirstOrDefault() is not ParagraphBlock paragraph
-            || paragraph.Inline?.FirstChild is not LiteralInline literal)
+        if (item.FirstOrDefault() is not ParagraphBlock paragraph)
+        {
+            return false;
+        }
+
+        if (paragraph.Inline?.FirstChild is TaskList taskList)
+        {
+            isChecked = taskList.Checked;
+            return true;
+        }
+
+        if (paragraph.Inline?.FirstChild is not LiteralInline literal)
         {
             return false;
         }
@@ -1412,6 +1445,20 @@ public class MarkdownViewer : TemplatedControl
             || text.StartsWith("[ ]", StringComparison.Ordinal))
         {
             stripped = text[3..];
+            return true;
+        }
+
+        return false;
+    }
+
+    private static bool TryGetSingleTextLink(ContainerInline? container, out string? url)
+    {
+        url = null;
+        if (container?.FirstChild is LinkInline { IsImage: false } link
+            && link.NextSibling is null
+            && !string.IsNullOrWhiteSpace(link.Url))
+        {
+            url = link.Url;
             return true;
         }
 
@@ -1451,6 +1498,9 @@ public class MarkdownViewer : TemplatedControl
                 AppendIndentedLine(builder, indent, ExtractPlainText(paragraph.Inline));
                 builder.AppendLine();
                 break;
+            case LinkReferenceDefinitionGroup:
+            case LinkReferenceDefinition:
+                break;
             case CodeBlock codeBlock:
                 AppendIndentedLines(builder, indent, codeBlock.Lines.ToString().TrimEnd());
                 builder.AppendLine();
@@ -1479,10 +1529,21 @@ public class MarkdownViewer : TemplatedControl
                 builder.AppendLine();
                 break;
             default:
-                AppendIndentedLine(builder, indent, block.ToString() ?? string.Empty);
-                builder.AppendLine();
+                var text = block.ToString() ?? string.Empty;
+                if (!IsTypeNameFallback(text, block.GetType()))
+                {
+                    AppendIndentedLine(builder, indent, text);
+                    builder.AppendLine();
+                }
+
                 break;
         }
+    }
+
+    private static bool IsTypeNameFallback(string text, Type type)
+    {
+        return string.Equals(text, type.FullName, StringComparison.Ordinal)
+               || string.Equals(text, type.Name, StringComparison.Ordinal);
     }
 
     private static void AppendPlainTextList(StringBuilder builder, ListBlock list, int indent)

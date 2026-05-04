@@ -6,10 +6,6 @@ namespace CodeWF.Markdown;
 /// </summary>
 public static class MarkdownStyleKeys
 {
-    public const string DefaultTypographyTheme = "Simple";
-    public const string ThemeClassPrefix = "MdTheme";
-    public const string ThemedElementClassSeparator = "_";
-
     public const string Document = "MdDocument";
     public const string Paragraph = "MdParagraph";
     public const string Heading = "MdHeading";
@@ -60,6 +56,20 @@ public static class MarkdownStyleKeys
     public const string ImagePreviewContent = "MdImagePreviewContent";
     public const string Link = "MdLink";
 
+    public const string AccentBrushResource = "CodeWFMarkdownAccentBrush";
+    public const string QuoteBackgroundBrushResource = "CodeWFMarkdownQuoteBackgroundBrush";
+    public const string InlineCodeBackgroundBrushResource = "CodeWFMarkdownInlineCodeBackgroundBrush";
+    public const string TableHeaderBackgroundBrushResource = "CodeWFMarkdownTableHeaderBackgroundBrush";
+    public const string CodeBackgroundBrushResource = "CodeWFMarkdownCodeBackgroundBrush";
+    public const string ParagraphFontSizeResource = "CodeWFMarkdownParagraphFontSize";
+    public const string ParagraphLineHeightResource = "CodeWFMarkdownParagraphLineHeight";
+    public const string Heading1FontSizeResource = "CodeWFMarkdownHeading1FontSize";
+    public const string Heading2FontSizeResource = "CodeWFMarkdownHeading2FontSize";
+    public const string Heading3FontSizeResource = "CodeWFMarkdownHeading3FontSize";
+    public const string Heading4FontSizeResource = "CodeWFMarkdownHeading4FontSize";
+    public const string Heading5FontSizeResource = "CodeWFMarkdownHeading5FontSize";
+    public const string Heading6FontSizeResource = "CodeWFMarkdownHeading6FontSize";
+
     public static string GetHeadingClass(int level)
     {
         return level switch
@@ -86,19 +96,4 @@ public static class MarkdownStyleKeys
         };
     }
 
-    public static string GetThemeClass(string? typographyTheme)
-    {
-        return $"{ThemeClassPrefix}{NormalizeThemeKey(typographyTheme)}";
-    }
-
-    public static string GetThemedElementClass(string elementClass, string? typographyTheme)
-    {
-        return $"{elementClass}{ThemedElementClassSeparator}{NormalizeThemeKey(typographyTheme)}";
-    }
-
-    public static string NormalizeThemeKey(string? typographyTheme)
-    {
-        var value = string.IsNullOrWhiteSpace(typographyTheme) ? DefaultTypographyTheme : typographyTheme.Trim();
-        return string.Concat(value.Where(char.IsLetterOrDigit));
-    }
 }

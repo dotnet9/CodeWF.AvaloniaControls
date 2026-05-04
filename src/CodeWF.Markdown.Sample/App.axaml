@@ -7,7 +7,6 @@
     <Application.Styles>
         <FluentTheme />
         <markdownThemes:MarkdownThemes />
-        <StyleInclude Source="/Themes/SampleTypographyTheme.axaml" />
         <Style Selector="ScrollViewer">
             <Setter Property="AllowAutoHide" Value="False" />
         </Style>

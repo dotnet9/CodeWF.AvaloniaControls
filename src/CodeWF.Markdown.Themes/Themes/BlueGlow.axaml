@@ -1,28 +1,20 @@
-<Styles
+<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:md="https://codewf.com">
-    <Styles.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="CodeWFMarkdownBlueGlowAccentBrush" Color="#2488FF" />
-                    <SolidColorBrush x:Key="CodeWFMarkdownBlueGlowSoftBrush" Color="#EDF6FF" />
-                    <SolidColorBrush x:Key="CodeWFMarkdownBlueGlowHeaderBrush" Color="#D8EBFF" />
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Dark">
-                    <SolidColorBrush x:Key="CodeWFMarkdownBlueGlowAccentBrush" Color="#78B7FF" />
-                    <SolidColorBrush x:Key="CodeWFMarkdownBlueGlowSoftBrush" Color="#142D46" />
-                    <SolidColorBrush x:Key="CodeWFMarkdownBlueGlowHeaderBrush" Color="#193A5F" />
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
+    x:Class="CodeWF.Markdown.Themes.Themes.BlueGlowTypographyResources">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="CodeWFMarkdownAccentBrush" Color="#2488FF" />
+            <SolidColorBrush x:Key="CodeWFMarkdownQuoteBackgroundBrush" Color="#EDF6FF" />
+            <SolidColorBrush x:Key="CodeWFMarkdownInlineCodeBackgroundBrush" Color="#EDF6FF" />
+            <SolidColorBrush x:Key="CodeWFMarkdownTableHeaderBackgroundBrush" Color="#D8EBFF" />
         </ResourceDictionary>
-    </Styles.Resources>
 
-    <Style Selector="md|MarkdownViewer.MdThemeBlueGlow">
-        <Setter Property="AccentBrush" Value="{DynamicResource CodeWFMarkdownBlueGlowAccentBrush}" />
-        <Setter Property="QuoteBackgroundBrush" Value="{DynamicResource CodeWFMarkdownBlueGlowSoftBrush}" />
-        <Setter Property="InlineCodeBackgroundBrush" Value="{DynamicResource CodeWFMarkdownBlueGlowSoftBrush}" />
-        <Setter Property="TableHeaderBackgroundBrush" Value="{DynamicResource CodeWFMarkdownBlueGlowHeaderBrush}" />
-    </Style>
-</Styles>
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="CodeWFMarkdownAccentBrush" Color="#78B7FF" />
+            <SolidColorBrush x:Key="CodeWFMarkdownQuoteBackgroundBrush" Color="#142D46" />
+            <SolidColorBrush x:Key="CodeWFMarkdownInlineCodeBackgroundBrush" Color="#142D46" />
+            <SolidColorBrush x:Key="CodeWFMarkdownTableHeaderBackgroundBrush" Color="#193A5F" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

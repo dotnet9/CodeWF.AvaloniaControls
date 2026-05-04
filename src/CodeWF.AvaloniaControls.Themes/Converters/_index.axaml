@@ -3,10 +3,7 @@
                     xmlns:codewf="https://codewf.com">
     <codewf:TrapezoidShapedTabItemPaddingConverter x:Key="TrapezoidShapedTabItemPaddingConverter" />
     <codewf:StatusBadgeLeftTextBorderCornerRadiusConverter x:Key="StatusBadgeLeftTextBorderCornerRadiusConverter" />
-	<codewf:StatusLabelCornerRadiusConverter x:Key="StatusLabelCornerRadiusConverter" />
-	<codewf:StatusLabelLeftTextCornerRadiusConverter x:Key="StatusLabelLeftTextCornerRadiusConverter" />
 	<codewf:StatusCardKindForegroundConverter x:Key="StatusCardKindForegroundConverter" />
-	<codewf:StatusLabelKindBorderBrushConverter x:Key="StatusLabelKindBorderBrushConverter" />
 	<codewf:StatusLabelKindBackgroundConverter x:Key="StatusLabelKindBackgroundConverter" />
 	<codewf:String2ImageConverter x:Key="String2ImageConverter" />
 </ResourceDictionary>

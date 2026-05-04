@@ -1,5 +1,6 @@
 using System.Globalization;
 
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Documents;
 using Avalonia.Controls.Primitives;
@@ -38,7 +39,10 @@ internal static class CodeHighlighter
             TextWrapping = TextWrapping.NoWrap,
             FontFamily = fontFamily,
             FontSize = fontSize,
-            LineHeight = lineHeight
+            LineHeight = lineHeight,
+            Margin = new Thickness(0, 0, 0, 6),
+            SelectionBrush = new ImmutableSolidColorBrush(Color.FromArgb(0xCC, 0x2F, 0x6F, 0xD6)),
+            SelectionForegroundBrush = Brushes.White
         };
         textBlock.Classes.Add(MarkdownStyleKeys.CodeBlockText);
         TextOptions.SetBaselinePixelAlignment(textBlock, BaselinePixelAlignment.Aligned);
@@ -157,18 +161,6 @@ internal static class CodeHighlighter
         if ((fontStyle & TextMateFontStyle.Italic) != 0)
         {
             run.FontStyle = AvaloniaFontStyle.Italic;
-        }
-
-        if ((fontStyle & TextMateFontStyle.Underline) != 0)
-        {
-            run.TextDecorations =
-            [
-                new TextDecoration
-                {
-                    Location = TextDecorationLocation.Underline,
-                    StrokeThicknessUnit = TextDecorationUnit.Pixel
-                }
-            ];
         }
 
         return run;

@@ -29,6 +29,11 @@
             <Setter Property="MinWidth" Value="150" />
             <Setter Property="Margin" Value="0 0 16 0" />
         </Style>
+        <Style Selector="Button.stress-toggle">
+            <Setter Property="MinWidth" Value="118" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Padding" Value="12 0" />
+        </Style>
     </Window.Styles>
 
     <Grid RowDefinitions="Auto,*">
@@ -37,7 +42,7 @@
             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
             BorderThickness="0 0 0 1">
             <Grid ColumnDefinitions="Auto,Auto,Auto,*">
-                <TextBlock Classes="label" Text="黑白主题" />
+                <TextBlock Classes="label" Text="应用主题" />
                 <ComboBox
                     Grid.Column="1"
                     Classes="toolbar-combo"
@@ -56,8 +61,15 @@
             </Grid>
         </Border>
 
-        <Grid Grid.Row="1" ColumnDefinitions="460,*">
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="460" MinWidth="300" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="*" MinWidth="360" />
+            </Grid.ColumnDefinitions>
+
             <Border
+                Grid.Column="0"
                 Padding="14"
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
                 BorderThickness="0 0 1 0">
@@ -66,12 +78,21 @@
                         FontSize="18"
                         FontWeight="SemiBold"
                         Text="Markdown 输入" />
-                    <ComboBox
+                    <Grid
                         Grid.Row="1"
                         Margin="0 10 0 12"
-                        DisplayMemberBinding="{Binding Name}"
-                        ItemsSource="{Binding MarkdownFiles}"
-                        SelectedItem="{Binding SelectedFile}" />
+                        ColumnDefinitions="*,Auto">
+                        <ComboBox
+                            Margin="0 0 10 0"
+                            DisplayMemberBinding="{Binding Name}"
+                            ItemsSource="{Binding MarkdownFiles}"
+                            SelectedItem="{Binding SelectedFile}" />
+                        <Button
+                            Grid.Column="1"
+                            Classes="stress-toggle"
+                            Command="{Binding ToggleIncrementalStressCommand}"
+                            Content="{Binding IncrementalStressButtonText}" />
+                    </Grid>
                     <TextBox
                         Grid.Row="2"
                         AcceptsReturn="True"
@@ -83,11 +104,21 @@
                 </Grid>
             </Border>
 
-            <ScrollViewer Grid.Column="1" Padding="34 28">
+            <GridSplitter
+                Grid.Column="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                ResizeDirection="Columns" />
+
+            <ScrollViewer
+                Grid.Column="2"
+                Padding="34 28 34 72"
+                HorizontalScrollBarVisibility="Disabled"
+                VerticalScrollBarVisibility="Auto">
                 <md:MarkdownViewer
                     BasePath="{Binding MarkdownBasePath}"
-                    Markdown="{Binding Markdown}"
-                    TypographyTheme="{Binding SelectedTypographyThemeKey}" />
+                    Markdown="{Binding Markdown}" />
             </ScrollViewer>
         </Grid>
     </Grid>

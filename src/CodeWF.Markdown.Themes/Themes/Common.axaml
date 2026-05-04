@@ -9,7 +9,11 @@
                     <SolidColorBrush x:Key="CodeWFMarkdownTextBrush" Color="#1F2328" />
                     <SolidColorBrush x:Key="CodeWFMarkdownMutedTextBrush" Color="#667085" />
                     <SolidColorBrush x:Key="CodeWFMarkdownBorderBrush" Color="#D0D7DE" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownAccentBrush" Color="#4B5563" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownQuoteBackgroundBrush" Color="#F6F7F9" />
                     <SolidColorBrush x:Key="CodeWFMarkdownCodeBackgroundBrush" Color="#F6F8FA" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownInlineCodeBackgroundBrush" Color="#F6F7F9" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownTableHeaderBackgroundBrush" Color="#EAECF0" />
                     <SolidColorBrush x:Key="CodeWFMarkdownAccentForegroundBrush" Color="#FFFFFF" />
                 </ResourceDictionary>
 
@@ -17,7 +21,11 @@
                     <SolidColorBrush x:Key="CodeWFMarkdownTextBrush" Color="#E6EDF3" />
                     <SolidColorBrush x:Key="CodeWFMarkdownMutedTextBrush" Color="#9BA7B4" />
                     <SolidColorBrush x:Key="CodeWFMarkdownBorderBrush" Color="#30363D" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownAccentBrush" Color="#D1D5DB" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownQuoteBackgroundBrush" Color="#252933" />
                     <SolidColorBrush x:Key="CodeWFMarkdownCodeBackgroundBrush" Color="#0D1117" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownInlineCodeBackgroundBrush" Color="#252933" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownTableHeaderBackgroundBrush" Color="#303643" />
                     <SolidColorBrush x:Key="CodeWFMarkdownAccentForegroundBrush" Color="#0D1117" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
@@ -31,6 +39,7 @@
             <x:Double x:Key="CodeWFMarkdownHeading5FontSize">18</x:Double>
             <x:Double x:Key="CodeWFMarkdownHeading6FontSize">16</x:Double>
             <x:Double x:Key="CodeWFMarkdownBlockSpacing">8</x:Double>
+            <Thickness x:Key="CodeWFMarkdownDocumentMargin">0 0 0 40</Thickness>
             <Thickness x:Key="CodeWFMarkdownParagraphMargin">0 4 0 10</Thickness>
             <Thickness x:Key="CodeWFMarkdownHeadingMargin">0 18 0 10</Thickness>
             <Thickness x:Key="CodeWFMarkdownHeading2BorderThickness">0 0 0 2</Thickness>
@@ -98,8 +107,12 @@
             <ControlTheme x:Key="{x:Type md:MarkdownViewer}" TargetType="md:MarkdownViewer">
                 <Setter Property="TextBrush" Value="{DynamicResource CodeWFMarkdownTextBrush}" />
                 <Setter Property="MutedTextBrush" Value="{DynamicResource CodeWFMarkdownMutedTextBrush}" />
+                <Setter Property="AccentBrush" Value="{DynamicResource CodeWFMarkdownAccentBrush}" />
+                <Setter Property="QuoteBackgroundBrush" Value="{DynamicResource CodeWFMarkdownQuoteBackgroundBrush}" />
                 <Setter Property="BorderLineBrush" Value="{DynamicResource CodeWFMarkdownBorderBrush}" />
                 <Setter Property="CodeBackgroundBrush" Value="{DynamicResource CodeWFMarkdownCodeBackgroundBrush}" />
+                <Setter Property="InlineCodeBackgroundBrush" Value="{DynamicResource CodeWFMarkdownInlineCodeBackgroundBrush}" />
+                <Setter Property="TableHeaderBackgroundBrush" Value="{DynamicResource CodeWFMarkdownTableHeaderBackgroundBrush}" />
                 <Setter Property="AccentForegroundBrush" Value="{DynamicResource CodeWFMarkdownAccentForegroundBrush}" />
                 <Setter Property="ParagraphFontSize" Value="{DynamicResource CodeWFMarkdownParagraphFontSize}" />
                 <Setter Property="ParagraphLineHeight" Value="{DynamicResource CodeWFMarkdownParagraphLineHeight}" />
@@ -145,6 +158,10 @@
     <Style Selector="Border.MdH2Border">
         <Setter Property="BorderThickness" Value="{DynamicResource CodeWFMarkdownHeading2BorderThickness}" />
         <Setter Property="Padding" Value="{DynamicResource CodeWFMarkdownHeading2Padding}" />
+    </Style>
+
+    <Style Selector="StackPanel.MdDocument">
+        <Setter Property="Margin" Value="{DynamicResource CodeWFMarkdownDocumentMargin}" />
     </Style>
 
     <Style Selector="Border.MdCodeBlock">

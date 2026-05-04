@@ -133,9 +133,6 @@
                     <TabItem Header="TabControl">
                         <pages:TabControlDemo />
                     </TabItem>
-                    <TabItem Header="状态标签">
-                        <pages:StatusLabelDemo />
-                    </TabItem>
                     <TabItem Header="StatusBadge">
                         <pages:StatusBadgeDemo />
                     </TabItem>
