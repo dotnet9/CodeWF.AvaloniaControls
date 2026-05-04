@@ -11,6 +11,9 @@
     <Project Path="src/CodeWF.AvaloniaControls.DockPrismDemo/CodeWF.AvaloniaControls.DockPrismDemo.csproj" />
     <Project Path="src/CodeWF.AvaloniaControls.DockReactiveUIDemo/CodeWF.AvaloniaControls.DockReactiveUIDemo.csproj" />
   </Folder>
+  <Folder Name="/samples/markdown/">
+    <Project Path="src/CodeWF.Markdown.Sample/CodeWF.Markdown.Sample.csproj" />
+  </Folder>
   <Folder Name="/samples/showcase/">
     <Project Path="src/CodeWF.AvaloniaControls.FluentStarterDemo/CodeWF.AvaloniaControls.FluentStarterDemo.csproj" />
     <Project Path="src/CodeWF.AvaloniaControls.Showcase/CodeWF.AvaloniaControls.Showcase.csproj" />
@@ -35,6 +38,8 @@
   <Project Path="src/CodeWF.AvaloniaControls.Dock/CodeWF.AvaloniaControls.Dock.csproj" />
   <Project Path="src/CodeWF.AvaloniaControls.ProDataGrid/CodeWF.AvaloniaControls.ProDataGrid.csproj" />
   <Project Path="src/CodeWF.AvaloniaControls/CodeWF.AvaloniaControls.csproj" />
+  <Project Path="src/CodeWF.Markdown.Themes/CodeWF.Markdown.Themes.csproj" />
+  <Project Path="src/CodeWF.Markdown/CodeWF.Markdown.csproj" />
   <Project Path="src/CodeWF.Themes/CodeWF.Themes.csproj" />
   <Project Path="src/CodeWF/CodeWF.csproj" />
 </Solution>

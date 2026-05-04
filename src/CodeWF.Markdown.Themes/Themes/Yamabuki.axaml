@@ -1,0 +1,29 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:md="https://codewf.com">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="CodeWFMarkdownYamabukiAccentBrush" Color="#D99100" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownYamabukiSoftBrush" Color="#FFF7E6" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownYamabukiHeaderBrush" Color="#FFE8B3" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="CodeWFMarkdownYamabukiAccentBrush" Color="#FFC247" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownYamabukiSoftBrush" Color="#3D2B10" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownYamabukiHeaderBrush" Color="#523914" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <Style Selector="md|MarkdownViewer.MdThemeYamabuki">
+        <Setter Property="AccentBrush" Value="{DynamicResource CodeWFMarkdownYamabukiAccentBrush}" />
+        <Setter Property="QuoteBackgroundBrush" Value="{DynamicResource CodeWFMarkdownYamabukiSoftBrush}" />
+        <Setter Property="InlineCodeBackgroundBrush" Value="{DynamicResource CodeWFMarkdownYamabukiSoftBrush}" />
+        <Setter Property="TableHeaderBackgroundBrush" Value="{DynamicResource CodeWFMarkdownYamabukiHeaderBrush}" />
+        <Setter Property="Heading1FontSize" Value="31" />
+    </Style>
+</Styles>

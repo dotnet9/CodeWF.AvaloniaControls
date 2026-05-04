@@ -1,0 +1,28 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:md="https://codewf.com">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="CodeWFMarkdownOrangeHeartAccentBrush" Color="#EF7060" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownOrangeHeartSoftBrush" Color="#FFF3F0" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownOrangeHeartHeaderBrush" Color="#FFE4DF" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="CodeWFMarkdownOrangeHeartAccentBrush" Color="#FF8A75" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownOrangeHeartSoftBrush" Color="#3A201C" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownOrangeHeartHeaderBrush" Color="#4A2924" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <Style Selector="md|MarkdownViewer.MdThemeOrangeHeart">
+        <Setter Property="AccentBrush" Value="{DynamicResource CodeWFMarkdownOrangeHeartAccentBrush}" />
+        <Setter Property="QuoteBackgroundBrush" Value="{DynamicResource CodeWFMarkdownOrangeHeartSoftBrush}" />
+        <Setter Property="InlineCodeBackgroundBrush" Value="{DynamicResource CodeWFMarkdownOrangeHeartSoftBrush}" />
+        <Setter Property="TableHeaderBackgroundBrush" Value="{DynamicResource CodeWFMarkdownOrangeHeartHeaderBrush}" />
+    </Style>
+</Styles>

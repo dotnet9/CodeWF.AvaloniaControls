@@ -1,0 +1,29 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:md="https://codewf.com">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="CodeWFMarkdownSimpleAccentBrush" Color="#4B5563" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownSimpleSoftBrush" Color="#F6F7F9" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownSimpleHeaderBrush" Color="#EAECF0" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="CodeWFMarkdownSimpleAccentBrush" Color="#D1D5DB" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownSimpleSoftBrush" Color="#252933" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownSimpleHeaderBrush" Color="#303643" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <Style Selector="md|MarkdownViewer.MdThemeSimple">
+        <Setter Property="AccentBrush" Value="{DynamicResource CodeWFMarkdownSimpleAccentBrush}" />
+        <Setter Property="QuoteBackgroundBrush" Value="{DynamicResource CodeWFMarkdownSimpleSoftBrush}" />
+        <Setter Property="InlineCodeBackgroundBrush" Value="{DynamicResource CodeWFMarkdownSimpleSoftBrush}" />
+        <Setter Property="TableHeaderBackgroundBrush" Value="{DynamicResource CodeWFMarkdownSimpleHeaderBrush}" />
+        <Setter Property="ParagraphLineHeight" Value="27" />
+    </Style>
+</Styles>

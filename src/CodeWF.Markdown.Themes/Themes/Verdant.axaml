@@ -1,0 +1,28 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:md="https://codewf.com">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="CodeWFMarkdownVerdantAccentBrush" Color="#31A24C" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownVerdantSoftBrush" Color="#EEF9F0" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownVerdantHeaderBrush" Color="#DDF4E4" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="CodeWFMarkdownVerdantAccentBrush" Color="#60D77A" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownVerdantSoftBrush" Color="#17351D" />
+                    <SolidColorBrush x:Key="CodeWFMarkdownVerdantHeaderBrush" Color="#214A29" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <Style Selector="md|MarkdownViewer.MdThemeVerdant">
+        <Setter Property="AccentBrush" Value="{DynamicResource CodeWFMarkdownVerdantAccentBrush}" />
+        <Setter Property="QuoteBackgroundBrush" Value="{DynamicResource CodeWFMarkdownVerdantSoftBrush}" />
+        <Setter Property="InlineCodeBackgroundBrush" Value="{DynamicResource CodeWFMarkdownVerdantSoftBrush}" />
+        <Setter Property="TableHeaderBackgroundBrush" Value="{DynamicResource CodeWFMarkdownVerdantHeaderBrush}" />
+    </Style>
+</Styles>

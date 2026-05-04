@@ -24,6 +24,7 @@
 		<PackageVersion Include="Dock.Model.ReactiveUI" Version="$(DockVersion)" />
 		<PackageVersion Include="Dock.Serializer" Version="11.3.0.12" />
 		<PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="2.0.0" />
+		<PackageVersion Include="Markdig" Version="1.1.3" />
 		<PackageVersion Include="Prism.DryIoc.Avalonia" Version="8.1.97.11073" />
 		<PackageVersion Include="ProDataGrid" Version="12.0.0" />
 		<PackageVersion Include="ReactiveUI.Avalonia" Version="$(ReactiveUIAvaloniaVersion)" />
@@ -32,6 +33,8 @@
 		<PackageVersion Include="Semi.Avalonia.ProDataGrid" Version="12.0.0" />
 		<PackageVersion Include="StaticViewLocator" Version="0.4.0" />
 		<PackageVersion Include="System.Drawing.Common" Version="10.0.6" />
+		<PackageVersion Include="TextMateSharp" Version="2.0.3" />
+		<PackageVersion Include="TextMateSharp.Grammars" Version="2.0.3" />
 		<PackageVersion Include="VC-LTL" Version="5.3.1" />
 		<PackageVersion Include="Xaml.Behaviors" Version="12.0.0" />
 		<PackageVersion Include="YY-Thunks" Version="1.2.1-beta.7" />
