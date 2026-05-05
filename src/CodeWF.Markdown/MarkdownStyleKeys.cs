@@ -7,6 +7,7 @@ namespace CodeWF.Markdown;
 public static class MarkdownStyleKeys
 {
     public const string Document = "MdDocument";
+    public const string DocumentBottomSpacer = "MdDocumentBottomSpacer";
     public const string Paragraph = "MdParagraph";
     public const string Heading = "MdHeading";
     public const string HeadingBorder = "MdHeadingBorder";

@@ -6,6 +6,9 @@
 - Added Markdown packages to the root packing script so `CodeWF.Markdown` and `CodeWF.Markdown.Themes` are emitted with the other library packages.
 - Added a `GridSplitter` between the Markdown sample editor and preview panes for live layout testing.
 - Improved Markdown rendering for bottom padding, long link wrapping, Markdig task/reference nodes, incremental stress testing, and code-block selection readability.
+- Removed the `MarkdownViewer.BasePath` file-path API so the viewer surface stays Markdown-text driven.
+- Enhanced the Markdown sample with Chinese incremental replacement, insertion, and append stress scenarios.
+- Added the Markdown sample to the one-click publish script with Windows/Linux publish profiles and a `net11.0-windows` target.
 - Split `CodeWF.AvaloniaControls` into a core control package and the new `CodeWF.AvaloniaControls.Themes` template/resource package.
 - Moved `StatusBadge` from the obsolete `CodeWF.Core` / `CodeWF.Themes` package line into `CodeWF.AvaloniaControls`.
 - Removed the obsolete `CodeWF.Core`, `CodeWF.Themes`, and `CodeWF.Themes.StatusBadgeDemo` projects from the solution and scripts.

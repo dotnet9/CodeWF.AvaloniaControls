@@ -111,15 +111,15 @@
                 Background="{DynamicResource SystemControlForegroundBaseLowBrush}"
                 ResizeDirection="Columns" />
 
-            <ScrollViewer
+            <Border
                 Grid.Column="2"
-                Padding="34 28 34 72"
-                HorizontalScrollBarVisibility="Disabled"
-                VerticalScrollBarVisibility="Auto">
-                <md:MarkdownViewer
-                    BasePath="{Binding MarkdownBasePath}"
-                    Markdown="{Binding Markdown}" />
-            </ScrollViewer>
+                Padding="34 28 34 0">
+                <ScrollViewer
+                    HorizontalScrollBarVisibility="Disabled"
+                    VerticalScrollBarVisibility="Auto">
+                    <md:MarkdownViewer Markdown="{Binding Markdown}" />
+                </ScrollViewer>
+            </Border>
         </Grid>
     </Grid>
 </Window>

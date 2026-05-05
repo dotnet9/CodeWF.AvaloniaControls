@@ -17,14 +17,36 @@ public sealed class MainWindowViewModel : ObservableObject
 {
     private const string SampleTypographyThemeKey = "SampleInkGreen";
     private const string IncrementalStressHeading = "## 自动增量压力";
+    private const string IncrementalInsertHeading = "## Markdown 中部插入演示";
+    private const string IncrementalAppendHeading = "## Markdown 尾部追加演示";
+    private const string IncrementalInsertAnchor = "中部插入锚点：";
+
+    private static readonly string[] IncrementalChineseFragments =
+    [
+        "会议纪要已补充验收口径，优先检查标题、列表和引用块的相邻间距",
+        "产品说明新增灰度发布计划，并记录影响范围、负责人和回滚条件",
+        "接口文档替换为最新字段说明，保留原有表格结构用于观察局部刷新",
+        "排查记录追加复现步骤，重点确认中文长句在窄窗口中的自动换行",
+        "变更日志改写为面向用户的描述，避免只更新孤立字符造成误判",
+        "测试报告插入边界场景，覆盖代码块、任务列表和尾部滚动留白"
+    ];
+
+    private static readonly string[] IncrementalChineseTags =
+    [
+        "段落修订",
+        "验收说明",
+        "风险记录",
+        "回归观察",
+        "边界场景",
+        "滚动校验"
+    ];
 
     private readonly DispatcherTimer _incrementalStressTimer;
-    private MarkdownSampleFile? _selectedFile;
-    private MarkdownTypographyTheme? _selectedTypographyTheme;
-    private ThemeVariantOption? _selectedThemeVariant;
-    private string _markdown = string.Empty;
-    private bool _isIncrementalStressRunning;
+    private readonly string _markdownBasePath;
     private int _incrementalStressTick;
+    private int _incrementalReplaceTick;
+    private int _incrementalInsertTick;
+    private int _incrementalAppendTick;
 
     public MainWindowViewModel()
     {
@@ -35,7 +57,7 @@ public sealed class MainWindowViewModel : ObservableObject
         _incrementalStressTimer.Tick += (_, _) => ApplyIncrementalStressTick();
         ToggleIncrementalStressCommand = new RelayCommand(ToggleIncrementalStress);
 
-        MarkdownBasePath = ResolveMarkdownBasePath();
+        _markdownBasePath = ResolveMarkdownBasePath();
         ThemeVariants =
         [
             new("浅色", ThemeVariant.Light),
@@ -59,34 +81,32 @@ public sealed class MainWindowViewModel : ObservableObject
 
     public RelayCommand ToggleIncrementalStressCommand { get; }
 
-    public string MarkdownBasePath { get; }
-
     public bool IsIncrementalStressRunning
     {
-        get => _isIncrementalStressRunning;
+        get;
         private set
         {
-            if (SetProperty(ref _isIncrementalStressRunning, value))
+            if (SetProperty(ref field, value))
             {
                 OnPropertyChanged(nameof(IncrementalStressButtonText));
             }
         }
     }
 
-    public string IncrementalStressButtonText => IsIncrementalStressRunning ? "停止增量压力" : "开始增量压力";
+    public string IncrementalStressButtonText => IsIncrementalStressRunning ? "停止增量演示" : "开始增量演示";
 
     public string Markdown
     {
-        get => _markdown;
-        set => SetProperty(ref _markdown, value ?? string.Empty);
-    }
+        get;
+        set => SetProperty(ref field, value ?? string.Empty);
+    } = string.Empty;
 
     public MarkdownSampleFile? SelectedFile
     {
-        get => _selectedFile;
+        get;
         set
         {
-            if (SetProperty(ref _selectedFile, value))
+            if (SetProperty(ref field, value))
             {
                 StopIncrementalStress();
                 LoadMarkdown();
@@ -96,10 +116,10 @@ public sealed class MainWindowViewModel : ObservableObject
 
     public MarkdownTypographyTheme? SelectedTypographyTheme
     {
-        get => _selectedTypographyTheme;
+        get;
         set
         {
-            if (SetProperty(ref _selectedTypographyTheme, value))
+            if (SetProperty(ref field, value))
             {
                 ApplySelectedTypographyTheme();
             }
@@ -108,10 +128,10 @@ public sealed class MainWindowViewModel : ObservableObject
 
     public ThemeVariantOption? SelectedThemeVariant
     {
-        get => _selectedThemeVariant;
+        get;
         set
         {
-            if (SetProperty(ref _selectedThemeVariant, value) && value is not null && Application.Current is { } app)
+            if (SetProperty(ref field, value) && value is not null && Application.Current is { } app)
             {
                 app.RequestedThemeVariant = value.ThemeVariant;
             }
@@ -161,11 +181,30 @@ public sealed class MainWindowViewModel : ObservableObject
     private void ApplyIncrementalStressTick()
     {
         _incrementalStressTick++;
-        Markdown = UpsertIncrementalStressSection(Markdown, _incrementalStressTick);
+        switch ((_incrementalStressTick - 1) % 3)
+        {
+            case 0:
+                _incrementalReplaceTick++;
+                Markdown = UpsertIncrementalStressSection(Markdown, _incrementalReplaceTick);
+                break;
+            case 1:
+                _incrementalInsertTick++;
+                Markdown = InsertIncrementalMarkdownFragment(Markdown, _incrementalInsertTick);
+                break;
+            default:
+                _incrementalAppendTick++;
+                Markdown = AppendIncrementalMarkdownBlock(Markdown, _incrementalAppendTick);
+                break;
+        }
     }
 
     private void LoadMarkdown()
     {
+        _incrementalStressTick = 0;
+        _incrementalReplaceTick = 0;
+        _incrementalInsertTick = 0;
+        _incrementalAppendTick = 0;
+
         if (SelectedFile is null || !File.Exists(SelectedFile.Path))
         {
             Markdown = "# CodeWF.Markdown\n\n示例 Markdown 文件未找到。";
@@ -177,12 +216,12 @@ public sealed class MainWindowViewModel : ObservableObject
 
     private IReadOnlyList<MarkdownSampleFile> LoadMarkdownFiles()
     {
-        if (!Directory.Exists(MarkdownBasePath))
+        if (!Directory.Exists(_markdownBasePath))
         {
             return [];
         }
 
-        return Directory.GetFiles(MarkdownBasePath, "*.md")
+        return Directory.GetFiles(_markdownBasePath, "*.md")
             .OrderBy(path => path)
             .Select(path => new MarkdownSampleFile(Path.GetFileName(path), path))
             .ToList();
@@ -214,32 +253,153 @@ public sealed class MainWindowViewModel : ObservableObject
     {
         var phase = (tick % 4) switch
         {
-            0 => "append",
-            1 => "replace",
-            2 => "table",
-            _ => "code"
+            0 => "尾部追加",
+            1 => "段落替换",
+            2 => "表格修订",
+            _ => "代码说明"
         };
-        var token = new string((char)('A' + tick % 26), 12 + tick % 18);
+        var fragment = BuildIncrementalChineseFragment(tick);
+        var listItem = BuildIncrementalChineseFragment(tick + 2);
+        var longLine = BuildIncrementalChineseLongLine(tick);
 
         return $$"""
                {{IncrementalStressHeading}}
 
-               当前轮次：{{tick}}，阶段：{{phase}}，自动输入片段：{{token}}。
+               当前替换轮次：{{tick}}，阶段：{{phase}}，这一整段会被自动替换内容，用于验证局部修改刷新。计时器还会轮流模拟正文中部插入和文档尾部追加，三类操作每次只产生一个连续文本变更。自动输入片段：{{fragment}}。
 
-               - 动态列表项：第 {{tick}} 次增量刷新
-               - 长文本换行：CodeWFMarkdownIncrementalStress{{tick:0000}}-{{token}}-viewer-live-render-update
+               - 动态列表项：第 {{tick}} 次增量刷新，{{listItem}}。
+               - 长文本换行：{{longLine}}
 
-               ```csharp
-               var tick = {{tick}};
-               var phase = "{{phase}}";
-               Console.WriteLine($"incremental {tick} / {phase}");
+               ```json
+               {
+                 "轮次": {{tick}},
+                 "阶段": "{{phase}}",
+                 "说明": "{{fragment}}"
+               }
                ```
 
-               | 项 | 值 |
+               | 检查项 | 当前值 |
                | --- | --- |
-               | tick | {{tick}} |
-               | phase | {{phase}} |
+               | 轮次 | {{tick}} |
+               | 阶段 | {{phase}} |
+               | 中文片段 | {{fragment}} |
                """;
+    }
+
+    private static string InsertIncrementalMarkdownFragment(string markdown, int tick)
+    {
+        if (string.IsNullOrWhiteSpace(markdown))
+        {
+            return BuildIncrementalInsertSection(tick);
+        }
+
+        var anchorIndex = markdown.IndexOf(IncrementalInsertAnchor, StringComparison.Ordinal);
+        if (anchorIndex < 0)
+        {
+            return InsertIncrementalInsertSection(markdown, tick);
+        }
+
+        var insertIndex = anchorIndex + IncrementalInsertAnchor.Length;
+        var token = BuildIncrementalInsertToken(tick);
+        return markdown.Insert(insertIndex, token);
+    }
+
+    private static string InsertIncrementalInsertSection(string markdown, int tick)
+    {
+        var section = BuildIncrementalInsertSection(tick);
+        var stressStart = markdown.IndexOf(IncrementalStressHeading, StringComparison.Ordinal);
+        if (stressStart >= 0)
+        {
+            var stressEnd = FindNextHeading(markdown, stressStart + IncrementalStressHeading.Length);
+            return CombineMarkdown(markdown[..stressEnd], section, markdown[stressEnd..]);
+        }
+
+        var firstLineEnd = markdown.IndexOf('\n');
+        var insertIndex = FindNextHeading(markdown, firstLineEnd < 0 ? markdown.Length : firstLineEnd + 1);
+        return insertIndex < markdown.Length
+            ? CombineMarkdown(markdown[..insertIndex], section, markdown[insertIndex..])
+            : CombineMarkdown(markdown, section, string.Empty);
+    }
+
+    private static string BuildIncrementalInsertSection(int tick)
+    {
+        return $$"""
+               {{IncrementalInsertHeading}}
+
+               {{IncrementalInsertAnchor}}{{BuildIncrementalInsertToken(tick)}}这一段模拟人工在已有段落中间连续输入内容。每一轮只插入一小段 Markdown 行内文本，用于观察已渲染块的局部替换和后续块位置更新。
+               """;
+    }
+
+    private static string BuildIncrementalInsertToken(int tick)
+    {
+        var fragment = BuildIncrementalChineseFragment(tick + 1);
+        return $" **插入第 {tick:0000} 段：{fragment}**";
+    }
+
+    private static string AppendIncrementalMarkdownBlock(string markdown, int tick)
+    {
+        var appendBlock = markdown.Contains(IncrementalAppendHeading, StringComparison.Ordinal)
+            ? BuildIncrementalAppendEntry(tick)
+            : BuildIncrementalAppendSection(tick);
+
+        if (string.IsNullOrWhiteSpace(markdown))
+        {
+            return appendBlock;
+        }
+
+        return CombineMarkdown(markdown, appendBlock, string.Empty);
+    }
+
+    private static string BuildIncrementalAppendSection(int tick)
+    {
+        return CombineMarkdown(
+            $$"""
+            {{IncrementalAppendHeading}}
+
+            这一节由“开始增量演示”按钮在文档尾部追加 Markdown 内容，文档长度会不断增加，用于观察新增块、尾部留白和滚动到底后的完整显示。
+            """,
+            BuildIncrementalAppendEntry(tick),
+            string.Empty);
+    }
+
+    private static string BuildIncrementalAppendEntry(int tick)
+    {
+        var tag = BuildIncrementalChineseTag(tick);
+        var fragment = BuildIncrementalChineseFragment(tick + 3);
+        var detail = BuildIncrementalChineseLongLine(tick + 4);
+
+        return $$"""
+               ### 追加片段 {{tick:0000}}
+
+               这是第 {{tick}} 次追加生成的 Markdown 段落，预览区应在文档长度持续增加时保持尾部可见。追加标记：`新增片段-{{tick:0000}}-{{tag}}`
+
+               - 新增列表项：{{fragment}}。
+               - 滚动观察：滚到底时应能看到本片段完整内容，以及文档尾部留白。
+
+               > {{detail}}
+
+               | 追加轮次 | 片段类型 | 中文长度 |
+               | ---: | --- | ---: |
+               | {{tick}} | {{tag}} | {{fragment.Length}} |
+               """;
+    }
+
+    private static string BuildIncrementalChineseFragment(int tick)
+    {
+        return IncrementalChineseFragments[Math.Abs(tick) % IncrementalChineseFragments.Length];
+    }
+
+    private static string BuildIncrementalChineseTag(int tick)
+    {
+        return IncrementalChineseTags[Math.Abs(tick) % IncrementalChineseTags.Length];
+    }
+
+    private static string BuildIncrementalChineseLongLine(int tick)
+    {
+        var first = BuildIncrementalChineseFragment(tick);
+        var second = BuildIncrementalChineseFragment(tick + 1);
+        var tag = BuildIncrementalChineseTag(tick + 2);
+        return $"{first}；{second}；本轮标记为“{tag}”，用于模拟真实中文 Markdown 文档里的连续长句、标点和语义变化。";
     }
 
     private static int FindNextHeading(string markdown, int startIndex)

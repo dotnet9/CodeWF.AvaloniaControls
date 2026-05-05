@@ -39,7 +39,8 @@
             <x:Double x:Key="CodeWFMarkdownHeading5FontSize">18</x:Double>
             <x:Double x:Key="CodeWFMarkdownHeading6FontSize">16</x:Double>
             <x:Double x:Key="CodeWFMarkdownBlockSpacing">8</x:Double>
-            <Thickness x:Key="CodeWFMarkdownDocumentMargin">0 0 0 40</Thickness>
+            <x:Double x:Key="CodeWFMarkdownDocumentBottomPadding">72</x:Double>
+            <Thickness x:Key="CodeWFMarkdownDocumentMargin">0</Thickness>
             <Thickness x:Key="CodeWFMarkdownParagraphMargin">0 4 0 10</Thickness>
             <Thickness x:Key="CodeWFMarkdownHeadingMargin">0 18 0 10</Thickness>
             <Thickness x:Key="CodeWFMarkdownHeading2BorderThickness">0 0 0 2</Thickness>
@@ -123,6 +124,7 @@
                 <Setter Property="Heading5FontSize" Value="{DynamicResource CodeWFMarkdownHeading5FontSize}" />
                 <Setter Property="Heading6FontSize" Value="{DynamicResource CodeWFMarkdownHeading6FontSize}" />
                 <Setter Property="BlockSpacing" Value="{DynamicResource CodeWFMarkdownBlockSpacing}" />
+                <Setter Property="DocumentBottomPadding" Value="{DynamicResource CodeWFMarkdownDocumentBottomPadding}" />
                 <Setter Property="ParagraphMargin" Value="{DynamicResource CodeWFMarkdownParagraphMargin}" />
                 <Setter Property="HeadingMargin" Value="{DynamicResource CodeWFMarkdownHeadingMargin}" />
                 <Setter Property="CodeBlockFontSize" Value="{DynamicResource CodeWFMarkdownCodeBlockFontSize}" />
@@ -137,10 +139,17 @@
                 <Setter Property="Template">
                     <ControlTemplate TargetType="{x:Type md:MarkdownViewer}">
                         <StackPanel
-                            Name="PART_DocumentHost"
                             Classes="MdDocument"
-                            Orientation="Vertical"
-                            Spacing="{TemplateBinding BlockSpacing}" />
+                            Orientation="Vertical">
+                            <StackPanel
+                                Name="PART_DocumentHost"
+                                Orientation="Vertical"
+                                Spacing="{TemplateBinding BlockSpacing}" />
+                            <Border
+                                Classes="MdDocumentBottomSpacer"
+                                Height="{TemplateBinding DocumentBottomPadding}"
+                                IsHitTestVisible="False" />
+                        </StackPanel>
                     </ControlTemplate>
                 </Setter>
             </ControlTheme>

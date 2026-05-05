@@ -53,9 +53,6 @@ public class MarkdownViewer : TemplatedControl
     public static readonly StyledProperty<string?> ValueProperty =
         AvaloniaProperty.Register<MarkdownViewer, string?>(nameof(Value));
 
-    public static readonly StyledProperty<string?> BasePathProperty =
-        AvaloniaProperty.Register<MarkdownViewer, string?>(nameof(BasePath));
-
     public static readonly StyledProperty<IBrush?> TextBrushProperty =
         AvaloniaProperty.Register<MarkdownViewer, IBrush?>(nameof(TextBrush), Brushes.Black);
 
@@ -109,6 +106,9 @@ public class MarkdownViewer : TemplatedControl
 
     public static readonly StyledProperty<double> BlockSpacingProperty =
         AvaloniaProperty.Register<MarkdownViewer, double>(nameof(BlockSpacing), 8);
+
+    public static readonly StyledProperty<double> DocumentBottomPaddingProperty =
+        AvaloniaProperty.Register<MarkdownViewer, double>(nameof(DocumentBottomPadding), 64);
 
     public static readonly StyledProperty<Thickness> ParagraphMarginProperty =
         AvaloniaProperty.Register<MarkdownViewer, Thickness>(nameof(ParagraphMargin), new Thickness(0, 4, 0, 10));
@@ -164,15 +164,6 @@ public class MarkdownViewer : TemplatedControl
     {
         get => GetValue(ValueProperty);
         set => SetValue(ValueProperty, value);
-    }
-
-    /// <summary>
-    /// Optional base directory used only for resolving relative image URLs. Markdown text is always supplied by Markdown.
-    /// </summary>
-    public string? BasePath
-    {
-        get => GetValue(BasePathProperty);
-        set => SetValue(BasePathProperty, value);
     }
 
     public IBrush? TextBrush
@@ -283,6 +274,12 @@ public class MarkdownViewer : TemplatedControl
         set => SetValue(BlockSpacingProperty, value);
     }
 
+    public double DocumentBottomPadding
+    {
+        get => GetValue(DocumentBottomPaddingProperty);
+        set => SetValue(DocumentBottomPaddingProperty, value);
+    }
+
     public Thickness ParagraphMargin
     {
         get => GetValue(ParagraphMarginProperty);
@@ -375,7 +372,6 @@ public class MarkdownViewer : TemplatedControl
                 viewer.Markdown = e.NewValue as string;
             }
         });
-        BasePathProperty.Changed.AddClassHandler<MarkdownViewer>((viewer, _) => viewer.QueueRenderDocument(MarkdownRenderMode.Full));
     }
 
     public MarkdownViewer()
@@ -1302,8 +1298,7 @@ public class MarkdownViewer : TemplatedControl
         var image = new MarkdownImage
         {
             Source = imageInline.Url,
-            AltText = ExtractPlainText(imageInline),
-            BasePath = BasePath
+            AltText = ExtractPlainText(imageInline)
         };
         AddMarkdownClass(image, MarkdownStyleKeys.Image);
         return CreateInlineContainer(image);
