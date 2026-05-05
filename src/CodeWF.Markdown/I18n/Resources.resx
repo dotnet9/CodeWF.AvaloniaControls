@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CodeWF.Markdown.Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="CodeWF.Markdown.CopyRenderedText" xml:space="preserve">
+    <value>Copy rendered text</value>
+  </data>
+  <data name="CodeWF.Markdown.CopySelectedText" xml:space="preserve">
+    <value>Copy selected text</value>
+  </data>
+  <data name="CodeWF.Markdown.ImageFileNotFound" xml:space="preserve">
+    <value>File not found: {0}</value>
+  </data>
+  <data name="CodeWF.Markdown.ImageLoadFailed" xml:space="preserve">
+    <value>Image failed to load: {0}</value>
+  </data>
+  <data name="CodeWF.Markdown.ImagePreviewTitle" xml:space="preserve">
+    <value>Image Preview</value>
+  </data>
+  <data name="CodeWF.Markdown.ImagePreviewZoomOut" xml:space="preserve">
+    <value>Zoom -</value>
+  </data>
+  <data name="CodeWF.Markdown.ImagePreviewZoomIn" xml:space="preserve">
+    <value>Zoom +</value>
+  </data>
+  <data name="CodeWF.Markdown.ImagePreviewActualSize" xml:space="preserve">
+    <value>1:1</value>
+  </data>
+  <data name="CodeWF.Markdown.ImagePreviewFit" xml:space="preserve">
+    <value>Fit</value>
+  </data>
+  <data name="CodeWF.Markdown.ImagePreviewRotateLeft" xml:space="preserve">
+    <value>Rotate L</value>
+  </data>
+  <data name="CodeWF.Markdown.ImagePreviewRotateRight" xml:space="preserve">
+    <value>Rotate R</value>
+  </data>
+  <data name="CodeWF.Markdown.ImagePreviewSaveAs" xml:space="preserve">
+    <value>Save As</value>
+  </data>
+  <data name="CodeWF.Markdown.ImagePreviewImagesFileType" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="CodeWF.Markdown.ImagePreviewZoomStatus" xml:space="preserve">
+    <value>{0:P0} / {1} deg</value>
+  </data>
+</root>

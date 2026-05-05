@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.RegularExpressions;
 
 using Avalonia;
 using Avalonia.Controls;
@@ -14,9 +15,15 @@ using Avalonia.Threading;
 using Avalonia.VisualTree;
 
 using CodeWF.Markdown.Helpers;
+using CodeWF.Markdown.I18n;
 using CodeWF.Markdown.Rendering;
 
+using CSharpMath.Avalonia;
+
+using Lang.Avalonia;
+
 using Markdig;
+using Markdig.Extensions.Footnotes;
 using Markdig.Extensions.TaskLists;
 using Markdig.Extensions.Tables;
 using Markdig.Syntax;
@@ -433,6 +440,7 @@ public class MarkdownViewer : TemplatedControl
             app.ActualThemeVariantChanged += OnActualThemeVariantChanged;
         }
 
+        I18nManager.Instance.CultureChanged += OnCultureChanged;
         QueueRenderDocument(MarkdownRenderMode.Full);
     }
 
@@ -443,6 +451,7 @@ public class MarkdownViewer : TemplatedControl
             app.ActualThemeVariantChanged -= OnActualThemeVariantChanged;
         }
 
+        I18nManager.Instance.CultureChanged -= OnCultureChanged;
         base.OnDetachedFromVisualTree(e);
     }
 
@@ -462,6 +471,12 @@ public class MarkdownViewer : TemplatedControl
     private void OnActualThemeVariantChanged(object? sender, EventArgs e)
     {
         // 代码高亮颜色由 TextMate 直接生成，明暗主题变化时需要重建。
+        QueueRenderDocument(MarkdownRenderMode.Full);
+    }
+
+    private void OnCultureChanged(object? sender, EventArgs e)
+    {
+        ContextMenu = CreateViewerContextMenu();
         QueueRenderDocument(MarkdownRenderMode.Full);
     }
 
@@ -605,7 +620,7 @@ public class MarkdownViewer : TemplatedControl
 
         foreach (var block in document)
         {
-            var control = ConvertBlock(block);
+            var control = ConvertBlock(block, markdown);
             if (control is null)
             {
                 continue;
@@ -780,8 +795,13 @@ public class MarkdownViewer : TemplatedControl
         return change.NewEnd;
     }
 
-    private Control? ConvertBlock(Block block)
+    private Control? ConvertBlock(Block block, string? sourceMarkdown = null)
     {
+        if (TryCreateSpecialBlock(block, sourceMarkdown, out var specialBlock))
+        {
+            return specialBlock;
+        }
+
         return block switch
         {
             ParagraphBlock paragraph => CreateParagraph(paragraph),
@@ -794,9 +814,133 @@ public class MarkdownViewer : TemplatedControl
             QuoteBlock quote => CreateQuote(quote),
             ThematicBreakBlock => CreateThematicBreak(),
             Table table => CreateTable(table),
-            HtmlBlock htmlBlock => CreateFallbackText(htmlBlock.Lines.ToString(), MarkdownStyleKeys.HtmlBlock),
+            FootnoteGroup footnotes => CreateFootnoteGroup(footnotes),
+            Footnote footnote => CreateFootnote(footnote),
+            HtmlBlock htmlBlock => CreateHtmlBlock(htmlBlock.Lines.ToString()),
             _ => CreateUnknownBlock(block)
         };
+    }
+
+    private bool TryCreateSpecialBlock(Block block, string? sourceMarkdown, out Control? control)
+    {
+        control = null;
+        if (block is ParagraphBlock paragraph && TryCreateImageBlock(paragraph, out control))
+        {
+            return true;
+        }
+
+        if (IsTocBlock(block))
+        {
+            control = CreateToc();
+            return true;
+        }
+
+        var text = GetSpecialBlockText(block, sourceMarkdown);
+
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return false;
+        }
+
+        if (string.Equals(text, "[TOC]", StringComparison.OrdinalIgnoreCase))
+        {
+            control = CreateToc();
+            return true;
+        }
+
+        if (TryExtractMathBlock(text, IsMathBlock(block), out var latex))
+        {
+            control = CreateMathBlock(latex);
+            return true;
+        }
+
+        if (TryCreateSlideBlock(text, out var slideBlock))
+        {
+            control = slideBlock;
+            return true;
+        }
+
+        return false;
+    }
+
+    private static bool IsTocBlock(Block block)
+    {
+        var typeName = block.GetType().Name;
+        return typeName.Contains("TableOfContents", StringComparison.OrdinalIgnoreCase)
+               || typeName.Equals("TocBlock", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool IsMathBlock(Block block)
+    {
+        return block.GetType().Name.Contains("Math", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string? GetSpecialBlockText(Block block, string? sourceMarkdown)
+    {
+        var sourceText = GetSourceText(block, sourceMarkdown);
+        if (!string.IsNullOrWhiteSpace(sourceText))
+        {
+            return sourceText.Trim();
+        }
+
+        return block switch
+        {
+            ParagraphBlock paragraphBlock => paragraphBlock.Lines.ToString().Trim(),
+            HtmlBlock htmlBlock => htmlBlock.Lines.ToString().Trim(),
+            LeafBlock leafBlock when IsMathBlock(block) => leafBlock.Lines.ToString().Trim(),
+            _ when IsMathBlock(block) => block.ToString()?.Trim(),
+            _ => null
+        };
+    }
+
+    private static string? GetSourceText(Block block, string? sourceMarkdown)
+    {
+        if (string.IsNullOrEmpty(sourceMarkdown)
+            || block.Span.Start < 0
+            || block.Span.End < block.Span.Start
+            || block.Span.Start >= sourceMarkdown.Length)
+        {
+            return null;
+        }
+
+        var end = Math.Min(block.Span.End, sourceMarkdown.Length - 1);
+        return sourceMarkdown[block.Span.Start..(end + 1)];
+    }
+
+    private bool TryCreateImageBlock(ParagraphBlock paragraph, out Control? control)
+    {
+        control = null;
+        var first = paragraph.Inline?.FirstChild;
+        if (first is not LinkInline { IsImage: true } image || HasNonEmptySibling(first.NextSibling))
+        {
+            return false;
+        }
+
+        var markdownImage = new MarkdownImage
+        {
+            Source = image.Url,
+            AltText = ExtractPlainText(image),
+            HorizontalAlignment = HorizontalAlignment.Left
+        };
+        AddMarkdownClass(markdownImage, MarkdownStyleKeys.Image);
+        control = markdownImage;
+        return true;
+    }
+
+    private static bool HasNonEmptySibling(Markdig.Syntax.Inlines.Inline? inline)
+    {
+        while (inline is not null)
+        {
+            if (inline is LiteralInline literal && string.IsNullOrWhiteSpace(literal.Content.ToString()))
+            {
+                inline = inline.NextSibling;
+                continue;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     private SelectableTextBlock CreateParagraph(
@@ -892,7 +1036,7 @@ public class MarkdownViewer : TemplatedControl
 
         var copyButton = new Button
         {
-            Content = "复制",
+            Content = MarkdownLocalization.Get(MarkdownLocalization.Copy),
         };
         AddMarkdownClass(copyButton, MarkdownStyleKeys.CopyButton);
         BindTheme(copyButton, Button.BackgroundProperty, AccentBrushProperty);
@@ -1134,6 +1278,440 @@ public class MarkdownViewer : TemplatedControl
         return border;
     }
 
+    private Control CreateFootnoteGroup(FootnoteGroup footnotes)
+    {
+        var panel = new StackPanel
+        {
+            Orientation = Orientation.Vertical,
+            Spacing = 6,
+            Margin = new Thickness(0, 18, 0, 8)
+        };
+        AddMarkdownClass(panel, MarkdownStyleKeys.List);
+
+        panel.Children.Add(CreateThematicBreak());
+        foreach (var footnote in footnotes.OfType<Footnote>().OrderBy(note => note.Order))
+        {
+            panel.Children.Add(CreateFootnote(footnote));
+        }
+
+        return panel;
+    }
+
+    private Control CreateFootnote(Footnote footnote)
+    {
+        var grid = new Grid
+        {
+            ColumnDefinitions =
+            {
+                new ColumnDefinition(GridLength.Auto),
+                new ColumnDefinition(new GridLength(1, GridUnitType.Star))
+            }
+        };
+        AddMarkdownClass(grid, MarkdownStyleKeys.ListItem);
+
+        var marker = CreateSelectableText(MarkdownStyleKeys.ListMarker);
+        marker.Text = $"[{Math.Max(1, footnote.Order)}]";
+        marker.MinWidth = OrderedListMarkerMinWidth;
+        marker.TextAlignment = TextAlignment.Right;
+        marker.VerticalAlignment = VerticalAlignment.Top;
+        BindTheme(marker, SelectableTextBlock.ForegroundProperty, AccentBrushProperty);
+        BindTheme(marker, SelectableTextBlock.FontFamilyProperty, ContentFontFamilyProperty);
+        BindTheme(marker, SelectableTextBlock.FontSizeProperty, ParagraphFontSizeProperty);
+        BindTheme(marker, SelectableTextBlock.LineHeightProperty, ParagraphLineHeightProperty);
+        Grid.SetColumn(marker, 0);
+        grid.Children.Add(marker);
+
+        var content = new StackPanel { Orientation = Orientation.Vertical };
+        AddMarkdownClass(content, MarkdownStyleKeys.ListItemContent);
+        var firstParagraph = true;
+        foreach (var block in footnote)
+        {
+            var child = block is ParagraphBlock paragraph
+                ? CreateParagraph(paragraph, false, GetListParagraphMargin(firstParagraph))
+                : ConvertBlock(block);
+            firstParagraph = false;
+
+            if (child is not null)
+            {
+                content.Children.Add(child);
+            }
+        }
+
+        Grid.SetColumn(content, 1);
+        grid.Children.Add(content);
+        return grid;
+    }
+
+    private Control CreateHtmlBlock(string html)
+    {
+        var trimmed = html.Trim();
+        if (Regex.IsMatch(trimmed, @"^<a\s+[^>]*id\s*=\s*[""'][^""']+[""'][^>]*>\s*</a>$", RegexOptions.IgnoreCase))
+        {
+            return new Border { Height = 0, IsHitTestVisible = false };
+        }
+
+        if (TryCreateStyledSpan(trimmed, out var spanBlock))
+        {
+            return spanBlock;
+        }
+
+        if (TryCreateSlideBlock(trimmed, out var slideBlock))
+        {
+            return slideBlock;
+        }
+
+        return CreateFallbackText(html, MarkdownStyleKeys.HtmlBlock);
+    }
+
+    private bool TryCreateStyledSpan(string html, out Control control)
+    {
+        control = null!;
+        var match = Regex.Match(
+            html,
+            @"^<span\s+[^>]*style\s*=\s*[""'](?<style>[^""']*)[""'][^>]*>(?<text>.*?)</span>$",
+            RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        if (!match.Success)
+        {
+            return false;
+        }
+
+        var textBlock = CreateSelectableText(MarkdownStyleKeys.HtmlBlock);
+        textBlock.Text = Regex.Replace(match.Groups["text"].Value, "<.*?>", string.Empty);
+        BindTheme(textBlock, SelectableTextBlock.ForegroundProperty, TextBrushProperty);
+        BindTheme(textBlock, SelectableTextBlock.FontFamilyProperty, ContentFontFamilyProperty);
+        BindTheme(textBlock, SelectableTextBlock.FontSizeProperty, ParagraphFontSizeProperty);
+        BindTheme(textBlock, SelectableTextBlock.LineHeightProperty, ParagraphLineHeightProperty);
+
+        var style = match.Groups["style"].Value;
+        if (style.Contains("text-align:center", StringComparison.OrdinalIgnoreCase))
+        {
+            textBlock.TextAlignment = TextAlignment.Center;
+        }
+        else if (style.Contains("text-align:right", StringComparison.OrdinalIgnoreCase))
+        {
+            textBlock.TextAlignment = TextAlignment.Right;
+        }
+
+        var colorMatch = Regex.Match(style, @"color\s*:\s*(?<color>#[0-9a-fA-F]{3,8}|[a-zA-Z]+)");
+        if (colorMatch.Success && Color.TryParse(colorMatch.Groups["color"].Value, out var color))
+        {
+            textBlock.Foreground = new SolidColorBrush(color);
+        }
+
+        control = textBlock;
+        return true;
+    }
+
+    private Control CreateToc()
+    {
+        var panel = new StackPanel { Orientation = Orientation.Vertical, Spacing = 4 };
+        AddMarkdownClass(panel, MarkdownStyleKeys.List);
+
+        var document = Markdig.Markdown.Parse(Markdown ?? string.Empty, Pipeline);
+        foreach (var heading in document.OfType<HeadingBlock>().Where(h => h.Level is >= 1 and <= 3))
+        {
+            var item = CreateSelectableText(MarkdownStyleKeys.ListMarker);
+            item.Text = $"{new string(' ', Math.Max(0, heading.Level - 1) * 2)}{ExtractPlainText(heading.Inline)}";
+            item.TextWrapping = TextWrapping.Wrap;
+            BindTheme(item, SelectableTextBlock.ForegroundProperty, heading.Level <= 2 ? AccentBrushProperty : TextBrushProperty);
+            BindTheme(item, SelectableTextBlock.FontFamilyProperty, ContentFontFamilyProperty);
+            BindTheme(item, SelectableTextBlock.FontSizeProperty, ParagraphFontSizeProperty);
+            panel.Children.Add(item);
+        }
+
+        return panel;
+    }
+
+    private static bool TryExtractMathBlock(string text, bool allowBareLatex, out string latex)
+    {
+        latex = string.Empty;
+        var trimmed = text.Trim();
+        if (trimmed.StartsWith("$$", StringComparison.Ordinal) && trimmed.EndsWith("$$", StringComparison.Ordinal) && trimmed.Length > 4)
+        {
+            latex = trimmed[2..^2].Trim();
+            return !string.IsNullOrWhiteSpace(latex);
+        }
+
+        if (trimmed.StartsWith(@"\[", StringComparison.Ordinal) && trimmed.EndsWith(@"\]", StringComparison.Ordinal) && trimmed.Length > 4)
+        {
+            latex = trimmed[2..^2].Trim();
+            return !string.IsNullOrWhiteSpace(latex);
+        }
+
+        if (allowBareLatex && !string.IsNullOrWhiteSpace(trimmed) && !IsTypeNameFallback(trimmed, typeof(Block)))
+        {
+            latex = trimmed;
+            return true;
+        }
+
+        return false;
+    }
+
+    private Control CreateMathBlock(string latex)
+    {
+        MathView view;
+        try
+        {
+            view = CreateMathView(latex, 20, CSharpMath.Atom.LineStyle.Display);
+        }
+        catch
+        {
+            return CreateFallbackText(latex, MarkdownStyleKeys.HtmlBlock);
+        }
+
+        var border = new Border
+        {
+            Child = view,
+            Padding = new Thickness(0, 8),
+            HorizontalAlignment = HorizontalAlignment.Center
+        };
+        AddMarkdownClass(border, MarkdownStyleKeys.HtmlBlock);
+        return border;
+    }
+
+    private MathView CreateMathView(string latex, double fontSize, CSharpMath.Atom.LineStyle lineStyle)
+    {
+        var view = new MathView
+        {
+            LaTeX = NormalizeLatex(latex),
+            FontSize = (float)fontSize,
+            LineStyle = lineStyle,
+            DisplayErrorInline = false
+        };
+        return view;
+    }
+
+    private static string NormalizeLatex(string latex)
+    {
+        if (string.IsNullOrWhiteSpace(latex) || !latex.Contains(@"\ce{", StringComparison.Ordinal))
+        {
+            return latex;
+        }
+
+        var builder = new StringBuilder(latex.Length);
+        var index = 0;
+        while (index < latex.Length)
+        {
+            var ceStart = latex.IndexOf(@"\ce{", index, StringComparison.Ordinal);
+            if (ceStart < 0)
+            {
+                builder.Append(latex[index..]);
+                break;
+            }
+
+            builder.Append(latex[index..ceStart]);
+            var contentStart = ceStart + 4;
+            var contentEnd = FindMatchingBrace(latex, contentStart - 1);
+            if (contentEnd < 0)
+            {
+                builder.Append(latex[ceStart..]);
+                break;
+            }
+
+            builder.Append(ConvertChemExpression(latex[contentStart..contentEnd]));
+            index = contentEnd + 1;
+        }
+
+        return builder.ToString();
+    }
+
+    private static int FindMatchingBrace(string text, int openBraceIndex)
+    {
+        var depth = 0;
+        for (var i = openBraceIndex; i < text.Length; i++)
+        {
+            if (text[i] == '{')
+            {
+                depth++;
+            }
+            else if (text[i] == '}')
+            {
+                depth--;
+                if (depth == 0)
+                {
+                    return i;
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    private static string ConvertChemExpression(string expression)
+    {
+        var tokens = Regex.Split(expression.Trim(), @"\s+").Where(token => token.Length > 0);
+        return string.Join(" ", tokens.Select(ConvertChemToken));
+    }
+
+    private static string ConvertChemToken(string token)
+    {
+        var arrowMatch = Regex.Match(token, @"^(?<arrow><->|->|<-)(\[(?<label>[^\]]+)\])?$");
+        if (arrowMatch.Success)
+        {
+            var arrow = arrowMatch.Groups["arrow"].Value switch
+            {
+                "<-" => @"\leftarrow",
+                "<->" => @"\leftrightarrow",
+                _ => @"\longrightarrow"
+            };
+            return arrowMatch.Groups["label"].Success
+                ? $@"{arrow}^{{{ConvertChemFormula(arrowMatch.Groups["label"].Value)}}}"
+                : arrow;
+        }
+
+        return ConvertChemFormula(token);
+    }
+
+    private static string ConvertChemFormula(string formula)
+    {
+        var builder = new StringBuilder(formula.Length * 2);
+        for (var i = 0; i < formula.Length; i++)
+        {
+            var c = formula[i];
+            if (char.IsUpper(c))
+            {
+                var start = i;
+                i++;
+                while (i < formula.Length && char.IsLower(formula[i]))
+                {
+                    i++;
+                }
+                builder.Append(@"\mathrm{").Append(formula[start..i]).Append('}');
+                i--;
+            }
+            else if (char.IsDigit(c))
+            {
+                var start = i;
+                while (i + 1 < formula.Length && char.IsDigit(formula[i + 1]))
+                {
+                    i++;
+                }
+                builder.Append("_{").Append(formula[start..(i + 1)]).Append('}');
+            }
+            else if (c == '^')
+            {
+                var value = ReadScriptValue(formula, ref i);
+                builder.Append("^{").Append(ConvertScriptText(value)).Append('}');
+            }
+            else if ((c == '+' || c == '-') && i == formula.Length - 1)
+            {
+                builder.Append("^{").Append(c).Append('}');
+            }
+            else if (char.IsLetter(c))
+            {
+                builder.Append(@"\mathrm{").Append(c).Append('}');
+            }
+            else
+            {
+                builder.Append(c);
+            }
+        }
+
+        return builder.ToString();
+    }
+
+    private static string ReadScriptValue(string text, ref int index)
+    {
+        if (index + 1 >= text.Length)
+        {
+            return string.Empty;
+        }
+
+        if (text[index + 1] == '{')
+        {
+            var end = FindMatchingBrace(text, index + 1);
+            if (end > index + 1)
+            {
+                var value = text[(index + 2)..end];
+                index = end;
+                return value;
+            }
+        }
+
+        var start = index + 1;
+        var endIndex = start;
+        while (endIndex < text.Length && (char.IsLetterOrDigit(text[endIndex]) || text[endIndex] is '+' or '-'))
+        {
+            endIndex++;
+        }
+
+        index = Math.Max(start, endIndex) - 1;
+        return text[start..endIndex];
+    }
+
+    private static string ConvertScriptText(string text)
+    {
+        return text.All(c => char.IsLetter(c))
+            ? $@"\mathrm{{{text}}}"
+            : text;
+    }
+
+    private bool TryCreateSlideBlock(string text, out Control control)
+    {
+        control = null!;
+        var trimmed = text.Trim();
+        if (!trimmed.StartsWith("<", StringComparison.Ordinal) || !trimmed.EndsWith(">", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var content = trimmed[1..^1];
+        var matches = Regex.Matches(content, @"!\[(?<alt>[^\]]*)\]\((?<url>[^)]+)\)");
+        if (matches.Count < 2)
+        {
+            return false;
+        }
+
+        var panel = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            Spacing = 24,
+            Margin = new Thickness(0, 4, 0, 8)
+        };
+
+        foreach (Match match in matches)
+        {
+            panel.Children.Add(new MarkdownImage
+            {
+                Source = match.Groups["url"].Value,
+                AltText = match.Groups["alt"].Value,
+                Width = 320,
+                Height = 220,
+                MaxWidth = 360,
+                MaxHeight = 260
+            });
+        }
+
+        var scrollViewer = new ScrollViewer
+        {
+            Content = panel,
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Disabled,
+            Margin = new Thickness(0, 8, 0, 12)
+        };
+        scrollViewer.PointerWheelChanged += OnSlidePointerWheelChanged;
+        control = scrollViewer;
+        return true;
+    }
+
+    private static void OnSlidePointerWheelChanged(object? sender, PointerWheelEventArgs e)
+    {
+        if (sender is not ScrollViewer scrollViewer || Math.Abs(e.Delta.Y) <= 0)
+        {
+            return;
+        }
+
+        var maxX = Math.Max(0, scrollViewer.Extent.Width - scrollViewer.Viewport.Width);
+        if (maxX <= 0)
+        {
+            return;
+        }
+
+        var x = Math.Clamp(scrollViewer.Offset.X - e.Delta.Y * 80, 0, maxX);
+        scrollViewer.Offset = new Vector(x, scrollViewer.Offset.Y);
+        e.Handled = true;
+    }
+
     private SelectableTextBlock CreateFallbackText(string text, string className)
     {
         var textBlock = CreateSelectableText(className);
@@ -1171,6 +1749,13 @@ public class MarkdownViewer : TemplatedControl
     private IReadOnlyList<Inline> ConvertInline(Markdig.Syntax.Inlines.Inline inline, ref bool stripTaskPrefix)
     {
         var result = new List<Inline>();
+        if (TryGetMathInlineLatex(inline, out var mathLatex))
+        {
+            stripTaskPrefix = false;
+            result.Add(CreateMathInline(mathLatex));
+            return result;
+        }
+
         switch (inline)
         {
             case LiteralInline literal:
@@ -1187,7 +1772,7 @@ public class MarkdownViewer : TemplatedControl
                 }
 
                 stripTaskPrefix = false;
-                result.Add(new Run(literalText));
+                result.AddRange(CreateLiteralInlines(literalText));
                 return result;
 
             case LineBreakInline:
@@ -1202,6 +1787,11 @@ public class MarkdownViewer : TemplatedControl
 
             case TaskList:
                 stripTaskPrefix = false;
+                return result;
+
+            case FootnoteLink footnoteLink:
+                stripTaskPrefix = false;
+                result.Add(CreateFootnoteLink(footnoteLink));
                 return result;
 
             case EmphasisInline emphasis:
@@ -1221,7 +1811,7 @@ public class MarkdownViewer : TemplatedControl
 
             case HtmlInline html:
                 stripTaskPrefix = false;
-                result.Add(new Run(html.Tag));
+                result.AddRange(CreateHtmlInline(html.Tag));
                 return result;
 
             case ContainerInline container:
@@ -1239,6 +1829,219 @@ public class MarkdownViewer : TemplatedControl
 
                 return result;
         }
+    }
+
+    private static bool TryGetMathInlineLatex(Markdig.Syntax.Inlines.Inline inline, out string latex)
+    {
+        latex = string.Empty;
+        if (!inline.GetType().Name.Contains("Math", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        var text = inline.ToString()?.Trim() ?? string.Empty;
+        if (IsTypeNameFallback(text, inline.GetType()))
+        {
+            text = inline.GetType().GetProperty("Content")?.GetValue(inline)?.ToString()?.Trim() ?? string.Empty;
+        }
+
+        text = TrimInlineMathDelimiters(text);
+        if (string.IsNullOrWhiteSpace(text) || IsTypeNameFallback(text, inline.GetType()))
+        {
+            return false;
+        }
+
+        latex = text;
+        return true;
+    }
+
+    private static string TrimInlineMathDelimiters(string text)
+    {
+        var trimmed = text.Trim();
+        if (trimmed.StartsWith("$$", StringComparison.Ordinal) && trimmed.EndsWith("$$", StringComparison.Ordinal) && trimmed.Length > 4)
+        {
+            return trimmed[2..^2].Trim();
+        }
+
+        if (trimmed.StartsWith('$') && trimmed.EndsWith('$') && trimmed.Length > 2)
+        {
+            return trimmed[1..^1].Trim();
+        }
+
+        if (trimmed.StartsWith(@"\(", StringComparison.Ordinal) && trimmed.EndsWith(@"\)", StringComparison.Ordinal) && trimmed.Length > 4)
+        {
+            return trimmed[2..^2].Trim();
+        }
+
+        return trimmed;
+    }
+
+    private IEnumerable<Inline> CreateLiteralInlines(string text)
+    {
+        var index = 0;
+        while (index < text.Length)
+        {
+            if (TryReadInlineMath(text, index, out var latex, out var mathEnd))
+            {
+                yield return CreateMathInline(latex);
+                index = mathEnd;
+                continue;
+            }
+
+            if (TryReadRuby(text, index, out var rubyText, out var rubyAnnotation, out var rubyEnd))
+            {
+                yield return CreateRubyInline(rubyText, rubyAnnotation);
+                index = rubyEnd;
+                continue;
+            }
+
+            var next = FindNextSpecialInline(text, index + 1);
+            yield return new Run(text[index..next]);
+            index = next;
+        }
+    }
+
+    private IEnumerable<Inline> CreateHtmlInline(string html)
+    {
+        if (Regex.IsMatch(html, @"^</?(a|span)\b", RegexOptions.IgnoreCase))
+        {
+            yield break;
+        }
+
+        yield return new Run(html);
+    }
+
+    private static int FindNextSpecialInline(string text, int start)
+    {
+        var dollar = text.IndexOf('$', start);
+        var ruby = text.IndexOf('{', start);
+        return (dollar, ruby) switch
+        {
+            (-1, -1) => text.Length,
+            (-1, _) => ruby,
+            (_, -1) => dollar,
+            _ => Math.Min(dollar, ruby)
+        };
+    }
+
+    private static bool TryReadInlineMath(string text, int start, out string latex, out int end)
+    {
+        latex = string.Empty;
+        end = start;
+        if (text[start] != '$' || start + 1 >= text.Length || text[start + 1] == '$')
+        {
+            return false;
+        }
+
+        var close = text.IndexOf('$', start + 1);
+        if (close <= start + 1)
+        {
+            return false;
+        }
+
+        latex = text[(start + 1)..close].Trim();
+        end = close + 1;
+        return !string.IsNullOrWhiteSpace(latex);
+    }
+
+    private static bool TryReadRuby(string text, int start, out string rubyText, out string annotation, out int end)
+    {
+        rubyText = string.Empty;
+        annotation = string.Empty;
+        end = start;
+        if (text[start] != '{')
+        {
+            return false;
+        }
+
+        var separator = text.IndexOf('|', start + 1);
+        var close = text.IndexOf('}', start + 1);
+        if (separator < 0 || close < 0 || separator > close)
+        {
+            return false;
+        }
+
+        rubyText = text[(start + 1)..separator];
+        annotation = text[(separator + 1)..close];
+        end = close + 1;
+        return !string.IsNullOrWhiteSpace(rubyText) && !string.IsNullOrWhiteSpace(annotation);
+    }
+
+    private Inline CreateMathInline(string latex)
+    {
+        try
+        {
+            var view = CreateMathView(latex, ParagraphFontSize, CSharpMath.Atom.LineStyle.Text);
+            view.VerticalAlignment = VerticalAlignment.Center;
+            return CreateInlineContainer(view);
+        }
+        catch
+        {
+            return new Run($"${latex}$");
+        }
+    }
+
+    private Inline CreateRubyInline(string text, string annotation)
+    {
+        var annotations = annotation.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (annotations.Length == text.Length)
+        {
+            var grid = new Grid { VerticalAlignment = VerticalAlignment.Center };
+            grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));
+            grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));
+
+            for (var i = 0; i < text.Length; i++)
+            {
+                grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
+
+                var top = CreateRubyTextBlock(annotations[i], Math.Max(8, ParagraphFontSize * 0.46), Math.Max(8, ParagraphLineHeight * 0.34));
+                var bottom = CreateRubyTextBlock(text[i].ToString(), ParagraphFontSize, Math.Max(12, ParagraphLineHeight * 0.66));
+                BindTheme(top, TextBlock.ForegroundProperty, MutedTextBrushProperty);
+                BindTheme(bottom, TextBlock.ForegroundProperty, TextBrushProperty);
+                BindTheme(top, TextBlock.FontFamilyProperty, ContentFontFamilyProperty);
+                BindTheme(bottom, TextBlock.FontFamilyProperty, ContentFontFamilyProperty);
+
+                Grid.SetRow(top, 0);
+                Grid.SetColumn(top, i);
+                Grid.SetRow(bottom, 1);
+                Grid.SetColumn(bottom, i);
+                grid.Children.Add(top);
+                grid.Children.Add(bottom);
+            }
+
+            return CreateInlineContainer(grid);
+        }
+
+        var panel = new StackPanel
+        {
+            Orientation = Orientation.Vertical,
+            Spacing = 0,
+            VerticalAlignment = VerticalAlignment.Center
+        };
+
+        var topFallback = CreateRubyTextBlock(annotation, Math.Max(9, ParagraphFontSize * 0.62), Math.Max(10, ParagraphLineHeight * 0.45));
+        var bottomFallback = CreateRubyTextBlock(text, ParagraphFontSize, ParagraphLineHeight * 0.72);
+        BindTheme(topFallback, TextBlock.ForegroundProperty, MutedTextBrushProperty);
+        BindTheme(bottomFallback, TextBlock.ForegroundProperty, TextBrushProperty);
+        BindTheme(topFallback, TextBlock.FontFamilyProperty, ContentFontFamilyProperty);
+        BindTheme(bottomFallback, TextBlock.FontFamilyProperty, ContentFontFamilyProperty);
+
+        panel.Children.Add(topFallback);
+        panel.Children.Add(bottomFallback);
+        return CreateInlineContainer(panel);
+    }
+
+    private static TextBlock CreateRubyTextBlock(string text, double fontSize, double lineHeight)
+    {
+        return new TextBlock
+        {
+            Text = text,
+            FontSize = fontSize,
+            TextAlignment = TextAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            LineHeight = lineHeight,
+            Margin = new Thickness(1, 0)
+        };
     }
 
     private Span CreateContainerSpan(ContainerInline container)
@@ -1260,21 +2063,58 @@ public class MarkdownViewer : TemplatedControl
             span.Inlines.Add(inline);
         }
 
+        FontWeight? fontWeight = null;
+        FontStyle? fontStyle = null;
+        TextDecorationCollection? textDecorations = null;
         if (emphasis.DelimiterCount >= 2 && emphasis.DelimiterChar is '*' or '_')
         {
             span.FontWeight = FontWeight.Bold;
+            fontWeight = FontWeight.Bold;
         }
         else if (emphasis.DelimiterChar is '*' or '_')
         {
             span.FontStyle = FontStyle.Italic;
+            fontStyle = FontStyle.Italic;
         }
 
         if (emphasis.DelimiterChar == '~')
         {
             span.TextDecorations = TextDecorations.Strikethrough;
+            textDecorations = TextDecorations.Strikethrough;
         }
 
+        ApplyInlineTextStyle(span, fontWeight, fontStyle, textDecorations);
         return span;
+    }
+
+    private static void ApplyInlineTextStyle(
+        Inline inline,
+        FontWeight? fontWeight,
+        FontStyle? fontStyle,
+        TextDecorationCollection? textDecorations)
+    {
+        if (fontWeight.HasValue)
+        {
+            inline.FontWeight = fontWeight.Value;
+        }
+
+        if (fontStyle.HasValue)
+        {
+            inline.FontStyle = fontStyle.Value;
+        }
+
+        if (textDecorations is not null)
+        {
+            inline.TextDecorations = textDecorations;
+        }
+
+        if (inline is Span span)
+        {
+            foreach (var child in span.Inlines)
+            {
+                ApplyInlineTextStyle(child, fontWeight, fontStyle, textDecorations);
+            }
+        }
     }
 
     private Inline CreateInlineCode(string code)
@@ -1302,27 +2142,65 @@ public class MarkdownViewer : TemplatedControl
         return CreateInlineContainer(image);
     }
 
+    private Inline CreateFootnoteLink(FootnoteLink footnoteLink)
+    {
+        var text = footnoteLink.IsBackLink
+            ? "^"
+            : $"[{Math.Max(1, footnoteLink.Footnote?.Order ?? footnoteLink.Index)}]";
+        var run = new Run(text)
+        {
+            BaselineAlignment = BaselineAlignment.Superscript,
+            FontSize = Math.Max(9, ParagraphFontSize * 0.72)
+        };
+        BindTheme(run, TextElement.ForegroundProperty, AccentBrushProperty);
+        BindTheme(run, TextElement.FontFamilyProperty, ContentFontFamilyProperty);
+        return run;
+    }
+
     private Inline CreateLink(LinkInline linkInline)
     {
-        var span = new Span
+        var text = ExtractPlainText(linkInline);
+        if (string.IsNullOrWhiteSpace(text))
         {
-            TextDecorations = TextDecorations.Underline
+            text = linkInline.Url ?? string.Empty;
+        }
+
+        var textBlock = new TextBlock
+        {
+            TextDecorations = TextDecorations.Underline,
+            Cursor = new Cursor(StandardCursorType.Hand),
+            Inlines = new InlineCollection(),
+            TextWrapping = TextWrapping.NoWrap,
+            Padding = new Thickness(0),
+            Margin = new Thickness(0),
+            VerticalAlignment = VerticalAlignment.Center
         };
-        BindTheme(span, TextElement.ForegroundProperty, AccentBrushProperty);
-        BindTheme(span, TextElement.FontFamilyProperty, ContentFontFamilyProperty);
-        BindTheme(span, TextElement.FontSizeProperty, ParagraphFontSizeProperty);
+        AddMarkdownClass(textBlock, MarkdownStyleKeys.Link);
+        BindTheme(textBlock, TextBlock.ForegroundProperty, AccentBrushProperty);
+        BindTheme(textBlock, TextBlock.FontFamilyProperty, ContentFontFamilyProperty);
+        BindTheme(textBlock, TextBlock.FontSizeProperty, ParagraphFontSizeProperty);
+        BindTheme(textBlock, TextBlock.LineHeightProperty, ParagraphLineHeightProperty);
 
         foreach (var inline in ConvertInlines(linkInline))
         {
-            span.Inlines.Add(inline);
+            textBlock.Inlines.Add(inline);
         }
 
-        if (span.Inlines.Count == 0)
+        if (textBlock.Inlines.Count == 0)
         {
-            span.Inlines.Add(new Run(linkInline.Url ?? string.Empty));
+            textBlock.Inlines.Add(new Run(text));
         }
 
-        return span;
+        textBlock.PointerReleased += (_, e) =>
+        {
+            if (e.InitialPressMouseButton == MouseButton.Left && !string.IsNullOrWhiteSpace(linkInline.Url))
+            {
+                UrlHelper.Open(linkInline.Url);
+                e.Handled = true;
+            }
+        };
+
+        return CreateInlineContainer(textBlock);
     }
 
     private static InlineUIContainer CreateInlineContainer(Control control)
@@ -1378,17 +2256,26 @@ public class MarkdownViewer : TemplatedControl
 
     private ContextMenu CreateViewerContextMenu()
     {
-        var copyRenderedTextItem = new MenuItem { Header = "复制渲染文本" };
+        var copyRenderedTextItem = new MenuItem
+        {
+            Header = MarkdownLocalization.Get(MarkdownLocalization.CopyRenderedText)
+        };
         copyRenderedTextItem.Click += async (_, _) => await CopyRenderedTextAsync();
         return new ContextMenu { ItemsSource = new[] { copyRenderedTextItem } };
     }
 
     private ContextMenu CreateSelectableTextContextMenu(SelectableTextBlock textBlock)
     {
-        var copySelectionItem = new MenuItem { Header = "复制选中文本" };
+        var copySelectionItem = new MenuItem
+        {
+            Header = MarkdownLocalization.Get(MarkdownLocalization.CopySelectedText)
+        };
         copySelectionItem.Click += (_, _) => textBlock.Copy();
 
-        var copyRenderedTextItem = new MenuItem { Header = "复制渲染文本" };
+        var copyRenderedTextItem = new MenuItem
+        {
+            Header = MarkdownLocalization.Get(MarkdownLocalization.CopyRenderedText)
+        };
         copyRenderedTextItem.Click += async (_, _) => await CopyRenderedTextAsync();
 
         return new ContextMenu { ItemsSource = new[] { copySelectionItem, copyRenderedTextItem } };

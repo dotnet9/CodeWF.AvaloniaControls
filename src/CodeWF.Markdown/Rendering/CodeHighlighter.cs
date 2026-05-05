@@ -81,6 +81,43 @@ internal static class CodeHighlighter
 
     private static Control Wrap(Control content)
     {
+        if (content is SelectableTextBlock textBlock)
+        {
+            var lineBreakCount = textBlock.Inlines?.OfType<LineBreak>().Count() ?? 0;
+            var plainText = textBlock.Inlines is null
+                ? string.Empty
+                : string.Concat(textBlock.Inlines.OfType<Run>().Select(run => run.Text ?? string.Empty));
+            var lineCount = lineBreakCount > 0
+                ? lineBreakCount
+                : Math.Max(1, plainText.Replace("\r\n", "\n").Split('\n').Length);
+            var lineNumbers = new SelectableTextBlock
+            {
+                Text = string.Join(Environment.NewLine, Enumerable.Range(1, lineCount).Select(i => i.ToString())),
+                TextWrapping = TextWrapping.NoWrap,
+                FontFamily = textBlock.FontFamily,
+                FontSize = textBlock.FontSize,
+                LineHeight = textBlock.LineHeight,
+                Foreground = Brushes.Gray,
+                Opacity = 0.72,
+                TextAlignment = TextAlignment.Right,
+                Margin = new Thickness(0, 0, 12, 6),
+                IsHitTestVisible = false
+            };
+
+            var grid = new Grid
+            {
+                ColumnDefinitions =
+                {
+                    new ColumnDefinition(GridLength.Auto),
+                    new ColumnDefinition(new GridLength(1, GridUnitType.Star))
+                }
+            };
+            grid.Children.Add(lineNumbers);
+            Grid.SetColumn(content, 1);
+            grid.Children.Add(content);
+            content = grid;
+        }
+
         var scrollViewer = new ScrollViewer
         {
             Content = content,

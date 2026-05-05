@@ -1,3 +1,5 @@
+using System.Text;
+
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -5,6 +7,11 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
+
+using CodeWF.Markdown.I18n;
+
+using Lang.Avalonia;
+using Svg.Skia;
 
 namespace CodeWF.Markdown.Controls;
 
@@ -16,21 +23,29 @@ internal sealed class MarkdownImagePreviewWindow : Window
 
     private readonly byte[] _imageBytes;
     private readonly string _fileName;
-    private readonly Image _image;
+    private readonly Control _image;
+    private readonly Border _imageHost;
     private readonly ScrollViewer _scrollViewer;
     private readonly TextBlock _zoomText;
+    private readonly List<(Button Button, string ResourceKey)> _localizedButtons = [];
     private readonly double _originalWidth;
     private readonly double _originalHeight;
+    private readonly bool _usesDefaultTitle;
     private double _zoom = 1.0;
+    private int _rotation;
+    private Point? _panStart;
+    private Vector _panStartOffset;
+    private bool _isPanning;
 
-    public MarkdownImagePreviewWindow(Bitmap bitmap, byte[] imageBytes, string fileName, string? title)
+    public MarkdownImagePreviewWindow(Bitmap bitmap, byte[] imageBytes, string fileName, string? title, bool isSvg)
     {
         _imageBytes = imageBytes;
         _fileName = string.IsNullOrWhiteSpace(fileName) ? "markdown-image.png" : fileName;
         _originalWidth = Math.Max(1, bitmap.PixelSize.Width);
         _originalHeight = Math.Max(1, bitmap.PixelSize.Height);
+        _usesDefaultTitle = string.IsNullOrWhiteSpace(title);
 
-        Title = string.IsNullOrWhiteSpace(title) ? "图片预览" : title;
+        Title = _usesDefaultTitle ? MarkdownLocalization.Get(MarkdownLocalization.ImagePreviewTitle) : title;
         Classes.Add(MarkdownStyleKeys.ImagePreviewWindow);
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
@@ -41,30 +56,68 @@ internal sealed class MarkdownImagePreviewWindow : Window
         };
         _zoomText.Classes.Add(MarkdownStyleKeys.ImagePreviewZoomText);
 
-        _image = new Image
-        {
-            Source = bitmap,
-            Stretch = Stretch.Fill,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Center
-        };
+        _image = isSvg
+            ? CreateSvgContent(imageBytes, bitmap)
+            : CreateBitmapContent(bitmap);
 
-        var imageHost = new Border
+        _imageHost = new Border
         {
-            Child = _image
+            Child = _image,
+            ClipToBounds = false,
+            Cursor = new Cursor(StandardCursorType.Hand)
         };
-        imageHost.Classes.Add(MarkdownStyleKeys.ImagePreviewContent);
+        _imageHost.Classes.Add(MarkdownStyleKeys.ImagePreviewContent);
+        _imageHost.PointerPressed += OnPanPointerPressed;
+        _imageHost.PointerMoved += OnPanPointerMoved;
+        _imageHost.PointerReleased += OnPanPointerReleased;
+        _imageHost.PointerCaptureLost += OnPanPointerCaptureLost;
 
         _scrollViewer = new ScrollViewer
         {
-            Content = imageHost,
+            Content = _imageHost,
             HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto,
             VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto
         };
 
         Content = CreateLayout();
         PointerWheelChanged += OnPointerWheelChanged;
+        I18nManager.Instance.CultureChanged += OnCultureChanged;
+        Closed += (_, _) => I18nManager.Instance.CultureChanged -= OnCultureChanged;
         UpdateImageSize();
+    }
+
+    private static Control CreateBitmapContent(Bitmap bitmap)
+    {
+        return new Image
+        {
+            Source = bitmap,
+            Stretch = Stretch.Fill,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center,
+            RenderTransformOrigin = RelativePoint.Center
+        };
+    }
+
+    private static Control CreateSvgContent(byte[] svgBytes, Bitmap fallbackBitmap)
+    {
+        try
+        {
+            return new global::Avalonia.Svg.Skia.Svg(new Uri("file:///", UriKind.Absolute))
+            {
+                Source = Encoding.UTF8.GetString(svgBytes),
+                Stretch = Stretch.Fill,
+                AnimationBackend = SvgAnimationHostBackend.DispatcherTimer,
+                AnimationFrameInterval = TimeSpan.FromMilliseconds(33),
+                AnimationPlaybackRate = 1,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                RenderTransformOrigin = RelativePoint.Center
+            };
+        }
+        catch
+        {
+            return CreateBitmapContent(fallbackBitmap);
+        }
     }
 
     private Control CreateLayout()
@@ -85,11 +138,13 @@ internal sealed class MarkdownImagePreviewWindow : Window
         };
         toolbar.Classes.Add(MarkdownStyleKeys.ImagePreviewToolbar);
 
-        toolbar.Children.Add(CreateButton("缩小", () => SetZoom(_zoom / ZoomStep)));
-        toolbar.Children.Add(CreateButton("放大", () => SetZoom(_zoom * ZoomStep)));
-        toolbar.Children.Add(CreateButton("原始大小", () => SetZoom(1.0)));
-        toolbar.Children.Add(CreateButton("适应窗口", FitToWindow));
-        toolbar.Children.Add(CreateButton("另存为", async () => await SaveAsAsync()));
+        toolbar.Children.Add(CreateButton(MarkdownLocalization.ImagePreviewZoomOut, () => SetZoom(_zoom / ZoomStep)));
+        toolbar.Children.Add(CreateButton(MarkdownLocalization.ImagePreviewZoomIn, () => SetZoom(_zoom * ZoomStep)));
+        toolbar.Children.Add(CreateButton(MarkdownLocalization.ImagePreviewActualSize, () => SetZoom(1.0)));
+        toolbar.Children.Add(CreateButton(MarkdownLocalization.ImagePreviewFit, FitToWindow));
+        toolbar.Children.Add(CreateButton(MarkdownLocalization.ImagePreviewRotateLeft, () => Rotate(-90)));
+        toolbar.Children.Add(CreateButton(MarkdownLocalization.ImagePreviewRotateRight, () => Rotate(90)));
+        toolbar.Children.Add(CreateButton(MarkdownLocalization.ImagePreviewSaveAs, async () => await SaveAsAsync()));
         toolbar.Children.Add(_zoomText);
 
         Grid.SetRow(toolbar, 0);
@@ -99,15 +154,16 @@ internal sealed class MarkdownImagePreviewWindow : Window
         return root;
     }
 
-    private static Button CreateButton(string text, Action action)
+    private Button CreateButton(string resourceKey, Action action)
     {
         var button = new Button
         {
-            Content = text,
+            Content = MarkdownLocalization.Get(resourceKey),
             VerticalAlignment = VerticalAlignment.Center
         };
         button.Classes.Add(MarkdownStyleKeys.ImagePreviewButton);
         button.Click += (_, _) => action();
+        _localizedButtons.Add((button, resourceKey));
         return button;
     }
 
@@ -122,12 +178,73 @@ internal sealed class MarkdownImagePreviewWindow : Window
         e.Handled = true;
     }
 
+    private void OnPanPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (e.GetCurrentPoint(_imageHost).Properties.PointerUpdateKind != PointerUpdateKind.LeftButtonPressed)
+        {
+            return;
+        }
+
+        _isPanning = true;
+        _panStart = e.GetPosition(this);
+        _panStartOffset = _scrollViewer.Offset;
+        _imageHost.Cursor = new Cursor(StandardCursorType.SizeAll);
+        e.Pointer.Capture(_imageHost);
+        e.Handled = true;
+    }
+
+    private void OnPanPointerMoved(object? sender, PointerEventArgs e)
+    {
+        if (!_isPanning || _panStart is not { } panStart)
+        {
+            return;
+        }
+
+        var current = e.GetPosition(this);
+        SetScrollOffset(_panStartOffset.X - (current.X - panStart.X), _panStartOffset.Y - (current.Y - panStart.Y));
+        e.Handled = true;
+    }
+
+    private void OnPanPointerReleased(object? sender, PointerReleasedEventArgs e)
+    {
+        if (!_isPanning || e.InitialPressMouseButton != MouseButton.Left)
+        {
+            return;
+        }
+
+        EndPan(e.Pointer);
+        e.Handled = true;
+    }
+
+    private void OnPanPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
+    {
+        EndPan(null);
+    }
+
+    private void EndPan(IPointer? pointer)
+    {
+        _isPanning = false;
+        _panStart = null;
+        _imageHost.Cursor = new Cursor(StandardCursorType.Hand);
+        pointer?.Capture(null);
+    }
+
+    private void SetScrollOffset(double x, double y)
+    {
+        var maxX = Math.Max(0, _scrollViewer.Extent.Width - _scrollViewer.Viewport.Width);
+        var maxY = Math.Max(0, _scrollViewer.Extent.Height - _scrollViewer.Viewport.Height);
+        _scrollViewer.Offset = new Vector(Math.Clamp(x, 0, maxX), Math.Clamp(y, 0, maxY));
+    }
+
     private void FitToWindow()
     {
-        var padding = (_scrollViewer.Content as Border)?.Padding ?? default;
+        var padding = _imageHost.Padding;
         var availableWidth = Math.Max(1, _scrollViewer.Bounds.Width - padding.Left - padding.Right);
         var availableHeight = Math.Max(1, _scrollViewer.Bounds.Height - padding.Top - padding.Bottom);
-        SetZoom(Math.Min(availableWidth / _originalWidth, availableHeight / _originalHeight));
+        var rotated = Math.Abs(_rotation % 180) == 90;
+        var width = rotated ? _originalHeight : _originalWidth;
+        var height = rotated ? _originalWidth : _originalHeight;
+        SetZoom(Math.Min(availableWidth / width, availableHeight / height));
     }
 
     private void SetZoom(double zoom)
@@ -136,11 +253,37 @@ internal sealed class MarkdownImagePreviewWindow : Window
         UpdateImageSize();
     }
 
+    private void Rotate(int degrees)
+    {
+        _rotation = ((_rotation + degrees) % 360 + 360) % 360;
+        UpdateImageSize();
+    }
+
     private void UpdateImageSize()
     {
         _image.Width = _originalWidth * _zoom;
         _image.Height = _originalHeight * _zoom;
-        _zoomText.Text = $"{_zoom:P0}";
+        _image.RenderTransform = new RotateTransform(_rotation);
+
+        var rotated = Math.Abs(_rotation % 180) == 90;
+        _imageHost.Width = (rotated ? _originalHeight : _originalWidth) * _zoom;
+        _imageHost.Height = (rotated ? _originalWidth : _originalHeight) * _zoom;
+        _zoomText.Text = MarkdownLocalization.Format(MarkdownLocalization.ImagePreviewZoomStatus, _zoom, _rotation);
+    }
+
+    private void OnCultureChanged(object? sender, EventArgs e)
+    {
+        if (_usesDefaultTitle)
+        {
+            Title = MarkdownLocalization.Get(MarkdownLocalization.ImagePreviewTitle);
+        }
+
+        foreach (var (button, resourceKey) in _localizedButtons)
+        {
+            button.Content = MarkdownLocalization.Get(resourceKey);
+        }
+
+        UpdateImageSize();
     }
 
     private async Task SaveAsAsync()
@@ -163,10 +306,10 @@ internal sealed class MarkdownImagePreviewWindow : Window
             ShowOverwritePrompt = true,
             FileTypeChoices =
             [
-                new FilePickerFileType("图片")
+                new FilePickerFileType(MarkdownLocalization.Get(MarkdownLocalization.ImagePreviewImagesFileType))
                 {
-                    Patterns = ["*.png", "*.jpg", "*.jpeg", "*.webp", "*.bmp", "*.gif"],
-                    MimeTypes = ["image/png", "image/jpeg", "image/webp", "image/bmp", "image/gif"]
+                    Patterns = ["*.png", "*.jpg", "*.jpeg", "*.webp", "*.bmp", "*.gif", "*.svg"],
+                    MimeTypes = ["image/png", "image/jpeg", "image/webp", "image/bmp", "image/gif", "image/svg+xml"]
                 }
             ]
         });
@@ -176,7 +319,6 @@ internal sealed class MarkdownImagePreviewWindow : Window
             return;
         }
 
-        // 另存为写出原始字节，避免重新编码导致格式或质量变化。
         await using var stream = await file.OpenWriteAsync();
         await stream.WriteAsync(_imageBytes);
     }

@@ -4,6 +4,7 @@
 
 - Bumped `CodeWF.Markdown` and `CodeWF.Markdown.Themes` to 12.0.2.1.
 - Removed the `MarkdownViewer.Value` compatibility API so `MarkdownViewer` only accepts Markdown text through `Markdown`.
+- Added Markdown SVG image rendering and local missing-file fallback text.
 - Expanded README documentation for Markdown package installation, `MarkdownViewer` XAML usage, typography theme registration, runtime theme switching, and image path handling.
 - Added XML documentation for the Markdown viewer, code-block tool render event arguments, theme entry point, and typography theme keys.
 - Added a dedicated `publish_Markdown.bat` script and included it in the solution file.
