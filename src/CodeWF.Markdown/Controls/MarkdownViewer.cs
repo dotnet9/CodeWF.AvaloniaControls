@@ -58,6 +58,7 @@ public class MarkdownViewer : TemplatedControl
         .Build();
 
     private readonly List<RenderedBlock> _renderedBlocks = [];
+    private readonly List<IDisposable> _currentBlockDisposables = [];
     private Panel? _documentHost;
     private string _renderedMarkdown = string.Empty;
     private MarkdownRenderMode _queuedRenderMode = MarkdownRenderMode.Incremental;
@@ -377,6 +378,8 @@ public class MarkdownViewer : TemplatedControl
         MarkdownProperty.Changed.AddClassHandler<MarkdownViewer>((viewer, _) => viewer.QueueRenderDocument(MarkdownRenderMode.Incremental));
     }
 
+    private MenuItem? _viewerCopyMenuItem;
+
     public MarkdownViewer()
     {
         Focusable = true;
@@ -530,6 +533,10 @@ public class MarkdownViewer : TemplatedControl
             return;
         }
 
+        foreach (var block in _renderedBlocks)
+        {
+            block.Cleanup();
+        }
         _documentHost.Children.Clear();
         _renderedBlocks.Clear();
         _renderedMarkdown = text;
@@ -619,14 +626,22 @@ public class MarkdownViewer : TemplatedControl
 
         foreach (var block in document)
         {
+            var previousDisposableCount = _currentBlockDisposables.Count;
             var control = ConvertBlock(block, markdown);
             if (control is null)
             {
+                for (var i = _currentBlockDisposables.Count - 1; i >= previousDisposableCount; i--)
+                {
+                    _currentBlockDisposables[i].Dispose();
+                    _currentBlockDisposables.RemoveAt(i);
+                }
                 continue;
             }
 
             var range = GetBlockRange(block, sourceOffset, markdown.Length);
-            renderedBlocks.Add(new RenderedBlock(range.Start, range.End, control));
+            var blockDisposables = _currentBlockDisposables.GetRange(previousDisposableCount,
+                _currentBlockDisposables.Count - previousDisposableCount);
+            renderedBlocks.Add(new RenderedBlock(range.Start, range.End, control, blockDisposables));
         }
 
         return renderedBlocks;
@@ -646,6 +661,7 @@ public class MarkdownViewer : TemplatedControl
         var removeCount = replaceEndIndex - replaceStartIndex;
         for (var i = 0; i < removeCount; i++)
         {
+            _renderedBlocks[replaceStartIndex].Cleanup();
             _documentHost.Children.RemoveAt(replaceStartIndex);
             _renderedBlocks.RemoveAt(replaceStartIndex);
         }
@@ -1036,16 +1052,17 @@ public class MarkdownViewer : TemplatedControl
         var copyButton = new Button
         {
             Content = I18nManager.Instance.GetResource(MarkdownL.Copy),
+            Tag = code
         };
         AddMarkdownClass(copyButton, MarkdownStyleKeys.CopyButton);
         BindTheme(copyButton, Button.BackgroundProperty, AccentBrushProperty);
         BindTheme(copyButton, Button.ForegroundProperty, AccentForegroundBrushProperty);
-        copyButton.Click += async (_, _) =>
+        copyButton.Click += (_, _) =>
         {
             CopyClick?.Invoke(this, EventArgs.Empty);
-            if (TopLevel.GetTopLevel(this)?.Clipboard is { } clipboard)
+            if (TopLevel.GetTopLevel(this)?.Clipboard is { } clipboard && copyButton.Tag is string tagCode)
             {
-                await clipboard.SetTextAsync(code);
+                _ = clipboard.SetTextAsync(tagCode);
             }
         };
 
@@ -2260,12 +2277,13 @@ public class MarkdownViewer : TemplatedControl
 
     private ContextMenu CreateViewerContextMenu()
     {
-        var copyRenderedTextItem = new MenuItem
+        if (_viewerCopyMenuItem is null)
         {
-            Header = I18nManager.Instance.GetResource(MarkdownL.CopyRenderedText)
-        };
-        copyRenderedTextItem.Click += async (_, _) => await CopyRenderedTextAsync();
-        return new ContextMenu { ItemsSource = new[] { copyRenderedTextItem } };
+            _viewerCopyMenuItem = new MenuItem();
+            _viewerCopyMenuItem.Click += async (_, _) => await CopyRenderedTextAsync();
+        }
+        _viewerCopyMenuItem.Header = I18nManager.Instance.GetResource(MarkdownL.CopyRenderedText);
+        return new ContextMenu { ItemsSource = new[] { _viewerCopyMenuItem } };
     }
 
     private ContextMenu CreateSelectableTextContextMenu(SelectableTextBlock textBlock)
@@ -2367,7 +2385,9 @@ public class MarkdownViewer : TemplatedControl
         AvaloniaProperty<T> targetProperty,
         StyledProperty<T> sourceProperty)
     {
-        return target.Bind(targetProperty, this.GetObservable(sourceProperty));
+        var disposable = target.Bind(targetProperty, this.GetObservable(sourceProperty));
+        _currentBlockDisposables.Add(disposable);
+        return disposable;
     }
 
     private static void AppendPlainTextBlock(StringBuilder builder, Block block, int indent)
@@ -2510,8 +2530,20 @@ public class MarkdownViewer : TemplatedControl
         }
     }
 
-    private sealed record RenderedBlock(int Start, int End, Control Control)
+    private sealed record RenderedBlock(int Start, int End, Control Control, List<IDisposable>? Bindings)
     {
+        public void Cleanup()
+        {
+            if (Bindings is not null)
+            {
+                foreach (var d in Bindings)
+                {
+                    d.Dispose();
+                }
+                Bindings.Clear();
+            }
+        }
+
         public RenderedBlock Shift(int delta)
         {
             return this with

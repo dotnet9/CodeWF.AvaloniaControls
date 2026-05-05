@@ -1,5 +1,16 @@
 # 更新日志
 
+V12.0.2.3（2026-05-05）
+
+- 🔴[修复]-修复 `BindTheme` 绑定订阅泄漏：`IDisposable` 令牌存储在 `RenderedBlock` 中，块重建时逐一 Dispose，杜绝 observer 列表无限增长
+- 🔴[修复]-增量渲染 `ReplaceRenderedBlocks` 和全量重建 `RenderDocumentFull` 新增 `Cleanup()` 入口，旧控件及其绑定在移除前被完整释放
+- 🟡[修复]-`ContextMenu` 缓存 `MenuItem` 实例，语言切换时只更新 `Header` 不重复订阅 `Click`，消除菜单反复重建导致的事件泄漏
+- 🟡[修复]-代码块复制按钮改用 `Button.Tag` 存储代码文本，lambda 不再闭包捕获局部变量，避免闭包对象泄漏
+- 🟡[修复]-`CodeHighlighter` 静态缓存新增 `MaxCacheSize=32` 上限和 `CacheOrder` 淘汰队列，防止未知语言无限堆积
+- 🟡[修复]-`MarkdownImage` 加载接入 `CancellationTokenSource`，每次 `QueueLoad` 自动取消前一次；加载新 Bitmap 前 Dispose 旧 Bitmap；清除旧字节数组和文件名引用
+- 🟡[修复]-`CodeHighlighter` 复制菜单硬编码中文改为走 `I18nManager.Instance.GetResource` 国际化资源
+- 🟡[优化]-`MarkdownImage.LoadBytesAsync` 传递 CancellationToken 给 `HttpClient.GetAsync`，快速滚动时旧 HTTP 请求可被及时取消
+
 V12.0.2.2（2026-05-05）
 
 - 😄[新增]-接入 `Lang.Avalonia.Resx` 插件，通过 `Resources.Designer.cs` 暴露 ResourceManager 供 `ResxLangPlugin` 反射发现，实现控件内文案（图片预览、复制菜单等）的多语言切换

@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 
 using Avalonia;
 using Avalonia.Controls;
@@ -34,6 +35,7 @@ public class MarkdownImage : TemplatedControl
     private string? _fileName;
     private bool _isSvg;
     private long _loadVersion;
+    private CancellationTokenSource? _loadCts;
     private Point? _pressedPoint;
     private bool _isPointerDragging;
 
@@ -73,7 +75,12 @@ public class MarkdownImage : TemplatedControl
         var source = Source?.Trim();
         if (string.IsNullOrWhiteSpace(source))
         {
-            _bitmap = null;
+            _loadCts?.Cancel();
+            if (_bitmap is not null)
+            {
+                _bitmap.Dispose();
+                _bitmap = null;
+            }
             _imageBytes = null;
             _fileName = null;
             _isSvg = false;
@@ -81,39 +88,50 @@ public class MarkdownImage : TemplatedControl
             return;
         }
 
+        _loadCts?.Cancel();
+        _loadCts = new CancellationTokenSource();
+        var token = _loadCts.Token;
         var version = Interlocked.Increment(ref _loadVersion);
-        _ = LoadAsync(source, version);
+        _ = LoadAsync(source, version, token);
     }
 
-    private async Task LoadAsync(string source, long version)
+    private async Task LoadAsync(string source, long version, CancellationToken token)
     {
         try
         {
-            var loadResult = await LoadBytesAsync(source);
+            token.ThrowIfCancellationRequested();
+            var loadResult = await LoadBytesAsync(source, token);
+            token.ThrowIfCancellationRequested();
             var previewBytes = loadResult.IsSvg
                 ? RenderSvgToPngBytes(loadResult.Bytes)
                 : loadResult.Bytes;
+            token.ThrowIfCancellationRequested();
             using var stream = new MemoryStream(previewBytes);
             var bitmap = new Bitmap(stream);
             var fileName = loadResult.FileName;
 
             await Dispatcher.UIThread.InvokeAsync(() =>
             {
-                if (version != _loadVersion)
+                if (version != _loadVersion || token.IsCancellationRequested)
                 {
+                    bitmap.Dispose();
                     return;
                 }
 
-                // 预览窗体和另存为需要复用当前图片，避免再次下载远程资源。
+                var oldBitmap = _bitmap;
                 _bitmap = bitmap;
                 _imageBytes = loadResult.Bytes;
                 _fileName = fileName;
                 _isSvg = loadResult.IsSvg;
+                oldBitmap?.Dispose();
 
                 SetContent(loadResult.IsSvg
                     ? CreateSvgContent(loadResult.Bytes, bitmap)
                     : CreateBitmapContent(bitmap));
             });
+        }
+        catch (OperationCanceledException)
+        {
         }
         catch (FileNotFoundException ex)
         {
@@ -130,7 +148,7 @@ public class MarkdownImage : TemplatedControl
         }
     }
 
-    private async Task<ImageLoadResult> LoadBytesAsync(string source)
+    private async Task<ImageLoadResult> LoadBytesAsync(string source, CancellationToken token)
     {
         if (TryReadDataUri(source, out var dataUriBytes, out var dataUriIsSvg))
         {
@@ -144,9 +162,10 @@ public class MarkdownImage : TemplatedControl
         {
             if (uri.Scheme is "http" or "https")
             {
-                using var response = await HttpClient.GetAsync(uri);
+                using var response = await HttpClient.GetAsync(uri, token);
                 response.EnsureSuccessStatusCode();
-                var bytes = await response.Content.ReadAsByteArrayAsync();
+                token.ThrowIfCancellationRequested();
+                var bytes = await response.Content.ReadAsByteArrayAsync(token);
                 var mediaType = response.Content.Headers.ContentType?.MediaType;
                 return new ImageLoadResult(
                     bytes,

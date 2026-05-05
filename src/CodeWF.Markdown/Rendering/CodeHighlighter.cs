@@ -9,6 +9,8 @@ using Avalonia.Media.Immutable;
 
 using CodeWF.Markdown;
 
+using Lang.Avalonia;
+
 using TextMateSharp.Grammars;
 using TextMateSharp.Registry;
 using TextMateSharp.Themes;
@@ -20,7 +22,9 @@ namespace CodeWF.Markdown.Rendering;
 
 internal static class CodeHighlighter
 {
+    private const int MaxCacheSize = 32;
     private static readonly Dictionary<(string Language, ThemeName Theme), (IGrammar? Grammar, Theme Theme)> Cache = new();
+    private static readonly Queue<(string Language, ThemeName Theme)> CacheOrder = new();
 
     public static Control Render(
         string code,
@@ -130,7 +134,10 @@ internal static class CodeHighlighter
 
     private static ContextMenu CreateCopyContextMenu(SelectableTextBlock textBlock)
     {
-        var copySelectionItem = new MenuItem { Header = "复制选中文本" };
+        var copySelectionItem = new MenuItem
+        {
+            Header = I18nManager.Instance.GetResource(MarkdownL.CopyRenderedText)
+        };
         copySelectionItem.Click += (_, _) => textBlock.Copy();
         return new ContextMenu { ItemsSource = new[] { copySelectionItem } };
     }
@@ -143,6 +150,12 @@ internal static class CodeHighlighter
             return cached;
         }
 
+        if (Cache.Count >= MaxCacheSize)
+        {
+            var oldest = CacheOrder.Dequeue();
+            Cache.Remove(oldest);
+        }
+
         var options = new RegistryOptions(themeName);
         var registry = new Registry(options);
         var theme = registry.GetTheme();
@@ -152,6 +165,7 @@ internal static class CodeHighlighter
 
         var value = (grammar, theme);
         Cache[key] = value;
+        CacheOrder.Enqueue(key);
         return value;
     }
 
