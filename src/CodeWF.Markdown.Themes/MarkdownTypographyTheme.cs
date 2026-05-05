@@ -1,10 +1,13 @@
 namespace CodeWF.Markdown.Themes;
 
 /// <summary>
-/// Describes one typography resource set shipped by CodeWF.Markdown.Themes.
+/// 描述 CodeWF.Markdown.Themes 内置的一套排版资源。
 /// </summary>
 public sealed record MarkdownTypographyTheme(string Name, string Key);
 
+/// <summary>
+/// Markdown 排版主题 Key 集合，运行时切换主题时直接使用这些常量。
+/// </summary>
 public static class MarkdownTypographyThemes
 {
     public const string OrangeHeart = "OrangeHeart";

@@ -1,5 +1,14 @@
 # Changelog
 
+## 12.0.2.1 - 2026-05-05
+
+- Bumped `CodeWF.Markdown` and `CodeWF.Markdown.Themes` to 12.0.2.1.
+- Removed the `MarkdownViewer.Value` compatibility API so `MarkdownViewer` only accepts Markdown text through `Markdown`.
+- Expanded README documentation for Markdown package installation, `MarkdownViewer` XAML usage, typography theme registration, runtime theme switching, and image path handling.
+- Added XML documentation for the Markdown viewer, code-block tool render event arguments, theme entry point, and typography theme keys.
+- Added a dedicated `publish_Markdown.bat` script and included it in the solution file.
+- Removed the unused `GroupItems` compatibility collection from the ProDataGrid cross rows/columns showcase view model.
+
 ## 12.0.2 - 2026-05-05
 
 - Split package versioning into five independently maintained version groups: controls/themes, DataGrid, Dock, ProDataGrid, and Markdown/themes.

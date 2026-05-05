@@ -7,6 +7,8 @@
 | CodeWF.AvaloniaControls.DataGrid | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.DataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.DataGrid/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.DataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.DataGrid/) |
 | CodeWF.AvaloniaControls.Dock | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) |
 | CodeWF.AvaloniaControls.ProDataGrid | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) |
+| CodeWF.Markdown | [![NuGet](https://img.shields.io/nuget/v/CodeWF.Markdown.svg)](https://www.nuget.org/packages/CodeWF.Markdown/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.Markdown.svg)](https://www.nuget.org/packages/CodeWF.Markdown/) |
+| CodeWF.Markdown.Themes | [![NuGet](https://img.shields.io/nuget/v/CodeWF.Markdown.Themes.svg)](https://www.nuget.org/packages/CodeWF.Markdown.Themes/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.Markdown.Themes.svg)](https://www.nuget.org/packages/CodeWF.Markdown.Themes/) |
 
 An open-source Avalonia control repository based on .NET 11 and Avalonia 12, including reusable libraries, legacy free-grid compatibility helpers, and runnable samples.
 
@@ -34,17 +36,81 @@ Install-Package CodeWF.AvaloniaControls
 - `CodeWF.AvaloniaControls.Themes`: control templates and visual resources for the main control package
 - `CodeWF.AvaloniaControls.Dock`: Dock extension controls styled for the Semi theme line
 - `CodeWF.AvaloniaControls.ProDataGrid`: open-source high-performance grid helper package built on `ProDataGrid`
+- `CodeWF.Markdown`: Markdown rendering control with code highlighting, image preview, and incremental rendering
+- `CodeWF.Markdown.Themes`: default `MarkdownViewer` templates and typography theme resources
 
 ### Legacy free DataGrid / TreeDataGrid line
 
 - `CodeWF.AvaloniaControls.DataGrid` stays on the last free official `Avalonia.Controls.DataGrid` / `Avalonia.Controls.TreeDataGrid` line
 - The legacy compatibility projects keep explicit package versions in their own `.csproj` files instead of adding conditional branches to the central package manager
 
+## Markdown Viewer Usage
+
+Install the renderer and theme packages:
+
+```shell
+dotnet add package CodeWF.Markdown
+dotnet add package CodeWF.Markdown.Themes
+```
+
+Register the default style and typography resources in `App.axaml`:
+
+```xml
+<Application
+    xmlns="https://github.com/avaloniaui"
+    xmlns:markdownThemes="https://codewf.com">
+    <Application.Styles>
+        <FluentTheme />
+        <markdownThemes:MarkdownThemes TypographyTheme="Simple" />
+    </Application.Styles>
+</Application>
+```
+
+Use `MarkdownViewer` from a page. The viewer only accepts the `Markdown` input property; legacy aliases are not kept:
+
+```xml
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:md="https://codewf.com">
+    <ScrollViewer
+        HorizontalScrollBarVisibility="Disabled"
+        VerticalScrollBarVisibility="Auto">
+        <md:MarkdownViewer Markdown="{Binding Markdown}" />
+    </ScrollViewer>
+</UserControl>
+```
+
+Switch typography resources at runtime:
+
+```csharp
+MarkdownThemes.OverrideTypographyResources(
+    Application.Current!,
+    MarkdownTypographyThemes.BlueGlow);
+```
+
+Handle `CodeBlockToolRender` to add custom code-block actions:
+
+```xml
+<md:MarkdownViewer
+    Markdown="{Binding Markdown}"
+    CodeBlockToolRender="OnCodeBlockToolRender" />
+```
+
+```csharp
+private void OnCodeBlockToolRender(object? sender, CodeBlockToolRenderEventArgs e)
+{
+    e.HeaderPanel.Children.Add(new Button { Content = "Run" });
+}
+```
+
+`MarkdownViewer` supports headings, paragraphs, lists, task lists, quotes, tables, inline code, links, images, and language-tagged code blocks. Code blocks include a copy button, and images open a preview window on click. Relative image paths are resolved from the application base directory by default; when rendering Markdown loaded from another folder, normalize image URLs to absolute paths or `file://` URLs before assigning `Markdown`.
+
 ## Sample Applications
 
 - `CodeWF.AvaloniaControls.Showcase`: general control showcase
 - `CodeWF.AvaloniaControls.ProDataGridShowcase`: functional ProDataGrid sample on Avalonia 12
 - `CodeWF.AvaloniaControls.ProDataGridPerformanceDemo`: large-dataset, tab-switching, and document-switching performance sample on Avalonia 12
+- `CodeWF.Markdown.Sample`: Markdown editing, live preview, typography theme switching, and incremental rendering stress sample
 - `CodeWF.AvaloniaControls.DataGridLegacyDemo`: legacy free DataGrid sample
 - `CodeWF.AvaloniaControls.TreeDataGridLegacyDemo`: legacy free TreeDataGrid sample
 - `CodeWF.AvaloniaControls.DockDemo`, `CodeWF.AvaloniaControls.DockPrismDemo`, `CodeWF.AvaloniaControls.DockReactiveUIDemo`: Dock integration samples

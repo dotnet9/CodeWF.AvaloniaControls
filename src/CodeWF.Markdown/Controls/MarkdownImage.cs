@@ -46,6 +46,9 @@ public class MarkdownImage : TemplatedControl
         set => SetValue(AltTextProperty, value);
     }
 
+    /// <summary>
+    /// 解析相对图片路径时使用的目录；MarkdownViewer 默认从进程目录解析图片。
+    /// </summary>
     public string? BasePath
     {
         get => GetValue(BasePathProperty);

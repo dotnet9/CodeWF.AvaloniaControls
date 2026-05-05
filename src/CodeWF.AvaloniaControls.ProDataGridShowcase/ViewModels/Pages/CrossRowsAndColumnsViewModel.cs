@@ -89,9 +89,6 @@ public class CrossRowsAndColumnsViewModel : ReactiveObject
             }
         }
         
-        // 为兼容旧代码保留GroupItems
-        GroupItems.AddRange(allGroups);
-        
         // 性能优化2：预计算扁平化列表大小，减少动态扩容
         var totalItemsCount = allGroups.Sum(g => g.Items.Count);
         var flattenedItemsList = new List<FlattenedProcessItem>(totalItemsCount);
@@ -143,9 +140,6 @@ public class CrossRowsAndColumnsViewModel : ReactiveObject
         }
     }
 
-    // 为兼容旧代码保留
-    public ObservableCollection<GroupItem> GroupItems { get; } = [];
-    
     // 新的扁平化数据集合，用于优化渲染
     public ObservableCollection<FlattenedProcessItem> FlattenedItems { get; } = [];
 }

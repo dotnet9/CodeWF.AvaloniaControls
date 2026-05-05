@@ -1,8 +1,8 @@
 namespace CodeWF.Markdown;
 
 /// <summary>
-/// Shared style keys and class names emitted by <see cref="Controls.MarkdownViewer" />.
-/// Theme packages can target these keys without depending on renderer internals.
+/// <see cref="Controls.MarkdownViewer" /> 输出的统一样式类名与资源 Key。
+/// 主题包只依赖这些常量，不需要感知渲染器内部控件结构。
 /// </summary>
 public static class MarkdownStyleKeys
 {

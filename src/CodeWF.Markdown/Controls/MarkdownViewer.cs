@@ -28,10 +28,20 @@ namespace CodeWF.Markdown.Controls;
 
 public enum MarkdownRenderMode
 {
+    /// <summary>
+    /// 尽量复用已渲染块，只替换文本变化影响到的区段。
+    /// </summary>
     Incremental,
+
+    /// <summary>
+    /// 丢弃现有渲染块并从 Markdown 文本完整重建文档。
+    /// </summary>
     Full
 }
 
+/// <summary>
+/// 将 Markdown 文本渲染为 Avalonia 控件树的只读预览控件。
+/// </summary>
 [TemplatePart(DocumentHostPartName, typeof(Panel), IsRequired = true)]
 public class MarkdownViewer : TemplatedControl
 {
@@ -49,9 +59,6 @@ public class MarkdownViewer : TemplatedControl
 
     public static readonly StyledProperty<string?> MarkdownProperty =
         AvaloniaProperty.Register<MarkdownViewer, string?>(nameof(Markdown));
-
-    public static readonly StyledProperty<string?> ValueProperty =
-        AvaloniaProperty.Register<MarkdownViewer, string?>(nameof(Value));
 
     public static readonly StyledProperty<IBrush?> TextBrushProperty =
         AvaloniaProperty.Register<MarkdownViewer, IBrush?>(nameof(TextBrush), Brushes.Black);
@@ -151,19 +158,13 @@ public class MarkdownViewer : TemplatedControl
     public static readonly StyledProperty<Thickness> ListNestedParagraphMarginProperty =
         AvaloniaProperty.Register<MarkdownViewer, Thickness>(nameof(ListNestedParagraphMargin), new Thickness(0, 2, 0, 2));
 
+    /// <summary>
+    /// Markdown 原文；控件只暴露这一处文本输入入口。
+    /// </summary>
     public string? Markdown
     {
         get => GetValue(MarkdownProperty);
         set => SetValue(MarkdownProperty, value);
-    }
-
-    /// <summary>
-    /// 兼容旧示例里的 Value 命名，新代码建议使用 Markdown。
-    /// </summary>
-    public string? Value
-    {
-        get => GetValue(ValueProperty);
-        set => SetValue(ValueProperty, value);
     }
 
     public IBrush? TextBrush
@@ -360,18 +361,14 @@ public class MarkdownViewer : TemplatedControl
 
     public event EventHandler? CopyClick;
 
+    /// <summary>
+    /// 在代码块工具栏创建完成后触发，调用方可追加自定义按钮。
+    /// </summary>
     public event EventHandler<CodeBlockToolRenderEventArgs>? CodeBlockToolRender;
 
     static MarkdownViewer()
     {
         MarkdownProperty.Changed.AddClassHandler<MarkdownViewer>((viewer, _) => viewer.QueueRenderDocument(MarkdownRenderMode.Incremental));
-        ValueProperty.Changed.AddClassHandler<MarkdownViewer>((viewer, e) =>
-        {
-            if (!Equals(viewer.Markdown, e.NewValue))
-            {
-                viewer.Markdown = e.NewValue as string;
-            }
-        });
     }
 
     public MarkdownViewer()
@@ -394,7 +391,7 @@ public class MarkdownViewer : TemplatedControl
 
     public string GetRenderedText()
     {
-        var text = Markdown ?? Value ?? string.Empty;
+        var text = Markdown ?? string.Empty;
         if (string.IsNullOrWhiteSpace(text))
         {
             return string.Empty;
@@ -503,7 +500,7 @@ public class MarkdownViewer : TemplatedControl
             return;
         }
 
-        var text = Markdown ?? Value ?? string.Empty;
+        var text = Markdown ?? string.Empty;
         if (mode == MarkdownRenderMode.Incremental && TryRenderIncremental(text))
         {
             return;
@@ -561,6 +558,7 @@ public class MarkdownViewer : TemplatedControl
             return false;
         }
 
+        // Markdig 不直接暴露块级增量渲染，这里用文本范围定位受影响块，再只替换该区间。
         var replaceStartIndex = FindReplaceStartIndex(change.OldStart);
         if (replaceStartIndex < 0)
         {

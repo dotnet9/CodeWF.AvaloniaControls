@@ -10,6 +10,9 @@ using CodeWF.Markdown.Themes.Themes;
 
 namespace CodeWF.Markdown.Themes;
 
+/// <summary>
+/// Markdown 控件的默认样式入口，并负责把指定排版主题资源合并到目标资源字典。
+/// </summary>
 public class MarkdownThemes : Styles
 {
     private static readonly IReadOnlyDictionary<string, Func<ResourceDictionary>> ThemeResourceFactories =
@@ -70,11 +73,17 @@ public class MarkdownThemes : Styles
         }
     }
 
+    /// <summary>
+    /// 覆盖应用级 Markdown 排版资源，适合全局主题切换。
+    /// </summary>
     public static void OverrideTypographyResources(Application application, string? typographyTheme)
     {
         ApplyTypographyResources(application.Resources, typographyTheme);
     }
 
+    /// <summary>
+    /// 覆盖指定控件或窗口的 Markdown 排版资源，适合局部预览区切换主题。
+    /// </summary>
     public static void OverrideTypographyResources(StyledElement element, string? typographyTheme)
     {
         ApplyTypographyResources(element.Resources, typographyTheme);

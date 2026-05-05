@@ -1,5 +1,9 @@
 # 更新日志
 
+V12.0.2.1（2026-05-05）
+
+- 🔤[优化]-补充 `MarkdownThemes` 和 `MarkdownTypographyThemes` 公开 API 注释，明确样式入口、排版主题 Key 与运行时覆盖方式
+
 V12.0.2（2026-05-05）
 
 - 😄[新增]-新增当前工程独立更新日志文件，后续 `CodeWF.Markdown.Themes` 的修改历史改为在工程目录内持续记录
