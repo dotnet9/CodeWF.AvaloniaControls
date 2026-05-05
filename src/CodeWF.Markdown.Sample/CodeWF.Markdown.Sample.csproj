@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFrameworks>net8.0;net9.0;net10.0;net11.0;net11.0-windows</TargetFrameworks>
@@ -21,7 +21,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\CodeWF.Markdown\CodeWF.Markdown.csproj" />
 		<ProjectReference Include="..\CodeWF.Markdown.Themes\CodeWF.Markdown.Themes.csproj" />
 	</ItemGroup>
 
@@ -33,5 +32,21 @@
 
 	<ItemGroup>
 		<Content Include="Assets\logo.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="I18n\Language.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Language.tt</DependentUpon>
+		</Compile>
+		<None Update="I18n\Language.tt">
+			<Generator>TextTemplatingFileGenerator</Generator>
+			<LastGenOutput>Language.cs</LastGenOutput>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
 	</ItemGroup>
 </Project>

@@ -12,9 +12,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
-
-using CodeWF.Markdown.I18n;
-
+using Lang.Avalonia;
 using SkiaSharp;
 using Svg.Skia;
 
@@ -119,15 +117,16 @@ public class MarkdownImage : TemplatedControl
         }
         catch (FileNotFoundException ex)
         {
+            ;
             await ShowFallbackAsync(
                 version,
-                MarkdownLocalization.Format(MarkdownLocalization.ImageFileNotFound, ex.FileName ?? source));
+                string.Format(I18nManager.Instance.GetResource(CodeWF.MarkdownL.ImageFileNotFound), ex.FileName ?? source));
         }
         catch
         {
             await ShowFallbackAsync(
                 version,
-                MarkdownLocalization.Format(MarkdownLocalization.ImageLoadFailed, AltText ?? source));
+                string.Format(I18nManager.Instance.GetResource(CodeWF.MarkdownL.ImageLoadFailed), AltText ?? source));
         }
     }
 
@@ -319,11 +318,12 @@ public class MarkdownImage : TemplatedControl
             return;
         }
 
+        var title = !string.IsNullOrWhiteSpace(AltText) ? AltText : Source;
         var window = new MarkdownImagePreviewWindow(
             _bitmap,
             _imageBytes,
             _fileName ?? (_isSvg ? "markdown-image.svg" : "markdown-image.png"),
-            AltText,
+            title,
             _isSvg);
         if (TopLevel.GetTopLevel(this) is Window owner)
         {

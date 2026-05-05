@@ -15,7 +15,6 @@ using Avalonia.Threading;
 using Avalonia.VisualTree;
 
 using CodeWF.Markdown.Helpers;
-using CodeWF.Markdown.I18n;
 using CodeWF.Markdown.Rendering;
 
 using CSharpMath.Avalonia;
@@ -1036,7 +1035,7 @@ public class MarkdownViewer : TemplatedControl
 
         var copyButton = new Button
         {
-            Content = MarkdownLocalization.Get(MarkdownLocalization.Copy),
+            Content = I18nManager.Instance.GetResource(MarkdownL.Copy),
         };
         AddMarkdownClass(copyButton, MarkdownStyleKeys.CopyButton);
         BindTheme(copyButton, Button.BackgroundProperty, AccentBrushProperty);
@@ -1986,7 +1985,11 @@ public class MarkdownViewer : TemplatedControl
         var annotations = annotation.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         if (annotations.Length == text.Length)
         {
-            var grid = new Grid { VerticalAlignment = VerticalAlignment.Center };
+            var grid = new Grid
+            {
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Bottom
+            };
             grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));
             grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));
 
@@ -2016,7 +2019,8 @@ public class MarkdownViewer : TemplatedControl
         {
             Orientation = Orientation.Vertical,
             Spacing = 0,
-            VerticalAlignment = VerticalAlignment.Center
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Bottom
         };
 
         var topFallback = CreateRubyTextBlock(annotation, Math.Max(9, ParagraphFontSize * 0.62), Math.Max(10, ParagraphLineHeight * 0.45));
@@ -2165,6 +2169,8 @@ public class MarkdownViewer : TemplatedControl
             text = linkInline.Url ?? string.Empty;
         }
 
+        var linkUrl = linkInline.Url;
+
         var textBlock = new TextBlock
         {
             TextDecorations = TextDecorations.Underline,
@@ -2172,14 +2178,12 @@ public class MarkdownViewer : TemplatedControl
             Inlines = new InlineCollection(),
             TextWrapping = TextWrapping.NoWrap,
             Padding = new Thickness(0),
-            Margin = new Thickness(0),
-            VerticalAlignment = VerticalAlignment.Center
+            Margin = new Thickness(0)
         };
         AddMarkdownClass(textBlock, MarkdownStyleKeys.Link);
         BindTheme(textBlock, TextBlock.ForegroundProperty, AccentBrushProperty);
         BindTheme(textBlock, TextBlock.FontFamilyProperty, ContentFontFamilyProperty);
         BindTheme(textBlock, TextBlock.FontSizeProperty, ParagraphFontSizeProperty);
-        BindTheme(textBlock, TextBlock.LineHeightProperty, ParagraphLineHeightProperty);
 
         foreach (var inline in ConvertInlines(linkInline))
         {
@@ -2191,26 +2195,26 @@ public class MarkdownViewer : TemplatedControl
             textBlock.Inlines.Add(new Run(text));
         }
 
+        textBlock.PointerPressed += (_, e) =>
+        {
+            e.Handled = true;
+        };
+
         textBlock.PointerReleased += (_, e) =>
         {
-            if (e.InitialPressMouseButton == MouseButton.Left && !string.IsNullOrWhiteSpace(linkInline.Url))
+            if (e.InitialPressMouseButton == MouseButton.Left && !string.IsNullOrWhiteSpace(linkUrl))
             {
-                UrlHelper.Open(linkInline.Url);
+                UrlHelper.Open(linkUrl);
                 e.Handled = true;
             }
         };
 
-        return CreateInlineContainer(textBlock);
+        return new InlineUIContainer(textBlock);
     }
 
     private static InlineUIContainer CreateInlineContainer(Control control)
     {
-        control.VerticalAlignment = VerticalAlignment.Center;
-        TextOptions.SetBaselinePixelAlignment(control, BaselinePixelAlignment.Aligned);
-        return new InlineUIContainer(control)
-        {
-            BaselineAlignment = BaselineAlignment.Center
-        };
+        return new InlineUIContainer(control);
     }
 
     private static string ExtractPlainText(ContainerInline? container)
@@ -2258,7 +2262,7 @@ public class MarkdownViewer : TemplatedControl
     {
         var copyRenderedTextItem = new MenuItem
         {
-            Header = MarkdownLocalization.Get(MarkdownLocalization.CopyRenderedText)
+            Header = I18nManager.Instance.GetResource(MarkdownL.CopyRenderedText)
         };
         copyRenderedTextItem.Click += async (_, _) => await CopyRenderedTextAsync();
         return new ContextMenu { ItemsSource = new[] { copyRenderedTextItem } };
@@ -2268,13 +2272,13 @@ public class MarkdownViewer : TemplatedControl
     {
         var copySelectionItem = new MenuItem
         {
-            Header = MarkdownLocalization.Get(MarkdownLocalization.CopySelectedText)
+            Header = I18nManager.Instance.GetResource(MarkdownL.CopySelectedText)
         };
         copySelectionItem.Click += (_, _) => textBlock.Copy();
 
         var copyRenderedTextItem = new MenuItem
         {
-            Header = MarkdownLocalization.Get(MarkdownLocalization.CopyRenderedText)
+            Header = I18nManager.Instance.GetResource(MarkdownL.CopyRenderedText)
         };
         copyRenderedTextItem.Click += async (_, _) => await CopyRenderedTextAsync();
 

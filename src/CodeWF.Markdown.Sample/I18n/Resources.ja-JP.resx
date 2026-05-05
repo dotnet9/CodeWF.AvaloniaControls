@@ -117,49 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CodeWF.MarkdownL.ImagePreviewTitle" xml:space="preserve">
-    <value>Image Preview</value>
+  <data name="CodeWF.Markdown.SampleL.WindowTitle" xml:space="preserve">
+    <value>CodeWF.Markdown サンプル</value>
   </data>
-  <data name="CodeWF.MarkdownL.ImagePreviewZoomOut" xml:space="preserve">
-    <value>Zoom -</value>
+  <data name="CodeWF.Markdown.SampleL.AppTheme" xml:space="preserve">
+    <value>アプリテーマ</value>
   </data>
-  <data name="CodeWF.MarkdownL.ImagePreviewZoomIn" xml:space="preserve">
-    <value>Zoom +</value>
+  <data name="CodeWF.Markdown.SampleL.TypographyTheme" xml:space="preserve">
+    <value>タイポグラフィテーマ</value>
   </data>
-  <data name="CodeWF.MarkdownL.ImagePreviewRotateLeft" xml:space="preserve">
-    <value>Rotate L</value>
+  <data name="CodeWF.Markdown.SampleL.Language" xml:space="preserve">
+    <value>言語</value>
   </data>
-  <data name="CodeWF.MarkdownL.ImagePreviewRotateRight" xml:space="preserve">
-    <value>Rotate R</value>
+  <data name="CodeWF.Markdown.SampleL.MarkdownInput" xml:space="preserve">
+    <value>Markdown 入力</value>
   </data>
-  <data name="CodeWF.MarkdownL.ImagePreviewSaveAs" xml:space="preserve">
-    <value>Save As</value>
+  <data name="CodeWF.Markdown.SampleL.StartIncrementalDemo" xml:space="preserve">
+    <value>増分デモ開始</value>
   </data>
-  <data name="CodeWF.MarkdownL.ImagePreviewImagesFileType" xml:space="preserve">
-    <value>Images</value>
-  </data>
-  <data name="CodeWF.MarkdownL.ImagePreviewZoomStatus" xml:space="preserve">
-    <value>{0:P0} / {1} deg</value>
-  </data>
-  <data name="CodeWF.MarkdownL.ImagePreviewActualSize" xml:space="preserve">
-    <value>1:1</value>
-  </data>
-  <data name="CodeWF.MarkdownL.ImagePreviewFit" xml:space="preserve">
-    <value>Fit</value>
-  </data>
-  <data name="CodeWF.MarkdownL.ImageLoadFailed" xml:space="preserve">
-    <value>Image failed to load: {0}</value>
-  </data>
-  <data name="CodeWF.MarkdownL.ImageFileNotFound" xml:space="preserve">
-    <value>File not found: {0}</value>
-  </data>
-  <data name="CodeWF.MarkdownL.CopySelectedText" xml:space="preserve">
-    <value>Copy selected text</value>
-  </data>
-  <data name="CodeWF.MarkdownL.CopyRenderedText" xml:space="preserve">
-    <value>Copy rendered text</value>
-  </data>
-  <data name="CodeWF.MarkdownL.Copy" xml:space="preserve">
-    <value>Copy</value>
+  <data name="CodeWF.Markdown.SampleL.StopIncrementalDemo" xml:space="preserve">
+    <value>増分デモ停止</value>
   </data>
 </root>

@@ -1,5 +1,15 @@
 # 更新日志
 
+V12.0.2.2（2026-05-05）
+
+- 😄[新增]-接入 `Lang.Avalonia.Resx` 插件，通过 `Resources.Designer.cs` 暴露 ResourceManager 供 `ResxLangPlugin` 反射发现，实现控件内文案（图片预览、复制菜单等）的多语言切换
+- 😄[新增]-新增 `Language.tt` T4 模板及生成的 `Language.cs`，提供强类型资源键（`MarkdownL` 静态类），支持简体中文、繁体中文、日语、英语四种语言
+- 😄[新增]-新增图片预览窗口 `CultureChanged` 事件监听，切换语言时即时刷新按钮文本和缩放状态栏
+- 🔤[优化]-超链接走 `PointerPressed` 拦截 + `PointerReleased` 调用 `UrlHelper.Open`，阻止 `SelectableTextBlock` 文本选择捕获指针，支持左键点击默认浏览器打开链接
+- 🔤[优化]-超链接 `TextBlock` 移除 `LineHeight` 和 `VerticalAlignment.Center` 绑定，避免 `InlineUIContainer` 布局偏移导致链接文本与段落文本基线不对齐
+- 🔤[优化]-图片预览窗口标题优先展示图片描述，描述为空时回退到图片路径
+- 🔤[优化]-注音符号（Ruby）区域改用 `HorizontalAlignment.Left` + `VerticalAlignment.Bottom`，配合 Grid 按字符逐列布局，修复多字符注音堆叠偏移
+
 V12.0.2.1（2026-05-05）
 
 - 🔤[优化]-移除 `MarkdownViewer.Value` 兼容入口，`MarkdownViewer` 只通过 `Markdown` 属性接收原文

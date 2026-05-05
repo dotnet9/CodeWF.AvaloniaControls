@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 using Avalonia;
 using Avalonia.Controls;
@@ -10,6 +11,8 @@ using CodeWF.Markdown.Themes;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+
+using Lang.Avalonia;
 
 namespace CodeWF.Markdown.Sample.ViewModels;
 
@@ -47,6 +50,7 @@ public sealed class MainWindowViewModel : ObservableObject
     private int _incrementalReplaceTick;
     private int _incrementalInsertTick;
     private int _incrementalAppendTick;
+    private SampleLanguage? _selectLanguage;
 
     public MainWindowViewModel()
     {
@@ -66,11 +70,14 @@ public sealed class MainWindowViewModel : ObservableObject
         TypographyThemes = new ObservableCollection<MarkdownTypographyTheme>(
             MarkdownTypographyThemes.All.Append(new MarkdownTypographyTheme("示例：青墨绿", SampleTypographyThemeKey)));
         MarkdownFiles = new ObservableCollection<MarkdownSampleFile>(LoadMarkdownFiles());
+        Languages = CreateLanguages(["zh-CN", "zh-Hant", "en-US", "ja-JP"]);
 
         SelectedThemeVariant = ThemeVariants[0];
         SelectedTypographyTheme = TypographyThemes.FirstOrDefault(theme => theme.Key == MarkdownTypographyThemes.OrangeHeart)
                                   ?? TypographyThemes.FirstOrDefault();
         SelectedFile = MarkdownFiles.FirstOrDefault();
+        SelectLanguage = Languages.FirstOrDefault(l => l.CultureName == I18nManager.Instance.Culture?.Name)
+                         ?? Languages.FirstOrDefault();
     }
 
     public ObservableCollection<ThemeVariantOption> ThemeVariants { get; }
@@ -78,6 +85,8 @@ public sealed class MainWindowViewModel : ObservableObject
     public ObservableCollection<MarkdownTypographyTheme> TypographyThemes { get; }
 
     public ObservableCollection<MarkdownSampleFile> MarkdownFiles { get; }
+
+    public List<SampleLanguage> Languages { get; }
 
     public RelayCommand ToggleIncrementalStressCommand { get; }
 
@@ -93,7 +102,9 @@ public sealed class MainWindowViewModel : ObservableObject
         }
     }
 
-    public string IncrementalStressButtonText => IsIncrementalStressRunning ? "停止增量演示" : "开始增量演示";
+    public string IncrementalStressButtonText => IsIncrementalStressRunning
+        ? I18nManager.Instance.GetResource(SampleL.StopIncrementalDemo)
+        : I18nManager.Instance.GetResource(SampleL.StartIncrementalDemo);
 
     public string Markdown
     {
@@ -137,6 +148,62 @@ public sealed class MainWindowViewModel : ObservableObject
             }
         }
     }
+
+    public SampleLanguage? SelectLanguage
+    {
+        get => _selectLanguage;
+        set
+        {
+            if (SetProperty(ref _selectLanguage, value) && value is not null)
+            {
+                I18nManager.Instance.Culture = new CultureInfo(value.CultureName);
+                OnPropertyChanged(nameof(IncrementalStressButtonText));
+            }
+        }
+    }
+
+    private static List<SampleLanguage> CreateLanguages(IEnumerable<string> cultureNames)
+    {
+        return cultureNames
+            .Where(cultureName => !string.IsNullOrWhiteSpace(cultureName))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .Select(CreateLanguage)
+            .OrderBy(GetSortOrder)
+            .ThenBy(language => language.DisplayName, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+    }
+
+    private static SampleLanguage CreateLanguage(string cultureName)
+    {
+        try
+        {
+            var culture = CultureInfo.GetCultureInfo(cultureName);
+            return new SampleLanguage
+            {
+                CultureName = culture.Name,
+                Language = culture.EnglishName,
+                Description = culture.NativeName
+            };
+        }
+        catch (CultureNotFoundException)
+        {
+            return new SampleLanguage
+            {
+                CultureName = cultureName,
+                Language = cultureName,
+                Description = cultureName
+            };
+        }
+    }
+
+    private static int GetSortOrder(SampleLanguage language) => language.CultureName switch
+    {
+        "zh-CN" => 0,
+        "zh-Hant" => 1,
+        "en-US" => 2,
+        "ja-JP" => 3,
+        _ => 4
+    };
 
     private void ApplySelectedTypographyTheme()
     {
