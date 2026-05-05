@@ -1,32 +1,28 @@
+using Avalonia.Threading;
 using CodeWF.AvaloniaControls.ProDataGridShowcase.Models;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 
 namespace CodeWF.AvaloniaControls.ProDataGridShowcase.ViewModels.Pages;
 
-// 扁平化的数据项模型，用于优化渲染性能
-// 不再继承ReactiveObject，因为我们不需要属性变更通知（所有属性都是初始化后不变的）
 public class FlattenedProcessItem
 {
-    // 分组相关属性
     public int GroupId { get; init; }
     public bool IsKeyGroup { get; init; }
     public string? Cycle { get; init; }
     public bool IsFirstInGroup { get; init; }
     public bool IsLastInGroup { get; init; }
     public int GroupItemCount { get; init; }
-    // 新增：用于确定是否在组的中间行显示组信息
     public bool IsMiddleOfGroup { get; init; }
-    // 新增：用于设置行边框（第一行添加上边框，最后一行添加下边框）
     public Avalonia.Thickness RowBorderThickness { get; init; }
-    
-    // ProcessItem属性
+
     public int Id { get; init; }
     public string? Name { get; init; }
-    public bool Enabled { get; set; } // 只有Enabled需要可变，因为它是CheckBox绑定的
+    public bool Enabled { get; set; }
     public int SourceNode { get; init; }
     public string? Host { get; init; }
     public string? ProgramPath { get; init; }
@@ -38,63 +34,200 @@ public class FlattenedProcessItem
     public string? Description { get; init; }
 }
 
-public class CrossRowsAndColumnsViewModel : ReactiveObject
+public class CrossRowsAndColumnsViewModel : ReactiveObject, IDisposable
 {
+    private const int MinGroupCount = 6;
+    private const int MaxGroupCount = 50;
+    private const int MinItemsPerGroup = 2;
+    private const int MaxItemsPerGroup = 20;
+
+    private readonly List<GroupItem> _groups = [];
+    private readonly IDisposable _updateTimerDisposable;
+    private ObservableCollection<FlattenedProcessItem> _flattenedItems = [];
+    private int _nextGroupId = 1;
+    private int _nextProcessId = 1;
+    private int _updateStep;
+
     public CrossRowsAndColumnsViewModel()
     {
-        // 性能优化1：使用List<T>进行中间计算，然后一次性添加到ObservableCollection
-        // ObservableCollection的添加操作会触发UI更新，避免频繁触发
-        var allGroups = new List<GroupItem>();
-        var id = 1;
-        
-        // 先生成所有组数据
         for (var i = 0; i < Random.Shared.Next(20, 50); i++)
         {
-            var group = new GroupItem
-            {
-                Id = i+1,
-                IsKeyGroup = i % Random.Shared.Next(1,4) == 0,
-                Cycle = $"{Random.Shared.Next(2, 5)}/{Random.Shared.Next(3, 6)}"
-            };
-            allGroups.Add(group);
-
-            // 预分配内部列表容量，减少动态扩容开销
-            var processItems = new List<ProcessItem>(Random.Shared.Next(5, 20));
-            
-            for (var j = 0; j < processItems.Capacity; j++)
-            {
-                id++;
-                // 使用对象初始值设定项一次性初始化对象，避免多次属性赋值
-                processItems.Add(new ProcessItem
-                {
-                    Id = id,
-                    Name = $"Process {id}",
-                    Enabled = j % Random.Shared.Next(3, 8) == 0,
-                    SourceNode = j % Random.Shared.Next(3, 8),
-                    Host = "127.0.0.1:89333",
-                    ProgramPath = "../../test/bb.exe",
-                    WorkPath = "../../test",
-                    Params = j % Random.Shared.Next(3, 8) == 0 ? "---" : "-type 1",
-                    AutoStart = j % Random.Shared.Next(3, 8) == 0,
-                    PreProcess = j % Random.Shared.Next(3, 8) == 0 ? "---" : "make dir",
-                    PostProcess = j % Random.Shared.Next(3, 8) == 0 ? "---" : "remove file",
-                    Description = j % Random.Shared.Next(3, 8) == 0 ? "---" : "用于测试 ",
-                });
-            }
-            
-            // 一次性添加所有process items
-            foreach (var item in processItems)
-            {
-                group.Items.Add(item);
-            }
+            _groups.Add(CreateGroup(Random.Shared.Next(5, 20)));
         }
-        
-        // 性能优化2：预计算扁平化列表大小，减少动态扩容
-        var totalItemsCount = allGroups.Sum(g => g.Items.Count);
-        var flattenedItemsList = new List<FlattenedProcessItem>(totalItemsCount);
-        
-        // 创建扁平化的数据项
-        foreach (var group in allGroups)
+
+        RebuildFlattenedItems();
+
+        _updateTimerDisposable = Observable.Interval(TimeSpan.FromSeconds(2))
+            .Subscribe(_ => Dispatcher.UIThread.Post(UpdateGroups));
+    }
+
+    public ObservableCollection<FlattenedProcessItem> FlattenedItems
+    {
+        get => _flattenedItems;
+        private set => this.RaiseAndSetIfChanged(ref _flattenedItems, value);
+    }
+
+    public void Dispose()
+    {
+        _updateTimerDisposable.Dispose();
+    }
+
+    private void UpdateGroups()
+    {
+        if (_groups.Count == 0)
+        {
+            _groups.Add(CreateGroup(Random.Shared.Next(5, 10)));
+            RebuildFlattenedItems();
+            return;
+        }
+
+        switch (_updateStep++ % 6)
+        {
+            case 0:
+                AddGroup();
+                break;
+            case 1:
+                AddProcessItemToRandomGroup();
+                break;
+            case 2:
+                RemoveProcessItemFromRandomGroup();
+                break;
+            case 3:
+                UpdateRandomGroupMetadata();
+                break;
+            case 4:
+                RemoveGroup();
+                break;
+            default:
+                UpdateRandomProcessItem();
+                break;
+        }
+
+        RebuildFlattenedItems();
+    }
+
+    private void AddGroup()
+    {
+        if (_groups.Count >= MaxGroupCount)
+        {
+            RemoveGroup();
+            return;
+        }
+
+        _groups.Insert(Random.Shared.Next(_groups.Count + 1), CreateGroup(Random.Shared.Next(3, 9)));
+    }
+
+    private void RemoveGroup()
+    {
+        if (_groups.Count <= MinGroupCount)
+        {
+            AddProcessItemToRandomGroup();
+            return;
+        }
+
+        _groups.RemoveAt(Random.Shared.Next(_groups.Count));
+    }
+
+    private void AddProcessItemToRandomGroup()
+    {
+        var group = GetRandomGroup(g => g.Items.Count < MaxItemsPerGroup);
+        if (group == null)
+        {
+            AddGroup();
+            return;
+        }
+
+        group.Items.Insert(Random.Shared.Next(group.Items.Count + 1), CreateProcessItem());
+    }
+
+    private void RemoveProcessItemFromRandomGroup()
+    {
+        var group = GetRandomGroup(g => g.Items.Count > MinItemsPerGroup);
+        if (group == null)
+        {
+            RemoveGroup();
+            return;
+        }
+
+        group.Items.RemoveAt(Random.Shared.Next(group.Items.Count));
+    }
+
+    private void UpdateRandomGroupMetadata()
+    {
+        var group = GetRandomGroup(_ => true);
+        if (group == null)
+        {
+            return;
+        }
+
+        group.IsKeyGroup = !group.IsKeyGroup;
+        group.Cycle = $"{Random.Shared.Next(2, 5)}/{Random.Shared.Next(3, 6)}";
+    }
+
+    private void UpdateRandomProcessItem()
+    {
+        var group = GetRandomGroup(g => g.Items.Count > 0);
+        if (group == null)
+        {
+            return;
+        }
+
+        var item = group.Items[Random.Shared.Next(group.Items.Count)];
+        item.Enabled = !item.Enabled;
+        item.AutoStart = !item.AutoStart;
+        item.Params = Random.Shared.Next(2) == 0 ? "---" : $"-type {Random.Shared.Next(1, 4)}";
+        item.Description = $"Updated {DateTime.Now:HH:mm:ss}";
+    }
+
+    private GroupItem CreateGroup(int itemCount)
+    {
+        var group = new GroupItem
+        {
+            Id = _nextGroupId++,
+            IsKeyGroup = Random.Shared.Next(4) == 0,
+            Cycle = $"{Random.Shared.Next(2, 5)}/{Random.Shared.Next(3, 6)}"
+        };
+
+        for (var i = 0; i < itemCount; i++)
+        {
+            group.Items.Add(CreateProcessItem());
+        }
+
+        return group;
+    }
+
+    private ProcessItem CreateProcessItem()
+    {
+        var id = _nextProcessId++;
+
+        return new ProcessItem
+        {
+            Id = id,
+            Name = $"Process {id}",
+            Enabled = Random.Shared.Next(5) == 0,
+            SourceNode = Random.Shared.Next(0, 8),
+            Host = "127.0.0.1:89333",
+            ProgramPath = "../../test/bb.exe",
+            WorkPath = "../../test",
+            Params = Random.Shared.Next(5) == 0 ? "---" : "-type 1",
+            AutoStart = Random.Shared.Next(5) == 0,
+            PreProcess = Random.Shared.Next(5) == 0 ? "---" : "make dir",
+            PostProcess = Random.Shared.Next(5) == 0 ? "---" : "remove file",
+            Description = Random.Shared.Next(5) == 0 ? "---" : "for dynamic row span test",
+        };
+    }
+
+    private GroupItem? GetRandomGroup(Func<GroupItem, bool> predicate)
+    {
+        var groups = _groups.Where(predicate).ToList();
+        return groups.Count == 0 ? null : groups[Random.Shared.Next(groups.Count)];
+    }
+
+    private void RebuildFlattenedItems()
+    {
+        var flattenedItemsList = new List<FlattenedProcessItem>(_groups.Sum(g => g.Items.Count));
+
+        foreach (var group in _groups)
         {
             var itemCount = group.Items.Count;
             for (var i = 0; i < itemCount; i++)
@@ -108,9 +241,7 @@ public class CrossRowsAndColumnsViewModel : ReactiveObject
                     IsFirstInGroup = i == 0,
                     IsLastInGroup = i == itemCount - 1,
                     GroupItemCount = itemCount,
-                    // 计算是否为组的中间行：5行显示在第3行，4行显示在第2行
-                    IsMiddleOfGroup = i == (itemCount / 2),
-                    // 设置边框：第一行添加上边框，最后一行添加下边框
+                    IsMiddleOfGroup = i == itemCount / 2,
                     RowBorderThickness = new Avalonia.Thickness(
                         left: 0,
                         top: i == 0 ? 1 : 0,
@@ -132,14 +263,7 @@ public class CrossRowsAndColumnsViewModel : ReactiveObject
                 });
             }
         }
-        
-        // 一次性添加所有扁平化项到ObservableCollection，只触发一次UI更新
-        foreach (var item in flattenedItemsList)
-        {
-            FlattenedItems.Add(item);
-        }
-    }
 
-    // 新的扁平化数据集合，用于优化渲染
-    public ObservableCollection<FlattenedProcessItem> FlattenedItems { get; } = [];
+        FlattenedItems = new ObservableCollection<FlattenedProcessItem>(flattenedItemsList);
+    }
 }
