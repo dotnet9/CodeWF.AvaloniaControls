@@ -6,6 +6,7 @@
 - Removed SVG rendering, multi-language resources, CSharpMath, and TextMate dependencies from the Lite Markdown control line; code blocks and math content now render with lightweight text fallbacks.
 - Added Win7 AOT compatibility settings to `CodeWF.Markdown.Lite.Sample` with `YY-Thunks`, `VC-LTL`, Windows 6.1 target metadata, and Win7-compatible application manifest entries.
 - Added `CodeWF.Markdown.Lite.Sample` to the Markdown publish script and the solution.
+- Added an `AnimatedImage.Avalonia` GIF demo to `CodeWF.AvaloniaControls.Showcase` with local and network image sources.
 
 ## 12.0.2.1 - 2026-05-05
 

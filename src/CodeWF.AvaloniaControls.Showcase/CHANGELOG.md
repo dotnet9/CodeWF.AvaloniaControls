@@ -1,5 +1,10 @@
 # 更新日志
 
+V12.0.2.3（2026-05-06）
+
+- 😄[新增]-新增 `AnimatedImage.Avalonia` 动态 GIF 演示页，展示本地 `Assets/nice.gif` 与网络 GIF 地址加载
+- 🔤[优化]-将 `AnimatedImage` 示例入口加入主展示馆左侧页签
+
 V12.0.2（2026-05-02）
 
 - 😄[新增]-新增当前工程独立更新日志文件，后续 `CodeWF.AvaloniaControls.Showcase` 的变更改为在工程目录内持续记录

@@ -139,6 +139,9 @@
                     <TabItem Header="状态卡片">
                         <pages:StatusCardDemo />
                     </TabItem>
+                    <TabItem Header="AnimatedImage">
+                        <pages:AnimatedImageDemo />
+                    </TabItem>
                     <TabItem Header="Ursa 窗口">
                         <pages:TestNoneWindowDemo />
                     </TabItem>
