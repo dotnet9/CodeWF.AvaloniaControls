@@ -1,5 +1,12 @@
 # Changelog
 
+## 12.0.2.3 - 2026-05-06
+
+- Added `CodeWF.Markdown.Lite`, `CodeWF.Markdown.Lite.Themes`, and `CodeWF.Markdown.Lite.Sample` as lightweight Markdown packages and sample app.
+- Removed SVG rendering, multi-language resources, CSharpMath, and TextMate dependencies from the Lite Markdown control line; code blocks and math content now render with lightweight text fallbacks.
+- Added Win7 AOT compatibility settings to `CodeWF.Markdown.Lite.Sample` with `YY-Thunks`, `VC-LTL`, Windows 6.1 target metadata, and Win7-compatible application manifest entries.
+- Added `CodeWF.Markdown.Lite.Sample` to the Markdown publish script and the solution.
+
 ## 12.0.2.1 - 2026-05-05
 
 - Bumped `CodeWF.Markdown` and `CodeWF.Markdown.Themes` to 12.0.2.1.
