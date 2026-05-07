@@ -77,9 +77,26 @@
                                 BorderBrush="#E2E8F0"
                                 BorderThickness="1"
                                 CornerRadius="12">
-                            <Image Classes="AnimatedPreview"
-                                   anim:ImageBehavior.AnimatedSource="https://img1.dotnet9.com/2026/05/nice.gif"
-                                   anim:ImageBehavior.RepeatBehavior="Forever" />
+                            <Grid>
+                                <Image x:Name="NetworkImage"
+                                       Classes="AnimatedPreview"
+                                       anim:ImageBehavior.RepeatBehavior="Forever" />
+                                <Border x:Name="NetworkStatusPanel"
+                                        Margin="12"
+                                        Padding="10,6"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
+                                        Background="#EEF6FF"
+                                        BorderBrush="#BFDBFE"
+                                        BorderThickness="1"
+                                        CornerRadius="12"
+                                        IsHitTestVisible="False">
+                                    <TextBlock x:Name="NetworkStatusText"
+                                               Foreground="#1D4ED8"
+                                               FontSize="12"
+                                               Text="正在加载网络 GIF..." />
+                                </Border>
+                            </Grid>
                         </Border>
                     </Grid>
                 </Border>
