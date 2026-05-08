@@ -1,3 +1,4 @@
+using Avalonia.Controls;
 using Ursa.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -13,6 +14,11 @@ public partial class UrsaWindowWithNone : UrsaWindow
 
     private void TitleBar_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
+        if (e.Source is Button)
+        {
+            return;
+        }
+
         if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
         {
             BeginMoveDrag(e);

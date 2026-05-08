@@ -10,81 +10,86 @@
               d:DesignHeight="300"
               Width="520"
               Height="300"
+              Background="{DynamicResource ShowcaseCardBackground}"
               CanResize="False"
               FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
               Icon="/Assets/logo.ico"
+              WindowDecorations="None"
               WindowStartupLocation="CenterScreen"
               x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.UrsaWindowCompactToolDemo"
               Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaCompactTitle}}">
-    <u:UrsaWindow.Resources>
-        <Color x:Key="CaptionButtonForeground">#0F172A</Color>
-    </u:UrsaWindow.Resources>
-
-    <u:UrsaWindow.LeftContent>
-        <StackPanel Height="38"
-                    Margin="8,0"
-                    Orientation="Horizontal"
-                    Spacing="9"
-                    IsHitTestVisible="False">
-            <Border Width="22"
-                    Height="22"
-                    VerticalAlignment="Center"
-                    Background="#E0F2FE"
-                    CornerRadius="6">
-                <TextBlock HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontSize="12"
-                           FontWeight="Bold"
-                           Foreground="#0369A1"
-                           Text="T" />
-            </Border>
-            <TextBlock VerticalAlignment="Center"
-                       FontWeight="SemiBold"
-                       Foreground="{DynamicResource ShowcaseTextBrush}"
-                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaCompactHeading}}" />
-        </StackPanel>
-    </u:UrsaWindow.LeftContent>
-
-    <Border Background="{DynamicResource ShowcaseSubtleBackground}"
+    <Border Background="{DynamicResource ShowcaseCardBackground}"
             BorderBrush="{DynamicResource ShowcaseBorderBrush}"
             BorderThickness="1">
-        <Grid Margin="20"
-              RowDefinitions="Auto,*"
-              RowSpacing="16">
-            <StackPanel Spacing="6">
-                <TextBlock FontSize="22"
-                           FontWeight="SemiBold"
-                           Foreground="{DynamicResource ShowcaseTextBrush}"
-                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaCompactHeading}}" />
-                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
-                           TextWrapping="Wrap"
-                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaCompactDescription}}" />
-            </StackPanel>
+        <Grid RowDefinitions="44,*">
+            <Border Background="{DynamicResource ShowcaseSubtleBackground}"
+                    BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    PointerPressed="TitleBar_OnPointerPressed">
+                <Grid Margin="14,0,8,0" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="9">
+                    <Border Width="24"
+                            Height="24"
+                            VerticalAlignment="Center"
+                            Background="#E0F2FE"
+                            CornerRadius="6">
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="Bold"
+                                   Foreground="#0369A1"
+                                   Text="T" />
+                    </Border>
+                    <TextBlock Grid.Column="1"
+                               VerticalAlignment="Center"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource ShowcaseTextBrush}"
+                               Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaCompactHeading}}" />
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <Button Width="34" Height="28" Padding="0" Content="-" Click="Minimize_OnClick" />
+                        <Button Width="34" Height="28" Padding="0" Content="X" Click="Close_OnClick" />
+                    </StackPanel>
+                </Grid>
+            </Border>
 
             <Grid Grid.Row="1"
-                  ColumnDefinitions="*,*"
-                  ColumnSpacing="12">
-                <Border Padding="14"
-                        Background="{DynamicResource ShowcaseCardBackground}"
-                        BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="10">
-                    <StackPanel Spacing="6">
-                        <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.FixedSize}}" />
-                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.FixedSizeDesc}}" TextWrapping="Wrap" />
-                    </StackPanel>
-                </Border>
-                <Border Grid.Column="1"
-                        Padding="14"
-                        Background="{DynamicResource ShowcaseCardBackground}"
-                        BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="10">
-                    <StackPanel Spacing="6">
-                        <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.LightTitleBar}}" />
-                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.LightTitleBarDesc}}" TextWrapping="Wrap" />
-                    </StackPanel>
-                </Border>
+                  Margin="22"
+                  RowDefinitions="Auto,*"
+                  RowSpacing="14">
+                <StackPanel Spacing="6">
+                    <TextBlock FontSize="22"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource ShowcaseTextBrush}"
+                               Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaCompactHeading}}" />
+                    <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                               TextWrapping="Wrap"
+                               Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaCompactDescription}}" />
+                </StackPanel>
+
+                <Grid Grid.Row="1"
+                      ColumnDefinitions="*,*"
+                      ColumnSpacing="12">
+                    <Border Padding="14"
+                            Background="{DynamicResource ShowcaseSubtleBackground}"
+                            BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="10">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.FixedSize}}" />
+                            <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.FixedSizeDesc}}" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="1"
+                            Padding="14"
+                            Background="{DynamicResource ShowcaseSubtleBackground}"
+                            BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="10">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.LightTitleBar}}" />
+                            <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.LightTitleBarDesc}}" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
             </Grid>
         </Grid>
     </Border>

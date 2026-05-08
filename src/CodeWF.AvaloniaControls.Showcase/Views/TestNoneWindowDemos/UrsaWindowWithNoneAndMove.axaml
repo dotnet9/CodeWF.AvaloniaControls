@@ -7,25 +7,20 @@
               xmlns:windowLangs="clr-namespace:Showcase.Windows"
               mc:Ignorable="d"
               d:DesignWidth="560"
-              d:DesignHeight="360"
+              d:DesignHeight="340"
               Width="560"
-              Height="360"
-              Background="Transparent"
+              Height="340"
+              Background="{DynamicResource ShowcaseCardBackground}"
               FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
-              TransparencyLevelHint="AcrylicBlur"
               WindowDecorations="None"
               WindowStartupLocation="CenterScreen"
               x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.UrsaWindowWithNoneAndMove"
               Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaMoveTitle}}">
-    <Border Margin="10"
-            Background="{DynamicResource ShowcaseCardBackground}"
-            BorderBrush="{DynamicResource ShowcaseBorderBrush}"
-            BorderThickness="1"
-            CornerRadius="16"
-            BoxShadow="0 18 42 #55000000">
+    <Border Background="{DynamicResource ShowcaseCardBackground}"
+            BorderBrush="#1E293B"
+            BorderThickness="1">
         <Grid RowDefinitions="64,*">
             <Border Background="#0F172A"
-                    CornerRadius="16,16,0,0"
                     PointerPressed="TitleBar_OnPointerPressed">
                 <Grid Margin="20,0,12,0" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
                     <Border Width="32"
@@ -53,11 +48,12 @@
                             Height="30"
                             Padding="0"
                             Click="Close_OnClick"
-                            Content="X" />
+                            Content="X"
+                            ToolTip.Tip="{i18n:I18n {x:Static windowLangs:WindowDemos.Close}}" />
                 </Grid>
             </Border>
 
-            <Grid Grid.Row="1" Margin="24" RowDefinitions="Auto,*" RowSpacing="14">
+            <Grid Grid.Row="1" Margin="28,26" RowDefinitions="Auto,*" RowSpacing="12">
                 <TextBlock FontSize="22"
                            FontWeight="SemiBold"
                            Foreground="{DynamicResource ShowcaseTextBrush}"

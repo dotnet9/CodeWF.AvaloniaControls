@@ -10,6 +10,8 @@ V12.0.2.4 (2026-05-08)
 - Localized the visible showcase text and runtime-updated labels used by `Transfer`, `VComboBox`, `AnimatedImage`, and markup extension demos.
 - Expanded `TestNoneWindowDemo` with native `Window`, `UrsaWindow`, and `CodeWFWindow` samples including borderless, draggable, compact, tall-title, dark-title, accent-title, and shaped-window variants.
 - Fixed `TransferDemo` initialization so localized headers are applied after the `MyTransfer` control is resolved.
+- Refined the Ursa samples to remove white margins around borderless windows and keep custom title bars separate from the client area.
+- Reworked the Ursa and CodeWF shaped demos into circular shaped windows.
 
 V12.0.2.3（2026-05-06）
 

@@ -10,6 +10,7 @@
 - Added light/dark theme switching, control-name tab search, and JSON-backed dynamic localization to `CodeWF.AvaloniaControls.Showcase`.
 - Expanded the showcase window demos with native `Window`, `UrsaWindow`, and `CodeWFWindow` examples covering custom title bars, compact/tall title heights, and shaped windows.
 - Improved `CodeWFWindow` caption buttons so the minimize glyph is visible and close hover/press states use the expected red background.
+- Refined showcase window demo visuals by removing Ursa borderless white margins, separating title bars from client content, adding default `CodeWFWindow` borders, and replacing rounded shaped demos with circular windows.
 
 ## 12.0.2.3 - 2026-05-06
 
