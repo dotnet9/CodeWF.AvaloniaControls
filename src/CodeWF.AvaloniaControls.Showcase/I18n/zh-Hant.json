@@ -241,7 +241,9 @@
         "CodeWFAccent": "品牌色標題列",
         "CodeWFCompact": "緊湊工具窗標題列",
         "CodeWFTall": "高標題列 CodeWFWindow",
-        "CodeWFShape": "浮層異型 CodeWFWindow"
+        "CodeWFShape": "圓形異型 CodeWFWindow",
+        "CodeWFStar": "星形異型 CodeWFWindow",
+        "CodeWFBlob": "不規則異型 CodeWFWindow"
       }
     },
     "Windows": {
@@ -294,6 +296,12 @@
         "CodeWFShapeTitle": "CodeWFWindow 圓形異型窗體",
         "CodeWFShapeHeading": "圓形異型窗體",
         "CodeWFShapeDescription": "隱藏常規標題列，用透明外層和自繪圓形主體展示異型視窗能力。",
+        "CodeWFStarTitle": "CodeWFWindow 星形異型窗體",
+        "CodeWFStarHeading": "星形異型 CodeWFWindow",
+        "CodeWFStarDescription": "複用 CodeWFWindow 基底能力，結合星形區域裁切展示非矩形外殼。",
+        "CodeWFBlobTitle": "CodeWFWindow 不規則異型窗體",
+        "CodeWFBlobHeading": "不規則異型 CodeWFWindow",
+        "CodeWFBlobDescription": "自由曲線外輪廓結合透明外層，展示更複雜的 CodeWFWindow 異型窗體。",
         "TitleBarContent": "標題列內容",
         "TitleBarContentDesc": "左側顯示產品標識，右側顯示運行狀態，視窗按鈕仍由窗體基類接管。",
         "Scenario": "適用場景",

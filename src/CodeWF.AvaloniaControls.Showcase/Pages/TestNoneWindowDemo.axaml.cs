@@ -90,4 +90,14 @@ public partial class TestNoneWindowDemo : UserControl
     {
         new CodeWFWindowShapedDemo().Show();
     }
+
+    private void ShowCodeWFWindowStar_OnClick(object? sender, RoutedEventArgs e)
+    {
+        new CodeWFWindowStarDemo().Show();
+    }
+
+    private void ShowCodeWFWindowBlob_OnClick(object? sender, RoutedEventArgs e)
+    {
+        new CodeWFWindowBlobDemo().Show();
+    }
 }

@@ -15,6 +15,7 @@ V12.0.2.4 (2026-05-08)
 - Added star and freeform Ursa shaped-window demos with transparent outer surfaces.
 - Replaced text-only custom title-bar buttons with icon glyph buttons across the shaped and custom-title samples.
 - Added Windows native region clipping for circular, star, and freeform shaped demos so transparent outer areas no longer behave like visible window chrome where supported.
+- Added matching star and freeform `CodeWFWindow` shaped demos to keep the CodeWF and Ursa sample sets aligned.
 
 V12.0.2.3（2026-05-06）
 

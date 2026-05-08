@@ -241,7 +241,9 @@
         "CodeWFAccent": "品牌色标题栏",
         "CodeWFCompact": "紧凑工具窗标题栏",
         "CodeWFTall": "高标题栏 CodeWFWindow",
-        "CodeWFShape": "浮层异型 CodeWFWindow"
+        "CodeWFShape": "圆形异型 CodeWFWindow",
+        "CodeWFStar": "星形异型 CodeWFWindow",
+        "CodeWFBlob": "不规则异型 CodeWFWindow"
       }
     },
     "Windows": {
@@ -294,6 +296,12 @@
         "CodeWFShapeTitle": "CodeWFWindow 圆形异型窗体",
         "CodeWFShapeHeading": "圆形异型窗体",
         "CodeWFShapeDescription": "隐藏常规标题栏，用透明外层和自绘圆形主体展示异型窗口能力。",
+        "CodeWFStarTitle": "CodeWFWindow 星形异型窗体",
+        "CodeWFStarHeading": "星形异型 CodeWFWindow",
+        "CodeWFStarDescription": "复用 CodeWFWindow 基类能力，结合星形区域裁剪展示非矩形外壳。",
+        "CodeWFBlobTitle": "CodeWFWindow 不规则异型窗体",
+        "CodeWFBlobHeading": "不规则异型 CodeWFWindow",
+        "CodeWFBlobDescription": "自由曲线外轮廓结合透明外层，展示更复杂的 CodeWFWindow 异型窗体。",
         "TitleBarContent": "标题栏内容",
         "TitleBarContentDesc": "左侧显示产品标识，右侧显示运行状态，窗口按钮仍由窗体基类接管。",
         "Scenario": "适用场景",

@@ -241,7 +241,9 @@
         "CodeWFAccent": "Brand title bar",
         "CodeWFCompact": "Compact tool title bar",
         "CodeWFTall": "Tall CodeWFWindow",
-        "CodeWFShape": "Floating shaped CodeWFWindow"
+        "CodeWFShape": "Circular shaped CodeWFWindow",
+        "CodeWFStar": "Star shaped CodeWFWindow",
+        "CodeWFBlob": "Blob shaped CodeWFWindow"
       }
     },
     "Windows": {
@@ -294,6 +296,12 @@
         "CodeWFShapeTitle": "CodeWFWindow Circular Shaped Window",
         "CodeWFShapeHeading": "Circular Shaped Window",
         "CodeWFShapeDescription": "Hides the regular title bar and uses a transparent outer window with a custom circular body.",
+        "CodeWFStarTitle": "CodeWFWindow Star Shaped Window",
+        "CodeWFStarHeading": "Star Shaped CodeWFWindow",
+        "CodeWFStarDescription": "Combines the CodeWFWindow base shell with star-region clipping for a non-rectangular window.",
+        "CodeWFBlobTitle": "CodeWFWindow Blob Shaped Window",
+        "CodeWFBlobHeading": "Blob Shaped CodeWFWindow",
+        "CodeWFBlobDescription": "Uses a freeform outline and transparent outer layer to demonstrate a more complex shaped CodeWFWindow.",
         "TitleBarContent": "Title Bar Content",
         "TitleBarContentDesc": "The left side shows product identity, the right side shows status, and caption buttons remain owned by the base window.",
         "Scenario": "Scenario",

@@ -241,7 +241,9 @@
         "CodeWFAccent": "ブランドタイトルバー",
         "CodeWFCompact": "コンパクトツールタイトルバー",
         "CodeWFTall": "高い CodeWFWindow",
-        "CodeWFShape": "フローティング変形 CodeWFWindow"
+        "CodeWFShape": "円形変形 CodeWFWindow",
+        "CodeWFStar": "星形変形 CodeWFWindow",
+        "CodeWFBlob": "不規則変形 CodeWFWindow"
       }
     },
     "Windows": {
@@ -294,6 +296,12 @@
         "CodeWFShapeTitle": "CodeWFWindow 円形変形ウィンドウ",
         "CodeWFShapeHeading": "円形変形ウィンドウ",
         "CodeWFShapeDescription": "通常のタイトルバーを隠し、透明な外側ウィンドウと自描画の円形本体を使います。",
+        "CodeWFStarTitle": "CodeWFWindow 星形変形ウィンドウ",
+        "CodeWFStarHeading": "星形変形 CodeWFWindow",
+        "CodeWFStarDescription": "CodeWFWindow の基底シェルと星形リージョンのクリッピングを組み合わせます。",
+        "CodeWFBlobTitle": "CodeWFWindow 不規則変形ウィンドウ",
+        "CodeWFBlobHeading": "不規則変形 CodeWFWindow",
+        "CodeWFBlobDescription": "自由曲線の輪郭と透明な外側レイヤーで、より複雑な変形 CodeWFWindow を示します。",
         "TitleBarContent": "タイトルバー内容",
         "TitleBarContentDesc": "左側は製品識別、右側は状態を表示し、キャプションボタンは基底ウィンドウが管理します。",
         "Scenario": "利用シーン",

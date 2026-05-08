@@ -132,6 +132,12 @@
                         <Button Classes="DemoAction"
                                 Content="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFShape}}"
                                 Click="ShowCodeWFWindowShaped_OnClick" />
+                        <Button Classes="DemoAction"
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFStar}}"
+                                Click="ShowCodeWFWindowStar_OnClick" />
+                        <Button Classes="DemoAction"
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFBlob}}"
+                                Click="ShowCodeWFWindowBlob_OnClick" />
                     </StackPanel>
                 </Border>
             </Grid>
