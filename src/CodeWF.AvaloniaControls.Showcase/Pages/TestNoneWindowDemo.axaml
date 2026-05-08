@@ -71,6 +71,27 @@
                         <Button Classes="DemoAction"
                                 Content="{i18n:I18n {x:Static pageLangs:WindowDemo.OpenNative}}"
                                 Click="ShowNativeWindow_OnClick" />
+                        <Button Classes="DemoAction"
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.NativeNone}}"
+                                Click="ShowNativeWindowBorderless_OnClick" />
+                        <Button Classes="DemoAction"
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.NativeMove}}"
+                                Click="ShowNativeWindowDraggable_OnClick" />
+                        <Button Classes="DemoAction"
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.NativeDark}}"
+                                Click="ShowNativeWindowDarkTitleBar_OnClick" />
+                        <Button Classes="DemoAction"
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.NativeTall}}"
+                                Click="ShowNativeWindowTallTitleBar_OnClick" />
+                        <Button Classes="DemoAction"
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.NativeShape}}"
+                                Click="ShowNativeWindowShaped_OnClick" />
+                        <Button Classes="DemoAction"
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.NativeStar}}"
+                                Click="ShowNativeWindowStar_OnClick" />
+                        <Button Classes="DemoAction"
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.NativeBlob}}"
+                                Click="ShowNativeWindowBlob_OnClick" />
                     </StackPanel>
                 </Border>
 
@@ -83,29 +104,14 @@
                                 Content="{i18n:I18n {x:Static pageLangs:WindowDemo.StandardUrsa}}"
                                 Click="ShowUrsaWindow_OnClick" />
                         <Button Classes="DemoAction"
-                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.BorderlessUrsa}}"
-                                Click="ShowUrsaWindowWithNone_OnClick" />
-                        <Button Classes="DemoAction"
-                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.BorderlessDraggableUrsa}}"
-                                Click="ShowUrsaWindowWithNoneAndMove_OnClick" />
-                        <Button Classes="DemoAction"
                                 Content="{i18n:I18n {x:Static pageLangs:WindowDemo.UrsaDark}}"
                                 Click="ShowUrsaWindowDarkTitleBar_OnClick" />
                         <Button Classes="DemoAction"
-                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.UrsaCompact}}"
-                                Click="ShowUrsaWindowCompactTool_OnClick" />
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.UrsaAccent}}"
+                                Click="ShowUrsaWindowAccent_OnClick" />
                         <Button Classes="DemoAction"
                                 Content="{i18n:I18n {x:Static pageLangs:WindowDemo.UrsaTall}}"
                                 Click="ShowUrsaWindowTallTitleBar_OnClick" />
-                        <Button Classes="DemoAction"
-                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.UrsaShape}}"
-                                Click="ShowUrsaWindowShaped_OnClick" />
-                        <Button Classes="DemoAction"
-                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.UrsaStar}}"
-                                Click="ShowUrsaWindowStar_OnClick" />
-                        <Button Classes="DemoAction"
-                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.UrsaBlob}}"
-                                Click="ShowUrsaWindowBlob_OnClick" />
                     </StackPanel>
                 </Border>
 
@@ -124,20 +130,8 @@
                                 Content="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFAccent}}"
                                 Click="ShowCodeWFWindowAccent_OnClick" />
                         <Button Classes="DemoAction"
-                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFCompact}}"
-                                Click="ShowCodeWFWindowCompactTool_OnClick" />
-                        <Button Classes="DemoAction"
                                 Content="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFTall}}"
                                 Click="ShowCodeWFWindowTall_OnClick" />
-                        <Button Classes="DemoAction"
-                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFShape}}"
-                                Click="ShowCodeWFWindowShaped_OnClick" />
-                        <Button Classes="DemoAction"
-                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFStar}}"
-                                Click="ShowCodeWFWindowStar_OnClick" />
-                        <Button Classes="DemoAction"
-                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFBlob}}"
-                                Click="ShowCodeWFWindowBlob_OnClick" />
                     </StackPanel>
                 </Border>
             </Grid>

@@ -16,19 +16,44 @@ public partial class TestNoneWindowDemo : UserControl
         new NativeWindowDemo().Show();
     }
 
+    private void ShowNativeWindowBorderless_OnClick(object? sender, RoutedEventArgs e)
+    {
+        new NativeWindowBorderlessDemo().Show();
+    }
+
+    private void ShowNativeWindowDraggable_OnClick(object? sender, RoutedEventArgs e)
+    {
+        new NativeWindowDraggableDemo().Show();
+    }
+
+    private void ShowNativeWindowDarkTitleBar_OnClick(object? sender, RoutedEventArgs e)
+    {
+        new NativeWindowDarkTitleBarDemo().Show();
+    }
+
+    private void ShowNativeWindowTallTitleBar_OnClick(object? sender, RoutedEventArgs e)
+    {
+        new NativeWindowTallTitleBarDemo().Show();
+    }
+
+    private void ShowNativeWindowShaped_OnClick(object? sender, RoutedEventArgs e)
+    {
+        new NativeWindowShapedDemo().Show();
+    }
+
+    private void ShowNativeWindowStar_OnClick(object? sender, RoutedEventArgs e)
+    {
+        new NativeWindowStarDemo().Show();
+    }
+
+    private void ShowNativeWindowBlob_OnClick(object? sender, RoutedEventArgs e)
+    {
+        new NativeWindowBlobDemo().Show();
+    }
+
     private void ShowUrsaWindow_OnClick(object? sender, RoutedEventArgs e)
     {
         new UrsaWindowDefault().Show();
-    }
-
-    private void ShowUrsaWindowWithNone_OnClick(object? sender, RoutedEventArgs e)
-    {
-        new UrsaWindowWithNone().Show();
-    }
-
-    private void ShowUrsaWindowWithNoneAndMove_OnClick(object? sender, RoutedEventArgs e)
-    {
-        new UrsaWindowWithNoneAndMove().Show();
     }
 
     private void ShowUrsaWindowDarkTitleBar_OnClick(object? sender, RoutedEventArgs e)
@@ -36,29 +61,14 @@ public partial class TestNoneWindowDemo : UserControl
         new UrsaWindowDarkTitleBarDemo().Show();
     }
 
-    private void ShowUrsaWindowCompactTool_OnClick(object? sender, RoutedEventArgs e)
+    private void ShowUrsaWindowAccent_OnClick(object? sender, RoutedEventArgs e)
     {
-        new UrsaWindowCompactToolDemo().Show();
+        new UrsaWindowAccentDemo().Show();
     }
 
     private void ShowUrsaWindowTallTitleBar_OnClick(object? sender, RoutedEventArgs e)
     {
         new UrsaWindowTallTitleBarDemo().Show();
-    }
-
-    private void ShowUrsaWindowShaped_OnClick(object? sender, RoutedEventArgs e)
-    {
-        new UrsaWindowShapedDemo().Show();
-    }
-
-    private void ShowUrsaWindowStar_OnClick(object? sender, RoutedEventArgs e)
-    {
-        new UrsaWindowStarDemo().Show();
-    }
-
-    private void ShowUrsaWindowBlob_OnClick(object? sender, RoutedEventArgs e)
-    {
-        new UrsaWindowBlobDemo().Show();
     }
 
     private void ShowCodeWFWindowStandard_OnClick(object? sender, RoutedEventArgs e)
@@ -76,28 +86,8 @@ public partial class TestNoneWindowDemo : UserControl
         new CodeWFWindowAccentDemo().Show();
     }
 
-    private void ShowCodeWFWindowCompactTool_OnClick(object? sender, RoutedEventArgs e)
-    {
-        new CodeWFWindowCompactToolDemo().Show();
-    }
-
     private void ShowCodeWFWindowTall_OnClick(object? sender, RoutedEventArgs e)
     {
         new CodeWFWindowTallDemo().Show();
-    }
-
-    private void ShowCodeWFWindowShaped_OnClick(object? sender, RoutedEventArgs e)
-    {
-        new CodeWFWindowShapedDemo().Show();
-    }
-
-    private void ShowCodeWFWindowStar_OnClick(object? sender, RoutedEventArgs e)
-    {
-        new CodeWFWindowStarDemo().Show();
-    }
-
-    private void ShowCodeWFWindowBlob_OnClick(object? sender, RoutedEventArgs e)
-    {
-        new CodeWFWindowBlobDemo().Show();
     }
 }

@@ -1,0 +1,63 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i18n="https://codewf.com"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:windowLangs="clr-namespace:Showcase.Windows"
+        mc:Ignorable="d"
+        d:DesignWidth="430"
+        d:DesignHeight="430"
+        Width="430"
+        Height="430"
+        Background="Transparent"
+        CanResize="False"
+        FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+        Icon="/Assets/logo.ico"
+        TransparencyBackgroundFallback="Transparent"
+        TransparencyLevelHint="Transparent"
+        WindowDecorations="None"
+        WindowStartupLocation="CenterScreen"
+        x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.NativeWindowStarDemo"
+        Title="{i18n:I18n {x:Static windowLangs:WindowDemos.NativeStarTitle}}">
+    <Canvas Width="430" Height="430">
+        <Path Data="M 215 28 L 258 156 L 392 156 L 284 235 L 326 365 L 215 286 L 104 365 L 146 235 L 38 156 L 172 156 Z"
+              Fill="#082F49"
+              PointerPressed="Shape_OnPointerPressed"
+              Stroke="#38BDF8"
+              StrokeThickness="3" />
+        <Path Data="M 215 74 L 244 173 L 348 174 L 263 233 L 294 331 L 215 270 L 136 331 L 167 233 L 82 174 L 186 173 Z"
+              Fill="#0F766E"
+              Opacity="0.9"
+              PointerPressed="Shape_OnPointerPressed"
+              Stroke="#99F6E4"
+              StrokeThickness="1.5" />
+        <Button Canvas.Left="300"
+                Canvas.Top="145"
+                Classes="WindowCaptionButton WindowCloseButton WindowShapeCloseButton"
+                Click="Close_OnClick">
+            <Path Width="12"
+                  Height="12"
+                  Data="M 1 1 L 11 11 M 11 1 L 1 11"
+                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                  StrokeLineCap="Round"
+                  StrokeThickness="1.6"
+                  Stretch="Uniform" />
+        </Button>
+        <StackPanel Canvas.Left="124"
+                    Canvas.Top="176"
+                    Width="182"
+                    IsHitTestVisible="False"
+                    Spacing="8">
+            <TextBlock HorizontalAlignment="Center"
+                       FontSize="22"
+                       FontWeight="SemiBold"
+                       Foreground="White"
+                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.NativeStarHeading}}" />
+            <TextBlock HorizontalAlignment="Center"
+                       Foreground="#CCFBF1"
+                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.NativeStarDescription}}"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap" />
+        </StackPanel>
+    </Canvas>
+</Window>

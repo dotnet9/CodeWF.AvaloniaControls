@@ -2,9 +2,9 @@ using Ursa.Controls;
 
 namespace CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos;
 
-public partial class UrsaWindowTallTitleBarDemo : UrsaWindow
+public partial class UrsaWindowAccentDemo : UrsaWindow
 {
-    public UrsaWindowTallTitleBarDemo()
+    public UrsaWindowAccentDemo()
     {
         InitializeComponent();
     }

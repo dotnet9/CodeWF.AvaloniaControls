@@ -1,16 +1,14 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Ursa.Controls;
 
 namespace CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos;
 
-public partial class UrsaWindowWithNoneAndMove : UrsaWindow
+public partial class NativeWindowDraggableDemo : Window
 {
-    public UrsaWindowWithNoneAndMove()
+    public NativeWindowDraggableDemo()
     {
         InitializeComponent();
-        WindowRegionHelper.AttachRoundedCorners(this);
     }
 
     private void TitleBar_OnPointerPressed(object? sender, PointerPressedEventArgs e)

@@ -1,0 +1,145 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i18n="https://codewf.com"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:windowLangs="clr-namespace:Showcase.Windows"
+        mc:Ignorable="d"
+        d:DesignWidth="600"
+        d:DesignHeight="380"
+        Width="600"
+        Height="380"
+        Background="Transparent"
+        FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+        Icon="/Assets/logo.ico"
+        TransparencyBackgroundFallback="Transparent"
+        TransparencyLevelHint="Transparent"
+        WindowDecorations="None"
+        WindowStartupLocation="CenterScreen"
+        x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.NativeWindowDarkTitleBarDemo"
+        Title="{i18n:I18n {x:Static windowLangs:WindowDemos.NativeDarkTitle}}">
+    <Border Background="#243041"
+            ClipToBounds="True"
+            CornerRadius="4">
+        <Border Margin="1"
+                Background="#0B1120"
+                ClipToBounds="True"
+                CornerRadius="3">
+            <Grid RowDefinitions="56,*">
+                <Border Background="#111827"
+                        BorderBrush="#243041"
+                        BorderThickness="0,0,0,1"
+                        PointerPressed="TitleBar_OnPointerPressed">
+                    <Grid Margin="16,0,8,0"
+                          ColumnDefinitions="Auto,*,Auto,Auto"
+                          ColumnSpacing="12">
+                        <Border Width="30"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Background="#2563EB"
+                                CornerRadius="8">
+                            <Image Width="18"
+                                   Height="18"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                                   Source="/Assets/logo.png" />
+                        </Border>
+                        <StackPanel Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Spacing="1">
+                            <TextBlock FontWeight="SemiBold"
+                                       Foreground="White"
+                                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.NativeDarkHeading}}" />
+                            <TextBlock FontSize="11"
+                                       Foreground="#CBD5E1"
+                                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarSlotsLabel}}" />
+                        </StackPanel>
+                        <Border Grid.Column="2"
+                                Padding="10,4"
+                                VerticalAlignment="Center"
+                                Background="#2222C55E"
+                                BorderBrush="#6622C55E"
+                                BorderThickness="1"
+                                CornerRadius="999">
+                            <TextBlock FontSize="12"
+                                       Foreground="#BBF7D0"
+                                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.Online}}" />
+                        </Border>
+                        <StackPanel Grid.Column="3"
+                                    Orientation="Horizontal">
+                            <Button Classes="WindowCaptionButton"
+                                    Foreground="#E2E8F0"
+                                    Click="Minimize_OnClick">
+                                <Border Width="12"
+                                        Height="1.6"
+                                        Background="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                        CornerRadius="1" />
+                            </Button>
+                            <Button Classes="WindowCaptionButton"
+                                    Foreground="#E2E8F0"
+                                    Click="MaximizeRestore_OnClick">
+                                <Path Width="12"
+                                      Height="12"
+                                      Data="M 1.5 1.5 L 10.5 1.5 L 10.5 10.5 L 1.5 10.5 Z"
+                                      Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                      StrokeThickness="1.4"
+                                      Stretch="Uniform" />
+                            </Button>
+                            <Button Classes="WindowCaptionButton WindowCloseButton"
+                                    Foreground="#E2E8F0"
+                                    Click="Close_OnClick">
+                                <Path Width="12"
+                                      Height="12"
+                                      Data="M 1 1 L 11 11 M 11 1 L 1 11"
+                                      Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                      StrokeLineCap="Round"
+                                      StrokeThickness="1.6"
+                                      Stretch="Uniform" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="1"
+                      Margin="22"
+                      RowDefinitions="Auto,*"
+                      RowSpacing="16">
+                    <StackPanel Spacing="6">
+                        <TextBlock FontSize="24"
+                                   FontWeight="SemiBold"
+                                   Foreground="White"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.NativeDarkHeading}}" />
+                        <TextBlock Foreground="#CBD5E1"
+                                   TextWrapping="Wrap"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.NativeDarkDescription}}" />
+                    </StackPanel>
+
+                    <Grid Grid.Row="1"
+                          ColumnDefinitions="*,*"
+                          ColumnSpacing="12">
+                        <Border Padding="16"
+                                Background="#111827"
+                                BorderBrush="#243041"
+                                BorderThickness="1"
+                                CornerRadius="10">
+                            <TextBlock Foreground="#94A3B8"
+                                       TextWrapping="Wrap"
+                                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarContentDesc}}" />
+                        </Border>
+                        <Border Grid.Column="1"
+                                Padding="16"
+                                Background="#111827"
+                                BorderBrush="#243041"
+                                BorderThickness="1"
+                                CornerRadius="10">
+                            <TextBlock Foreground="#94A3B8"
+                                       TextWrapping="Wrap"
+                                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.ScenarioDesc}}" />
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

@@ -1,29 +1,24 @@
-<codewf:CodeWFWindow xmlns="https://github.com/avaloniaui"
-                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:codewf="https://codewf.com"
-                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                     xmlns:i18n="https://codewf.com"
-                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                     xmlns:windowLangs="clr-namespace:Showcase.Windows"
-                     mc:Ignorable="d"
-                     d:DesignWidth="460"
-                     d:DesignHeight="360"
-                     Width="460"
-                     Height="360"
-                     Background="Transparent"
-                     CanResize="False"
-                     FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
-                     Icon="/Assets/logo.ico"
-                     TitleBarHeight="0"
-                     TitleBarBackground="Transparent"
-                     TitleBarBorderBrush="Transparent"
-                     TitleBarForeground="Transparent"
-                     TransparencyBackgroundFallback="Transparent"
-                     TransparencyLevelHint="Transparent"
-                     WindowCornerRadius="0"
-                     WindowStartupLocation="CenterScreen"
-                     x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.CodeWFWindowBlobDemo"
-                     Title="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFBlobTitle}}">
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i18n="https://codewf.com"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:windowLangs="clr-namespace:Showcase.Windows"
+        mc:Ignorable="d"
+        d:DesignWidth="460"
+        d:DesignHeight="360"
+        Width="460"
+        Height="360"
+        Background="Transparent"
+        CanResize="False"
+        FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+        Icon="/Assets/logo.ico"
+        TransparencyBackgroundFallback="Transparent"
+        TransparencyLevelHint="Transparent"
+        WindowDecorations="None"
+        WindowStartupLocation="CenterScreen"
+        x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.NativeWindowBlobDemo"
+        Title="{i18n:I18n {x:Static windowLangs:WindowDemos.NativeBlobTitle}}">
     <Canvas Width="460" Height="360">
         <Path Data="M 233 34 C 305 18 390 56 410 132 C 434 223 354 318 252 323 C 162 327 60 298 42 213 C 25 130 91 52 164 55 C 189 56 207 40 233 34 Z"
               Fill="#111827"
@@ -41,8 +36,7 @@
         <Button Canvas.Left="348"
                 Canvas.Top="82"
                 Classes="WindowCaptionButton WindowCloseButton WindowShapeCloseButton"
-                Click="Close_OnClick"
-                ToolTip.Tip="{i18n:I18n {x:Static windowLangs:WindowDemos.Close}}">
+                Click="Close_OnClick">
             <Path Width="12"
                   Height="12"
                   Data="M 1 1 L 11 11 M 11 1 L 1 11"
@@ -60,12 +54,12 @@
                        FontSize="23"
                        FontWeight="SemiBold"
                        Foreground="White"
-                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFBlobHeading}}" />
+                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.NativeBlobHeading}}" />
             <TextBlock HorizontalAlignment="Center"
                        Foreground="#FFEDD5"
-                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFBlobDescription}}"
+                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.NativeBlobDescription}}"
                        TextAlignment="Center"
                        TextWrapping="Wrap" />
         </StackPanel>
     </Canvas>
-</codewf:CodeWFWindow>
+</Window>

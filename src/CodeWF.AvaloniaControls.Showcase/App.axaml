@@ -108,9 +108,9 @@
             <Setter Property="MinWidth" Value="34" />
             <Setter Property="MinHeight" Value="34" />
             <Setter Property="CornerRadius" Value="17" />
-            <Setter Property="BorderBrush" Value="#FFFFFFB8" />
+            <Setter Property="BorderBrush" Value="#B8FFFFFF" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Background" Value="#F8FAFCE6" />
+            <Setter Property="Background" Value="#E6F8FAFC" />
             <Setter Property="Foreground" Value="#111827" />
         </Style>
         <Style Selector="Button.WindowCloseButton:pointerover">

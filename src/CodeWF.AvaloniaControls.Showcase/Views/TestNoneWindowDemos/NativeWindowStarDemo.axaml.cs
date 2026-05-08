@@ -1,14 +1,13 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia;
-using Ursa.Controls;
 
 namespace CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos;
 
-public partial class UrsaWindowStarDemo : UrsaWindow
+public partial class NativeWindowStarDemo : Window
 {
-    public UrsaWindowStarDemo()
+    public NativeWindowStarDemo()
     {
         InitializeComponent();
         Opened += (_, _) => WindowRegionHelper.ApplyPolygon(

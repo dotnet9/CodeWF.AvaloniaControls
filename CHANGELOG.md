@@ -8,17 +8,23 @@
 - Removed Dock projects from the `CodeWF.AvaloniaControls` solution, root packing script, sample publish script, and central package version list.
 - Moved `CodeWF.Markdown`, `CodeWF.Markdown.Themes`, `CodeWF.Markdown.Lite`, `CodeWF.Markdown.Lite.Themes`, and their sample applications to the standalone `CodeWF.Markdown` repository.
 - Removed Markdown projects from the `CodeWF.AvaloniaControls` solution, root packing script, and sample publish script.
+- Moved the legacy `CodeWF.AvaloniaControls.DataGrid` package and its DataGrid/TreeDataGrid demos to the standalone `CodeWF.AvaloniaControls.DataGrid` repository.
 - Updated repository documentation so this repository only describes the Avalonia controls and showcase sample lines.
 - Added `CodeWFWindow`, a managed custom window base with title-bar dragging, caption buttons, and resize grips for consistent Win7 and Linux showcase behavior.
+- Updated `CodeWFWindow` rounded-corner rendering to use transparent managed chrome instead of native window regions.
+- Refined the default `CodeWFWindow` template with an outer frame, inset content surface, consistent right/bottom borders, and smoother small corner radii.
+- Added a shared corner-radius inset converter for nested rounded `CodeWFWindow` surfaces.
 - Migrated the showcase main window from `UrsaWindow` to `CodeWFWindow` so the content area is laid out below the title bar without manual overlap offsets.
 - Added light/dark theme switching, control-name tab search, and JSON-backed dynamic localization to `CodeWF.AvaloniaControls.Showcase`.
-- Expanded the showcase window demos with native `Window`, `UrsaWindow`, and `CodeWFWindow` examples covering custom title bars, compact/tall title heights, and shaped windows.
+- Reworked the showcase window demos so `UrsaWindow` and `CodeWFWindow` focus on regular window styles while borderless, draggable, custom-title, and shaped variants use native `Window`.
+- Aligned the standard `UrsaWindow` sample with the regular `CodeWFWindow` sample style and removed duplicate compact tool-title demos.
+- Added native `Window` demos for borderless, draggable, dark-title, tall-title, circular, star, and freeform shaped windows.
+- Added an `UrsaWindow` accent-title demo to keep the regular Ursa and CodeWF demo sets aligned.
+- Updated the standard `CodeWFWindow` sample with a narrow GitHub Desktop-style title bar, right-aligned caption buttons, and standard desktop menus.
+- Removed title-bar control button tooltips from `CodeWFWindow` examples.
+- Improved title-bar menu selection, open, hover, and pressed states so dropdown text remains readable.
 - Improved `CodeWFWindow` caption buttons so the minimize glyph is visible and close hover/press states use the expected red background.
-- Refined showcase window demo visuals by removing Ursa borderless white margins, separating title bars from client content, adding default `CodeWFWindow` borders, and replacing rounded shaped demos with circular windows.
-- Added star and freeform Ursa shaped-window demos and replaced text-only custom caption actions with glyph buttons.
-- Added Windows region clipping for shaped showcase windows so transparent outer areas are excluded from the native window hit region where supported.
-- Added matching star and freeform `CodeWFWindow` shaped demos to the showcase window sample.
-- Moved the legacy `CodeWF.AvaloniaControls.DataGrid` package and its DataGrid/TreeDataGrid demos to the standalone `CodeWF.AvaloniaControls.DataGrid` repository.
+- Corrected Avalonia alpha color ordering in showcase and starter demo styles so translucent badges and window controls render with the intended contrast.
 
 ## 12.0.2.3 - 2026-05-06
 

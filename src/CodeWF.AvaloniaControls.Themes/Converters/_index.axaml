@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:codewf="https://codewf.com">
     <codewf:TrapezoidShapedTabItemPaddingConverter x:Key="TrapezoidShapedTabItemPaddingConverter" />
+    <codewf:CornerRadiusInsetConverter x:Key="CornerRadiusInsetConverter" />
     <codewf:StatusBadgeLeftTextBorderCornerRadiusConverter x:Key="StatusBadgeLeftTextBorderCornerRadiusConverter" />
 	<codewf:StatusCardKindForegroundConverter x:Key="StatusCardKindForegroundConverter" />
 	<codewf:StatusLabelKindBackgroundConverter x:Key="StatusLabelKindBackgroundConverter" />

@@ -28,7 +28,7 @@
         </Grid>
     </codewf:CodeWFWindow.LeftContent>
     <codewf:CodeWFWindow.RightContent>
-        <Border Padding="10,4" Background="#22C55E22" BorderBrush="#22C55E66" BorderThickness="1" CornerRadius="999" IsHitTestVisible="False">
+        <Border Padding="10,4" Background="#2222C55E" BorderBrush="#6622C55E" BorderThickness="1" CornerRadius="999" IsHitTestVisible="False">
             <TextBlock FontSize="12" Foreground="#BBF7D0" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.Live}}" />
         </Border>
     </codewf:CodeWFWindow.RightContent>

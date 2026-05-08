@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -102,13 +101,12 @@ public class CodeWFWindow : Window
 
     protected override Type StyleKeyOverride => typeof(CodeWFWindow);
 
-    private bool _nativeCornerRegionApplied;
-
     public CodeWFWindow()
     {
         WindowDecorations = WindowDecorations.None;
         ExtendClientAreaToDecorationsHint = false;
-        Opened += (_, _) => UpdateNativeWindowCornerRadius();
+        TransparencyLevelHint = [WindowTransparencyLevel.Transparent];
+        TransparencyBackgroundFallback = Brushes.Transparent;
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -163,7 +161,6 @@ public class CodeWFWindow : Window
         if (change.Property == WindowStateProperty)
         {
             UpdateWindowStatePseudoClasses();
-            UpdateNativeWindowCornerRadius();
         }
 
         if (change.Property == WindowStateProperty || change.Property == CanResizeProperty)
@@ -171,17 +168,6 @@ public class CodeWFWindow : Window
             UpdateButtonStates();
             UpdateResizeGripStates();
         }
-
-        if (change.Property == WindowCornerRadiusProperty)
-        {
-            UpdateNativeWindowCornerRadius();
-        }
-    }
-
-    protected override void OnSizeChanged(SizeChangedEventArgs e)
-    {
-        base.OnSizeChanged(e);
-        UpdateNativeWindowCornerRadius();
     }
 
     private void AttachResizeGrip(TemplateAppliedEventArgs e, string name, WindowEdge edge)
@@ -332,83 +318,4 @@ public class CodeWFWindow : Window
 
         return false;
     }
-
-    private void UpdateNativeWindowCornerRadius()
-    {
-        if (!OperatingSystem.IsWindows())
-        {
-            return;
-        }
-
-        var radius = GetUniformNativeCornerRadius();
-        if (radius <= 0
-            || WindowState == WindowState.Maximized
-            || WindowState == WindowState.FullScreen
-            || ClientSize.Width <= 0
-            || ClientSize.Height <= 0)
-        {
-            ClearNativeWindowCornerRadius();
-            return;
-        }
-
-        var handle = TryGetPlatformHandle()?.Handle ?? IntPtr.Zero;
-        if (handle == IntPtr.Zero)
-        {
-            return;
-        }
-
-        var scaling = RenderScaling;
-        var width = Math.Max(1, Scale(ClientSize.Width, scaling));
-        var height = Math.Max(1, Scale(ClientSize.Height, scaling));
-        var diameter = Math.Max(1, Scale(radius * 2, scaling));
-        var region = CreateRoundRectRgn(0, 0, width, height, diameter, diameter);
-
-        if (region == IntPtr.Zero)
-        {
-            return;
-        }
-
-        if (SetWindowRgn(handle, region, true) == 0)
-        {
-            DeleteObject(region);
-            return;
-        }
-
-        _nativeCornerRegionApplied = true;
-    }
-
-    private void ClearNativeWindowCornerRadius()
-    {
-        if (!_nativeCornerRegionApplied)
-        {
-            return;
-        }
-
-        var handle = TryGetPlatformHandle()?.Handle ?? IntPtr.Zero;
-        if (handle != IntPtr.Zero && SetWindowRgn(handle, IntPtr.Zero, true) != 0)
-        {
-            _nativeCornerRegionApplied = false;
-        }
-    }
-
-    private double GetUniformNativeCornerRadius()
-    {
-        return Math.Max(
-            Math.Max(WindowCornerRadius.TopLeft, WindowCornerRadius.TopRight),
-            Math.Max(WindowCornerRadius.BottomRight, WindowCornerRadius.BottomLeft));
-    }
-
-    private static int Scale(double value, double scaling)
-    {
-        return (int)Math.Round(value * scaling, MidpointRounding.AwayFromZero);
-    }
-
-    [DllImport("gdi32.dll", SetLastError = true)]
-    private static extern IntPtr CreateRoundRectRgn(int left, int top, int right, int bottom, int width, int height);
-
-    [DllImport("gdi32.dll", SetLastError = true)]
-    private static extern bool DeleteObject(IntPtr value);
-
-    [DllImport("user32.dll", SetLastError = true)]
-    private static extern int SetWindowRgn(IntPtr hwnd, IntPtr region, bool redraw);
 }

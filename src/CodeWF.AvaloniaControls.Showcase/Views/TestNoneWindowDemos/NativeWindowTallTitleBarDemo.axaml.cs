@@ -1,16 +1,14 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Ursa.Controls;
 
 namespace CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos;
 
-public partial class UrsaWindowCompactToolDemo : UrsaWindow
+public partial class NativeWindowTallTitleBarDemo : Window
 {
-    public UrsaWindowCompactToolDemo()
+    public NativeWindowTallTitleBarDemo()
     {
         InitializeComponent();
-        WindowRegionHelper.AttachRoundedCorners(this);
     }
 
     private void TitleBar_OnPointerPressed(object? sender, PointerPressedEventArgs e)
@@ -29,6 +27,11 @@ public partial class UrsaWindowCompactToolDemo : UrsaWindow
     private void Minimize_OnClick(object? sender, RoutedEventArgs e)
     {
         WindowState = WindowState.Minimized;
+    }
+
+    private void MaximizeRestore_OnClick(object? sender, RoutedEventArgs e)
+    {
+        WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
     }
 
     private void Close_OnClick(object? sender, RoutedEventArgs e)

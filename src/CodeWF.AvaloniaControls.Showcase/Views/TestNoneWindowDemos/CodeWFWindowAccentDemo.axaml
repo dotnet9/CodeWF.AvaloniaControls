@@ -44,8 +44,8 @@
                     Spacing="8"
                     IsHitTestVisible="False">
             <Border Padding="10,4"
-                    Background="#FFFFFF22"
-                    BorderBrush="#FFFFFF44"
+                    Background="#22FFFFFF"
+                    BorderBrush="#44FFFFFF"
                     BorderThickness="1"
                     CornerRadius="999">
                 <TextBlock FontSize="12"

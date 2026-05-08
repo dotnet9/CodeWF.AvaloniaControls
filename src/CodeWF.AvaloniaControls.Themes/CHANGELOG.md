@@ -2,10 +2,11 @@
 
 V12.0.2.4 (2026-05-08)
 
-- Added the default `CodeWFWindow` control theme with a 60px managed title bar, right-aligned caption buttons, maximize/restore glyph switching, and resize hit areas.
-- Improved the caption button theme with a visible minimize glyph, lightweight hover states, and red close hover/pressed backgrounds.
-- Added a default outer border to `CodeWFWindow` so custom-decorated windows remain visually separated from their parent background.
-- Refined the default `CodeWFWindow` caption buttons to use larger square system-style hit targets.
+- 😄[新增]-新增默认 `CodeWFWindow` 控件主题，提供托管标题栏、右侧控制按钮、最大化/还原图标切换和缩放热区
+- 😄[新增]-新增圆角内缩转换器，用于 `CodeWFWindow` 外层边框与内层内容面板的嵌套圆角计算
+- 🔤[优化]-优化控制按钮主题，确保最小化图标可见，并提供轻量悬浮状态和红色关闭按钮悬浮/按下背景
+- 🔤[优化]-重构默认 `CodeWFWindow` 模板，使用外层边框加内缩内容面板，统一右边框、下边框和小圆角视觉效果
+- 🔤[优化]-默认控制按钮改为更接近系统窗体的方形命中区域，并移除标题栏控制按钮的鼠标悬浮提示文字
 
 V12.0.2（2026-05-05）
 

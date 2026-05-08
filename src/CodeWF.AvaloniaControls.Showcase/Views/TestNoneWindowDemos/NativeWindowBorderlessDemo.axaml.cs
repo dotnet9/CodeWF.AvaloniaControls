@@ -1,16 +1,14 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Ursa.Controls;
 
 namespace CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos;
 
-public partial class UrsaWindowShapedDemo : UrsaWindow
+public partial class NativeWindowBorderlessDemo : Window
 {
-    public UrsaWindowShapedDemo()
+    public NativeWindowBorderlessDemo()
     {
         InitializeComponent();
-        Opened += (_, _) => WindowRegionHelper.ApplyEllipse(this, 22, 22, 316, 316);
     }
 
     private void TitleBar_OnPointerPressed(object? sender, PointerPressedEventArgs e)

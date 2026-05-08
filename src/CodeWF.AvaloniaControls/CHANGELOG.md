@@ -2,9 +2,10 @@
 
 V12.0.2.4 (2026-05-08)
 
-- Added `CodeWFWindow`, a managed Avalonia window base with custom title-bar dragging, caption buttons, and resize grips for consistent Win7 and Linux behavior.
-- Added title-bar content slots and styling properties so applications can provide branding and actions without depending on `UrsaWindow`.
-- Improved `CodeWFWindow` state handling for maximize/restore, caption button enablement, and resize grip visibility.
+- 😄[新增]-新增 `CodeWFWindow` 托管 Avalonia 窗体基类，提供自定义标题栏拖动、控制按钮和缩放热区，统一 Win7 与 Linux 下的窗体行为
+- 😄[新增]-新增标题栏左右内容槽和标题栏样式属性，应用可直接放置品牌、菜单和操作区，不必依赖 `UrsaWindow`
+- 🔤[优化]-改进 `CodeWFWindow` 最大化/还原状态、控制按钮启用状态和缩放热区显隐处理
+- 🔤[优化]-`CodeWFWindow` 改用透明托管窗体外壳渲染圆角，移除原生窗口区域裁剪逻辑，避免小圆角锯齿感和边框突兀问题
 
 V12.0.2（2026-05-05）
 

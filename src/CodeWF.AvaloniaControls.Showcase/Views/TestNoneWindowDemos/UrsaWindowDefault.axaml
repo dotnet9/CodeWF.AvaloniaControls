@@ -6,23 +6,63 @@
               xmlns:u="https://irihi.tech/ursa"
               xmlns:windowLangs="clr-namespace:Showcase.Windows"
               mc:Ignorable="d"
-              d:DesignWidth="800"
-              d:DesignHeight="450"
-              Width="460"
-              Height="320"
+              d:DesignWidth="700"
+              d:DesignHeight="360"
+              Width="700"
+              Height="360"
+              Background="{DynamicResource ShowcaseAppBackground}"
               FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+              Icon="/Assets/logo.ico"
               WindowStartupLocation="CenterScreen"
               x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.UrsaWindowDefault"
               Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaDefaultTitle}}">
-    <u:UrsaWindow.Resources>
-        <Color x:Key="CaptionButtonForeground">#0F172A</Color>
-    </u:UrsaWindow.Resources>
-    <Border Background="{DynamicResource ShowcaseSubtleBackground}" BorderBrush="{DynamicResource ShowcaseBorderBrush}" BorderThickness="1" CornerRadius="12" Padding="24">
-        <StackPanel Spacing="8" VerticalAlignment="Center">
-            <TextBlock FontSize="22" FontWeight="Bold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaDefaultHeading}}" />
-            <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
-                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaDefaultDescription}}"
-                       TextWrapping="Wrap" />
-        </StackPanel>
+    <Border Background="{DynamicResource ShowcaseAppBackground}">
+        <Grid Margin="20"
+              RowDefinitions="Auto,*"
+              RowSpacing="16">
+            <StackPanel Spacing="6">
+                <TextBlock FontSize="24"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaDefaultHeading}}" />
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           TextWrapping="Wrap"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaDefaultDescription}}" />
+            </StackPanel>
+
+            <Grid Grid.Row="1"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="12">
+                <Border Padding="16"
+                        Background="{DynamicResource ShowcaseCardBackground}"
+                        BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                    <StackPanel Spacing="7">
+                        <TextBlock FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.WindowBehavior}}" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.ResizeHotZones}}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1"
+                        Padding="16"
+                        Background="{DynamicResource ShowcaseCardBackground}"
+                        BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                    <StackPanel Spacing="7">
+                        <TextBlock FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.Scenario}}" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.ScenarioDesc}}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
     </Border>
 </u:UrsaWindow>

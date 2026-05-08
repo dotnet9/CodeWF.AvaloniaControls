@@ -53,10 +53,10 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Top">
-                    <Border Padding="12,6" Background="#1D4ED855" CornerRadius="999">
+                    <Border Padding="12,6" Background="#551D4ED8" CornerRadius="999">
                         <TextBlock Foreground="White" FontWeight="SemiBold" Text="Fluent" />
                     </Border>
-                    <Border Padding="12,6" Background="#0F766E55" CornerRadius="999">
+                    <Border Padding="12,6" Background="#550F766E" CornerRadius="999">
                         <TextBlock Foreground="White" FontWeight="SemiBold" Text="起步示例" />
                     </Border>
                 </StackPanel>
