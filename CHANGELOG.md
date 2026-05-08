@@ -4,7 +4,7 @@
 
 - Moved `CodeWF.Markdown`, `CodeWF.Markdown.Themes`, `CodeWF.Markdown.Lite`, `CodeWF.Markdown.Lite.Themes`, and their sample applications to the standalone `CodeWF.Markdown` repository.
 - Removed Markdown projects from the `CodeWF.AvaloniaControls` solution, root packing script, and sample publish script.
-- Updated repository documentation so this repository only describes the Avalonia controls, DataGrid, Dock, ProDataGrid, and showcase sample lines.
+- Updated repository documentation so this repository only describes the Avalonia controls, Dock, ProDataGrid, and showcase sample lines.
 - Added `CodeWFWindow`, a managed custom window base with title-bar dragging, caption buttons, and resize grips for consistent Win7 and Linux showcase behavior.
 - Migrated the showcase main window from `UrsaWindow` to `CodeWFWindow` so the content area is laid out below the title bar without manual overlap offsets.
 - Added light/dark theme switching, control-name tab search, and JSON-backed dynamic localization to `CodeWF.AvaloniaControls.Showcase`.
@@ -14,6 +14,7 @@
 - Added star and freeform Ursa shaped-window demos and replaced text-only custom caption actions with glyph buttons.
 - Added Windows region clipping for shaped showcase windows so transparent outer areas are excluded from the native window hit region where supported.
 - Added matching star and freeform `CodeWFWindow` shaped demos to the showcase window sample.
+- Moved the legacy `CodeWF.AvaloniaControls.DataGrid` package and its DataGrid/TreeDataGrid demos to the standalone `CodeWF.AvaloniaControls.DataGrid` repository.
 
 ## 12.0.2.3 - 2026-05-06
 

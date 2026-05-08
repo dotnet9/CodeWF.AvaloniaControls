@@ -4,11 +4,10 @@
 |------|-------|----------|
 | CodeWF.AvaloniaControls | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls)](https://www.nuget.org/packages/CodeWF.AvaloniaControls/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls)](https://www.nuget.org/packages/CodeWF.AvaloniaControls/) |
 | CodeWF.AvaloniaControls.Themes | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Themes/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Themes/) |
-| CodeWF.AvaloniaControls.DataGrid | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.DataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.DataGrid/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.DataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.DataGrid/) |
 | CodeWF.AvaloniaControls.Dock | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) |
 | CodeWF.AvaloniaControls.ProDataGrid | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) |
 
-An open-source Avalonia control repository based on .NET 11 and Avalonia 12, including reusable libraries, legacy free-grid compatibility helpers, and runnable samples.
+An open-source Avalonia control repository based on .NET 11 and Avalonia 12, including reusable libraries and runnable samples.
 
 English | [简体中文](README.zh-CN.md)
 
@@ -37,18 +36,13 @@ Install-Package CodeWF.AvaloniaControls
 
 Markdown packages now live in the standalone [CodeWF.Markdown](https://github.com/dotnet9/CodeWF.Markdown) repository.
 
-### Legacy free DataGrid / TreeDataGrid line
-
-- `CodeWF.AvaloniaControls.DataGrid` stays on the last free official `Avalonia.Controls.DataGrid` / `Avalonia.Controls.TreeDataGrid` line
-- The legacy compatibility projects keep explicit package versions in their own `.csproj` files instead of adding conditional branches to the central package manager
+Legacy free `DataGrid` / `TreeDataGrid` packages and samples now live in the standalone [CodeWF.AvaloniaControls.DataGrid](https://github.com/dotnet9/CodeWF.AvaloniaControls.DataGrid) repository.
 
 ## Sample Applications
 
 - `CodeWF.AvaloniaControls.Showcase`: general control showcase
 - `CodeWF.AvaloniaControls.ProDataGridShowcase`: functional ProDataGrid sample on Avalonia 12
 - `CodeWF.AvaloniaControls.ProDataGridPerformanceDemo`: large-dataset, tab-switching, and document-switching performance sample on Avalonia 12
-- `CodeWF.AvaloniaControls.DataGridLegacyDemo`: legacy free DataGrid sample
-- `CodeWF.AvaloniaControls.TreeDataGridLegacyDemo`: legacy free TreeDataGrid sample
 - `CodeWF.AvaloniaControls.DockDemo`, `CodeWF.AvaloniaControls.DockPrismDemo`, `CodeWF.AvaloniaControls.DockReactiveUIDemo`: Dock integration samples
 - `CodeWF.AvaloniaControls.FluentStarterDemo`: lightweight starter-window sample
 
@@ -75,7 +69,6 @@ Markdown packages now live in the standalone [CodeWF.Markdown](https://github.co
 
 - Commercial package lines are intentionally avoided in this repository
 - `Prism.DryIoc.Avalonia` is pinned to `8.1.97.11073` because the `9.x` line is commercial
-- `Semi.Avalonia.DataGrid` and `Semi.Avalonia.TreeDataGrid` use their last free open-source theme package versions
 - `CodeWF.AvaloniaControls.ProDataGrid` is based on the MIT-licensed [ProDataGrid](https://www.nuget.org/packages/ProDataGrid/)
 
 ## Demo

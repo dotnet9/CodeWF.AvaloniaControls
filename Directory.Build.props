@@ -1,7 +1,6 @@
 <Project>
 	<PropertyGroup>
 		<CodeWFAvaloniaControlsVersion>12.0.2.1</CodeWFAvaloniaControlsVersion>
-		<CodeWFAvaloniaControlsDataGridVersion>12.0.2.1</CodeWFAvaloniaControlsDataGridVersion>
 		<CodeWFAvaloniaControlsDockVersion>12.0.2.1</CodeWFAvaloniaControlsDockVersion>
 		<CodeWFAvaloniaControlsProDataGridVersion>12.0.2.1</CodeWFAvaloniaControlsProDataGridVersion>
 		<Version Condition="'$(Version)' == ''">$(CodeWFAvaloniaControlsVersion)</Version>
