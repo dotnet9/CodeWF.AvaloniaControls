@@ -272,7 +272,6 @@ public class CodeWFWindow : Window
         if (_maximizeRestoreButton is not null)
         {
             _maximizeRestoreButton.IsEnabled = CanResize;
-            ToolTip.SetTip(_maximizeRestoreButton, WindowState == WindowState.Maximized ? "Restore" : "Maximize");
         }
     }
 

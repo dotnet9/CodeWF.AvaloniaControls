@@ -56,8 +56,7 @@
                                         Orientation="Horizontal">
                                         <Button
                                             Name="PART_MinimizeButton"
-                                            Classes="caption-button"
-                                            ToolTip.Tip="Minimize">
+                                            Classes="caption-button">
                                             <Border
                                                 Width="12"
                                                 Height="1.6"
@@ -66,8 +65,7 @@
                                         </Button>
                                         <Button
                                             Name="PART_MaximizeRestoreButton"
-                                            Classes="caption-button"
-                                            ToolTip.Tip="Maximize">
+                                            Classes="caption-button">
                                             <Grid Width="12" Height="12">
                                                 <Path
                                                     Classes="maximize-glyph"
@@ -86,8 +84,7 @@
                                         </Button>
                                         <Button
                                             Name="PART_CloseButton"
-                                            Classes="caption-button close-button"
-                                            ToolTip.Tip="Close">
+                                            Classes="caption-button close-button">
                                             <Path
                                                 Width="12"
                                                 Height="12"
