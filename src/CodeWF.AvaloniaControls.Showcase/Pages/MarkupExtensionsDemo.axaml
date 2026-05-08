@@ -1,0 +1,280 @@
+<UserControl
+    x:Class="CodeWF.AvaloniaControls.Showcase.Pages.MarkupExtensionsDemo"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:edit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+    xmlns:codewf="https://codewf.com"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CodeWF.AvaloniaControls.Showcase.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:CodeWF.AvaloniaControls.Showcase.Models"
+    x:DataType="local:MarkupExtensionsDemo"
+    d:DesignHeight="620"
+    d:DesignWidth="980"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <codewf:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+        <codewf:IsCollectionEmptyConverter x:Key="IsCollectionEmptyConverter" />
+
+        <SolidColorBrush x:Key="UnknownHealthBrush" Color="#F8FAFC" />
+
+        <codewf:SwitchCases x:Key="HealthTitleCases">
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Healthy}" Then="运行健康" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Delayed}" Then="发布延迟" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Failed}" Then="构建失败" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Locked}" Then="人工锁定" />
+        </codewf:SwitchCases>
+
+        <codewf:SwitchCases x:Key="HealthDescriptionCases">
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Healthy}" Then="所有检查通过，可以继续自动发布。" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Delayed}" Then="上游任务仍在排队，预计稍后恢复。" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Failed}" Then="最近一次构建没有通过，需要先修复错误。" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Locked}" Then="当前由值班同学接管，自动化暂时停止。" />
+        </codewf:SwitchCases>
+
+        <codewf:SwitchCases x:Key="HealthBrushCases">
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Healthy}">
+                <codewf:SwitchCase.Then>
+                    <SolidColorBrush Color="#DCFCE7" />
+                </codewf:SwitchCase.Then>
+            </codewf:SwitchCase>
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Delayed}">
+                <codewf:SwitchCase.Then>
+                    <SolidColorBrush Color="#FEF3C7" />
+                </codewf:SwitchCase.Then>
+            </codewf:SwitchCase>
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Failed}">
+                <codewf:SwitchCase.Then>
+                    <SolidColorBrush Color="#FEE2E2" />
+                </codewf:SwitchCase.Then>
+            </codewf:SwitchCase>
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Locked}">
+                <codewf:SwitchCase.Then>
+                    <SolidColorBrush Color="#E0E7FF" />
+                </codewf:SwitchCase.Then>
+            </codewf:SwitchCase>
+        </codewf:SwitchCases>
+
+        <codewf:IfConditionConverter x:Key="RunVisualConverter">
+            <codewf:IfConditionConverter.True>
+                <Border Padding="14,10"
+                        Background="#DCFCE7"
+                        BorderBrush="#86EFAC"
+                        BorderThickness="1"
+                        CornerRadius="12">
+                    <StackPanel Spacing="2">
+                        <TextBlock FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Foreground="#166534"
+                                   Text="自动发布已开启" />
+                        <TextBlock Foreground="#15803D" Text="新的任务会直接进入发布队列。" />
+                    </StackPanel>
+                </Border>
+            </codewf:IfConditionConverter.True>
+            <codewf:IfConditionConverter.False>
+                <Border Padding="14,10"
+                        Background="#FEE2E2"
+                        BorderBrush="#FCA5A5"
+                        BorderThickness="1"
+                        CornerRadius="12">
+                    <StackPanel Spacing="2">
+                        <TextBlock FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Foreground="#991B1B"
+                                   Text="自动发布已暂停" />
+                        <TextBlock Foreground="#B91C1C" Text="队列保留，但不会继续消费任务。" />
+                    </StackPanel>
+                </Border>
+            </codewf:IfConditionConverter.False>
+        </codewf:IfConditionConverter>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="TextBlock.Caption">
+            <Setter Property="Foreground" Value="#64748B" />
+        </Style>
+        <Style Selector="TextBlock.SectionTitle">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#0F172A" />
+        </Style>
+        <Style Selector="Border.Panel">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#E4E9F2" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="14" />
+        </Style>
+        <Style Selector="RadioButton">
+            <Setter Property="Margin" Value="0,0,14,0" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="Auto,*" RowSpacing="14">
+        <Border Padding="16"
+                Background="#F8FAFC"
+                BorderBrush="#E4E9F2"
+                BorderThickness="1"
+                CornerRadius="14">
+            <StackPanel Spacing="6">
+                <TextBlock FontSize="20" FontWeight="SemiBold" Text="Markup 标记扩展" />
+                <TextBlock Classes="Caption"
+                           Text="迁移自 AvaloniaExtensions.Axaml，并补充 Switch 标记：用少量 XAML 表达条件文本、状态映射和集合状态。" />
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1" ColumnDefinitions="1.15*,*" ColumnSpacing="14">
+            <Border Classes="Panel" Padding="18">
+                <Grid RowDefinitions="Auto,Auto,Auto,*" RowSpacing="16">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                        <StackPanel Spacing="4">
+                            <TextBlock Classes="SectionTitle" Text="发布控制台" />
+                            <TextBlock Classes="Caption"
+                                       Text="{codewf:If {Binding IsPipelineRunning}, 当前流水线正在接收任务, 当前流水线已暂停接收任务}" />
+                        </StackPanel>
+                        <Button Grid.Column="1"
+                                MinWidth="112"
+                                VerticalAlignment="Top"
+                                Click="TogglePipelineStatus"
+                                Content="{codewf:If {Binding IsPipelineRunning}, 暂停流水线, 启动流水线}" />
+                    </Grid>
+
+                    <ContentControl Grid.Row="1"
+                                    Content="{Binding IsPipelineRunning, Converter={StaticResource RunVisualConverter}}" />
+
+                    <Border Grid.Row="2"
+                            Padding="16"
+                            Background="{codewf:Switch {Binding Health}, Cases={StaticResource HealthBrushCases}, Default={StaticResource UnknownHealthBrush}}"
+                            BorderBrush="#CBD5E1"
+                            BorderThickness="1"
+                            CornerRadius="14">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock FontSize="18"
+                                           FontWeight="Bold"
+                                           Foreground="#0F172A"
+                                           Text="{codewf:Switch {Binding Health}, Cases={StaticResource HealthTitleCases}, Default=未知状态}" />
+                                <TextBlock Foreground="#334155"
+                                           Text="{codewf:Switch {Binding Health}, Cases={StaticResource HealthDescriptionCases}, Default=没有匹配到状态说明。}"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                            <Button Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Click="NextHealth"
+                                    Content="切换状态" />
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="3"
+                            Padding="16"
+                            Background="#F8FAFC"
+                            BorderBrush="#E4E9F2"
+                            BorderThickness="1"
+                            CornerRadius="14">
+                        <Grid RowDefinitions="Auto,Auto,*" RowSpacing="10">
+                            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                                <StackPanel Spacing="2">
+                                    <TextBlock FontWeight="SemiBold" Text="发布队列" />
+                                    <TextBlock Classes="Caption"
+                                               Text="{codewf:If {Binding QueuedDeployments, Converter={StaticResource IsCollectionEmptyConverter}}, 队列为空，可以放心下班, 队列中仍有发布任务}" />
+                                </StackPanel>
+                                <Button Grid.Column="1"
+                                        VerticalAlignment="Top"
+                                        Click="ClearQueue"
+                                        Content="清空" />
+                                <Button Grid.Column="2"
+                                        VerticalAlignment="Top"
+                                        Click="RefillQueue"
+                                        Content="重置" />
+                            </Grid>
+
+                            <ItemsControl Grid.Row="1" ItemsSource="{Binding QueuedDeployments}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Margin="0,0,8,8"
+                                                Padding="10,6"
+                                                Background="White"
+                                                BorderBrush="#D7DEE9"
+                                                BorderThickness="1"
+                                                CornerRadius="999">
+                                            <TextBlock Text="{Binding}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1" Classes="Panel" Padding="18">
+                <StackPanel Spacing="16">
+                    <StackPanel Spacing="5">
+                        <TextBlock Classes="SectionTitle" Text="Switch 状态源" />
+                        <TextBlock Classes="Caption"
+                                   Text="RadioButton 使用 EnumToBooleanConverter 写回枚举，右侧状态卡片再由 Switch 标记映射文案和颜色。" />
+                    </StackPanel>
+
+                    <WrapPanel Orientation="Horizontal">
+                        <RadioButton Content="健康"
+                                     GroupName="PipelineHealth"
+                                     IsChecked="{Binding Health, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static models:PipelineHealth.Healthy}}" />
+                        <RadioButton Content="延迟"
+                                     GroupName="PipelineHealth"
+                                     IsChecked="{Binding Health, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static models:PipelineHealth.Delayed}}" />
+                        <RadioButton Content="失败"
+                                     GroupName="PipelineHealth"
+                                     IsChecked="{Binding Health, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static models:PipelineHealth.Failed}}" />
+                        <RadioButton Content="锁定"
+                                     GroupName="PipelineHealth"
+                                     IsChecked="{Binding Health, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static models:PipelineHealth.Locked}}" />
+                    </WrapPanel>
+
+                    <Border Padding="14"
+                            Background="#F8FAFC"
+                            BorderBrush="#E4E9F2"
+                            BorderThickness="1"
+                            CornerRadius="14">
+                        <StackPanel Spacing="8">
+                            <TextBlock FontWeight="SemiBold" Text="当前 XAML 写法" />
+                            <edit:TextEditor x:Name="SwitchSnippetEditor"
+                                             Height="54"
+                                             Background="Transparent"
+                                             FontFamily="Consolas, Cascadia Mono, Microsoft YaHei UI"
+                                             FontSize="13"
+                                             HorizontalScrollBarVisibility="Auto"
+                                             IsReadOnly="True"
+                                             ShowLineNumbers="False"
+                                             VerticalScrollBarVisibility="Disabled"
+                                             WordWrap="True" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Padding="14"
+                            Background="#F8FAFC"
+                            BorderBrush="#E4E9F2"
+                            BorderThickness="1"
+                            CornerRadius="14">
+                        <StackPanel Spacing="8">
+                            <TextBlock FontWeight="SemiBold" Text="If 写法" />
+                            <edit:TextEditor x:Name="IfSnippetEditor"
+                                             Height="54"
+                                             Background="Transparent"
+                                             FontFamily="Consolas, Cascadia Mono, Microsoft YaHei UI"
+                                             FontSize="13"
+                                             HorizontalScrollBarVisibility="Auto"
+                                             IsReadOnly="True"
+                                             ShowLineNumbers="False"
+                                             VerticalScrollBarVisibility="Disabled"
+                                             WordWrap="True" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

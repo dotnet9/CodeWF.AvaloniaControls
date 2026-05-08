@@ -1,0 +1,53 @@
+<UserControl
+    x:Class="CodeWF.AvaloniaControls.Showcase.Pages.OverviewDemo"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="520"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="TextBlock.Caption">
+            <Setter Property="Foreground" Value="#64748B" />
+        </Style>
+        <Style Selector="TextBlock.Title">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#0F172A" />
+        </Style>
+    </UserControl.Styles>
+
+    <Border Padding="22"
+            Background="White"
+            BorderBrush="#E4E9F2"
+            BorderThickness="1"
+            CornerRadius="14">
+        <StackPanel MaxWidth="720" Spacing="16">
+            <StackPanel Spacing="6">
+                <TextBlock Classes="Title" Text="示例维护说明" />
+                <TextBlock Classes="Caption"
+                           Text="主窗口只保留控件示例入口；全局说明集中放在这里，避免干扰具体控件页面。" />
+            </StackPanel>
+
+            <Grid ColumnDefinitions="160,*" RowDefinitions="Auto,Auto,Auto" RowSpacing="12" ColumnSpacing="16">
+                <TextBlock FontWeight="SemiBold" Text="控件示例" />
+                <TextBlock Grid.Column="1"
+                           Classes="Caption"
+                           Text="穿梭框、VComboBox、TabControl、状态徽章、状态卡片、AnimatedImage。" />
+
+                <TextBlock Grid.Row="1" FontWeight="SemiBold" Text="标记扩展" />
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           Classes="Caption"
+                           Text="If、Switch 以及常用 converter 示例集中在 Markup 页面。" />
+
+                <TextBlock Grid.Row="2" FontWeight="SemiBold" Text="窗口示例" />
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           Classes="Caption"
+                           Text="Ursa 窗口页面保留标题栏、无边框和移动区域相关示例。" />
+            </Grid>
+        </StackPanel>
+    </Border>
+</UserControl>

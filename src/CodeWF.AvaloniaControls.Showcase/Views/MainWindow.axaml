@@ -6,10 +6,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:CodeWF.AvaloniaControls.Showcase.Pages"
     xmlns:u="https://irihi.tech/ursa"
-    Title="CodeWF 控件展示馆"
+    Title="CodeWF 控件示例"
     Width="1280"
     Height="860"
     Background="#F3F6FB"
+    ExtendClientAreaTitleBarHeightHint="56"
     FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
     WindowStartupLocation="CenterScreen"
     d:DesignHeight="860"
@@ -18,12 +19,9 @@
     mc:Ignorable="d">
     <u:UrsaWindow.Resources>
         <Color x:Key="CaptionButtonForeground">#0F172A</Color>
+        <SolidColorBrush x:Key="CaptionButtonBackgroundPointerOver">#EEF2F7</SolidColorBrush>
+        <SolidColorBrush x:Key="CaptionButtonBackgroundPressed">#E2E8F0</SolidColorBrush>
         <SolidColorBrush x:Key="PanelBorderBrush">#DCE3EE</SolidColorBrush>
-        <LinearGradientBrush x:Key="HeroBackground" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#0F172A" Offset="0" />
-            <GradientStop Color="#1D4ED8" Offset="0.58" />
-            <GradientStop Color="#38BDF8" Offset="1" />
-        </LinearGradientBrush>
     </u:UrsaWindow.Resources>
 
     <u:UrsaWindow.Styles>
@@ -36,6 +34,12 @@
         <Style Selector="TextBlock.Caption">
             <Setter Property="Foreground" Value="#64748B" />
         </Style>
+        <Style Selector="u|TitleBar">
+            <Setter Property="MinHeight" Value="56" />
+            <Setter Property="Background" Value="#F8FAFC" />
+            <Setter Property="BorderBrush" Value="#DCE3EE" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+        </Style>
         <Style Selector="TabItem">
             <Setter Property="Padding" Value="18,14" />
             <Setter Property="MinWidth" Value="154" />
@@ -44,109 +48,68 @@
     </u:UrsaWindow.Styles>
 
     <u:UrsaWindow.LeftContent>
-        <Grid Height="40" Margin="4" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="10">
-            <Image Width="24"
-                   Height="24"
-                   VerticalAlignment="Center"
-                   IsHitTestVisible="False"
-                   RenderOptions.BitmapInterpolationMode="HighQuality"
-                   Source="/Assets/logo.png" />
+        <Grid Height="56"
+              Margin="14,0,12,0"
+              ColumnDefinitions="Auto,Auto"
+              ColumnSpacing="12"
+              IsHitTestVisible="False">
+            <Border Width="34"
+                    Height="34"
+                    VerticalAlignment="Center"
+                    Background="White"
+                    BorderBrush="#DCE3EE"
+                    BorderThickness="1"
+                    CornerRadius="9">
+                <Image Width="22"
+                       Height="22"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                       Source="/Assets/logo.png" />
+            </Border>
             <TextBlock Grid.Column="1"
                        VerticalAlignment="Center"
                        Foreground="#0F172A"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       IsHitTestVisible="False"
-                       Text="CodeWF 控件展示馆" />
+                       FontSize="17"
+                       FontWeight="SemiBold"
+                       Text="CodeWF 控件示例" />
         </Grid>
     </u:UrsaWindow.LeftContent>
 
     <Border Background="#F3F6FB">
-        <Grid Margin="22" RowDefinitions="Auto,*" RowSpacing="18">
-            <Border Padding="28"
-                    CornerRadius="24"
-                    Background="{StaticResource HeroBackground}">
-                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="18">
-                    <StackPanel Spacing="8">
-                        <TextBlock FontSize="34"
-                                   FontWeight="Bold"
-                                   Foreground="White"
-                                   Text="CodeWF 控件展示馆" />
-                        <TextBlock MaxWidth="760"
-                                   FontSize="14"
-                                   Foreground="#D8EAFE"
-                                   Text="面向开源项目整理的控件示例中心，集中展示穿梭框、VComboBox、TabControl、状态标签、状态卡片以及 Ursa 窗口扩展能力。" />
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="1"
-                                Orientation="Horizontal"
-                                Spacing="10"
-                                VerticalAlignment="Top">
-                        <Border Padding="12,6" Background="#1E3A8A55" CornerRadius="999">
-                            <TextBlock Foreground="White" FontWeight="SemiBold" Text=".NET 11" />
-                        </Border>
-                        <Border Padding="12,6" Background="#0F766E55" CornerRadius="999">
-                            <TextBlock Foreground="White" FontWeight="SemiBold" Text="Avalonia 12" />
-                        </Border>
-                        <Border Padding="12,6" Background="#9A341255" CornerRadius="999">
-                            <TextBlock Foreground="White" FontWeight="SemiBold" Text="Ursa / Semi" />
-                        </Border>
-                    </StackPanel>
-
-                    <Grid Grid.Row="1"
-                          Grid.ColumnSpan="2"
-                          ColumnDefinitions="*,*,*"
-                          ColumnSpacing="12">
-                        <Border Padding="16" Background="#F8FBFF" CornerRadius="16">
-                            <StackPanel Spacing="6">
-                                <TextBlock FontWeight="SemiBold" Foreground="#0F172A" Text="核心交互" />
-                                <TextBlock Foreground="#64748B" Text="涵盖穿梭框、下拉框和页签导航等高频输入组件。" />
-                            </StackPanel>
-                        </Border>
-                        <Border Grid.Column="1" Padding="16" Background="#F8FBFF" CornerRadius="16">
-                            <StackPanel Spacing="6">
-                                <TextBlock FontWeight="SemiBold" Foreground="#0F172A" Text="状态展示" />
-                                <TextBlock Foreground="#64748B" Text="提供可复用的状态标签、状态卡片和视觉反馈模式。" />
-                            </StackPanel>
-                        </Border>
-                        <Border Grid.Column="2" Padding="16" Background="#F8FBFF" CornerRadius="16">
-                            <StackPanel Spacing="6">
-                                <TextBlock FontWeight="SemiBold" Foreground="#0F172A" Text="窗口外壳" />
-                                <TextBlock Foreground="#64748B" Text="演示基于 Ursa 的窗口边框扩展和自定义桌面标题栏能力。" />
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="1" Classes="Panel" Padding="14">
-                <TabControl Background="Transparent"
-                            Classes.ReverseSeparator="False"
-                            TabStripPlacement="Left"
-                            Theme="{StaticResource LineTabControl}">
-                    <TabItem Header="穿梭框">
-                        <pages:TransferDemo />
-                    </TabItem>
-                    <TabItem Header="VComboBox">
-                        <pages:VComboBoxDemo />
-                    </TabItem>
-                    <TabItem Header="TabControl">
-                        <pages:TabControlDemo />
-                    </TabItem>
-                    <TabItem Header="StatusBadge">
-                        <pages:StatusBadgeDemo />
-                    </TabItem>
-                    <TabItem Header="状态卡片">
-                        <pages:StatusCardDemo />
-                    </TabItem>
-                    <TabItem Header="AnimatedImage">
-                        <pages:AnimatedImageDemo />
-                    </TabItem>
-                    <TabItem Header="Ursa 窗口">
-                        <pages:TestNoneWindowDemo />
-                    </TabItem>
-                </TabControl>
-            </Border>
-        </Grid>
+        <Border Margin="18,74,18,18" Classes="Panel" Padding="12">
+            <TabControl Background="Transparent"
+                        Classes.ReverseSeparator="False"
+                        TabStripPlacement="Left"
+                        Theme="{StaticResource LineTabControl}">
+                <TabItem Header="说明">
+                    <pages:OverviewDemo />
+                </TabItem>
+                <TabItem Header="穿梭框">
+                    <pages:TransferDemo />
+                </TabItem>
+                <TabItem Header="VComboBox">
+                    <pages:VComboBoxDemo />
+                </TabItem>
+                <TabItem Header="TabControl">
+                    <pages:TabControlDemo />
+                </TabItem>
+                <TabItem Header="StatusBadge">
+                    <pages:StatusBadgeDemo />
+                </TabItem>
+                <TabItem Header="状态卡片">
+                    <pages:StatusCardDemo />
+                </TabItem>
+                <TabItem Header="Markup">
+                    <pages:MarkupExtensionsDemo />
+                </TabItem>
+                <TabItem Header="AnimatedImage">
+                    <pages:AnimatedImageDemo />
+                </TabItem>
+                <TabItem Header="Ursa 窗口">
+                    <pages:TestNoneWindowDemo />
+                </TabItem>
+            </TabControl>
+        </Border>
     </Border>
 </u:UrsaWindow>

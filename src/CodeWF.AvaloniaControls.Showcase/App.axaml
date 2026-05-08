@@ -15,6 +15,7 @@
     <Application.Styles>
         <fluent:FluentTheme />
         <semi:SemiTheme Locale="zh-CN" />
+        <semi:AvaloniaEditSemiTheme />
         <uSemi:SemiTheme Locale="zh-CN" />
 		<codewf:CodeWFTheme />
         <!-- 无障碍滚动条：默认常显且加宽，方便老年用户识别和拖动。 -->

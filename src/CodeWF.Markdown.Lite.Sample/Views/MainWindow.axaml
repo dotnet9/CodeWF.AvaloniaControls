@@ -3,6 +3,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:edit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="https://codewf.com"
     xmlns:vm="using:CodeWF.Markdown.Lite.Sample.ViewModels"
@@ -93,14 +94,15 @@
                             Command="{Binding ToggleIncrementalStressCommand}"
                             Content="{Binding IncrementalStressButtonText}" />
                     </Grid>
-                    <TextBox
+                    <edit:TextEditor
+                        x:Name="MarkdownEditor"
                         Grid.Row="2"
-                        AcceptsReturn="True"
                         FontFamily="Consolas, Cascadia Mono"
                         FontSize="13"
-                        ScrollViewer.VerticalScrollBarVisibility="Auto"
-                        Text="{Binding Markdown, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        TextWrapping="Wrap" />
+                        HorizontalScrollBarVisibility="Auto"
+                        ShowLineNumbers="True"
+                        VerticalScrollBarVisibility="Auto"
+                        WordWrap="True" />
                 </Grid>
             </Border>
 

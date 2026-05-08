@@ -30,6 +30,7 @@
 		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="AvaloniaUI.DiagnosticsSupport" />
 		<PackageReference Include="ReactiveUI.Avalonia" />
 		<PackageReference Include="Irihi.Ursa.Themes.Semi" />
+		<PackageReference Include="Semi.Avalonia.AvaloniaEdit" />
 		<PackageReference Include="YY-Thunks" />
 		<PackageReference Include="VC-LTL" />
 	</ItemGroup>

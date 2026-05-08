@@ -31,6 +31,7 @@
     <PackageVersion Include="ProDataGrid" Version="12.0.0" />
     <PackageVersion Include="ReactiveUI.Avalonia" Version="$(ReactiveUIAvaloniaVersion)" />
     <PackageVersion Include="Semi.Avalonia" Version="$(SemiAvaloniaVersion)" />
+    <PackageVersion Include="Semi.Avalonia.AvaloniaEdit" Version="12.0.0" />
     <PackageVersion Include="Semi.Avalonia.Dock" Version="12.0.0" />
     <PackageVersion Include="Semi.Avalonia.ProDataGrid" Version="12.0.0" />
     <PackageVersion Include="StaticViewLocator" Version="0.4.0" />

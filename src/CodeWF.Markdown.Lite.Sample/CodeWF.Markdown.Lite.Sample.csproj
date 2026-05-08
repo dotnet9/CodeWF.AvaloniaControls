@@ -19,6 +19,8 @@
 		<PackageReference Include="Avalonia.Fonts.Inter" />
 		<PackageReference Include="Avalonia.Themes.Fluent" />
 		<PackageReference Include="CommunityToolkit.Mvvm" />
+		<PackageReference Include="Semi.Avalonia" />
+		<PackageReference Include="Semi.Avalonia.AvaloniaEdit" />
 		<PackageReference Include="YY-Thunks" />
 		<PackageReference Include="VC-LTL" />
 	</ItemGroup>
