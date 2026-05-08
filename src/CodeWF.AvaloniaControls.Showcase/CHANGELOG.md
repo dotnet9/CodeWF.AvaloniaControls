@@ -1,5 +1,16 @@
 # 更新日志
 
+V12.0.2.4 (2026-05-08)
+
+- Migrated the showcase main window from `UrsaWindow` to `CodeWFWindow` to restore managed title-bar dragging on Win7 and show caption buttons consistently on Linux.
+- Removed the manual top content offset now that the base window template lays out the title bar and content area in separate rows.
+- Added title-bar controls for light/dark theme switching and runtime language switching.
+- Added control-name tab headers and a fuzzy search box above the control list.
+- Added `Lang.Avalonia.Json` localization with `zh-CN`, `zh-Hant`, `en-US`, and `ja-JP` resources generated through `I18n/Language.tt`.
+- Localized the visible showcase text and runtime-updated labels used by `Transfer`, `VComboBox`, `AnimatedImage`, and markup extension demos.
+- Expanded `TestNoneWindowDemo` with native `Window`, `UrsaWindow`, and `CodeWFWindow` samples including borderless, draggable, compact, tall-title, dark-title, accent-title, and shaped-window variants.
+- Fixed `TransferDemo` initialization so localized headers are applied after the `MyTransfer` control is resolved.
+
 V12.0.2.3（2026-05-06）
 
 - 😄[新增]-新增 `AnimatedImage.Avalonia` 动态 GIF 演示页，展示本地 `Assets/nice.gif` 与网络 GIF 地址加载

@@ -1,0 +1,52 @@
+<codewf:CodeWFWindow xmlns="https://github.com/avaloniaui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:codewf="https://codewf.com"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:i18n="https://codewf.com"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:windowLangs="clr-namespace:Showcase.Windows"
+                     mc:Ignorable="d"
+                     d:DesignWidth="640"
+                     d:DesignHeight="420"
+                     Width="640"
+                     Height="420"
+                     Background="{DynamicResource ShowcaseAppBackground}"
+                     FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+                     Icon="/Assets/logo.ico"
+                     TitleBarHeight="72"
+                     TitleBarBackground="#0F172A"
+                     TitleBarBorderBrush="#243041"
+                     TitleBarForeground="White"
+                     WindowStartupLocation="CenterScreen"
+                     x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.CodeWFWindowTallDemo"
+                     Title="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFTallTitle}}">
+    <codewf:CodeWFWindow.LeftContent>
+        <Grid Height="72" ColumnDefinitions="Auto" IsHitTestVisible="False">
+            <Border Width="40" Height="40" VerticalAlignment="Center" Background="#2563EB" CornerRadius="10">
+                <Image Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/logo.png" />
+            </Border>
+        </Grid>
+    </codewf:CodeWFWindow.LeftContent>
+    <codewf:CodeWFWindow.RightContent>
+        <Border Padding="10,4" Background="#22C55E22" BorderBrush="#22C55E66" BorderThickness="1" CornerRadius="999" IsHitTestVisible="False">
+            <TextBlock FontSize="12" Foreground="#BBF7D0" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.Live}}" />
+        </Border>
+    </codewf:CodeWFWindow.RightContent>
+
+    <Grid Margin="22" RowDefinitions="Auto,*" RowSpacing="16">
+        <Border Padding="18" Background="{DynamicResource ShowcaseCardBackground}" BorderBrush="{DynamicResource ShowcaseBorderBrush}" BorderThickness="1" CornerRadius="12">
+            <StackPanel Spacing="8">
+                <TextBlock FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFTallHeading}}" />
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFTallDescription}}" TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="12">
+            <Border Padding="16" Background="{DynamicResource ShowcaseCardBackground}" BorderBrush="{DynamicResource ShowcaseBorderBrush}" BorderThickness="1" CornerRadius="12">
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarContentDesc}}" TextWrapping="Wrap" />
+            </Border>
+            <Border Grid.Column="1" Padding="16" Background="{DynamicResource ShowcaseCardBackground}" BorderBrush="{DynamicResource ShowcaseBorderBrush}" BorderThickness="1" CornerRadius="12">
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.ResizeHotZones}}" TextWrapping="Wrap" />
+            </Border>
+        </Grid>
+    </Grid>
+</codewf:CodeWFWindow>

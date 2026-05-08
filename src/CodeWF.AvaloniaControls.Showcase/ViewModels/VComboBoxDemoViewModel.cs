@@ -1,16 +1,34 @@
 using Avalonia.Media;
 using CodeWF.AvaloniaControls.Showcase.Models;
-using System.Collections.Generic;
+using CodeWF.AvaloniaControls.Showcase.Services;
+using Lang.Avalonia;
+using System.Collections.ObjectModel;
+using PageLangs = Showcase.Pages.VComboBoxDemo;
 
 namespace CodeWF.AvaloniaControls.Showcase.ViewModels
 {
     internal class VComboBoxDemoViewModel
     {
-        public List<WarningItem> WarningItems { get; } = new List<WarningItem>()
+        public VComboBoxDemoViewModel()
         {
-            new() { Color = new SolidColorBrush(Colors.Black), Name = "显示所有" },
-            new() { Color = new SolidColorBrush(Colors.Red), Name = "筛选告警" },
-            new() { Color = new SolidColorBrush(Colors.Green), Name = "筛选正常" }
-        };
+            WarningItems =
+            [
+                new() { Color = new SolidColorBrush(Colors.Black) },
+                new() { Color = new SolidColorBrush(Colors.Red) },
+                new() { Color = new SolidColorBrush(Colors.Green) }
+            ];
+
+            ReloadText();
+            I18nManager.Instance.CultureChanged += (_, _) => ReloadText();
+        }
+
+        public ObservableCollection<WarningItem> WarningItems { get; }
+
+        private void ReloadText()
+        {
+            WarningItems[0].Name = LocalizationService.Get(PageLangs.WarningAll);
+            WarningItems[1].Name = LocalizationService.Get(PageLangs.WarningAlert);
+            WarningItems[2].Name = LocalizationService.Get(PageLangs.WarningNormal);
+        }
     }
 }

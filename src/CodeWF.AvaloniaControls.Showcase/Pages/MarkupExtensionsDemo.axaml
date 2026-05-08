@@ -5,9 +5,11 @@
     xmlns:edit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
     xmlns:codewf="https://codewf.com"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="https://codewf.com"
     xmlns:local="clr-namespace:CodeWF.AvaloniaControls.Showcase.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:CodeWF.AvaloniaControls.Showcase.Models"
+    xmlns:pageLangs="clr-namespace:Showcase.Pages"
     x:DataType="local:MarkupExtensionsDemo"
     d:DesignHeight="620"
     d:DesignWidth="980"
@@ -19,17 +21,17 @@
         <SolidColorBrush x:Key="UnknownHealthBrush" Color="#F8FAFC" />
 
         <codewf:SwitchCases x:Key="HealthTitleCases">
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Healthy}" Then="运行健康" />
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Delayed}" Then="发布延迟" />
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Failed}" Then="构建失败" />
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Locked}" Then="人工锁定" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Healthy}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthHealthyTitle}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Delayed}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthDelayedTitle}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Failed}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthFailedTitle}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Locked}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthLockedTitle}}" />
         </codewf:SwitchCases>
 
         <codewf:SwitchCases x:Key="HealthDescriptionCases">
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Healthy}" Then="所有检查通过，可以继续自动发布。" />
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Delayed}" Then="上游任务仍在排队，预计稍后恢复。" />
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Failed}" Then="最近一次构建没有通过，需要先修复错误。" />
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Locked}" Then="当前由值班同学接管，自动化暂时停止。" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Healthy}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthHealthyDesc}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Delayed}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthDelayedDesc}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Failed}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthFailedDesc}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Locked}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthLockedDesc}}" />
         </codewf:SwitchCases>
 
         <codewf:SwitchCases x:Key="HealthBrushCases">
@@ -66,8 +68,8 @@
                         <TextBlock FontSize="16"
                                    FontWeight="SemiBold"
                                    Foreground="#166534"
-                                   Text="自动发布已开启" />
-                        <TextBlock Foreground="#15803D" Text="新的任务会直接进入发布队列。" />
+                                   Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.AutoPublishEnabled}}" />
+                        <TextBlock Foreground="#15803D" Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.AutoPublishEnabledDesc}}" />
                     </StackPanel>
                 </Border>
             </codewf:IfConditionConverter.True>
@@ -81,8 +83,8 @@
                         <TextBlock FontSize="16"
                                    FontWeight="SemiBold"
                                    Foreground="#991B1B"
-                                   Text="自动发布已暂停" />
-                        <TextBlock Foreground="#B91C1C" Text="队列保留，但不会继续消费任务。" />
+                                   Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.AutoPublishPaused}}" />
+                        <TextBlock Foreground="#B91C1C" Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.AutoPublishPausedDesc}}" />
                     </StackPanel>
                 </Border>
             </codewf:IfConditionConverter.False>
@@ -91,16 +93,17 @@
 
     <UserControl.Styles>
         <Style Selector="TextBlock.Caption">
-            <Setter Property="Foreground" Value="#64748B" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
         <Style Selector="TextBlock.SectionTitle">
             <Setter Property="FontSize" Value="18" />
             <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="#0F172A" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
         </Style>
         <Style Selector="Border.Panel">
-            <Setter Property="Background" Value="White" />
-            <Setter Property="BorderBrush" Value="#E4E9F2" />
+            <Setter Property="Background" Value="{DynamicResource ShowcaseCardBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="CornerRadius" Value="14" />
         </Style>
@@ -111,14 +114,17 @@
 
     <Grid RowDefinitions="Auto,*" RowSpacing="14">
         <Border Padding="16"
-                Background="#F8FAFC"
-                BorderBrush="#E4E9F2"
+                Background="{DynamicResource ShowcaseSubtleBackground}"
+                BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
                 BorderThickness="1"
-                CornerRadius="14">
+                CornerRadius="12">
             <StackPanel Spacing="6">
-                <TextBlock FontSize="20" FontWeight="SemiBold" Text="Markup 标记扩展" />
+                <TextBlock FontSize="20"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.Title}}" />
                 <TextBlock Classes="Caption"
-                           Text="迁移自 AvaloniaExtensions.Axaml，并补充 Switch 标记：用少量 XAML 表达条件文本、状态映射和集合状态。" />
+                           Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.Description}}" />
             </StackPanel>
         </Border>
 
@@ -127,15 +133,15 @@
                 <Grid RowDefinitions="Auto,Auto,Auto,*" RowSpacing="16">
                     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                         <StackPanel Spacing="4">
-                            <TextBlock Classes="SectionTitle" Text="发布控制台" />
+                            <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.PipelineConsole}}" />
                             <TextBlock Classes="Caption"
-                                       Text="{codewf:If {Binding IsPipelineRunning}, 当前流水线正在接收任务, 当前流水线已暂停接收任务}" />
+                                       Text="{Binding PipelineStatusText}" />
                         </StackPanel>
                         <Button Grid.Column="1"
                                 MinWidth="112"
                                 VerticalAlignment="Top"
                                 Click="TogglePipelineStatus"
-                                Content="{codewf:If {Binding IsPipelineRunning}, 暂停流水线, 启动流水线}" />
+                                Content="{Binding PipelineToggleText}" />
                     </Grid>
 
                     <ContentControl Grid.Row="1"
@@ -152,39 +158,41 @@
                                 <TextBlock FontSize="18"
                                            FontWeight="Bold"
                                            Foreground="#0F172A"
-                                           Text="{codewf:Switch {Binding Health}, Cases={StaticResource HealthTitleCases}, Default=未知状态}" />
+                                           Text="{codewf:Switch {Binding Health}, Cases={StaticResource HealthTitleCases}, Default={i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.UnknownStatus}}}" />
                                 <TextBlock Foreground="#334155"
-                                           Text="{codewf:Switch {Binding Health}, Cases={StaticResource HealthDescriptionCases}, Default=没有匹配到状态说明。}"
+                                           Text="{codewf:Switch {Binding Health}, Cases={StaticResource HealthDescriptionCases}, Default={i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.UnknownStatusDesc}}}"
                                            TextWrapping="Wrap" />
                             </StackPanel>
                             <Button Grid.Column="1"
                                     VerticalAlignment="Center"
                                     Click="NextHealth"
-                                    Content="切换状态" />
+                                    Content="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.NextStatus}}" />
                         </Grid>
                     </Border>
 
                     <Border Grid.Row="3"
                             Padding="16"
-                            Background="#F8FAFC"
-                            BorderBrush="#E4E9F2"
+                            Background="{DynamicResource ShowcaseSubtleBackground}"
+                            BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
                             BorderThickness="1"
                             CornerRadius="14">
                         <Grid RowDefinitions="Auto,Auto,*" RowSpacing="10">
                             <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
                                 <StackPanel Spacing="2">
-                                    <TextBlock FontWeight="SemiBold" Text="发布队列" />
+                                    <TextBlock FontWeight="SemiBold"
+                                               Foreground="{DynamicResource ShowcaseTextBrush}"
+                                               Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.QueueTitle}}" />
                                     <TextBlock Classes="Caption"
-                                               Text="{codewf:If {Binding QueuedDeployments, Converter={StaticResource IsCollectionEmptyConverter}}, 队列为空，可以放心下班, 队列中仍有发布任务}" />
+                                               Text="{Binding QueueStatusText}" />
                                 </StackPanel>
                                 <Button Grid.Column="1"
                                         VerticalAlignment="Top"
                                         Click="ClearQueue"
-                                        Content="清空" />
+                                        Content="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.Clear}}" />
                                 <Button Grid.Column="2"
                                         VerticalAlignment="Top"
                                         Click="RefillQueue"
-                                        Content="重置" />
+                                        Content="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.Reset}}" />
                             </Grid>
 
                             <ItemsControl Grid.Row="1" ItemsSource="{Binding QueuedDeployments}">
@@ -197,11 +205,11 @@
                                     <DataTemplate>
                                         <Border Margin="0,0,8,8"
                                                 Padding="10,6"
-                                                Background="White"
-                                                BorderBrush="#D7DEE9"
+                                                Background="{DynamicResource ShowcaseCardBackground}"
+                                                BorderBrush="{DynamicResource ShowcaseBorderBrush}"
                                                 BorderThickness="1"
                                                 CornerRadius="999">
-                                            <TextBlock Text="{Binding}" />
+                                            <TextBlock Foreground="{DynamicResource ShowcaseTextBrush}" Text="{Binding}" />
                                         </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -214,36 +222,38 @@
             <Border Grid.Column="1" Classes="Panel" Padding="18">
                 <StackPanel Spacing="16">
                     <StackPanel Spacing="5">
-                        <TextBlock Classes="SectionTitle" Text="Switch 状态源" />
+                        <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.SwitchSourceTitle}}" />
                         <TextBlock Classes="Caption"
-                                   Text="RadioButton 使用 EnumToBooleanConverter 写回枚举，右侧状态卡片再由 Switch 标记映射文案和颜色。" />
+                                   Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.SwitchSourceDesc}}" />
                     </StackPanel>
 
                     <WrapPanel Orientation="Horizontal">
-                        <RadioButton Content="健康"
+                        <RadioButton Content="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.Healthy}}"
                                      GroupName="PipelineHealth"
                                      IsChecked="{Binding Health, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static models:PipelineHealth.Healthy}}" />
-                        <RadioButton Content="延迟"
+                        <RadioButton Content="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.Delayed}}"
                                      GroupName="PipelineHealth"
                                      IsChecked="{Binding Health, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static models:PipelineHealth.Delayed}}" />
-                        <RadioButton Content="失败"
+                        <RadioButton Content="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.Failed}}"
                                      GroupName="PipelineHealth"
                                      IsChecked="{Binding Health, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static models:PipelineHealth.Failed}}" />
-                        <RadioButton Content="锁定"
+                        <RadioButton Content="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.Locked}}"
                                      GroupName="PipelineHealth"
                                      IsChecked="{Binding Health, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static models:PipelineHealth.Locked}}" />
                     </WrapPanel>
 
                     <Border Padding="14"
-                            Background="#F8FAFC"
-                            BorderBrush="#E4E9F2"
+                            Background="{DynamicResource ShowcaseSubtleBackground}"
+                            BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
                             BorderThickness="1"
                             CornerRadius="14">
                         <StackPanel Spacing="8">
-                            <TextBlock FontWeight="SemiBold" Text="当前 XAML 写法" />
+                            <TextBlock FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ShowcaseTextBrush}"
+                                       Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.CurrentXamlTitle}}" />
                             <edit:TextEditor x:Name="SwitchSnippetEditor"
                                              Height="54"
-                                             Background="Transparent"
+                                             Background="{DynamicResource ShowcaseCodeBackground}"
                                              FontFamily="Consolas, Cascadia Mono, Microsoft YaHei UI"
                                              FontSize="13"
                                              HorizontalScrollBarVisibility="Auto"
@@ -255,15 +265,17 @@
                     </Border>
 
                     <Border Padding="14"
-                            Background="#F8FAFC"
-                            BorderBrush="#E4E9F2"
+                            Background="{DynamicResource ShowcaseSubtleBackground}"
+                            BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
                             BorderThickness="1"
                             CornerRadius="14">
                         <StackPanel Spacing="8">
-                            <TextBlock FontWeight="SemiBold" Text="If 写法" />
+                            <TextBlock FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ShowcaseTextBrush}"
+                                       Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.IfSyntaxTitle}}" />
                             <edit:TextEditor x:Name="IfSnippetEditor"
                                              Height="54"
-                                             Background="Transparent"
+                                             Background="{DynamicResource ShowcaseCodeBackground}"
                                              FontFamily="Consolas, Cascadia Mono, Microsoft YaHei UI"
                                              FontSize="13"
                                              HorizontalScrollBarVisibility="Auto"

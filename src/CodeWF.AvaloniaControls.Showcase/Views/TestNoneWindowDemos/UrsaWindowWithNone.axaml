@@ -1,24 +1,73 @@
 <u:UrsaWindow xmlns="https://github.com/avaloniaui"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:i18n="https://codewf.com"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:u="https://irihi.tech/ursa"
+              xmlns:windowLangs="clr-namespace:Showcase.Windows"
               mc:Ignorable="d"
-              d:DesignWidth="800"
-              d:DesignHeight="450"
-              Width="460"
-              Height="320"
+              d:DesignWidth="520"
+              d:DesignHeight="340"
+              Width="520"
+              Height="340"
+              Background="Transparent"
+              FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+              TransparencyLevelHint="AcrylicBlur"
               WindowDecorations="None"
+              WindowStartupLocation="CenterScreen"
               x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.UrsaWindowWithNone"
-              Title="无边框 Ursa 窗口">
-    <u:UrsaWindow.Resources>
-        <Color x:Key="CaptionButtonForeground">#0F172A</Color>
-    </u:UrsaWindow.Resources>
-    <Border Background="#F8FAFC" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="14" Padding="24">
-        <StackPanel Spacing="8" VerticalAlignment="Center">
-            <TextBlock FontSize="22" FontWeight="Bold" Text="无边框 Ursa 窗口" />
-            <TextBlock Foreground="#64748B"
-                       Text="系统边框被完全移除，这种模式适合沉浸式外壳、启动页，或拥有自定义顶部栏与拖动区域的品牌化应用。" />
-        </StackPanel>
+              Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaNoneTitle}}">
+    <Border Margin="10"
+            Background="{DynamicResource ShowcaseCardBackground}"
+            BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="18"
+            BoxShadow="0 18 42 #55000000">
+        <Grid RowDefinitions="58,*">
+            <Border Background="{DynamicResource ShowcaseSubtleBackground}"
+                    BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    CornerRadius="18,18,0,0"
+                    PointerPressed="TitleBar_OnPointerPressed">
+                <Grid Margin="18,0,10,0" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <Border Width="28"
+                            Height="28"
+                            VerticalAlignment="Center"
+                            Background="{DynamicResource ShowcaseAccentSubtleBrush}"
+                            CornerRadius="7">
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource ShowcaseAccentTextBrush}"
+                                   Text="U" />
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="1">
+                        <TextBlock FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaNoneHeading}}" />
+                        <TextBlock FontSize="12"
+                                   Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaNoneTitle}}" />
+                    </StackPanel>
+                    <Button Grid.Column="2"
+                            Width="34"
+                            Height="30"
+                            Padding="0"
+                            Click="Close_OnClick"
+                            Content="X" />
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1" Margin="22" RowDefinitions="Auto,*" RowSpacing="14">
+                <TextBlock FontSize="22"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaNoneHeading}}" />
+                <TextBlock Grid.Row="1"
+                           Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaNoneDescription}}"
+                           TextWrapping="Wrap" />
+            </Grid>
+        </Grid>
     </Border>
 </u:UrsaWindow>

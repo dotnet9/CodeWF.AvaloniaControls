@@ -1,0 +1,45 @@
+<u:UrsaWindow xmlns="https://github.com/avaloniaui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:i18n="https://codewf.com"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:u="https://irihi.tech/ursa"
+              xmlns:windowLangs="clr-namespace:Showcase.Windows"
+              mc:Ignorable="d"
+              d:DesignWidth="540"
+              d:DesignHeight="340"
+              Width="540"
+              Height="340"
+              Background="Transparent"
+              CanResize="False"
+              FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+              TransparencyLevelHint="AcrylicBlur"
+              WindowDecorations="None"
+              WindowStartupLocation="CenterScreen"
+              x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.UrsaWindowShapedDemo"
+              Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaShapeTitle}}">
+    <Border Margin="14"
+            Background="{DynamicResource ShowcaseCardBackground}"
+            BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="28"
+            BoxShadow="0 22 54 #66000000"
+            ClipToBounds="True">
+        <Grid RowDefinitions="70,*">
+            <Border Background="{DynamicResource ShowcaseAccentSubtleBrush}"
+                    PointerPressed="TitleBar_OnPointerPressed">
+                <Grid Margin="24,0,16,0" ColumnDefinitions="*,Auto">
+                    <StackPanel VerticalAlignment="Center" Spacing="3">
+                        <TextBlock FontSize="18" FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaShapeHeading}}" />
+                        <TextBlock FontSize="12" Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaShapeTitle}}" />
+                    </StackPanel>
+                    <Button Grid.Column="1" Width="34" Height="30" Padding="0" Click="Close_OnClick" Content="X" />
+                </Grid>
+            </Border>
+            <Grid Grid.Row="1" Margin="24" RowDefinitions="Auto,*" RowSpacing="12">
+                <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaShapeHeading}}" />
+                <TextBlock Grid.Row="1" Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaShapeDescription}}" TextWrapping="Wrap" />
+            </Grid>
+        </Grid>
+    </Border>
+</u:UrsaWindow>

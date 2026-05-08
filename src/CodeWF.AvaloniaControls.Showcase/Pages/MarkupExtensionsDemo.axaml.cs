@@ -6,6 +6,9 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using AvaloniaEdit.Highlighting;
 using CodeWF.AvaloniaControls.Showcase.Models;
+using CodeWF.AvaloniaControls.Showcase.Services;
+using Lang.Avalonia;
+using PageLangs = Showcase.Pages.MarkupExtensionsDemo;
 
 namespace CodeWF.AvaloniaControls.Showcase.Pages;
 
@@ -20,6 +23,7 @@ public partial class MarkupExtensionsDemo : UserControl, INotifyPropertyChanged
         DataContext = this;
         InitializeComponent();
         ConfigureCodeEditors();
+        I18nManager.Instance.CultureChanged += (_, _) => ReloadLocalizedText();
     }
 
     public bool IsPipelineRunning
@@ -40,9 +44,21 @@ public partial class MarkupExtensionsDemo : UserControl, INotifyPropertyChanged
         set => SetField(ref _queuedDeployments, value);
     }
 
-    public string IfSnippet => "{codewf:If {Binding IsPipelineRunning}, 暂停流水线, 启动流水线}";
+    public string PipelineStatusText => IsPipelineRunning
+        ? LocalizationService.Get(PageLangs.PipelineRunning)
+        : LocalizationService.Get(PageLangs.PipelinePaused);
 
-    public string SwitchSnippet => "{codewf:Switch {Binding Health}, Cases={StaticResource HealthTitleCases}, Default=未知状态}";
+    public string PipelineToggleText => IsPipelineRunning
+        ? LocalizationService.Get(PageLangs.PausePipeline)
+        : LocalizationService.Get(PageLangs.StartPipeline);
+
+    public string QueueStatusText => QueuedDeployments.Count <= 0
+        ? LocalizationService.Get(PageLangs.QueueEmpty)
+        : LocalizationService.Get(PageLangs.QueueNotEmpty);
+
+    public string IfSnippet => "{codewf:If {Binding IsPipelineRunning}, PausePipeline, StartPipeline}";
+
+    public string SwitchSnippet => "{codewf:Switch {Binding Health}, Cases={StaticResource HealthTitleCases}, Default=UnknownStatus}";
 
     public new event PropertyChangedEventHandler? PropertyChanged;
 
@@ -50,10 +66,10 @@ public partial class MarkupExtensionsDemo : UserControl, INotifyPropertyChanged
     {
         return
         [
-            "API 网关",
-            "桌面端安装包",
-            "文档站点",
-            "同步任务"
+            LocalizationService.Get(PageLangs.QueueItemApi),
+            LocalizationService.Get(PageLangs.QueueItemDesktop),
+            LocalizationService.Get(PageLangs.QueueItemDocs),
+            LocalizationService.Get(PageLangs.QueueItemSync)
         ];
     }
 
@@ -72,11 +88,13 @@ public partial class MarkupExtensionsDemo : UserControl, INotifyPropertyChanged
     private void ClearQueue(object? sender, RoutedEventArgs e)
     {
         QueuedDeployments = [];
+        RaiseQueueStateChanged();
     }
 
     private void RefillQueue(object? sender, RoutedEventArgs e)
     {
         QueuedDeployments = CreateDefaultQueue();
+        RaiseQueueStateChanged();
     }
 
     private void ConfigureCodeEditors()
@@ -90,6 +108,29 @@ public partial class MarkupExtensionsDemo : UserControl, INotifyPropertyChanged
         IfSnippetEditor.Text = IfSnippet;
     }
 
+    private void ReloadLocalizedText()
+    {
+        if (QueuedDeployments.Count > 0)
+        {
+            QueuedDeployments = CreateDefaultQueue();
+        }
+
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PipelineStatusText)));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PipelineToggleText)));
+        RaiseQueueStateChanged();
+    }
+
+    private void RaisePipelineStateChanged()
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PipelineStatusText)));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PipelineToggleText)));
+    }
+
+    private void RaiseQueueStateChanged()
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(QueueStatusText)));
+    }
+
     private bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
     {
         if (Equals(field, value))
@@ -99,6 +140,16 @@ public partial class MarkupExtensionsDemo : UserControl, INotifyPropertyChanged
 
         field = value;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        if (propertyName == nameof(IsPipelineRunning))
+        {
+            RaisePipelineStateChanged();
+        }
+
+        if (propertyName == nameof(QueuedDeployments))
+        {
+            RaiseQueueStateChanged();
+        }
+
         return true;
     }
 }

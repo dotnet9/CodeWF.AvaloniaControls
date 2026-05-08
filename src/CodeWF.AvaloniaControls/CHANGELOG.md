@@ -1,5 +1,11 @@
 # 更新日志
 
+V12.0.2.4 (2026-05-08)
+
+- Added `CodeWFWindow`, a managed Avalonia window base with custom title-bar dragging, caption buttons, and resize grips for consistent Win7 and Linux behavior.
+- Added title-bar content slots and styling properties so applications can provide branding and actions without depending on `UrsaWindow`.
+- Improved `CodeWFWindow` state handling for maximize/restore, caption button enablement, and resize grip visibility.
+
 V12.0.2（2026-05-05）
 
 - 😄[新增]-合并原 `CodeWF` 工程中的 `StatusBadge` 控件，统一纳入 `CodeWF.AvaloniaControls` 主控件库维护

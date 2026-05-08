@@ -2,6 +2,9 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using CodeWF.AvaloniaControls.Showcase.Views;
+using Lang.Avalonia;
+using Lang.Avalonia.Json;
+using System.Globalization;
 
 namespace CodeWF.AvaloniaControls.Showcase;
 
@@ -10,6 +13,7 @@ public class App : Application
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        I18nManager.Instance.Register(new JsonLangPlugin(), new CultureInfo("zh-CN"), out _);
     }
 
     public override void OnFrameworkInitializationCompleted()

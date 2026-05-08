@@ -1,23 +1,28 @@
 <u:UrsaWindow xmlns="https://github.com/avaloniaui"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:i18n="https://codewf.com"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:u="https://irihi.tech/ursa"
+              xmlns:windowLangs="clr-namespace:Showcase.Windows"
               mc:Ignorable="d"
               d:DesignWidth="800"
               d:DesignHeight="450"
               Width="460"
               Height="320"
+              FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+              WindowStartupLocation="CenterScreen"
               x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.UrsaWindowDefault"
-              Title="标准 Ursa 窗口">
+              Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaDefaultTitle}}">
     <u:UrsaWindow.Resources>
         <Color x:Key="CaptionButtonForeground">#0F172A</Color>
     </u:UrsaWindow.Resources>
-    <Border Background="#F8FAFC" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="14" Padding="24">
+    <Border Background="{DynamicResource ShowcaseSubtleBackground}" BorderBrush="{DynamicResource ShowcaseBorderBrush}" BorderThickness="1" CornerRadius="12" Padding="24">
         <StackPanel Spacing="8" VerticalAlignment="Center">
-            <TextBlock FontSize="22" FontWeight="Bold" Text="标准 Ursa 窗口" />
-            <TextBlock Foreground="#64748B"
-                       Text="该示例保留默认 Ursa 窗口边框，适合作为对比无边框和可拖动外壳变体的基线。" />
+            <TextBlock FontSize="22" FontWeight="Bold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaDefaultHeading}}" />
+            <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaDefaultDescription}}"
+                       TextWrapping="Wrap" />
         </StackPanel>
     </Border>
 </u:UrsaWindow>

@@ -1,4 +1,6 @@
 using Ursa.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 
 namespace CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos;
 
@@ -7,5 +9,18 @@ public partial class UrsaWindowWithNone : UrsaWindow
     public UrsaWindowWithNone()
     {
         InitializeComponent();
+    }
+
+    private void TitleBar_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+        {
+            BeginMoveDrag(e);
+        }
+    }
+
+    private void Close_OnClick(object? sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

@@ -1,0 +1,233 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:codewf="https://codewf.com">
+    <ControlTheme x:Key="{x:Type codewf:CodeWFWindow}" TargetType="codewf:CodeWFWindow">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="TitleBarHeight" Value="60" />
+        <Setter Property="TitleBarBackground" Value="#F8FAFC" />
+        <Setter Property="TitleBarForeground" Value="#0F172A" />
+        <Setter Property="TitleBarBorderBrush" Value="#DCE3EE" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="codewf:CodeWFWindow">
+                <Panel>
+                    <Grid Background="{TemplateBinding Background}" RowDefinitions="Auto,*">
+                        <Border
+                            Name="PART_TitleBar"
+                            Height="{TemplateBinding TitleBarHeight}"
+                            Background="{TemplateBinding TitleBarBackground}"
+                            BorderBrush="{TemplateBinding TitleBarBorderBrush}"
+                            BorderThickness="0,0,0,1">
+                            <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                                <ContentPresenter
+                                    Margin="14,0,8,0"
+                                    VerticalAlignment="Stretch"
+                                    Content="{TemplateBinding LeftContent}"
+                                    ContentTemplate="{TemplateBinding LeftContentTemplate}" />
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    Margin="0,0,16,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="16"
+                                    FontWeight="SemiBold"
+                                    Foreground="{TemplateBinding TitleBarForeground}"
+                                    IsHitTestVisible="False"
+                                    Text="{TemplateBinding Title}"
+                                    TextTrimming="CharacterEllipsis" />
+
+                                <ContentPresenter
+                                    Grid.Column="2"
+                                    Margin="0,0,8,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding RightContent}"
+                                    ContentTemplate="{TemplateBinding RightContentTemplate}" />
+
+                                <StackPanel
+                                    Grid.Column="3"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="0,0,10,0"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Name="PART_MinimizeButton"
+                                        Classes="caption-button"
+                                        ToolTip.Tip="Minimize">
+                                        <Border
+                                            Width="12"
+                                            Height="1.6"
+                                            Background="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                            CornerRadius="1" />
+                                    </Button>
+                                    <Button
+                                        Name="PART_MaximizeRestoreButton"
+                                        Classes="caption-button"
+                                        ToolTip.Tip="Maximize">
+                                        <Grid Width="12" Height="12">
+                                            <Path
+                                                Classes="maximize-glyph"
+                                                Data="M 1 1 L 11 1 L 11 11 L 1 11 Z"
+                                                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                StrokeThickness="1.4"
+                                                Stretch="Uniform" />
+                                            <Path
+                                                Classes="restore-glyph"
+                                                Data="M 4 1 L 11 1 L 11 8 M 1 4 L 8 4 L 8 11 L 1 11 Z"
+                                                IsVisible="False"
+                                                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                StrokeThickness="1.4"
+                                                Stretch="Uniform" />
+                                        </Grid>
+                                    </Button>
+                                    <Button
+                                        Name="PART_CloseButton"
+                                        Classes="caption-button close-button"
+                                        ToolTip.Tip="Close">
+                                        <Path
+                                            Width="12"
+                                            Height="12"
+                                            Data="M 1 1 L 11 11 M 11 1 L 1 11"
+                                            Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                            StrokeLineCap="Round"
+                                            StrokeThickness="1.6"
+                                            Stretch="Uniform" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <ContentPresenter
+                            Name="PART_ContentPresenter"
+                            Grid.Row="1"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </Grid>
+
+                    <Border
+                        Name="PART_ResizeTop"
+                        Classes="resize-grip"
+                        Height="5"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Background="Transparent"
+                        Cursor="TopSide" />
+                    <Border
+                        Name="PART_ResizeBottom"
+                        Classes="resize-grip"
+                        Height="5"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Bottom"
+                        Background="Transparent"
+                        Cursor="BottomSide" />
+                    <Border
+                        Name="PART_ResizeLeft"
+                        Classes="resize-grip"
+                        Width="5"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Stretch"
+                        Background="Transparent"
+                        Cursor="LeftSide" />
+                    <Border
+                        Name="PART_ResizeRight"
+                        Classes="resize-grip"
+                        Width="5"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Stretch"
+                        Background="Transparent"
+                        Cursor="RightSide" />
+                    <Border
+                        Name="PART_ResizeTopLeft"
+                        Classes="resize-grip"
+                        Width="10"
+                        Height="10"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="Transparent"
+                        Cursor="TopLeftCorner" />
+                    <Border
+                        Name="PART_ResizeTopRight"
+                        Classes="resize-grip"
+                        Width="10"
+                        Height="10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="Transparent"
+                        Cursor="TopRightCorner" />
+                    <Border
+                        Name="PART_ResizeBottomLeft"
+                        Classes="resize-grip"
+                        Width="10"
+                        Height="10"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Background="Transparent"
+                        Cursor="BottomLeftCorner" />
+                    <Border
+                        Name="PART_ResizeBottomRight"
+                        Classes="resize-grip"
+                        Width="10"
+                        Height="10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Background="Transparent"
+                        Cursor="BottomRightCorner" />
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:maximized /template/ Path.maximize-glyph">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="^:maximized /template/ Path.restore-glyph">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^ /template/ Button.caption-button">
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="MinWidth" Value="40" />
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource TemplatedParent}}" />
+            <Setter Property="Template">
+                <ControlTemplate TargetType="Button">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <ContentPresenter
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="^ /template/ Button.caption-button:pointerover">
+            <Setter Property="Background" Value="#1A64748B" />
+        </Style>
+        <Style Selector="^ /template/ Button.caption-button:pressed">
+            <Setter Property="Background" Value="#2A64748B" />
+        </Style>
+        <Style Selector="^ /template/ Button.caption-button:disabled">
+            <Setter Property="Opacity" Value="0.45" />
+        </Style>
+        <Style Selector="^ /template/ Button.close-button:pointerover">
+            <Setter Property="Background" Value="#E81123" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style Selector="^ /template/ Button.close-button:pressed">
+            <Setter Property="Background" Value="#C50F1F" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

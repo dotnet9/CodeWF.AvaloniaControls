@@ -5,6 +5,8 @@
              xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.Showcase.ViewModels"
              xmlns:model="clr-namespace:CodeWF.AvaloniaControls.Showcase.Models"
              xmlns:u="https://irihi.tech/ursa"
+             xmlns:i18n="https://codewf.com"
+             xmlns:pageLangs="clr-namespace:Showcase.Pages"
              x:Class="CodeWF.AvaloniaControls.Showcase.Pages.VComboBoxDemo"
              x:DataType="vm:VComboBoxDemoViewModel"
              d:DesignWidth="980"
@@ -15,19 +17,18 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="MenuForeground">Black</SolidColorBrush>
         <x:Double x:Key="MenuFontSize">14</x:Double>
         <FontWeight x:Key="MenuFontWeight">Normal</FontWeight>
     </UserControl.Resources>
 
     <UserControl.Styles>
         <Style Selector="u|IconButton">
-            <Setter Property="Foreground" Value="{StaticResource MenuForeground}" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
             <Setter Property="FontSize" Value="{StaticResource MenuFontSize}" />
             <Setter Property="FontWeight" Value="{StaticResource MenuFontWeight}" />
         </Style>
         <Style Selector="ComboBox">
-            <Setter Property="Foreground" Value="{StaticResource MenuForeground}" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
             <Setter Property="FontSize" Value="{StaticResource MenuFontSize}" />
             <Setter Property="FontWeight" Value="{StaticResource MenuFontWeight}" />
             <Setter Property="ItemTemplate">
@@ -58,7 +59,9 @@
                                        Margin="0,15,0,10"
                                        HorizontalAlignment="Center"
                                        Fill="{Binding Color}" />
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="超时告警" />
+                            <TextBlock Grid.Row="1"
+                                       HorizontalAlignment="Center"
+                                       Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.SelectionBoxWarning}}" />
                         </Grid>
                     </DataTemplate>
                 </Setter.Value>
@@ -68,39 +71,43 @@
 
     <Grid RowDefinitions="Auto,*" RowSpacing="14">
         <Border Padding="16"
-                Background="#F8FAFC"
-                BorderBrush="#E4E9F2"
+                Background="{DynamicResource ShowcaseSubtleBackground}"
+                BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
                 BorderThickness="1"
-                CornerRadius="14">
+                CornerRadius="12">
             <StackPanel Spacing="6">
-                <TextBlock FontSize="20" FontWeight="SemiBold" Text="VComboBox 与图标操作" />
-                <TextBlock Foreground="#5B6472"
-                           Text="演示紧凑型图标命令、行内弹出确认，以及适用于告警选择器的纵向选择框布局。" />
+                <TextBlock FontSize="20"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Title}}" />
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Description}}"
+                           TextWrapping="Wrap" />
             </StackPanel>
         </Border>
 
         <Grid Grid.Row="1" ColumnDefinitions="2*,*" ColumnSpacing="14">
             <Border Padding="20"
-                    Background="White"
-                    BorderBrush="#E4E9F2"
+                    Background="{DynamicResource ShowcaseCardBackground}"
+                    BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
                     BorderThickness="1"
-                    CornerRadius="14">
+                    CornerRadius="12">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Spacing="14">
-                    <u:IconButton Content="新建" IconPlacement="Top" VerticalAlignment="Top" Padding="0">
+                    <u:IconButton Content="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.New}}" IconPlacement="Top" VerticalAlignment="Top" Padding="0">
                         <u:IconButton.Icon>
                             <Rectangle Width="24" Height="24" Margin="0,0,0,-4" HorizontalAlignment="Center" Fill="#EF4444" />
                         </u:IconButton.Icon>
                     </u:IconButton>
 
                     <Grid>
-                        <u:IconButton Content="配置" IconPlacement="Top">
+                        <u:IconButton Content="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Configure}}" IconPlacement="Top">
                             <u:IconButton.Icon>
                                 <Rectangle Width="24" Height="24" Margin="0,0,0,5" HorizontalAlignment="Center" Fill="#F59E0B" />
                             </u:IconButton.Icon>
                         </u:IconButton>
-                        <u:PopConfirm PopupHeader="编辑数值" Placement="Bottom">
+                        <u:PopConfirm PopupHeader="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.PopupHeader}}" Placement="Bottom">
                             <u:PopConfirm.PopupContent>
-                                <TextBox Watermark="Input new value" />
+                                <TextBox Watermark="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.PopupWatermark}}" />
                             </u:PopConfirm.PopupContent>
                             <Button VerticalAlignment="Bottom"
                                     HorizontalAlignment="Stretch"
@@ -116,13 +123,13 @@
                         </u:PopConfirm>
                     </Grid>
 
-                    <u:IconButton Content="编辑" IconPlacement="Top">
+                    <u:IconButton Content="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Edit}}" IconPlacement="Top">
                         <u:IconButton.Icon>
                             <Rectangle Width="24" Height="24" Margin="0,0,0,5" HorizontalAlignment="Center" Fill="#3B82F6" />
                         </u:IconButton.Icon>
                     </u:IconButton>
 
-                    <u:IconButton Content="刷新" IconPlacement="Top">
+                    <u:IconButton Content="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Refresh}}" IconPlacement="Top">
                         <u:IconButton.Icon>
                             <Rectangle Width="24" Height="24" Margin="0,0,0,5" HorizontalAlignment="Center" Fill="#10B981" />
                         </u:IconButton.Icon>
@@ -138,15 +145,18 @@
 
             <Border Grid.Column="1"
                     Padding="18"
-                    Background="#FFFFFF"
-                    BorderBrush="#E4E9F2"
+                    Background="{DynamicResource ShowcaseCardBackground}"
+                    BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
                     BorderThickness="1"
-                    CornerRadius="14">
+                    CornerRadius="12">
                 <StackPanel Spacing="10">
-                    <TextBlock FontSize="18" FontWeight="SemiBold" Text="适用场景" />
-                    <TextBlock Foreground="#64748B" Text="适用于告警类型选择和紧凑命令栏。" />
-                    <TextBlock Foreground="#64748B" Text="适用于图标位于文字上方的工具栏式控件。" />
-                    <TextBlock Foreground="#64748B" Text="适用于需要额外确认步骤的弹出式编辑流程。" />
+                    <TextBlock FontSize="18"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource ShowcaseTextBrush}"
+                               Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.ScenarioTitle}}" />
+                    <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Scenario1}}" TextWrapping="Wrap" />
+                    <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Scenario2}}" TextWrapping="Wrap" />
+                    <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Scenario3}}" TextWrapping="Wrap" />
                 </StackPanel>
             </Border>
         </Grid>

@@ -1,5 +1,10 @@
 # 更新日志
 
+V12.0.2.4 (2026-05-08)
+
+- Added the default `CodeWFWindow` control theme with a 60px managed title bar, right-aligned caption buttons, maximize/restore glyph switching, and resize hit areas.
+- Improved the caption button theme with a visible minimize glyph, lightweight hover states, and red close hover/pressed backgrounds.
+
 V12.0.2（2026-05-05）
 
 - 😄[新增]-新增 `CodeWF.AvaloniaControls.Themes` 主题工程，集中承载 `CodeWF.AvaloniaControls` 的控件模板、转换器和视觉资源

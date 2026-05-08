@@ -1,24 +1,72 @@
 <u:UrsaWindow xmlns="https://github.com/avaloniaui"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:i18n="https://codewf.com"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:u="https://irihi.tech/ursa"
+              xmlns:windowLangs="clr-namespace:Showcase.Windows"
               mc:Ignorable="d"
-              d:DesignWidth="800"
-              d:DesignHeight="450"
-              Width="460"
-              Height="320"
+              d:DesignWidth="560"
+              d:DesignHeight="360"
+              Width="560"
+              Height="360"
+              Background="Transparent"
+              FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+              TransparencyLevelHint="AcrylicBlur"
               WindowDecorations="None"
+              WindowStartupLocation="CenterScreen"
               x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.UrsaWindowWithNoneAndMove"
-              Title="无边框可移动窗口">
-    <u:UrsaWindow.Resources>
-        <Color x:Key="CaptionButtonForeground">#0F172A</Color>
-    </u:UrsaWindow.Resources>
-    <Border Background="#F8FAFC" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="14" Padding="24">
-        <StackPanel Spacing="8" VerticalAlignment="Center">
-            <TextBlock FontSize="22" FontWeight="Bold" Text="无边框且可拖动" />
-            <TextBlock Foreground="#64748B"
-                       Text="当你需要完全自定义外观，同时保留熟悉的桌面窗口拖动与缩放行为时，可以使用这个变体。" />
-        </StackPanel>
+              Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaMoveTitle}}">
+    <Border Margin="10"
+            Background="{DynamicResource ShowcaseCardBackground}"
+            BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="16"
+            BoxShadow="0 18 42 #55000000">
+        <Grid RowDefinitions="64,*">
+            <Border Background="#0F172A"
+                    CornerRadius="16,16,0,0"
+                    PointerPressed="TitleBar_OnPointerPressed">
+                <Grid Margin="20,0,12,0" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <Border Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="#2563EB"
+                            CornerRadius="8">
+                        <Image Width="20"
+                               Height="20"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               RenderOptions.BitmapInterpolationMode="HighQuality"
+                               Source="/Assets/logo.png" />
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                        <TextBlock FontWeight="SemiBold"
+                                   Foreground="White"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaMoveHeading}}" />
+                        <TextBlock FontSize="12"
+                                   Foreground="#CBD5E1"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaMoveTitle}}" />
+                    </StackPanel>
+                    <Button Grid.Column="2"
+                            Width="34"
+                            Height="30"
+                            Padding="0"
+                            Click="Close_OnClick"
+                            Content="X" />
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1" Margin="24" RowDefinitions="Auto,*" RowSpacing="14">
+                <TextBlock FontSize="22"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaMoveHeading}}" />
+                <TextBlock Grid.Row="1"
+                           Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaMoveDescription}}"
+                           TextWrapping="Wrap" />
+            </Grid>
+        </Grid>
     </Border>
 </u:UrsaWindow>

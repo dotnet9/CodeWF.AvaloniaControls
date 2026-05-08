@@ -24,6 +24,7 @@
     <PackageVersion Include="Dock.Model.ReactiveUI" Version="$(DockVersion)" />
     <PackageVersion Include="Dock.Serializer" Version="11.3.0.12" />
     <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="2.0.0" />
+    <PackageVersion Include="Lang.Avalonia.Json" Version="12.0.2" />
     <PackageVersion Include="Prism.DryIoc.Avalonia" Version="8.1.97.11073" />
     <PackageVersion Include="ProDataGrid" Version="12.0.0" />
     <PackageVersion Include="ReactiveUI.Avalonia" Version="$(ReactiveUIAvaloniaVersion)" />

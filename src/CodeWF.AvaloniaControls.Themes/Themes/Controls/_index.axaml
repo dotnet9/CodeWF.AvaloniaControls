@@ -3,6 +3,7 @@
   <ResourceDictionary.MergedDictionaries>
       <ResourceInclude Source="StatusBadge.axaml" />
       <ResourceInclude Source="StatusCard.axaml" />
+      <ResourceInclude Source="CodeWFWindow.axaml" />
       <ResourceInclude Source="SearchListBox.axaml" />
       <ResourceInclude Source="Transfer.axaml" />
       <ResourceInclude Source="VComboBox.axaml" />

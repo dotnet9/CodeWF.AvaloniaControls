@@ -1,0 +1,40 @@
+<codewf:CodeWFWindow xmlns="https://github.com/avaloniaui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:codewf="https://codewf.com"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:i18n="https://codewf.com"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:windowLangs="clr-namespace:Showcase.Windows"
+                     mc:Ignorable="d"
+                     d:DesignWidth="560"
+                     d:DesignHeight="350"
+                     Width="560"
+                     Height="350"
+                     Background="Transparent"
+                     CanResize="False"
+                     FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+                     Icon="/Assets/logo.ico"
+                     TitleBarHeight="46"
+                     TitleBarBackground="{DynamicResource ShowcaseSubtleBackground}"
+                     TitleBarBorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                     TitleBarForeground="{DynamicResource ShowcaseTextBrush}"
+                     TransparencyLevelHint="AcrylicBlur"
+                     WindowStartupLocation="CenterScreen"
+                     x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.CodeWFWindowShapedDemo"
+                     Title="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFShapeTitle}}">
+    <Border Margin="14"
+            Background="{DynamicResource ShowcaseCardBackground}"
+            BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="24"
+            BoxShadow="0 22 54 #66000000"
+            ClipToBounds="True">
+        <Grid Margin="0" RowDefinitions="Auto,*">
+            <Border Height="1" Background="Transparent" />
+            <Grid Grid.Row="1" Margin="24" RowDefinitions="Auto,*" RowSpacing="14">
+                <TextBlock FontSize="22" FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFShapeHeading}}" />
+                <TextBlock Grid.Row="1" Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFShapeDescription}}" TextWrapping="Wrap" />
+            </Grid>
+        </Grid>
+    </Border>
+</codewf:CodeWFWindow>

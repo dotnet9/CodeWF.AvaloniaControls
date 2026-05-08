@@ -3,7 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:codewf="https://codewf.com"
+             xmlns:i18n="https://codewf.com"
              xmlns:local="clr-namespace:CodeWF.AvaloniaControls.Showcase.Pages"
+             xmlns:pageLangs="clr-namespace:Showcase.Pages"
              x:Class="CodeWF.AvaloniaControls.Showcase.Pages.TransferDemo"
              Width="800"
              Height="600"
@@ -14,11 +16,13 @@
              mc:Ignorable="d">
     <UserControl.Styles>
         <Style Selector="TextBlock.Caption">
-            <Setter Property="Foreground" Value="#5B6472" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
         <Style Selector="TextBlock.FormLabel">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
         </Style>
         <Style Selector="TextBox">
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -27,22 +31,23 @@
 
     <Grid RowDefinitions="Auto,*" RowSpacing="14">
         <Border Padding="16"
-                Background="#F8FAFC"
-                BorderBrush="#E4E9F2"
+                Background="{DynamicResource ShowcaseSubtleBackground}"
+                BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
                 BorderThickness="1"
-                CornerRadius="14">
+                CornerRadius="12">
             <StackPanel Spacing="6">
-                <TextBlock FontSize="20" FontWeight="SemiBold" Text="穿梭框工作区" />
+                <TextBlock FontSize="20"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static pageLangs:TransferDemo.Title}}" />
                 <TextBlock Classes="Caption"
-                           Text="支持在源列表与目标列表之间移动项目，实时修改两侧标题，并在右侧查看当前结果摘要。" />
+                           Text="{i18n:I18n {x:Static pageLangs:TransferDemo.Description}}" />
             </StackPanel>
         </Border>
 
         <Grid Grid.Row="1" ColumnDefinitions="*,1,320" ColumnSpacing="14">
             <Border Theme="{StaticResource CardBorder}" Padding="8">
                 <codewf:Transfer x:Name="MyTransfer"
-                                 LeftHeader="源数据"
-                                 RightHeader="已选结果"
                                  LeftItemsSource="{CompiledBinding $parent[local:TransferDemo].LeftItems}"
                                  RightItemsSource="{CompiledBinding $parent[local:TransferDemo].RightItems}" />
             </Border>
@@ -50,28 +55,29 @@
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch"
-                          Background="#E4E9F2" />
+                          Background="{DynamicResource ShowcaseSplitterBrush}" />
 
             <Border Grid.Column="2" Theme="{StaticResource CardBorder}" Padding="18">
                 <Grid RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="96,*" RowSpacing="12" ColumnSpacing="12">
-                    <TextBlock Classes="FormLabel" Text="左侧标题" />
+                    <TextBlock Classes="FormLabel" Text="{i18n:I18n {x:Static pageLangs:TransferDemo.LeftTitleLabel}}" />
                     <TextBox Grid.Column="1"
                              Text="{CompiledBinding ElementName=MyTransfer, Path=LeftHeader, Mode=TwoWay}" />
 
-                    <TextBlock Grid.Row="1" Classes="FormLabel" Text="右侧标题" />
+                    <TextBlock Grid.Row="1" Classes="FormLabel" Text="{i18n:I18n {x:Static pageLangs:TransferDemo.RightTitleLabel}}" />
                     <TextBox Grid.Row="1"
                              Grid.Column="1"
                              Text="{CompiledBinding ElementName=MyTransfer, Path=RightHeader, Mode=TwoWay}" />
 
-                    <TextBlock Grid.Row="2" Classes="FormLabel" Text="当前选择" />
+                    <TextBlock Grid.Row="2" Classes="FormLabel" Text="{i18n:I18n {x:Static pageLangs:TransferDemo.SelectedLabel}}" />
                     <Border Grid.Row="2"
                             Grid.Column="1"
                             Padding="12,8"
-                            Background="#F8FAFC"
-                            BorderBrush="#E4E9F2"
+                            Background="{DynamicResource ShowcaseSubtleBackground}"
+                            BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
                             BorderThickness="1"
                             CornerRadius="10">
-                        <TextBlock Text="{CompiledBinding $parent[local:TransferDemo].SelectedInfo}"
+                        <TextBlock Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{CompiledBinding $parent[local:TransferDemo].SelectedInfo}"
                                    TextWrapping="Wrap" />
                     </Border>
                 </Grid>

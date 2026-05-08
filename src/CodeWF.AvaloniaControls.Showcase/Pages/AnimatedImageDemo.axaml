@@ -4,25 +4,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:anim="https://github.com/whistyun/AnimatedImage.Avalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="https://codewf.com"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pageLangs="clr-namespace:Showcase.Pages"
     d:DesignHeight="560"
     d:DesignWidth="980"
     mc:Ignorable="d">
     <UserControl.Styles>
         <Style Selector="Border.PreviewPanel">
-            <Setter Property="Background" Value="#F8FAFC" />
-            <Setter Property="BorderBrush" Value="#DCE3EE" />
+            <Setter Property="Background" Value="{DynamicResource ShowcaseSubtleBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseBorderBrush}" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="16" />
+            <Setter Property="CornerRadius" Value="12" />
             <Setter Property="Padding" Value="18" />
         </Style>
         <Style Selector="TextBlock.Title">
-            <Setter Property="Foreground" Value="#0F172A" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
             <Setter Property="FontSize" Value="18" />
             <Setter Property="FontWeight" Value="SemiBold" />
         </Style>
         <Style Selector="TextBlock.Source">
-            <Setter Property="Foreground" Value="#64748B" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
@@ -40,10 +42,11 @@
             <StackPanel Spacing="8">
                 <TextBlock FontSize="26"
                            FontWeight="Bold"
-                           Foreground="#0F172A"
-                           Text="AnimatedImage 动态 GIF" />
-                <TextBlock Foreground="#64748B"
-                           Text="同一个 nice.gif 资源分别通过 Avalonia 资源 URI 和网络 URI 加载。" />
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.Title}}" />
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.Description}}"
+                           TextWrapping="Wrap" />
             </StackPanel>
 
             <Grid Grid.Row="1"
@@ -52,12 +55,12 @@
                   RowDefinitions="*">
                 <Border Classes="PreviewPanel">
                     <Grid RowDefinitions="Auto,Auto,*" RowSpacing="14">
-                        <TextBlock Classes="Title" Text="本地资源" />
+                        <TextBlock Classes="Title" Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.LocalResource}}" />
                         <TextBlock Grid.Row="1" Classes="Source"
                                    Text="avares://CodeWF.AvaloniaControls.Showcase/Assets/nice.gif" />
                         <Border Grid.Row="2"
-                                Background="White"
-                                BorderBrush="#E2E8F0"
+                                Background="{DynamicResource ShowcaseCardBackground}"
+                                BorderBrush="{DynamicResource ShowcaseBorderBrush}"
                                 BorderThickness="1"
                                 CornerRadius="12">
                             <Image Classes="AnimatedPreview"
@@ -69,12 +72,12 @@
 
                 <Border Grid.Column="1" Classes="PreviewPanel">
                     <Grid RowDefinitions="Auto,Auto,*" RowSpacing="14">
-                        <TextBlock Classes="Title" Text="网络资源" />
+                        <TextBlock Classes="Title" Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.NetworkResource}}" />
                         <TextBlock Grid.Row="1" Classes="Source"
                                    Text="https://img1.dotnet9.com/2026/05/nice.gif" />
                         <Border Grid.Row="2"
-                                Background="White"
-                                BorderBrush="#E2E8F0"
+                                Background="{DynamicResource ShowcaseCardBackground}"
+                                BorderBrush="{DynamicResource ShowcaseBorderBrush}"
                                 BorderThickness="1"
                                 CornerRadius="12">
                             <Grid>
@@ -86,15 +89,15 @@
                                         Padding="10,6"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom"
-                                        Background="#EEF6FF"
-                                        BorderBrush="#BFDBFE"
+                                        Background="{DynamicResource ShowcaseAccentSubtleBrush}"
+                                        BorderBrush="{DynamicResource ShowcaseBorderBrush}"
                                         BorderThickness="1"
                                         CornerRadius="12"
                                         IsHitTestVisible="False">
                                     <TextBlock x:Name="NetworkStatusText"
-                                               Foreground="#1D4ED8"
+                                               Foreground="{DynamicResource ShowcaseAccentTextBrush}"
                                                FontSize="12"
-                                               Text="正在加载网络 GIF..." />
+                                               Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.LoadingNetworkGif}}" />
                                 </Border>
                             </Grid>
                         </Border>

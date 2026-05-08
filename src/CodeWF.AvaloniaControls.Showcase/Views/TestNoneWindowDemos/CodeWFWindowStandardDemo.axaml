@@ -1,0 +1,86 @@
+<codewf:CodeWFWindow xmlns="https://github.com/avaloniaui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:codewf="https://codewf.com"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:i18n="https://codewf.com"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:windowLangs="clr-namespace:Showcase.Windows"
+                     mc:Ignorable="d"
+                     d:DesignWidth="560"
+                     d:DesignHeight="360"
+                     Width="560"
+                     Height="360"
+                     Background="#F5F7FB"
+                     FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+                     Icon="/Assets/logo.ico"
+                     TitleBarHeight="52"
+                     TitleBarBackground="#FFFFFF"
+                     TitleBarBorderBrush="#DCE3EE"
+                     TitleBarForeground="#0F172A"
+                     WindowStartupLocation="CenterScreen"
+                     x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.CodeWFWindowStandardDemo"
+                     Title="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFStandardTitle}}">
+    <codewf:CodeWFWindow.LeftContent>
+        <StackPanel Height="52"
+                    Orientation="Horizontal"
+                    Spacing="10"
+                    IsHitTestVisible="False">
+            <Border Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Background="#F8FAFC"
+                    BorderBrush="#DCE3EE"
+                    BorderThickness="1"
+                    CornerRadius="8">
+                <Image Width="20"
+                       Height="20"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                       Source="/Assets/logo.png" />
+            </Border>
+        </StackPanel>
+    </codewf:CodeWFWindow.LeftContent>
+
+    <Border Background="{DynamicResource ShowcaseAppBackground}">
+        <Grid Margin="20"
+              RowDefinitions="Auto,*"
+              RowSpacing="16">
+            <StackPanel Spacing="6">
+                <TextBlock FontSize="24"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFStandardHeading}}" />
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           TextWrapping="Wrap"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFStandardDescription}}" />
+            </StackPanel>
+
+            <Grid Grid.Row="1"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="12">
+                <Border Padding="16"
+                        Background="{DynamicResource ShowcaseCardBackground}"
+                        BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                    <StackPanel Spacing="7">
+                        <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarHeight52}}" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFStandardDescription}}" TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1"
+                        Padding="16"
+                        Background="{DynamicResource ShowcaseCardBackground}"
+                        BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                    <StackPanel Spacing="7">
+                        <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.WindowBehavior}}" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.ResizeHotZones}}" TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</codewf:CodeWFWindow>
