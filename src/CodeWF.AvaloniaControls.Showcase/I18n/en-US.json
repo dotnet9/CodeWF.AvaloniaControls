@@ -313,6 +313,7 @@
         "CustomProperties": "Custom Properties",
         "WindowBehavior": "Window Behavior",
         "TitleBarHeight52": "TitleBarHeight = 52",
+        "TitleBarHeight34": "TitleBarHeight = 34",
         "TitleBarHeight44": "TitleBarHeight = 44",
         "CanResizeFalse": "CanResize = false",
         "TitleBarBrushes": "Title bar background, foreground, and border",

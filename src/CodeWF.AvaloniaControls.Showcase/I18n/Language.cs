@@ -353,6 +353,7 @@ namespace Showcase.Windows
         public static readonly string CustomProperties = "Showcase.Windows.WindowDemos.CustomProperties";
         public static readonly string WindowBehavior = "Showcase.Windows.WindowDemos.WindowBehavior";
         public static readonly string TitleBarHeight52 = "Showcase.Windows.WindowDemos.TitleBarHeight52";
+        public static readonly string TitleBarHeight34 = "Showcase.Windows.WindowDemos.TitleBarHeight34";
         public static readonly string TitleBarHeight44 = "Showcase.Windows.WindowDemos.TitleBarHeight44";
         public static readonly string CanResizeFalse = "Showcase.Windows.WindowDemos.CanResizeFalse";
         public static readonly string TitleBarBrushes = "Showcase.Windows.WindowDemos.TitleBarBrushes";

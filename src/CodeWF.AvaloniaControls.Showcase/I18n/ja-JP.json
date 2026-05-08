@@ -313,6 +313,7 @@
         "CustomProperties": "カスタムプロパティ",
         "WindowBehavior": "ウィンドウ動作",
         "TitleBarHeight52": "TitleBarHeight = 52",
+        "TitleBarHeight34": "TitleBarHeight = 34",
         "TitleBarHeight44": "TitleBarHeight = 44",
         "CanResizeFalse": "CanResize = false",
         "TitleBarBrushes": "タイトルバー背景、前景、境界線",

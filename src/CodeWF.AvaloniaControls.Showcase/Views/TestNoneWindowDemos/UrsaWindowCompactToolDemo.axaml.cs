@@ -10,6 +10,7 @@ public partial class UrsaWindowCompactToolDemo : UrsaWindow
     public UrsaWindowCompactToolDemo()
     {
         InitializeComponent();
+        WindowRegionHelper.AttachRoundedCorners(this);
     }
 
     private void TitleBar_OnPointerPressed(object? sender, PointerPressedEventArgs e)

@@ -10,6 +10,7 @@ public partial class UrsaWindowWithNoneAndMove : UrsaWindow
     public UrsaWindowWithNoneAndMove()
     {
         InitializeComponent();
+        WindowRegionHelper.AttachRoundedCorners(this);
     }
 
     private void TitleBar_OnPointerPressed(object? sender, PointerPressedEventArgs e)

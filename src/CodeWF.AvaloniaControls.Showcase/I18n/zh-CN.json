@@ -313,6 +313,7 @@
         "CustomProperties": "自定义属性",
         "WindowBehavior": "窗口行为",
         "TitleBarHeight52": "TitleBarHeight = 52",
+        "TitleBarHeight34": "TitleBarHeight = 34",
         "TitleBarHeight44": "TitleBarHeight = 44",
         "CanResizeFalse": "CanResize = false",
         "TitleBarBrushes": "标题栏背景、前景与边框",

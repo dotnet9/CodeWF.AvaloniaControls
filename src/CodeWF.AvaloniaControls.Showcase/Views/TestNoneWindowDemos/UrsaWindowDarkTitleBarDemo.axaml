@@ -19,7 +19,9 @@
               Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaDarkTitle}}">
     <Border Background="#0B1120"
             BorderBrush="#243041"
-            BorderThickness="1">
+            BorderThickness="1"
+            ClipToBounds="True"
+            CornerRadius="4">
         <Grid RowDefinitions="56,*">
             <Border Background="#111827"
                     BorderBrush="#243041"

@@ -8,13 +8,18 @@
         <Setter Property="TitleBarBackground" Value="#F8FAFC" />
         <Setter Property="TitleBarForeground" Value="#0F172A" />
         <Setter Property="TitleBarBorderBrush" Value="#DCE3EE" />
+        <Setter Property="WindowCornerRadius" Value="4" />
         <Setter Property="Template">
             <ControlTemplate TargetType="codewf:CodeWFWindow">
                 <Panel>
                     <Border
+                        Name="PART_WindowFrame"
+                        Classes="window-frame"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding TitleBarBorderBrush}"
-                        BorderThickness="1">
+                        BorderThickness="1"
+                        ClipToBounds="True"
+                        CornerRadius="{TemplateBinding WindowCornerRadius}">
                         <Grid Background="{TemplateBinding Background}" RowDefinitions="Auto,*">
                             <Border
                                 Name="PART_TitleBar"
@@ -52,7 +57,6 @@
                                         Grid.Column="3"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
-                                        Margin="0,0,10,0"
                                         Orientation="Horizontal">
                                         <Button
                                             Name="PART_MinimizeButton"
@@ -183,6 +187,12 @@
         </Style>
         <Style Selector="^:maximized /template/ Path.restore-glyph">
             <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^:maximized /template/ Border.window-frame">
+            <Setter Property="CornerRadius" Value="0" />
+        </Style>
+        <Style Selector="^:fullscreen /template/ Border.window-frame">
+            <Setter Property="CornerRadius" Value="0" />
         </Style>
         <Style Selector="^ /template/ Button.caption-button">
             <Setter Property="Width" Value="46" />

@@ -6,40 +6,108 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:windowLangs="clr-namespace:Showcase.Windows"
                      mc:Ignorable="d"
-                     d:DesignWidth="560"
+                     d:DesignWidth="700"
                      d:DesignHeight="360"
-                     Width="560"
+                     Width="700"
                      Height="360"
                      Background="#F5F7FB"
                      FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
                      Icon="/Assets/logo.ico"
-                     TitleBarHeight="52"
-                     TitleBarBackground="#FFFFFF"
-                     TitleBarBorderBrush="#DCE3EE"
-                     TitleBarForeground="#0F172A"
+                     TitleBarHeight="34"
+                     TitleBarBackground="#24292F"
+                     TitleBarBorderBrush="#11161C"
+                     TitleBarForeground="#F3F4F6"
                      WindowStartupLocation="CenterScreen"
                      x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.CodeWFWindowStandardDemo"
-                     Title="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFStandardTitle}}">
+                     Title="">
+    <codewf:CodeWFWindow.Styles>
+        <Style Selector="Menu.title-bar-menu">
+            <Setter Property="Height" Value="34" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="Menu.title-bar-menu MenuItem">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="#F3F4F6" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="8,0" />
+        </Style>
+        <Style Selector="Menu.title-bar-menu MenuItem:pointerover">
+            <Setter Property="Background" Value="#32383F" />
+        </Style>
+        <Style Selector="Menu.title-bar-menu MenuItem:pressed">
+            <Setter Property="Background" Value="#3A424B" />
+        </Style>
+    </codewf:CodeWFWindow.Styles>
+
     <codewf:CodeWFWindow.LeftContent>
-        <StackPanel Height="52"
-                    Orientation="Horizontal"
-                    Spacing="10"
-                    IsHitTestVisible="False">
-            <Border Width="30"
-                    Height="30"
-                    VerticalAlignment="Center"
-                    Background="#F8FAFC"
-                    BorderBrush="#DCE3EE"
-                    BorderThickness="1"
-                    CornerRadius="8">
-                <Image Width="20"
-                       Height="20"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       RenderOptions.BitmapInterpolationMode="HighQuality"
-                       Source="/Assets/logo.png" />
-            </Border>
-        </StackPanel>
+        <Grid Height="34"
+              ColumnDefinitions="Auto,Auto">
+            <Image Width="16"
+                   Height="16"
+                   Margin="0,0,10,0"
+                   VerticalAlignment="Center"
+                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                   Source="/Assets/logo.png" />
+            <Menu Grid.Column="1"
+                  Classes="title-bar-menu">
+                <MenuItem Header="File">
+                    <MenuItem Header="New repository..." />
+                    <MenuItem Header="Add local repository..." />
+                    <MenuItem Header="Clone repository..." />
+                    <Separator />
+                    <MenuItem Header="Options" />
+                    <Separator />
+                    <MenuItem Header="Exit" />
+                </MenuItem>
+                <MenuItem Header="Edit">
+                    <MenuItem Header="Undo" />
+                    <MenuItem Header="Redo" />
+                    <Separator />
+                    <MenuItem Header="Cut" />
+                    <MenuItem Header="Copy" />
+                    <MenuItem Header="Paste" />
+                    <MenuItem Header="Select All" />
+                </MenuItem>
+                <MenuItem Header="View">
+                    <MenuItem Header="Show Changes" />
+                    <MenuItem Header="Show History" />
+                    <Separator />
+                    <MenuItem Header="Toggle Full Screen" />
+                    <Separator />
+                    <MenuItem Header="Zoom In" />
+                    <MenuItem Header="Zoom Out" />
+                    <MenuItem Header="Reset Zoom" />
+                </MenuItem>
+                <MenuItem Header="Repository">
+                    <MenuItem Header="Push" />
+                    <MenuItem Header="Pull" />
+                    <MenuItem Header="Fetch" />
+                    <Separator />
+                    <MenuItem Header="View on GitHub" />
+                    <MenuItem Header="Open in Visual Studio Code" />
+                    <MenuItem Header="Show in Explorer" />
+                    <Separator />
+                    <MenuItem Header="Repository Settings..." />
+                </MenuItem>
+                <MenuItem Header="Branch">
+                    <MenuItem Header="New branch..." />
+                    <MenuItem Header="Rename branch..." />
+                    <MenuItem Header="Delete branch" />
+                    <Separator />
+                    <MenuItem Header="Update from default branch" />
+                    <MenuItem Header="Compare to current branch" />
+                    <MenuItem Header="Merge into current branch..." />
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Header="About GitHub Desktop" />
+                    <MenuItem Header="Show User Guide" />
+                    <MenuItem Header="Report Issue" />
+                    <Separator />
+                    <MenuItem Header="View Logs" />
+                </MenuItem>
+            </Menu>
+        </Grid>
     </codewf:CodeWFWindow.LeftContent>
 
     <Border Background="{DynamicResource ShowcaseAppBackground}">
@@ -65,7 +133,7 @@
                         BorderThickness="1"
                         CornerRadius="10">
                     <StackPanel Spacing="7">
-                        <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarHeight52}}" />
+                        <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarHeight34}}" />
                         <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFStandardDescription}}" TextWrapping="Wrap" />
                     </StackPanel>
                 </Border>

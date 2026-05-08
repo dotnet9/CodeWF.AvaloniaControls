@@ -20,7 +20,9 @@
               Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaCompactTitle}}">
     <Border Background="{DynamicResource ShowcaseCardBackground}"
             BorderBrush="{DynamicResource ShowcaseBorderBrush}"
-            BorderThickness="1">
+            BorderThickness="1"
+            ClipToBounds="True"
+            CornerRadius="4">
         <Grid RowDefinitions="44,*">
             <Border Background="{DynamicResource ShowcaseSubtleBackground}"
                     BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"

@@ -18,7 +18,9 @@
               Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaMoveTitle}}">
     <Border Background="{DynamicResource ShowcaseCardBackground}"
             BorderBrush="#1E293B"
-            BorderThickness="1">
+            BorderThickness="1"
+            ClipToBounds="True"
+            CornerRadius="4">
         <Grid RowDefinitions="64,*">
             <Border Background="#0F172A"
                     PointerPressed="TitleBar_OnPointerPressed">

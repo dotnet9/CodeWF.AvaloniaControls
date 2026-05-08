@@ -19,7 +19,9 @@
               Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaTallTitle}}">
     <Border Background="{DynamicResource ShowcaseAppBackground}"
             BorderBrush="#1E293B"
-            BorderThickness="1">
+            BorderThickness="1"
+            ClipToBounds="True"
+            CornerRadius="4">
         <Grid RowDefinitions="86,*">
             <Border Background="#0F172A"
                     BorderBrush="#243041"

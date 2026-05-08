@@ -20,6 +20,7 @@
                      TitleBarForeground="Transparent"
                      TransparencyBackgroundFallback="Transparent"
                      TransparencyLevelHint="Transparent"
+                     WindowCornerRadius="0"
                      WindowStartupLocation="CenterScreen"
                      x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.CodeWFWindowShapedDemo"
                      Title="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFShapeTitle}}">

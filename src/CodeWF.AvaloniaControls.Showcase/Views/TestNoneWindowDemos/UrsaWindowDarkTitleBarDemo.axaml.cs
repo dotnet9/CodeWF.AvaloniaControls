@@ -10,6 +10,7 @@ public partial class UrsaWindowDarkTitleBarDemo : UrsaWindow
     public UrsaWindowDarkTitleBarDemo()
     {
         InitializeComponent();
+        WindowRegionHelper.AttachRoundedCorners(this);
     }
 
     private void TitleBar_OnPointerPressed(object? sender, PointerPressedEventArgs e)
