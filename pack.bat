@@ -22,7 +22,6 @@ echo [3/3] Packing libraries...
 for %%P in (
     "src\CodeWF.AvaloniaControls\CodeWF.AvaloniaControls.csproj"
     "src\CodeWF.AvaloniaControls.Themes\CodeWF.AvaloniaControls.Themes.csproj"
-    "src\CodeWF.AvaloniaControls.ProDataGrid\CodeWF.AvaloniaControls.ProDataGrid.csproj"
 ) do (
     dotnet pack %%~P -c %CONFIGURATION% --no-build -o "%PACKAGES_DIR%"
     if errorlevel 1 goto :error

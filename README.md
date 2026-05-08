@@ -4,7 +4,6 @@
 |------|-------|----------|
 | CodeWF.AvaloniaControls | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls)](https://www.nuget.org/packages/CodeWF.AvaloniaControls/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls)](https://www.nuget.org/packages/CodeWF.AvaloniaControls/) |
 | CodeWF.AvaloniaControls.Themes | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Themes/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Themes/) |
-| CodeWF.AvaloniaControls.ProDataGrid | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) |
 
 An open-source Avalonia control repository based on .NET 11 and Avalonia 12, including reusable libraries and runnable samples.
 
@@ -30,7 +29,6 @@ Install-Package CodeWF.AvaloniaControls
 
 - `CodeWF.AvaloniaControls`: general-purpose custom control APIs, state models, helpers, and drawing logic
 - `CodeWF.AvaloniaControls.Themes`: control templates and visual resources for the main control package
-- `CodeWF.AvaloniaControls.ProDataGrid`: open-source high-performance grid helper package built on `ProDataGrid`
 
 Markdown packages now live in the standalone [CodeWF.Markdown](https://github.com/dotnet9/CodeWF.Markdown) repository.
 
@@ -38,16 +36,16 @@ Legacy free `DataGrid` / `TreeDataGrid` packages and samples now live in the sta
 
 Dock packages and samples now live in the standalone [CodeWF.AvaloniaControls.Dock](https://github.com/dotnet9/CodeWF.AvaloniaControls.Dock) repository.
 
+ProDataGrid packages and samples now live in the standalone [CodeWF.AvaloniaControls.ProDataGrid](https://github.com/dotnet9/CodeWF.AvaloniaControls.ProDataGrid) repository.
+
 ## Sample Applications
 
 - `CodeWF.AvaloniaControls.Showcase`: general control showcase
-- `CodeWF.AvaloniaControls.ProDataGridShowcase`: functional ProDataGrid sample on Avalonia 12
-- `CodeWF.AvaloniaControls.ProDataGridPerformanceDemo`: large-dataset, tab-switching, and document-switching performance sample on Avalonia 12
 - `CodeWF.AvaloniaControls.FluentStarterDemo`: lightweight starter-window sample
 
 ## Shared Configuration
 
-- `Directory.Packages.props`: central package management for the Avalonia 12 main line and shared package versions such as `ProDataGrid`
+- `Directory.Packages.props`: central package management for the Avalonia 12 main line
 - `Directory.Build.props`: shared repository/package metadata
 - `Directory.Build.targets`: shared pack-time behavior, including common package metadata defaults and root README/CHANGELOG injection for packable libraries
 - `Publish.Common.pubxml`: shared publish settings
@@ -67,8 +65,6 @@ Dock packages and samples now live in the standalone [CodeWF.AvaloniaControls.Do
 ## Open Source Notes
 
 - Commercial package lines are intentionally avoided in this repository
-- `Prism.DryIoc.Avalonia` is pinned to `8.1.97.11073` because the `9.x` line is commercial
-- `CodeWF.AvaloniaControls.ProDataGrid` is based on the MIT-licensed [ProDataGrid](https://www.nuget.org/packages/ProDataGrid/)
 
 ## Demo
 

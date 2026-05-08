@@ -12,21 +12,13 @@
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="AnimatedImage.Avalonia" Version="2.1.4" />
-    <PackageVersion Include="CodeWF.EventBus" Version="3.4.5.1" />
-    <PackageVersion Include="CodeWF.Log.Core" Version="12.0.2" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="2.0.0" />
     <PackageVersion Include="Lang.Avalonia.Json" Version="12.0.2" />
-    <PackageVersion Include="Prism.DryIoc.Avalonia" Version="8.1.97.11073" />
-    <PackageVersion Include="ProDataGrid" Version="12.0.0" />
     <PackageVersion Include="ReactiveUI.Avalonia" Version="$(ReactiveUIAvaloniaVersion)" />
     <PackageVersion Include="Semi.Avalonia" Version="$(SemiAvaloniaVersion)" />
     <PackageVersion Include="Semi.Avalonia.AvaloniaEdit" Version="12.0.0" />
-    <PackageVersion Include="Semi.Avalonia.ProDataGrid" Version="12.0.0" />
-    <PackageVersion Include="StaticViewLocator" Version="0.4.0" />
-    <PackageVersion Include="System.Drawing.Common" Version="10.0.6" />
     <PackageVersion Include="VC-LTL" Version="5.3.1" />
-    <PackageVersion Include="Xaml.Behaviors" Version="12.0.0" />
     <PackageVersion Include="YY-Thunks" Version="1.2.1-beta.7" />
   </ItemGroup>
 </Project>

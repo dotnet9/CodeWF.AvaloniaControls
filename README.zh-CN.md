@@ -4,7 +4,6 @@
 |------|-------|--------|
 | CodeWF.AvaloniaControls | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls)](https://www.nuget.org/packages/CodeWF.AvaloniaControls/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls)](https://www.nuget.org/packages/CodeWF.AvaloniaControls/) |
 | CodeWF.AvaloniaControls.Themes | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Themes/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Themes/) |
-| CodeWF.AvaloniaControls.ProDataGrid | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) |
 
 这是一个基于 .NET 11 与 Avalonia 12 的开源控件仓库，包含可复用类库以及可直接运行的示例工程。
 
@@ -29,7 +28,6 @@ Install-Package CodeWF.AvaloniaControls
 ### Avalonia 12 主线
 
 - `CodeWF.AvaloniaControls`：通用自定义控件
-- `CodeWF.AvaloniaControls.ProDataGrid`：基于 `ProDataGrid` 的开源高性能表格辅助包
 - `CodeWF.AvaloniaControls.Themes`：`CodeWF.AvaloniaControls` 的控件模板与主题资源包
 
 Markdown 相关包已迁移到独立仓库：[CodeWF.Markdown](https://github.com/dotnet9/CodeWF.Markdown)。
@@ -38,16 +36,16 @@ Markdown 相关包已迁移到独立仓库：[CodeWF.Markdown](https://github.co
 
 Dock 包与示例已迁移到独立仓库：[CodeWF.AvaloniaControls.Dock](https://github.com/dotnet9/CodeWF.AvaloniaControls.Dock)。
 
+ProDataGrid 包与示例已迁移到独立仓库：[CodeWF.AvaloniaControls.ProDataGrid](https://github.com/dotnet9/CodeWF.AvaloniaControls.ProDataGrid)。
+
 ## 示例工程
 
 - `CodeWF.AvaloniaControls.Showcase`：通用控件展示馆
-- `CodeWF.AvaloniaControls.ProDataGridShowcase`：Avalonia 12 下的 ProDataGrid 功能示例
-- `CodeWF.AvaloniaControls.ProDataGridPerformanceDemo`：Avalonia 12 下的大数据量、Tab 切换、Document 切换性能示例
 - `CodeWF.AvaloniaControls.FluentStarterDemo`：轻量启动窗口示例
 
 ## 公共配置
 
-- `Directory.Packages.props`：Avalonia 12 主线与 `ProDataGrid` 等共享依赖的中央包管理
+- `Directory.Packages.props`：Avalonia 12 主线共享依赖的中央包管理
 - `Directory.Build.props`：仓库级公共元数据
 - `Directory.Build.targets`：类库打包时的公共处理逻辑，例如统一补充 README、更新日志与通用打包默认值
 - `Publish.Common.pubxml`：共享发布参数
@@ -67,8 +65,6 @@ Dock 包与示例已迁移到独立仓库：[CodeWF.AvaloniaControls.Dock](https
 ## 开源约束
 
 - 仓库明确避免使用商业版 NuGet 包
-- `Prism.DryIoc.Avalonia` 固定使用 `8.1.97.11073`，因为 `9.x` 已转为商业版
-- `CodeWF.AvaloniaControls.ProDataGrid` 基于 MIT 协议的 [ProDataGrid](https://www.nuget.org/packages/ProDataGrid/)
 
 ## 演示
 
