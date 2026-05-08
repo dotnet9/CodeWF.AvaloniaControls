@@ -18,13 +18,9 @@
   <Folder Name="/demos/">
     <Project Path="src/CodeWF.AvaloniaControls.ProDataGridPerformanceDemo/CodeWF.AvaloniaControls.ProDataGridPerformanceDemo.csproj" />
     <Project Path="src/CodeWF.AvaloniaControls.ProDataGridShowcase/CodeWF.AvaloniaControls.ProDataGridShowcase.csproj" />
-    <Project Path="src/CodeWF.AvaloniaControls.DockDemo/CodeWF.AvaloniaControls.DockDemo.csproj" />
-    <Project Path="src/CodeWF.AvaloniaControls.DockPrismDemo/CodeWF.AvaloniaControls.DockPrismDemo.csproj" />
-    <Project Path="src/CodeWF.AvaloniaControls.DockReactiveUIDemo/CodeWF.AvaloniaControls.DockReactiveUIDemo.csproj" />
     <Project Path="src/CodeWF.AvaloniaControls.FluentStarterDemo/CodeWF.AvaloniaControls.FluentStarterDemo.csproj" />
     <Project Path="src/CodeWF.AvaloniaControls.Showcase/CodeWF.AvaloniaControls.Showcase.csproj" />  
   </Folder>
-  <Project Path="src/CodeWF.AvaloniaControls.Dock/CodeWF.AvaloniaControls.Dock.csproj" />
   <Project Path="src/CodeWF.AvaloniaControls.ProDataGrid/CodeWF.AvaloniaControls.ProDataGrid.csproj" />
   <Project Path="src/CodeWF.AvaloniaControls.Themes/CodeWF.AvaloniaControls.Themes.csproj" />
   <Project Path="src/CodeWF.AvaloniaControls/CodeWF.AvaloniaControls.csproj" />

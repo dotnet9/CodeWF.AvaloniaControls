@@ -4,7 +4,6 @@
 |------|-------|--------|
 | CodeWF.AvaloniaControls | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls)](https://www.nuget.org/packages/CodeWF.AvaloniaControls/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls)](https://www.nuget.org/packages/CodeWF.AvaloniaControls/) |
 | CodeWF.AvaloniaControls.Themes | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Themes/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Themes/) |
-| CodeWF.AvaloniaControls.Dock | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) |
 | CodeWF.AvaloniaControls.ProDataGrid | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.ProDataGrid.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.ProDataGrid/) |
 
 这是一个基于 .NET 11 与 Avalonia 12 的开源控件仓库，包含可复用类库以及可直接运行的示例工程。
@@ -30,7 +29,6 @@ Install-Package CodeWF.AvaloniaControls
 ### Avalonia 12 主线
 
 - `CodeWF.AvaloniaControls`：通用自定义控件
-- `CodeWF.AvaloniaControls.Dock`：适配 Semi 主题的 Dock 扩展控件
 - `CodeWF.AvaloniaControls.ProDataGrid`：基于 `ProDataGrid` 的开源高性能表格辅助包
 - `CodeWF.AvaloniaControls.Themes`：`CodeWF.AvaloniaControls` 的控件模板与主题资源包
 
@@ -38,12 +36,13 @@ Markdown 相关包已迁移到独立仓库：[CodeWF.Markdown](https://github.co
 
 旧版免费 `DataGrid` / `TreeDataGrid` 包与示例已迁移到独立仓库：[CodeWF.AvaloniaControls.DataGrid](https://github.com/dotnet9/CodeWF.AvaloniaControls.DataGrid)。
 
+Dock 包与示例已迁移到独立仓库：[CodeWF.AvaloniaControls.Dock](https://github.com/dotnet9/CodeWF.AvaloniaControls.Dock)。
+
 ## 示例工程
 
 - `CodeWF.AvaloniaControls.Showcase`：通用控件展示馆
 - `CodeWF.AvaloniaControls.ProDataGridShowcase`：Avalonia 12 下的 ProDataGrid 功能示例
 - `CodeWF.AvaloniaControls.ProDataGridPerformanceDemo`：Avalonia 12 下的大数据量、Tab 切换、Document 切换性能示例
-- `CodeWF.AvaloniaControls.DockDemo`、`CodeWF.AvaloniaControls.DockPrismDemo`、`CodeWF.AvaloniaControls.DockReactiveUIDemo`：Dock 集成示例
 - `CodeWF.AvaloniaControls.FluentStarterDemo`：轻量启动窗口示例
 
 ## 公共配置
