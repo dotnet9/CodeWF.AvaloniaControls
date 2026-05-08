@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.0.2.4 - 2026-05-08
+
+- Moved `CodeWF.Markdown`, `CodeWF.Markdown.Themes`, `CodeWF.Markdown.Lite`, `CodeWF.Markdown.Lite.Themes`, and their sample applications to the standalone `CodeWF.Markdown` repository.
+- Removed Markdown projects from the `CodeWF.AvaloniaControls` solution, root packing script, and sample publish script.
+- Updated repository documentation so this repository only describes the Avalonia controls, DataGrid, Dock, ProDataGrid, and showcase sample lines.
+
 ## 12.0.2.3 - 2026-05-06
 
 - Added `CodeWF.Markdown.Lite`, `CodeWF.Markdown.Lite.Themes`, and `CodeWF.Markdown.Lite.Sample` as lightweight Markdown packages and sample app.
