@@ -1,10 +1,9 @@
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Core;
 using CodeWF.AvaloniaControls.Extensions;
 using System;
 using Ursa.Controls;
-using CodeWF.AvaloniaControls.Helpers;
-using Avalonia.Controls;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.Views;
 
@@ -16,7 +15,6 @@ public partial class MainWindow : UrsaWindow
     {
         InitializeComponent();
         this.RegisterGlobalKeyDownHandler();
-        this.EnableOSVersionAwareDecorations();
 
         PropertyChanged += async (s, e) => 
         {
