@@ -45,12 +45,17 @@
                                    Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaNoneTitle}}" />
                     </StackPanel>
                     <Button Grid.Column="2"
-                            Width="34"
-                            Height="30"
-                            Padding="0"
+                            Classes="WindowCaptionButton WindowCloseButton"
                             Click="Close_OnClick"
-                            Content="X"
-                            ToolTip.Tip="{i18n:I18n {x:Static windowLangs:WindowDemos.Close}}" />
+                            ToolTip.Tip="{i18n:I18n {x:Static windowLangs:WindowDemos.Close}}">
+                        <Path Width="12"
+                              Height="12"
+                              Data="M 1 1 L 11 11 M 11 1 L 1 11"
+                              Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                              StrokeLineCap="Round"
+                              StrokeThickness="1.6"
+                              Stretch="Uniform" />
+                    </Button>
                 </Grid>
             </Border>
 

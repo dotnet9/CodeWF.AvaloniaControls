@@ -10,6 +10,7 @@ public partial class CodeWFWindowShapedDemo : CodeWFWindow
     public CodeWFWindowShapedDemo()
     {
         InitializeComponent();
+        Opened += (_, _) => WindowRegionHelper.ApplyEllipse(this, 22, 22, 316, 316);
     }
 
     private void Shell_OnPointerPressed(object? sender, PointerPressedEventArgs e)

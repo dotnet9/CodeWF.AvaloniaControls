@@ -51,6 +51,16 @@ public partial class TestNoneWindowDemo : UserControl
         new UrsaWindowShapedDemo().Show();
     }
 
+    private void ShowUrsaWindowStar_OnClick(object? sender, RoutedEventArgs e)
+    {
+        new UrsaWindowStarDemo().Show();
+    }
+
+    private void ShowUrsaWindowBlob_OnClick(object? sender, RoutedEventArgs e)
+    {
+        new UrsaWindowBlobDemo().Show();
+    }
+
     private void ShowCodeWFWindowStandard_OnClick(object? sender, RoutedEventArgs e)
     {
         new CodeWFWindowStandardDemo().Show();

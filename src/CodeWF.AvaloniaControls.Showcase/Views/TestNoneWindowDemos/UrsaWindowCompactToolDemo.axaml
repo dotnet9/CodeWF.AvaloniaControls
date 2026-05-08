@@ -45,8 +45,21 @@
                                Foreground="{DynamicResource ShowcaseTextBrush}"
                                Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaCompactHeading}}" />
                     <StackPanel Grid.Column="2" Orientation="Horizontal">
-                        <Button Width="34" Height="28" Padding="0" Content="-" Click="Minimize_OnClick" />
-                        <Button Width="34" Height="28" Padding="0" Content="X" Click="Close_OnClick" />
+                        <Button Classes="WindowCaptionButton" Click="Minimize_OnClick">
+                            <Border Width="12"
+                                    Height="1.6"
+                                    Background="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                    CornerRadius="1" />
+                        </Button>
+                        <Button Classes="WindowCaptionButton WindowCloseButton" Click="Close_OnClick">
+                            <Path Width="12"
+                                  Height="12"
+                                  Data="M 1 1 L 11 11 M 11 1 L 1 11"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                  StrokeLineCap="Round"
+                                  StrokeThickness="1.6"
+                                  Stretch="Uniform" />
+                        </Button>
                     </StackPanel>
                 </Grid>
             </Border>

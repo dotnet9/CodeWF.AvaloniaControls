@@ -17,23 +17,6 @@
               WindowStartupLocation="CenterScreen"
               x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.UrsaWindowDarkTitleBarDemo"
               Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaDarkTitle}}">
-    <u:UrsaWindow.Styles>
-        <Style Selector="Button.CaptionButton">
-            <Setter Property="Width" Value="36" />
-            <Setter Property="Height" Value="30" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="Foreground" Value="White" />
-        </Style>
-        <Style Selector="Button.CaptionButton:pointerover">
-            <Setter Property="Background" Value="#334155" />
-        </Style>
-        <Style Selector="Button.CloseButton:pointerover">
-            <Setter Property="Background" Value="#E81123" />
-        </Style>
-    </u:UrsaWindow.Styles>
-
     <Border Background="#0B1120"
             BorderBrush="#243041"
             BorderThickness="1">
@@ -77,9 +60,29 @@
                                    Text="{i18n:I18n {x:Static windowLangs:WindowDemos.Online}}" />
                     </Border>
                     <StackPanel Grid.Column="3" Orientation="Horizontal">
-                        <Button Classes="CaptionButton" Content="-" Click="Minimize_OnClick" />
-                        <Button Classes="CaptionButton" Content="□" Click="MaximizeRestore_OnClick" />
-                        <Button Classes="CaptionButton CloseButton" Content="X" Click="Close_OnClick" />
+                        <Button Classes="WindowCaptionButton" Foreground="#E2E8F0" Click="Minimize_OnClick">
+                            <Border Width="12"
+                                    Height="1.6"
+                                    Background="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                    CornerRadius="1" />
+                        </Button>
+                        <Button Classes="WindowCaptionButton" Foreground="#E2E8F0" Click="MaximizeRestore_OnClick">
+                            <Path Width="12"
+                                  Height="12"
+                                  Data="M 1.5 1.5 L 10.5 1.5 L 10.5 10.5 L 1.5 10.5 Z"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                  StrokeThickness="1.4"
+                                  Stretch="Uniform" />
+                        </Button>
+                        <Button Classes="WindowCaptionButton WindowCloseButton" Foreground="#E2E8F0" Click="Close_OnClick">
+                            <Path Width="12"
+                                  Height="12"
+                                  Data="M 1 1 L 11 11 M 11 1 L 1 11"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                  StrokeLineCap="Round"
+                                  StrokeThickness="1.6"
+                                  Stretch="Uniform" />
+                        </Button>
                     </StackPanel>
                 </Grid>
             </Border>

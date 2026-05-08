@@ -18,59 +18,67 @@
                      TitleBarBackground="Transparent"
                      TitleBarBorderBrush="Transparent"
                      TitleBarForeground="Transparent"
-                     TransparencyLevelHint="AcrylicBlur"
+                     TransparencyBackgroundFallback="Transparent"
+                     TransparencyLevelHint="Transparent"
                      WindowStartupLocation="CenterScreen"
                      x:Class="CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos.CodeWFWindowShapedDemo"
                      Title="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFShapeTitle}}">
-    <Grid>
-        <Border Width="330"
-                Height="330"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="{DynamicResource ShowcaseCardBackground}"
-                BorderBrush="#2563EB"
-                BorderThickness="2"
-                CornerRadius="165"
-                ClipToBounds="True"
-                PointerPressed="Shell_OnPointerPressed">
-            <Grid Margin="38" RowDefinitions="Auto,*,Auto">
-                <Button Width="34"
-                        Height="30"
-                        HorizontalAlignment="Right"
-                        Padding="0"
-                        Click="Close_OnClick"
-                        Content="X"
-                        ToolTip.Tip="{i18n:I18n {x:Static windowLangs:WindowDemos.Close}}" />
-                <StackPanel Grid.Row="1"
-                            VerticalAlignment="Center"
-                            Spacing="10">
-                    <Border Width="48"
-                            Height="48"
-                            HorizontalAlignment="Center"
-                            Background="{DynamicResource ShowcaseAccentSubtleBrush}"
-                            BorderBrush="{DynamicResource ShowcaseBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="24">
-                        <TextBlock HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   FontSize="22"
-                                   FontWeight="Bold"
-                                   Foreground="{DynamicResource ShowcaseAccentTextBrush}"
-                                   Text="C" />
-                    </Border>
-                    <TextBlock HorizontalAlignment="Center"
-                               FontSize="21"
-                               FontWeight="SemiBold"
-                               Foreground="{DynamicResource ShowcaseTextBrush}"
-                               Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFShapeHeading}}" />
-                    <TextBlock MaxWidth="220"
-                               HorizontalAlignment="Center"
-                               Foreground="{DynamicResource ShowcaseMutedTextBrush}"
-                               Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFShapeDescription}}"
-                               TextAlignment="Center"
-                               TextWrapping="Wrap" />
-                </StackPanel>
-            </Grid>
-        </Border>
-    </Grid>
+    <Canvas Width="360" Height="360">
+        <Ellipse Canvas.Left="22"
+                 Canvas.Top="22"
+                 Width="316"
+                 Height="316"
+                 Fill="#EFF6FF"
+                 PointerPressed="Shell_OnPointerPressed"
+                 Stroke="#FFFFFF"
+                 StrokeThickness="10" />
+        <Path Data="M 50 176 C 98 146 150 146 204 170 C 250 192 290 188 322 162 L 322 304 L 50 304 Z"
+              Fill="#60A5FA"
+              Opacity="0.86"
+              PointerPressed="Shell_OnPointerPressed" />
+        <Path Data="M 50 232 C 104 202 156 208 214 232 C 256 250 292 248 322 226 L 322 304 L 50 304 Z"
+              Fill="#2563EB"
+              Opacity="0.86"
+              PointerPressed="Shell_OnPointerPressed" />
+        <Ellipse Canvas.Left="154"
+                 Canvas.Top="58"
+                 Width="52"
+                 Height="52"
+                 Fill="#FDE68A"
+                 Opacity="0.9"
+                 PointerPressed="Shell_OnPointerPressed" />
+        <Path Data="M 93 104 C 106 86 132 86 145 104 C 160 94 181 101 188 119 C 203 121 212 134 210 148 L 93 148 C 82 136 82 116 93 104 Z"
+              Fill="#FFFFFF"
+              Opacity="0.94"
+              PointerPressed="Shell_OnPointerPressed" />
+        <Button Canvas.Left="286"
+                Canvas.Top="72"
+                Classes="WindowCaptionButton WindowCloseButton WindowShapeCloseButton"
+                Click="Close_OnClick"
+                ToolTip.Tip="{i18n:I18n {x:Static windowLangs:WindowDemos.Close}}">
+            <Path Width="12"
+                  Height="12"
+                  Data="M 1 1 L 11 11 M 11 1 L 1 11"
+                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                  StrokeLineCap="Round"
+                  StrokeThickness="1.6"
+                  Stretch="Uniform" />
+        </Button>
+        <StackPanel Canvas.Left="72"
+                    Canvas.Top="154"
+                    Width="216"
+                    IsHitTestVisible="False"
+                    Spacing="8">
+            <TextBlock HorizontalAlignment="Center"
+                       FontSize="21"
+                       FontWeight="SemiBold"
+                       Foreground="#0F172A"
+                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFShapeHeading}}" />
+            <TextBlock HorizontalAlignment="Center"
+                       Foreground="#1E3A8A"
+                       Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFShapeDescription}}"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap" />
+        </StackPanel>
+    </Canvas>
 </codewf:CodeWFWindow>

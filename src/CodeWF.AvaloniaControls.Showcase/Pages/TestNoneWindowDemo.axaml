@@ -100,6 +100,12 @@
                         <Button Classes="DemoAction"
                                 Content="{i18n:I18n {x:Static pageLangs:WindowDemo.UrsaShape}}"
                                 Click="ShowUrsaWindowShaped_OnClick" />
+                        <Button Classes="DemoAction"
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.UrsaStar}}"
+                                Click="ShowUrsaWindowStar_OnClick" />
+                        <Button Classes="DemoAction"
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.UrsaBlob}}"
+                                Click="ShowUrsaWindowBlob_OnClick" />
                     </StackPanel>
                 </Border>
 

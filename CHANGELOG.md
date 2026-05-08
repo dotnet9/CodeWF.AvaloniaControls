@@ -11,6 +11,8 @@
 - Expanded the showcase window demos with native `Window`, `UrsaWindow`, and `CodeWFWindow` examples covering custom title bars, compact/tall title heights, and shaped windows.
 - Improved `CodeWFWindow` caption buttons so the minimize glyph is visible and close hover/press states use the expected red background.
 - Refined showcase window demo visuals by removing Ursa borderless white margins, separating title bars from client content, adding default `CodeWFWindow` borders, and replacing rounded shaped demos with circular windows.
+- Added star and freeform Ursa shaped-window demos and replaced text-only custom caption actions with glyph buttons.
+- Added Windows region clipping for shaped showcase windows so transparent outer areas are excluded from the native window hit region where supported.
 
 ## 12.0.2.3 - 2026-05-06
 

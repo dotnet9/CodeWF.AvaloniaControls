@@ -277,6 +277,8 @@ namespace Showcase.Pages
         public static readonly string UrsaCompact = "Showcase.Pages.WindowDemo.UrsaCompact";
         public static readonly string UrsaTall = "Showcase.Pages.WindowDemo.UrsaTall";
         public static readonly string UrsaShape = "Showcase.Pages.WindowDemo.UrsaShape";
+        public static readonly string UrsaStar = "Showcase.Pages.WindowDemo.UrsaStar";
+        public static readonly string UrsaBlob = "Showcase.Pages.WindowDemo.UrsaBlob";
         public static readonly string CodeWFGroup = "Showcase.Pages.WindowDemo.CodeWFGroup";
         public static readonly string CodeWFDesc = "Showcase.Pages.WindowDemo.CodeWFDesc";
         public static readonly string StandardCodeWF = "Showcase.Pages.WindowDemo.StandardCodeWF";
@@ -319,6 +321,12 @@ namespace Showcase.Windows
         public static readonly string UrsaShapeTitle = "Showcase.Windows.WindowDemos.UrsaShapeTitle";
         public static readonly string UrsaShapeHeading = "Showcase.Windows.WindowDemos.UrsaShapeHeading";
         public static readonly string UrsaShapeDescription = "Showcase.Windows.WindowDemos.UrsaShapeDescription";
+        public static readonly string UrsaStarTitle = "Showcase.Windows.WindowDemos.UrsaStarTitle";
+        public static readonly string UrsaStarHeading = "Showcase.Windows.WindowDemos.UrsaStarHeading";
+        public static readonly string UrsaStarDescription = "Showcase.Windows.WindowDemos.UrsaStarDescription";
+        public static readonly string UrsaBlobTitle = "Showcase.Windows.WindowDemos.UrsaBlobTitle";
+        public static readonly string UrsaBlobHeading = "Showcase.Windows.WindowDemos.UrsaBlobHeading";
+        public static readonly string UrsaBlobDescription = "Showcase.Windows.WindowDemos.UrsaBlobDescription";
         public static readonly string CodeWFStandardTitle = "Showcase.Windows.WindowDemos.CodeWFStandardTitle";
         public static readonly string CodeWFStandardHeading = "Showcase.Windows.WindowDemos.CodeWFStandardHeading";
         public static readonly string CodeWFStandardDescription = "Showcase.Windows.WindowDemos.CodeWFStandardDescription";
@@ -366,6 +374,5 @@ namespace Showcase.Windows
 
 
 }
-
 
 
