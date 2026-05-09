@@ -1,8 +1,8 @@
 # Changelog
 
-## 12.0.3.0 - 2026-05-09
+## 12.0.2.9 - 2026-05-09
 
-- Bumped the controls and themes package version to 12.0.3.0 for the `CodeWFWindow` template fix release.
+- Bumped the controls and themes package version to 12.0.2.9 for the `CodeWFWindow` template fix release.
 - Restored and named `VisualLayerManager` in the default `CodeWFWindow` template so `ComboBox`, dropdowns, and other popup controls can resolve the overlay host when `OverlayPopups=true`.
 - Wired the default `CodeWFWindow` foreground to `SemiGrey9` so regular content text does not inherit unreadable black text in dark-themed surfaces.
 - Added Ursa-compatible `CodeWFWindow` title-bar properties for caption button visibility, title-bar visibility, managed resize grips, title-bar content, and title-bar margin.
