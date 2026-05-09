@@ -7,7 +7,7 @@ namespace CodeWF.AvaloniaControls.Showcase.Views.TestNoneWindowDemos;
 
 internal static class WindowRegionHelper
 {
-    public static void ApplyEllipse(Window window, double x, double y, double width, double height)
+    public static void ApplyEllipse(Window window, double x, double y, double width, double height, double padding = 0)
     {
         if (!OperatingSystem.IsWindows())
         {
@@ -16,21 +16,27 @@ internal static class WindowRegionHelper
 
         var scaling = window.RenderScaling;
         var region = CreateEllipticRgn(
-            Scale(x, scaling),
-            Scale(y, scaling),
-            Scale(x + width, scaling),
-            Scale(y + height, scaling));
+            Scale(x - padding, scaling),
+            Scale(y - padding, scaling),
+            Scale(x + width + padding, scaling),
+            Scale(y + height + padding, scaling));
 
         ApplyRegion(window, region);
     }
 
     public static void ApplyPolygon(Window window, params Point[] points)
     {
+        ApplyPolygon(window, 0, points);
+    }
+
+    public static void ApplyPolygon(Window window, double padding, params Point[] points)
+    {
         if (!OperatingSystem.IsWindows() || points.Length < 3)
         {
             return;
         }
 
+        points = InflateFromCenter(points, padding);
         var scaling = window.RenderScaling;
         var nativePoints = new NativePoint[points.Length];
         for (var i = 0; i < points.Length; i++)
@@ -39,6 +45,40 @@ internal static class WindowRegionHelper
         }
 
         ApplyRegion(window, CreatePolygonRgn(nativePoints, nativePoints.Length, 1));
+    }
+
+    private static Point[] InflateFromCenter(Point[] points, double padding)
+    {
+        if (padding <= 0)
+        {
+            return points;
+        }
+
+        double centerX = 0;
+        double centerY = 0;
+        foreach (var point in points)
+        {
+            centerX += point.X;
+            centerY += point.Y;
+        }
+
+        var center = new Point(centerX / points.Length, centerY / points.Length);
+
+        var inflated = new Point[points.Length];
+        for (var i = 0; i < points.Length; i++)
+        {
+            var offset = points[i] - center;
+            var length = Math.Sqrt(offset.X * offset.X + offset.Y * offset.Y);
+            if (length <= 0.001)
+            {
+                inflated[i] = points[i];
+                continue;
+            }
+
+            inflated[i] = center + offset * ((length + padding) / length);
+        }
+
+        return inflated;
     }
 
     private static void ApplyRegion(Window window, IntPtr region)

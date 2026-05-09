@@ -72,9 +72,6 @@
                                 Content="{i18n:I18n {x:Static pageLangs:WindowDemo.OpenNative}}"
                                 Click="ShowNativeWindow_OnClick" />
                         <Button Classes="DemoAction"
-                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.NativeNone}}"
-                                Click="ShowNativeWindowBorderless_OnClick" />
-                        <Button Classes="DemoAction"
                                 Content="{i18n:I18n {x:Static pageLangs:WindowDemo.NativeMove}}"
                                 Click="ShowNativeWindowDraggable_OnClick" />
                         <Button Classes="DemoAction"

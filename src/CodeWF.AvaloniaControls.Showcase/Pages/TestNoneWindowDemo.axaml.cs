@@ -16,11 +16,6 @@ public partial class TestNoneWindowDemo : UserControl
         new NativeWindowDemo().Show();
     }
 
-    private void ShowNativeWindowBorderless_OnClick(object? sender, RoutedEventArgs e)
-    {
-        new NativeWindowBorderlessDemo().Show();
-    }
-
     private void ShowNativeWindowDraggable_OnClick(object? sender, RoutedEventArgs e)
     {
         new NativeWindowDraggableDemo().Show();

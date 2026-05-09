@@ -12,6 +12,7 @@ public partial class NativeWindowStarDemo : Window
         InitializeComponent();
         Opened += (_, _) => WindowRegionHelper.ApplyPolygon(
             this,
+            6,
             new Point(215, 28),
             new Point(258, 156),
             new Point(392, 156),

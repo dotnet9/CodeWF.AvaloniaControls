@@ -9,7 +9,7 @@ public partial class NativeWindowShapedDemo : Window
     public NativeWindowShapedDemo()
     {
         InitializeComponent();
-        Opened += (_, _) => WindowRegionHelper.ApplyEllipse(this, 22, 22, 316, 316);
+        Opened += (_, _) => WindowRegionHelper.ApplyEllipse(this, 22, 22, 316, 316, 5);
     }
 
     private void Shape_OnPointerPressed(object? sender, PointerPressedEventArgs e)
