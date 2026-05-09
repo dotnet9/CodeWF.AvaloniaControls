@@ -30,10 +30,11 @@
 
     <codewf:CodeWFWindow.Resources>
         <DataTemplate x:Key="LanguageSelectionTemplate" x:DataType="lang:LocalizationLanguage">
-            <StackPanel Orientation="Horizontal" Spacing="7">
-                <TextBlock FontWeight="SemiBold" Text="{Binding DisplayName}" />
-                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{Binding DisplayTag}" />
-            </StackPanel>
+            <TextBlock VerticalAlignment="Center" TextTrimming="CharacterEllipsis">
+                <Run FontWeight="SemiBold" Text="{Binding DisplayName}" />
+                <Run Text=" " />
+                <Run Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{Binding DisplayTag}" />
+            </TextBlock>
         </DataTemplate>
         <DataTemplate x:Key="LanguageOptionTemplate" x:DataType="lang:LocalizationLanguage">
             <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
@@ -87,6 +88,8 @@
             <Setter Property="MinWidth" Value="150" />
             <Setter Property="Height" Value="34" />
             <Setter Property="Padding" Value="8,4" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
     </codewf:CodeWFWindow.Styles>
 

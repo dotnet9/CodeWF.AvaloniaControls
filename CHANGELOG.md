@@ -1,5 +1,13 @@
 # Changelog
 
+## 12.0.2.5 - 2026-05-09
+
+- Bumped the controls and themes package version to 12.0.2.5 for the `CodeWFWindow` template fix release.
+- Restored `VisualLayerManager` in the default `CodeWFWindow` template so `ComboBox`, dropdowns, and other popup controls can resolve the overlay host when `OverlayPopups=true`.
+- Wired the default `CodeWFWindow` foreground to `SemiGrey9` so regular content text does not inherit unreadable black text in dark-themed surfaces.
+- Fixed the showcase title-bar language selector closed-state layout so the language name and culture tag share one text baseline while the dropdown option layout remains unchanged.
+- Centralized library and sample changelog entries in the root English and Chinese changelog files.
+
 ## 12.0.2.4 - 2026-05-08
 
 - Moved `CodeWF.AvaloniaControls.ProDataGrid` and its ProDataGrid sample applications to the standalone `CodeWF.AvaloniaControls.ProDataGrid` repository.

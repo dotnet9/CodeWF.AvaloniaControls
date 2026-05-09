@@ -1,5 +1,13 @@
 # 更新日志
 
+## 12.0.2.5 - 2026-05-09
+
+- 将控件库与主题库版本提升到 12.0.2.5，用于发布 `CodeWFWindow` 模板修复。
+- 为默认 `CodeWFWindow` 模板补回 `VisualLayerManager`，确保 `OverlayPopups=true` 时 `ComboBox`、下拉层和其他弹出控件可以找到窗口弹层宿主。
+- 将默认 `CodeWFWindow` 前景色接入 `SemiGrey9`，避免深色主题表面中的普通内容文字继承黑色而不可读。
+- 修复展示馆标题栏语言选择框的闭合态布局，使语言名称与区域码共用同一文本基线，同时保持下拉选项布局不变。
+- 将各库和示例应用的更新日志条目统一汇总到根目录中英文更新日志文件。
+
 ## 12.0.2.4 - 2026-05-08
 
 - 将 `CodeWF.AvaloniaControls.ProDataGrid` 及其 ProDataGrid 示例应用迁移到独立的 `CodeWF.AvaloniaControls.ProDataGrid` 仓库。

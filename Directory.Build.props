@@ -1,6 +1,6 @@
 <Project>
 	<PropertyGroup>
-		<CodeWFAvaloniaControlsVersion>12.0.2.4</CodeWFAvaloniaControlsVersion>
+		<CodeWFAvaloniaControlsVersion>12.0.2.5</CodeWFAvaloniaControlsVersion>
 		<Version Condition="'$(Version)' == ''">$(CodeWFAvaloniaControlsVersion)</Version>
 		<Authors>沙漠尽头的狼</Authors>
 		<RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</RepositoryUrl>
