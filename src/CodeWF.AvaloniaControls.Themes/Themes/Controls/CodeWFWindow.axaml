@@ -15,6 +15,7 @@
             <ControlTemplate TargetType="codewf:CodeWFWindow">
                 <Panel>
                     <primitives:VisualLayerManager
+                        Name="PART_VisualLayerManager"
                         EnableAdornerLayer="True"
                         EnableOverlayLayer="True"
                         EnableTextSelectorLayer="True">
