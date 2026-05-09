@@ -1,10 +1,15 @@
 # Changelog
 
-## 12.0.2.8 - 2026-05-09
+## 12.0.3.0 - 2026-05-09
 
-- Bumped the controls and themes package version to 12.0.2.8 for the `CodeWFWindow` template fix release.
+- Bumped the controls and themes package version to 12.0.3.0 for the `CodeWFWindow` template fix release.
 - Restored and named `VisualLayerManager` in the default `CodeWFWindow` template so `ComboBox`, dropdowns, and other popup controls can resolve the overlay host when `OverlayPopups=true`.
 - Wired the default `CodeWFWindow` foreground to `SemiGrey9` so regular content text does not inherit unreadable black text in dark-themed surfaces.
+- Added Ursa-compatible `CodeWFWindow` title-bar properties for caption button visibility, title-bar visibility, managed resize grips, title-bar content, and title-bar margin.
+- Updated `CodeWFWindow` maximize and double-click behavior to respect `CanMaximize` while keeping the Win7/Linux managed title-bar implementation.
+- Added interactive controls to the standard `CodeWFWindow` showcase sample so the new title-bar properties can be toggled live.
+- Increased default `CodeWFWindow` caption-button hover and pressed contrast so minimize and maximize feedback is easier to see.
+- Converted the standard `CodeWFWindow` showcase sample title-bar toggles to ViewModel bindings instead of direct click handlers.
 - Fixed the showcase title-bar language selector closed-state layout so the language name and culture tag share one text baseline while the dropdown option layout remains unchanged.
 - Centralized library and sample changelog entries in the root English and Chinese changelog files.
 

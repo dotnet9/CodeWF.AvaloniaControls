@@ -14,9 +14,64 @@ public class CodeWFWindow : Window
 {
     private readonly Dictionary<Control, WindowEdge> _resizeGrips = new();
     private InputElement? _titleBar;
+    private Button? _fullScreenButton;
     private Button? _minimizeButton;
     private Button? _maximizeRestoreButton;
     private Button? _closeButton;
+
+    public static readonly StyledProperty<bool> IsFullScreenButtonVisibleProperty =
+        AvaloniaProperty.Register<CodeWFWindow, bool>(nameof(IsFullScreenButtonVisible));
+
+    public bool IsFullScreenButtonVisible
+    {
+        get => GetValue(IsFullScreenButtonVisibleProperty);
+        set => SetValue(IsFullScreenButtonVisibleProperty, value);
+    }
+
+    public static readonly StyledProperty<bool> IsMinimizeButtonVisibleProperty =
+        AvaloniaProperty.Register<CodeWFWindow, bool>(nameof(IsMinimizeButtonVisible), true);
+
+    public bool IsMinimizeButtonVisible
+    {
+        get => GetValue(IsMinimizeButtonVisibleProperty);
+        set => SetValue(IsMinimizeButtonVisibleProperty, value);
+    }
+
+    public static readonly StyledProperty<bool> IsRestoreButtonVisibleProperty =
+        AvaloniaProperty.Register<CodeWFWindow, bool>(nameof(IsRestoreButtonVisible), true);
+
+    public bool IsRestoreButtonVisible
+    {
+        get => GetValue(IsRestoreButtonVisibleProperty);
+        set => SetValue(IsRestoreButtonVisibleProperty, value);
+    }
+
+    public static readonly StyledProperty<bool> IsCloseButtonVisibleProperty =
+        AvaloniaProperty.Register<CodeWFWindow, bool>(nameof(IsCloseButtonVisible), true);
+
+    public bool IsCloseButtonVisible
+    {
+        get => GetValue(IsCloseButtonVisibleProperty);
+        set => SetValue(IsCloseButtonVisibleProperty, value);
+    }
+
+    public static readonly StyledProperty<bool> IsTitleBarVisibleProperty =
+        AvaloniaProperty.Register<CodeWFWindow, bool>(nameof(IsTitleBarVisible), true);
+
+    public bool IsTitleBarVisible
+    {
+        get => GetValue(IsTitleBarVisibleProperty);
+        set => SetValue(IsTitleBarVisibleProperty, value);
+    }
+
+    public static readonly StyledProperty<bool> IsManagedResizerVisibleProperty =
+        AvaloniaProperty.Register<CodeWFWindow, bool>(nameof(IsManagedResizerVisible), true);
+
+    public bool IsManagedResizerVisible
+    {
+        get => GetValue(IsManagedResizerVisibleProperty);
+        set => SetValue(IsManagedResizerVisibleProperty, value);
+    }
 
     public static readonly StyledProperty<object?> LeftContentProperty =
         AvaloniaProperty.Register<CodeWFWindow, object?>(nameof(LeftContent));
@@ -52,6 +107,33 @@ public class CodeWFWindow : Window
     {
         get => GetValue(RightContentTemplateProperty);
         set => SetValue(RightContentTemplateProperty, value);
+    }
+
+    public static readonly StyledProperty<object?> TitleBarContentProperty =
+        AvaloniaProperty.Register<CodeWFWindow, object?>(nameof(TitleBarContent));
+
+    public object? TitleBarContent
+    {
+        get => GetValue(TitleBarContentProperty);
+        set => SetValue(TitleBarContentProperty, value);
+    }
+
+    public static readonly StyledProperty<IDataTemplate?> TitleBarContentTemplateProperty =
+        AvaloniaProperty.Register<CodeWFWindow, IDataTemplate?>(nameof(TitleBarContentTemplate));
+
+    public IDataTemplate? TitleBarContentTemplate
+    {
+        get => GetValue(TitleBarContentTemplateProperty);
+        set => SetValue(TitleBarContentTemplateProperty, value);
+    }
+
+    public static readonly StyledProperty<Thickness> TitleBarMarginProperty =
+        AvaloniaProperty.Register<CodeWFWindow, Thickness>(nameof(TitleBarMargin));
+
+    public Thickness TitleBarMargin
+    {
+        get => GetValue(TitleBarMarginProperty);
+        set => SetValue(TitleBarMarginProperty, value);
     }
 
     public static readonly StyledProperty<double> TitleBarHeightProperty =
@@ -116,6 +198,7 @@ public class CodeWFWindow : Window
         DetachTemplateEvents();
 
         _titleBar = e.NameScope.Find<InputElement>("PART_TitleBar");
+        _fullScreenButton = e.NameScope.Find<Button>("PART_FullScreenButton");
         _minimizeButton = e.NameScope.Find<Button>("PART_MinimizeButton");
         _maximizeRestoreButton = e.NameScope.Find<Button>("PART_MaximizeRestoreButton");
         _closeButton = e.NameScope.Find<Button>("PART_CloseButton");
@@ -123,6 +206,11 @@ public class CodeWFWindow : Window
         if (_titleBar is not null)
         {
             _titleBar.PointerPressed += TitleBar_OnPointerPressed;
+        }
+
+        if (_fullScreenButton is not null)
+        {
+            _fullScreenButton.Click += FullScreenButton_OnClick;
         }
 
         if (_minimizeButton is not null)
@@ -150,6 +238,7 @@ public class CodeWFWindow : Window
         AttachResizeGrip(e, "PART_ResizeBottomRight", WindowEdge.SouthEast);
 
         UpdateWindowStatePseudoClasses();
+        UpdateTitleBarContentPseudoClasses();
         UpdateButtonStates();
         UpdateResizeGripStates();
     }
@@ -163,9 +252,21 @@ public class CodeWFWindow : Window
             UpdateWindowStatePseudoClasses();
         }
 
-        if (change.Property == WindowStateProperty || change.Property == CanResizeProperty)
+        if (change.Property == TitleBarContentProperty)
+        {
+            UpdateTitleBarContentPseudoClasses();
+        }
+
+        if (change.Property == WindowStateProperty
+            || change.Property == CanResizeProperty
+            || change.Property == CanMaximizeProperty)
         {
             UpdateButtonStates();
+            UpdateResizeGripStates();
+        }
+
+        if (change.Property == IsManagedResizerVisibleProperty)
+        {
             UpdateResizeGripStates();
         }
     }
@@ -187,6 +288,11 @@ public class CodeWFWindow : Window
         if (_titleBar is not null)
         {
             _titleBar.PointerPressed -= TitleBar_OnPointerPressed;
+        }
+
+        if (_fullScreenButton is not null)
+        {
+            _fullScreenButton.Click -= FullScreenButton_OnClick;
         }
 
         if (_minimizeButton is not null)
@@ -219,7 +325,7 @@ public class CodeWFWindow : Window
             return;
         }
 
-        if (e.ClickCount == 2 && CanResize)
+        if (e.ClickCount == 2 && CanResize && CanMaximize && WindowState != WindowState.FullScreen)
         {
             ToggleMaximizeRestore();
             e.Handled = true;
@@ -232,7 +338,8 @@ public class CodeWFWindow : Window
 
     private void ResizeGrip_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (!CanResize
+        if (!IsManagedResizerVisible
+            || !CanResize
             || WindowState == WindowState.Maximized
             || WindowState == WindowState.FullScreen
             || !e.GetCurrentPoint(this).Properties.IsLeftButtonPressed
@@ -246,6 +353,13 @@ public class CodeWFWindow : Window
         e.Handled = true;
     }
 
+    private void FullScreenButton_OnClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        WindowState = WindowState == WindowState.FullScreen
+            ? WindowState.Normal
+            : WindowState.FullScreen;
+    }
+
     private void MinimizeButton_OnClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         WindowState = WindowState.Minimized;
@@ -253,7 +367,7 @@ public class CodeWFWindow : Window
 
     private void MaximizeRestoreButton_OnClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        if (CanResize)
+        if (CanResize && CanMaximize && WindowState != WindowState.FullScreen)
         {
             ToggleMaximizeRestore();
         }
@@ -278,17 +392,23 @@ public class CodeWFWindow : Window
         PseudoClasses.Set(":fullscreen", WindowState == WindowState.FullScreen);
     }
 
+    private void UpdateTitleBarContentPseudoClasses()
+    {
+        PseudoClasses.Set(":has-title-bar-content", TitleBarContent is not null);
+    }
+
     private void UpdateButtonStates()
     {
         if (_maximizeRestoreButton is not null)
         {
-            _maximizeRestoreButton.IsEnabled = CanResize;
+            _maximizeRestoreButton.IsEnabled = CanResize && CanMaximize && WindowState != WindowState.FullScreen;
         }
     }
 
     private void UpdateResizeGripStates()
     {
-        var showResizeGrips = CanResize
+        var showResizeGrips = IsManagedResizerVisible
+            && CanResize
             && WindowState != WindowState.Maximized
             && WindowState != WindowState.FullScreen;
 
