@@ -32,6 +32,11 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Padding" Value="8,0" />
         </Style>
+        <Style Selector="TextBlock.title-bar-menu-header">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#F3F4F6" />
+        </Style>
         <Style Selector="Menu.title-bar-menu > MenuItem:pointerover">
             <Setter Property="Foreground" Value="#F3F4F6" />
             <Setter Property="Background" Value="#32383F" />
@@ -79,7 +84,10 @@
                    Source="/Assets/logo.png" />
             <Menu Grid.Column="1"
                   Classes="title-bar-menu">
-                <MenuItem Header="File">
+                <MenuItem>
+                    <MenuItem.Header>
+                        <TextBlock Classes="title-bar-menu-header" Text="File" />
+                    </MenuItem.Header>
                     <MenuItem Header="New repository..." />
                     <MenuItem Header="Add local repository..." />
                     <MenuItem Header="Clone repository..." />
@@ -88,7 +96,10 @@
                     <Separator />
                     <MenuItem Header="Exit" />
                 </MenuItem>
-                <MenuItem Header="Edit">
+                <MenuItem>
+                    <MenuItem.Header>
+                        <TextBlock Classes="title-bar-menu-header" Text="Edit" />
+                    </MenuItem.Header>
                     <MenuItem Header="Undo" />
                     <MenuItem Header="Redo" />
                     <Separator />
@@ -97,7 +108,10 @@
                     <MenuItem Header="Paste" />
                     <MenuItem Header="Select All" />
                 </MenuItem>
-                <MenuItem Header="View">
+                <MenuItem>
+                    <MenuItem.Header>
+                        <TextBlock Classes="title-bar-menu-header" Text="View" />
+                    </MenuItem.Header>
                     <MenuItem Header="Show Changes" />
                     <MenuItem Header="Show History" />
                     <Separator />
@@ -107,7 +121,10 @@
                     <MenuItem Header="Zoom Out" />
                     <MenuItem Header="Reset Zoom" />
                 </MenuItem>
-                <MenuItem Header="Repository">
+                <MenuItem>
+                    <MenuItem.Header>
+                        <TextBlock Classes="title-bar-menu-header" Text="Repository" />
+                    </MenuItem.Header>
                     <MenuItem Header="Push" />
                     <MenuItem Header="Pull" />
                     <MenuItem Header="Fetch" />
@@ -118,7 +135,10 @@
                     <Separator />
                     <MenuItem Header="Repository Settings..." />
                 </MenuItem>
-                <MenuItem Header="Branch">
+                <MenuItem>
+                    <MenuItem.Header>
+                        <TextBlock Classes="title-bar-menu-header" Text="Branch" />
+                    </MenuItem.Header>
                     <MenuItem Header="New branch..." />
                     <MenuItem Header="Rename branch..." />
                     <MenuItem Header="Delete branch" />
@@ -127,7 +147,10 @@
                     <MenuItem Header="Compare to current branch" />
                     <MenuItem Header="Merge into current branch..." />
                 </MenuItem>
-                <MenuItem Header="Help">
+                <MenuItem>
+                    <MenuItem.Header>
+                        <TextBlock Classes="title-bar-menu-header" Text="Help" />
+                    </MenuItem.Header>
                     <MenuItem Header="About GitHub Desktop" />
                     <MenuItem Header="Show User Guide" />
                     <MenuItem Header="Report Issue" />
