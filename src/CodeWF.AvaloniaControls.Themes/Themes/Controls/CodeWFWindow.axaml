@@ -10,6 +10,7 @@
         <Setter Property="TitleBarBackground" Value="#F8FAFC" />
         <Setter Property="TitleBarForeground" Value="#0F172A" />
         <Setter Property="TitleBarBorderBrush" Value="#DCE3EE" />
+        <Setter Property="TitleBarBorderThickness" Value="0,0,0,1" />
         <Setter Property="WindowCornerRadius" Value="4" />
         <Setter Property="IsTitleBarVisible" Value="True" />
         <Setter Property="IsManagedResizerVisible" Value="True" />
@@ -60,7 +61,7 @@
                                         Margin="{TemplateBinding TitleBarMargin}"
                                         Background="{TemplateBinding TitleBarBackground}"
                                         BorderBrush="{TemplateBinding TitleBarBorderBrush}"
-                                        BorderThickness="0,0,0,1"
+                                        BorderThickness="{TemplateBinding TitleBarBorderThickness}"
                                         CenterContent="{TemplateBinding TitleBarContent}"
                                         CenterContentTemplate="{TemplateBinding TitleBarContentTemplate}"
                                         Foreground="{TemplateBinding TitleBarForeground}"

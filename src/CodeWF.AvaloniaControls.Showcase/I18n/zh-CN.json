@@ -5,8 +5,8 @@
   "Showcase": {
     "Main": {
       "MainWindow": {
-        "Title": "CodeWF 控件示例",
-        "AppName": "CodeWF 控件示例",
+        "Title": "CodeWF控件集",
+        "AppName": "CodeWF控件集",
         "ControlListTitle": "控件列表",
         "SearchWatermark": "按控件名搜索",
         "LanguageLabel": "语言",

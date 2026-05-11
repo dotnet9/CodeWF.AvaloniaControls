@@ -95,7 +95,7 @@
 
     <codewf:CodeWFWindow.LeftContent>
         <Grid Height="60"
-              ColumnDefinitions="Auto"
+              ColumnDefinitions="Auto,Auto"
               IsHitTestVisible="False">
             <Border Width="34"
                     Height="34"
@@ -111,6 +111,14 @@
                        RenderOptions.BitmapInterpolationMode="HighQuality"
                        Source="/Assets/logo.png" />
             </Border>
+            <TextBlock Grid.Column="1"
+                       Margin="10,0,0,0"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       FontWeight="SemiBold"
+                       Foreground="{DynamicResource ShowcaseTitleBarForeground}"
+                       Text="{i18n:I18n {x:Static mainLangs:MainWindow.AppName}}"
+                       TextTrimming="CharacterEllipsis" />
         </Grid>
     </codewf:CodeWFWindow.LeftContent>
 

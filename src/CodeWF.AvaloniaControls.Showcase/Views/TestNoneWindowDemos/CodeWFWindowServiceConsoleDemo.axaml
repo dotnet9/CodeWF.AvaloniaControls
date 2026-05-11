@@ -17,6 +17,7 @@
                      TitleBarHeight="37"
                      TitleBarBackground="Transparent"
                      TitleBarBorderBrush="#2F83D9"
+                     TitleBarBorderThickness="0"
                      TitleBarForeground="White"
                      WindowCornerRadius="4"
                      WindowStartupLocation="CenterScreen"

@@ -181,6 +181,15 @@ public class CodeWFWindow : Window
         set => SetValue(TitleBarBorderBrushProperty, value);
     }
 
+    public static readonly StyledProperty<Thickness> TitleBarBorderThicknessProperty =
+        AvaloniaProperty.Register<CodeWFWindow, Thickness>(nameof(TitleBarBorderThickness), new Thickness(0, 0, 0, 1));
+
+    public Thickness TitleBarBorderThickness
+    {
+        get => GetValue(TitleBarBorderThicknessProperty);
+        set => SetValue(TitleBarBorderThicknessProperty, value);
+    }
+
     public static readonly StyledProperty<CornerRadius> WindowCornerRadiusProperty =
         AvaloniaProperty.Register<CodeWFWindow, CornerRadius>(nameof(WindowCornerRadius), new CornerRadius(4));
 
