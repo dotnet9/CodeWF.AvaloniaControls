@@ -1,0 +1,99 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:codewf="https://codewf.com">
+    <ControlTheme x:Key="{x:Type codewf:CodeWFTitleBar}" TargetType="codewf:CodeWFTitleBar">
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource SemiGrey9}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="codewf:CodeWFTitleBar">
+                <Border
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Padding="{TemplateBinding Padding}"
+                    WindowDecorationProperties.ElementRole="TitleBar">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <StackPanel
+                            Classes="default-left-content"
+                            Margin="14,0,10,0"
+                            VerticalAlignment="Stretch"
+                            IsHitTestVisible="False"
+                            Orientation="Horizontal"
+                            Spacing="8">
+                            <Image
+                                Classes="window-icon"
+                                Width="16"
+                                Height="16"
+                                VerticalAlignment="Center"
+                                IsVisible="False"
+                                RenderOptions.BitmapInterpolationMode="HighQuality"
+                                Source="{TemplateBinding Icon, Converter={StaticResource WindowIconToImageConverter}}" />
+                            <TextBlock
+                                Classes="window-title"
+                                VerticalAlignment="Center"
+                                FontFamily="{TemplateBinding FontFamily}"
+                                FontSize="{TemplateBinding FontSize}"
+                                FontWeight="SemiBold"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding Title}"
+                                TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+
+                        <ContentPresenter
+                            Grid.Column="0"
+                            Classes="left-content"
+                            Margin="14,0,10,0"
+                            VerticalAlignment="Stretch"
+                            Content="{TemplateBinding LeftContent}"
+                            ContentTemplate="{TemplateBinding LeftContentTemplate}"
+                            IsVisible="False"
+                            KeyboardNavigation.TabNavigation="Local"
+                            WindowDecorationProperties.ElementRole="User" />
+
+                        <ContentPresenter
+                            Grid.Column="1"
+                            Classes="center-content"
+                            Margin="0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Content="{TemplateBinding CenterContent}"
+                            ContentTemplate="{TemplateBinding CenterContentTemplate}"
+                            IsVisible="False"
+                            KeyboardNavigation.TabNavigation="Local"
+                            WindowDecorationProperties.ElementRole="User" />
+
+                        <ContentPresenter
+                            Grid.Column="2"
+                            Classes="right-content"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Stretch"
+                            Content="{TemplateBinding RightContent}"
+                            ContentTemplate="{TemplateBinding RightContentTemplate}"
+                            IsVisible="False"
+                            KeyboardNavigation.TabNavigation="Local"
+                            WindowDecorationProperties.ElementRole="User" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:has-icon /template/ Image.window-icon">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^:has-left-content /template/ StackPanel.default-left-content">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="^:has-left-content /template/ ContentPresenter.left-content">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^:has-center-content /template/ ContentPresenter.center-content">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^:has-right-content /template/ ContentPresenter.right-content">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

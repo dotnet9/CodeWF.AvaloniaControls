@@ -73,6 +73,15 @@ public class CodeWFWindow : Window
         set => SetValue(IsManagedResizerVisibleProperty, value);
     }
 
+    public static readonly StyledProperty<bool> ContentExtendsIntoTitleBarProperty =
+        AvaloniaProperty.Register<CodeWFWindow, bool>(nameof(ContentExtendsIntoTitleBar));
+
+    public bool ContentExtendsIntoTitleBar
+    {
+        get => GetValue(ContentExtendsIntoTitleBarProperty);
+        set => SetValue(ContentExtendsIntoTitleBarProperty, value);
+    }
+
     public static readonly StyledProperty<object?> LeftContentProperty =
         AvaloniaProperty.Register<CodeWFWindow, object?>(nameof(LeftContent));
 
@@ -238,7 +247,7 @@ public class CodeWFWindow : Window
         AttachResizeGrip(e, "PART_ResizeBottomRight", WindowEdge.SouthEast);
 
         UpdateWindowStatePseudoClasses();
-        UpdateTitleBarContentPseudoClasses();
+        UpdateContentLayoutPseudoClasses();
         UpdateButtonStates();
         UpdateResizeGripStates();
     }
@@ -252,9 +261,9 @@ public class CodeWFWindow : Window
             UpdateWindowStatePseudoClasses();
         }
 
-        if (change.Property == TitleBarContentProperty)
+        if (change.Property == ContentExtendsIntoTitleBarProperty)
         {
-            UpdateTitleBarContentPseudoClasses();
+            UpdateContentLayoutPseudoClasses();
         }
 
         if (change.Property == WindowStateProperty
@@ -392,9 +401,9 @@ public class CodeWFWindow : Window
         PseudoClasses.Set(":fullscreen", WindowState == WindowState.FullScreen);
     }
 
-    private void UpdateTitleBarContentPseudoClasses()
+    private void UpdateContentLayoutPseudoClasses()
     {
-        PseudoClasses.Set(":has-title-bar-content", TitleBarContent is not null);
+        PseudoClasses.Set(":content-extends-into-title-bar", ContentExtendsIntoTitleBar);
     }
 
     private void UpdateButtonStates()

@@ -1,5 +1,15 @@
 # 更新日志
 
+## 12.0.2.10 - 2026-05-11
+
+- 将控件库与主题库版本提升到 12.0.2.10，用于发布 `CodeWFWindow` 标题栏组合能力更新。
+- 新增独立的 `CodeWFTitleBar` 标题栏控件，提供 `LeftContent`、`CenterContent` 和 `RightContent` 插槽；未设置自定义左侧内容时默认显示 `Icon + Title`。
+- 重构默认 `CodeWFWindow` 模板，使标题栏覆盖在内容层之上，跨标题栏背景和跨标题栏控件可以更自然地组合。
+- 为 `CodeWFWindow` 新增 `ContentExtendsIntoTitleBar`，支持内容有意绘制到托管标题栏下方的布局。
+- 完善标准 `CodeWFWindow` 展示示例，加入默认标题、自定义左侧内容、中间内容、右侧内容、标题栏边距和内容延伸的实时开关。
+- 新增服务台 `CodeWFWindow` 展示示例，使用共享顶部蒙版图片，并通过 `CodeWF.LogViewer.Avalonia` 展示日志。
+- 更新中央包版本，包含 `CodeWF.LogViewer.Avalonia`、`Lang.Avalonia.Json` 和 `YY-Thunks`。
+
 ## 12.0.2.9 - 2026-05-09
 
 - 将控件库与主题库版本提升到 12.0.2.9，用于发布 `CodeWFWindow` 模板修复。

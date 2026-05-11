@@ -7,4 +7,5 @@
 	<codewf:StatusCardKindForegroundConverter x:Key="StatusCardKindForegroundConverter" />
 	<codewf:StatusLabelKindBackgroundConverter x:Key="StatusLabelKindBackgroundConverter" />
 	<codewf:String2ImageConverter x:Key="String2ImageConverter" />
+	<codewf:WindowIconToImageConverter x:Key="WindowIconToImageConverter" />
 </ResourceDictionary>

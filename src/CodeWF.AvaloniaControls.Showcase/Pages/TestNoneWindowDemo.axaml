@@ -129,6 +129,9 @@
                         <Button Classes="DemoAction"
                                 Content="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFTall}}"
                                 Click="ShowCodeWFWindowTall_OnClick" />
+                        <Button Classes="DemoAction"
+                                Content="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFServiceConsole}}"
+                                Click="ShowCodeWFWindowServiceConsole_OnClick" />
                     </StackPanel>
                 </Border>
             </Grid>

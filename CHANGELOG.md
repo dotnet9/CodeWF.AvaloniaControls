@@ -1,5 +1,15 @@
 # Changelog
 
+## 12.0.2.10 - 2026-05-11
+
+- Bumped the controls and themes package version to 12.0.2.10 for the `CodeWFWindow` title-bar composition update.
+- Added `CodeWFTitleBar` as a standalone title-bar control with `LeftContent`, `CenterContent`, and `RightContent` slots, plus default `Icon + Title` rendering when no custom left content is supplied.
+- Refactored the default `CodeWFWindow` template so the title bar overlays the content layer, making cross-title-bar backgrounds and controls natural to compose.
+- Added `ContentExtendsIntoTitleBar` to `CodeWFWindow` for layouts that intentionally draw content under the managed title bar.
+- Updated the standard `CodeWFWindow` showcase sample with live toggles for default title rendering, custom left content, center content, right content, title-bar margin, and content extension.
+- Added a service-console `CodeWFWindow` showcase sample using a shared header mask image and `CodeWF.LogViewer.Avalonia` for the log display.
+- Updated central package versions for `CodeWF.LogViewer.Avalonia`, `Lang.Avalonia.Json`, and `YY-Thunks`.
+
 ## 12.0.2.9 - 2026-05-09
 
 - Bumped the controls and themes package version to 12.0.2.9 for the `CodeWFWindow` template fix release.

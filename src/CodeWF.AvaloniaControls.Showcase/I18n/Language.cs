@@ -283,6 +283,7 @@ namespace Showcase.Pages
         public static readonly string CodeWFAccent = "Showcase.Pages.WindowDemo.CodeWFAccent";
         public static readonly string CodeWFCompact = "Showcase.Pages.WindowDemo.CodeWFCompact";
         public static readonly string CodeWFTall = "Showcase.Pages.WindowDemo.CodeWFTall";
+        public static readonly string CodeWFServiceConsole = "Showcase.Pages.WindowDemo.CodeWFServiceConsole";
         public static readonly string CodeWFShape = "Showcase.Pages.WindowDemo.CodeWFShape";
         public static readonly string CodeWFStar = "Showcase.Pages.WindowDemo.CodeWFStar";
         public static readonly string CodeWFBlob = "Showcase.Pages.WindowDemo.CodeWFBlob";
@@ -386,10 +387,14 @@ namespace Showcase.Windows
         public static readonly string ShowTitleBar = "Showcase.Windows.WindowDemos.ShowTitleBar";
         public static readonly string ShowManagedResizer = "Showcase.Windows.WindowDemos.ShowManagedResizer";
         public static readonly string TitleBarCustomizationGroup = "Showcase.Windows.WindowDemos.TitleBarCustomizationGroup";
+        public static readonly string UseCustomLeftContent = "Showcase.Windows.WindowDemos.UseCustomLeftContent";
         public static readonly string ShowTitleBarContent = "Showcase.Windows.WindowDemos.ShowTitleBarContent";
+        public static readonly string ShowRightContent = "Showcase.Windows.WindowDemos.ShowRightContent";
+        public static readonly string ContentExtendsIntoTitleBar = "Showcase.Windows.WindowDemos.ContentExtendsIntoTitleBar";
         public static readonly string ApplyTitleBarMargin = "Showcase.Windows.WindowDemos.ApplyTitleBarMargin";
         public static readonly string PropertyEffect = "Showcase.Windows.WindowDemos.PropertyEffect";
         public static readonly string PropertyEffectDesc = "Showcase.Windows.WindowDemos.PropertyEffectDesc";
+        public static readonly string TitleBarSlotsExperienceDesc = "Showcase.Windows.WindowDemos.TitleBarSlotsExperienceDesc";
         public static readonly string Scenario = "Showcase.Windows.WindowDemos.Scenario";
         public static readonly string ScenarioDesc = "Showcase.Windows.WindowDemos.ScenarioDesc";
         public static readonly string FixedSize = "Showcase.Windows.WindowDemos.FixedSize";

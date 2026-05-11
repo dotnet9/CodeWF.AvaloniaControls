@@ -16,6 +16,7 @@
                      Background="#F5F7FB"
                      CanMaximize="{Binding CanMaximize}"
                      CanResize="{Binding CanResize}"
+                     ContentExtendsIntoTitleBar="{Binding ContentExtendsIntoTitleBar}"
                      FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
                      Icon="/Assets/logo.ico"
                      IsCloseButtonVisible="{Binding IsCloseButtonVisible}"
@@ -24,6 +25,10 @@
                      IsMinimizeButtonVisible="{Binding IsMinimizeButtonVisible}"
                      IsRestoreButtonVisible="{Binding IsRestoreButtonVisible}"
                      IsTitleBarVisible="{Binding IsTitleBarVisible}"
+                     LeftContent="{Binding CustomLeftContent}"
+                     LeftContentTemplate="{StaticResource SampleLeftContentTemplate}"
+                     RightContent="{Binding RightContent}"
+                     RightContentTemplate="{StaticResource SampleRightContentTemplate}"
                      TitleBarHeight="34"
                      TitleBarBackground="#24292F"
                      TitleBarBorderBrush="#11161C"
@@ -39,6 +44,94 @@
     </codewf:CodeWFWindow.DataContext>
 
     <codewf:CodeWFWindow.Resources>
+        <DataTemplate x:Key="SampleLeftContentTemplate">
+            <Grid Height="34"
+                  ColumnDefinitions="Auto,Auto">
+                <Image Width="16"
+                       Height="16"
+                       Margin="0,0,10,0"
+                       VerticalAlignment="Center"
+                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                       Source="/Assets/logo.png" />
+                <Menu Grid.Column="1"
+                      Classes="title-bar-menu">
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Classes="title-bar-menu-header" Text="File" />
+                        </MenuItem.Header>
+                        <MenuItem Header="New repository..." />
+                        <MenuItem Header="Add local repository..." />
+                        <MenuItem Header="Clone repository..." />
+                        <Separator />
+                        <MenuItem Header="Options" />
+                        <Separator />
+                        <MenuItem Header="Exit" />
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Classes="title-bar-menu-header" Text="Edit" />
+                        </MenuItem.Header>
+                        <MenuItem Header="Undo" />
+                        <MenuItem Header="Redo" />
+                        <Separator />
+                        <MenuItem Header="Cut" />
+                        <MenuItem Header="Copy" />
+                        <MenuItem Header="Paste" />
+                        <MenuItem Header="Select All" />
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Classes="title-bar-menu-header" Text="View" />
+                        </MenuItem.Header>
+                        <MenuItem Header="Show Changes" />
+                        <MenuItem Header="Show History" />
+                        <Separator />
+                        <MenuItem Header="Toggle Full Screen" />
+                        <Separator />
+                        <MenuItem Header="Zoom In" />
+                        <MenuItem Header="Zoom Out" />
+                        <MenuItem Header="Reset Zoom" />
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Classes="title-bar-menu-header" Text="Repository" />
+                        </MenuItem.Header>
+                        <MenuItem Header="Push" />
+                        <MenuItem Header="Pull" />
+                        <MenuItem Header="Fetch" />
+                        <Separator />
+                        <MenuItem Header="View on GitHub" />
+                        <MenuItem Header="Open in Visual Studio Code" />
+                        <MenuItem Header="Show in Explorer" />
+                        <Separator />
+                        <MenuItem Header="Repository Settings..." />
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Classes="title-bar-menu-header" Text="Branch" />
+                        </MenuItem.Header>
+                        <MenuItem Header="New branch..." />
+                        <MenuItem Header="Rename branch..." />
+                        <MenuItem Header="Delete branch" />
+                        <Separator />
+                        <MenuItem Header="Update from default branch" />
+                        <MenuItem Header="Compare to current branch" />
+                        <MenuItem Header="Merge into current branch..." />
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Classes="title-bar-menu-header" Text="Help" />
+                        </MenuItem.Header>
+                        <MenuItem Header="About GitHub Desktop" />
+                        <MenuItem Header="Show User Guide" />
+                        <MenuItem Header="Report Issue" />
+                        <Separator />
+                        <MenuItem Header="View Logs" />
+                    </MenuItem>
+                </Menu>
+            </Grid>
+        </DataTemplate>
+
         <DataTemplate x:Key="SampleTitleBarContentTemplate">
             <Border HorizontalAlignment="Center"
                     Padding="12,4"
@@ -59,6 +152,21 @@
                                Foreground="White"
                                Text="TitleBarContent" />
                 </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SampleRightContentTemplate">
+            <Border Margin="0,0,2,0"
+                    Padding="10,4"
+                    Background="#2222C55E"
+                    BorderBrush="#6622C55E"
+                    BorderThickness="1"
+                    CornerRadius="999">
+                <TextBlock VerticalAlignment="Center"
+                           FontSize="12"
+                           FontWeight="SemiBold"
+                           Foreground="#BBF7D0"
+                           Text="RightContent" />
             </Border>
         </DataTemplate>
     </codewf:CodeWFWindow.Resources>
@@ -115,94 +223,6 @@
             <Setter Property="Background" Value="#D8E1EC" />
         </Style>
     </codewf:CodeWFWindow.Styles>
-
-    <codewf:CodeWFWindow.LeftContent>
-        <Grid Height="34"
-              ColumnDefinitions="Auto,Auto">
-            <Image Width="16"
-                   Height="16"
-                   Margin="0,0,10,0"
-                   VerticalAlignment="Center"
-                   RenderOptions.BitmapInterpolationMode="HighQuality"
-                   Source="/Assets/logo.png" />
-            <Menu Grid.Column="1"
-                  Classes="title-bar-menu">
-                <MenuItem>
-                    <MenuItem.Header>
-                        <TextBlock Classes="title-bar-menu-header" Text="File" />
-                    </MenuItem.Header>
-                    <MenuItem Header="New repository..." />
-                    <MenuItem Header="Add local repository..." />
-                    <MenuItem Header="Clone repository..." />
-                    <Separator />
-                    <MenuItem Header="Options" />
-                    <Separator />
-                    <MenuItem Header="Exit" />
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <TextBlock Classes="title-bar-menu-header" Text="Edit" />
-                    </MenuItem.Header>
-                    <MenuItem Header="Undo" />
-                    <MenuItem Header="Redo" />
-                    <Separator />
-                    <MenuItem Header="Cut" />
-                    <MenuItem Header="Copy" />
-                    <MenuItem Header="Paste" />
-                    <MenuItem Header="Select All" />
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <TextBlock Classes="title-bar-menu-header" Text="View" />
-                    </MenuItem.Header>
-                    <MenuItem Header="Show Changes" />
-                    <MenuItem Header="Show History" />
-                    <Separator />
-                    <MenuItem Header="Toggle Full Screen" />
-                    <Separator />
-                    <MenuItem Header="Zoom In" />
-                    <MenuItem Header="Zoom Out" />
-                    <MenuItem Header="Reset Zoom" />
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <TextBlock Classes="title-bar-menu-header" Text="Repository" />
-                    </MenuItem.Header>
-                    <MenuItem Header="Push" />
-                    <MenuItem Header="Pull" />
-                    <MenuItem Header="Fetch" />
-                    <Separator />
-                    <MenuItem Header="View on GitHub" />
-                    <MenuItem Header="Open in Visual Studio Code" />
-                    <MenuItem Header="Show in Explorer" />
-                    <Separator />
-                    <MenuItem Header="Repository Settings..." />
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <TextBlock Classes="title-bar-menu-header" Text="Branch" />
-                    </MenuItem.Header>
-                    <MenuItem Header="New branch..." />
-                    <MenuItem Header="Rename branch..." />
-                    <MenuItem Header="Delete branch" />
-                    <Separator />
-                    <MenuItem Header="Update from default branch" />
-                    <MenuItem Header="Compare to current branch" />
-                    <MenuItem Header="Merge into current branch..." />
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <TextBlock Classes="title-bar-menu-header" Text="Help" />
-                    </MenuItem.Header>
-                    <MenuItem Header="About GitHub Desktop" />
-                    <MenuItem Header="Show User Guide" />
-                    <MenuItem Header="Report Issue" />
-                    <Separator />
-                    <MenuItem Header="View Logs" />
-                </MenuItem>
-            </Menu>
-        </Grid>
-    </codewf:CodeWFWindow.LeftContent>
 
     <ScrollViewer Background="{DynamicResource ShowcaseAppBackground}">
         <Grid Margin="20"
@@ -287,9 +307,15 @@
                         <TextBlock FontWeight="SemiBold"
                                    Foreground="{DynamicResource ShowcaseTextBrush}"
                                    Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarCustomizationGroup}}" />
+                        <CheckBox Content="{i18n:I18n {x:Static windowLangs:WindowDemos.UseCustomLeftContent}}"
+                                  IsChecked="{Binding UseCustomLeftContent, Mode=TwoWay}" />
                         <CheckBox Name="ShowTitleBarContentCheckBox"
                                   Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ShowTitleBarContent}}"
                                   IsChecked="{Binding ShowTitleBarContent, Mode=TwoWay}" />
+                        <CheckBox Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ShowRightContent}}"
+                                  IsChecked="{Binding ShowRightContent, Mode=TwoWay}" />
+                        <CheckBox Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ContentExtendsIntoTitleBar}}"
+                                  IsChecked="{Binding ContentExtendsIntoTitleBar, Mode=TwoWay}" />
                         <CheckBox Name="TitleBarMarginCheckBox"
                                   Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ApplyTitleBarMargin}}"
                                   IsChecked="{Binding ApplyTitleBarMargin, Mode=TwoWay}" />
@@ -328,6 +354,9 @@
                                    Text="{i18n:I18n {x:Static windowLangs:WindowDemos.PropertyEffect}}" />
                         <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
                                    Text="{i18n:I18n {x:Static windowLangs:WindowDemos.PropertyEffectDesc}}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarSlotsExperienceDesc}}"
                                    TextWrapping="Wrap" />
                     </StackPanel>
                 </Border>

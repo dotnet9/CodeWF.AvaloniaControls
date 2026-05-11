@@ -85,4 +85,9 @@ public partial class TestNoneWindowDemo : UserControl
     {
         new CodeWFWindowTallDemo().Show();
     }
+
+    private void ShowCodeWFWindowServiceConsole_OnClick(object? sender, RoutedEventArgs e)
+    {
+        new CodeWFWindowServiceConsoleDemo().Show();
+    }
 }

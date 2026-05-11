@@ -13,7 +13,10 @@ public sealed class CodeWFWindowStandardDemoViewModel : ReactiveObject
     private bool _isManagedResizerVisible = true;
     private bool _canResize = true;
     private bool _canMaximize = true;
+    private bool _useCustomLeftContent;
     private bool _showTitleBarContent;
+    private bool _showRightContent;
+    private bool _contentExtendsIntoTitleBar;
     private bool _applyTitleBarMargin;
 
     public bool IsFullScreenButtonVisible
@@ -64,6 +67,16 @@ public sealed class CodeWFWindowStandardDemoViewModel : ReactiveObject
         set => this.RaiseAndSetIfChanged(ref _canMaximize, value);
     }
 
+    public bool UseCustomLeftContent
+    {
+        get => _useCustomLeftContent;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _useCustomLeftContent, value);
+            this.RaisePropertyChanged(nameof(CustomLeftContent));
+        }
+    }
+
     public bool ShowTitleBarContent
     {
         get => _showTitleBarContent;
@@ -72,6 +85,22 @@ public sealed class CodeWFWindowStandardDemoViewModel : ReactiveObject
             this.RaiseAndSetIfChanged(ref _showTitleBarContent, value);
             this.RaisePropertyChanged(nameof(TitleBarContent));
         }
+    }
+
+    public bool ShowRightContent
+    {
+        get => _showRightContent;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _showRightContent, value);
+            this.RaisePropertyChanged(nameof(RightContent));
+        }
+    }
+
+    public bool ContentExtendsIntoTitleBar
+    {
+        get => _contentExtendsIntoTitleBar;
+        set => this.RaiseAndSetIfChanged(ref _contentExtendsIntoTitleBar, value);
     }
 
     public bool ApplyTitleBarMargin
@@ -84,7 +113,11 @@ public sealed class CodeWFWindowStandardDemoViewModel : ReactiveObject
         }
     }
 
+    public string? CustomLeftContent => UseCustomLeftContent ? "LeftContent" : null;
+
     public string? TitleBarContent => ShowTitleBarContent ? "TitleBarContent" : null;
+
+    public string? RightContent => ShowRightContent ? "RightContent" : null;
 
     public Thickness TitleBarMargin => ApplyTitleBarMargin ? new Thickness(10, 8, 10, 0) : default;
 }
