@@ -1,5 +1,12 @@
 # 更新日志
 
+## 12.0.2.11 - 2026-05-12
+
+- 将默认 `CodeWFWindow` 与 `CodeWFTitleBar` 主题值对齐 Semi/Ursa 的窗口资源，例如 `WindowDefaultBackground`、`WindowDefaultForeground`、`TitleBarBackground` 和 `CaptionButtonForeground`。
+- 将托管窗体控制按钮的尺寸、内边距、圆角、前景、悬浮、按下、禁用和关闭按钮状态改为使用 Semi 资源 Key。
+- 将 `CodeWFWindow` 默认标题栏高度改为 32，使托管标题栏与 Semi 的常规标题栏从同一基线开始，同时仍支持每个窗体单独覆盖。
+- 为托管窗体控制按钮补充 Avalonia 窗口装饰元素角色，使模板结构更接近 Semi 和 Ursa 的窗口模板。
+
 ## 12.0.2.10 - 2026-05-11
 
 - 将控件库与主题库版本提升到 12.0.2.10，用于发布 `CodeWFWindow` 标题栏组合能力更新。

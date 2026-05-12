@@ -146,7 +146,7 @@ public class CodeWFWindow : Window
     }
 
     public static readonly StyledProperty<double> TitleBarHeightProperty =
-        AvaloniaProperty.Register<CodeWFWindow, double>(nameof(TitleBarHeight), 60);
+        AvaloniaProperty.Register<CodeWFWindow, double>(nameof(TitleBarHeight), 32);
 
     public double TitleBarHeight
     {

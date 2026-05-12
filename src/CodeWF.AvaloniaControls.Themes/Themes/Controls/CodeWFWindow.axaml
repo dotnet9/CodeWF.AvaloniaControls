@@ -4,12 +4,14 @@
     xmlns:primitives="using:Avalonia.Controls.Primitives"
     xmlns:codewf="https://codewf.com">
     <ControlTheme x:Key="{x:Type codewf:CodeWFWindow}" TargetType="codewf:CodeWFWindow">
-        <Setter Property="Background" Value="White" />
-        <Setter Property="Foreground" Value="{DynamicResource SemiGrey9}" />
-        <Setter Property="TitleBarHeight" Value="60" />
-        <Setter Property="TitleBarBackground" Value="#F8FAFC" />
-        <Setter Property="TitleBarForeground" Value="#0F172A" />
-        <Setter Property="TitleBarBorderBrush" Value="#DCE3EE" />
+        <Setter Property="Background" Value="{DynamicResource WindowDefaultBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowDefaultForeground}" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}" />
+        <Setter Property="TitleBarHeight" Value="32" />
+        <Setter Property="TitleBarBackground" Value="{DynamicResource TitleBarBackground}" />
+        <Setter Property="TitleBarForeground" Value="{DynamicResource CaptionButtonForeground}" />
+        <Setter Property="TitleBarBorderBrush" Value="{DynamicResource SemiColorBorder}" />
         <Setter Property="TitleBarBorderThickness" Value="0,0,0,1" />
         <Setter Property="WindowCornerRadius" Value="4" />
         <Setter Property="IsTitleBarVisible" Value="True" />
@@ -69,7 +71,7 @@
                                         IsVisible="{TemplateBinding IsTitleBarVisible}"
                                         LeftContent="{TemplateBinding LeftContent}"
                                         LeftContentTemplate="{TemplateBinding LeftContentTemplate}"
-                                        Padding="0,0,184,0"
+                                        Padding="0,0,128,0"
                                         RightContent="{TemplateBinding RightContent}"
                                         RightContentTemplate="{TemplateBinding RightContentTemplate}"
                                         Title="{TemplateBinding Title}" />
@@ -83,7 +85,8 @@
                                         <Button
                                             Name="PART_FullScreenButton"
                                             Classes="caption-button"
-                                            IsVisible="{TemplateBinding IsFullScreenButtonVisible}">
+                                            IsVisible="{TemplateBinding IsFullScreenButtonVisible}"
+                                            WindowDecorationProperties.ElementRole="FullScreenButton">
                                             <Grid Width="12" Height="12">
                                                 <Path
                                                     Classes="fullscreen-glyph"
@@ -105,7 +108,8 @@
                                         <Button
                                             Name="PART_MinimizeButton"
                                             Classes="caption-button"
-                                            IsVisible="{TemplateBinding IsMinimizeButtonVisible}">
+                                            IsVisible="{TemplateBinding IsMinimizeButtonVisible}"
+                                            WindowDecorationProperties.ElementRole="MinimizeButton">
                                             <Border
                                                 Width="12"
                                                 Height="1.6"
@@ -115,7 +119,8 @@
                                         <Button
                                             Name="PART_MaximizeRestoreButton"
                                             Classes="caption-button"
-                                            IsVisible="{TemplateBinding IsRestoreButtonVisible}">
+                                            IsVisible="{TemplateBinding IsRestoreButtonVisible}"
+                                            WindowDecorationProperties.ElementRole="MaximizeButton">
                                             <Grid Width="12" Height="12">
                                                 <Path
                                                     Classes="maximize-glyph"
@@ -135,7 +140,8 @@
                                         <Button
                                             Name="PART_CloseButton"
                                             Classes="caption-button close-button"
-                                            IsVisible="{TemplateBinding IsCloseButtonVisible}">
+                                            IsVisible="{TemplateBinding IsCloseButtonVisible}"
+                                            WindowDecorationProperties.ElementRole="CloseButton">
                                             <Path
                                                 Width="12"
                                                 Height="12"
@@ -255,17 +261,17 @@
             <Setter Property="CornerRadius" Value="0" />
         </Style>
         <Style Selector="^ /template/ Button.caption-button">
-            <Setter Property="Width" Value="46" />
-            <Setter Property="Height" Value="34" />
-            <Setter Property="MinWidth" Value="46" />
-            <Setter Property="MinHeight" Value="34" />
-            <Setter Property="Padding" Value="0" />
+            <Setter Property="Width" Value="{StaticResource CaptionButtonWidth}" />
+            <Setter Property="Height" Value="{StaticResource CaptionButtonHeight}" />
+            <Setter Property="MinWidth" Value="{StaticResource CaptionButtonWidth}" />
+            <Setter Property="MinHeight" Value="{StaticResource CaptionButtonHeight}" />
+            <Setter Property="Padding" Value="{StaticResource CaptionButtonPadding}" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="CornerRadius" Value="{StaticResource CaptionButtonCornerRadius}" />
             <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource TemplatedParent}}" />
             <Setter Property="Template">
                 <ControlTemplate TargetType="Button">
@@ -285,21 +291,21 @@
             </Setter>
         </Style>
         <Style Selector="^ /template/ Button.caption-button:pointerover">
-            <Setter Property="Background" Value="#3D64748B" />
+            <Setter Property="Background" Value="{DynamicResource CaptionButtonPointeroverBackground}" />
         </Style>
         <Style Selector="^ /template/ Button.caption-button:pressed">
-            <Setter Property="Background" Value="#5264748B" />
+            <Setter Property="Background" Value="{DynamicResource CaptionButtonPressedBackground}" />
         </Style>
         <Style Selector="^ /template/ Button.caption-button:disabled">
-            <Setter Property="Opacity" Value="0.45" />
+            <Setter Property="Foreground" Value="{DynamicResource CaptionButtonDisabledForeground}" />
         </Style>
         <Style Selector="^ /template/ Button.close-button:pointerover">
-            <Setter Property="Background" Value="#E81123" />
-            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="{DynamicResource CaptionButtonClosePointeroverBackground}" />
+            <Setter Property="Foreground" Value="{DynamicResource CaptionButtonCloseForeground}" />
         </Style>
         <Style Selector="^ /template/ Button.close-button:pressed">
-            <Setter Property="Background" Value="#C50F1F" />
-            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="{DynamicResource CaptionButtonClosePressedBackground}" />
+            <Setter Property="Foreground" Value="{DynamicResource CaptionButtonCloseForeground}" />
         </Style>
     </ControlTheme>
 </ResourceDictionary>

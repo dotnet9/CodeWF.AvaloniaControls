@@ -1,5 +1,12 @@
 # Changelog
 
+## 12.0.2.11 - 2026-05-12
+
+- Aligned the default `CodeWFWindow` and `CodeWFTitleBar` theme values with Semi/Ursa window resources such as `WindowDefaultBackground`, `WindowDefaultForeground`, `TitleBarBackground`, and `CaptionButtonForeground`.
+- Updated managed caption buttons to use Semi resource keys for size, padding, corner radius, foreground, pointer-over, pressed, disabled, and close-button states.
+- Changed the default `CodeWFWindow` title-bar height to 32 so unmanaged and managed title bars start from the same Semi baseline while still allowing per-window overrides.
+- Added Avalonia window-decoration element roles to the managed caption buttons for closer parity with Semi and Ursa window templates.
+
 ## 12.0.2.10 - 2026-05-11
 
 - Bumped the controls and themes package version to 12.0.2.10 for the `CodeWFWindow` title-bar composition update.
