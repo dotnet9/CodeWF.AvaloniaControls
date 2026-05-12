@@ -96,6 +96,17 @@ namespace Showcase.Pages
         public static readonly string WarningAlert = "Showcase.Pages.VComboBoxDemo.WarningAlert";
         public static readonly string WarningNormal = "Showcase.Pages.VComboBoxDemo.WarningNormal";
         public static readonly string SelectionBoxWarning = "Showcase.Pages.VComboBoxDemo.SelectionBoxWarning";
+        public static readonly string ToolbarTitle = "Showcase.Pages.VComboBoxDemo.ToolbarTitle";
+        public static readonly string ToolbarDescription = "Showcase.Pages.VComboBoxDemo.ToolbarDescription";
+        public static readonly string LivePreview = "Showcase.Pages.VComboBoxDemo.LivePreview";
+        public static readonly string VerticalSelectorTitle = "Showcase.Pages.VComboBoxDemo.VerticalSelectorTitle";
+        public static readonly string VerticalSelectorDescription = "Showcase.Pages.VComboBoxDemo.VerticalSelectorDescription";
+        public static readonly string FilterResultTitle = "Showcase.Pages.VComboBoxDemo.FilterResultTitle";
+        public static readonly string FilterDelayed = "Showcase.Pages.VComboBoxDemo.FilterDelayed";
+        public static readonly string FilterPendingConfig = "Showcase.Pages.VComboBoxDemo.FilterPendingConfig";
+        public static readonly string FilterNormal = "Showcase.Pages.VComboBoxDemo.FilterNormal";
+        public static readonly string CurrentPolicyTitle = "Showcase.Pages.VComboBoxDemo.CurrentPolicyTitle";
+        public static readonly string CurrentPolicyDescription = "Showcase.Pages.VComboBoxDemo.CurrentPolicyDescription";
     }
 
 
@@ -110,6 +121,23 @@ namespace Showcase.Pages
         public static readonly string UserCenter = "Showcase.Pages.TabControlDemo.UserCenter";
         public static readonly string LogRecords = "Showcase.Pages.TabControlDemo.LogRecords";
         public static readonly string HelpDocs = "Showcase.Pages.TabControlDemo.HelpDocs";
+        public static readonly string BusinessContentDesc = "Showcase.Pages.TabControlDemo.BusinessContentDesc";
+        public static readonly string ContentDemo = "Showcase.Pages.TabControlDemo.ContentDemo";
+        public static readonly string DataQuality = "Showcase.Pages.TabControlDemo.DataQuality";
+        public static readonly string Last24hPassRate = "Showcase.Pages.TabControlDemo.Last24hPassRate";
+        public static readonly string Pending = "Showcase.Pages.TabControlDemo.Pending";
+        public static readonly string ManualReviewRecords = "Showcase.Pages.TabControlDemo.ManualReviewRecords";
+        public static readonly string SyncStatus = "Showcase.Pages.TabControlDemo.SyncStatus";
+        public static readonly string Normal = "Showcase.Pages.TabControlDemo.Normal";
+        public static readonly string LastSync2Min = "Showcase.Pages.TabControlDemo.LastSync2Min";
+        public static readonly string SettingsContentDesc = "Showcase.Pages.TabControlDemo.SettingsContentDesc";
+        public static readonly string UserCenterContentDesc = "Showcase.Pages.TabControlDemo.UserCenterContentDesc";
+        public static readonly string LogRecordsContentDesc = "Showcase.Pages.TabControlDemo.LogRecordsContentDesc";
+        public static readonly string HelpDocsContentDesc = "Showcase.Pages.TabControlDemo.HelpDocsContentDesc";
+        public static readonly string BrandContentDesc = "Showcase.Pages.TabControlDemo.BrandContentDesc";
+        public static readonly string BrandContentTitle = "Showcase.Pages.TabControlDemo.BrandContentTitle";
+        public static readonly string BrandContentBody = "Showcase.Pages.TabControlDemo.BrandContentBody";
+        public static readonly string ViewDetails = "Showcase.Pages.TabControlDemo.ViewDetails";
     }
 
 
@@ -191,6 +219,14 @@ namespace Showcase.Pages
         public static readonly string Usage1 = "Showcase.Pages.StatusCardDemo.Usage1";
         public static readonly string Usage2 = "Showcase.Pages.StatusCardDemo.Usage2";
         public static readonly string Usage3 = "Showcase.Pages.StatusCardDemo.Usage3";
+        public static readonly string HealthOverviewTitle = "Showcase.Pages.StatusCardDemo.HealthOverviewTitle";
+        public static readonly string HealthOverviewDesc = "Showcase.Pages.StatusCardDemo.HealthOverviewDesc";
+        public static readonly string StatusVariantsTag = "Showcase.Pages.StatusCardDemo.StatusVariantsTag";
+        public static readonly string CompactView = "Showcase.Pages.StatusCardDemo.CompactView";
+        public static readonly string CompactViewDesc = "Showcase.Pages.StatusCardDemo.CompactViewDesc";
+        public static readonly string AlertView = "Showcase.Pages.StatusCardDemo.AlertView";
+        public static readonly string AlertViewDesc = "Showcase.Pages.StatusCardDemo.AlertViewDesc";
+        public static readonly string ThemeResources = "Showcase.Pages.StatusCardDemo.ThemeResources";
     }
 
 

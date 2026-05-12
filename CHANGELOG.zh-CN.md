@@ -6,6 +6,9 @@
 - 将 CodeWF 主题资源按控件拆分到 shared、light、dark 主题字典中，目录结构与 Semi 的资源组织方式保持一致。
 - 将 `CodeWFWindow`、`CodeWFTitleBar`、`SearchListBox`、`StatusBadge`、`StatusCard` 和异型 TabItem 默认值改为使用 CodeWF 自有主题 Key，便于黑白主题适配。
 - 将 `StatusCard` 改为通过状态伪类和主题资源设置状态背景与前景色，不再依赖固定色值转换器。
+- 优化 Showcase 中 `VComboBox`、`TabControl`、`StatusBadge`、`StatusCard`、`Transfer` 和窗体示例，使示例更聚焦并更接近专业业务界面。
+- 为 Showcase 新增英文、日文、简体中文和繁体中文的补充文案，并完成黑白主题下的页面截图验证。
+- 精简重复窗体示例入口，使 Window 页面更聚焦于原生基线、Ursa 参考窗体和 CodeWFWindow 示例。
 
 ## 12.0.2.11 - 2026-05-12
 

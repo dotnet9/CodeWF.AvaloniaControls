@@ -13,9 +13,9 @@ public sealed class CodeWFWindowStandardDemoViewModel : ReactiveObject
     private bool _isManagedResizerVisible = true;
     private bool _canResize = true;
     private bool _canMaximize = true;
-    private bool _useCustomLeftContent;
-    private bool _showTitleBarContent;
-    private bool _showRightContent;
+    private bool _useCustomLeftContent = true;
+    private bool _showTitleBarContent = true;
+    private bool _showRightContent = true;
     private bool _contentExtendsIntoTitleBar;
     private bool _applyTitleBarMargin;
 

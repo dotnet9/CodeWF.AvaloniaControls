@@ -16,9 +16,9 @@
             <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
         <Style Selector="TextBlock.SectionTitle">
-            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontSize" Value="17" />
             <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Margin" Value="0,16,0,8" />
+            <Setter Property="Margin" Value="0,0,0,8" />
             <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
         </Style>
         <Style Selector="TextBlock.SectionDescription">
@@ -33,99 +33,100 @@
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
         </Style>
+        <Style Selector="Border.SurfaceCard">
+            <Setter Property="Background" Value="{DynamicResource ShowcaseCardBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="18" />
+        </Style>
     </UserControl.Styles>
 
-    <ScrollViewer Padding="24">
-        <StackPanel Spacing="12">
-            <TextBlock Margin="0,0,0,16"
-                       FontSize="24"
-                       FontWeight="Bold"
-                       Foreground="{DynamicResource ShowcaseTextBrush}"
-                       Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Title}}" />
+    <Grid RowDefinitions="Auto,*" RowSpacing="14">
+        <Border Padding="16"
+                Background="{DynamicResource ShowcaseSubtleBackground}"
+                BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="12">
+            <StackPanel Spacing="6">
+                <TextBlock FontSize="20"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Title}}" />
+                <TextBlock Classes="SectionDescription"
+                           Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.SemanticDesc}}" />
+            </StackPanel>
+        </Border>
 
-            <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.SemanticStatus}}" />
-            <TextBlock Classes="SectionDescription"
-                       Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.SemanticDesc}}" />
-            <WrapPanel Orientation="Horizontal">
-                <c:StatusBadge Classes="Debug" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Debug}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Running}}" />
-                <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Info}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Completed}}" />
-                <c:StatusBadge Classes="Warn" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Warn}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Review}}" />
-                <c:StatusBadge Classes="Error" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Error}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Fix}}" />
-                <c:StatusBadge Classes="Fatal" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Fatal}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Critical}}" />
-            </WrapPanel>
+        <Grid Grid.Row="1"
+              ColumnDefinitions="1.35*,*"
+              RowDefinitions="*,*"
+              ColumnSpacing="14"
+              RowSpacing="14">
+            <Border Classes="SurfaceCard">
+                <StackPanel Spacing="12">
+                    <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.SemanticStatus}}" />
+                    <WrapPanel Orientation="Horizontal">
+                        <c:StatusBadge Classes="Debug" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Debug}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Running}}" />
+                        <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Info}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Completed}}" />
+                        <c:StatusBadge Classes="Warn" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Warn}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Review}}" />
+                        <c:StatusBadge Classes="Error" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Error}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Fix}}" />
+                        <c:StatusBadge Classes="Fatal" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Fatal}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Critical}}" />
+                    </WrapPanel>
 
-            <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.SizeChanges}}" />
-            <TextBlock Classes="SectionDescription"
-                       Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.SizeDesc}}" />
-            <WrapPanel Orientation="Horizontal">
-                <c:StatusBadge Classes="Debug" FontSize="10" LeftText="XS" RightText="10px" />
-                <c:StatusBadge Classes="Debug" FontSize="12" LeftText="S" RightText="12px" />
-                <c:StatusBadge Classes="Debug" FontSize="14" LeftText="M" RightText="14px" />
-                <c:StatusBadge Classes="Debug" FontSize="16" LeftText="L" RightText="16px" />
-                <c:StatusBadge Classes="Debug" FontSize="18" LeftText="XL" RightText="18px" />
-                <c:StatusBadge Classes="Debug" FontSize="20" LeftText="2XL" RightText="20px" />
-                <c:StatusBadge Classes="Debug" FontSize="24" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Emphasis}}" RightText="24px" />
-            </WrapPanel>
+                    <TextBlock Classes="SubLabel" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.SizeChanges}}" />
+                    <WrapPanel Orientation="Horizontal">
+                        <c:StatusBadge Classes="Debug" FontSize="10" LeftText="XS" RightText="10px" />
+                        <c:StatusBadge Classes="Debug" FontSize="12" LeftText="S" RightText="12px" />
+                        <c:StatusBadge Classes="Debug" FontSize="14" LeftText="M" RightText="14px" />
+                        <c:StatusBadge Classes="Debug" FontSize="16" LeftText="L" RightText="16px" />
+                        <c:StatusBadge Classes="Debug" FontSize="20" LeftText="2XL" RightText="20px" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
 
-            <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.ContentLength}}" />
-            <TextBlock Classes="SectionDescription"
-                       Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.ContentDesc}}" />
-            <WrapPanel Orientation="Vertical">
-                <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.ShortText}}" RightText="1" />
-                <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.MediumLabel}}" RightText="100" />
-                <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.LongCategory}}" RightText="1,234" />
-                <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.LongStatus}}" RightText="99,876" />
-            </WrapPanel>
+            <Border Grid.Column="1" Classes="SurfaceCard">
+                <StackPanel Spacing="12">
+                    <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Appearance}}" />
+                    <TextBlock Classes="SectionDescription"
+                               Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.AppearanceDesc}}" />
+                    <WrapPanel Orientation="Horizontal">
+                        <c:StatusBadge Classes="Warn" CornerRadius="0" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Sharp}}" RightText="0px" />
+                        <c:StatusBadge Classes="Warn" CornerRadius="8" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.MediumRadius}}" RightText="8px" />
+                        <c:StatusBadge Classes="Warn" CornerRadius="999" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Pill}}" RightText="999" />
+                        <c:StatusBadge Classes="Error" Padding="4,2" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Dense}}" RightText="4,2" />
+                        <c:StatusBadge Classes="Error" Padding="12,6" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Relaxed}}" RightText="12,6" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
 
-            <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Appearance}}" />
-            <TextBlock Classes="SectionDescription"
-                       Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.AppearanceDesc}}" />
+            <Border Grid.Row="1" Classes="SurfaceCard">
+                <StackPanel Spacing="12">
+                    <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.ContentLength}}" />
+                    <TextBlock Classes="SectionDescription"
+                               Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.ContentDesc}}" />
+                    <WrapPanel Orientation="Horizontal">
+                        <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.ShortText}}" RightText="1" />
+                        <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.MediumLabel}}" RightText="100" />
+                        <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.LongCategory}}" RightText="1,234" />
+                        <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.LongStatus}}" RightText="99,876" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
 
-            <TextBlock Classes="SubLabel" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.CornerRadius}}" />
-            <WrapPanel Orientation="Horizontal">
-                <c:StatusBadge Classes="Warn" CornerRadius="0" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Sharp}}" RightText="0px" />
-                <c:StatusBadge Classes="Warn" CornerRadius="2" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Soft}}" RightText="2px" />
-                <c:StatusBadge Classes="Warn" CornerRadius="4" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.SmallRadius}}" RightText="4px" />
-                <c:StatusBadge Classes="Warn" CornerRadius="8" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.MediumRadius}}" RightText="8px" />
-                <c:StatusBadge Classes="Warn" CornerRadius="16" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Rounded}}" RightText="16px" />
-                <c:StatusBadge Classes="Warn" CornerRadius="999" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Pill}}" RightText="999" />
-            </WrapPanel>
-
-            <TextBlock Classes="SubLabel" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.PaddingDensity}}" />
-            <WrapPanel Orientation="Horizontal">
-                <c:StatusBadge Classes="Error" Padding="2,1" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Compact}}" RightText="2,1" />
-                <c:StatusBadge Classes="Error" Padding="4,2" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Dense}}" RightText="4,2" />
-                <c:StatusBadge Classes="Error" Padding="6,3" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Balanced}}" RightText="6,3" />
-                <c:StatusBadge Classes="Error" Padding="8,4" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Roomy}}" RightText="8,4" />
-                <c:StatusBadge Classes="Error" Padding="12,6" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Relaxed}}" RightText="12,6" />
-            </WrapPanel>
-
-            <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Scenarios}}" />
-            <TextBlock Classes="SectionDescription"
-                       Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.ScenariosDesc}}" />
-
-            <TextBlock Classes="SubLabel" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Metrics}}" />
-            <WrapPanel Orientation="Horizontal">
-                <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Downloads}}" RightText="35.4k" />
-                <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.ActiveUsers}}" RightText="1,287" />
-                <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Conversion}}" RightText="23.7%" />
-                <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Satisfaction}}" RightText="4.8/5" />
-            </WrapPanel>
-
-            <TextBlock Classes="SubLabel" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.SystemStatus}}" />
-            <WrapPanel Orientation="Horizontal">
-                <c:StatusBadge Classes="Debug" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.System}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Running}}" />
-                <c:StatusBadge Classes="Warn" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Storage}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.StorageLow}}" />
-                <c:StatusBadge Classes="Error" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Sync}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Failed}}" />
-                <c:StatusBadge Classes="Fatal" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Database}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Disconnected}}" />
-            </WrapPanel>
-
-            <TextBlock Classes="SubLabel" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.TaskTracking}}" />
-            <WrapPanel Orientation="Horizontal">
-                <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Completed}}" RightText="12/20" />
-                <c:StatusBadge Classes="Warn" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.InProgress}}" RightText="5/20" />
-                <c:StatusBadge Classes="Error" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Overdue}}" RightText="3/20" />
-            </WrapPanel>
-        </StackPanel>
-    </ScrollViewer>
+            <Border Grid.Row="1" Grid.Column="1" Classes="SurfaceCard">
+                <StackPanel Spacing="12">
+                    <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Scenarios}}" />
+                    <WrapPanel Orientation="Horizontal">
+                        <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Downloads}}" RightText="35.4k" />
+                        <c:StatusBadge Classes="Warn" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Storage}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.StorageLow}}" />
+                        <c:StatusBadge Classes="Error" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Sync}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Failed}}" />
+                        <c:StatusBadge Classes="Fatal" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Database}}" RightText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Disconnected}}" />
+                        <c:StatusBadge Classes="Info" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Completed}}" RightText="12/20" />
+                        <c:StatusBadge Classes="Error" FontSize="14" LeftText="{i18n:I18n {x:Static pageLangs:StatusBadgeDemo.Overdue}}" RightText="3/20" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
 </UserControl>

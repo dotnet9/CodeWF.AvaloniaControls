@@ -7,10 +7,6 @@
              xmlns:local="clr-namespace:CodeWF.AvaloniaControls.Showcase.Pages"
              xmlns:pageLangs="clr-namespace:Showcase.Pages"
              x:Class="CodeWF.AvaloniaControls.Showcase.Pages.TransferDemo"
-             Width="800"
-             Height="600"
-             HorizontalAlignment="Left"
-             VerticalAlignment="Top"
              d:DesignWidth="800"
              d:DesignHeight="600"
              mc:Ignorable="d">
@@ -45,7 +41,7 @@
             </StackPanel>
         </Border>
 
-        <Grid Grid.Row="1" ColumnDefinitions="*,1,320" ColumnSpacing="14">
+        <Grid Grid.Row="1" ColumnDefinitions="2*,1,360" ColumnSpacing="14">
             <Border Theme="{StaticResource CardBorder}" Padding="8">
                 <codewf:Transfer x:Name="MyTransfer"
                                  LeftItemsSource="{CompiledBinding $parent[local:TransferDemo].LeftItems}"

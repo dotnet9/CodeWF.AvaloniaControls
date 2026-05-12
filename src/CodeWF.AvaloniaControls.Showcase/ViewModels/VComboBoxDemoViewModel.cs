@@ -13,7 +13,7 @@ namespace CodeWF.AvaloniaControls.Showcase.ViewModels
         {
             WarningItems =
             [
-                new() { Color = new SolidColorBrush(Colors.Black) },
+                new() { Color = new SolidColorBrush(Color.Parse("#64748B")) },
                 new() { Color = new SolidColorBrush(Colors.Red) },
                 new() { Color = new SolidColorBrush(Colors.Green) }
             ];

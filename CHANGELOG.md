@@ -6,6 +6,9 @@
 - Split CodeWF theme resources into per-control files under the shared, light, and dark theme dictionaries, matching the Semi resource layout style.
 - Routed `CodeWFWindow`, `CodeWFTitleBar`, `SearchListBox`, `StatusBadge`, `StatusCard`, and shaped tab item defaults through CodeWF-owned theme keys for cleaner light and dark theme adaptation.
 - Updated `StatusCard` to use state pseudo-classes and theme resources instead of fixed converter colors for status backgrounds and foregrounds.
+- Polished the Showcase pages for `VComboBox`, `TabControl`, `StatusBadge`, `StatusCard`, `Transfer`, and window demos with more focused, professional examples.
+- Added localized Showcase copy for English, Japanese, Simplified Chinese, and Traditional Chinese, and verified the pages across light and dark themes.
+- Reduced redundant window demo entries so the Window page focuses on the native baseline, Ursa reference windows, and the CodeWFWindow examples.
 
 ## 12.0.2.11 - 2026-05-12
 
