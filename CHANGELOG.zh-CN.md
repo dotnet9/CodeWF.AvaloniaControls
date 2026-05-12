@@ -1,5 +1,12 @@
 # 更新日志
 
+## 12.0.2.12 - 2026-05-12
+
+- 将控件库与主题库版本提升到 12.0.2.12，用于发布主题资源组织方式调整。
+- 将 CodeWF 主题资源按控件拆分到 shared、light、dark 主题字典中，目录结构与 Semi 的资源组织方式保持一致。
+- 将 `CodeWFWindow`、`CodeWFTitleBar`、`SearchListBox`、`StatusBadge`、`StatusCard` 和异型 TabItem 默认值改为使用 CodeWF 自有主题 Key，便于黑白主题适配。
+- 将 `StatusCard` 改为通过状态伪类和主题资源设置状态背景与前景色，不再依赖固定色值转换器。
+
 ## 12.0.2.11 - 2026-05-12
 
 - 将默认 `CodeWFWindow` 与 `CodeWFTitleBar` 主题值对齐 Semi/Ursa 的窗口资源，例如 `WindowDefaultBackground`、`WindowDefaultForeground`、`TitleBarBackground` 和 `CaptionButtonForeground`。

@@ -1,0 +1,6 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StaticResource x:Key="SearchListBoxBackground" ResourceKey="WindowDefaultBackground" />
+    <StaticResource x:Key="SearchListBoxBorderBrush" ResourceKey="SemiColorBorder" />
+    <StaticResource x:Key="SearchListBoxCounterForeground" ResourceKey="SemiColorText2" />
+</ResourceDictionary>

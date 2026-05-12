@@ -11,11 +11,12 @@
     </Design.PreviewWith>
 
     <ControlTheme x:Key="{x:Type codewf:StatusCard}" TargetType="codewf:StatusCard">
-        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="CornerRadius" Value="{StaticResource StatusCardDefaultCornerRadius}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="codewf:StatusCard">
                 <Border
-                    Background="{TemplateBinding Kind, Converter={StaticResource StatusLabelKindBackgroundConverter}}"
+                    Name="PART_Root"
+                    Background="{DynamicResource StatusCardDebugBackground}"
                     CornerRadius="{TemplateBinding CornerRadius}">
                     <Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*">
                         <Image
@@ -31,20 +32,52 @@
                             Grid.Column="1"
                             Margin="{TemplateBinding TopTextMargin}"
                             VerticalAlignment="Center"
-                            Foreground="#595959"
+                            Foreground="{DynamicResource StatusCardTopTextForeground}"
                             FontSize="{TemplateBinding TopTextFontSize}"
                             Text="{TemplateBinding TopText}" />
                         <SelectableTextBlock
+                            Name="PART_BottomText"
                             Grid.Row="1"
                             Grid.Column="1"
                             Margin="{TemplateBinding BottomTextMargin}"
                             VerticalAlignment="Center"
-                            Foreground="{TemplateBinding Kind, Converter={StaticResource StatusCardKindForegroundConverter}}"
+                            Foreground="{DynamicResource StatusCardDebugForeground}"
                             FontSize="{TemplateBinding BottomTextFontSize}"
                             Text="{TemplateBinding BottomText}" />
                     </Grid>
                 </Border>
             </ControlTemplate>
         </Setter>
+
+        <Style Selector="^:debug /template/ Border#PART_Root">
+            <Setter Property="Background" Value="{DynamicResource StatusCardDebugBackground}" />
+        </Style>
+        <Style Selector="^:debug /template/ SelectableTextBlock#PART_BottomText">
+            <Setter Property="Foreground" Value="{DynamicResource StatusCardDebugForeground}" />
+        </Style>
+        <Style Selector="^:info /template/ Border#PART_Root">
+            <Setter Property="Background" Value="{DynamicResource StatusCardInfoBackground}" />
+        </Style>
+        <Style Selector="^:info /template/ SelectableTextBlock#PART_BottomText">
+            <Setter Property="Foreground" Value="{DynamicResource StatusCardInfoForeground}" />
+        </Style>
+        <Style Selector="^:warn /template/ Border#PART_Root">
+            <Setter Property="Background" Value="{DynamicResource StatusCardWarnBackground}" />
+        </Style>
+        <Style Selector="^:warn /template/ SelectableTextBlock#PART_BottomText">
+            <Setter Property="Foreground" Value="{DynamicResource StatusCardWarnForeground}" />
+        </Style>
+        <Style Selector="^:error /template/ Border#PART_Root">
+            <Setter Property="Background" Value="{DynamicResource StatusCardErrorBackground}" />
+        </Style>
+        <Style Selector="^:error /template/ SelectableTextBlock#PART_BottomText">
+            <Setter Property="Foreground" Value="{DynamicResource StatusCardErrorForeground}" />
+        </Style>
+        <Style Selector="^:fatal /template/ Border#PART_Root">
+            <Setter Property="Background" Value="{DynamicResource StatusCardFatalBackground}" />
+        </Style>
+        <Style Selector="^:fatal /template/ SelectableTextBlock#PART_BottomText">
+            <Setter Property="Foreground" Value="{DynamicResource StatusCardFatalForeground}" />
+        </Style>
     </ControlTheme>
 </ResourceDictionary>

@@ -1,9 +1,17 @@
 using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using CodeWF.AvaloniaControls.Models;
 
 namespace CodeWF.AvaloniaControls.Controls;
 
+[PseudoClasses(
+    ":debug",
+    ":info",
+    ":warn",
+    ":error",
+    ":fatal")]
 public class StatusCard : TemplatedControl
 {
     public static readonly StyledProperty<string?> IconPathProperty =
@@ -93,5 +101,31 @@ public class StatusCard : TemplatedControl
     {
         get => GetValue(KindProperty);
         set => SetValue(KindProperty, value);
+    }
+
+    public StatusCard()
+    {
+        UpdateKindPseudoClasses();
+    }
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+
+        if (change.Property == KindProperty)
+        {
+            UpdateKindPseudoClasses();
+        }
+    }
+
+    private void UpdateKindPseudoClasses()
+    {
+        var kind = Kind ?? StatusLabelKind.Debug;
+
+        PseudoClasses.Set(":debug", kind == StatusLabelKind.Debug);
+        PseudoClasses.Set(":info", kind == StatusLabelKind.Info);
+        PseudoClasses.Set(":warn", kind == StatusLabelKind.Warn);
+        PseudoClasses.Set(":error", kind == StatusLabelKind.Error);
+        PseudoClasses.Set(":fatal", kind == StatusLabelKind.Fatal);
     }
 }

@@ -30,7 +30,7 @@
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
-                                Foreground="White"
+                                Foreground="{DynamicResource StatusBadgeLeftTextForeground}"
                                 FontSize="{TemplateBinding FontSize}"
                                 Text="{TemplateBinding LeftText}" />
                         </Border>
@@ -40,7 +40,7 @@
                             Padding="{TemplateBinding Padding}"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
-                            Foreground="#262626"
+                            Foreground="{DynamicResource StatusBadgeRightTextForeground}"
                             FontSize="{TemplateBinding FontSize}"
                             Text="{TemplateBinding RightText}" />
                     </Grid>

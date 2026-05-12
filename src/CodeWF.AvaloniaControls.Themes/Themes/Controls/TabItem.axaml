@@ -18,7 +18,7 @@
                         IsVisible="False" />
                     <ContentPresenter
                         x:Name="PART_ContentPresenter"
-                        Background="#01FFFFFF"
+                        Background="{DynamicResource TrapezoidShapedTabItemContentBackground}"
                         Padding="{TemplateBinding Converter={StaticResource TrapezoidShapedTabItemPaddingConverter}}"
                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"

@@ -4,16 +4,16 @@
     xmlns:primitives="using:Avalonia.Controls.Primitives"
     xmlns:codewf="https://codewf.com">
     <ControlTheme x:Key="{x:Type codewf:CodeWFWindow}" TargetType="codewf:CodeWFWindow">
-        <Setter Property="Background" Value="{DynamicResource WindowDefaultBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource WindowDefaultForeground}" />
+        <Setter Property="Background" Value="{DynamicResource CodeWFWindowBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource CodeWFWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}" />
-        <Setter Property="TitleBarHeight" Value="32" />
-        <Setter Property="TitleBarBackground" Value="{DynamicResource TitleBarBackground}" />
-        <Setter Property="TitleBarForeground" Value="{DynamicResource CaptionButtonForeground}" />
-        <Setter Property="TitleBarBorderBrush" Value="{DynamicResource SemiColorBorder}" />
-        <Setter Property="TitleBarBorderThickness" Value="0,0,0,1" />
-        <Setter Property="WindowCornerRadius" Value="4" />
+        <Setter Property="TitleBarHeight" Value="{StaticResource CodeWFWindowTitleBarHeight}" />
+        <Setter Property="TitleBarBackground" Value="{DynamicResource CodeWFWindowTitleBarBackground}" />
+        <Setter Property="TitleBarForeground" Value="{DynamicResource CodeWFWindowTitleBarForeground}" />
+        <Setter Property="TitleBarBorderBrush" Value="{DynamicResource CodeWFWindowTitleBarBorderBrush}" />
+        <Setter Property="TitleBarBorderThickness" Value="{StaticResource CodeWFWindowTitleBarBorderThickness}" />
+        <Setter Property="WindowCornerRadius" Value="{StaticResource CodeWFWindowCornerRadius}" />
         <Setter Property="IsTitleBarVisible" Value="True" />
         <Setter Property="IsManagedResizerVisible" Value="True" />
         <Setter Property="IsMinimizeButtonVisible" Value="True" />
@@ -71,7 +71,7 @@
                                         IsVisible="{TemplateBinding IsTitleBarVisible}"
                                         LeftContent="{TemplateBinding LeftContent}"
                                         LeftContentTemplate="{TemplateBinding LeftContentTemplate}"
-                                        Padding="0,0,128,0"
+                                        Padding="{StaticResource CodeWFWindowTitleBarContentPadding}"
                                         RightContent="{TemplateBinding RightContent}"
                                         RightContentTemplate="{TemplateBinding RightContentTemplate}"
                                         Title="{TemplateBinding Title}" />
@@ -160,7 +160,7 @@
                     <Border
                         Name="PART_ResizeTop"
                         Classes="resize-grip"
-                        Height="5"
+                        Height="{StaticResource CodeWFWindowResizeGripThickness}"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
                         Background="Transparent"
@@ -168,7 +168,7 @@
                     <Border
                         Name="PART_ResizeBottom"
                         Classes="resize-grip"
-                        Height="5"
+                        Height="{StaticResource CodeWFWindowResizeGripThickness}"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Bottom"
                         Background="Transparent"
@@ -176,7 +176,7 @@
                     <Border
                         Name="PART_ResizeLeft"
                         Classes="resize-grip"
-                        Width="5"
+                        Width="{StaticResource CodeWFWindowResizeGripThickness}"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Stretch"
                         Background="Transparent"
@@ -184,7 +184,7 @@
                     <Border
                         Name="PART_ResizeRight"
                         Classes="resize-grip"
-                        Width="5"
+                        Width="{StaticResource CodeWFWindowResizeGripThickness}"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Stretch"
                         Background="Transparent"
@@ -192,8 +192,8 @@
                     <Border
                         Name="PART_ResizeTopLeft"
                         Classes="resize-grip"
-                        Width="10"
-                        Height="10"
+                        Width="{StaticResource CodeWFWindowResizeGripCornerSize}"
+                        Height="{StaticResource CodeWFWindowResizeGripCornerSize}"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Background="Transparent"
@@ -201,8 +201,8 @@
                     <Border
                         Name="PART_ResizeTopRight"
                         Classes="resize-grip"
-                        Width="10"
-                        Height="10"
+                        Width="{StaticResource CodeWFWindowResizeGripCornerSize}"
+                        Height="{StaticResource CodeWFWindowResizeGripCornerSize}"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         Background="Transparent"
@@ -210,8 +210,8 @@
                     <Border
                         Name="PART_ResizeBottomLeft"
                         Classes="resize-grip"
-                        Width="10"
-                        Height="10"
+                        Width="{StaticResource CodeWFWindowResizeGripCornerSize}"
+                        Height="{StaticResource CodeWFWindowResizeGripCornerSize}"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
                         Background="Transparent"
@@ -219,8 +219,8 @@
                     <Border
                         Name="PART_ResizeBottomRight"
                         Classes="resize-grip"
-                        Width="10"
-                        Height="10"
+                        Width="{StaticResource CodeWFWindowResizeGripCornerSize}"
+                        Height="{StaticResource CodeWFWindowResizeGripCornerSize}"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Background="Transparent"

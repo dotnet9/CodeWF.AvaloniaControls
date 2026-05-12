@@ -1,5 +1,12 @@
 # Changelog
 
+## 12.0.2.12 - 2026-05-12
+
+- Bumped the controls and themes package version to 12.0.2.12 for the theme resource organization update.
+- Split CodeWF theme resources into per-control files under the shared, light, and dark theme dictionaries, matching the Semi resource layout style.
+- Routed `CodeWFWindow`, `CodeWFTitleBar`, `SearchListBox`, `StatusBadge`, `StatusCard`, and shaped tab item defaults through CodeWF-owned theme keys for cleaner light and dark theme adaptation.
+- Updated `StatusCard` to use state pseudo-classes and theme resources instead of fixed converter colors for status backgrounds and foregrounds.
+
 ## 12.0.2.11 - 2026-05-12
 
 - Aligned the default `CodeWFWindow` and `CodeWFTitleBar` theme values with Semi/Ursa window resources such as `WindowDefaultBackground`, `WindowDefaultForeground`, `TitleBarBackground`, and `CaptionButtonForeground`.

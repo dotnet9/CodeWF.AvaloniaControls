@@ -14,7 +14,10 @@
                         Name="PART_SearchBox"
                         Classes="clearButton"
                         PlaceholderText="Search" />
-                    <TextBlock Grid.Row="1" Margin="5">
+                    <TextBlock
+                        Grid.Row="1"
+                        Margin="{StaticResource SearchListBoxCounterMargin}"
+                        Foreground="{DynamicResource SearchListBoxCounterForeground}">
                         <Run Text="Filtered: " />
                         <Run Text="{Binding SearchCount, RelativeSource={RelativeSource TemplatedParent}}" />
                         <Run Text="/" />
@@ -22,10 +25,10 @@
                     </TextBlock>
                     <Border
                         Grid.Row="2"
-                        Background="White"
-                        BorderBrush="#DCE3EE"
-                        BorderThickness="1"
-                        CornerRadius="6">
+                        Background="{DynamicResource SearchListBoxBackground}"
+                        BorderBrush="{DynamicResource SearchListBoxBorderBrush}"
+                        BorderThickness="{StaticResource SearchListBoxBorderThickness}"
+                        CornerRadius="{StaticResource SearchListBoxCornerRadius}">
                         <ListBox
                             Name="PART_ListBox"
                             ItemsSource="{Binding BindingItemsSource, RelativeSource={RelativeSource TemplatedParent}}"

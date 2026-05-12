@@ -3,9 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:codewf="https://codewf.com">
     <ControlTheme x:Key="{x:Type codewf:CodeWFTitleBar}" TargetType="codewf:CodeWFTitleBar">
-        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="MinHeight" Value="{StaticResource CodeWFTitleBarMinHeight}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource CaptionButtonForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource CodeWFTitleBarForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}" />
         <Setter Property="Template">
@@ -19,15 +19,15 @@
                     <Grid ColumnDefinitions="Auto,*,Auto">
                         <StackPanel
                             Classes="default-left-content"
-                            Margin="14,0,10,0"
+                            Margin="{StaticResource CodeWFTitleBarLeftContentMargin}"
                             VerticalAlignment="Stretch"
                             IsHitTestVisible="False"
                             Orientation="Horizontal"
-                            Spacing="8">
+                            Spacing="{StaticResource CodeWFTitleBarDefaultContentSpacing}">
                             <Image
                                 Classes="window-icon"
-                                Width="16"
-                                Height="16"
+                                Width="{StaticResource CodeWFTitleBarIconSize}"
+                                Height="{StaticResource CodeWFTitleBarIconSize}"
                                 VerticalAlignment="Center"
                                 IsVisible="False"
                                 RenderOptions.BitmapInterpolationMode="HighQuality"
@@ -46,7 +46,7 @@
                         <ContentPresenter
                             Grid.Column="0"
                             Classes="left-content"
-                            Margin="14,0,10,0"
+                            Margin="{StaticResource CodeWFTitleBarLeftContentMargin}"
                             VerticalAlignment="Stretch"
                             Content="{TemplateBinding LeftContent}"
                             ContentTemplate="{TemplateBinding LeftContentTemplate}"

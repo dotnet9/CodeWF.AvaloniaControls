@@ -1,18 +1,15 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-	<!-- 边框颜色 -->
-    <SolidColorBrush x:Key="StatusBadgeDebugBorderBrush" Color="#1890FF" />
-    <SolidColorBrush x:Key="StatusBadgeInfoBorderBrush" Color="#52C41A" />
-    <SolidColorBrush x:Key="StatusBadgeWarnBorderBrush" Color="#FAAD14" />
-    <SolidColorBrush x:Key="StatusBadgeErrorBorderBrush" Color="#FF4D4F" />
-    <SolidColorBrush x:Key="StatusBadgeFatalBorderBrush" Color="#CF1322" />
-    <!-- 更深的红色 -->
-
-    <!-- 背景颜色 -->
-    <SolidColorBrush x:Key="StatusBadgeDebugBackground" Color="#E6F7FF" />
-    <SolidColorBrush x:Key="StatusBadgeInfoBackground" Color="#F6FFED" />
-    <SolidColorBrush x:Key="StatusBadgeWarnBackground" Color="#FFF7E6" />
-    <SolidColorBrush x:Key="StatusBadgeErrorBackground" Color="#FFF1F0" />
-    <SolidColorBrush x:Key="StatusBadgeFatalBackground" Color="#FFE6E6" />
-    <!-- 更饱和的背景色 -->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StaticResource x:Key="StatusBadgeLeftTextForeground" ResourceKey="SemiColorWhite" />
+    <StaticResource x:Key="StatusBadgeRightTextForeground" ResourceKey="SemiColorText0" />
+    <StaticResource x:Key="StatusBadgeDebugBorderBrush" ResourceKey="SemiColorInformation" />
+    <StaticResource x:Key="StatusBadgeInfoBorderBrush" ResourceKey="SemiColorSuccess" />
+    <StaticResource x:Key="StatusBadgeWarnBorderBrush" ResourceKey="SemiColorWarning" />
+    <StaticResource x:Key="StatusBadgeErrorBorderBrush" ResourceKey="SemiColorDanger" />
+    <StaticResource x:Key="StatusBadgeFatalBorderBrush" ResourceKey="SemiColorDangerActive" />
+    <StaticResource x:Key="StatusBadgeDebugBackground" ResourceKey="SemiColorInformationLight" />
+    <StaticResource x:Key="StatusBadgeInfoBackground" ResourceKey="SemiColorSuccessLight" />
+    <StaticResource x:Key="StatusBadgeWarnBackground" ResourceKey="SemiColorWarningLight" />
+    <StaticResource x:Key="StatusBadgeErrorBackground" ResourceKey="SemiColorDangerLight" />
+    <StaticResource x:Key="StatusBadgeFatalBackground" ResourceKey="SemiColorDangerLightActive" />
 </ResourceDictionary>
