@@ -1,5 +1,13 @@
 # Changelog
 
+## 12.0.3.1 - 2026-05-14
+
+- Bumped the controls and themes package version to 12.0.3.1.
+- Updated central package versions for Avalonia 12.0.3 and YY-Thunks 1.2.2-Beta.2.
+- Refined the default `CodeWFWindow` title-bar layout so caption buttons stay in the top-right control area and `RightContent` is placed immediately to their left.
+- Made the default `CodeWFWindow` title bar transparent, removed the default title-bar divider, and removed the reserved right padding from the title-bar content area.
+- Tightened the default `CodeWFTitleBar` left content margin and moved `CodeWFWindow` frame drawing to an explicit themed border overlay.
+
 ## 12.0.2.12 - 2026-05-12
 
 - Bumped the controls and themes package version to 12.0.2.12 for the theme resource organization update.

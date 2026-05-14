@@ -2,8 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <x:Double x:Key="CodeWFWindowTitleBarHeight">32</x:Double>
     <CornerRadius x:Key="CodeWFWindowCornerRadius">4</CornerRadius>
-    <Thickness x:Key="CodeWFWindowTitleBarBorderThickness">0,0,0,1</Thickness>
-    <Thickness x:Key="CodeWFWindowTitleBarContentPadding">0,0,128,0</Thickness>
+    <Thickness x:Key="CodeWFWindowBorderThickness">1</Thickness>
+    <Thickness x:Key="CodeWFWindowTitleBarBorderThickness">0</Thickness>
+    <Thickness x:Key="CodeWFWindowTitleBarContentPadding">0</Thickness>
     <x:Double x:Key="CodeWFWindowResizeGripThickness">5</x:Double>
     <x:Double x:Key="CodeWFWindowResizeGripCornerSize">10</x:Double>
 </ResourceDictionary>
