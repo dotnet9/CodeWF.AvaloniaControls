@@ -1,0 +1,125 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CodeWF.AvaloniaControlsDemo.App"
+             xmlns:fluent="clr-namespace:Avalonia.Themes.Fluent;assembly=Avalonia.Themes.Fluent"
+             xmlns:semi="https://irihi.tech/semi"
+             xmlns:uSemi="https://irihi.tech/ursa/themes/semi"
+             xmlns:codewf="https://codewf.com"
+             RequestedThemeVariant="Light">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="ShowcaseAppBackground">#F3F6FB</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcasePanelBackground">#FFFFFFFF</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseCardBackground">#FFFFFFFF</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseSubtleBackground">#F8FAFC</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseInputBackground">#FFFFFFFF</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseBorderBrush">#DCE3EE</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseSubtleBorderBrush">#E4E9F2</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseTextBrush">#0F172A</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseMutedTextBrush">#64748B</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseAccentBrush">#2563EB</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseAccentSubtleBrush">#EEF2FF</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseAccentTextBrush">#3730A3</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseTitleBarBackground">#F8FAFC</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseTitleBarBorderBrush">#DCE3EE</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseTitleBarForeground">#0F172A</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseSplitterBrush">#E4E9F2</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcasePositiveBrush">#16A34A</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseWarningBrush">#B45309</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseDangerBrush">#DC2626</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseCodeBackground">#F8FAFC</SolidColorBrush>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="ShowcaseAppBackground">#0F172A</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcasePanelBackground">#111827</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseCardBackground">#1F2937</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseSubtleBackground">#172033</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseInputBackground">#0B1220</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseBorderBrush">#334155</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseSubtleBorderBrush">#263449</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseTextBrush">#F8FAFC</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseMutedTextBrush">#CBD5E1</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseAccentBrush">#60A5FA</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseAccentSubtleBrush">#1E3A5F</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseAccentTextBrush">#BFDBFE</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseTitleBarBackground">#111827</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseTitleBarBorderBrush">#263449</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseTitleBarForeground">#F8FAFC</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseSplitterBrush">#334155</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcasePositiveBrush">#4ADE80</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseWarningBrush">#FBBF24</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseDangerBrush">#F87171</SolidColorBrush>
+                    <SolidColorBrush x:Key="ShowcaseCodeBackground">#0B1220</SolidColorBrush>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary.MergedDictionaries>
+                <MergeResourceInclude Source="Styles/Brushes.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+    <Application.Styles>
+        <fluent:FluentTheme />
+        <semi:SemiTheme Locale="zh-CN" />
+        <semi:AvaloniaEditSemiTheme />
+        <uSemi:SemiTheme Locale="zh-CN" />
+        <codewf:CodeWFTheme />
+        <!-- Keep scrollbars visible by default for easier scanning and dragging. -->
+        <Style Selector="ScrollViewer">
+            <Setter Property="AllowAutoHide" Value="False" />
+        </Style>
+        <Style Selector="Button.WindowCaptionButton">
+            <Setter Property="Width" Value="46" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="MinWidth" Value="46" />
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTitleBarForeground}" />
+            <Setter Property="Template">
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="Button.WindowCaptionButton:pointerover">
+            <Setter Property="Background" Value="#1A64748B" />
+        </Style>
+        <Style Selector="Button.WindowCaptionButton:pressed">
+            <Setter Property="Background" Value="#2A64748B" />
+        </Style>
+        <Style Selector="Button.WindowShapeCloseButton">
+            <Setter Property="Width" Value="34" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="MinWidth" Value="34" />
+            <Setter Property="MinHeight" Value="34" />
+            <Setter Property="CornerRadius" Value="17" />
+            <Setter Property="BorderBrush" Value="#B8FFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="#E6F8FAFC" />
+            <Setter Property="Foreground" Value="#111827" />
+        </Style>
+        <Style Selector="Button.WindowCloseButton:pointerover">
+            <Setter Property="Background" Value="#E81123" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style Selector="Button.WindowCloseButton:pressed">
+            <Setter Property="Background" Value="#C50F1F" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    </Application.Styles>
+</Application>

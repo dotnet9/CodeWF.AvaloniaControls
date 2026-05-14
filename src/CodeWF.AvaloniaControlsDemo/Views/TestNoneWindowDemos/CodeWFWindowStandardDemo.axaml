@@ -1,0 +1,385 @@
+<codewf:CodeWFWindow xmlns="https://github.com/avaloniaui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:codewf="https://codewf.com"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:i18n="https://codewf.com"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:vm="clr-namespace:CodeWF.AvaloniaControlsDemo.ViewModels"
+                     xmlns:windowLangs="clr-namespace:Showcase.Windows"
+                     mc:Ignorable="d"
+                     x:Name="DemoWindow"
+                     x:DataType="vm:CodeWFWindowStandardDemoViewModel"
+                     d:DesignWidth="840"
+                     d:DesignHeight="580"
+                     Width="840"
+                     Height="580"
+                     Background="#F5F7FB"
+                     CanMaximize="{Binding CanMaximize}"
+                     CanResize="{Binding CanResize}"
+                     ContentExtendsIntoTitleBar="{Binding ContentExtendsIntoTitleBar}"
+                     FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+                     Icon="/Assets/logo.ico"
+                     IsCloseButtonVisible="{Binding IsCloseButtonVisible}"
+                     IsFullScreenButtonVisible="{Binding IsFullScreenButtonVisible}"
+                     IsManagedResizerVisible="{Binding IsManagedResizerVisible}"
+                     IsMinimizeButtonVisible="{Binding IsMinimizeButtonVisible}"
+                     IsRestoreButtonVisible="{Binding IsRestoreButtonVisible}"
+                     IsTitleBarVisible="{Binding IsTitleBarVisible}"
+                     LeftContent="{Binding CustomLeftContent}"
+                     LeftContentTemplate="{StaticResource SampleLeftContentTemplate}"
+                     RightContent="{Binding RightContent}"
+                     RightContentTemplate="{StaticResource SampleRightContentTemplate}"
+                     TitleBarHeight="34"
+                     TitleBarBackground="#24292F"
+                     TitleBarBorderBrush="#11161C"
+                     TitleBarContent="{Binding TitleBarContent}"
+                     TitleBarContentTemplate="{StaticResource SampleTitleBarContentTemplate}"
+                     TitleBarForeground="#F3F4F6"
+                     TitleBarMargin="{Binding TitleBarMargin}"
+                     WindowStartupLocation="CenterScreen"
+                     x:Class="CodeWF.AvaloniaControlsDemo.Views.TestNoneWindowDemos.CodeWFWindowStandardDemo"
+                     Title="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFStandardTitle}}">
+    <codewf:CodeWFWindow.DataContext>
+        <vm:CodeWFWindowStandardDemoViewModel />
+    </codewf:CodeWFWindow.DataContext>
+
+    <codewf:CodeWFWindow.Resources>
+        <DataTemplate x:Key="SampleLeftContentTemplate">
+            <Grid Height="34"
+                  ColumnDefinitions="Auto,Auto">
+                <Image Width="16"
+                       Height="16"
+                       Margin="0,0,10,0"
+                       VerticalAlignment="Center"
+                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                       Source="/Assets/logo.png" />
+                <Menu Grid.Column="1"
+                      Classes="title-bar-menu">
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Classes="title-bar-menu-header" Text="File" />
+                        </MenuItem.Header>
+                        <MenuItem Header="New repository..." />
+                        <MenuItem Header="Add local repository..." />
+                        <MenuItem Header="Clone repository..." />
+                        <Separator />
+                        <MenuItem Header="Options" />
+                        <Separator />
+                        <MenuItem Header="Exit" />
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Classes="title-bar-menu-header" Text="Edit" />
+                        </MenuItem.Header>
+                        <MenuItem Header="Undo" />
+                        <MenuItem Header="Redo" />
+                        <Separator />
+                        <MenuItem Header="Cut" />
+                        <MenuItem Header="Copy" />
+                        <MenuItem Header="Paste" />
+                        <MenuItem Header="Select All" />
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Classes="title-bar-menu-header" Text="View" />
+                        </MenuItem.Header>
+                        <MenuItem Header="Show Changes" />
+                        <MenuItem Header="Show History" />
+                        <Separator />
+                        <MenuItem Header="Toggle Full Screen" />
+                        <Separator />
+                        <MenuItem Header="Zoom In" />
+                        <MenuItem Header="Zoom Out" />
+                        <MenuItem Header="Reset Zoom" />
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Classes="title-bar-menu-header" Text="Repository" />
+                        </MenuItem.Header>
+                        <MenuItem Header="Push" />
+                        <MenuItem Header="Pull" />
+                        <MenuItem Header="Fetch" />
+                        <Separator />
+                        <MenuItem Header="View on GitHub" />
+                        <MenuItem Header="Open in Visual Studio Code" />
+                        <MenuItem Header="Show in Explorer" />
+                        <Separator />
+                        <MenuItem Header="Repository Settings..." />
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Classes="title-bar-menu-header" Text="Branch" />
+                        </MenuItem.Header>
+                        <MenuItem Header="New branch..." />
+                        <MenuItem Header="Rename branch..." />
+                        <MenuItem Header="Delete branch" />
+                        <Separator />
+                        <MenuItem Header="Update from default branch" />
+                        <MenuItem Header="Compare to current branch" />
+                        <MenuItem Header="Merge into current branch..." />
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock Classes="title-bar-menu-header" Text="Help" />
+                        </MenuItem.Header>
+                        <MenuItem Header="About GitHub Desktop" />
+                        <MenuItem Header="Show User Guide" />
+                        <MenuItem Header="Report Issue" />
+                        <Separator />
+                        <MenuItem Header="View Logs" />
+                    </MenuItem>
+                </Menu>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SampleTitleBarContentTemplate">
+            <Border HorizontalAlignment="Center"
+                    Padding="12,4"
+                    Background="#223B82F6"
+                    BorderBrush="#553B82F6"
+                    BorderThickness="1"
+                    CornerRadius="999">
+                <StackPanel Orientation="Horizontal"
+                            Spacing="8">
+                    <Border Width="7"
+                            Height="7"
+                            VerticalAlignment="Center"
+                            Background="#60A5FA"
+                            CornerRadius="999" />
+                    <TextBlock VerticalAlignment="Center"
+                               FontSize="12"
+                               FontWeight="SemiBold"
+                               Foreground="White"
+                               Text="TitleBarContent" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SampleRightContentTemplate">
+            <Border Margin="0,0,2,0"
+                    Padding="10,4"
+                    Background="#2222C55E"
+                    BorderBrush="#6622C55E"
+                    BorderThickness="1"
+                    CornerRadius="999">
+                <TextBlock VerticalAlignment="Center"
+                           FontSize="12"
+                           FontWeight="SemiBold"
+                           Foreground="#BBF7D0"
+                           Text="RightContent" />
+            </Border>
+        </DataTemplate>
+    </codewf:CodeWFWindow.Resources>
+
+    <codewf:CodeWFWindow.Styles>
+        <Style Selector="Menu.title-bar-menu">
+            <Setter Property="Height" Value="34" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="Menu.title-bar-menu > MenuItem">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="#F3F4F6" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="8,0" />
+        </Style>
+        <Style Selector="TextBlock.title-bar-menu-header">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#F3F4F6" />
+        </Style>
+        <Style Selector="Menu.title-bar-menu > MenuItem:pointerover">
+            <Setter Property="Foreground" Value="#F3F4F6" />
+            <Setter Property="Background" Value="#32383F" />
+        </Style>
+        <Style Selector="Menu.title-bar-menu > MenuItem:pressed">
+            <Setter Property="Foreground" Value="#F3F4F6" />
+            <Setter Property="Background" Value="#3A424B" />
+        </Style>
+        <Style Selector="Menu.title-bar-menu > MenuItem:selected">
+            <Setter Property="Foreground" Value="#F3F4F6" />
+            <Setter Property="Background" Value="#3A424B" />
+        </Style>
+        <Style Selector="Menu.title-bar-menu > MenuItem:open">
+            <Setter Property="Foreground" Value="#F3F4F6" />
+            <Setter Property="Background" Value="#3A424B" />
+        </Style>
+        <Style Selector="Menu.title-bar-menu MenuItem MenuItem">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="#24292F" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="12,4" />
+        </Style>
+        <Style Selector="Menu.title-bar-menu MenuItem MenuItem:pointerover">
+            <Setter Property="Foreground" Value="#0F172A" />
+            <Setter Property="Background" Value="#E7EDF5" />
+        </Style>
+        <Style Selector="Menu.title-bar-menu MenuItem MenuItem:pressed">
+            <Setter Property="Foreground" Value="#0F172A" />
+            <Setter Property="Background" Value="#D8E1EC" />
+        </Style>
+        <Style Selector="Menu.title-bar-menu MenuItem MenuItem:selected">
+            <Setter Property="Foreground" Value="#0F172A" />
+            <Setter Property="Background" Value="#D8E1EC" />
+        </Style>
+    </codewf:CodeWFWindow.Styles>
+
+    <ScrollViewer Background="{DynamicResource ShowcaseAppBackground}">
+        <Grid Margin="20"
+              ColumnDefinitions="1.05*,*"
+              RowDefinitions="Auto,*"
+              ColumnSpacing="14"
+              RowSpacing="16">
+            <StackPanel Grid.ColumnSpan="2"
+                        Spacing="6">
+                <TextBlock FontSize="24"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFStandardHeading}}" />
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           TextWrapping="Wrap"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFStandardDescription}}" />
+            </StackPanel>
+
+            <Border Grid.Row="1"
+                    Padding="16"
+                    Background="{DynamicResource ShowcaseCardBackground}"
+                    BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="10">
+                <StackPanel Spacing="14">
+                    <StackPanel Spacing="6">
+                        <TextBlock FontSize="17"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.InteractiveProperties}}" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   TextWrapping="Wrap"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.InteractivePropertiesDesc}}" />
+                    </StackPanel>
+
+                    <Grid ColumnDefinitions="*,*"
+                          ColumnSpacing="18"
+                          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                          RowSpacing="9">
+                        <TextBlock Grid.ColumnSpan="2"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CaptionButtonsGroup}}" />
+                        <CheckBox Grid.Row="1"
+                                  Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ShowMinimizeButton}}"
+                                  IsChecked="{Binding IsMinimizeButtonVisible, Mode=TwoWay}" />
+                        <CheckBox Grid.Row="1"
+                                  Grid.Column="1"
+                                  Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ShowRestoreButton}}"
+                                  IsChecked="{Binding IsRestoreButtonVisible, Mode=TwoWay}" />
+                        <CheckBox Grid.Row="2"
+                                  Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ShowCloseButton}}"
+                                  IsChecked="{Binding IsCloseButtonVisible, Mode=TwoWay}" />
+                        <CheckBox Grid.Row="2"
+                                  Grid.Column="1"
+                                  Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ShowFullScreenButton}}"
+                                  IsChecked="{Binding IsFullScreenButtonVisible, Mode=TwoWay}" />
+
+                        <TextBlock Grid.Row="3"
+                                   Grid.ColumnSpan="2"
+                                   Margin="0,8,0,0"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.WindowBehavior}}" />
+                        <CheckBox Grid.Row="4"
+                                  Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ShowTitleBar}}"
+                                  IsChecked="{Binding IsTitleBarVisible, Mode=TwoWay}" />
+                        <CheckBox Grid.Row="4"
+                                  Grid.Column="1"
+                                  Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ShowManagedResizer}}"
+                                  IsChecked="{Binding IsManagedResizerVisible, Mode=TwoWay}" />
+                        <CheckBox Grid.Row="5"
+                                  Content="CanResize"
+                                  IsChecked="{Binding CanResize, Mode=TwoWay}" />
+                        <CheckBox Grid.Row="5"
+                                  Grid.Column="1"
+                                  Content="CanMaximize"
+                                  IsChecked="{Binding CanMaximize, Mode=TwoWay}" />
+                    </Grid>
+
+                    <StackPanel Spacing="9">
+                        <TextBlock FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarCustomizationGroup}}" />
+                        <CheckBox Content="{i18n:I18n {x:Static windowLangs:WindowDemos.UseCustomLeftContent}}"
+                                  IsChecked="{Binding UseCustomLeftContent, Mode=TwoWay}" />
+                        <CheckBox Name="ShowTitleBarContentCheckBox"
+                                  Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ShowTitleBarContent}}"
+                                  IsChecked="{Binding ShowTitleBarContent, Mode=TwoWay}" />
+                        <CheckBox Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ShowRightContent}}"
+                                  IsChecked="{Binding ShowRightContent, Mode=TwoWay}" />
+                        <CheckBox Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ContentExtendsIntoTitleBar}}"
+                                  IsChecked="{Binding ContentExtendsIntoTitleBar, Mode=TwoWay}" />
+                        <CheckBox Name="TitleBarMarginCheckBox"
+                                  Content="{i18n:I18n {x:Static windowLangs:WindowDemos.ApplyTitleBarMargin}}"
+                                  IsChecked="{Binding ApplyTitleBarMargin, Mode=TwoWay}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Row="1"
+                  Grid.Column="1"
+                  RowDefinitions="Auto,Auto,*"
+                  RowSpacing="12">
+                <Border Padding="16"
+                        Background="{DynamicResource ShowcaseCardBackground}"
+                        BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                    <StackPanel Spacing="7">
+                        <TextBlock FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarHeight34}}" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFStandardDescription}}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1"
+                        Padding="16"
+                        Background="{DynamicResource ShowcaseCardBackground}"
+                        BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                    <StackPanel Spacing="7">
+                        <TextBlock FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.PropertyEffect}}" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.PropertyEffectDesc}}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarSlotsExperienceDesc}}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="2"
+                        Padding="16"
+                        Background="{DynamicResource ShowcaseCardBackground}"
+                        BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                    <StackPanel Spacing="7">
+                        <TextBlock FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.WindowBehavior}}" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.DoubleClickMaximize}}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.ResizeHotZones}}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</codewf:CodeWFWindow>

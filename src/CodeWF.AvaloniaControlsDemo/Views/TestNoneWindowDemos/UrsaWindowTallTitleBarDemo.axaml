@@ -1,0 +1,61 @@
+<u:UrsaWindow xmlns="https://github.com/avaloniaui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:i18n="https://codewf.com"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:u="https://irihi.tech/ursa"
+              xmlns:windowLangs="clr-namespace:Showcase.Windows"
+              mc:Ignorable="d"
+              d:DesignWidth="640"
+              d:DesignHeight="420"
+              Width="640"
+              Height="420"
+              Background="{DynamicResource ShowcaseAppBackground}"
+              FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+              Icon="/Assets/logo.ico"
+              WindowStartupLocation="CenterScreen"
+              x:Class="CodeWF.AvaloniaControlsDemo.Views.TestNoneWindowDemos.UrsaWindowTallTitleBarDemo"
+              Title="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaTallTitle}}">
+    <Grid Margin="22"
+          RowDefinitions="Auto,*"
+          RowSpacing="16">
+        <Border Padding="18"
+                Background="{DynamicResource ShowcaseCardBackground}"
+                BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="12">
+            <StackPanel Spacing="8">
+                <TextBlock FontSize="24"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaTallHeading}}" />
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.UrsaTallDescription}}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,*"
+              ColumnSpacing="12">
+            <Border Padding="16"
+                    Background="{DynamicResource ShowcaseCardBackground}"
+                    BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarContentDesc}}"
+                           TextWrapping="Wrap" />
+            </Border>
+            <Border Grid.Column="1"
+                    Padding="16"
+                    Background="{DynamicResource ShowcaseCardBackground}"
+                    BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.ResizeHotZones}}"
+                           TextWrapping="Wrap" />
+            </Border>
+        </Grid>
+    </Grid>
+</u:UrsaWindow>

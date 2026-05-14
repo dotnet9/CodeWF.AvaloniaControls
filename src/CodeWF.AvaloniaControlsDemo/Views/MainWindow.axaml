@@ -1,0 +1,201 @@
+<codewf:CodeWFWindow
+    x:Class="CodeWF.AvaloniaControlsDemo.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:codewf="https://codewf.com"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="https://codewf.com"
+    xmlns:lang="clr-namespace:Lang.Avalonia;assembly=Lang.Avalonia"
+    xmlns:mainLangs="clr-namespace:Showcase.Main"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:CodeWF.AvaloniaControlsDemo.ViewModels"
+    Title="{i18n:I18n {x:Static mainLangs:MainWindow.Title}}"
+    Width="1280"
+    Height="860"
+    Background="{DynamicResource ShowcaseAppBackground}"
+    FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+    TitleBarBackground="{DynamicResource ShowcaseTitleBarBackground}"
+    TitleBarBorderBrush="{DynamicResource ShowcaseTitleBarBorderBrush}"
+    TitleBarForeground="{DynamicResource ShowcaseTitleBarForeground}"
+    TitleBarHeight="60"
+    WindowStartupLocation="CenterScreen"
+    d:DesignHeight="860"
+    d:DesignWidth="1280"
+    Icon="/Assets/logo.ico"
+    x:DataType="vm:MainWindowViewModel"
+    mc:Ignorable="d">
+    <codewf:CodeWFWindow.DataContext>
+        <vm:MainWindowViewModel />
+    </codewf:CodeWFWindow.DataContext>
+
+    <codewf:CodeWFWindow.Resources>
+        <DataTemplate x:Key="LanguageSelectionTemplate" x:DataType="lang:LocalizationLanguage">
+            <TextBlock VerticalAlignment="Center" TextTrimming="CharacterEllipsis">
+                <Run FontWeight="SemiBold" Text="{Binding DisplayName}" />
+                <Run Text=" " />
+                <Run Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{Binding DisplayTag}" />
+            </TextBlock>
+        </DataTemplate>
+        <DataTemplate x:Key="LanguageOptionTemplate" x:DataType="lang:LocalizationLanguage">
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                <TextBlock FontWeight="SemiBold" Text="{Binding DisplayName}" />
+                <Border Grid.Column="1"
+                        Padding="8,2"
+                        Background="{DynamicResource ShowcaseSubtleBackground}"
+                        BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="999">
+                    <TextBlock FontSize="11"
+                               Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                               Text="{Binding DisplayTag}" />
+                </Border>
+                <TextBlock Grid.Row="1"
+                           Grid.ColumnSpan="2"
+                           Margin="0,5,0,0"
+                           FontSize="12"
+                           Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           Text="{Binding DetailText}"
+                           TextWrapping="Wrap" />
+            </Grid>
+        </DataTemplate>
+    </codewf:CodeWFWindow.Resources>
+
+    <codewf:CodeWFWindow.Styles>
+        <Style Selector="Border.Panel">
+            <Setter Property="Background" Value="{DynamicResource ShowcasePanelBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="14" />
+        </Style>
+        <Style Selector="TextBlock.Caption">
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
+        </Style>
+        <Style Selector="TextBlock.Title">
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+        </Style>
+        <Style Selector="TabItem">
+            <Setter Property="Padding" Value="16,12" />
+            <Setter Property="MinWidth" Value="178" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style Selector="TextBox.SearchBox">
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Background" Value="{DynamicResource ShowcaseInputBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseBorderBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+        </Style>
+        <Style Selector="ComboBox.TitleBarPicker">
+            <Setter Property="MinWidth" Value="150" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+    </codewf:CodeWFWindow.Styles>
+
+    <codewf:CodeWFWindow.LeftContent>
+        <Grid Height="60"
+              ColumnDefinitions="Auto,Auto"
+              IsHitTestVisible="False">
+            <Border Width="34"
+                    Height="34"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource ShowcasePanelBackground}"
+                    BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="9">
+                <Image Width="22"
+                       Height="22"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                       Source="/Assets/logo.png" />
+            </Border>
+            <TextBlock Grid.Column="1"
+                       Margin="10,0,0,0"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       FontWeight="SemiBold"
+                       Foreground="{DynamicResource ShowcaseTitleBarForeground}"
+                       Text="{i18n:I18n {x:Static mainLangs:MainWindow.AppName}}"
+                       TextTrimming="CharacterEllipsis" />
+        </Grid>
+    </codewf:CodeWFWindow.LeftContent>
+
+    <codewf:CodeWFWindow.RightContent>
+        <StackPanel Margin="0,0,8,0"
+                    Orientation="Horizontal"
+                    Spacing="10"
+                    VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                <TextBlock Classes="Caption"
+                           VerticalAlignment="Center"
+                           FontSize="12"
+                           FontWeight="SemiBold"
+                           Text="{i18n:I18n {x:Static mainLangs:MainWindow.LanguageLabel}}" />
+                <ComboBox Classes="TitleBarPicker"
+                          ItemTemplate="{StaticResource LanguageOptionTemplate}"
+                          ItemsSource="{Binding Languages}"
+                          SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                          SelectionBoxItemTemplate="{StaticResource LanguageSelectionTemplate}" />
+            </StackPanel>
+
+            <ToggleSwitch MinWidth="100"
+                          VerticalAlignment="Center"
+                          IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
+                          OffContent="{i18n:I18n {x:Static mainLangs:MainWindow.ThemeLight}}"
+                          OnContent="{i18n:I18n {x:Static mainLangs:MainWindow.ThemeDark}}" />
+        </StackPanel>
+    </codewf:CodeWFWindow.RightContent>
+
+    <Border Background="{DynamicResource ShowcaseAppBackground}">
+        <Border Margin="18" Classes="Panel" Padding="12">
+            <Grid RowDefinitions="Auto,*" RowSpacing="12">
+                <Grid ColumnDefinitions="220,*" ColumnSpacing="12">
+                    <StackPanel Spacing="6">
+                        <TextBlock Classes="Title"
+                                   FontSize="13"
+                                   FontWeight="SemiBold"
+                                   Text="{i18n:I18n {x:Static mainLangs:MainWindow.ControlListTitle}}" />
+                        <TextBox Classes="SearchBox"
+                                 Text="{Binding SearchText, Mode=TwoWay}"
+                                 Watermark="{i18n:I18n {x:Static mainLangs:MainWindow.SearchWatermark}}" />
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <TabControl Background="Transparent"
+                                Classes.ReverseSeparator="False"
+                                IsVisible="{Binding HasMatches}"
+                                ItemsSource="{Binding FilteredPages}"
+                                SelectedItem="{Binding SelectedPage, Mode=TwoWay}"
+                                TabStripPlacement="Left"
+                                Theme="{StaticResource LineTabControl}">
+                        <TabControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ShowcasePageItem">
+                                <TextBlock Text="{Binding DisplayName}" />
+                            </DataTemplate>
+                        </TabControl.ItemTemplate>
+                        <TabControl.ContentTemplate>
+                            <DataTemplate x:DataType="vm:ShowcasePageItem">
+                                <ContentControl Content="{Binding Content}" />
+                            </DataTemplate>
+                        </TabControl.ContentTemplate>
+                    </TabControl>
+
+                    <Border Padding="24"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ShowcaseSubtleBackground}"
+                            BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="12"
+                            IsVisible="{Binding HasNoMatches}">
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static mainLangs:MainWindow.NoMatches}}" />
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+    </Border>
+</codewf:CodeWFWindow>

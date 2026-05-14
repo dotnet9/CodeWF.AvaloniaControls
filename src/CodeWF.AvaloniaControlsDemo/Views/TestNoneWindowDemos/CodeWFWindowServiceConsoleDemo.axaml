@@ -1,0 +1,239 @@
+<codewf:CodeWFWindow xmlns="https://github.com/avaloniaui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:codewf="https://codewf.com"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:log="https://codewf.com"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     mc:Ignorable="d"
+                     d:DesignWidth="945"
+                     d:DesignHeight="533"
+                     Width="945"
+                     Height="533"
+                     Background="#F7FAFE"
+                     CanResize="True"
+                     ContentExtendsIntoTitleBar="True"
+                     FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI"
+                     Icon="/Assets/logo.ico"
+                     TitleBarHeight="37"
+                     TitleBarBackground="Transparent"
+                     TitleBarBorderBrush="#2F83D9"
+                     TitleBarBorderThickness="0"
+                     TitleBarForeground="White"
+                     WindowCornerRadius="4"
+                     WindowStartupLocation="CenterScreen"
+                     x:Class="CodeWF.AvaloniaControlsDemo.Views.TestNoneWindowDemos.CodeWFWindowServiceConsoleDemo"
+                     Title="S-Services 服务控制台">
+    <codewf:CodeWFWindow.Resources>
+        <ImageBrush x:Key="ServiceTopBackgroundBrush"
+                    Source="/Assets/window-mask.png"
+                    SourceRect="0 0 1440 86"
+                    Stretch="Fill" />
+    </codewf:CodeWFWindow.Resources>
+
+    <codewf:CodeWFWindow.Styles>
+        <Style Selector="Button.service-toolbar-button">
+            <Setter Property="Width" Value="60" />
+            <Setter Property="Height" Value="44" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style Selector="Button.service-toolbar-button:pointerover">
+            <Setter Property="Background" Value="#26FFFFFF" />
+        </Style>
+        <Style Selector="Button.service-toolbar-button:pressed">
+            <Setter Property="Background" Value="#38DDEAFF" />
+        </Style>
+        <Style Selector="TextBlock.service-toolbar-text">
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Foreground" Value="#2B3440" />
+        </Style>
+        <Style Selector="Border.service-status-pill">
+            <Setter Property="Height" Value="14" />
+            <Setter Property="Padding" Value="4,0" />
+            <Setter Property="Background" Value="#DFFBCB" />
+            <Setter Property="CornerRadius" Value="2" />
+        </Style>
+        <Style Selector="TextBlock.service-status-label">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="9" />
+            <Setter Property="Foreground" Value="#56616C" />
+        </Style>
+        <Style Selector="TextBlock.service-status-ok">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="9" />
+            <Setter Property="Foreground" Value="#13A10E" />
+        </Style>
+    </codewf:CodeWFWindow.Styles>
+
+    <codewf:CodeWFWindow.LeftContent>
+        <Image Width="16"
+               Height="16"
+               VerticalAlignment="Center"
+               RenderOptions.BitmapInterpolationMode="HighQuality"
+               Source="/Assets/logo.png" />
+    </codewf:CodeWFWindow.LeftContent>
+
+    <codewf:CodeWFWindow.TitleBarContent>
+        <StackPanel Height="37"
+                    Orientation="Horizontal"
+                    IsHitTestVisible="False"
+                    VerticalAlignment="Center">
+            <TextBlock VerticalAlignment="Center"
+                       FontSize="17"
+                       FontWeight="SemiBold"
+                       Foreground="#FFFFFF"
+                       Text="CodeWF服务台" />
+            <TextBlock Margin="6,2,0,0"
+                       VerticalAlignment="Center"
+                       FontSize="11"
+                       FontWeight="SemiBold"
+                       Foreground="#CFE8FF"
+                       Text="V1.0.1" />
+        </StackPanel>
+    </codewf:CodeWFWindow.TitleBarContent>
+
+    <Grid RowDefinitions="86,*,23">
+        <Border Grid.Row="0"
+                Background="{StaticResource ServiceTopBackgroundBrush}" />
+
+        <Border Grid.Row="1"
+                Grid.RowSpan="2"
+                Background="#F7FAFE" />
+
+        <Border Grid.Row="0"
+                Height="49"
+                Margin="6,0,6,0"
+                VerticalAlignment="Bottom"
+                Background="#EEFFFFFF"
+                BorderBrush="#C9E5F4FF"
+                BorderThickness="1,0,1,1"
+                CornerRadius="4"
+                BoxShadow="0 2 8 0 #180F3F70">
+            <StackPanel Margin="13,1,0,0"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal"
+                        Spacing="14">
+                <Button Classes="service-toolbar-button">
+                    <StackPanel Spacing="2">
+                        <Grid Width="22"
+                              Height="22"
+                              HorizontalAlignment="Center">
+                            <Ellipse Stroke="#FF4D4F"
+                                     StrokeThickness="2.2" />
+                            <Ellipse Width="5.5"
+                                     Height="5.5"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Fill="#FF4D4F" />
+                        </Grid>
+                        <TextBlock Classes="service-toolbar-text"
+                                   HorizontalAlignment="Center"
+                                   Text="停止服务" />
+                    </StackPanel>
+                </Button>
+
+                <Button Classes="service-toolbar-button">
+                    <StackPanel Spacing="2">
+                        <Viewbox Width="23"
+                                 Height="23"
+                                 HorizontalAlignment="Center">
+                            <Path Width="24"
+                                  Height="24"
+                                  Data="M 19.43 12.98 C 19.47 12.66 19.5 12.34 19.5 12 C 19.5 11.66 19.47 11.33 19.42 11.02 L 21.54 9.37 L 19.54 5.91 L 17.05 6.91 C 16.53 6.51 15.97 6.18 15.34 5.93 L 14.96 3.29 L 10.96 3.29 L 10.58 5.93 C 9.96 6.18 9.39 6.52 8.88 6.91 L 6.39 5.91 L 4.39 9.37 L 6.5 11.02 C 6.45 11.33 6.42 11.66 6.42 12 C 6.42 12.34 6.45 12.66 6.5 12.98 L 4.39 14.63 L 6.39 18.09 L 8.88 17.09 C 9.39 17.49 9.96 17.82 10.58 18.07 L 10.96 20.71 L 14.96 20.71 L 15.34 18.07 C 15.97 17.82 16.53 17.48 17.05 17.09 L 19.54 18.09 L 21.54 14.63 Z M 12.96 14.5 C 11.58 14.5 10.46 13.38 10.46 12 C 10.46 10.62 11.58 9.5 12.96 9.5 C 14.34 9.5 15.46 10.62 15.46 12 C 15.46 13.38 14.34 14.5 12.96 14.5 Z"
+                                  Fill="#3F3F46"
+                                  Stretch="Uniform" />
+                        </Viewbox>
+                        <TextBlock Classes="service-toolbar-text"
+                                   HorizontalAlignment="Center"
+                                   Text="设置" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1"
+                Margin="8,0,8,5"
+                Background="#FEFEFE"
+                BorderBrush="#EEF1F5"
+                BorderThickness="1"
+                CornerRadius="3">
+            <Grid Margin="13,10,13,16"
+                  RowDefinitions="Auto,*"
+                  RowSpacing="8">
+                <TextBlock FontSize="11"
+                           FontWeight="SemiBold"
+                           Foreground="#20252B"
+                           Text="日志" />
+
+                <Border Grid.Row="1"
+                        Background="#FFFFFF"
+                        BorderBrush="#E9EDF3"
+                        BorderThickness="1"
+                        CornerRadius="2">
+                    <log:LogView Margin="28,10,0,0"
+                                 Background="Transparent"
+                                 BorderBrush="Transparent"
+                                 FontFamily="Consolas, Microsoft YaHei UI"
+                                 FontSize="11"
+                                 Foreground="#1F2933" />
+                </Border>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2"
+                Padding="14,0"
+                Background="#FBFCFF"
+                BorderBrush="#E7ECF4"
+                BorderThickness="0,1,0,0">
+            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*,Auto,Auto"
+                  ColumnSpacing="8">
+                <Border Classes="service-status-pill">
+                    <TextBlock Classes="service-status-ok"
+                               Text="在线" />
+                </Border>
+                <TextBlock Grid.Column="1"
+                           Classes="service-status-label"
+                           Text="服务器状态" />
+                <TextBlock Grid.Column="2"
+                           Classes="service-status-label"
+                           Margin="20,0,0,0"
+                           Text="本机IP：127.0.0.1" />
+                <TextBlock Grid.Column="3"
+                           Classes="service-status-label"
+                           Margin="18,0,0,0"
+                           Text="控制服务：在端口2701" />
+                <Border Grid.Column="4"
+                        Classes="service-status-pill">
+                    <TextBlock Classes="service-status-ok"
+                               Text="已启动" />
+                </Border>
+                <TextBlock Grid.Column="5"
+                           Classes="service-status-label"
+                           Margin="10,0,0,0"
+                           Text="消息服务：在端口6701" />
+                <Border Grid.Column="6"
+                        Classes="service-status-pill">
+                    <TextBlock Classes="service-status-ok"
+                               Text="已启动" />
+                </Border>
+                <TextBlock Grid.Column="7"
+                           Classes="service-status-label"
+                           Margin="10,0,0,0"
+                           Text="数据库消息服务：在127.0.0.1:2715" />
+                <Border Grid.Column="9"
+                        Classes="service-status-pill">
+                    <TextBlock Classes="service-status-ok"
+                               Text="已连接" />
+                </Border>
+                <TextBlock Grid.Column="10"
+                           Classes="service-status-label"
+                           Text="已运行：1时48分21秒" />
+            </Grid>
+        </Border>
+    </Grid>
+</codewf:CodeWFWindow>

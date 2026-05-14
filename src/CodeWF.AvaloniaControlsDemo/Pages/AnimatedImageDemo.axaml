@@ -1,0 +1,109 @@
+<UserControl
+    x:Class="CodeWF.AvaloniaControlsDemo.Pages.AnimatedImageDemo"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:anim="https://github.com/whistyun/AnimatedImage.Avalonia"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="https://codewf.com"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pageLangs="clr-namespace:Showcase.Pages"
+    d:DesignHeight="560"
+    d:DesignWidth="980"
+    mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="Border.PreviewPanel">
+            <Setter Property="Background" Value="{DynamicResource ShowcaseSubtleBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="18" />
+        </Style>
+        <Style Selector="TextBlock.Title">
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style Selector="TextBlock.Source">
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style Selector="Image.AnimatedPreview">
+            <Setter Property="Width" Value="450" />
+            <Setter Property="Height" Value="200" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Stretch" Value="Uniform" />
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer>
+        <Grid Margin="18" RowDefinitions="Auto,*" RowSpacing="18">
+            <StackPanel Spacing="8">
+                <TextBlock FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.Title}}" />
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.Description}}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <Grid Grid.Row="1"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="18"
+                  RowDefinitions="*">
+                <Border Classes="PreviewPanel">
+                    <Grid RowDefinitions="Auto,Auto,*" RowSpacing="14">
+                        <TextBlock Classes="Title" Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.LocalResource}}" />
+                        <TextBlock Grid.Row="1" Classes="Source"
+                                   Text="avares://CodeWF.AvaloniaControlsDemo/Assets/nice.gif" />
+                        <Border Grid.Row="2"
+                                Background="{DynamicResource ShowcaseCardBackground}"
+                                BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="12">
+                            <Image Classes="AnimatedPreview"
+                                   anim:ImageBehavior.AnimatedSource="avares://CodeWF.AvaloniaControlsDemo/Assets/nice.gif"
+                                   anim:ImageBehavior.RepeatBehavior="Forever" />
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Column="1" Classes="PreviewPanel">
+                    <Grid RowDefinitions="Auto,Auto,*" RowSpacing="14">
+                        <TextBlock Classes="Title" Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.NetworkResource}}" />
+                        <TextBlock Grid.Row="1" Classes="Source"
+                                   Text="https://img1.dotnet9.com/2026/05/nice.gif" />
+                        <Border Grid.Row="2"
+                                Background="{DynamicResource ShowcaseCardBackground}"
+                                BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="12">
+                            <Grid>
+                                <Image x:Name="NetworkImage"
+                                       Classes="AnimatedPreview"
+                                       anim:ImageBehavior.RepeatBehavior="Forever" />
+                                <Border x:Name="NetworkStatusPanel"
+                                        Margin="12"
+                                        Padding="10,6"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
+                                        Background="{DynamicResource ShowcaseAccentSubtleBrush}"
+                                        BorderBrush="{DynamicResource ShowcaseBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="12"
+                                        IsHitTestVisible="False">
+                                    <TextBlock x:Name="NetworkStatusText"
+                                               Foreground="{DynamicResource ShowcaseAccentTextBrush}"
+                                               FontSize="12"
+                                               Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.LoadingNetworkGif}}" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

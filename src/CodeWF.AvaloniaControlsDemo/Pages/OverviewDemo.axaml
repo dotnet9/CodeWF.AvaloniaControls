@@ -1,0 +1,66 @@
+<UserControl
+    x:Class="CodeWF.AvaloniaControlsDemo.Pages.OverviewDemo"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="https://codewf.com"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pageLangs="clr-namespace:Showcase.Pages"
+    d:DesignHeight="520"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="TextBlock.Caption">
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style Selector="TextBlock.Title">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+        </Style>
+        <Style Selector="TextBlock.RowLabel">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+        </Style>
+    </UserControl.Styles>
+
+    <Border Padding="22"
+            Background="{DynamicResource ShowcaseCardBackground}"
+            BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="12">
+        <StackPanel MaxWidth="760" Spacing="16">
+            <StackPanel Spacing="6">
+                <TextBlock Classes="Title" Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.Title}}" />
+                <TextBlock Classes="Caption"
+                           Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.Description}}" />
+            </StackPanel>
+
+            <Grid ColumnDefinitions="170,*" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="12" ColumnSpacing="16">
+                <TextBlock Classes="RowLabel" Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.ControlSamples}}" />
+                <TextBlock Grid.Column="1"
+                           Classes="Caption"
+                           Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.ControlSamplesDesc}}" />
+
+                <TextBlock Grid.Row="1" Classes="RowLabel" Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.MarkupExtensions}}" />
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           Classes="Caption"
+                           Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.MarkupExtensionsDesc}}" />
+
+                <TextBlock Grid.Row="2" Classes="RowLabel" Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.WindowSamples}}" />
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           Classes="Caption"
+                           Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.WindowSamplesDesc}}" />
+
+                <TextBlock Grid.Row="3" Classes="RowLabel" Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.ThemeI18n}}" />
+                <TextBlock Grid.Row="3"
+                           Grid.Column="1"
+                           Classes="Caption"
+                           Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.ThemeI18nDesc}}" />
+            </Grid>
+        </StackPanel>
+    </Border>
+</UserControl>

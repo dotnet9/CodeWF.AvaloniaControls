@@ -1,0 +1,5 @@
+<linker>
+  <assembly fullname="CodeWF.AvaloniaControlsDemo" preserve="all" />
+  <assembly fullname="Lang.Avalonia" preserve="all" />
+  <assembly fullname="Lang.Avalonia.Json" preserve="all" />
+</linker>
