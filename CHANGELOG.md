@@ -1,5 +1,10 @@
 # Changelog
 
+## 12.0.3.2 - 2026-05-15
+
+- Bumped the controls and themes package version to 12.0.3.2.
+- Kept `CodeWFWindow` caption buttons pinned to the top-right edge when custom title-bar heights are used.
+
 ## 12.0.3.1 - 2026-05-14
 
 - Bumped the controls and themes package version to 12.0.3.1.
