@@ -66,6 +66,31 @@ ProDataGrid 包与示例已迁移到独立仓库：[CodeWF.AvaloniaControls.ProD
 
 - 仓库明确避免使用商业版 NuGet 包
 
+## 第三方开源组件审计
+
+检查时间：2026-05-20。检查范围包括 NuGet 元数据、恢复后的 `project.assets.json`、NuGet.org 信息以及上游源码/许可证链接。优先接受 MIT / Apache-2.0 / BSD。
+
+本次整改：
+
+- 将 `Semi.Avalonia.AvaloniaEdit` 替换为开源 `Avalonia.AvaloniaEdit`。
+- 移除 `AvaloniaUI.DiagnosticsSupport`，因为该 NuGet 包未公开明确的开源许可证和源码仓库。
+
+| 包 | 协议 | 源码/项目地址 | 结论 |
+| --- | --- | --- | --- |
+| `Avalonia` / `Avalonia.Desktop` / `Avalonia.Fonts.Inter` / `Avalonia.Themes.Fluent` | MIT | https://github.com/AvaloniaUI/Avalonia | 通过 |
+| `Avalonia.AvaloniaEdit` | MIT | https://github.com/AvaloniaUI/AvaloniaEdit | 通过 |
+| `AnimatedImage.Avalonia` | Apache-2.0 | https://github.com/whistyun/AnimatedImage | 通过 |
+| `CodeWF.LogViewer.Avalonia` | MIT | https://github.com/dotnet9/CodeWF.LogViewer | 自研开源包 |
+| `CommunityToolkit.Mvvm` | MIT | https://github.com/CommunityToolkit/dotnet | 通过 |
+| `Irihi.Ursa.Themes.Semi` | MIT | https://github.com/irihitech/Ursa.Avalonia | 通过 |
+| `Lang.Avalonia.Json` | MIT | https://github.com/dotnet9/Lang.Avalonia | 自研开源包 |
+| `ReactiveUI.Avalonia` | MIT | https://github.com/reactiveui/reactiveui | 通过 |
+| `Semi.Avalonia` | MIT | https://github.com/irihitech/Semi.Avalonia | 通过，仅使用开源主体包 |
+| `VC-LTL` | EPL-2.0 | https://github.com/Chuyu-Team/VC-LTL5 | 源码开放，按“非优先但可追溯”规则通过 |
+| `YY-Thunks` | MIT | https://github.com/Chuyu-Team/YY-Thunks | 通过 |
+
+传递依赖检查结论：Avalonia / SkiaSharp / ANGLE 链路均有公开源码，许可证为 MIT 或 BSD-style。有效项目文件中未再发现 `Semi.Avalonia.AvaloniaEdit`、`Semi.Avalonia.Dock`、`Semi.Avalonia.ProDataGrid` 或 `AvaloniaUI.DiagnosticsSupport`。
+
 ## 演示
 
 ### Transfer

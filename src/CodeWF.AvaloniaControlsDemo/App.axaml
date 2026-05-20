@@ -62,7 +62,6 @@
     <Application.Styles>
         <fluent:FluentTheme />
         <semi:SemiTheme Locale="zh-CN" />
-        <semi:AvaloniaEditSemiTheme />
         <uSemi:SemiTheme Locale="zh-CN" />
         <codewf:CodeWFTheme />
         <!-- Keep scrollbars visible by default for easier scanning and dragging. -->

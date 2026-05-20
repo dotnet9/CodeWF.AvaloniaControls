@@ -66,6 +66,31 @@ ProDataGrid packages and samples now live in the standalone [CodeWF.AvaloniaCont
 
 - Commercial package lines are intentionally avoided in this repository
 
+## Third-Party Open Source Audit
+
+Checked on 2026-05-20 with NuGet metadata, restored `project.assets.json`, and upstream source/license links. MIT / Apache-2.0 / BSD are preferred.
+
+Remediation:
+
+- Replaced `Semi.Avalonia.AvaloniaEdit` with the open-source `Avalonia.AvaloniaEdit` package.
+- Removed `AvaloniaUI.DiagnosticsSupport` because the NuGet package does not publish a clear open-source license or source repository.
+
+| Package | License | Source | Status |
+| --- | --- | --- | --- |
+| `Avalonia` / `Avalonia.Desktop` / `Avalonia.Fonts.Inter` / `Avalonia.Themes.Fluent` | MIT | https://github.com/AvaloniaUI/Avalonia | Approved |
+| `Avalonia.AvaloniaEdit` | MIT | https://github.com/AvaloniaUI/AvaloniaEdit | Approved |
+| `AnimatedImage.Avalonia` | Apache-2.0 | https://github.com/whistyun/AnimatedImage | Approved |
+| `CodeWF.LogViewer.Avalonia` | MIT | https://github.com/dotnet9/CodeWF.LogViewer | Own open-source package |
+| `CommunityToolkit.Mvvm` | MIT | https://github.com/CommunityToolkit/dotnet | Approved |
+| `Irihi.Ursa.Themes.Semi` | MIT | https://github.com/irihitech/Ursa.Avalonia | Approved |
+| `Lang.Avalonia.Json` | MIT | https://github.com/dotnet9/Lang.Avalonia | Approved |
+| `ReactiveUI.Avalonia` | MIT | https://github.com/reactiveui/reactiveui | Approved |
+| `Semi.Avalonia` | MIT | https://github.com/irihitech/Semi.Avalonia | Approved, only the open core package is used |
+| `VC-LTL` | EPL-2.0 | https://github.com/Chuyu-Team/VC-LTL5 | Source-open; approved under the source-traceable non-preferred license rule |
+| `YY-Thunks` | MIT | https://github.com/Chuyu-Team/YY-Thunks | Approved |
+
+Transitive dependencies from Avalonia/SkiaSharp/ANGLE were checked and are source-open under MIT or BSD-style licenses. No `Semi.Avalonia.AvaloniaEdit`, `Semi.Avalonia.Dock`, `Semi.Avalonia.ProDataGrid`, or `AvaloniaUI.DiagnosticsSupport` dependency remains in active project files.
+
 ## Demo
 
 ### Transfer

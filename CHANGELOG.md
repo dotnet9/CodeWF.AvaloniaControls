@@ -1,5 +1,12 @@
 # Changelog
 
+## 12.0.3.3 - 2026-05-20
+
+- Bumped the controls and themes package version to 12.0.3.3.
+- Replaced the sample `Semi.Avalonia.AvaloniaEdit` dependency with the source-open `Avalonia.AvaloniaEdit` package.
+- Removed `AvaloniaUI.DiagnosticsSupport` from the sample project because the package does not publish a clear open-source license or source repository.
+- Added English and Simplified Chinese third-party open-source audit notes to the root README files.
+
 ## 12.0.3.2 - 2026-05-15
 
 - Bumped the controls and themes package version to 12.0.3.2.
