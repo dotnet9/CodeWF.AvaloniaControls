@@ -20,6 +20,8 @@ namespace CodeWF.AvaloniaControls.Controls;
 public class Guide : TemplatedControl
 {
     private const int MaxTargetResolveAttempts = 8;
+    private const double ArrowOverlap = 6;
+    private const double ArrowEdgePadding = 12;
 
     private readonly DispatcherTimer _targetResolveTimer;
     private readonly List<IGuideStepOption> _activeSteps = [];
@@ -929,6 +931,8 @@ public class Guide : TemplatedControl
         ConfigurePopupOffset(placement);
         ConfigureArrow(placement, target);
         _popup.IsOpen = true;
+        AlignArrowToTarget(placement, target);
+        Dispatcher.UIThread.Post(() => AlignArrowToTarget(placement, target), DispatcherPriority.Render);
 
         if (_cardRoot is not null && ShouldFocusCard(target))
         {
@@ -1034,10 +1038,10 @@ public class Guide : TemplatedControl
 
         _arrow.Margin = placement switch
         {
-            GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => new Thickness(0, 0, 0, -6),
-            GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => new Thickness(0, -6, 0, 0),
-            GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => new Thickness(0, 0, -6, 0),
-            GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => new Thickness(-6, 0, 0, 0),
+            GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => new Thickness(0, 0, 0, -ArrowOverlap),
+            GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => new Thickness(0, -ArrowOverlap, 0, 0),
+            GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => new Thickness(0, 0, -ArrowOverlap, 0),
+            GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => new Thickness(-ArrowOverlap, 0, 0, 0),
             _ => default
         };
 
@@ -1058,6 +1062,87 @@ public class Guide : TemplatedControl
             GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => HorizontalAlignment.Left,
             _ => HorizontalAlignment.Center
         };
+    }
+
+    private void AlignArrowToTarget(GuidePlacementMode placement, Control? target)
+    {
+        if (_arrow is null
+            || _cardRoot is null
+            || target is null
+            || !_arrow.IsVisible
+            || placement == GuidePlacementMode.Center
+            || target.Bounds.Width <= 0
+            || target.Bounds.Height <= 0
+            || _cardRoot.Bounds.Width <= 0
+            || _cardRoot.Bounds.Height <= 0)
+        {
+            return;
+        }
+
+        var topLevel = TopLevel.GetTopLevel(this);
+        if (topLevel is null)
+        {
+            return;
+        }
+
+        var targetTopLeft = topLevel.PointToClient(target.PointToScreen(new Point(0, 0)));
+        var cardTopLeft = topLevel.PointToClient(_cardRoot.PointToScreen(new Point(0, 0)));
+        var arrowSize = Math.Max(1, Math.Max(_arrow.Bounds.Width, _arrow.Bounds.Height));
+        var targetCenterX = targetTopLeft.X + (target.Bounds.Width / 2);
+        var targetCenterY = targetTopLeft.Y + (target.Bounds.Height / 2);
+
+        if (IsHorizontalPlacement(placement))
+        {
+            var top = GetArrowOffset(targetCenterY, cardTopLeft.Y, _cardRoot.Bounds.Height, arrowSize);
+            _arrow.VerticalAlignment = VerticalAlignment.Top;
+            _arrow.Margin = placement switch
+            {
+                GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => new Thickness(0, top, -ArrowOverlap, 0),
+                GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => new Thickness(-ArrowOverlap, top, 0, 0),
+                _ => _arrow.Margin
+            };
+            return;
+        }
+
+        if (IsVerticalPlacement(placement))
+        {
+            var left = GetArrowOffset(targetCenterX, cardTopLeft.X, _cardRoot.Bounds.Width, arrowSize);
+            _arrow.HorizontalAlignment = HorizontalAlignment.Left;
+            _arrow.Margin = placement switch
+            {
+                GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => new Thickness(left, 0, 0, -ArrowOverlap),
+                GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => new Thickness(left, -ArrowOverlap, 0, 0),
+                _ => _arrow.Margin
+            };
+        }
+    }
+
+    private static double GetArrowOffset(double targetCenter, double cardStart, double cardLength, double arrowSize)
+    {
+        var desired = targetCenter - cardStart - (arrowSize / 2);
+        var maxOffset = Math.Max(0, cardLength - arrowSize);
+        var padding = Math.Min(ArrowEdgePadding, maxOffset / 2);
+        return Math.Clamp(desired, padding, Math.Max(padding, maxOffset - padding));
+    }
+
+    private static bool IsHorizontalPlacement(GuidePlacementMode placement)
+    {
+        return placement is GuidePlacementMode.Left
+            or GuidePlacementMode.LeftTop
+            or GuidePlacementMode.LeftBottom
+            or GuidePlacementMode.Right
+            or GuidePlacementMode.RightTop
+            or GuidePlacementMode.RightBottom;
+    }
+
+    private static bool IsVerticalPlacement(GuidePlacementMode placement)
+    {
+        return placement is GuidePlacementMode.Top
+            or GuidePlacementMode.TopLeft
+            or GuidePlacementMode.TopRight
+            or GuidePlacementMode.Bottom
+            or GuidePlacementMode.BottomLeft
+            or GuidePlacementMode.BottomRight;
     }
 
     private Rect CalculateTargetRegion(Control? target, IGuideStepOption step, TopLevel? relativeTopLevel)
@@ -1388,18 +1473,10 @@ public class Guide : TemplatedControl
     {
         return placement switch
         {
-            GuidePlacementMode.TopLeft => PopupGravity.TopRight,
-            GuidePlacementMode.TopRight => PopupGravity.TopLeft,
-            GuidePlacementMode.BottomLeft => PopupGravity.BottomRight,
-            GuidePlacementMode.BottomRight => PopupGravity.BottomLeft,
-            GuidePlacementMode.LeftTop => PopupGravity.BottomLeft,
-            GuidePlacementMode.LeftBottom => PopupGravity.TopLeft,
-            GuidePlacementMode.RightTop => PopupGravity.BottomRight,
-            GuidePlacementMode.RightBottom => PopupGravity.TopRight,
-            GuidePlacementMode.Left => PopupGravity.Left,
-            GuidePlacementMode.Right => PopupGravity.Right,
-            GuidePlacementMode.Top => PopupGravity.Top,
-            GuidePlacementMode.Bottom => PopupGravity.Bottom,
+            GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => PopupGravity.Top,
+            GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => PopupGravity.Bottom,
+            GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => PopupGravity.Left,
+            GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => PopupGravity.Right,
             _ => PopupGravity.None
         };
     }
