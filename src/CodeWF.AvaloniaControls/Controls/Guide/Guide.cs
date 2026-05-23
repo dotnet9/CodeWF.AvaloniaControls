@@ -6,6 +6,7 @@ using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Primitives.PopupPositioning;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
@@ -41,7 +42,7 @@ public class Guide : TemplatedControl
     private bool _isReallyOpen;
     private bool _ignoreOpenChange;
     private bool _layoutRefreshQueued;
-    private bool _currentTargetUsesPopupHost;
+    private bool _suppressNavigationClick;
     private int _pendingStepOpenedIndex = -1;
     private int _targetResolveAttempt;
 
@@ -704,7 +705,6 @@ public class Guide : TemplatedControl
             _arrow.IsVisible = false;
         }
 
-        _currentTargetUsesPopupHost = false;
         TargetRegion = default;
         TargetRegionVisible = false;
     }
@@ -821,7 +821,6 @@ public class Guide : TemplatedControl
         CurrentIsArrowVisible = target is not null && (step.IsArrowVisible ?? IsArrowVisible);
         CurrentMaskColor = step.MaskColor ?? MaskColor;
         CurrentGapRadius = Math.Max(0, step.GapRadius ?? GapRadius);
-        _currentTargetUsesPopupHost = target is not null && TargetUsesPopupHost(target);
         TargetRegion = target is not null
             ? CalculateTargetRegion(target, step, TopLevel.GetTopLevel(this))
             : default;
@@ -926,11 +925,10 @@ public class Guide : TemplatedControl
         var topLevel = TopLevel.GetTopLevel(this);
 
         _popup.PlacementTarget = target ?? topLevel;
-        _popup.Placement = ToPopupPlacement(placement);
+        ConfigurePopupPlacement(placement);
         ConfigurePopupOffset(placement);
-        _popup.IsOpen = true;
-
         ConfigureArrow(placement, target);
+        _popup.IsOpen = true;
 
         if (_cardRoot is not null && ShouldFocusCard(target))
         {
@@ -958,6 +956,28 @@ public class Guide : TemplatedControl
         }
 
         return GetCurrentStep()?.Placement ?? Placement;
+    }
+
+    private void ConfigurePopupPlacement(GuidePlacementMode placement)
+    {
+        if (_popup is null)
+        {
+            return;
+        }
+
+        if (placement == GuidePlacementMode.Center)
+        {
+            _popup.Placement = PlacementMode.Center;
+            _popup.PlacementConstraintAdjustment = PopupPositionerConstraintAdjustment.None;
+            return;
+        }
+
+        _popup.Placement = PlacementMode.AnchorAndGravity;
+        _popup.PlacementAnchor = ToPopupAnchor(placement);
+        _popup.PlacementGravity = ToPopupGravity(placement);
+        _popup.PlacementConstraintAdjustment =
+            PopupPositionerConstraintAdjustment.SlideX |
+            PopupPositionerConstraintAdjustment.SlideY;
     }
 
     private void ConfigurePopupOffset(GuidePlacementMode placement)
@@ -989,10 +1009,27 @@ public class Guide : TemplatedControl
             return;
         }
 
+        if (_cardRoot is not null)
+        {
+            _cardRoot.Margin = default;
+        }
+
         _arrow.IsVisible = target is not null && CurrentIsArrowVisible && placement != GuidePlacementMode.Center;
         if (!_arrow.IsVisible)
         {
             return;
+        }
+
+        if (_cardRoot is not null)
+        {
+            _cardRoot.Margin = placement switch
+            {
+                GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => new Thickness(0, 0, 0, 6),
+                GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => new Thickness(0, 6, 0, 0),
+                GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => new Thickness(0, 0, 6, 0),
+                GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => new Thickness(6, 0, 0, 0),
+                _ => default
+            };
         }
 
         _arrow.Margin = placement switch
@@ -1129,6 +1166,8 @@ public class Guide : TemplatedControl
 
     private void SyncIndicator()
     {
+        SyncNavigationActionStyles();
+
         if (Indicator is null)
         {
             return;
@@ -1137,6 +1176,13 @@ public class Guide : TemplatedControl
         Indicator.StepCount = StepCount;
         Indicator.ActiveIndex = CurrentIndex;
         Indicator.StyleType = CurrentStyleType;
+    }
+
+    private void SyncNavigationActionStyles()
+    {
+        var isPrimary = CurrentStyleType == GuideStyleType.Primary;
+        _nextButton?.Classes.Set("accent", isPrimary);
+        _finishButton?.Classes.Set("accent", isPrimary);
     }
 
     private void SyncCustomActionsHost()
@@ -1193,6 +1239,8 @@ public class Guide : TemplatedControl
         {
             _cardRoot.KeyDown += CardRoot_OnKeyDown;
         }
+
+        SyncNavigationActionStyles();
     }
 
     private void DetachTemplateEvents()
@@ -1232,41 +1280,47 @@ public class Guide : TemplatedControl
 
     private void PreviousButton_OnClick(object? sender, RoutedEventArgs e)
     {
+        if (TryConsumeNavigationClick())
+        {
+            return;
+        }
+
         GoPrevious();
     }
 
     private void PreviousButton_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (TryHandleNavigationPointerPressed(sender, e))
-        {
-            GoPrevious();
-        }
+        TryHandleNavigationPointerPressed(sender, e, GoPrevious);
     }
 
     private void NextButton_OnClick(object? sender, RoutedEventArgs e)
     {
+        if (TryConsumeNavigationClick())
+        {
+            return;
+        }
+
         GoNext();
     }
 
     private void NextButton_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (TryHandleNavigationPointerPressed(sender, e))
-        {
-            GoNext();
-        }
+        TryHandleNavigationPointerPressed(sender, e, GoNext);
     }
 
     private void FinishButton_OnClick(object? sender, RoutedEventArgs e)
     {
+        if (TryConsumeNavigationClick())
+        {
+            return;
+        }
+
         GoNext();
     }
 
     private void FinishButton_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (TryHandleNavigationPointerPressed(sender, e))
-        {
-            GoNext();
-        }
+        TryHandleNavigationPointerPressed(sender, e, GoNext);
     }
 
     private void CloseButton_OnClick(object? sender, RoutedEventArgs e)
@@ -1274,15 +1328,33 @@ public class Guide : TemplatedControl
         Close();
     }
 
-    private bool TryHandleNavigationPointerPressed(object? sender, PointerPressedEventArgs e)
+    private bool TryConsumeNavigationClick()
     {
-        // Menu/Flyout popups can light-dismiss before Button.Click when the guide target lives in popup content.
-        if (!IsPrimaryButtonPressed(sender, e) || !CurrentTargetUsesPopupHost())
+        return _suppressNavigationClick;
+    }
+
+    private bool TryHandleNavigationPointerPressed(object? sender, PointerPressedEventArgs e, Action navigate)
+    {
+        // Menu/Flyout popups can light-dismiss before Button.Click reaches the guide button.
+        // Handle pointer navigation early so dynamic popup-backed guide steps remain clickable.
+        if (!IsPrimaryButtonPressed(sender, e))
         {
             return false;
         }
 
         e.Handled = true;
+        _suppressNavigationClick = true;
+        Dispatcher.UIThread.Post(() =>
+        {
+            try
+            {
+                navigate();
+            }
+            finally
+            {
+                _suppressNavigationClick = false;
+            }
+        }, DispatcherPriority.Background);
         return true;
     }
 
@@ -1296,37 +1368,32 @@ public class Guide : TemplatedControl
         return e.GetCurrentPoint(control).Properties.IsLeftButtonPressed;
     }
 
-    private bool CurrentTargetUsesPopupHost()
+    private static PopupAnchor ToPopupAnchor(GuidePlacementMode placement)
     {
-        if (_currentTargetUsesPopupHost)
+        return placement switch
         {
-            return true;
-        }
-
-        var target = GetCurrentStep()?.Target;
-        if (target is null || !target.IsAttachedToVisualTree())
-        {
-            return false;
-        }
-
-        return TargetUsesPopupHost(target);
+            GuidePlacementMode.LeftTop or GuidePlacementMode.TopLeft => PopupAnchor.TopLeft,
+            GuidePlacementMode.LeftBottom or GuidePlacementMode.BottomLeft => PopupAnchor.BottomLeft,
+            GuidePlacementMode.RightTop or GuidePlacementMode.TopRight => PopupAnchor.TopRight,
+            GuidePlacementMode.RightBottom or GuidePlacementMode.BottomRight => PopupAnchor.BottomRight,
+            GuidePlacementMode.Left => PopupAnchor.Left,
+            GuidePlacementMode.Right => PopupAnchor.Right,
+            GuidePlacementMode.Top => PopupAnchor.Top,
+            GuidePlacementMode.Bottom => PopupAnchor.Bottom,
+            _ => PopupAnchor.None
+        };
     }
 
-    private bool TargetUsesPopupHost(Control target)
+    private static PopupGravity ToPopupGravity(GuidePlacementMode placement)
     {
-        var topLevel = TopLevel.GetTopLevel(this);
-        var targetTopLevel = TopLevel.GetTopLevel(target);
-        return target.GetVisualAncestors().Any(IsPopupHostVisual) ||
-               (topLevel is not null &&
-                targetTopLevel is not null &&
-                !ReferenceEquals(topLevel, targetTopLevel));
-    }
-
-    private static bool IsPopupHostVisual(Visual visual)
-    {
-        var typeName = visual.GetType().Name;
-        return visual is PopupRoot ||
-               typeName is "PopupRoot" or "OverlayPopupHost" or "PopupOverlayLayer";
+        return placement switch
+        {
+            GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => PopupGravity.Left,
+            GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => PopupGravity.Right,
+            GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => PopupGravity.Top,
+            GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => PopupGravity.Bottom,
+            _ => PopupGravity.None
+        };
     }
 
     private void CardRoot_OnKeyDown(object? sender, KeyEventArgs e)
@@ -1466,24 +1533,4 @@ public class Guide : TemplatedControl
         _ignoreOpenChange = false;
     }
 
-    private static PlacementMode ToPopupPlacement(GuidePlacementMode placement)
-    {
-        return placement switch
-        {
-            GuidePlacementMode.Left => PlacementMode.Left,
-            GuidePlacementMode.LeftTop => PlacementMode.LeftEdgeAlignedTop,
-            GuidePlacementMode.LeftBottom => PlacementMode.LeftEdgeAlignedBottom,
-            GuidePlacementMode.Right => PlacementMode.Right,
-            GuidePlacementMode.RightTop => PlacementMode.RightEdgeAlignedTop,
-            GuidePlacementMode.RightBottom => PlacementMode.RightEdgeAlignedBottom,
-            GuidePlacementMode.Top => PlacementMode.Top,
-            GuidePlacementMode.TopLeft => PlacementMode.TopEdgeAlignedLeft,
-            GuidePlacementMode.TopRight => PlacementMode.TopEdgeAlignedRight,
-            GuidePlacementMode.Bottom => PlacementMode.Bottom,
-            GuidePlacementMode.BottomLeft => PlacementMode.BottomEdgeAlignedLeft,
-            GuidePlacementMode.BottomRight => PlacementMode.BottomEdgeAlignedRight,
-            GuidePlacementMode.Center => PlacementMode.Center,
-            _ => PlacementMode.Bottom
-        };
-    }
 }

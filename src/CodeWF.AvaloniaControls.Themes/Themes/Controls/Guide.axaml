@@ -14,6 +14,8 @@
             <SolidColorBrush x:Key="GuideSecondaryTextForeground">#4B5563</SolidColorBrush>
             <SolidColorBrush x:Key="GuideIndicatorBrush">#D1D5DB</SolidColorBrush>
             <SolidColorBrush x:Key="GuidePrimaryBrush">#2563EB</SolidColorBrush>
+            <SolidColorBrush x:Key="GuidePrimaryHoverBrush">#1D4ED8</SolidColorBrush>
+            <SolidColorBrush x:Key="GuidePrimaryPressedBrush">#1E40AF</SolidColorBrush>
             <SolidColorBrush x:Key="GuidePrimaryForeground">#FFFFFFFF</SolidColorBrush>
             <SolidColorBrush x:Key="GuideCloseButtonHoverBackground">#12000000</SolidColorBrush>
             <SolidColorBrush x:Key="GuideCloseButtonPressedBackground">#1F000000</SolidColorBrush>
@@ -25,6 +27,8 @@
             <SolidColorBrush x:Key="GuideSecondaryTextForeground">#D1D5DB</SolidColorBrush>
             <SolidColorBrush x:Key="GuideIndicatorBrush">#4B5563</SolidColorBrush>
             <SolidColorBrush x:Key="GuidePrimaryBrush">#60A5FA</SolidColorBrush>
+            <SolidColorBrush x:Key="GuidePrimaryHoverBrush">#93C5FD</SolidColorBrush>
+            <SolidColorBrush x:Key="GuidePrimaryPressedBrush">#BFDBFE</SolidColorBrush>
             <SolidColorBrush x:Key="GuidePrimaryForeground">#111827</SolidColorBrush>
             <SolidColorBrush x:Key="GuideCloseButtonHoverBackground">#24FFFFFF</SolidColorBrush>
             <SolidColorBrush x:Key="GuideCloseButtonPressedBackground">#33FFFFFF</SolidColorBrush>
@@ -49,6 +53,47 @@
                     Text="{TemplateBinding IndicatorText}" />
             </ControlTemplate>
         </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="GuidePrimaryActionButton" TargetType="Button">
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="Padding" Value="12,6" />
+        <Setter Property="Background" Value="{DynamicResource GuidePrimaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GuidePrimaryBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Foreground" Value="{DynamicResource GuidePrimaryForeground}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="Button">
+                <ContentPresenter
+                    Name="PART_ContentPresenter"
+                    Padding="{TemplateBinding Padding}"
+                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Foreground="{TemplateBinding Foreground}"
+                    RecognizesAccessKey="True" />
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{DynamicResource GuidePrimaryHoverBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GuidePrimaryHoverBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource GuidePrimaryForeground}" />
+        </Style>
+
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="{DynamicResource GuidePrimaryPressedBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GuidePrimaryPressedBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource GuidePrimaryForeground}" />
+        </Style>
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type codewf:Guide}" TargetType="codewf:Guide">
@@ -191,14 +236,40 @@
         </Setter>
 
         <Style Selector="^:primary /template/ Button#PART_NextButton">
+            <Setter Property="Theme" Value="{StaticResource GuidePrimaryActionButton}" />
             <Setter Property="Background" Value="{DynamicResource GuidePrimaryBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource GuidePrimaryBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource GuidePrimaryForeground}" />
         </Style>
 
+        <Style Selector="^:primary /template/ Button#PART_NextButton:pointerover">
+            <Setter Property="Background" Value="{DynamicResource GuidePrimaryHoverBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GuidePrimaryHoverBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource GuidePrimaryForeground}" />
+        </Style>
+
+        <Style Selector="^:primary /template/ Button#PART_NextButton:pressed">
+            <Setter Property="Background" Value="{DynamicResource GuidePrimaryPressedBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GuidePrimaryPressedBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource GuidePrimaryForeground}" />
+        </Style>
+
         <Style Selector="^:primary /template/ Button#PART_FinishButton">
+            <Setter Property="Theme" Value="{StaticResource GuidePrimaryActionButton}" />
             <Setter Property="Background" Value="{DynamicResource GuidePrimaryBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource GuidePrimaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource GuidePrimaryForeground}" />
+        </Style>
+
+        <Style Selector="^:primary /template/ Button#PART_FinishButton:pointerover">
+            <Setter Property="Background" Value="{DynamicResource GuidePrimaryHoverBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GuidePrimaryHoverBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource GuidePrimaryForeground}" />
+        </Style>
+
+        <Style Selector="^:primary /template/ Button#PART_FinishButton:pressed">
+            <Setter Property="Background" Value="{DynamicResource GuidePrimaryPressedBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GuidePrimaryPressedBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource GuidePrimaryForeground}" />
         </Style>
 
