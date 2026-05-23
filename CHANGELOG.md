@@ -1,5 +1,10 @@
 # Changelog
 
+## 12.0.3.6 - 2026-05-23
+
+- Fixed Guide popup placement for edge-aligned modes such as `RightTop`, `RightBottom`, `LeftTop`, and `TopLeft` by mapping each mode to the matching Avalonia anchor/gravity pair.
+- Kept the existing arrow alignment rules, which now point at the target after the popup gravity correction.
+
 ## 12.0.3.3 - 2026-05-20
 
 - Bumped the controls and themes package version to 12.0.3.3.

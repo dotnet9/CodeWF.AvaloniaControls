@@ -1388,10 +1388,18 @@ public class Guide : TemplatedControl
     {
         return placement switch
         {
-            GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => PopupGravity.Left,
-            GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => PopupGravity.Right,
-            GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => PopupGravity.Top,
-            GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => PopupGravity.Bottom,
+            GuidePlacementMode.TopLeft => PopupGravity.TopRight,
+            GuidePlacementMode.TopRight => PopupGravity.TopLeft,
+            GuidePlacementMode.BottomLeft => PopupGravity.BottomRight,
+            GuidePlacementMode.BottomRight => PopupGravity.BottomLeft,
+            GuidePlacementMode.LeftTop => PopupGravity.BottomLeft,
+            GuidePlacementMode.LeftBottom => PopupGravity.TopLeft,
+            GuidePlacementMode.RightTop => PopupGravity.BottomRight,
+            GuidePlacementMode.RightBottom => PopupGravity.TopRight,
+            GuidePlacementMode.Left => PopupGravity.Left,
+            GuidePlacementMode.Right => PopupGravity.Right,
+            GuidePlacementMode.Top => PopupGravity.Top,
+            GuidePlacementMode.Bottom => PopupGravity.Bottom,
             _ => PopupGravity.None
         };
     }
