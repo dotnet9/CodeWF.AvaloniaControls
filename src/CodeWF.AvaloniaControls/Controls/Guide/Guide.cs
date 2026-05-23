@@ -41,6 +41,7 @@ public class Guide : TemplatedControl
     private bool _isReallyOpen;
     private bool _ignoreOpenChange;
     private bool _layoutRefreshQueued;
+    private bool _currentTargetUsesPopupHost;
     private int _pendingStepOpenedIndex = -1;
     private int _targetResolveAttempt;
 
@@ -703,6 +704,7 @@ public class Guide : TemplatedControl
             _arrow.IsVisible = false;
         }
 
+        _currentTargetUsesPopupHost = false;
         TargetRegion = default;
         TargetRegionVisible = false;
     }
@@ -819,6 +821,7 @@ public class Guide : TemplatedControl
         CurrentIsArrowVisible = target is not null && (step.IsArrowVisible ?? IsArrowVisible);
         CurrentMaskColor = step.MaskColor ?? MaskColor;
         CurrentGapRadius = Math.Max(0, step.GapRadius ?? GapRadius);
+        _currentTargetUsesPopupHost = target is not null && TargetUsesPopupHost(target);
         TargetRegion = target is not null
             ? CalculateTargetRegion(target, step, TopLevel.GetTopLevel(this))
             : default;
@@ -1154,16 +1157,31 @@ public class Guide : TemplatedControl
         if (_previousButton is not null)
         {
             _previousButton.Click += PreviousButton_OnClick;
+            _previousButton.AddHandler(
+                InputElement.PointerPressedEvent,
+                PreviousButton_OnPointerPressed,
+                RoutingStrategies.Bubble,
+                true);
         }
 
         if (_nextButton is not null)
         {
             _nextButton.Click += NextButton_OnClick;
+            _nextButton.AddHandler(
+                InputElement.PointerPressedEvent,
+                NextButton_OnPointerPressed,
+                RoutingStrategies.Bubble,
+                true);
         }
 
         if (_finishButton is not null)
         {
             _finishButton.Click += FinishButton_OnClick;
+            _finishButton.AddHandler(
+                InputElement.PointerPressedEvent,
+                FinishButton_OnPointerPressed,
+                RoutingStrategies.Bubble,
+                true);
         }
 
         if (_closeButton is not null)
@@ -1182,18 +1200,21 @@ public class Guide : TemplatedControl
         if (_previousButton is not null)
         {
             _previousButton.Click -= PreviousButton_OnClick;
+            _previousButton.RemoveHandler(InputElement.PointerPressedEvent, PreviousButton_OnPointerPressed);
             _previousButton = null;
         }
 
         if (_nextButton is not null)
         {
             _nextButton.Click -= NextButton_OnClick;
+            _nextButton.RemoveHandler(InputElement.PointerPressedEvent, NextButton_OnPointerPressed);
             _nextButton = null;
         }
 
         if (_finishButton is not null)
         {
             _finishButton.Click -= FinishButton_OnClick;
+            _finishButton.RemoveHandler(InputElement.PointerPressedEvent, FinishButton_OnPointerPressed);
             _finishButton = null;
         }
 
@@ -1214,9 +1235,25 @@ public class Guide : TemplatedControl
         GoPrevious();
     }
 
+    private void PreviousButton_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (TryHandleNavigationPointerPressed(sender, e))
+        {
+            GoPrevious();
+        }
+    }
+
     private void NextButton_OnClick(object? sender, RoutedEventArgs e)
     {
         GoNext();
+    }
+
+    private void NextButton_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (TryHandleNavigationPointerPressed(sender, e))
+        {
+            GoNext();
+        }
     }
 
     private void FinishButton_OnClick(object? sender, RoutedEventArgs e)
@@ -1224,9 +1261,72 @@ public class Guide : TemplatedControl
         GoNext();
     }
 
+    private void FinishButton_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (TryHandleNavigationPointerPressed(sender, e))
+        {
+            GoNext();
+        }
+    }
+
     private void CloseButton_OnClick(object? sender, RoutedEventArgs e)
     {
         Close();
+    }
+
+    private bool TryHandleNavigationPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        // Menu/Flyout popups can light-dismiss before Button.Click when the guide target lives in popup content.
+        if (!IsPrimaryButtonPressed(sender, e) || !CurrentTargetUsesPopupHost())
+        {
+            return false;
+        }
+
+        e.Handled = true;
+        return true;
+    }
+
+    private static bool IsPrimaryButtonPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (sender is not Control control)
+        {
+            return false;
+        }
+
+        return e.GetCurrentPoint(control).Properties.IsLeftButtonPressed;
+    }
+
+    private bool CurrentTargetUsesPopupHost()
+    {
+        if (_currentTargetUsesPopupHost)
+        {
+            return true;
+        }
+
+        var target = GetCurrentStep()?.Target;
+        if (target is null || !target.IsAttachedToVisualTree())
+        {
+            return false;
+        }
+
+        return TargetUsesPopupHost(target);
+    }
+
+    private bool TargetUsesPopupHost(Control target)
+    {
+        var topLevel = TopLevel.GetTopLevel(this);
+        var targetTopLevel = TopLevel.GetTopLevel(target);
+        return target.GetVisualAncestors().Any(IsPopupHostVisual) ||
+               (topLevel is not null &&
+                targetTopLevel is not null &&
+                !ReferenceEquals(topLevel, targetTopLevel));
+    }
+
+    private static bool IsPopupHostVisual(Visual visual)
+    {
+        var typeName = visual.GetType().Name;
+        return visual is PopupRoot ||
+               typeName is "PopupRoot" or "OverlayPopupHost" or "PopupOverlayLayer";
     }
 
     private void CardRoot_OnKeyDown(object? sender, KeyEventArgs e)
