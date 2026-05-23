@@ -32,6 +32,7 @@ public sealed class MainWindowViewModel : ReactiveObject
             new(MainWindowLangs.TabTransfer, "Transfer", new TransferDemo()),
             new(MainWindowLangs.TabVComboBox, "VComboBox", new VComboBoxDemo()),
             new(MainWindowLangs.TabTabControl, "TabControl", new TabControlDemo()),
+            new(MainWindowLangs.TabGuide, "Guide Tour 引导", new GuideDemo()),
             new(MainWindowLangs.TabStatusBadge, "StatusBadge", new StatusBadgeDemo()),
             new(MainWindowLangs.TabStatusCard, "StatusCard", new StatusCardDemo()),
             new(MainWindowLangs.TabMarkup, "MarkupExtensions If Switch Converter", new MarkupExtensionsDemo()),

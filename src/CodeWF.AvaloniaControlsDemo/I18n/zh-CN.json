@@ -18,6 +18,7 @@
         "TabTransfer": "Transfer",
         "TabVComboBox": "VComboBox",
         "TabTabControl": "TabControl",
+        "TabGuide": "Guide",
         "TabStatusBadge": "StatusBadge",
         "TabStatusCard": "StatusCard",
         "TabMarkup": "MarkupExtensions",

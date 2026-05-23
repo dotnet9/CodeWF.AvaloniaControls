@@ -1,0 +1,269 @@
+<UserControl
+    x:Class="CodeWF.AvaloniaControlsDemo.Pages.GuideDemo"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:codewf="https://codewf.com"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="640"
+    d:DesignWidth="960"
+    mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="Border.SurfaceCard">
+            <Setter Property="Background" Value="{DynamicResource ShowcaseCardBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="18" />
+        </Style>
+        <Style Selector="TextBlock.PanelTitle">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+        </Style>
+        <Style Selector="TextBlock.Caption">
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style Selector="Border.PreviewTile">
+            <Setter Property="MinHeight" Value="88" />
+            <Setter Property="Padding" Value="14" />
+            <Setter Property="Background" Value="{DynamicResource ShowcaseSubtleBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid>
+        <Grid RowDefinitions="Auto,*" RowSpacing="14">
+            <Border
+                x:Name="DynamicGuideSummaryPanel"
+                Padding="16"
+                Background="{DynamicResource ShowcaseSubtleBackground}"
+                BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="12">
+                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="12">
+                    <StackPanel Spacing="6">
+                        <TextBlock
+                            FontSize="20"
+                            FontWeight="SemiBold"
+                            Foreground="{DynamicResource ShowcaseTextBrush}"
+                            Text="Guide 漫游式引导" />
+                        <TextBlock
+                            Classes="Caption"
+                            Text="标题栏菜单用于演示打开菜单后圈选下拉 MenuItem；下方继续演示基础步骤、非模态提示和自定义高亮区域。" />
+                    </StackPanel>
+
+                    <Menu
+                        Grid.Column="1"
+                        MinWidth="164"
+                        VerticalAlignment="Top">
+                        <MenuItem x:Name="GuideThemeMenu" Header="主题色">
+                            <MenuItem x:Name="GuideThemeBlueItem" Header="蓝色" />
+                            <MenuItem x:Name="GuideThemeGreenItem" Header="绿色" />
+                            <MenuItem x:Name="GuideThemePurpleItem" Header="紫色" />
+                        </MenuItem>
+                        <MenuItem x:Name="GuideLanguageMenu" Header="语言">
+                            <MenuItem Header="简体中文" />
+                            <MenuItem Header="English" />
+                            <MenuItem Header="日本語" />
+                        </MenuItem>
+                    </Menu>
+
+                    <Button
+                        Grid.Column="2"
+                        VerticalAlignment="Top"
+                        Click="BeginDynamicGuide_OnClick"
+                        Content="开始标题栏菜单引导" />
+                </Grid>
+            </Border>
+
+            <ScrollViewer Grid.Row="1">
+                <StackPanel Spacing="14">
+                    <Border Classes="SurfaceCard">
+                        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="14">
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Classes="PanelTitle" Text="基础引导" />
+                                    <TextBlock Classes="Caption" Text="三个步骤依次圈选上传、保存和更多操作按钮，第一步带有封面内容。" />
+                                </StackPanel>
+                                <Button
+                                    Grid.Column="1"
+                                    VerticalAlignment="Top"
+                                    Click="BeginBasicGuide_OnClick"
+                                    Content="开始基础引导" />
+                            </Grid>
+
+                            <StackPanel
+                                Grid.Row="1"
+                                Orientation="Horizontal"
+                                Spacing="10">
+                                <Button x:Name="BasicUploadButton" Content="上传文件" />
+                                <Button x:Name="BasicSaveButton" Content="保存变更" />
+                                <Button x:Name="BasicMoreButton" Content="更多操作" />
+                            </StackPanel>
+
+                            <Grid
+                                Grid.Row="2"
+                                ColumnDefinitions="*,*,*"
+                                ColumnSpacing="12">
+                                <Border Classes="PreviewTile">
+                                    <StackPanel Spacing="6">
+                                        <TextBlock Classes="PanelTitle" Text="上传队列" />
+                                        <TextBlock Classes="Caption" Text="等待处理 12 个文件" />
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Column="1" Classes="PreviewTile">
+                                    <StackPanel Spacing="6">
+                                        <TextBlock Classes="PanelTitle" Text="保存状态" />
+                                        <TextBlock Classes="Caption" Text="最近一次保存成功" />
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Column="2" Classes="PreviewTile">
+                                    <StackPanel Spacing="6">
+                                        <TextBlock Classes="PanelTitle" Text="扩展命令" />
+                                        <TextBlock Classes="Caption" Text="导出、复制和批量处理" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <Border Classes="SurfaceCard">
+                        <Grid RowDefinitions="Auto,Auto" RowSpacing="14">
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Classes="PanelTitle" Text="非模态和文本指示器" />
+                                    <TextBlock Classes="Caption" Text="关闭遮罩后页面仍可交互，指示器替换为文本形式。" />
+                                </StackPanel>
+                                <Button
+                                    Grid.Column="1"
+                                    VerticalAlignment="Top"
+                                    Click="BeginNonMaskGuide_OnClick"
+                                    Content="开始非模态引导" />
+                            </Grid>
+
+                            <Grid
+                                Grid.Row="1"
+                                ColumnDefinitions="2*,*"
+                                ColumnSpacing="12">
+                                <Border x:Name="NonMaskPreviewPanel" Classes="PreviewTile">
+                                    <StackPanel Spacing="6">
+                                        <TextBlock Classes="PanelTitle" Text="实时预览区域" />
+                                        <TextBlock Classes="Caption" Text="非模态引导不会阻止用户继续查看或操作背景内容。" />
+                                    </StackPanel>
+                                </Border>
+                                <Border x:Name="GapTargetPanel" Grid.Column="1" Classes="PreviewTile">
+                                    <StackPanel Spacing="6">
+                                        <TextBlock Classes="PanelTitle" Text="高亮区域" />
+                                        <TextBlock Classes="Caption" Text="当前步骤扩大了圈选间距和圆角。" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <codewf:Guide
+            x:Name="BasicGuide"
+            Placement="Bottom"
+            PopupOffset="14">
+            <codewf:Guide.CustomActions>
+                <Button Click="SkipBasicGuide_OnClick" Content="跳过" />
+            </codewf:Guide.CustomActions>
+            <codewf:GuideStep
+                Description="把本地文件加入处理队列。Guide 会在目标周围绘制高亮区域，并将引导卡片放在目标附近。"
+                Target="{Binding ElementName=BasicUploadButton}"
+                Title="上传文件">
+                <codewf:GuideStep.Cover>
+                    <Border
+                        Height="92"
+                        Padding="14"
+                        Background="{DynamicResource ShowcaseAccentSubtleBrush}"
+                        CornerRadius="8">
+                        <StackPanel Spacing="4">
+                            <TextBlock
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource ShowcaseAccentTextBrush}"
+                                Text="Guide" />
+                            <TextBlock
+                                Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                Text="支持封面、自定义操作和多步骤导航。" />
+                        </StackPanel>
+                    </Border>
+                </codewf:GuideStep.Cover>
+            </codewf:GuideStep>
+            <codewf:GuideStep
+                Description="保存当前工作区的配置和数据。"
+                Placement="Right"
+                Target="{Binding ElementName=BasicSaveButton}"
+                Title="保存变更" />
+            <codewf:GuideStep
+                Description="更多操作可以继续展开为批处理、复制或导出。"
+                Placement="Top"
+                Target="{Binding ElementName=BasicMoreButton}"
+                Title="更多操作" />
+        </codewf:Guide>
+
+        <codewf:Guide
+            x:Name="NonMaskGuide"
+            IsShowMask="False"
+            Placement="Top"
+            StyleType="Primary">
+            <codewf:Guide.Indicator>
+                <codewf:TextGuideIndicator />
+            </codewf:Guide.Indicator>
+            <codewf:GuideStep
+                Description="遮罩关闭后不会拦截背景区域，适合轻量提示。"
+                Target="{Binding ElementName=NonMaskPreviewPanel}"
+                Title="非模态引导" />
+            <codewf:GuideStep
+                Description="这一项使用更大的高亮间距和圆角，便于突出整块区域。"
+                GapOffsetX="16"
+                GapOffsetY="16"
+                GapRadius="14"
+                Placement="Left"
+                Target="{Binding ElementName=GapTargetPanel}"
+                Title="自定义高亮区域" />
+        </codewf:Guide>
+
+        <codewf:Guide
+            x:Name="DynamicGuide"
+            TargetResolveDelay="00:00:00.220"
+            Placement="Bottom"
+            StepOpening="DynamicGuide_OnStepOpening"
+            Closed="DynamicGuide_OnClosed"
+            Completed="DynamicGuide_OnClosed">
+            <codewf:GuideStep
+                Description="标题栏里的主题色菜单提供外观切换入口，适合先说明菜单入口本身。"
+                Placement="Bottom"
+                Target="{Binding ElementName=GuideThemeMenu}"
+                Title="主题色菜单" />
+            <codewf:GuideStep
+                Description="蓝色主题适合作为默认业务色，强调主要操作和当前状态。"
+                Placement="RightBottom"
+                Target="{Binding ElementName=GuideThemeBlueItem}"
+                Title="蓝色主题" />
+            <codewf:GuideStep
+                Description="绿色主题适合强调成功、启用或运行正常的场景。"
+                Placement="RightBottom"
+                Target="{Binding ElementName=GuideThemeGreenItem}"
+                Title="绿色主题" />
+            <codewf:GuideStep
+                Description="紫色主题适合用于差异化产品线或个性化工作区。"
+                Placement="RightBottom"
+                Target="{Binding ElementName=GuideThemePurpleItem}"
+                Title="紫色主题" />
+            <codewf:GuideStep
+                Description="标题栏菜单项引导结束后收起下拉层，回到页面顶部给出流程总结。"
+                Placement="Bottom"
+                Target="{Binding ElementName=DynamicGuideSummaryPanel}"
+                Title="标题栏菜单引导总结" />
+        </codewf:Guide>
+    </Grid>
+</UserControl>

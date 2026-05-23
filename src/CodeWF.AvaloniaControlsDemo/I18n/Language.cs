@@ -22,6 +22,7 @@ namespace Showcase.Main
         public static readonly string TabTransfer = "Showcase.Main.MainWindow.TabTransfer";
         public static readonly string TabVComboBox = "Showcase.Main.MainWindow.TabVComboBox";
         public static readonly string TabTabControl = "Showcase.Main.MainWindow.TabTabControl";
+        public static readonly string TabGuide = "Showcase.Main.MainWindow.TabGuide";
         public static readonly string TabStatusBadge = "Showcase.Main.MainWindow.TabStatusBadge";
         public static readonly string TabStatusCard = "Showcase.Main.MainWindow.TabStatusCard";
         public static readonly string TabMarkup = "Showcase.Main.MainWindow.TabMarkup";

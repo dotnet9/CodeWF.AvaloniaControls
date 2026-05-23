@@ -10,5 +10,6 @@
       <ResourceInclude Source="VComboBox.axaml" />
       <ResourceInclude Source="TabItem.axaml" />
       <ResourceInclude Source="TabControl.axaml" />
+      <ResourceInclude Source="Guide.axaml" />
   </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

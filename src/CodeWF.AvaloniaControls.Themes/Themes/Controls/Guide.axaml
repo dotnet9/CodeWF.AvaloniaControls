@@ -1,0 +1,223 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:codewf="https://codewf.com">
+    <Design.PreviewWith>
+        <codewf:Guide Width="360" />
+    </Design.PreviewWith>
+
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="GuideCardBackground">#FFFFFFFF</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideCardBorderBrush">#E5E7EB</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideTextForeground">#111827</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideSecondaryTextForeground">#4B5563</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideIndicatorBrush">#D1D5DB</SolidColorBrush>
+            <SolidColorBrush x:Key="GuidePrimaryBrush">#2563EB</SolidColorBrush>
+            <SolidColorBrush x:Key="GuidePrimaryForeground">#FFFFFFFF</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideCloseButtonHoverBackground">#12000000</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideCloseButtonPressedBackground">#1F000000</SolidColorBrush>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="GuideCardBackground">#1F2937</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideCardBorderBrush">#374151</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideTextForeground">#F9FAFB</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideSecondaryTextForeground">#D1D5DB</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideIndicatorBrush">#4B5563</SolidColorBrush>
+            <SolidColorBrush x:Key="GuidePrimaryBrush">#60A5FA</SolidColorBrush>
+            <SolidColorBrush x:Key="GuidePrimaryForeground">#111827</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideCloseButtonHoverBackground">#24FFFFFF</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideCloseButtonPressedBackground">#33FFFFFF</SolidColorBrush>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <BoxShadows x:Key="GuideCardBoxShadow">0 8 28 0 #33000000</BoxShadows>
+
+    <ControlTheme x:Key="{x:Type codewf:DefaultGuideIndicator}" TargetType="codewf:DefaultGuideIndicator">
+        <Setter Property="IndicatorSize" Value="6" />
+        <Setter Property="ItemSpacing" Value="6" />
+        <Setter Property="IndicatorBrush" Value="{DynamicResource GuideIndicatorBrush}" />
+        <Setter Property="ActiveIndicatorBrush" Value="{DynamicResource GuidePrimaryBrush}" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type codewf:TextGuideIndicator}" TargetType="codewf:TextGuideIndicator">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="codewf:TextGuideIndicator">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Foreground="{DynamicResource GuideSecondaryTextForeground}"
+                    Text="{TemplateBinding IndicatorText}" />
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type codewf:Guide}" TargetType="codewf:Guide">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="codewf:Guide">
+                <Grid>
+                    <Popup
+                        Name="PART_MaskPopup"
+                        IsLightDismissEnabled="False"
+                        ShouldUseOverlayLayer="False"
+                        Topmost="False"
+                        WindowManagerAddShadowHint="False">
+                        <codewf:GuideOverlay Name="PART_Overlay" />
+                    </Popup>
+
+                    <Popup
+                        Name="PART_TargetMaskPopup"
+                        IsLightDismissEnabled="False"
+                        ShouldUseOverlayLayer="False"
+                        Topmost="True"
+                        WindowManagerAddShadowHint="False">
+                        <codewf:GuideOverlay Name="PART_TargetOverlay" />
+                    </Popup>
+
+                    <Popup
+                        Name="PART_Popup"
+                        IsLightDismissEnabled="False"
+                        ShouldUseOverlayLayer="False"
+                        Topmost="True"
+                        WindowManagerAddShadowHint="False">
+                        <Grid>
+                            <Border
+                                Name="PART_Arrow"
+                                Width="12"
+                                Height="12"
+                                Background="{DynamicResource GuideCardBackground}"
+                                BorderBrush="{DynamicResource GuideCardBorderBrush}"
+                                BorderThickness="1"
+                                RenderTransformOrigin="50%,50%">
+                                <Border.RenderTransform>
+                                    <RotateTransform Angle="45" />
+                                </Border.RenderTransform>
+                            </Border>
+
+                            <Border
+                                Name="PART_CardRoot"
+                                MinWidth="280"
+                                MaxWidth="420"
+                                Padding="18"
+                                Background="{DynamicResource GuideCardBackground}"
+                                BorderBrush="{DynamicResource GuideCardBorderBrush}"
+                                BorderThickness="1"
+                                BoxShadow="{DynamicResource GuideCardBoxShadow}"
+                                CornerRadius="8"
+                                Focusable="True">
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="12">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <TextBlock
+                                            FontSize="15"
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource GuideTextForeground}"
+                                            IsVisible="{TemplateBinding HasCurrentTitle}"
+                                            Text="{TemplateBinding CurrentTitle}"
+                                            TextWrapping="Wrap" />
+                                        <Button
+                                            Name="PART_CloseButton"
+                                            Grid.Column="1"
+                                            Width="28"
+                                            Height="28"
+                                            Margin="12,-4,-8,0"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            ToolTip.Tip="{TemplateBinding CloseText}">
+                                            <PathIcon
+                                                Width="13"
+                                                Height="13"
+                                                Data="M18.3,5.71L12,12L18.3,18.29L16.89,19.7L10.59,13.41L4.29,19.71L2.88,18.3L9.17,12L2.88,5.7L4.29,4.29L10.59,10.59L16.89,4.29L18.3,5.71Z" />
+                                        </Button>
+                                    </Grid>
+
+                                    <ContentControl
+                                        Grid.Row="1"
+                                        HorizontalContentAlignment="Stretch"
+                                        Content="{TemplateBinding CurrentCover}"
+                                        IsVisible="{TemplateBinding HasCurrentCover}" />
+
+                                    <TextBlock
+                                        Grid.Row="2"
+                                        Foreground="{DynamicResource GuideSecondaryTextForeground}"
+                                        IsVisible="{TemplateBinding HasCurrentDescription}"
+                                        LineHeight="21"
+                                        Text="{TemplateBinding CurrentDescription}"
+                                        TextWrapping="Wrap" />
+
+                                    <Grid
+                                        Grid.Row="3"
+                                        ColumnDefinitions="Auto,*,Auto"
+                                        ColumnSpacing="10">
+                                        <ContentControl
+                                            VerticalAlignment="Center"
+                                            Content="{TemplateBinding Indicator}" />
+
+                                        <ItemsControl
+                                            Name="PART_CustomActionsHost"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Horizontal" Spacing="8" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+
+                                        <StackPanel
+                                            Grid.Column="2"
+                                            Orientation="Horizontal"
+                                            Spacing="8">
+                                            <Button
+                                                Name="PART_PreviousButton"
+                                                IsEnabled="{TemplateBinding CanGoPrevious}"
+                                                Content="{TemplateBinding PreviousText}" />
+                                            <Button
+                                                Name="PART_NextButton"
+                                                IsVisible="{TemplateBinding CanGoNext}"
+                                                Content="{TemplateBinding NextText}" />
+                                            <Button
+                                                Name="PART_FinishButton"
+                                                IsVisible="{TemplateBinding IsLastStep}"
+                                                Content="{TemplateBinding FinishText}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Popup>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:primary /template/ Button#PART_NextButton">
+            <Setter Property="Background" Value="{DynamicResource GuidePrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GuidePrimaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource GuidePrimaryForeground}" />
+        </Style>
+
+        <Style Selector="^:primary /template/ Button#PART_FinishButton">
+            <Setter Property="Background" Value="{DynamicResource GuidePrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource GuidePrimaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource GuidePrimaryForeground}" />
+        </Style>
+
+        <Style Selector="^ /template/ Button#PART_CloseButton">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Foreground" Value="{DynamicResource GuideSecondaryTextForeground}" />
+        </Style>
+
+        <Style Selector="^ /template/ Button#PART_CloseButton:pointerover">
+            <Setter Property="Background" Value="{DynamicResource GuideCloseButtonHoverBackground}" />
+            <Setter Property="Foreground" Value="{DynamicResource GuideTextForeground}" />
+        </Style>
+
+        <Style Selector="^ /template/ Button#PART_CloseButton:pressed">
+            <Setter Property="Background" Value="{DynamicResource GuideCloseButtonPressedBackground}" />
+            <Setter Property="Foreground" Value="{DynamicResource GuideTextForeground}" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>
