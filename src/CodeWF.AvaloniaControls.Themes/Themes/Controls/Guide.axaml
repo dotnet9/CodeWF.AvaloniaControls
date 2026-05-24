@@ -17,6 +17,8 @@
             <SolidColorBrush x:Key="GuidePrimaryHoverBrush">#1D4ED8</SolidColorBrush>
             <SolidColorBrush x:Key="GuidePrimaryPressedBrush">#1E40AF</SolidColorBrush>
             <SolidColorBrush x:Key="GuidePrimaryForeground">#FFFFFFFF</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideArrowBorderBrush">#93C5FD</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideTargetBorderBrush">#60A5FA</SolidColorBrush>
             <SolidColorBrush x:Key="GuideCloseButtonHoverBackground">#12000000</SolidColorBrush>
             <SolidColorBrush x:Key="GuideCloseButtonPressedBackground">#1F000000</SolidColorBrush>
         </ResourceDictionary>
@@ -30,6 +32,8 @@
             <SolidColorBrush x:Key="GuidePrimaryHoverBrush">#93C5FD</SolidColorBrush>
             <SolidColorBrush x:Key="GuidePrimaryPressedBrush">#BFDBFE</SolidColorBrush>
             <SolidColorBrush x:Key="GuidePrimaryForeground">#111827</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideArrowBorderBrush">#93C5FD</SolidColorBrush>
+            <SolidColorBrush x:Key="GuideTargetBorderBrush">#60A5FA</SolidColorBrush>
             <SolidColorBrush x:Key="GuideCloseButtonHoverBackground">#24FFFFFF</SolidColorBrush>
             <SolidColorBrush x:Key="GuideCloseButtonPressedBackground">#33FFFFFF</SolidColorBrush>
         </ResourceDictionary>
@@ -97,6 +101,8 @@
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type codewf:Guide}" TargetType="codewf:Guide">
+        <Setter Property="TargetBorderBrush" Value="{DynamicResource GuideTargetBorderBrush}" />
+        <Setter Property="TargetBorderThickness" Value="3" />
         <Setter Property="Template">
             <ControlTemplate TargetType="codewf:Guide">
                 <Grid>
@@ -125,18 +131,13 @@
                         Topmost="True"
                         WindowManagerAddShadowHint="False">
                         <Grid>
-                            <Border
+                            <codewf:GuideArrow
                                 Name="PART_Arrow"
-                                Width="12"
-                                Height="12"
-                                Background="{DynamicResource GuideCardBackground}"
-                                BorderBrush="{DynamicResource GuideCardBorderBrush}"
-                                BorderThickness="1"
-                                RenderTransformOrigin="50%,50%">
-                                <Border.RenderTransform>
-                                    <RotateTransform Angle="45" />
-                                </Border.RenderTransform>
-                            </Border>
+                                Width="20"
+                                Height="20"
+                                Fill="{DynamicResource GuideCardBackground}"
+                                Stroke="{DynamicResource GuideArrowBorderBrush}"
+                                StrokeThickness="1.5" />
 
                             <Border
                                 Name="PART_CardRoot"

@@ -20,8 +20,8 @@ namespace CodeWF.AvaloniaControls.Controls;
 public class Guide : TemplatedControl
 {
     private const int MaxTargetResolveAttempts = 8;
-    private const double ArrowOverlap = 6;
-    private const double ArrowEdgePadding = 12;
+    private const double ArrowOverlap = 2;
+    private const double ArrowEdgePadding = 14;
 
     private readonly DispatcherTimer _targetResolveTimer;
     private readonly List<IGuideStepOption> _activeSteps = [];
@@ -30,7 +30,7 @@ public class Guide : TemplatedControl
     private Popup? _targetMaskPopup;
     private GuideOverlay? _overlay;
     private GuideOverlay? _targetOverlay;
-    private Border? _arrow;
+    private GuideArrow? _arrow;
     private Control? _cardRoot;
     private ItemsControl? _customActionsHost;
     private Button? _previousButton;
@@ -86,6 +86,12 @@ public class Guide : TemplatedControl
 
     public static readonly StyledProperty<double> PopupOffsetProperty =
         AvaloniaProperty.Register<Guide, double>(nameof(PopupOffset), 12);
+
+    public static readonly StyledProperty<IBrush?> TargetBorderBrushProperty =
+        AvaloniaProperty.Register<Guide, IBrush?>(nameof(TargetBorderBrush), new SolidColorBrush(Color.FromRgb(96, 165, 250)));
+
+    public static readonly StyledProperty<double> TargetBorderThicknessProperty =
+        AvaloniaProperty.Register<Guide, double>(nameof(TargetBorderThickness), 3);
 
     public static readonly StyledProperty<TimeSpan> TargetResolveDelayProperty =
         AvaloniaProperty.Register<Guide, TimeSpan>(nameof(TargetResolveDelay), TimeSpan.FromMilliseconds(80));
@@ -287,6 +293,18 @@ public class Guide : TemplatedControl
     {
         get => GetValue(PopupOffsetProperty);
         set => SetValue(PopupOffsetProperty, value);
+    }
+
+    public IBrush? TargetBorderBrush
+    {
+        get => GetValue(TargetBorderBrushProperty);
+        set => SetValue(TargetBorderBrushProperty, value);
+    }
+
+    public double TargetBorderThickness
+    {
+        get => GetValue(TargetBorderThicknessProperty);
+        set => SetValue(TargetBorderThicknessProperty, value);
     }
 
     public TimeSpan TargetResolveDelay
@@ -521,7 +539,7 @@ public class Guide : TemplatedControl
         _targetMaskPopup = e.NameScope.Find<Popup>("PART_TargetMaskPopup");
         _overlay = e.NameScope.Find<GuideOverlay>("PART_Overlay");
         _targetOverlay = e.NameScope.Find<GuideOverlay>("PART_TargetOverlay");
-        _arrow = e.NameScope.Find<Border>("PART_Arrow");
+        _arrow = e.NameScope.Find<GuideArrow>("PART_Arrow");
         _cardRoot = e.NameScope.Find<Control>("PART_CardRoot");
         _customActionsHost = e.NameScope.Find<ItemsControl>("PART_CustomActionsHost");
 
@@ -602,7 +620,9 @@ public class Guide : TemplatedControl
                      change.Property == GapOffsetXProperty ||
                      change.Property == GapOffsetYProperty ||
                      change.Property == GapRadiusProperty ||
-                     change.Property == PopupOffsetProperty))
+                     change.Property == PopupOffsetProperty ||
+                     change.Property == TargetBorderBrushProperty ||
+                     change.Property == TargetBorderThicknessProperty))
         {
             ApplyCurrentStep();
         }
@@ -887,6 +907,8 @@ public class Guide : TemplatedControl
         overlay.MaskBrush = CurrentMaskColor;
         overlay.TargetRegion = targetRegion;
         overlay.TargetRegionCornerRadius = CurrentGapRadius;
+        overlay.TargetRegionBorderBrush = TargetBorderBrush;
+        overlay.TargetRegionBorderThickness = TargetRegionVisible ? Math.Max(0, TargetBorderThickness) : 0;
         overlay.IsHitTestVisible = isHitTestVisible;
         popup.IsHitTestVisible = isHitTestVisible;
         popup.PlacementTarget = topLevel;
@@ -1024,14 +1046,16 @@ public class Guide : TemplatedControl
             return;
         }
 
+        _arrow.Placement = placement;
+
         if (_cardRoot is not null)
         {
             _cardRoot.Margin = placement switch
             {
-                GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => new Thickness(0, 0, 0, 6),
-                GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => new Thickness(0, 6, 0, 0),
-                GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => new Thickness(0, 0, 6, 0),
-                GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => new Thickness(6, 0, 0, 0),
+                GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => new Thickness(0, 0, 0, 12),
+                GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => new Thickness(0, 12, 0, 0),
+                GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => new Thickness(0, 0, 12, 0),
+                GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => new Thickness(12, 0, 0, 0),
                 _ => default
             };
         }

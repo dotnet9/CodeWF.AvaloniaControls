@@ -15,9 +15,20 @@ public class GuideOverlay : Control
     public static readonly StyledProperty<double> TargetRegionCornerRadiusProperty =
         AvaloniaProperty.Register<GuideOverlay, double>(nameof(TargetRegionCornerRadius));
 
+    public static readonly StyledProperty<IBrush?> TargetRegionBorderBrushProperty =
+        AvaloniaProperty.Register<GuideOverlay, IBrush?>(nameof(TargetRegionBorderBrush), Brushes.DodgerBlue);
+
+    public static readonly StyledProperty<double> TargetRegionBorderThicknessProperty =
+        AvaloniaProperty.Register<GuideOverlay, double>(nameof(TargetRegionBorderThickness), 3);
+
     static GuideOverlay()
     {
-        AffectsRender<GuideOverlay>(MaskBrushProperty, TargetRegionProperty, TargetRegionCornerRadiusProperty);
+        AffectsRender<GuideOverlay>(
+            MaskBrushProperty,
+            TargetRegionProperty,
+            TargetRegionCornerRadiusProperty,
+            TargetRegionBorderBrushProperty,
+            TargetRegionBorderThicknessProperty);
     }
 
     public IBrush? MaskBrush
@@ -36,6 +47,18 @@ public class GuideOverlay : Control
     {
         get => GetValue(TargetRegionCornerRadiusProperty);
         set => SetValue(TargetRegionCornerRadiusProperty, value);
+    }
+
+    public IBrush? TargetRegionBorderBrush
+    {
+        get => GetValue(TargetRegionBorderBrushProperty);
+        set => SetValue(TargetRegionBorderBrushProperty, value);
+    }
+
+    public double TargetRegionBorderThickness
+    {
+        get => GetValue(TargetRegionBorderThicknessProperty);
+        set => SetValue(TargetRegionBorderThicknessProperty, value);
     }
 
     public override void Render(DrawingContext context)
@@ -68,5 +91,30 @@ public class GuideOverlay : Control
         geometry.Children.Add(new RectangleGeometry(target, radius, radius));
 
         context.DrawGeometry(brush, null, geometry);
+        DrawTargetBorder(context, target, radius);
+    }
+
+    private void DrawTargetBorder(DrawingContext context, Rect target, double radius)
+    {
+        var borderBrush = TargetRegionBorderBrush;
+        var thickness = System.Math.Max(0, TargetRegionBorderThickness);
+        if (borderBrush is null || thickness <= 0)
+        {
+            return;
+        }
+
+        var inset = thickness / 2;
+        var borderRect = target.Deflate(new Thickness(inset));
+        if (borderRect.Width <= 0 || borderRect.Height <= 0)
+        {
+            return;
+        }
+
+        context.DrawRectangle(
+            null,
+            new Pen(borderBrush, thickness),
+            borderRect,
+            System.Math.Max(0, radius - inset),
+            System.Math.Max(0, radius - inset));
     }
 }
