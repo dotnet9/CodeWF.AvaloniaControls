@@ -13,6 +13,20 @@ English | [简体中文](README.zh-CN.md)
 
 ```shell
 Install-Package CodeWF.AvaloniaControls
+Install-Package CodeWF.AvaloniaControls.Themes
+```
+
+Add the theme package to your Avalonia application styles:
+
+```xml
+<Application
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:codewf="https://codewf.com">
+    <Application.Styles>
+        <codewf:CodeWFTheme />
+    </Application.Styles>
+</Application>
 ```
 
 ## Repository Layout
@@ -38,10 +52,93 @@ Dock packages and samples now live in the standalone [CodeWF.AvaloniaControls.Do
 
 ProDataGrid packages and samples now live in the standalone [CodeWF.AvaloniaControls.ProDataGrid](https://github.com/dotnet9/CodeWF.AvaloniaControls.ProDataGrid) repository.
 
+## Controls
+
+- `Guide`: multi-step onboarding and feature-tour control for desktop applications.
+- `Transfer` / `SearchListBox`: dual-list transfer and searchable list controls.
+- `StatusBadge` / `StatusCard`: semantic status labels and health summary cards.
+- `CodeWFWindow` / `CodeWFTitleBar`: custom window shell and title bar controls.
+- TabControl styles, markup helpers, converters, and small drawing helpers.
+
+## Guide Control
+
+`Guide` is built for Avalonia desktop onboarding, feature tours, and contextual hints. It can highlight different controls step by step, render a mask with a transparent target hole, place the guide card around the target, and keep the highlight aligned when layout or window size changes.
+
+Covered scenarios:
+
+- Multi-step navigation with previous, next, finish, and close actions.
+- Targeted steps and targetless centered steps.
+- Per-step placement, mask visibility, arrow visibility, gap offsets, corner radius, and style type.
+- Non-modal hints by setting `IsShowMask="False"`.
+- Custom cover content, custom action buttons, and text or dot indicators.
+- Delayed target resolution for controls that appear later.
+- Targets inside `Menu`, `Popup`, and `Flyout` layers.
+- `StepOpening` and opening commands for switching tabs or opening parent menus before a step is resolved.
+
+Basic usage:
+
+```xml
+<Grid>
+    <StackPanel Orientation="Horizontal" Spacing="10">
+        <Button x:Name="UploadButton" Content="Upload file" />
+        <Button x:Name="SaveButton" Content="Save changes" />
+        <Button x:Name="MoreButton" Content="More actions" />
+    </StackPanel>
+
+    <codewf:Guide x:Name="BasicGuide" Placement="Bottom" PopupOffset="14">
+        <codewf:GuideStep
+            Target="{Binding ElementName=UploadButton}"
+            Title="Upload file"
+            Description="Add local files to the processing queue." />
+        <codewf:GuideStep
+            Target="{Binding ElementName=SaveButton}"
+            Placement="Right"
+            Title="Save changes"
+            Description="Persist the current workspace." />
+        <codewf:GuideStep
+            Target="{Binding ElementName=MoreButton}"
+            Placement="Top"
+            Title="More actions"
+            Description="Continue with export, copy, or batch operations." />
+    </codewf:Guide>
+</Grid>
+```
+
+```csharp
+BasicGuide.GoTo(0);
+BasicGuide.Show();
+```
+
+For dynamic menu steps, open the parent menu before resolving the child target and give the popup layer a short layout delay:
+
+```xml
+<codewf:Guide
+    x:Name="DynamicGuide"
+    TargetResolveDelay="00:00:00.220"
+    StepOpening="DynamicGuide_OnStepOpening">
+    <codewf:GuideStep
+        Target="{Binding ElementName=GuideThemeMenu}"
+        Title="Theme menu" />
+    <codewf:GuideStep
+        Target="{Binding ElementName=GuideThemeBlueItem}"
+        Placement="RightBottom"
+        Title="Blue theme" />
+</codewf:Guide>
+```
+
+```csharp
+private void DynamicGuide_OnStepOpening(object? sender, GuideStepEventArgs e)
+{
+    GuideThemeMenu.IsSubMenuOpen = e.Index is >= 1 and <= 3;
+    Dispatcher.UIThread.Post(
+        () => GuideThemeMenu.IsSubMenuOpen = true,
+        DispatcherPriority.Background);
+}
+```
+
 ## Sample Applications
 
-- `CodeWF.AvaloniaControls.Showcase`: general control showcase
-- `CodeWF.AvaloniaControls.FluentStarterDemo`: lightweight starter-window sample
+- `CodeWF.AvaloniaControlsDemo`: runnable showcase for Transfer, VComboBox, TabControl, Guide, StatusBadge, StatusCard, custom windows, and AnimatedImage.
 
 ## Shared Configuration
 
@@ -92,6 +189,12 @@ Remediation:
 Transitive dependencies from Avalonia/SkiaSharp/ANGLE were checked and are source-open under MIT or BSD-style licenses. No `Semi.Avalonia.AvaloniaEdit`, `Semi.Avalonia.Dock`, `Semi.Avalonia.ProDataGrid`, or `AvaloniaUI.DiagnosticsSupport` dependency remains in active project files.
 
 ## Demo
+
+### Guide
+
+![](https://img1.dotnet9.com/2026/05/codewf-guide-demo-basic.gif)
+
+![](https://img1.dotnet9.com/2026/05/codewf-guide-demo-nonmask.gif)
 
 ### Transfer
 

@@ -1,9 +1,33 @@
 # Changelog
 
+## 12.0.3.8 - 2026-05-24
+
+- Bumped the controls and themes package version to 12.0.3.8.
+- Added a dedicated `GuideArrow` control and configurable target-region border rendering so Guide highlights are easier to follow.
+- Expanded the English and Simplified Chinese README files with theme registration, control overview, Guide usage, dynamic menu guidance, and Guide demo GIFs.
+
+## 12.0.3.7 - 2026-05-24
+
+- Bumped the controls and themes package version to 12.0.3.7.
+- Refined Guide arrow alignment so arrows point toward target centers for edge-aligned placements.
+- Corrected Guide popup gravity grouping after the anchor/gravity placement conversion.
+
 ## 12.0.3.6 - 2026-05-23
 
 - Fixed Guide popup placement for edge-aligned modes such as `RightTop`, `RightBottom`, `LeftTop`, and `TopLeft` by mapping each mode to the matching Avalonia anchor/gravity pair.
 - Kept the existing arrow alignment rules, which now point at the target after the popup gravity correction.
+
+## 12.0.3.5 - 2026-05-23
+
+- Bumped the controls and themes package version to 12.0.3.5.
+- Switched Guide card placement to Avalonia anchor/gravity positioning and kept menu/flyout navigation buttons responsive before popup light-dismiss can close dynamic targets.
+- Added Guide primary action hover and pressed theme resources for light and dark themes.
+
+## 12.0.3.4 - 2026-05-23
+
+- Bumped the controls and themes package version to 12.0.3.4.
+- Added the `Guide` onboarding control with XAML steps, step data sources, target and targetless steps, masks, placement modes, indicators, custom actions, and delayed target resolution.
+- Added the Guide showcase page with basic, non-modal, custom highlight, and dynamic `MenuItem` guidance examples.
 
 ## 12.0.3.3 - 2026-05-20
 

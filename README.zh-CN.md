@@ -13,6 +13,20 @@
 
 ```powershell
 Install-Package CodeWF.AvaloniaControls
+Install-Package CodeWF.AvaloniaControls.Themes
+```
+
+在 Avalonia 应用中引入主题资源：
+
+```xml
+<Application
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:codewf="https://codewf.com">
+    <Application.Styles>
+        <codewf:CodeWFTheme />
+    </Application.Styles>
+</Application>
 ```
 
 ## 仓库结构
@@ -38,10 +52,93 @@ Dock 包与示例已迁移到独立仓库：[CodeWF.AvaloniaControls.Dock](https
 
 ProDataGrid 包与示例已迁移到独立仓库：[CodeWF.AvaloniaControls.ProDataGrid](https://github.com/dotnet9/CodeWF.AvaloniaControls.ProDataGrid)。
 
+## 控件概览
+
+- `Guide`：用于桌面应用的新手引导、功能漫游和局部提示。
+- `Transfer` / `SearchListBox`：左右穿梭框与可搜索列表。
+- `StatusBadge` / `StatusCard`：语义化状态标签与状态概览卡片。
+- `CodeWFWindow` / `CodeWFTitleBar`：自定义窗口外壳和标题栏。
+- TabControl 样式、标记扩展、转换器和小型绘图辅助控件。
+
+## Guide 引导控件
+
+`Guide` 面向 Avalonia 桌面应用的新手引导、功能漫游和局部提示场景。它可以按步骤高亮不同控件，绘制带透明目标洞的遮罩，把引导卡片放在目标附近，并在布局或窗口尺寸变化后刷新高亮位置。
+
+当前覆盖的场景：
+
+- 多步骤导航：上一步、下一步、完成、关闭。
+- 每一步绑定不同目标控件，也支持无目标居中说明。
+- 按步骤配置卡片方向、遮罩、箭头、高亮间距、圆角和样式类型。
+- 设置 `IsShowMask="False"` 可作为非模态提示使用。
+- 支持封面内容、自定义操作按钮、圆点指示器和文本进度指示器。
+- 目标晚一点出现时可以延迟解析。
+- 目标位于 `Menu`、`Popup`、`Flyout` 等弹层里时仍可定位。
+- 通过 `StepOpening` 或打开命令，在解析步骤前展开菜单、切换页签或准备业务状态。
+
+基础用法：
+
+```xml
+<Grid>
+    <StackPanel Orientation="Horizontal" Spacing="10">
+        <Button x:Name="UploadButton" Content="上传文件" />
+        <Button x:Name="SaveButton" Content="保存变更" />
+        <Button x:Name="MoreButton" Content="更多操作" />
+    </StackPanel>
+
+    <codewf:Guide x:Name="BasicGuide" Placement="Bottom" PopupOffset="14">
+        <codewf:GuideStep
+            Target="{Binding ElementName=UploadButton}"
+            Title="上传文件"
+            Description="把本地文件加入处理队列。" />
+        <codewf:GuideStep
+            Target="{Binding ElementName=SaveButton}"
+            Placement="Right"
+            Title="保存变更"
+            Description="保存当前工作区。" />
+        <codewf:GuideStep
+            Target="{Binding ElementName=MoreButton}"
+            Placement="Top"
+            Title="更多操作"
+            Description="继续展开导出、复制或批处理。" />
+    </codewf:Guide>
+</Grid>
+```
+
+```csharp
+BasicGuide.GoTo(0);
+BasicGuide.Show();
+```
+
+菜单项这类动态目标需要在解析子项前打开父菜单，并给弹层布局留一点延迟：
+
+```xml
+<codewf:Guide
+    x:Name="DynamicGuide"
+    TargetResolveDelay="00:00:00.220"
+    StepOpening="DynamicGuide_OnStepOpening">
+    <codewf:GuideStep
+        Target="{Binding ElementName=GuideThemeMenu}"
+        Title="主题色菜单" />
+    <codewf:GuideStep
+        Target="{Binding ElementName=GuideThemeBlueItem}"
+        Placement="RightBottom"
+        Title="蓝色主题" />
+</codewf:Guide>
+```
+
+```csharp
+private void DynamicGuide_OnStepOpening(object? sender, GuideStepEventArgs e)
+{
+    GuideThemeMenu.IsSubMenuOpen = e.Index is >= 1 and <= 3;
+    Dispatcher.UIThread.Post(
+        () => GuideThemeMenu.IsSubMenuOpen = true,
+        DispatcherPriority.Background);
+}
+```
+
 ## 示例工程
 
-- `CodeWF.AvaloniaControls.Showcase`：通用控件展示馆
-- `CodeWF.AvaloniaControls.FluentStarterDemo`：轻量启动窗口示例
+- `CodeWF.AvaloniaControlsDemo`：可运行控件展示工程，包含 Transfer、VComboBox、TabControl、Guide、StatusBadge、StatusCard、自定义窗口和 AnimatedImage 示例。
 
 ## 公共配置
 
@@ -92,6 +189,12 @@ ProDataGrid 包与示例已迁移到独立仓库：[CodeWF.AvaloniaControls.ProD
 传递依赖检查结论：Avalonia / SkiaSharp / ANGLE 链路均有公开源码，许可证为 MIT 或 BSD-style。有效项目文件中未再发现 `Semi.Avalonia.AvaloniaEdit`、`Semi.Avalonia.Dock`、`Semi.Avalonia.ProDataGrid` 或 `AvaloniaUI.DiagnosticsSupport`。
 
 ## 演示
+
+### Guide
+
+![](https://img1.dotnet9.com/2026/05/codewf-guide-demo-basic.gif)
+
+![](https://img1.dotnet9.com/2026/05/codewf-guide-demo-nonmask.gif)
 
 ### Transfer
 
