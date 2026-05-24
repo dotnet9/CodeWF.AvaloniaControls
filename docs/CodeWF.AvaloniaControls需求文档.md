@@ -1,5 +1,40 @@
 # CodeWF.AvaloniaControls Guide控件需求文档
 
+## 当前实现状态
+
+更新日期：2026-05-24。当前实现已进入 `CodeWF.AvaloniaControls` / `CodeWF.AvaloniaControls.Themes` 12.0.3.8 包线。
+
+相关源码：
+
+- `src/CodeWF.AvaloniaControls/Controls/Guide/Guide.cs`
+- `src/CodeWF.AvaloniaControls/Controls/Guide/GuideStep.cs`
+- `src/CodeWF.AvaloniaControls/Controls/Guide/GuideStepOption.cs`
+- `src/CodeWF.AvaloniaControls/Controls/Guide/GuideOverlay.cs`
+- `src/CodeWF.AvaloniaControls/Controls/Guide/GuideArrow.cs`
+- `src/CodeWF.AvaloniaControls.Themes/Themes/Controls/Guide.axaml`
+- `src/CodeWF.AvaloniaControlsDemo/Pages/GuideDemo.axaml`
+
+已落地能力：
+
+- 支持 `Guide` / `GuideStep` 的 XAML 声明式步骤，也支持 `StepsSource` 绑定 `IGuideStepOption` 数据源。
+- 支持目标步骤、无目标居中步骤、多步骤导航、跳转到指定步骤、完成、关闭和重复打开清理。
+- 支持 `Placement`、`IsShowMask`、`IsArrowVisible`、`IsPointAtCenter`、`IsScrollIntoView`、`MaskColor`、`GapOffsetX`、`GapOffsetY`、`GapRadius`、`StyleType` 等全局配置，并允许每个步骤覆盖。
+- 支持 `DefaultGuideIndicator` 圆点指示器、`TextGuideIndicator` 文本进度指示器和自定义指示器。
+- 支持 `Guide.CustomActions` 添加自定义操作按钮，例如“跳过”。
+- 支持 `StepOpening`、`StepOpened`、`Completed`、`Closed` 事件，以及每个步骤的 `OpeningCommand`。
+- 支持 `TargetResolveDelay` 和最多多次重试，用于目标控件延迟出现或弹层布局稍后完成的场景。
+- 支持目标控件位于 `Menu`、`Popup`、`Flyout` 等弹层宿主中时的跨 `TopLevel` 定位。
+- 支持 `GuideMissingTargetBehavior.Center`、`Skip`、`Close` 三种目标缺失处理方式。
+- 支持目标区域遮罩挖洞、目标描边、独立箭头绘制，以及窗口尺寸或目标布局变化后的刷新。
+- 示例页面已覆盖基础多步骤引导、封面内容、自定义按钮、非模态提示、文本指示器、自定义高亮区域和动态 `MenuItem` 引导。
+
+已知差异和后续项：
+
+- 目标空间不足时当前使用 Avalonia popup 的 `SlideX` / `SlideY` 约束调整，尚未做完整的自动翻转策略。
+- 标题、说明、封面的专用模板 API 尚未抽象出来；当前封面可放任意内容，整体卡片样式由主题模板控制。
+- 自定义关闭图标、弹层动效开关和更完整的屏幕阅读器语义仍属于后续增强项。
+- 菜单弹层引导在应用失焦时仍可能受 Avalonia light-dismiss 规则影响，需要业务侧在 `Closed` / `Completed` 中做好菜单收起。
+
 ## 功能列表
 
 - Guide 控件用于实现新手引导、功能介绍、操作提示等漫游式引导场景。

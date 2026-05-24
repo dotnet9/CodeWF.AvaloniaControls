@@ -5,6 +5,7 @@
 - Bumped the controls and themes package version to 12.0.3.8.
 - Added a dedicated `GuideArrow` control and configurable target-region border rendering so Guide highlights are easier to follow.
 - Expanded the English and Simplified Chinese README files with theme registration, control overview, Guide usage, dynamic menu guidance, and Guide demo GIFs.
+- Updated the Guide requirements document with the current implementation status, source locations, and follow-up items.
 
 ## 12.0.3.7 - 2026-05-24
 
