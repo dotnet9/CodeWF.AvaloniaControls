@@ -1,0 +1,10 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StaticResource x:Key="ColumnDisplayEditorBackground" ResourceKey="WindowDefaultBackground" />
+    <StaticResource x:Key="ColumnDisplayEditorBorderBrush" ResourceKey="SemiColorBorder" />
+    <StaticResource x:Key="ColumnDisplayEditorHeaderBackground" ResourceKey="SemiColorFill0" />
+    <StaticResource x:Key="ColumnDisplayEditorHeaderForeground" ResourceKey="SemiColorText0" />
+    <StaticResource x:Key="ColumnDisplayEditorRowForeground" ResourceKey="SemiColorText0" />
+    <SolidColorBrush x:Key="ColumnDisplayEditorRowHoverBackground" Color="#24272E" />
+    <SolidColorBrush x:Key="ColumnDisplayEditorRowSelectedBackground" Color="#1C2A3E" />
+</ResourceDictionary>

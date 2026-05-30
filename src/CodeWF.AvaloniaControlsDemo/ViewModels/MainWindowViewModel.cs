@@ -29,6 +29,7 @@ public sealed class MainWindowViewModel : ReactiveObject
         _pages =
         [
             new(MainWindowLangs.TabOverview, "Overview", new OverviewDemo()),
+            new("ColumnDisplayEditor", "Column Display Editor", new ColumnDisplayEditorDemo()),
             new(MainWindowLangs.TabTransfer, "Transfer", new TransferDemo()),
             new(MainWindowLangs.TabVComboBox, "VComboBox", new VComboBoxDemo()),
             new(MainWindowLangs.TabTabControl, "TabControl", new TabControlDemo()),

@@ -64,6 +64,26 @@
         "Item14": "DataGrid 示例提供大数据切换压力场景",
         "Item15": "整理窗口标题与按钮前景配色"
       },
+      "ColumnDisplayEditorDemo": {
+        "Title": "列显示编辑器",
+        "Description": "拖动行前手柄调整顺序，切换显示状态，并把有序列列表传回调用端。",
+        "VisibleHeaderText": "显示",
+        "DisplayTextHeaderText": "名称",
+        "CurrentOrderedItems": "当前排序项",
+        "CurrentOrderedItemsDesc": "调用端会按此顺序收到 Key、DisplayText、Visible。",
+        "ColumnRecordId": "记录 ID",
+        "ColumnTitle": "标题",
+        "ColumnCategory": "分类",
+        "ColumnOwner": "负责人",
+        "ColumnPriority": "优先级",
+        "ColumnStatus": "状态",
+        "ColumnCreatedAt": "创建时间",
+        "ColumnUpdatedAt": "更新时间",
+        "ColumnDueDate": "截止日期",
+        "ColumnTags": "标签",
+        "ColumnSummary": "摘要",
+        "ColumnNotes": "备注"
+      },
       "VComboBoxDemo": {
         "Title": "VComboBox 与图标操作",
         "Description": "演示紧凑型图标命令、行内弹出确认，以及适用于告警选择器的纵向选择框布局。",

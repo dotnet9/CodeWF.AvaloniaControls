@@ -64,6 +64,26 @@
         "Item14": "DataGrid 示例提供大資料切換壓力場景",
         "Item15": "整理視窗標題與按鈕前景配色"
       },
+      "ColumnDisplayEditorDemo": {
+        "Title": "列顯示編輯器",
+        "Description": "拖曳行前控制柄調整順序，切換顯示狀態，並將有序列清單傳回呼叫端。",
+        "VisibleHeaderText": "顯示",
+        "DisplayTextHeaderText": "名稱",
+        "CurrentOrderedItems": "目前排序項目",
+        "CurrentOrderedItemsDesc": "呼叫端會依此順序取得 Key、DisplayText、Visible。",
+        "ColumnRecordId": "記錄 ID",
+        "ColumnTitle": "標題",
+        "ColumnCategory": "分類",
+        "ColumnOwner": "負責人",
+        "ColumnPriority": "優先級",
+        "ColumnStatus": "狀態",
+        "ColumnCreatedAt": "建立時間",
+        "ColumnUpdatedAt": "更新時間",
+        "ColumnDueDate": "截止日期",
+        "ColumnTags": "標籤",
+        "ColumnSummary": "摘要",
+        "ColumnNotes": "備註"
+      },
       "VComboBoxDemo": {
         "Title": "VComboBox 與圖示操作",
         "Description": "演示緊湊型圖示命令、行內彈出確認，以及適用於告警選擇器的縱向選擇框佈局。",

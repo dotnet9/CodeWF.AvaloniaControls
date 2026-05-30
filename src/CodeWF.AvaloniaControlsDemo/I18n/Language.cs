@@ -79,6 +79,29 @@ namespace Showcase.Pages
     }
 
 
+    public static class ColumnDisplayEditorDemo
+    {
+        public static readonly string Title = "Showcase.Pages.ColumnDisplayEditorDemo.Title";
+        public static readonly string Description = "Showcase.Pages.ColumnDisplayEditorDemo.Description";
+        public static readonly string VisibleHeaderText = "Showcase.Pages.ColumnDisplayEditorDemo.VisibleHeaderText";
+        public static readonly string DisplayTextHeaderText = "Showcase.Pages.ColumnDisplayEditorDemo.DisplayTextHeaderText";
+        public static readonly string CurrentOrderedItems = "Showcase.Pages.ColumnDisplayEditorDemo.CurrentOrderedItems";
+        public static readonly string CurrentOrderedItemsDesc = "Showcase.Pages.ColumnDisplayEditorDemo.CurrentOrderedItemsDesc";
+        public static readonly string ColumnRecordId = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnRecordId";
+        public static readonly string ColumnTitle = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnTitle";
+        public static readonly string ColumnCategory = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnCategory";
+        public static readonly string ColumnOwner = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnOwner";
+        public static readonly string ColumnPriority = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnPriority";
+        public static readonly string ColumnStatus = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnStatus";
+        public static readonly string ColumnCreatedAt = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnCreatedAt";
+        public static readonly string ColumnUpdatedAt = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnUpdatedAt";
+        public static readonly string ColumnDueDate = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnDueDate";
+        public static readonly string ColumnTags = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnTags";
+        public static readonly string ColumnSummary = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnSummary";
+        public static readonly string ColumnNotes = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnNotes";
+    }
+
+
     public static class VComboBoxDemo
     {
         public static readonly string Title = "Showcase.Pages.VComboBoxDemo.Title";

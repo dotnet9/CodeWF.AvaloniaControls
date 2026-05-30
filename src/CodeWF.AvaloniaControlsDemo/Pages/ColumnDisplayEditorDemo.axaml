@@ -1,0 +1,72 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:codewf="https://codewf.com"
+             xmlns:i18n="https://codewf.com"
+             xmlns:local="clr-namespace:CodeWF.AvaloniaControlsDemo.Pages"
+             xmlns:pageLangs="clr-namespace:Showcase.Pages"
+             xmlns:vm="clr-namespace:CodeWF.AvaloniaControlsDemo.ViewModels"
+             x:Class="CodeWF.AvaloniaControlsDemo.Pages.ColumnDisplayEditorDemo"
+             x:DataType="vm:ColumnDisplayEditorDemoViewModel"
+             d:DesignWidth="900"
+             d:DesignHeight="600"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:ColumnDisplayEditorDemoViewModel />
+    </UserControl.DataContext>
+    <UserControl.Styles>
+        <Style Selector="TextBlock.Caption">
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style Selector="TextBlock.Title">
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="Auto,*" RowSpacing="14">
+        <Border Padding="16"
+                Background="{DynamicResource ShowcaseSubtleBackground}"
+                BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="12">
+            <StackPanel Spacing="6">
+                <TextBlock Classes="Title"
+                           FontSize="20"
+                           Text="{i18n:I18n {x:Static pageLangs:ColumnDisplayEditorDemo.Title}}" />
+                <TextBlock Classes="Caption"
+                           Text="{i18n:I18n {x:Static pageLangs:ColumnDisplayEditorDemo.Description}}" />
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1" ColumnDefinitions="360,1,*" ColumnSpacing="14">
+            <Border Theme="{StaticResource CardBorder}" Padding="12">
+                <codewf:ColumnDisplayEditor
+                    DisplayTextHeaderText="{i18n:I18n {x:Static pageLangs:ColumnDisplayEditorDemo.DisplayTextHeaderText}}"
+                    ItemsSource="{Binding Items}"
+                    VisibleHeaderText="{i18n:I18n {x:Static pageLangs:ColumnDisplayEditorDemo.VisibleHeaderText}}" />
+            </Border>
+
+            <GridSplitter Grid.Column="1"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Background="{DynamicResource ShowcaseSplitterBrush}" />
+
+            <Border Grid.Column="2" Theme="{StaticResource CardBorder}" Padding="18">
+                <Grid RowDefinitions="Auto,*" RowSpacing="12">
+                    <StackPanel Spacing="5">
+                        <TextBlock Classes="Title" FontSize="16" Text="{i18n:I18n {x:Static pageLangs:ColumnDisplayEditorDemo.CurrentOrderedItems}}" />
+                        <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:ColumnDisplayEditorDemo.CurrentOrderedItemsDesc}}" />
+                    </StackPanel>
+                    <TextBox Grid.Row="1"
+                             AcceptsReturn="True"
+                             IsReadOnly="True"
+                             Text="{Binding PreviewText}"
+                             TextWrapping="NoWrap" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

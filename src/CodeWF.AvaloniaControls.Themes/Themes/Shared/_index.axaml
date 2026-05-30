@@ -4,6 +4,7 @@
         <ResourceInclude Source="CodeWFWindow.axaml" />
         <ResourceInclude Source="CodeWFTitleBar.axaml" />
         <ResourceInclude Source="SearchListBox.axaml" />
+        <ResourceInclude Source="ColumnDisplayEditor.axaml" />
         <ResourceInclude Source="StatusBadge.axaml" />
         <ResourceInclude Source="StatusCard.axaml" />
     </ResourceDictionary.MergedDictionaries>

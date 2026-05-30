@@ -64,6 +64,26 @@
         "Item14": "DataGrid サンプルに大規模データの負荷場面を追加",
         "Item15": "ウィンドウタイトルとボタン前景色を整理"
       },
+      "ColumnDisplayEditorDemo": {
+        "Title": "列表示エディター",
+        "Description": "ハンドルをドラッグして行を並べ替え、表示状態を切り替え、並び順付きの列リストを呼び出し元へ返します。",
+        "VisibleHeaderText": "表示",
+        "DisplayTextHeaderText": "名称",
+        "CurrentOrderedItems": "現在の並び順",
+        "CurrentOrderedItemsDesc": "呼び出し元は Key、DisplayText、Visible をこの順序で受け取ります。",
+        "ColumnRecordId": "レコード ID",
+        "ColumnTitle": "タイトル",
+        "ColumnCategory": "カテゴリ",
+        "ColumnOwner": "所有者",
+        "ColumnPriority": "優先度",
+        "ColumnStatus": "ステータス",
+        "ColumnCreatedAt": "作成日時",
+        "ColumnUpdatedAt": "更新日時",
+        "ColumnDueDate": "期限",
+        "ColumnTags": "タグ",
+        "ColumnSummary": "概要",
+        "ColumnNotes": "メモ"
+      },
       "VComboBoxDemo": {
         "Title": "VComboBox とアイコン操作",
         "Description": "コンパクトなアイコンコマンド、インライン確認、アラート選択に適した縦型セレクターを示します。",

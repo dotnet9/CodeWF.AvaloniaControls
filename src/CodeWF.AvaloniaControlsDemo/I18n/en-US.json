@@ -64,6 +64,26 @@
         "Item14": "Provide a large-data stress scenario in the DataGrid sample",
         "Item15": "Align window title and caption button foreground colors"
       },
+      "ColumnDisplayEditorDemo": {
+        "Title": "Column Display Editor",
+        "Description": "Drag the handle to reorder rows, toggle visibility, and pass the ordered column list back to the caller.",
+        "VisibleHeaderText": "Visible",
+        "DisplayTextHeaderText": "Name",
+        "CurrentOrderedItems": "Current Ordered Items",
+        "CurrentOrderedItemsDesc": "The caller receives the list in this order: Key, DisplayText, Visible.",
+        "ColumnRecordId": "Record ID",
+        "ColumnTitle": "Title",
+        "ColumnCategory": "Category",
+        "ColumnOwner": "Owner",
+        "ColumnPriority": "Priority",
+        "ColumnStatus": "Status",
+        "ColumnCreatedAt": "Created At",
+        "ColumnUpdatedAt": "Updated At",
+        "ColumnDueDate": "Due Date",
+        "ColumnTags": "Tags",
+        "ColumnSummary": "Summary",
+        "ColumnNotes": "Notes"
+      },
       "VComboBoxDemo": {
         "Title": "VComboBox and Icon Actions",
         "Description": "Demonstrates compact icon commands, inline confirmation, and a vertical selector layout for alert filters.",
