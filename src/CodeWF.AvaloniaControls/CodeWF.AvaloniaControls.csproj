@@ -19,7 +19,4 @@
 		<PackageReference Include="Avalonia" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<None Include="logo.png" Pack="true" PackagePath="" />
-	</ItemGroup>
 </Project>

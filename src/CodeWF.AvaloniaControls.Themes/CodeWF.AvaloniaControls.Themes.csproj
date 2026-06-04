@@ -12,7 +12,7 @@
 		<PackageId>CodeWF.AvaloniaControls.Themes</PackageId>
 		<AssemblyName>CodeWF.AvaloniaControls.Themes</AssemblyName>
 		<RootNamespace>CodeWF.AvaloniaControls.Themes</RootNamespace>
-		<PackageIcon>codewf.png</PackageIcon>
+		<PackageIcon>logo.png</PackageIcon>
 		<PackageTags>avalonia ui,controls,themes,codewf</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
