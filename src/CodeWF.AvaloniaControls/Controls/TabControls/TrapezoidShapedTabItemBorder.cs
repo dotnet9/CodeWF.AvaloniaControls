@@ -1,6 +1,8 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Media;
+using Avalonia.VisualTree;
 
 namespace CodeWF.AvaloniaControls.Controls;
 
@@ -44,21 +46,13 @@ public partial class TrapezoidShapedTabItemBorder : Control
             return;
         }
 
-        if (Parent?.Parent?.Parent is not TabControl tabControl ||
-            Parent?.Parent is not TabItem currentTabItem)
+        if (!TryGetTopTabContext(out var index, out var itemCount, out var radius))
         {
             return;
         }
 
-        if (tabControl.TabStripPlacement != Dock.Top)
-        {
-            return;
-        }
-
-        var index = tabControl.Items.IndexOf(currentTabItem);
         var isFirst = index == 0;
-        var isLast = index == tabControl.Items.Count - 1;
-        var radius = currentTabItem.CornerRadius;
+        var isLast = index == itemCount - 1;
 
         // 获取控件的尺寸
         var rect = new Rect(Bounds.Size);
@@ -96,5 +90,39 @@ public partial class TrapezoidShapedTabItemBorder : Control
             LineJoin = PenLineJoin.Round, // 圆角连接
             LineCap = PenLineCap.Round // 圆角端点
         }, pathGeometry);
+    }
+
+    private bool TryGetTopTabContext(out int index, out int itemCount, out CornerRadius radius)
+    {
+        var tabItem = this.FindAncestorOfType<TabItem>();
+        if (tabItem is not null)
+        {
+            var tabControl = tabItem.FindAncestorOfType<TabControl>();
+            if (tabControl is not null && tabControl.TabStripPlacement == Dock.Top)
+            {
+                index = tabControl.Items.IndexOf(tabItem);
+                itemCount = tabControl.Items.Count;
+                radius = tabItem.CornerRadius;
+                return index >= 0;
+            }
+        }
+
+        var tabStripItem = this.FindAncestorOfType<TabStripItem>();
+        if (tabStripItem is not null)
+        {
+            var tabStrip = tabStripItem.FindAncestorOfType<TabStrip>();
+            if (tabStrip is not null)
+            {
+                index = tabStrip.Items.IndexOf(tabStripItem);
+                itemCount = tabStrip.Items.Count;
+                radius = tabStripItem.CornerRadius;
+                return index >= 0;
+            }
+        }
+
+        index = -1;
+        itemCount = 0;
+        radius = default;
+        return false;
     }
 }
