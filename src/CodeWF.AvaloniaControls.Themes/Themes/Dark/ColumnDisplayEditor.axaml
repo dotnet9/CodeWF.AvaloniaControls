@@ -5,6 +5,6 @@
     <StaticResource x:Key="ColumnDisplayEditorHeaderBackground" ResourceKey="SemiColorFill0" />
     <StaticResource x:Key="ColumnDisplayEditorHeaderForeground" ResourceKey="SemiColorText0" />
     <StaticResource x:Key="ColumnDisplayEditorRowForeground" ResourceKey="SemiColorText0" />
-    <SolidColorBrush x:Key="ColumnDisplayEditorRowHoverBackground" Color="#24272E" />
-    <SolidColorBrush x:Key="ColumnDisplayEditorRowSelectedBackground" Color="#1C2A3E" />
+    <StaticResource x:Key="ColumnDisplayEditorRowHoverBackground" ResourceKey="SemiColorFill0" />
+    <StaticResource x:Key="ColumnDisplayEditorRowSelectedBackground" ResourceKey="SemiColorPrimaryLight" />
 </ResourceDictionary>

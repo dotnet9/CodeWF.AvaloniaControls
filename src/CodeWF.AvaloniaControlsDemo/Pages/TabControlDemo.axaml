@@ -8,29 +8,6 @@
              d:DesignWidth="920"
              d:DesignHeight="520"
              x:Class="CodeWF.AvaloniaControlsDemo.Pages.TabControlDemo">
-    <UserControl.Styles>
-        <Style Selector="Border.SurfaceCard">
-            <Setter Property="Background" Value="{DynamicResource ShowcaseCardBackground}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="12" />
-            <Setter Property="Padding" Value="18" />
-        </Style>
-        <Style Selector="TextBlock.PanelTitle">
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
-        </Style>
-        <Style Selector="TextBlock.Caption">
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-        </Style>
-        <Style Selector="Border.StatusChip">
-            <Setter Property="Padding" Value="8,3" />
-            <Setter Property="CornerRadius" Value="999" />
-            <Setter Property="Background" Value="{DynamicResource ShowcaseAccentSubtleBrush}" />
-        </Style>
-    </UserControl.Styles>
-
     <Grid RowDefinitions="Auto,*,*" RowSpacing="14">
         <Border Padding="16"
                 Background="{DynamicResource ShowcaseSubtleBackground}"
@@ -65,16 +42,11 @@
                     </Border>
                 </Grid>
                 <TabControl Grid.Row="1"
+                            Classes="BusinessTabs"
                             SelectedIndex="0"
                             Theme="{StaticResource TrapezoidShapedTabControl}"
                             CornerRadius="10 10 0 0"
                             TabStripPlacement="Top">
-                    <TabControl.Styles>
-                        <Style Selector="TabItem">
-                            <Setter Property="CornerRadius" Value="10 10 0 0" />
-                            <Setter Property="Padding" Value="12 8" />
-                        </Style>
-                    </TabControl.Styles>
                     <TabItem Header="{i18n:I18n {x:Static pageLangs:TabControlDemo.DataManagement}}">
                         <Grid Margin="0,14,0,0"
                               ColumnDefinitions="*,*,*"
@@ -152,37 +124,11 @@
                     <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.BrandContentDesc}}" />
                 </StackPanel>
                 <TabControl Grid.Row="1"
+                            Classes="BrandTabs"
                             SelectedIndex="0"
                             Theme="{StaticResource TrapezoidShapedTabControl}"
                             CornerRadius="10 10 0 0"
                             TabStripPlacement="Top">
-                    <TabControl.Styles>
-                        <Style Selector="TabControl">
-                            <Setter Property="Background" Value="#551890FF" />
-                        </Style>
-                        <Style Selector="TabItem">
-                            <Setter Property="CornerRadius" Value="10 10 0 0" />
-                            <Setter Property="Foreground" Value="#FFFFFF" />
-                            <Setter Property="Padding" Value="12 8" />
-                            <Setter Property="MinHeight" Value="40" />
-                            <Setter Property="BorderThickness" Value="1" />
-                            <Setter Property="VerticalContentAlignment" Value="Center" />
-                            <Setter Property="Background">
-                                <Setter.Value>
-                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                        <GradientStops>
-                                            <GradientStop Color="#BAE7FF" Offset="0" />
-                                            <GradientStop Color="#FFFFFF" Offset="1" />
-                                        </GradientStops>
-                                    </LinearGradientBrush>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </TabControl.Styles>
-                    <TabControl.Resources>
-                        <SolidColorBrush x:Key="TabItemLineHeaderPointeroverForeground">#1890FF</SolidColorBrush>
-                        <SolidColorBrush x:Key="TabItemLineHeaderSelectedForeground">#1890FF</SolidColorBrush>
-                    </TabControl.Resources>
                     <TabItem Header="{i18n:I18n {x:Static pageLangs:TabControlDemo.DataManagement}}">
                         <Border Margin="0,14,0,0"
                                 Padding="16"

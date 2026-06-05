@@ -1,0 +1,138 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:semi="https://irihi.tech/semi">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="ShowcaseAppBackground">#F3F6FB</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcasePanelBackground">#FFFFFFFF</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseCardBackground">#FFFFFFFF</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseSubtleBackground">#F8FAFC</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseInputBackground">#FFFFFFFF</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseBorderBrush">#DCE3EE</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseSubtleBorderBrush">#E4E9F2</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseTextBrush">#0F172A</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseMutedTextBrush">#64748B</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseAccentBrush">#2563EB</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseAccentSubtleBrush">#EEF2FF</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseAccentTextBrush">#3730A3</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseTitleBarBackground">#F8FAFC</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseTitleBarBorderBrush">#DCE3EE</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseTitleBarForeground">#0F172A</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseSplitterBrush">#E4E9F2</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcasePositiveBrush">#16A34A</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseWarningBrush">#B45309</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseDangerBrush">#DC2626</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseCodeBackground">#F8FAFC</SolidColorBrush>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="ShowcaseAppBackground">#0F172A</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcasePanelBackground">#111827</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseCardBackground">#1F2937</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseSubtleBackground">#172033</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseInputBackground">#0B1220</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseBorderBrush">#334155</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseSubtleBorderBrush">#263449</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseTextBrush">#F8FAFC</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseMutedTextBrush">#CBD5E1</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseAccentBrush">#60A5FA</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseAccentSubtleBrush">#1E3A5F</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseAccentTextBrush">#BFDBFE</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseTitleBarBackground">#111827</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseTitleBarBorderBrush">#263449</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseTitleBarForeground">#F8FAFC</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseSplitterBrush">#334155</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcasePositiveBrush">#4ADE80</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseWarningBrush">#FBBF24</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseDangerBrush">#F87171</SolidColorBrush>
+            <SolidColorBrush x:Key="ShowcaseCodeBackground">#0B1220</SolidColorBrush>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="{x:Static semi:SemiTheme.Aquatic}">
+            <StaticResource x:Key="ShowcaseAppBackground" ResourceKey="SemiColorBackground1" />
+            <StaticResource x:Key="ShowcasePanelBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseCardBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseSubtleBackground" ResourceKey="SemiColorPrimaryLight" />
+            <StaticResource x:Key="ShowcaseInputBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcaseSubtleBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcaseTextBrush" ResourceKey="SemiColorText0" />
+            <StaticResource x:Key="ShowcaseMutedTextBrush" ResourceKey="SemiColorText2" />
+            <StaticResource x:Key="ShowcaseAccentBrush" ResourceKey="SemiColorPrimary" />
+            <StaticResource x:Key="ShowcaseAccentSubtleBrush" ResourceKey="SemiColorPrimaryLight" />
+            <StaticResource x:Key="ShowcaseAccentTextBrush" ResourceKey="SemiColorPrimary" />
+            <StaticResource x:Key="ShowcaseTitleBarBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseTitleBarBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcaseTitleBarForeground" ResourceKey="SemiColorText0" />
+            <StaticResource x:Key="ShowcaseSplitterBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcasePositiveBrush" ResourceKey="SemiColorSuccess" />
+            <StaticResource x:Key="ShowcaseWarningBrush" ResourceKey="SemiColorWarning" />
+            <StaticResource x:Key="ShowcaseDangerBrush" ResourceKey="SemiColorDanger" />
+            <StaticResource x:Key="ShowcaseCodeBackground" ResourceKey="SemiColorBackground1" />
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="{x:Static semi:SemiTheme.Desert}">
+            <StaticResource x:Key="ShowcaseAppBackground" ResourceKey="SemiColorBackground1" />
+            <StaticResource x:Key="ShowcasePanelBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseCardBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseSubtleBackground" ResourceKey="SemiColorWarningLight" />
+            <StaticResource x:Key="ShowcaseInputBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcaseSubtleBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcaseTextBrush" ResourceKey="SemiColorText0" />
+            <StaticResource x:Key="ShowcaseMutedTextBrush" ResourceKey="SemiColorText2" />
+            <StaticResource x:Key="ShowcaseAccentBrush" ResourceKey="SemiColorWarning" />
+            <StaticResource x:Key="ShowcaseAccentSubtleBrush" ResourceKey="SemiColorWarningLight" />
+            <StaticResource x:Key="ShowcaseAccentTextBrush" ResourceKey="SemiColorWarning" />
+            <StaticResource x:Key="ShowcaseTitleBarBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseTitleBarBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcaseTitleBarForeground" ResourceKey="SemiColorText0" />
+            <StaticResource x:Key="ShowcaseSplitterBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcasePositiveBrush" ResourceKey="SemiColorSuccess" />
+            <StaticResource x:Key="ShowcaseWarningBrush" ResourceKey="SemiColorWarning" />
+            <StaticResource x:Key="ShowcaseDangerBrush" ResourceKey="SemiColorDanger" />
+            <StaticResource x:Key="ShowcaseCodeBackground" ResourceKey="SemiColorBackground1" />
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="{x:Static semi:SemiTheme.Dusk}">
+            <StaticResource x:Key="ShowcaseAppBackground" ResourceKey="SemiColorBackground1" />
+            <StaticResource x:Key="ShowcasePanelBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseCardBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseSubtleBackground" ResourceKey="SemiColorSecondaryLight" />
+            <StaticResource x:Key="ShowcaseInputBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcaseSubtleBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcaseTextBrush" ResourceKey="SemiColorText0" />
+            <StaticResource x:Key="ShowcaseMutedTextBrush" ResourceKey="SemiColorText2" />
+            <StaticResource x:Key="ShowcaseAccentBrush" ResourceKey="SemiColorSecondary" />
+            <StaticResource x:Key="ShowcaseAccentSubtleBrush" ResourceKey="SemiColorSecondaryLight" />
+            <StaticResource x:Key="ShowcaseAccentTextBrush" ResourceKey="SemiColorSecondary" />
+            <StaticResource x:Key="ShowcaseTitleBarBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseTitleBarBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcaseTitleBarForeground" ResourceKey="SemiColorText0" />
+            <StaticResource x:Key="ShowcaseSplitterBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcasePositiveBrush" ResourceKey="SemiColorSuccess" />
+            <StaticResource x:Key="ShowcaseWarningBrush" ResourceKey="SemiColorWarning" />
+            <StaticResource x:Key="ShowcaseDangerBrush" ResourceKey="SemiColorDanger" />
+            <StaticResource x:Key="ShowcaseCodeBackground" ResourceKey="SemiColorBackground1" />
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="{x:Static semi:SemiTheme.NightSky}">
+            <StaticResource x:Key="ShowcaseAppBackground" ResourceKey="SemiColorBackground1" />
+            <StaticResource x:Key="ShowcasePanelBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseCardBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseSubtleBackground" ResourceKey="SemiColorTertiaryLight" />
+            <StaticResource x:Key="ShowcaseInputBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcaseSubtleBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcaseTextBrush" ResourceKey="SemiColorText0" />
+            <StaticResource x:Key="ShowcaseMutedTextBrush" ResourceKey="SemiColorText2" />
+            <StaticResource x:Key="ShowcaseAccentBrush" ResourceKey="SemiColorPrimary" />
+            <StaticResource x:Key="ShowcaseAccentSubtleBrush" ResourceKey="SemiColorPrimaryLight" />
+            <StaticResource x:Key="ShowcaseAccentTextBrush" ResourceKey="SemiColorPrimary" />
+            <StaticResource x:Key="ShowcaseTitleBarBackground" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="ShowcaseTitleBarBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcaseTitleBarForeground" ResourceKey="SemiColorText0" />
+            <StaticResource x:Key="ShowcaseSplitterBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="ShowcasePositiveBrush" ResourceKey="SemiColorSuccess" />
+            <StaticResource x:Key="ShowcaseWarningBrush" ResourceKey="SemiColorWarning" />
+            <StaticResource x:Key="ShowcaseDangerBrush" ResourceKey="SemiColorDanger" />
+            <StaticResource x:Key="ShowcaseCodeBackground" ResourceKey="SemiColorBackground1" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

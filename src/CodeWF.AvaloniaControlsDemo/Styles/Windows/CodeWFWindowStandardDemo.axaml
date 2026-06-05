@@ -1,0 +1,52 @@
+<Styles xmlns="https://github.com/avaloniaui">
+    <Style Selector="Menu.title-bar-menu">
+        <Setter Property="Height" Value="34" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Menu.title-bar-menu > MenuItem">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="#F3F4F6" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="8,0" />
+    </Style>
+    <Style Selector="TextBlock.title-bar-menu-header">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="#F3F4F6" />
+    </Style>
+    <Style Selector="Menu.title-bar-menu > MenuItem:pointerover">
+        <Setter Property="Foreground" Value="#F3F4F6" />
+        <Setter Property="Background" Value="#32383F" />
+    </Style>
+    <Style Selector="Menu.title-bar-menu > MenuItem:pressed">
+        <Setter Property="Foreground" Value="#F3F4F6" />
+        <Setter Property="Background" Value="#3A424B" />
+    </Style>
+    <Style Selector="Menu.title-bar-menu > MenuItem:selected">
+        <Setter Property="Foreground" Value="#F3F4F6" />
+        <Setter Property="Background" Value="#3A424B" />
+    </Style>
+    <Style Selector="Menu.title-bar-menu > MenuItem:open">
+        <Setter Property="Foreground" Value="#F3F4F6" />
+        <Setter Property="Background" Value="#3A424B" />
+    </Style>
+    <Style Selector="Menu.title-bar-menu MenuItem MenuItem">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="#24292F" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="12,4" />
+    </Style>
+    <Style Selector="Menu.title-bar-menu MenuItem MenuItem:pointerover">
+        <Setter Property="Foreground" Value="#0F172A" />
+        <Setter Property="Background" Value="#E7EDF5" />
+    </Style>
+    <Style Selector="Menu.title-bar-menu MenuItem MenuItem:pressed">
+        <Setter Property="Foreground" Value="#0F172A" />
+        <Setter Property="Background" Value="#D8E1EC" />
+    </Style>
+    <Style Selector="Menu.title-bar-menu MenuItem MenuItem:selected">
+        <Setter Property="Foreground" Value="#0F172A" />
+        <Setter Property="Background" Value="#D8E1EC" />
+    </Style>
+</Styles>

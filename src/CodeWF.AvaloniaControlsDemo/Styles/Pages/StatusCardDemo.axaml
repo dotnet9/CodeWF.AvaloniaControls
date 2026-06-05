@@ -1,0 +1,14 @@
+<Styles xmlns="https://github.com/avaloniaui">
+    <Style Selector="TextBlock.PanelTitle">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+    </Style>
+    <Style Selector="Border.HealthRow">
+        <Setter Property="Padding" Value="12" />
+        <Setter Property="Background" Value="{DynamicResource ShowcaseSubtleBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="10" />
+    </Style>
+</Styles>

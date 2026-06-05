@@ -2,6 +2,6 @@
 
 namespace CodeWF.AvaloniaControls.Themes;
 
-public class CodeWFTheme : Styles
+public class ACSemiTheme : Styles
 {
 }

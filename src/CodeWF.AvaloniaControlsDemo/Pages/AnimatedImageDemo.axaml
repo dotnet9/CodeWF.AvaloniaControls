@@ -10,33 +10,6 @@
     d:DesignHeight="560"
     d:DesignWidth="980"
     mc:Ignorable="d">
-    <UserControl.Styles>
-        <Style Selector="Border.PreviewPanel">
-            <Setter Property="Background" Value="{DynamicResource ShowcaseSubtleBackground}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="12" />
-            <Setter Property="Padding" Value="18" />
-        </Style>
-        <Style Selector="TextBlock.Title">
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-        </Style>
-        <Style Selector="TextBlock.Source">
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
-            <Setter Property="FontSize" Value="12" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-        </Style>
-        <Style Selector="Image.AnimatedPreview">
-            <Setter Property="Width" Value="450" />
-            <Setter Property="Height" Value="200" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Stretch" Value="Uniform" />
-        </Style>
-    </UserControl.Styles>
-
     <ScrollViewer>
         <Grid Margin="18" RowDefinitions="Auto,*" RowSpacing="18">
             <StackPanel Spacing="8">

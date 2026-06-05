@@ -7,6 +7,7 @@ using Avalonia.Styling;
 using CodeWF.AvaloniaControlsDemo.Pages;
 using Lang.Avalonia;
 using ReactiveUI;
+using Semi.Avalonia;
 
 using MainWindowLangs = global::Showcase.Main.MainWindow;
 
@@ -14,15 +15,29 @@ namespace CodeWF.AvaloniaControlsDemo.ViewModels;
 
 public sealed class MainWindowViewModel : ReactiveObject
 {
+    private static readonly ThemeVariant Aquatic = new(nameof(SemiTheme.Aquatic), ThemeVariant.Light);
+    private static readonly ThemeVariant Dusk = new(nameof(SemiTheme.Dusk), ThemeVariant.Light);
+
     private readonly List<ShowcasePageItem> _pages;
     private string? _searchText;
     private LocalizationLanguage? _selectedLanguage;
     private ShowcasePageItem? _selectedPage;
-    private bool _isDarkTheme;
+    private ShowcaseThemeOption? _selectedTheme;
 
     public MainWindowViewModel()
     {
         Languages = CreateLanguages(I18nManager.Instance.GetLanguages()?.Select(language => language.CultureName));
+        ThemeOptions =
+        [
+            new("Light", "浅色", ThemeVariant.Light),
+            new("Dark", "深色", ThemeVariant.Dark),
+            new("Aquatic", "水生", Aquatic),
+            new("Desert", "沙漠", SemiTheme.Desert),
+            new("Dusk", "黄昏", Dusk),
+            new("NightSky", "夜空", SemiTheme.NightSky)
+        ];
+
+        _selectedTheme = ThemeOptions.FirstOrDefault();
         _selectedLanguage = Languages.FirstOrDefault(l => l.CultureName == I18nManager.Instance.Culture?.Name)
             ?? Languages.FirstOrDefault();
 
@@ -46,6 +61,8 @@ public sealed class MainWindowViewModel : ReactiveObject
     }
 
     public IReadOnlyList<LocalizationLanguage> Languages { get; }
+
+    public IReadOnlyList<ShowcaseThemeOption> ThemeOptions { get; }
 
     public IReadOnlyList<ShowcasePageItem> FilteredPages =>
         _pages.Where(page => page.Matches(SearchText)).ToList();
@@ -95,13 +112,16 @@ public sealed class MainWindowViewModel : ReactiveObject
     public string SelectedLanguageDescription =>
         SelectedLanguage == null ? string.Empty : $"{SelectedLanguage.CultureName} · {SelectedLanguage.DetailText}";
 
-    public bool IsDarkTheme
+    public ShowcaseThemeOption? SelectedTheme
     {
-        get => _isDarkTheme;
+        get => _selectedTheme;
         set
         {
-            this.RaiseAndSetIfChanged(ref _isDarkTheme, value);
-            Application.Current!.RequestedThemeVariant = value ? ThemeVariant.Dark : ThemeVariant.Light;
+            this.RaiseAndSetIfChanged(ref _selectedTheme, value);
+            if (value is not null && Application.Current is { } app)
+            {
+                app.RequestedThemeVariant = value.ThemeVariant;
+            }
         }
     }
 
@@ -174,3 +194,5 @@ public sealed class MainWindowViewModel : ReactiveObject
         _ => 4
     };
 }
+
+public sealed record ShowcaseThemeOption(string Name, string DisplayName, ThemeVariant ThemeVariant);

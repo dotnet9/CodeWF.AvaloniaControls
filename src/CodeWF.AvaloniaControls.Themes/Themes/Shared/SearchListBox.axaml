@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <CornerRadius x:Key="SearchListBoxCornerRadius">6</CornerRadius>
-    <Thickness x:Key="SearchListBoxCounterMargin">5</Thickness>
-    <Thickness x:Key="SearchListBoxBorderThickness">1</Thickness>
+    <StaticResource x:Key="SearchListBoxCornerRadius" ResourceKey="SemiBorderRadiusMedium" />
+    <StaticResource x:Key="SearchListBoxCounterMargin" ResourceKey="SemiThicknessExtraTight" />
+    <StaticResource x:Key="SearchListBoxBorderThickness" ResourceKey="SemiBorderThicknessControl" />
 </ResourceDictionary>

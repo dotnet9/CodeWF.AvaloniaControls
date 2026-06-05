@@ -1,0 +1,17 @@
+<Styles xmlns="https://github.com/avaloniaui">
+    <Style Selector="TextBlock.Caption">
+        <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="Border.SurfaceCard">
+        <Setter Property="Background" Value="{DynamicResource ShowcaseCardBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="Padding" Value="18" />
+    </Style>
+    <Style Selector="TextBlock.PanelTitle">
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+    </Style>
+</Styles>

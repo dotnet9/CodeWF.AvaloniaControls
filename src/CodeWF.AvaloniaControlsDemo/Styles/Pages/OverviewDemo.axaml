@@ -1,0 +1,11 @@
+<Styles xmlns="https://github.com/avaloniaui">
+    <Style Selector="TextBlock.Title">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+    </Style>
+    <Style Selector="TextBlock.RowLabel">
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+    </Style>
+</Styles>

@@ -1,0 +1,10 @@
+<Styles xmlns="https://github.com/avaloniaui">
+    <Style Selector="Border.PreviewTile">
+        <Setter Property="MinHeight" Value="88" />
+        <Setter Property="Padding" Value="14" />
+        <Setter Property="Background" Value="{DynamicResource ShowcaseSubtleBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="10" />
+    </Style>
+</Styles>

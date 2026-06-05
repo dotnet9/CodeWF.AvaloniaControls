@@ -1,0 +1,48 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="Border.StatusChip">
+        <Setter Property="Padding" Value="8,3" />
+        <Setter Property="CornerRadius" Value="999" />
+        <Setter Property="Background" Value="{DynamicResource ShowcaseAccentSubtleBrush}" />
+    </Style>
+    <Style Selector="TabControl.BusinessTabs TabItem">
+        <Setter Property="CornerRadius" Value="10 10 0 0" />
+        <Setter Property="Padding" Value="12 8" />
+    </Style>
+    <Style Selector="TabControl.BrandTabs">
+        <Setter Property="Background" Value="#551890FF" />
+    </Style>
+    <Style Selector="TabControl.BrandTabs">
+        <Style.Resources>
+            <SolidColorBrush x:Key="TabItemLineHeaderPointeroverForeground">#1890FF</SolidColorBrush>
+            <SolidColorBrush x:Key="TabItemLineHeaderSelectedForeground">#1890FF</SolidColorBrush>
+        </Style.Resources>
+    </Style>
+    <Style Selector="TabControl.BrandTabs TabItem">
+        <Setter Property="CornerRadius" Value="10 10 0 0" />
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="Padding" Value="12 8" />
+        <Setter Property="MinHeight" Value="40" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStops>
+                        <GradientStop Color="#BAE7FF" Offset="0" />
+                        <GradientStop Color="#FFFFFF" Offset="1" />
+                    </GradientStops>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style Selector="TabControl.BrandTabs TabItem:selected">
+        <Setter Property="Foreground" Value="#1890FF" />
+    </Style>
+    <Style Selector="TabControl.BrandTabs TabItem:open">
+        <Setter Property="Foreground" Value="#1890FF" />
+    </Style>
+    <Style Selector="TabControl.BrandTabs TabItem:pressed">
+        <Setter Property="Foreground" Value="#096DD9" />
+    </Style>
+</Styles>

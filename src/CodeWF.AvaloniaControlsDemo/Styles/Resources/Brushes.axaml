@@ -7,7 +7,7 @@
                   DestinationRect="0 0 157 157"
                   Opacity="0.1">
         <DrawingBrush.Drawing>
-            <ImageDrawing ImageSource="../Assets/cloud.png" Rect="0 0 157 157" />
+            <ImageDrawing ImageSource="../../Assets/cloud.png" Rect="0 0 157 157" />
         </DrawingBrush.Drawing>
     </DrawingBrush>
 </ResourceDictionary>

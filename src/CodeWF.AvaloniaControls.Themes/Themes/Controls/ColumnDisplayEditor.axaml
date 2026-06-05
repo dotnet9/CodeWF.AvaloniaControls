@@ -12,14 +12,14 @@
                 <Border
                     Background="{DynamicResource ColumnDisplayEditorBackground}"
                     BorderBrush="{DynamicResource ColumnDisplayEditorBorderBrush}"
-                    BorderThickness="1"
-                    CornerRadius="8">
+                    BorderThickness="{StaticResource SemiBorderThicknessControl}"
+                    CornerRadius="{StaticResource SemiBorderRadiusMedium}">
                     <Grid RowDefinitions="34,*">
                         <Border
                             Background="{DynamicResource ColumnDisplayEditorHeaderBackground}"
                             BorderBrush="{DynamicResource ColumnDisplayEditorBorderBrush}"
                             BorderThickness="0,0,0,1"
-                            CornerRadius="8,8,0,0">
+                            CornerRadius="6,6,0,0">
                             <Grid ColumnDefinitions="38,72,*" Margin="8,0,12,0">
                                 <TextBlock
                                     Grid.Column="1"
@@ -49,7 +49,7 @@
                                     <Setter Property="Margin" Value="6,2" />
                                     <Setter Property="MinHeight" Value="34" />
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                    <Setter Property="CornerRadius" Value="6" />
+                                    <Setter Property="CornerRadius" Value="{StaticResource SemiBorderRadiusMedium}" />
                                 </Style>
                                 <Style Selector="ListBoxItem:pointerover">
                                     <Setter Property="Background" Value="{DynamicResource ColumnDisplayEditorRowHoverBackground}" />

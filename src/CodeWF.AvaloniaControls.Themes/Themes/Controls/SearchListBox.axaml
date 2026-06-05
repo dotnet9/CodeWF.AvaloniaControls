@@ -9,14 +9,28 @@
     <ControlTheme x:Key="{x:Type codewf:SearchListBox}" TargetType="codewf:SearchListBox">
         <Setter Property="Template">
             <ControlTemplate TargetType="codewf:SearchListBox">
-                <Grid RowDefinitions="Auto,Auto,*">
-                    <TextBox
-                        Name="PART_SearchBox"
-                        Classes="clearButton"
-                        PlaceholderText="Search" />
+                <Grid RowDefinitions="Auto,Auto,*" RowSpacing="12">
+                    <Grid>
+                        <TextBox
+                            Name="PART_SearchBox"
+                            Classes="clearButton"
+                            Height="{StaticResource SemiHeightControlLarge}"
+                            Padding="12,0,38,0"
+                            PlaceholderText="Search" />
+                        <PathIcon
+                            Width="18"
+                            Height="18"
+                            Margin="0,0,12,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Data="{StaticResource SemiIconSearchStroked}"
+                            Foreground="{DynamicResource SemiColorText2}"
+                            IsHitTestVisible="False" />
+                    </Grid>
                     <TextBlock
                         Grid.Row="1"
-                        Margin="{StaticResource SearchListBoxCounterMargin}"
+                        Margin="0"
+                        FontSize="{DynamicResource SemiFontSizeHeader6}"
                         Foreground="{DynamicResource SearchListBoxCounterForeground}">
                         <Run Text="Filtered: " />
                         <Run Text="{Binding SearchCount, RelativeSource={RelativeSource TemplatedParent}}" />
@@ -31,8 +45,20 @@
                         CornerRadius="{StaticResource SearchListBoxCornerRadius}">
                         <ListBox
                             Name="PART_ListBox"
+                            Background="Transparent"
+                            BorderThickness="0"
                             ItemsSource="{Binding BindingItemsSource, RelativeSource={RelativeSource TemplatedParent}}"
-                            SelectionMode="Multiple" />
+                            SelectionMode="Multiple">
+                            <ListBox.Styles>
+                                <Style Selector="ListBoxItem">
+                                    <Setter Property="MinHeight" Value="38" />
+                                    <Setter Property="Padding" Value="10,4" />
+                                    <Setter Property="Margin" Value="4,1" />
+                                    <Setter Property="CornerRadius" Value="{StaticResource SemiBorderRadiusSmall}" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListBox.Styles>
+                        </ListBox>
                     </Border>
                 </Grid>
             </ControlTemplate>

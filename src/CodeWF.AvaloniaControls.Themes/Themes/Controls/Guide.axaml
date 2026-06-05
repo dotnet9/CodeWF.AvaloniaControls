@@ -6,40 +6,20 @@
         <codewf:Guide Width="360" />
     </Design.PreviewWith>
 
-    <ResourceDictionary.ThemeDictionaries>
-        <ResourceDictionary x:Key="Light">
-            <SolidColorBrush x:Key="GuideCardBackground">#FFFFFFFF</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideCardBorderBrush">#E5E7EB</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideTextForeground">#111827</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideSecondaryTextForeground">#4B5563</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideIndicatorBrush">#D1D5DB</SolidColorBrush>
-            <SolidColorBrush x:Key="GuidePrimaryBrush">#2563EB</SolidColorBrush>
-            <SolidColorBrush x:Key="GuidePrimaryHoverBrush">#1D4ED8</SolidColorBrush>
-            <SolidColorBrush x:Key="GuidePrimaryPressedBrush">#1E40AF</SolidColorBrush>
-            <SolidColorBrush x:Key="GuidePrimaryForeground">#FFFFFFFF</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideArrowBorderBrush">#93C5FD</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideTargetBorderBrush">#60A5FA</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideCloseButtonHoverBackground">#12000000</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideCloseButtonPressedBackground">#1F000000</SolidColorBrush>
-        </ResourceDictionary>
-        <ResourceDictionary x:Key="Dark">
-            <SolidColorBrush x:Key="GuideCardBackground">#1F2937</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideCardBorderBrush">#374151</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideTextForeground">#F9FAFB</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideSecondaryTextForeground">#D1D5DB</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideIndicatorBrush">#4B5563</SolidColorBrush>
-            <SolidColorBrush x:Key="GuidePrimaryBrush">#60A5FA</SolidColorBrush>
-            <SolidColorBrush x:Key="GuidePrimaryHoverBrush">#93C5FD</SolidColorBrush>
-            <SolidColorBrush x:Key="GuidePrimaryPressedBrush">#BFDBFE</SolidColorBrush>
-            <SolidColorBrush x:Key="GuidePrimaryForeground">#111827</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideArrowBorderBrush">#93C5FD</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideTargetBorderBrush">#60A5FA</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideCloseButtonHoverBackground">#24FFFFFF</SolidColorBrush>
-            <SolidColorBrush x:Key="GuideCloseButtonPressedBackground">#33FFFFFF</SolidColorBrush>
-        </ResourceDictionary>
-    </ResourceDictionary.ThemeDictionaries>
-
-    <BoxShadows x:Key="GuideCardBoxShadow">0 8 28 0 #33000000</BoxShadows>
+    <StaticResource x:Key="GuideCardBackground" ResourceKey="SemiColorBackground0" />
+    <StaticResource x:Key="GuideCardBorderBrush" ResourceKey="SemiColorBorder" />
+    <StaticResource x:Key="GuideTextForeground" ResourceKey="SemiColorText0" />
+    <StaticResource x:Key="GuideSecondaryTextForeground" ResourceKey="SemiColorText2" />
+    <StaticResource x:Key="GuideIndicatorBrush" ResourceKey="SemiColorFill2" />
+    <StaticResource x:Key="GuidePrimaryBrush" ResourceKey="SemiColorPrimary" />
+    <StaticResource x:Key="GuidePrimaryHoverBrush" ResourceKey="SemiColorPrimaryPointerover" />
+    <StaticResource x:Key="GuidePrimaryPressedBrush" ResourceKey="SemiColorPrimaryActive" />
+    <StaticResource x:Key="GuidePrimaryForeground" ResourceKey="SemiColorWhite" />
+    <StaticResource x:Key="GuideArrowBorderBrush" ResourceKey="SemiColorPrimaryLightActive" />
+    <StaticResource x:Key="GuideTargetBorderBrush" ResourceKey="SemiColorPrimary" />
+    <StaticResource x:Key="GuideCloseButtonHoverBackground" ResourceKey="SemiColorFill0" />
+    <StaticResource x:Key="GuideCloseButtonPressedBackground" ResourceKey="SemiColorFill1" />
+    <StaticResource x:Key="GuideCardBoxShadow" ResourceKey="SemiShadowElevated" />
 
     <ControlTheme x:Key="{x:Type codewf:DefaultGuideIndicator}" TargetType="codewf:DefaultGuideIndicator">
         <Setter Property="IndicatorSize" Value="6" />
@@ -60,12 +40,12 @@
     </ControlTheme>
 
     <ControlTheme x:Key="GuidePrimaryActionButton" TargetType="Button">
-        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="MinHeight" Value="{StaticResource SemiHeightControlDefault}" />
         <Setter Property="Padding" Value="12,6" />
         <Setter Property="Background" Value="{DynamicResource GuidePrimaryBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource GuidePrimaryBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="BorderThickness" Value="{StaticResource SemiBorderThicknessControl}" />
+        <Setter Property="CornerRadius" Value="{StaticResource SemiBorderRadiusSmall}" />
         <Setter Property="Foreground" Value="{DynamicResource GuidePrimaryForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -146,9 +126,9 @@
                                 Padding="18"
                                 Background="{DynamicResource GuideCardBackground}"
                                 BorderBrush="{DynamicResource GuideCardBorderBrush}"
-                                BorderThickness="1"
+                                BorderThickness="{StaticResource SemiBorderThicknessControl}"
                                 BoxShadow="{DynamicResource GuideCardBoxShadow}"
-                                CornerRadius="8"
+                                CornerRadius="{StaticResource SemiBorderRadiusMedium}"
                                 Focusable="True">
                                 <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="12">
                                     <Grid ColumnDefinitions="*,Auto">
@@ -278,7 +258,7 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="CornerRadius" Value="{StaticResource SemiBorderRadiusMedium}" />
             <Setter Property="Foreground" Value="{DynamicResource GuideSecondaryTextForeground}" />
         </Style>
 

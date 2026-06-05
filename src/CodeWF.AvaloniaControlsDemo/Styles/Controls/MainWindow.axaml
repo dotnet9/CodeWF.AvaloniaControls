@@ -1,0 +1,32 @@
+<Styles xmlns="https://github.com/avaloniaui">
+    <Style Selector="Border.Panel">
+        <Setter Property="Background" Value="{DynamicResource ShowcasePanelBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="14" />
+    </Style>
+    <Style Selector="TextBlock.Caption">
+        <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
+    </Style>
+    <Style Selector="TextBlock.Title">
+        <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+    </Style>
+    <Style Selector="TabItem">
+        <Setter Property="Padding" Value="16,12" />
+        <Setter Property="MinWidth" Value="178" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBox.SearchBox">
+        <Setter Property="Height" Value="38" />
+        <Setter Property="Background" Value="{DynamicResource ShowcaseInputBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+    </Style>
+    <Style Selector="ComboBox.TitleBarPicker">
+        <Setter Property="MinWidth" Value="150" />
+        <Setter Property="Height" Value="34" />
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+</Styles>

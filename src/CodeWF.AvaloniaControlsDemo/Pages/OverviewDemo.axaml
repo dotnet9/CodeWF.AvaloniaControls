@@ -9,22 +9,6 @@
     d:DesignHeight="520"
     d:DesignWidth="900"
     mc:Ignorable="d">
-    <UserControl.Styles>
-        <Style Selector="TextBlock.Caption">
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-        </Style>
-        <Style Selector="TextBlock.Title">
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
-        </Style>
-        <Style Selector="TextBlock.RowLabel">
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
-        </Style>
-    </UserControl.Styles>
-
     <Border Padding="22"
             Background="{DynamicResource ShowcaseCardBackground}"
             BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"

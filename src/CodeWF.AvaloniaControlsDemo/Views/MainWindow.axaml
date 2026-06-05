@@ -58,40 +58,13 @@
                            TextWrapping="Wrap" />
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="ThemeSelectionTemplate" x:DataType="vm:ShowcaseThemeOption">
+            <TextBlock VerticalAlignment="Center"
+                       FontWeight="SemiBold"
+                       Text="{Binding DisplayName}"
+                       TextTrimming="CharacterEllipsis" />
+        </DataTemplate>
     </codewf:CodeWFWindow.Resources>
-
-    <codewf:CodeWFWindow.Styles>
-        <Style Selector="Border.Panel">
-            <Setter Property="Background" Value="{DynamicResource ShowcasePanelBackground}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="14" />
-        </Style>
-        <Style Selector="TextBlock.Caption">
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
-        </Style>
-        <Style Selector="TextBlock.Title">
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
-        </Style>
-        <Style Selector="TabItem">
-            <Setter Property="Padding" Value="16,12" />
-            <Setter Property="MinWidth" Value="178" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-        </Style>
-        <Style Selector="TextBox.SearchBox">
-            <Setter Property="Height" Value="38" />
-            <Setter Property="Background" Value="{DynamicResource ShowcaseInputBackground}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseBorderBrush}" />
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
-        </Style>
-        <Style Selector="ComboBox.TitleBarPicker">
-            <Setter Property="MinWidth" Value="150" />
-            <Setter Property="Height" Value="34" />
-            <Setter Property="Padding" Value="8,4" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-        </Style>
-    </codewf:CodeWFWindow.Styles>
 
     <codewf:CodeWFWindow.LeftContent>
         <Grid Height="60"
@@ -140,11 +113,18 @@
                           SelectionBoxItemTemplate="{StaticResource LanguageSelectionTemplate}" />
             </StackPanel>
 
-            <ToggleSwitch MinWidth="100"
-                          VerticalAlignment="Center"
-                          IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
-                          OffContent="{i18n:I18n {x:Static mainLangs:MainWindow.ThemeLight}}"
-                          OnContent="{i18n:I18n {x:Static mainLangs:MainWindow.ThemeDark}}" />
+            <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                <TextBlock Classes="Caption"
+                           VerticalAlignment="Center"
+                           FontSize="12"
+                           FontWeight="SemiBold"
+                           Text="主题" />
+                <ComboBox Classes="TitleBarPicker"
+                          ItemTemplate="{StaticResource ThemeSelectionTemplate}"
+                          ItemsSource="{Binding ThemeOptions}"
+                          SelectedItem="{Binding SelectedTheme, Mode=TwoWay}"
+                          SelectionBoxItemTemplate="{StaticResource ThemeSelectionTemplate}" />
+            </StackPanel>
         </StackPanel>
     </codewf:CodeWFWindow.RightContent>
 

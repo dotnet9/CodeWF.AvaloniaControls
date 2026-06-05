@@ -15,17 +15,6 @@
     <UserControl.DataContext>
         <vm:ColumnDisplayEditorDemoViewModel />
     </UserControl.DataContext>
-    <UserControl.Styles>
-        <Style Selector="TextBlock.Caption">
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-        </Style>
-        <Style Selector="TextBlock.Title">
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-        </Style>
-    </UserControl.Styles>
-
     <Grid RowDefinitions="Auto,*" RowSpacing="14">
         <Border Padding="16"
                 Background="{DynamicResource ShowcaseSubtleBackground}"

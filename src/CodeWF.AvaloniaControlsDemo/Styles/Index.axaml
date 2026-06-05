@@ -1,0 +1,27 @@
+<Styles xmlns="https://github.com/avaloniaui">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <MergeResourceInclude Source="Resources/Palette.axaml" />
+                <MergeResourceInclude Source="Resources/Brushes.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <StyleInclude Source="Controls/WindowChrome.axaml" />
+    <StyleInclude Source="Controls/MainWindow.axaml" />
+    <StyleInclude Source="Pages/Common.axaml" />
+    <StyleInclude Source="Pages/AnimatedImageDemo.axaml" />
+    <StyleInclude Source="Pages/ColumnDisplayEditorDemo.axaml" />
+    <StyleInclude Source="Pages/GuideDemo.axaml" />
+    <StyleInclude Source="Pages/MarkupExtensionsDemo.axaml" />
+    <StyleInclude Source="Pages/OverviewDemo.axaml" />
+    <StyleInclude Source="Pages/StatusBadgeDemo.axaml" />
+    <StyleInclude Source="Pages/StatusCardDemo.axaml" />
+    <StyleInclude Source="Pages/TabControlDemo.axaml" />
+    <StyleInclude Source="Pages/TestNoneWindowDemo.axaml" />
+    <StyleInclude Source="Pages/TransferDemo.axaml" />
+    <StyleInclude Source="Pages/VComboBoxDemo.axaml" />
+    <StyleInclude Source="Windows/CodeWFWindowServiceConsoleDemo.axaml" />
+    <StyleInclude Source="Windows/CodeWFWindowStandardDemo.axaml" />
+</Styles>

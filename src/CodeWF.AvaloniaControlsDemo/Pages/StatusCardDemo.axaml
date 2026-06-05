@@ -9,32 +9,6 @@
              d:DesignWidth="920"
              d:DesignHeight="560"
              x:Class="CodeWF.AvaloniaControlsDemo.Pages.StatusCardDemo">
-    <UserControl.Styles>
-        <Style Selector="TextBlock.Caption">
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-        </Style>
-        <Style Selector="Border.SurfaceCard">
-            <Setter Property="Background" Value="{DynamicResource ShowcaseCardBackground}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="12" />
-            <Setter Property="Padding" Value="18" />
-        </Style>
-        <Style Selector="TextBlock.PanelTitle">
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
-        </Style>
-        <Style Selector="Border.HealthRow">
-            <Setter Property="Padding" Value="12" />
-            <Setter Property="Background" Value="{DynamicResource ShowcaseSubtleBackground}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="10" />
-        </Style>
-    </UserControl.Styles>
-
     <Grid RowDefinitions="Auto,*" RowSpacing="14">
         <Border Padding="16"
                 Background="{DynamicResource ShowcaseSubtleBackground}"

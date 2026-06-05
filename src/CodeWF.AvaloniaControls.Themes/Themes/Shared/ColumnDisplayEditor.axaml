@@ -1,5 +1,5 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="ColumnDisplayEditorDragHandleForeground" Color="#8C8C8C" />
-    <SolidColorBrush x:Key="ColumnDisplayEditorDropPreviewBrush" Color="#1677FF" />
+    <StaticResource x:Key="ColumnDisplayEditorDragHandleForeground" ResourceKey="SemiColorText2" />
+    <StaticResource x:Key="ColumnDisplayEditorDropPreviewBrush" ResourceKey="SemiColorPrimary" />
 </ResourceDictionary>

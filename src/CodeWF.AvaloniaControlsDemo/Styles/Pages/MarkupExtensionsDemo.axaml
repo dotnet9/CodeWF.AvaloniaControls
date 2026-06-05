@@ -1,0 +1,16 @@
+<Styles xmlns="https://github.com/avaloniaui">
+    <Style Selector="TextBlock.SectionTitle">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+    </Style>
+    <Style Selector="Border.Panel">
+        <Setter Property="Background" Value="{DynamicResource ShowcaseCardBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="14" />
+    </Style>
+    <Style Selector="RadioButton">
+        <Setter Property="Margin" Value="0,0,14,0" />
+    </Style>
+</Styles>

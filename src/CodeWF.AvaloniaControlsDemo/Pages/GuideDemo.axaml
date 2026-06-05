@@ -8,32 +8,6 @@
     d:DesignHeight="640"
     d:DesignWidth="960"
     mc:Ignorable="d">
-    <UserControl.Styles>
-        <Style Selector="Border.SurfaceCard">
-            <Setter Property="Background" Value="{DynamicResource ShowcaseCardBackground}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="12" />
-            <Setter Property="Padding" Value="18" />
-        </Style>
-        <Style Selector="TextBlock.PanelTitle">
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
-        </Style>
-        <Style Selector="TextBlock.Caption">
-            <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-        </Style>
-        <Style Selector="Border.PreviewTile">
-            <Setter Property="MinHeight" Value="88" />
-            <Setter Property="Padding" Value="14" />
-            <Setter Property="Background" Value="{DynamicResource ShowcaseSubtleBackground}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ShowcaseSubtleBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="10" />
-        </Style>
-    </UserControl.Styles>
-
     <Grid>
         <Grid RowDefinitions="Auto,*" RowSpacing="14">
             <Border
