@@ -4,5 +4,5 @@
     <StaticResource x:Key="CodeWFWindowForeground" ResourceKey="WindowDefaultForeground" />
     <StaticResource x:Key="CodeWFWindowTitleBarBackground" ResourceKey="TitleBarBackground" />
     <StaticResource x:Key="CodeWFWindowTitleBarForeground" ResourceKey="CaptionButtonForeground" />
-    <StaticResource x:Key="CodeWFWindowTitleBarBorderBrush" ResourceKey="SemiColorBorder" />
+    <StaticResource x:Key="CodeWFWindowTitleBarBorderBrush" ResourceKey="WindowBorderBrush" />
 </ResourceDictionary>
