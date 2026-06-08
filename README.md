@@ -7,6 +7,13 @@
 
 这是一个基于 .NET 11 与 Avalonia 12 的开源控件仓库，包含可复用类库以及可直接运行的示例工程。
 
+## 仓库规范
+
+- 当前版本：`12.0.4.11`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
+- NuGet 包项目统一支持 `net8.0;net10.0`；Demo、App、测试与内部应用项目统一使用 `net11.0` / `net11.0-windows`。
+- 根目录 `logo.svg`、`logo.png`、`logo.ico` 是唯一图标源，子工程只通过 MSBuild `Link` 引用，不维护图标副本。
+- 运行时帮助、Markdown 示例、内置备忘录、设计说明等业务文档按功能保留；仓库级入口文档使用根目录 `README.md` 和 `UpdateLog.md`。
+
 ## 安装
 
 ```powershell
@@ -154,8 +161,7 @@ private void DynamicGuide_OnStepOpening(object? sender, GuideStepEventArgs e)
 
 ## 更新日志
 
-- 仓库级变更记录在根目录 `CHANGELOG.md`
-- 每个工程目录下也都保留独立 `CHANGELOG.md`，用于记录各自类库或示例的变更历史
+- 变更记录统一维护在根目录 `UpdateLog.md`，不再拆分工程级更新日志。
 
 ## 开源约束
 

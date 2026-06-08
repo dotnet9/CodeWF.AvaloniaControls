@@ -1,22 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<Title>CodeWF.AvaloniaControls</Title>
-		<TargetFrameworks>net8.0;net9.0;net10.0;net11.0</TargetFrameworks>
-		<Version>$(CodeWFAvaloniaControlsVersion)</Version>
-		<Nullable>enable</Nullable>
-		<LangVersion>latest</LangVersion>
-		<OutputType>Library</OutputType>
-		<IsPackable>true</IsPackable>
-		<Description>Avalonia custom control core library for CodeWF controls. It defines control APIs, state models, helpers, and drawing logic; concrete templates and visual resources are provided by CodeWF.AvaloniaControls.Themes.</Description>
-		<PackageIcon>logo.png</PackageIcon>
-		<PackageTags>avalonia ui,controls,custom</PackageTags>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Avalonia" />
-	</ItemGroup>
-
+  <PropertyGroup>
+    <Title>CodeWF.AvaloniaControls</Title>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <OutputType>Library</OutputType>
+    <IsPackable>true</IsPackable>
+    <Description>Avalonia custom control core library for CodeWF controls. It defines control APIs, state models, helpers, and drawing logic; concrete templates and visual resources are provided by CodeWF.AvaloniaControls.Themes.</Description>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageTags>avalonia ui controls custom</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
+    <PackageReference Include="Avalonia" />
+  </ItemGroup>
 </Project>

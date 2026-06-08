@@ -1,5 +1,18 @@
 # 更新日志
 
+## 12.0.4.11 (2026-06-08)
+
+- 🔨[优化]-补齐根目录 logo.svg、logo.png、logo.ico 三件套，子工程通过 MSBuild Link 引用根 logo，避免维护多份图标副本。
+- 🔨[优化]-统一目标框架：NuGet 包项目支持 `net8.0;net10.0`，Demo、App、测试与内部应用项目升级到 `net11.0` / `net11.0-windows`。
+- 🔨[优化]-保留运行时帮助、Markdown 示例、内置备忘录和业务设计文档，仅收敛仓库级重复文档入口。
+
+## 12.0.4.10 (2026-06-08)
+
+- 统一版本号维护入口，只在仓库根目录 `Directory.Build.props` 中定义 `<Version>`。
+- 清理英文/双语文档入口，后续仅维护简体中文文档。
+- 完善 NuGet 发布配置，补充 Source Link、符号包和标签格式规范。
+
+
 ## 12.0.3.8 - 2026-05-24
 
 - 将控件库与主题库版本提升到 12.0.3.8。
@@ -142,7 +155,7 @@
 - 改进 Markdown 渲染，覆盖底部内边距、长链接换行、Markdig 任务/引用节点、增量压力测试和代码块选择可读性。
 - 移除 `MarkdownViewer.BasePath` 文件路径 API，使查看器表面保持由 Markdown 文本驱动。
 - 增强 Markdown 示例，新增中文增量替换、插入和追加压力场景。
-- 将 Markdown 示例加入一键发布脚本，提供 Windows/Linux 发布配置和 `net11.0-windows` 目标。
+- 将 Markdown 示例加入一键发布脚本，提供 Windows/Linux 发布配置和 `net10.0-windows` 目标。
 - 将 `CodeWF.AvaloniaControls` 拆分为核心控件包和新的 `CodeWF.AvaloniaControls.Themes` 模板/资源包。
 - 将 `StatusBadge` 从已废弃的 `CodeWF.Core` / `CodeWF.Themes` 包线迁移到 `CodeWF.AvaloniaControls`。
 - 从解决方案和脚本中移除已废弃的 `CodeWF.Core`、`CodeWF.Themes` 和 `CodeWF.Themes.StatusBadgeDemo` 工程。
@@ -151,7 +164,7 @@
 ## 12.0.2 - 2026-05-02
 
 - 仓库切换为中央 NuGet 包管理，使用 `Directory.Packages.props`。
-- 解决方案迁移到 `.slnx`，并通过 `global.json` 固定 .NET 11 preview SDK。
+- 解决方案迁移到 `.slnx`，SDK 选择交给本机或 CI 环境，不再维护 `global.json`。
 - 仓库基线升级到 .NET 11 和 Avalonia 12 包生态。
 - 将仓库重组为更适合开源的目录结构：所有工程物理上位于 `src/` 下，示例应用在 `.slnx` 中按逻辑分组。
 - 新增 `CodeWF.AvaloniaControls.ProDataGrid` 包，以及 `CodeWF.AvaloniaControls.ProDataGridShowcase` 和 `CodeWF.AvaloniaControls.ProDataGridPerformanceDemo` 示例工程。
@@ -159,8 +172,8 @@
 - 新增独立的 `CodeWF.AvaloniaControls.ProDataGridPerformanceDemo` 示例，用于 Avalonia 12 大表格页签与文档切换验证。
 - 新增根目录 `pack.bat` 脚本，用于一键还原、构建和 NuGet 打包。
 - 新增 `publish_all.bat` 和 `publishbase.bat`，用于一键发布示例。
-- 在仓库各工程中新增独立 `CHANGELOG.md` 文件。
-- 通过 `Directory.Build.props` 和 `Directory.Build.targets` 统一公共打包元数据，以及根 README/CHANGELOG 注入。
+- 在仓库各工程中新增独立 `UpdateLog.md` 文件。
+- 通过 `Directory.Build.props` 和 `Directory.Build.targets` 统一公共打包元数据，以及根 README/UpdateLog 注入。
 
 ## 11.3.14.1 - 2026-04-29
 
@@ -181,3 +194,9 @@
 ## 0.1.0.0 - 2025-06-28
 
 - 新增最初的 `CodeWF.AvaloniaControls` TabControl 扩展包。
+## 2026-06-08 仓库规范整理
+
+- 统一文档维护入口：每个仓库只保留根目录 `README.md` 和根目录 `UpdateLog.md`，清理重复日志、英文文档和语言切换入口。
+- 统一版本维护入口：包版本只在仓库根目录 `Directory.Build.props` 的 `<Version>` 节点维护，移除散落的程序集版本配置。
+- 不再维护 `global.json`，SDK 选择交给本机或 CI 环境；NuGet 包和应用的目标框架在项目文件中明确声明。
+- 统一 NuGet 包文档入口：包 README 统一引用仓库根 `README.md`，更新日志统一引用仓库根 `UpdateLog.md`。

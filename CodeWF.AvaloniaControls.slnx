@@ -1,23 +1,22 @@
 <Solution>
-  <Folder Name="/solution/">
+  <Folder Name="/demos/">
+    <Project Path="src/CodeWF.AvaloniaControlsDemo/CodeWF.AvaloniaControlsDemo.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
-    <File Path="CHANGELOG.md" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
-    <File Path="global.json" />
     <File Path="logo.ico" />
     <File Path="logo.png" />
     <File Path="logo.svg" />
     <File Path="pack.bat" />
-    <File Path="publishbase.bat" />
     <File Path="Publish.Common.pubxml" />
+    <File Path="publishbase.bat" />
     <File Path="publish_all.bat" />
     <File Path="publish_AvaloniaControls.bat" />
     <File Path="README.md" />
     <File Path="UpdateAssemblyVersion.ps1" />
-  </Folder>
-  <Folder Name="/demos/">
-    <Project Path="src/CodeWF.AvaloniaControlsDemo/CodeWF.AvaloniaControlsDemo.csproj" />
+    <File Path="UpdateLog.md" />
   </Folder>
   <Project Path="src/CodeWF.AvaloniaControls.Themes/CodeWF.AvaloniaControls.Themes.csproj" />
   <Project Path="src/CodeWF.AvaloniaControls/CodeWF.AvaloniaControls.csproj" />
