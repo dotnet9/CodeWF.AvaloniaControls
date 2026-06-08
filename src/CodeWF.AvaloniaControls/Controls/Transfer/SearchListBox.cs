@@ -1,18 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Threading;
 using CodeWF.AvaloniaControls.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
 
 namespace CodeWF.AvaloniaControls.Controls;
 
 public class SearchListBox : TemplatedControl
 {
+    #region 字段
+
     private readonly DispatcherTimer _searchTimer;
     private ListBox? _listBox;
     private TextBox? _searchBox;
@@ -20,6 +22,10 @@ public class SearchListBox : TemplatedControl
     private string? _searchKey;
     private int _searchCount;
     private int _totalCount;
+
+    #endregion 字段
+
+    #region 构造
 
     static SearchListBox()
     {
@@ -39,7 +45,17 @@ public class SearchListBox : TemplatedControl
         };
     }
 
+    #endregion 构造
+
+    #region 事件
+
     public event Action<object?, TappedEventArgs>? ListItemDoubleTapped;
+
+    public event Action<object?, SelectionChangedEventArgs>? ListSelectionChanged;
+
+    #endregion 事件
+
+    #region 数据源属性
 
     public static readonly StyledProperty<RangeObservableCollection<string>?> ItemsSourceProperty =
         AvaloniaProperty.Register<SearchListBox, RangeObservableCollection<string>?>(nameof(ItemsSource));
@@ -49,6 +65,14 @@ public class SearchListBox : TemplatedControl
         get => GetValue(ItemsSourceProperty);
         set => SetValue(ItemsSourceProperty, value);
     }
+
+    public RangeObservableCollection<string> BindingItemsSource { get; } = new();
+
+    public List<string>? SelectedItems => _listBox?.SelectedItems?.Cast<string>().ToList();
+
+    #endregion 数据源属性
+
+    #region 计数属性
 
     public static readonly DirectProperty<SearchListBox, int> TotalCountProperty =
         AvaloniaProperty.RegisterDirect<SearchListBox, int>(nameof(TotalCount), box => box.TotalCount);
@@ -68,9 +92,9 @@ public class SearchListBox : TemplatedControl
         private set => SetAndRaise(SearchCountProperty, ref _searchCount, value);
     }
 
-    public RangeObservableCollection<string> BindingItemsSource { get; } = new();
+    #endregion 计数属性
 
-    public List<string>? SelectedItems => _listBox?.SelectedItems?.Cast<string>().ToList();
+    #region 集合操作
 
     public void AddRange(IEnumerable<string>? items)
     {
@@ -106,10 +130,44 @@ public class SearchListBox : TemplatedControl
         SearchData();
     }
 
+    #endregion 集合操作
+
+    #region 模板生命周期
+
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
 
+        DetachTemplateEvents();
+        ResolveTemplateParts(e);
+        AttachTemplateEvents();
+        SearchData();
+    }
+
+    private void ResolveTemplateParts(TemplateAppliedEventArgs e)
+    {
+        _searchBox = e.NameScope.Find<TextBox>("PART_SearchBox");
+        _listBox = e.NameScope.Find<ListBox>("PART_ListBox");
+        _searchKey = _searchBox?.Text?.Trim().ToLowerInvariant();
+    }
+
+    private void AttachTemplateEvents()
+    {
+        if (_searchBox is not null)
+        {
+            _searchBox.TextChanged += SearchBox_OnTextChanged;
+            _searchBox.KeyUp += SearchBox_OnKeyUp;
+        }
+
+        if (_listBox is not null)
+        {
+            _listBox.DoubleTapped += ListBox_OnDoubleTapped;
+            _listBox.SelectionChanged += ListBox_OnSelectionChanged;
+        }
+    }
+
+    private void DetachTemplateEvents()
+    {
         if (_searchBox is not null)
         {
             _searchBox.TextChanged -= SearchBox_OnTextChanged;
@@ -119,25 +177,13 @@ public class SearchListBox : TemplatedControl
         if (_listBox is not null)
         {
             _listBox.DoubleTapped -= ListBox_OnDoubleTapped;
+            _listBox.SelectionChanged -= ListBox_OnSelectionChanged;
         }
-
-        _searchBox = e.NameScope.Find<TextBox>("PART_SearchBox");
-        _listBox = e.NameScope.Find<ListBox>("PART_ListBox");
-
-        if (_searchBox is not null)
-        {
-            _searchBox.TextChanged += SearchBox_OnTextChanged;
-            _searchBox.KeyUp += SearchBox_OnKeyUp;
-            _searchKey = _searchBox.Text?.Trim().ToLowerInvariant();
-        }
-
-        if (_listBox is not null)
-        {
-            _listBox.DoubleTapped += ListBox_OnDoubleTapped;
-        }
-
-        SearchData();
     }
+
+    #endregion 模板生命周期
+
+    #region 数据源观察
 
     private void OnItemsSourceChanged()
     {
@@ -161,6 +207,10 @@ public class SearchListBox : TemplatedControl
         SearchData();
     }
 
+    #endregion 数据源观察
+
+    #region 搜索
+
     private void SearchBox_OnKeyUp(object? sender, KeyEventArgs e)
     {
         UpdateSearchKey(sender);
@@ -182,11 +232,9 @@ public class SearchListBox : TemplatedControl
         _searchTimer.Start();
     }
 
-    private void ListBox_OnDoubleTapped(object? sender, TappedEventArgs e)
-    {
-        ListItemDoubleTapped?.Invoke(sender, e);
-    }
-
+    /// <summary>
+    /// 根据当前搜索关键字刷新绑定集合和筛选计数。
+    /// </summary>
     private void SearchData()
     {
         BindingItemsSource.Clear();
@@ -201,4 +249,20 @@ public class SearchListBox : TemplatedControl
         TotalCount = ItemsSource?.Count ?? 0;
         SearchCount = BindingItemsSource.Count;
     }
+
+    #endregion 搜索
+
+    #region 列表事件
+
+    private void ListBox_OnDoubleTapped(object? sender, TappedEventArgs e)
+    {
+        ListItemDoubleTapped?.Invoke(sender, e);
+    }
+
+    private void ListBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        ListSelectionChanged?.Invoke(sender, e);
+    }
+
+    #endregion 列表事件
 }

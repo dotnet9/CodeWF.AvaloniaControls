@@ -8,6 +8,7 @@
 
     <ControlTheme x:Key="{x:Type codewf:Transfer}" TargetType="codewf:Transfer">
         <ControlTheme.Resources>
+            <!-- 移动按钮资源 -->
             <x:Double x:Key="TransferActionButtonSize">46</x:Double>
             <ControlTheme x:Key="TransferActionButton" TargetType="Button">
                 <Setter Property="Width" Value="{StaticResource TransferActionButtonSize}" />
@@ -16,12 +17,12 @@
                 <Setter Property="MinHeight" Value="{StaticResource TransferActionButtonSize}" />
                 <Setter Property="Padding" Value="0" />
                 <Setter Property="Background" Value="Transparent" />
-                <Setter Property="BorderBrush" Value="{DynamicResource SemiColorBorder}" />
-                <Setter Property="BorderThickness" Value="{StaticResource SemiBorderThicknessControl}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="CornerRadius" Value="{StaticResource SemiBorderRadiusFull}" />
                 <Setter Property="Foreground" Value="{DynamicResource SemiColorText2}" />
-                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Stretch" />
                 <Setter Property="Template">
                     <ControlTemplate TargetType="Button">
                         <Border
@@ -49,14 +50,14 @@
                     <Setter Property="Foreground" Value="{DynamicResource SemiColorPrimaryActive}" />
                 </Style>
                 <Style Selector="^:disabled">
-                    <Setter Property="BorderBrush" Value="{DynamicResource SemiColorDisabledBorder}" />
-                    <Setter Property="Foreground" Value="{DynamicResource SemiColorDisabledText}" />
+                    <Setter Property="Opacity" Value="0.45" />
                 </Style>
             </ControlTheme>
         </ControlTheme.Resources>
         <Setter Property="Template">
             <ControlTemplate TargetType="codewf:Transfer">
                 <Grid ColumnDefinitions="*,92,*" ColumnSpacing="18">
+                    <!-- 左侧列表 -->
                     <Grid RowDefinitions="Auto,*" RowSpacing="10">
                         <TextBlock
                             FontSize="{DynamicResource SemiFontSizeHeader6}"
@@ -69,6 +70,7 @@
                             ItemsSource="{TemplateBinding LeftItemsSource}" />
                     </Grid>
 
+                    <!-- 中间分隔线 -->
                     <GridSplitter
                         Grid.Column="1"
                         Width="10"
@@ -94,6 +96,7 @@
                         </GridSplitter.Template>
                     </GridSplitter>
 
+                    <!-- 中间移动按钮 -->
                     <StackPanel
                         Grid.Column="1"
                         HorizontalAlignment="Center"
@@ -102,21 +105,24 @@
                         <Button
                             Name="PART_MoveLeftToRightButton"
                             Theme="{StaticResource TransferActionButton}">
-                            <PathIcon
-                                Width="24"
-                                Height="24"
-                                Data="{StaticResource SemiIconDoubleChevronRight}" />
+                            <Image
+                                Width="{StaticResource TransferActionButtonSize}"
+                                Height="{StaticResource TransferActionButtonSize}"
+                                Source="avares://CodeWF.AvaloniaControls.Themes/Assets/btn-arrow-r.png"
+                                Stretch="Fill" />
                         </Button>
                         <Button
                             Name="PART_MoveRightToLeftButton"
                             Theme="{StaticResource TransferActionButton}">
-                            <PathIcon
-                                Width="24"
-                                Height="24"
-                                Data="{StaticResource SemiIconDoubleChevronLeft}" />
+                            <Image
+                                Width="{StaticResource TransferActionButtonSize}"
+                                Height="{StaticResource TransferActionButtonSize}"
+                                Source="avares://CodeWF.AvaloniaControls.Themes/Assets/btn-arrow-l.png"
+                                Stretch="Fill" />
                         </Button>
                     </StackPanel>
 
+                    <!-- 右侧列表 -->
                     <Grid Grid.Column="2" RowDefinitions="Auto,*" RowSpacing="10">
                         <TextBlock
                             FontSize="{DynamicResource SemiFontSizeHeader6}"
