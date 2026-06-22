@@ -12,7 +12,7 @@ public partial class TrapezoidShapedTabItemBorder
         var y = adjustedRect.Bottom;
 
         // 左下角开始
-        ctx.BeginFigure(new Point(x, y), isFilled: true);
+        ctx.BeginFigure(new Point(x, y), true);
 
         // 左下角外圆
         if (radius.BottomLeft > 0)
@@ -87,7 +87,7 @@ public partial class TrapezoidShapedTabItemBorder
         var y = adjustedRect.Bottom;
 
         // 开始路径，左下角
-        ctx.BeginFigure(new Point(x, y), isFilled: true);
+        ctx.BeginFigure(new Point(x, y), true);
 
         // 左下角外圆角
         if (radius.BottomLeft > 0)
@@ -165,7 +165,7 @@ public partial class TrapezoidShapedTabItemBorder
         var y = adjustedRect.Bottom;
 
         // 开始路径，左下角
-        ctx.BeginFigure(new Point(x, y), isFilled: true);
+        ctx.BeginFigure(new Point(x, y), true);
 
         // 左下角外圆角
         if (radius.BottomLeft > 0)

@@ -30,12 +30,10 @@ public partial class NativeWindowBlobDemo : Window
         return points.ToArray();
     }
 
-    private static void AddCubic(List<Point> points, Point start, Point control1, Point control2, Point end, int segments)
+    private static void AddCubic(List<Point> points, Point start, Point control1, Point control2, Point end,
+        int segments)
     {
-        for (var i = 1; i <= segments; i++)
-        {
-            points.Add(Cubic(start, control1, control2, end, (double)i / segments));
-        }
+        for (var i = 1; i <= segments; i++) points.Add(Cubic(start, control1, control2, end, (double)i / segments));
     }
 
     private static Point Cubic(Point start, Point control1, Point control2, Point end, double t)
@@ -53,15 +51,9 @@ public partial class NativeWindowBlobDemo : Window
 
     private void Shape_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (e.Source is Button)
-        {
-            return;
-        }
+        if (e.Source is Button) return;
 
-        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
-        {
-            BeginMoveDrag(e);
-        }
+        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed) BeginMoveDrag(e);
     }
 
     private void Close_OnClick(object? sender, RoutedEventArgs e)

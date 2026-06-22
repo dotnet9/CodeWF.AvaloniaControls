@@ -41,15 +41,9 @@ public partial class TrapezoidShapedTabItemBorder : Control
     public override void Render(DrawingContext context)
     {
         base.Render(context);
-        if (BorderThickness < 1)
-        {
-            return;
-        }
+        if (BorderThickness < 1) return;
 
-        if (!TryGetTopTabContext(out var index, out var itemCount, out var radius))
-        {
-            return;
-        }
+        if (!TryGetTopTabContext(out var index, out var itemCount, out var radius)) return;
 
         var isFirst = index == 0;
         var isLast = index == itemCount - 1;
@@ -66,21 +60,15 @@ public partial class TrapezoidShapedTabItemBorder : Control
         using (var ctx = pathGeometry.Open())
         {
             if (isFirst && !isLast)
-            {
                 DrawTopFirstTabItemBorder(ctx, adjustedRect, radius, rect);
-            }
             else if (!isFirst && isLast)
-            {
                 DrawTopLastTabItemBorder(ctx, adjustedRect, radius, rect);
-            }
             else
-            {
                 DrawTopOtherTabItemBorder(ctx, adjustedRect, radius, rect);
-            }
 
             // 底边消失（不绘制）
             // 这里直接跳过底边路径，确保底边消失
-            ctx.EndFigure(isClosed: true);
+            ctx.EndFigure(true);
         }
 
         // 绘制边框

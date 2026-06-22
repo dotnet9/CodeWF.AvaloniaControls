@@ -151,4 +151,3 @@ public class GuideStep : ContentControl, IGuideStepOption
         set => SetValue(OpeningCommandParameterProperty, value);
     }
 }
-

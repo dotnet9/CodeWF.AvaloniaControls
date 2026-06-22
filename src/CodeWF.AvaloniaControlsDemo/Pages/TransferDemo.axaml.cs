@@ -1,11 +1,11 @@
+using System;
+using System.ComponentModel;
+using System.Globalization;
 using Avalonia.Controls;
 using CodeWF.AvaloniaControls.Controls;
 using CodeWF.AvaloniaControls.Extensions;
 using CodeWF.AvaloniaControlsDemo.Services;
 using Lang.Avalonia;
-using System;
-using System.ComponentModel;
-using System.Globalization;
 using PageLangs = Showcase.Pages.TransferDemo;
 
 namespace CodeWF.AvaloniaControlsDemo.Pages;
@@ -19,7 +19,7 @@ public partial class TransferDemo : UserControl, INotifyPropertyChanged
     {
         InitializeComponent();
         _myTransfer = this.FindControl<Transfer>("MyTransfer")
-            ?? throw new InvalidOperationException("Transfer control 'MyTransfer' was not found.");
+                      ?? throw new InvalidOperationException("Transfer control 'MyTransfer' was not found.");
 
         RightItems.CollectionChanged += (_, _) => UpdateSelectedCount();
         I18nManager.Instance.CultureChanged += (_, _) => ReloadLocalizedData();
@@ -35,10 +35,7 @@ public partial class TransferDemo : UserControl, INotifyPropertyChanged
         get => _selectedInfo;
         set
         {
-            if (_selectedInfo == value)
-            {
-                return;
-            }
+            if (_selectedInfo == value) return;
 
             _selectedInfo = value;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedInfo)));

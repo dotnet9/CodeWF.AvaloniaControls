@@ -13,15 +13,9 @@ public partial class NativeWindowTallTitleBarDemo : Window
 
     private void TitleBar_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (e.Source is Button)
-        {
-            return;
-        }
+        if (e.Source is Button) return;
 
-        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
-        {
-            BeginMoveDrag(e);
-        }
+        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed) BeginMoveDrag(e);
     }
 
     private void Minimize_OnClick(object? sender, RoutedEventArgs e)

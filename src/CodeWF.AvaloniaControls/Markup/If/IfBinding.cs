@@ -10,13 +10,13 @@ public class IfBinding : MarkupExtension
 {
     private readonly MultiBinding _binding = new();
 
-    public int ConditionIndex = Constants.InvalidIndex;
-    public int TrueIndex = Constants.InvalidIndex;
-    public int FalseIndex = Constants.InvalidIndex;
-
     public object? ConditionContent;
-    public object? TrueContent;
+
+    public int ConditionIndex = Constants.InvalidIndex;
     public object? FalseContent;
+    public int FalseIndex = Constants.InvalidIndex;
+    public object? TrueContent;
+    public int TrueIndex = Constants.InvalidIndex;
 
     public IfBinding()
     {
@@ -61,10 +61,7 @@ public class IfBinding : MarkupExtension
     internal object? Evaluate(IList<object?> values)
     {
         var condition = ResolveValue(values, ConditionIndex, ConditionContent);
-        if (ReferenceEquals(condition, BindingOperations.DoNothing))
-        {
-            return BindingOperations.DoNothing;
-        }
+        if (ReferenceEquals(condition, BindingOperations.DoNothing)) return BindingOperations.DoNothing;
 
         return condition is true
             ? ResolveValue(values, TrueIndex, TrueContent)
@@ -73,20 +70,14 @@ public class IfBinding : MarkupExtension
 
     internal static object? ResolveValue(IList<object?> values, int index, object? content)
     {
-        if (index == Constants.InvalidIndex)
-        {
-            return content;
-        }
+        if (index == Constants.InvalidIndex) return content;
 
         return index < values.Count ? values[index] : BindingOperations.DoNothing;
     }
 
     private void SetProperty<T>(T value, ref int index, out T? storage)
     {
-        if (index != Constants.InvalidIndex)
-        {
-            throw new InvalidOperationException("Cannot reset the value.");
-        }
+        if (index != Constants.InvalidIndex) throw new InvalidOperationException("Cannot reset the value.");
 
         if (value is BindingBase binding)
         {

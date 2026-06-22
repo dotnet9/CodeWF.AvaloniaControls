@@ -16,4 +16,3 @@ public enum GuidePlacementMode
     BottomLeft,
     BottomRight
 }
-

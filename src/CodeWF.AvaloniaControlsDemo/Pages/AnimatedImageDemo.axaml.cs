@@ -22,9 +22,10 @@ public partial class AnimatedImageDemo : UserControl
         Timeout = TimeSpan.FromSeconds(5)
     };
 
-    private NetworkStatusKind _networkStatusKind = NetworkStatusKind.None;
     private CancellationTokenSource? _networkGifLoadCts;
     private MemoryStream? _networkGifStream;
+
+    private NetworkStatusKind _networkStatusKind = NetworkStatusKind.None;
 
     public AnimatedImageDemo()
     {
@@ -36,10 +37,7 @@ public partial class AnimatedImageDemo : UserControl
     {
         base.OnAttachedToVisualTree(e);
 
-        if (_networkGifLoadCts is not null)
-        {
-            return;
-        }
+        if (_networkGifLoadCts is not null) return;
 
         _networkGifLoadCts = new CancellationTokenSource();
         _ = LoadNetworkGifAsync(_networkGifLoadCts.Token);

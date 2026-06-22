@@ -5,4 +5,3 @@ public enum GuideStyleType
     Default,
     Primary
 }
-

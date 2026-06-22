@@ -27,19 +27,22 @@
                            Classes="Caption"
                            Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.ControlSamplesDesc}}" />
 
-                <TextBlock Grid.Row="1" Classes="RowLabel" Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.MarkupExtensions}}" />
+                <TextBlock Grid.Row="1" Classes="RowLabel"
+                           Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.MarkupExtensions}}" />
                 <TextBlock Grid.Row="1"
                            Grid.Column="1"
                            Classes="Caption"
                            Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.MarkupExtensionsDesc}}" />
 
-                <TextBlock Grid.Row="2" Classes="RowLabel" Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.WindowSamples}}" />
+                <TextBlock Grid.Row="2" Classes="RowLabel"
+                           Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.WindowSamples}}" />
                 <TextBlock Grid.Row="2"
                            Grid.Column="1"
                            Classes="Caption"
                            Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.WindowSamplesDesc}}" />
 
-                <TextBlock Grid.Row="3" Classes="RowLabel" Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.ThemeI18n}}" />
+                <TextBlock Grid.Row="3" Classes="RowLabel"
+                           Text="{i18n:I18n {x:Static pageLangs:OverviewDemo.ThemeI18n}}" />
                 <TextBlock Grid.Row="3"
                            Grid.Column="1"
                            Classes="Caption"

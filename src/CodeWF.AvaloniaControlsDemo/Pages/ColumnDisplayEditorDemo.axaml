@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:codewf="https://codewf.com"
              xmlns:i18n="https://codewf.com"
-             xmlns:local="clr-namespace:CodeWF.AvaloniaControlsDemo.Pages"
              xmlns:pageLangs="clr-namespace:Showcase.Pages"
              xmlns:vm="clr-namespace:CodeWF.AvaloniaControlsDemo.ViewModels"
              x:Class="CodeWF.AvaloniaControlsDemo.Pages.ColumnDisplayEditorDemo"
@@ -46,8 +45,10 @@
             <Border Grid.Column="2" Theme="{StaticResource CardBorder}" Padding="18">
                 <Grid RowDefinitions="Auto,*" RowSpacing="12">
                     <StackPanel Spacing="5">
-                        <TextBlock Classes="Title" FontSize="16" Text="{i18n:I18n {x:Static pageLangs:ColumnDisplayEditorDemo.CurrentOrderedItems}}" />
-                        <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:ColumnDisplayEditorDemo.CurrentOrderedItemsDesc}}" />
+                        <TextBlock Classes="Title" FontSize="16"
+                                   Text="{i18n:I18n {x:Static pageLangs:ColumnDisplayEditorDemo.CurrentOrderedItems}}" />
+                        <TextBlock Classes="Caption"
+                                   Text="{i18n:I18n {x:Static pageLangs:ColumnDisplayEditorDemo.CurrentOrderedItemsDesc}}" />
                     </StackPanel>
                     <TextBox Grid.Row="1"
                              AcceptsReturn="True"

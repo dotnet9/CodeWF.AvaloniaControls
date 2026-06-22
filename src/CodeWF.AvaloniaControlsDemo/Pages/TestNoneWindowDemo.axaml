@@ -40,7 +40,8 @@
             <Grid Grid.Row="1" ColumnDefinitions="*,*,*" ColumnSpacing="14">
                 <Border Classes="WindowDemoSection">
                     <StackPanel Spacing="12">
-                        <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:WindowDemo.NativeGroup}}" />
+                        <TextBlock Classes="SectionTitle"
+                                   Text="{i18n:I18n {x:Static pageLangs:WindowDemo.NativeGroup}}" />
                         <TextBlock Classes="SectionCaption"
                                    Text="{i18n:I18n {x:Static pageLangs:WindowDemo.NativeDesc}}" />
                         <Button Classes="DemoAction"
@@ -77,7 +78,8 @@
 
                 <Border Grid.Column="2" Classes="WindowDemoSection">
                     <StackPanel Spacing="12">
-                        <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFGroup}}" />
+                        <TextBlock Classes="SectionTitle"
+                                   Text="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFGroup}}" />
                         <TextBlock Classes="SectionCaption"
                                    Text="{i18n:I18n {x:Static pageLangs:WindowDemo.CodeWFDesc}}" />
                         <Button Classes="DemoAction"

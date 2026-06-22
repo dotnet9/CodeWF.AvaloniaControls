@@ -1,46 +1,43 @@
-﻿using Avalonia.Controls;
+﻿using System;
+using System.Collections.Generic;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using System;
-using System.Collections.Generic;
 
 namespace CodeWF.AvaloniaControls.Extensions;
 
 /// <summary>
-/// Window窗体键盘事件扩展类
-/// 提供【全局ESC关闭窗体】【Enter执行自定义回调】核心能力，支持忽略多行TextBox回车拦截
-/// 基于隧道模式实现，无视子控件焦点，窗体优先捕获按键事件
+///     Window窗体键盘事件扩展类
+///     提供【全局ESC关闭窗体】【Enter执行自定义回调】核心能力，支持忽略多行TextBox回车拦截
+///     基于隧道模式实现，无视子控件焦点，窗体优先捕获按键事件
 /// </summary>
 public static class WindowKeyInputExtension
 {
     /// <summary>
-    /// 窗体与按键事件处理器的映射缓存
-    /// 用于后续精准移除事件，防止内存泄漏与重复注销异常
+    ///     窗体与按键事件处理器的映射缓存
+    ///     用于后续精准移除事件，防止内存泄漏与重复注销异常
     /// </summary>
     private static readonly Dictionary<Window, EventHandler<KeyEventArgs>> _windowKeyDownEventCache = new();
 
     /// <summary>
-    /// 为窗体注册全局键盘按下事件（隧道模式）
-    /// 内置：ESC键关闭窗体 | Enter键执行自定义回调 | 可配置是否忽略TextBox控件回车
+    ///     为窗体注册全局键盘按下事件（隧道模式）
+    ///     内置：ESC键关闭窗体 | Enter键执行自定义回调 | 可配置是否忽略TextBox控件回车
     /// </summary>
     /// <param name="window">当前扩展的窗体实例</param>
     /// <param name="ignoreTextBoxEnter">是否忽略TextBox控件的Enter键触发（默认true）</param>
     /// <param name="enterCallback">Enter键触发的自定义回调方法（null则不响应Enter）</param>
     /// <exception cref="ArgumentNullException">窗体实例为null时抛出</exception>
     public static void RegisterGlobalKeyDownHandler(this Window window,
-                                                    bool ignoreTextBoxEnter = true,
-                                                    Action? enterCallback = null)
+        bool ignoreTextBoxEnter = true,
+        Action? enterCallback = null)
     {
         // 空值校验：杜绝传入null窗体导致的空引用异常
         if (window is null)
             throw new ArgumentNullException(nameof(window), "窗体实例不能为空，无法注册键盘事件");
 
         // 先移除旧事件：防止重复注册导致的事件多次触发问题
-        if (_windowKeyDownEventCache.ContainsKey(window))
-        {
-            window.RemoveGlobalKeyDownHandler();
-        }
+        if (_windowKeyDownEventCache.ContainsKey(window)) window.RemoveGlobalKeyDownHandler();
 
         // 构建按键事件处理器核心逻辑
         EventHandler<KeyEventArgs> keyDownHandler = (sender, e) =>
@@ -54,8 +51,8 @@ public static class WindowKeyInputExtension
     }
 
     /// <summary>
-    /// 移除窗体已注册的全局键盘按下事件
-    /// 配套RegisterGlobalKeyDownHandler使用，防止内存泄漏
+    ///     移除窗体已注册的全局键盘按下事件
+    ///     配套RegisterGlobalKeyDownHandler使用，防止内存泄漏
     /// </summary>
     /// <param name="window">当前扩展的窗体实例</param>
     /// <exception cref="ArgumentNullException">窗体实例为null时抛出</exception>
@@ -74,14 +71,15 @@ public static class WindowKeyInputExtension
     }
 
     /// <summary>
-    /// 内部核心：按键事件处理逻辑解耦封装
-    /// 分离事件注册与业务逻辑，提升代码可读性、可维护性
+    ///     内部核心：按键事件处理逻辑解耦封装
+    ///     分离事件注册与业务逻辑，提升代码可读性、可维护性
     /// </summary>
     /// <param name="window">目标窗体</param>
     /// <param name="e">键盘事件参数</param>
     /// <param name="ignoreTextBoxEnter">是否忽略TextBox回车</param>
     /// <param name="enterCallback">Enter自定义回调</param>
-    private static void HandleKeyDownEvent(Window window, KeyEventArgs e, bool ignoreTextBoxEnter, Action? enterCallback)
+    private static void HandleKeyDownEvent(Window window, KeyEventArgs e, bool ignoreTextBoxEnter,
+        Action? enterCallback)
     {
         // ========== 1. ESC键：无条件关闭窗体 ==========
         if (e.Key == Key.Escape)
@@ -104,8 +102,8 @@ public static class WindowKeyInputExtension
     }
 
     /// <summary>
-    /// 内部辅助：判断是否需要忽略当前TextBox控件的Enter键触发
-    /// 精准匹配【多行可换行TextBox】场景，放行其原生回车换行功能
+    ///     内部辅助：判断是否需要忽略当前TextBox控件的Enter键触发
+    ///     精准匹配【多行可换行TextBox】场景，放行其原生回车换行功能
     /// </summary>
     /// <param name="e">键盘事件参数</param>
     /// <param name="ignoreTextBoxEnter">外部配置的是否忽略开关</param>

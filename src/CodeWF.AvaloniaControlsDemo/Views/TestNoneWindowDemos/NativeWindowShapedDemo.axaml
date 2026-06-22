@@ -43,10 +43,11 @@
                  Fill="#FDE68A"
                  Opacity="0.9"
                  PointerPressed="Shape_OnPointerPressed" />
-        <Path Data="M 93 104 C 106 86 132 86 145 104 C 160 94 181 101 188 119 C 203 121 212 134 210 148 L 93 148 C 82 136 82 116 93 104 Z"
-              Fill="#FFFFFF"
-              Opacity="0.94"
-              PointerPressed="Shape_OnPointerPressed" />
+        <Path
+            Data="M 93 104 C 106 86 132 86 145 104 C 160 94 181 101 188 119 C 203 121 212 134 210 148 L 93 148 C 82 136 82 116 93 104 Z"
+            Fill="#FFFFFF"
+            Opacity="0.94"
+            PointerPressed="Shape_OnPointerPressed" />
         <Button Canvas.Left="286"
                 Canvas.Top="72"
                 Classes="WindowCaptionButton WindowCloseButton WindowShapeCloseButton"

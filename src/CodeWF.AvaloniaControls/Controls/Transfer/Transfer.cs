@@ -9,6 +9,22 @@ namespace CodeWF.AvaloniaControls.Controls;
 
 public class Transfer : TemplatedControl
 {
+    #region 按钮状态
+
+    /// <summary>
+    ///     移动按钮只在对应侧存在选中项时启用。
+    /// </summary>
+    private void UpdateButtonStates()
+    {
+        if (_moveLeftToRightButton is not null)
+            _moveLeftToRightButton.IsEnabled = _leftSearchListBox?.SelectedItems?.Count > 0;
+
+        if (_moveRightToLeftButton is not null)
+            _moveRightToLeftButton.IsEnabled = _rightSearchListBox?.SelectedItems?.Count > 0;
+    }
+
+    #endregion 按钮状态
+
     #region 字段
 
     private Button? _moveLeftToRightButton;
@@ -96,15 +112,9 @@ public class Transfer : TemplatedControl
             _rightSearchListBox.ListSelectionChanged += SearchListBox_OnListSelectionChanged;
         }
 
-        if (_moveLeftToRightButton is not null)
-        {
-            _moveLeftToRightButton.Click += MoveLeftToRightButton_OnClick;
-        }
+        if (_moveLeftToRightButton is not null) _moveLeftToRightButton.Click += MoveLeftToRightButton_OnClick;
 
-        if (_moveRightToLeftButton is not null)
-        {
-            _moveRightToLeftButton.Click += MoveRightToLeftButton_OnClick;
-        }
+        if (_moveRightToLeftButton is not null) _moveRightToLeftButton.Click += MoveRightToLeftButton_OnClick;
     }
 
     private void DetachTemplateEvents()
@@ -121,15 +131,9 @@ public class Transfer : TemplatedControl
             _rightSearchListBox.ListSelectionChanged -= SearchListBox_OnListSelectionChanged;
         }
 
-        if (_moveLeftToRightButton is not null)
-        {
-            _moveLeftToRightButton.Click -= MoveLeftToRightButton_OnClick;
-        }
+        if (_moveLeftToRightButton is not null) _moveLeftToRightButton.Click -= MoveLeftToRightButton_OnClick;
 
-        if (_moveRightToLeftButton is not null)
-        {
-            _moveRightToLeftButton.Click -= MoveRightToLeftButton_OnClick;
-        }
+        if (_moveRightToLeftButton is not null) _moveRightToLeftButton.Click -= MoveRightToLeftButton_OnClick;
     }
 
     #endregion 模板生命周期
@@ -190,24 +194,4 @@ public class Transfer : TemplatedControl
     }
 
     #endregion 事件处理
-
-    #region 按钮状态
-
-    /// <summary>
-    /// 移动按钮只在对应侧存在选中项时启用。
-    /// </summary>
-    private void UpdateButtonStates()
-    {
-        if (_moveLeftToRightButton is not null)
-        {
-            _moveLeftToRightButton.IsEnabled = _leftSearchListBox?.SelectedItems?.Count > 0;
-        }
-
-        if (_moveRightToLeftButton is not null)
-        {
-            _moveRightToLeftButton.IsEnabled = _rightSearchListBox?.SelectedItems?.Count > 0;
-        }
-    }
-
-    #endregion 按钮状态
 }

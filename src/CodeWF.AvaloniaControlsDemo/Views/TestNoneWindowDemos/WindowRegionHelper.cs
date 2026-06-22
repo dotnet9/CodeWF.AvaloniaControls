@@ -9,10 +9,7 @@ internal static class WindowRegionHelper
 {
     public static void ApplyEllipse(Window window, double x, double y, double width, double height, double padding = 0)
     {
-        if (!OperatingSystem.IsWindows())
-        {
-            return;
-        }
+        if (!OperatingSystem.IsWindows()) return;
 
         var scaling = window.RenderScaling;
         var region = CreateEllipticRgn(
@@ -31,28 +28,20 @@ internal static class WindowRegionHelper
 
     public static void ApplyPolygon(Window window, double padding, params Point[] points)
     {
-        if (!OperatingSystem.IsWindows() || points.Length < 3)
-        {
-            return;
-        }
+        if (!OperatingSystem.IsWindows() || points.Length < 3) return;
 
         points = InflateFromCenter(points, padding);
         var scaling = window.RenderScaling;
         var nativePoints = new NativePoint[points.Length];
         for (var i = 0; i < points.Length; i++)
-        {
             nativePoints[i] = new NativePoint(Scale(points[i].X, scaling), Scale(points[i].Y, scaling));
-        }
 
         ApplyRegion(window, CreatePolygonRgn(nativePoints, nativePoints.Length, 1));
     }
 
     private static Point[] InflateFromCenter(Point[] points, double padding)
     {
-        if (padding <= 0)
-        {
-            return points;
-        }
+        if (padding <= 0) return points;
 
         double centerX = 0;
         double centerY = 0;
@@ -83,16 +72,10 @@ internal static class WindowRegionHelper
 
     private static void ApplyRegion(Window window, IntPtr region)
     {
-        if (region == IntPtr.Zero)
-        {
-            return;
-        }
+        if (region == IntPtr.Zero) return;
 
         var handle = window.TryGetPlatformHandle()?.Handle ?? IntPtr.Zero;
-        if (handle == IntPtr.Zero || SetWindowRgn(handle, region, true) == 0)
-        {
-            DeleteObject(region);
-        }
+        if (handle == IntPtr.Zero || SetWindowRgn(handle, region, true) == 0) DeleteObject(region);
     }
 
     private static int Scale(double value, double scaling)

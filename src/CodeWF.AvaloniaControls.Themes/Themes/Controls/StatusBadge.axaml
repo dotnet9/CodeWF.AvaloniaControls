@@ -22,8 +22,8 @@
                     BorderThickness="1"
                     CornerRadius="{TemplateBinding CornerRadius}">
                     <Grid ColumnDefinitions="Auto auto">
-                        <Border 
-                            Name="PART_LeftTextBorder" 
+                        <Border
+                            Name="PART_LeftTextBorder"
                             CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource StatusBadgeLeftTextBorderCornerRadiusConverter}}"
                             Padding="{TemplateBinding Padding}">
                             <SelectableTextBlock

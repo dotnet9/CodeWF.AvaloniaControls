@@ -28,7 +28,8 @@
                   RowDefinitions="*">
                 <Border Classes="PreviewPanel">
                     <Grid RowDefinitions="Auto,Auto,*" RowSpacing="14">
-                        <TextBlock Classes="Title" Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.LocalResource}}" />
+                        <TextBlock Classes="Title"
+                                   Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.LocalResource}}" />
                         <TextBlock Grid.Row="1" Classes="Source"
                                    Text="avares://CodeWF.AvaloniaControlsDemo/Assets/nice.gif" />
                         <Border Grid.Row="2"
@@ -45,7 +46,8 @@
 
                 <Border Grid.Column="1" Classes="PreviewPanel">
                     <Grid RowDefinitions="Auto,Auto,*" RowSpacing="14">
-                        <TextBlock Classes="Title" Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.NetworkResource}}" />
+                        <TextBlock Classes="Title"
+                                   Text="{i18n:I18n {x:Static pageLangs:AnimatedImageDemo.NetworkResource}}" />
                         <TextBlock Grid.Row="1" Classes="Source"
                                    Text="https://img1.dotnet9.com/2026/05/nice.gif" />
                         <Border Grid.Row="2"

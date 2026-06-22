@@ -11,12 +11,12 @@ public class SwitchBinding : MarkupExtension
 {
     private readonly MultiBinding _binding = new();
     private readonly List<ResolvedSwitchCase> _cases = [];
-
-    public int ValueIndex = Constants.InvalidIndex;
+    public object? DefaultContent;
     public int DefaultIndex = Constants.InvalidIndex;
 
     public object? ValueContent;
-    public object? DefaultContent;
+
+    public int ValueIndex = Constants.InvalidIndex;
 
     public SwitchBinding()
     {
@@ -56,28 +56,18 @@ public class SwitchBinding : MarkupExtension
     internal object? Evaluate(IList<object?> values, CultureInfo culture)
     {
         var value = IfBinding.ResolveValue(values, ValueIndex, ValueContent);
-        if (ReferenceEquals(value, BindingOperations.DoNothing))
-        {
-            return BindingOperations.DoNothing;
-        }
+        if (ReferenceEquals(value, BindingOperations.DoNothing)) return BindingOperations.DoNothing;
 
         foreach (var item in _cases)
-        {
             if (ValuesMatch(value, item.When, culture))
-            {
                 return IfBinding.ResolveValue(values, item.ThenIndex, item.ThenContent);
-            }
-        }
 
         return IfBinding.ResolveValue(values, DefaultIndex, DefaultContent);
     }
 
     private void SetCases(IEnumerable<SwitchCase>? cases)
     {
-        if (cases == null)
-        {
-            return;
-        }
+        if (cases == null) return;
 
         foreach (var item in cases)
         {
@@ -89,10 +79,7 @@ public class SwitchBinding : MarkupExtension
 
     private void SetProperty<T>(T value, ref int index, out T? storage)
     {
-        if (index != Constants.InvalidIndex)
-        {
-            throw new InvalidOperationException("Cannot reset the value.");
-        }
+        if (index != Constants.InvalidIndex) throw new InvalidOperationException("Cannot reset the value.");
 
         if (value is BindingBase binding)
         {
@@ -107,39 +94,24 @@ public class SwitchBinding : MarkupExtension
 
     private static bool ValuesMatch(object? value, object? expected, CultureInfo culture)
     {
-        if (Equals(value, expected))
-        {
-            return true;
-        }
+        if (Equals(value, expected)) return true;
 
-        if (value == null || expected == null)
-        {
-            return false;
-        }
+        if (value == null || expected == null) return false;
 
         if (value is Enum && expected is string expectedText)
-        {
             return string.Equals(value.ToString(), expectedText, StringComparison.OrdinalIgnoreCase);
-        }
 
         if (expected is Enum && value is string valueText)
-        {
             return string.Equals(valueText, expected.ToString(), StringComparison.OrdinalIgnoreCase);
-        }
 
         var valueType = value.GetType();
         var expectedType = expected.GetType();
-        if (valueType == expectedType)
-        {
-            return false;
-        }
+        if (valueType == expectedType) return false;
 
         try
         {
             if (value is IConvertible && expected is IConvertible)
-            {
                 return Equals(value, Convert.ChangeType(expected, valueType, culture));
-            }
         }
         catch (InvalidCastException)
         {

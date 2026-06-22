@@ -1,5 +1,5 @@
+using System;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 
@@ -52,7 +52,8 @@ public class DefaultGuideIndicator : GuideIndicator
     static DefaultGuideIndicator()
     {
         AffectsMeasure<DefaultGuideIndicator>(StepCountProperty, IndicatorSizeProperty, ItemSpacingProperty);
-        AffectsRender<DefaultGuideIndicator>(StepCountProperty, ActiveIndexProperty, IndicatorBrushProperty, ActiveIndicatorBrushProperty);
+        AffectsRender<DefaultGuideIndicator>(StepCountProperty, ActiveIndexProperty, IndicatorBrushProperty,
+            ActiveIndicatorBrushProperty);
     }
 
     public double IndicatorSize
@@ -81,18 +82,15 @@ public class DefaultGuideIndicator : GuideIndicator
 
     protected override Size MeasureOverride(Size availableSize)
     {
-        var count = System.Math.Max(0, StepCount);
-        if (count == 0)
-        {
-            return default;
-        }
+        var count = Math.Max(0, StepCount);
+        if (count == 0) return default;
 
         return new Size(count * IndicatorSize + (count - 1) * ItemSpacing, IndicatorSize);
     }
 
     public override void Render(DrawingContext context)
     {
-        var count = System.Math.Max(0, StepCount);
+        var count = Math.Max(0, StepCount);
         var size = IndicatorSize;
         var x = 0d;
         var y = (Bounds.Height - size) / 2;
@@ -131,8 +129,6 @@ public class TextGuideIndicator : GuideIndicator
         base.OnPropertyChanged(change);
 
         if (change.Property == StepCountProperty || change.Property == ActiveIndexProperty)
-        {
             IndicatorText = $"{ActiveIndex + 1} / {StepCount}";
-        }
     }
 }

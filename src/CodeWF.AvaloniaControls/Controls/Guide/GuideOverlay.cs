@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -64,16 +65,10 @@ public class GuideOverlay : Control
     public override void Render(DrawingContext context)
     {
         var brush = MaskBrush;
-        if (brush is null)
-        {
-            return;
-        }
+        if (brush is null) return;
 
         var bounds = new Rect(Bounds.Size);
-        if (bounds.Width <= 0 || bounds.Height <= 0)
-        {
-            return;
-        }
+        if (bounds.Width <= 0 || bounds.Height <= 0) return;
 
         var target = TargetRegion.Intersect(bounds);
         if (target.Width <= 0 || target.Height <= 0)
@@ -82,7 +77,7 @@ public class GuideOverlay : Control
             return;
         }
 
-        var radius = System.Math.Max(0, TargetRegionCornerRadius);
+        var radius = Math.Max(0, TargetRegionCornerRadius);
         var geometry = new GeometryGroup
         {
             FillRule = FillRule.EvenOdd
@@ -97,24 +92,18 @@ public class GuideOverlay : Control
     private void DrawTargetBorder(DrawingContext context, Rect target, double radius)
     {
         var borderBrush = TargetRegionBorderBrush;
-        var thickness = System.Math.Max(0, TargetRegionBorderThickness);
-        if (borderBrush is null || thickness <= 0)
-        {
-            return;
-        }
+        var thickness = Math.Max(0, TargetRegionBorderThickness);
+        if (borderBrush is null || thickness <= 0) return;
 
         var inset = thickness / 2;
         var borderRect = target.Deflate(new Thickness(inset));
-        if (borderRect.Width <= 0 || borderRect.Height <= 0)
-        {
-            return;
-        }
+        if (borderRect.Width <= 0 || borderRect.Height <= 0) return;
 
         context.DrawRectangle(
             null,
             new Pen(borderBrush, thickness),
             borderRect,
-            System.Math.Max(0, radius - inset),
-            System.Math.Max(0, radius - inset));
+            Math.Max(0, radius - inset),
+            Math.Max(0, radius - inset));
     }
 }

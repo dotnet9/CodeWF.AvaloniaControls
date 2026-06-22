@@ -17,14 +17,32 @@ public class CodeWFTitleBar : TemplatedControl
     public static readonly StyledProperty<object?> LeftContentProperty =
         AvaloniaProperty.Register<CodeWFTitleBar, object?>(nameof(LeftContent));
 
+    public static readonly StyledProperty<IDataTemplate?> LeftContentTemplateProperty =
+        AvaloniaProperty.Register<CodeWFTitleBar, IDataTemplate?>(nameof(LeftContentTemplate));
+
+    public static readonly StyledProperty<object?> CenterContentProperty =
+        AvaloniaProperty.Register<CodeWFTitleBar, object?>(nameof(CenterContent));
+
+    public static readonly StyledProperty<IDataTemplate?> CenterContentTemplateProperty =
+        AvaloniaProperty.Register<CodeWFTitleBar, IDataTemplate?>(nameof(CenterContentTemplate));
+
+    public static readonly StyledProperty<object?> RightContentProperty =
+        AvaloniaProperty.Register<CodeWFTitleBar, object?>(nameof(RightContent));
+
+    public static readonly StyledProperty<IDataTemplate?> RightContentTemplateProperty =
+        AvaloniaProperty.Register<CodeWFTitleBar, IDataTemplate?>(nameof(RightContentTemplate));
+
+    public static readonly StyledProperty<WindowIcon?> IconProperty =
+        AvaloniaProperty.Register<CodeWFTitleBar, WindowIcon?>(nameof(Icon));
+
+    public static readonly StyledProperty<string?> TitleProperty =
+        AvaloniaProperty.Register<CodeWFTitleBar, string?>(nameof(Title));
+
     public object? LeftContent
     {
         get => GetValue(LeftContentProperty);
         set => SetValue(LeftContentProperty, value);
     }
-
-    public static readonly StyledProperty<IDataTemplate?> LeftContentTemplateProperty =
-        AvaloniaProperty.Register<CodeWFTitleBar, IDataTemplate?>(nameof(LeftContentTemplate));
 
     public IDataTemplate? LeftContentTemplate
     {
@@ -32,17 +50,11 @@ public class CodeWFTitleBar : TemplatedControl
         set => SetValue(LeftContentTemplateProperty, value);
     }
 
-    public static readonly StyledProperty<object?> CenterContentProperty =
-        AvaloniaProperty.Register<CodeWFTitleBar, object?>(nameof(CenterContent));
-
     public object? CenterContent
     {
         get => GetValue(CenterContentProperty);
         set => SetValue(CenterContentProperty, value);
     }
-
-    public static readonly StyledProperty<IDataTemplate?> CenterContentTemplateProperty =
-        AvaloniaProperty.Register<CodeWFTitleBar, IDataTemplate?>(nameof(CenterContentTemplate));
 
     public IDataTemplate? CenterContentTemplate
     {
@@ -50,17 +62,11 @@ public class CodeWFTitleBar : TemplatedControl
         set => SetValue(CenterContentTemplateProperty, value);
     }
 
-    public static readonly StyledProperty<object?> RightContentProperty =
-        AvaloniaProperty.Register<CodeWFTitleBar, object?>(nameof(RightContent));
-
     public object? RightContent
     {
         get => GetValue(RightContentProperty);
         set => SetValue(RightContentProperty, value);
     }
-
-    public static readonly StyledProperty<IDataTemplate?> RightContentTemplateProperty =
-        AvaloniaProperty.Register<CodeWFTitleBar, IDataTemplate?>(nameof(RightContentTemplate));
 
     public IDataTemplate? RightContentTemplate
     {
@@ -68,17 +74,11 @@ public class CodeWFTitleBar : TemplatedControl
         set => SetValue(RightContentTemplateProperty, value);
     }
 
-    public static readonly StyledProperty<WindowIcon?> IconProperty =
-        AvaloniaProperty.Register<CodeWFTitleBar, WindowIcon?>(nameof(Icon));
-
     public WindowIcon? Icon
     {
         get => GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
-
-    public static readonly StyledProperty<string?> TitleProperty =
-        AvaloniaProperty.Register<CodeWFTitleBar, string?>(nameof(Title));
 
     public string? Title
     {
@@ -96,9 +96,7 @@ public class CodeWFTitleBar : TemplatedControl
             || change.Property == CenterContentProperty
             || change.Property == RightContentProperty
             || change.Property == IconProperty)
-        {
             UpdatePseudoClasses();
-        }
     }
 
     private void UpdatePseudoClasses()

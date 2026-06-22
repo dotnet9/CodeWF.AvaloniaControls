@@ -7,8 +7,6 @@ namespace CodeWF.AvaloniaControlsDemo.ViewModels;
 
 public sealed class ShowcasePageItem(string headerKey, string searchToken, Control content) : INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     public string HeaderKey { get; } = headerKey;
 
     public string SearchToken { get; } = searchToken;
@@ -16,17 +14,15 @@ public sealed class ShowcasePageItem(string headerKey, string searchToken, Contr
     public Control Content { get; } = content;
 
     public string DisplayName => LocalizationService.Get(HeaderKey);
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public bool Matches(string? searchText)
     {
-        if (string.IsNullOrWhiteSpace(searchText))
-        {
-            return true;
-        }
+        if (string.IsNullOrWhiteSpace(searchText)) return true;
 
         var text = searchText.Trim();
         return DisplayName.Contains(text, StringComparison.OrdinalIgnoreCase)
-            || SearchToken.Contains(text, StringComparison.OrdinalIgnoreCase);
+               || SearchToken.Contains(text, StringComparison.OrdinalIgnoreCase);
     }
 
     public void Refresh()

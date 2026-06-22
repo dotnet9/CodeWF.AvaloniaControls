@@ -27,10 +27,7 @@ public class ColumnDisplayItem : INotifyPropertyChanged
         get => _visible;
         set
         {
-            if (_visible == value)
-            {
-                return;
-            }
+            if (_visible == value) return;
 
             _visible = value;
             OnPropertyChanged();

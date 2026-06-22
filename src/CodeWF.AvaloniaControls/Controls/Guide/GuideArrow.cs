@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -50,23 +51,20 @@ public sealed class GuideArrow : Control
     public override void Render(DrawingContext context)
     {
         var bounds = new Rect(Bounds.Size);
-        if (bounds.Width <= 0 || bounds.Height <= 0)
-        {
-            return;
-        }
+        if (bounds.Width <= 0 || bounds.Height <= 0) return;
 
         var points = GetTrianglePoints(Placement, bounds);
         var geometry = new StreamGeometry();
         using (var geometryContext = geometry.Open())
         {
-            geometryContext.BeginFigure(points[0], true);
+            geometryContext.BeginFigure(points[0]);
             geometryContext.LineTo(points[1]);
             geometryContext.LineTo(points[2]);
             geometryContext.EndFigure(true);
         }
 
         var stroke = Stroke;
-        var thickness = System.Math.Max(0, StrokeThickness);
+        var thickness = Math.Max(0, StrokeThickness);
         var pen = stroke is null || thickness <= 0 ? null : new Pen(stroke, thickness);
         context.DrawGeometry(Fill, pen, geometry);
     }

@@ -17,8 +17,7 @@ public class SwitchExtension : MarkupExtension
 
     public object? Value { get; set; }
 
-    [Content]
-    public SwitchCases? Cases { get; set; } = [];
+    [Content] public SwitchCases? Cases { get; set; } = [];
 
     public object? Default { get; set; }
 

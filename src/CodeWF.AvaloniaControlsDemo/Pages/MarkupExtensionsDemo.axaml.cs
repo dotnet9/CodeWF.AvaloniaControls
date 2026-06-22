@@ -14,8 +14,8 @@ namespace CodeWF.AvaloniaControlsDemo.Pages;
 
 public partial class MarkupExtensionsDemo : UserControl, INotifyPropertyChanged
 {
-    private bool _isPipelineRunning = true;
     private PipelineHealth _health = PipelineHealth.Healthy;
+    private bool _isPipelineRunning = true;
     private ObservableCollection<string> _queuedDeployments = CreateDefaultQueue();
 
     public MarkupExtensionsDemo()
@@ -58,7 +58,8 @@ public partial class MarkupExtensionsDemo : UserControl, INotifyPropertyChanged
 
     public string IfSnippet => "{codewf:If {Binding IsPipelineRunning}, PausePipeline, StartPipeline}";
 
-    public string SwitchSnippet => "{codewf:Switch {Binding Health}, Cases={StaticResource HealthTitleCases}, Default=UnknownStatus}";
+    public string SwitchSnippet =>
+        "{codewf:Switch {Binding Health}, Cases={StaticResource HealthTitleCases}, Default=UnknownStatus}";
 
     public new event PropertyChangedEventHandler? PropertyChanged;
 
@@ -110,10 +111,7 @@ public partial class MarkupExtensionsDemo : UserControl, INotifyPropertyChanged
 
     private void ReloadLocalizedText()
     {
-        if (QueuedDeployments.Count > 0)
-        {
-            QueuedDeployments = CreateDefaultQueue();
-        }
+        if (QueuedDeployments.Count > 0) QueuedDeployments = CreateDefaultQueue();
 
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PipelineStatusText)));
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PipelineToggleText)));
@@ -133,22 +131,13 @@ public partial class MarkupExtensionsDemo : UserControl, INotifyPropertyChanged
 
     private bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
     {
-        if (Equals(field, value))
-        {
-            return false;
-        }
+        if (Equals(field, value)) return false;
 
         field = value;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        if (propertyName == nameof(IsPipelineRunning))
-        {
-            RaisePipelineStateChanged();
-        }
+        if (propertyName == nameof(IsPipelineRunning)) RaisePipelineStateChanged();
 
-        if (propertyName == nameof(QueuedDeployments))
-        {
-            RaiseQueueStateChanged();
-        }
+        if (propertyName == nameof(QueuedDeployments)) RaiseQueueStateChanged();
 
         return true;
     }

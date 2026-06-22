@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Primitives.PopupPositioning;
+using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
@@ -22,31 +22,6 @@ public class Guide : TemplatedControl
     private const int MaxTargetResolveAttempts = 8;
     private const double ArrowOverlap = 2;
     private const double ArrowEdgePadding = 14;
-
-    private readonly DispatcherTimer _targetResolveTimer;
-    private readonly List<IGuideStepOption> _activeSteps = [];
-    private Popup? _popup;
-    private Popup? _maskPopup;
-    private Popup? _targetMaskPopup;
-    private GuideOverlay? _overlay;
-    private GuideOverlay? _targetOverlay;
-    private GuideArrow? _arrow;
-    private Control? _cardRoot;
-    private ItemsControl? _customActionsHost;
-    private Button? _previousButton;
-    private Button? _nextButton;
-    private Button? _finishButton;
-    private Button? _closeButton;
-    private Control? _observedTarget;
-    private TopLevel? _observedTopLevel;
-    private INotifyCollectionChanged? _observedStepsSource;
-    private IInputElement? _restoreFocusElement;
-    private bool _isReallyOpen;
-    private bool _ignoreOpenChange;
-    private bool _layoutRefreshQueued;
-    private bool _suppressNavigationClick;
-    private int _pendingStepOpenedIndex = -1;
-    private int _targetResolveAttempt;
 
     public static readonly StyledProperty<IEnumerable<IGuideStepOption>?> StepsSourceProperty =
         AvaloniaProperty.Register<Guide, IEnumerable<IGuideStepOption>?>(nameof(StepsSource));
@@ -88,7 +63,8 @@ public class Guide : TemplatedControl
         AvaloniaProperty.Register<Guide, double>(nameof(PopupOffset), 12);
 
     public static readonly StyledProperty<IBrush?> TargetBorderBrushProperty =
-        AvaloniaProperty.Register<Guide, IBrush?>(nameof(TargetBorderBrush), new SolidColorBrush(Color.FromRgb(96, 165, 250)));
+        AvaloniaProperty.Register<Guide, IBrush?>(nameof(TargetBorderBrush),
+            new SolidColorBrush(Color.FromRgb(96, 165, 250)));
 
     public static readonly StyledProperty<double> TargetBorderThicknessProperty =
         AvaloniaProperty.Register<Guide, double>(nameof(TargetBorderThickness), 3);
@@ -119,7 +95,7 @@ public class Guide : TemplatedControl
             nameof(CurrentIndex),
             guide => guide.CurrentIndex,
             (guide, value) => guide.CurrentIndex = value,
-            defaultBindingMode: Avalonia.Data.BindingMode.TwoWay);
+            defaultBindingMode: BindingMode.TwoWay);
 
     public static readonly DirectProperty<Guide, int> StepCountProperty =
         AvaloniaProperty.RegisterDirect<Guide, int>(nameof(StepCount), guide => guide.StepCount);
@@ -137,7 +113,8 @@ public class Guide : TemplatedControl
         AvaloniaProperty.RegisterDirect<Guide, bool>(nameof(HasCurrentTitle), guide => guide.HasCurrentTitle);
 
     public static readonly DirectProperty<Guide, bool> HasCurrentDescriptionProperty =
-        AvaloniaProperty.RegisterDirect<Guide, bool>(nameof(HasCurrentDescription), guide => guide.HasCurrentDescription);
+        AvaloniaProperty.RegisterDirect<Guide, bool>(nameof(HasCurrentDescription),
+            guide => guide.HasCurrentDescription);
 
     public static readonly DirectProperty<Guide, bool> HasCurrentCoverProperty =
         AvaloniaProperty.RegisterDirect<Guide, bool>(nameof(HasCurrentCover), guide => guide.HasCurrentCover);
@@ -164,32 +141,60 @@ public class Guide : TemplatedControl
         AvaloniaProperty.RegisterDirect<Guide, bool>(nameof(CurrentIsShowMask), guide => guide.CurrentIsShowMask);
 
     public static readonly DirectProperty<Guide, bool> CurrentIsArrowVisibleProperty =
-        AvaloniaProperty.RegisterDirect<Guide, bool>(nameof(CurrentIsArrowVisible), guide => guide.CurrentIsArrowVisible);
+        AvaloniaProperty.RegisterDirect<Guide, bool>(nameof(CurrentIsArrowVisible),
+            guide => guide.CurrentIsArrowVisible);
 
     public static readonly DirectProperty<Guide, double> CurrentGapRadiusProperty =
         AvaloniaProperty.RegisterDirect<Guide, double>(nameof(CurrentGapRadius), guide => guide.CurrentGapRadius);
 
     public static readonly DirectProperty<Guide, GuideStyleType> CurrentStyleTypeProperty =
-        AvaloniaProperty.RegisterDirect<Guide, GuideStyleType>(nameof(CurrentStyleType), guide => guide.CurrentStyleType);
+        AvaloniaProperty.RegisterDirect<Guide, GuideStyleType>(nameof(CurrentStyleType),
+            guide => guide.CurrentStyleType);
+
+    private readonly List<IGuideStepOption> _activeSteps = [];
+
+    private readonly DispatcherTimer _targetResolveTimer;
+    private GuideArrow? _arrow;
+    private bool _canGoNext;
+    private bool _canGoPrevious;
+    private Control? _cardRoot;
+    private Button? _closeButton;
+    private object? _currentCover;
+    private string? _currentDescription;
+    private double _currentGapRadius;
 
     private int _currentIndex = -1;
-    private int _stepCount;
-    private string? _currentTitle;
-    private string? _currentDescription;
-    private object? _currentCover;
-    private bool _hasCurrentTitle;
-    private bool _hasCurrentDescription;
-    private bool _hasCurrentCover;
-    private bool _canGoPrevious;
-    private bool _canGoNext;
-    private bool _isLastStep;
-    private bool _targetRegionVisible;
-    private Rect _targetRegion;
-    private IBrush? _currentMaskColor;
-    private bool _currentIsShowMask;
     private bool _currentIsArrowVisible;
-    private double _currentGapRadius;
+    private bool _currentIsShowMask;
+    private IBrush? _currentMaskColor;
     private GuideStyleType _currentStyleType;
+    private string? _currentTitle;
+    private ItemsControl? _customActionsHost;
+    private Button? _finishButton;
+    private bool _hasCurrentCover;
+    private bool _hasCurrentDescription;
+    private bool _hasCurrentTitle;
+    private bool _ignoreOpenChange;
+    private bool _isLastStep;
+    private bool _isReallyOpen;
+    private bool _layoutRefreshQueued;
+    private Popup? _maskPopup;
+    private Button? _nextButton;
+    private INotifyCollectionChanged? _observedStepsSource;
+    private Control? _observedTarget;
+    private TopLevel? _observedTopLevel;
+    private GuideOverlay? _overlay;
+    private int _pendingStepOpenedIndex = -1;
+    private Popup? _popup;
+    private Button? _previousButton;
+    private IInputElement? _restoreFocusElement;
+    private int _stepCount;
+    private bool _suppressNavigationClick;
+    private Popup? _targetMaskPopup;
+    private GuideOverlay? _targetOverlay;
+    private Rect _targetRegion;
+    private bool _targetRegionVisible;
+    private int _targetResolveAttempt;
 
     static Guide()
     {
@@ -208,14 +213,6 @@ public class Guide : TemplatedControl
             ApplyCurrentStep();
         };
     }
-
-    public event EventHandler<GuideStepEventArgs>? StepOpening;
-
-    public event EventHandler<GuideStepEventArgs>? StepOpened;
-
-    public event EventHandler? Completed;
-
-    public event EventHandler? Closed;
 
     public IEnumerable<IGuideStepOption>? StepsSource
     {
@@ -457,10 +454,17 @@ public class Guide : TemplatedControl
         private set => SetAndRaise(CurrentStyleTypeProperty, ref _currentStyleType, value);
     }
 
-    [Content]
-    public AvaloniaList<GuideStep> Steps { get; } = [];
+    [Content] public AvaloniaList<GuideStep> Steps { get; } = [];
 
     public AvaloniaList<Control> CustomActions { get; } = [];
+
+    public event EventHandler<GuideStepEventArgs>? StepOpening;
+
+    public event EventHandler<GuideStepEventArgs>? StepOpened;
+
+    public event EventHandler? Completed;
+
+    public event EventHandler? Closed;
 
     public void Show()
     {
@@ -480,20 +484,14 @@ public class Guide : TemplatedControl
 
     public void GoTo(int index)
     {
-        if (index < 0 || index >= StepCount)
-        {
-            return;
-        }
+        if (index < 0 || index >= StepCount) return;
 
         SetCurrentValue(CurrentIndexProperty, index);
     }
 
     public void GoPrevious()
     {
-        if (CurrentIndex > 0)
-        {
-            SetCurrentValue(CurrentIndexProperty, CurrentIndex - 1);
-        }
+        if (CurrentIndex > 0) SetCurrentValue(CurrentIndexProperty, CurrentIndex - 1);
     }
 
     public void GoNext()
@@ -510,20 +508,14 @@ public class Guide : TemplatedControl
 
     public void Refresh()
     {
-        if (_isReallyOpen)
-        {
-            ApplyCurrentStep();
-        }
+        if (_isReallyOpen) ApplyCurrentStep();
     }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        if (Indicator is null)
-        {
-            SetCurrentValue(IndicatorProperty, new DefaultGuideIndicator());
-        }
+        if (Indicator is null) SetCurrentValue(IndicatorProperty, new DefaultGuideIndicator());
 
         RefreshStepCollection();
     }
@@ -547,20 +539,14 @@ public class Guide : TemplatedControl
         SyncCustomActionsHost();
         SyncIndicator();
 
-        if (IsOpen)
-        {
-            ShowGuideCore();
-        }
+        if (IsOpen) ShowGuideCore();
     }
 
     protected override void OnLoaded(RoutedEventArgs e)
     {
         base.OnLoaded(e);
 
-        if (IsOpen)
-        {
-            ShowGuideCore();
-        }
+        if (IsOpen) ShowGuideCore();
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
@@ -583,13 +569,9 @@ public class Guide : TemplatedControl
         if (change.Property == IsOpenProperty && !_ignoreOpenChange)
         {
             if (change.GetNewValue<bool>())
-            {
                 ShowGuideCore();
-            }
             else
-            {
                 HideGuideCore(true);
-            }
         }
         else if (change.Property == CurrentIndexProperty)
         {
@@ -597,13 +579,9 @@ public class Guide : TemplatedControl
             SyncIndicator();
 
             if (_isReallyOpen)
-            {
                 ActivateCurrentStep();
-            }
             else
-            {
                 UpdateCurrentStepContent(GetCurrentStep());
-            }
         }
         else if (change.Property == IndicatorProperty)
         {
@@ -632,26 +610,17 @@ public class Guide : TemplatedControl
     {
         if (_isReallyOpen || _popup is null || StepCount == 0)
         {
-            if (StepCount == 0)
-            {
-                SetIsOpenSilently(false);
-            }
+            if (StepCount == 0) SetIsOpenSilently(false);
             return;
         }
 
         var topLevel = TopLevel.GetTopLevel(this);
-        if (topLevel is null)
-        {
-            return;
-        }
+        if (topLevel is null) return;
 
         _restoreFocusElement = topLevel.FocusManager?.GetFocusedElement();
         AttachObservedTopLevel(topLevel);
 
-        if (CurrentIndex < 0 || CurrentIndex >= StepCount)
-        {
-            SetCurrentValue(CurrentIndexProperty, 0);
-        }
+        if (CurrentIndex < 0 || CurrentIndex >= StepCount) SetCurrentValue(CurrentIndexProperty, 0);
 
         _isReallyOpen = true;
         SetIsOpenSilently(true);
@@ -660,10 +629,7 @@ public class Guide : TemplatedControl
 
     private void HideGuideCore(bool raiseClosed)
     {
-        if (!_isReallyOpen && !IsOpen)
-        {
-            return;
-        }
+        if (!_isReallyOpen && !IsOpen) return;
 
         _targetResolveTimer.Stop();
         ClosePopups();
@@ -675,14 +641,11 @@ public class Guide : TemplatedControl
         if (_restoreFocusElement is not null)
         {
             var restoreFocus = _restoreFocusElement;
-            Dispatcher.UIThread.Post(() => restoreFocus.Focus(NavigationMethod.Unspecified));
+            Dispatcher.UIThread.Post(() => restoreFocus.Focus());
             _restoreFocusElement = null;
         }
 
-        if (raiseClosed)
-        {
-            Closed?.Invoke(this, EventArgs.Empty);
-        }
+        if (raiseClosed) Closed?.Invoke(this, EventArgs.Empty);
     }
 
     private void ActivateCurrentStep()
@@ -714,18 +677,12 @@ public class Guide : TemplatedControl
     {
         _targetResolveAttempt = 0;
 
-        if (_popup is not null)
-        {
-            _popup.IsOpen = false;
-        }
+        if (_popup is not null) _popup.IsOpen = false;
 
         CloseOverlayPopup(_maskPopup);
         CloseOverlayPopup(_targetMaskPopup);
 
-        if (_arrow is not null)
-        {
-            _arrow.IsVisible = false;
-        }
+        if (_arrow is not null) _arrow.IsVisible = false;
 
         TargetRegion = default;
         TargetRegionVisible = false;
@@ -742,10 +699,7 @@ public class Guide : TemplatedControl
 
     private void ApplyCurrentStep()
     {
-        if (!_isReallyOpen || _popup is null)
-        {
-            return;
-        }
+        if (!_isReallyOpen || _popup is null) return;
 
         var step = GetCurrentStep();
         if (step is null)
@@ -757,15 +711,9 @@ public class Guide : TemplatedControl
         UpdateCurrentStepContent(step);
 
         var target = ResolveTarget(step, out var missingTarget);
-        if (missingTarget && DeferMissingTarget(step))
-        {
-            return;
-        }
+        if (missingTarget && DeferMissingTarget(step)) return;
 
-        if (missingTarget && HandleMissingTarget())
-        {
-            return;
-        }
+        if (missingTarget && HandleMissingTarget()) return;
 
         _targetResolveAttempt = 0;
         ConfigureCurrentStepValues(step, target);
@@ -803,9 +751,7 @@ public class Guide : TemplatedControl
         if (step.Target is null ||
             MissingTargetBehavior != GuideMissingTargetBehavior.Center ||
             _targetResolveAttempt >= MaxTargetResolveAttempts)
-        {
             return false;
-        }
 
         _targetResolveAttempt++;
         ScheduleApplyCurrentStep();
@@ -817,21 +763,16 @@ public class Guide : TemplatedControl
         missingTarget = false;
         var target = step.Target;
 
-        if (target is null)
-        {
-            return null;
-        }
+        if (target is null) return null;
 
-        if (!target.IsVisible || !target.IsAttachedToVisualTree() || target.Bounds.Width <= 0 || target.Bounds.Height <= 0)
+        if (!target.IsVisible || !target.IsAttachedToVisualTree() || target.Bounds.Width <= 0 ||
+            target.Bounds.Height <= 0)
         {
             missingTarget = true;
             return null;
         }
 
-        if (step.IsScrollIntoView ?? IsScrollIntoView)
-        {
-            target.BringIntoView();
-        }
+        if (step.IsScrollIntoView ?? IsScrollIntoView) target.BringIntoView();
 
         return target;
     }
@@ -853,10 +794,7 @@ public class Guide : TemplatedControl
     private void ConfigureOverlay(Control? target, IGuideStepOption step)
     {
         var topLevel = TopLevel.GetTopLevel(this);
-        if (_maskPopup is null || _overlay is null || topLevel is null)
-        {
-            return;
-        }
+        if (_maskPopup is null || _overlay is null || topLevel is null) return;
 
         var targetTopLevel = target is null ? null : TopLevel.GetTopLevel(target);
         var targetUsesForeignTopLevel = target is not null &&
@@ -876,18 +814,14 @@ public class Guide : TemplatedControl
         ConfigureOverlayPopup(_maskPopup, _overlay, topLevel, primaryTargetRegion, true);
 
         if (targetUsesForeignTopLevel && targetTopLevel is not null)
-        {
             ConfigureOverlayPopup(
                 _targetMaskPopup,
                 _targetOverlay,
                 targetTopLevel,
                 CalculateTargetRegion(target, step, targetTopLevel),
                 false);
-        }
         else
-        {
             CloseOverlayPopup(_targetMaskPopup);
-        }
     }
 
     private void ConfigureOverlayPopup(
@@ -897,10 +831,7 @@ public class Guide : TemplatedControl
         Rect targetRegion,
         bool isHitTestVisible)
     {
-        if (popup is null || overlay is null)
-        {
-            return;
-        }
+        if (popup is null || overlay is null) return;
 
         overlay.Width = topLevel.ClientSize.Width;
         overlay.Height = topLevel.ClientSize.Height;
@@ -920,10 +851,7 @@ public class Guide : TemplatedControl
 
     private static void CloseOverlayPopup(Popup? popup)
     {
-        if (popup is not null)
-        {
-            popup.IsOpen = false;
-        }
+        if (popup is not null) popup.IsOpen = false;
     }
 
     private static void OpenOverlayPopup(Popup popup)
@@ -940,10 +868,7 @@ public class Guide : TemplatedControl
 
     private void ConfigurePopup(Control? target)
     {
-        if (_popup is null)
-        {
-            return;
-        }
+        if (_popup is null) return;
 
         var placement = GetCurrentPlacement(target);
         var topLevel = TopLevel.GetTopLevel(this);
@@ -956,18 +881,12 @@ public class Guide : TemplatedControl
         AlignArrowToTarget(placement, target);
         Dispatcher.UIThread.Post(() => AlignArrowToTarget(placement, target), DispatcherPriority.Render);
 
-        if (_cardRoot is not null && ShouldFocusCard(target))
-        {
-            _cardRoot.Focus(NavigationMethod.Unspecified);
-        }
+        if (_cardRoot is not null && ShouldFocusCard(target)) _cardRoot.Focus();
     }
 
     private bool ShouldFocusCard(Control? target)
     {
-        if (target is null)
-        {
-            return true;
-        }
+        if (target is null) return true;
 
         var topLevel = TopLevel.GetTopLevel(this);
         var targetTopLevel = TopLevel.GetTopLevel(target);
@@ -976,20 +895,14 @@ public class Guide : TemplatedControl
 
     private GuidePlacementMode GetCurrentPlacement(Control? target)
     {
-        if (target is null)
-        {
-            return GuidePlacementMode.Center;
-        }
+        if (target is null) return GuidePlacementMode.Center;
 
         return GetCurrentStep()?.Placement ?? Placement;
     }
 
     private void ConfigurePopupPlacement(GuidePlacementMode placement)
     {
-        if (_popup is null)
-        {
-            return;
-        }
+        if (_popup is null) return;
 
         if (placement == GuidePlacementMode.Center)
         {
@@ -1008,10 +921,7 @@ public class Guide : TemplatedControl
 
     private void ConfigurePopupOffset(GuidePlacementMode placement)
     {
-        if (_popup is null)
-        {
-            return;
-        }
+        if (_popup is null) return;
 
         var offset = Math.Max(0, PopupOffset);
         _popup.HorizontalOffset = placement switch
@@ -1030,42 +940,39 @@ public class Guide : TemplatedControl
 
     private void ConfigureArrow(GuidePlacementMode placement, Control? target)
     {
-        if (_arrow is null)
-        {
-            return;
-        }
+        if (_arrow is null) return;
 
-        if (_cardRoot is not null)
-        {
-            _cardRoot.Margin = default;
-        }
+        if (_cardRoot is not null) _cardRoot.Margin = default;
 
         _arrow.IsVisible = target is not null && CurrentIsArrowVisible && placement != GuidePlacementMode.Center;
-        if (!_arrow.IsVisible)
-        {
-            return;
-        }
+        if (!_arrow.IsVisible) return;
 
         _arrow.Placement = placement;
 
         if (_cardRoot is not null)
-        {
             _cardRoot.Margin = placement switch
             {
-                GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => new Thickness(0, 0, 0, 12),
-                GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => new Thickness(0, 12, 0, 0),
-                GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => new Thickness(0, 0, 12, 0),
-                GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => new Thickness(12, 0, 0, 0),
+                GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => new Thickness(0,
+                    0, 0, 12),
+                GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight =>
+                    new Thickness(0, 12, 0, 0),
+                GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => new Thickness(
+                    0, 0, 12, 0),
+                GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom =>
+                    new Thickness(12, 0, 0, 0),
                 _ => default
             };
-        }
 
         _arrow.Margin = placement switch
         {
-            GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => new Thickness(0, 0, 0, -ArrowOverlap),
-            GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => new Thickness(0, -ArrowOverlap, 0, 0),
-            GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => new Thickness(0, 0, -ArrowOverlap, 0),
-            GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => new Thickness(-ArrowOverlap, 0, 0, 0),
+            GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => new Thickness(0, 0,
+                0, -ArrowOverlap),
+            GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight =>
+                new Thickness(0, -ArrowOverlap, 0, 0),
+            GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => new Thickness(0,
+                0, -ArrowOverlap, 0),
+            GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => new Thickness(
+                -ArrowOverlap, 0, 0, 0),
             _ => default
         };
 
@@ -1073,8 +980,10 @@ public class Guide : TemplatedControl
         {
             GuidePlacementMode.LeftTop or GuidePlacementMode.RightTop => VerticalAlignment.Top,
             GuidePlacementMode.LeftBottom or GuidePlacementMode.RightBottom => VerticalAlignment.Bottom,
-            GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => VerticalAlignment.Bottom,
-            GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => VerticalAlignment.Top,
+            GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => VerticalAlignment
+                .Bottom,
+            GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight =>
+                VerticalAlignment.Top,
             _ => VerticalAlignment.Center
         };
 
@@ -1082,8 +991,10 @@ public class Guide : TemplatedControl
         {
             GuidePlacementMode.TopLeft or GuidePlacementMode.BottomLeft => HorizontalAlignment.Left,
             GuidePlacementMode.TopRight or GuidePlacementMode.BottomRight => HorizontalAlignment.Right,
-            GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => HorizontalAlignment.Right,
-            GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => HorizontalAlignment.Left,
+            GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom =>
+                HorizontalAlignment.Right,
+            GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom =>
+                HorizontalAlignment.Left,
             _ => HorizontalAlignment.Center
         };
     }
@@ -1099,21 +1010,16 @@ public class Guide : TemplatedControl
             || target.Bounds.Height <= 0
             || _cardRoot.Bounds.Width <= 0
             || _cardRoot.Bounds.Height <= 0)
-        {
             return;
-        }
 
         var topLevel = TopLevel.GetTopLevel(this);
-        if (topLevel is null)
-        {
-            return;
-        }
+        if (topLevel is null) return;
 
         var targetTopLeft = topLevel.PointToClient(target.PointToScreen(new Point(0, 0)));
         var cardTopLeft = topLevel.PointToClient(_cardRoot.PointToScreen(new Point(0, 0)));
         var arrowSize = Math.Max(1, Math.Max(_arrow.Bounds.Width, _arrow.Bounds.Height));
-        var targetCenterX = targetTopLeft.X + (target.Bounds.Width / 2);
-        var targetCenterY = targetTopLeft.Y + (target.Bounds.Height / 2);
+        var targetCenterX = targetTopLeft.X + target.Bounds.Width / 2;
+        var targetCenterY = targetTopLeft.Y + target.Bounds.Height / 2;
 
         if (IsHorizontalPlacement(placement))
         {
@@ -1121,8 +1027,10 @@ public class Guide : TemplatedControl
             _arrow.VerticalAlignment = VerticalAlignment.Top;
             _arrow.Margin = placement switch
             {
-                GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => new Thickness(0, top, -ArrowOverlap, 0),
-                GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => new Thickness(-ArrowOverlap, top, 0, 0),
+                GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => new Thickness(
+                    0, top, -ArrowOverlap, 0),
+                GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom =>
+                    new Thickness(-ArrowOverlap, top, 0, 0),
                 _ => _arrow.Margin
             };
             return;
@@ -1134,8 +1042,10 @@ public class Guide : TemplatedControl
             _arrow.HorizontalAlignment = HorizontalAlignment.Left;
             _arrow.Margin = placement switch
             {
-                GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => new Thickness(left, 0, 0, -ArrowOverlap),
-                GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => new Thickness(left, -ArrowOverlap, 0, 0),
+                GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => new Thickness(
+                    left, 0, 0, -ArrowOverlap),
+                GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight =>
+                    new Thickness(left, -ArrowOverlap, 0, 0),
                 _ => _arrow.Margin
             };
         }
@@ -1143,7 +1053,7 @@ public class Guide : TemplatedControl
 
     private static double GetArrowOffset(double targetCenter, double cardStart, double cardLength, double arrowSize)
     {
-        var desired = targetCenter - cardStart - (arrowSize / 2);
+        var desired = targetCenter - cardStart - arrowSize / 2;
         var maxOffset = Math.Max(0, cardLength - arrowSize);
         var padding = Math.Min(ArrowEdgePadding, maxOffset / 2);
         return Math.Clamp(desired, padding, Math.Max(padding, maxOffset - padding));
@@ -1171,15 +1081,9 @@ public class Guide : TemplatedControl
 
     private Rect CalculateTargetRegion(Control? target, IGuideStepOption step, TopLevel? relativeTopLevel)
     {
-        if (target is null)
-        {
-            return default;
-        }
+        if (target is null) return default;
 
-        if (relativeTopLevel is null)
-        {
-            return default;
-        }
+        if (relativeTopLevel is null) return default;
 
         var targetTopLeft = target.PointToScreen(new Point(0, 0));
         var origin = relativeTopLevel.PointToClient(targetTopLeft);
@@ -1202,16 +1106,10 @@ public class Guide : TemplatedControl
     private void ExecuteOpeningCommand(IGuideStepOption step)
     {
         var command = step.OpeningCommand;
-        if (command is null)
-        {
-            return;
-        }
+        if (command is null) return;
 
         var parameter = step.OpeningCommandParameter ?? step;
-        if (command.CanExecute(parameter))
-        {
-            command.Execute(parameter);
-        }
+        if (command.CanExecute(parameter)) command.Execute(parameter);
     }
 
     private void ConfigureStepsSource()
@@ -1236,13 +1134,9 @@ public class Guide : TemplatedControl
     {
         _activeSteps.Clear();
         if (StepsSource is not null)
-        {
             _activeSteps.AddRange(StepsSource);
-        }
         else
-        {
             _activeSteps.AddRange(Steps);
-        }
 
         StepCount = _activeSteps.Count;
         if (StepCount == 0)
@@ -1277,10 +1171,7 @@ public class Guide : TemplatedControl
     {
         SyncNavigationActionStyles();
 
-        if (Indicator is null)
-        {
-            return;
-        }
+        if (Indicator is null) return;
 
         Indicator.StepCount = StepCount;
         Indicator.ActiveIndex = CurrentIndex;
@@ -1296,10 +1187,7 @@ public class Guide : TemplatedControl
 
     private void SyncCustomActionsHost()
     {
-        if (_customActionsHost is not null)
-        {
-            _customActionsHost.ItemsSource = CustomActions;
-        }
+        if (_customActionsHost is not null) _customActionsHost.ItemsSource = CustomActions;
     }
 
     private void AttachTemplateEvents(INameScope nameScope)
@@ -1313,7 +1201,7 @@ public class Guide : TemplatedControl
         {
             _previousButton.Click += PreviousButton_OnClick;
             _previousButton.AddHandler(
-                InputElement.PointerPressedEvent,
+                PointerPressedEvent,
                 PreviousButton_OnPointerPressed,
                 RoutingStrategies.Bubble,
                 true);
@@ -1323,7 +1211,7 @@ public class Guide : TemplatedControl
         {
             _nextButton.Click += NextButton_OnClick;
             _nextButton.AddHandler(
-                InputElement.PointerPressedEvent,
+                PointerPressedEvent,
                 NextButton_OnPointerPressed,
                 RoutingStrategies.Bubble,
                 true);
@@ -1333,21 +1221,15 @@ public class Guide : TemplatedControl
         {
             _finishButton.Click += FinishButton_OnClick;
             _finishButton.AddHandler(
-                InputElement.PointerPressedEvent,
+                PointerPressedEvent,
                 FinishButton_OnPointerPressed,
                 RoutingStrategies.Bubble,
                 true);
         }
 
-        if (_closeButton is not null)
-        {
-            _closeButton.Click += CloseButton_OnClick;
-        }
+        if (_closeButton is not null) _closeButton.Click += CloseButton_OnClick;
 
-        if (_cardRoot is not null)
-        {
-            _cardRoot.KeyDown += CardRoot_OnKeyDown;
-        }
+        if (_cardRoot is not null) _cardRoot.KeyDown += CardRoot_OnKeyDown;
 
         SyncNavigationActionStyles();
     }
@@ -1357,21 +1239,21 @@ public class Guide : TemplatedControl
         if (_previousButton is not null)
         {
             _previousButton.Click -= PreviousButton_OnClick;
-            _previousButton.RemoveHandler(InputElement.PointerPressedEvent, PreviousButton_OnPointerPressed);
+            _previousButton.RemoveHandler(PointerPressedEvent, PreviousButton_OnPointerPressed);
             _previousButton = null;
         }
 
         if (_nextButton is not null)
         {
             _nextButton.Click -= NextButton_OnClick;
-            _nextButton.RemoveHandler(InputElement.PointerPressedEvent, NextButton_OnPointerPressed);
+            _nextButton.RemoveHandler(PointerPressedEvent, NextButton_OnPointerPressed);
             _nextButton = null;
         }
 
         if (_finishButton is not null)
         {
             _finishButton.Click -= FinishButton_OnClick;
-            _finishButton.RemoveHandler(InputElement.PointerPressedEvent, FinishButton_OnPointerPressed);
+            _finishButton.RemoveHandler(PointerPressedEvent, FinishButton_OnPointerPressed);
             _finishButton = null;
         }
 
@@ -1381,18 +1263,12 @@ public class Guide : TemplatedControl
             _closeButton = null;
         }
 
-        if (_cardRoot is not null)
-        {
-            _cardRoot.KeyDown -= CardRoot_OnKeyDown;
-        }
+        if (_cardRoot is not null) _cardRoot.KeyDown -= CardRoot_OnKeyDown;
     }
 
     private void PreviousButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (TryConsumeNavigationClick())
-        {
-            return;
-        }
+        if (TryConsumeNavigationClick()) return;
 
         GoPrevious();
     }
@@ -1404,10 +1280,7 @@ public class Guide : TemplatedControl
 
     private void NextButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (TryConsumeNavigationClick())
-        {
-            return;
-        }
+        if (TryConsumeNavigationClick()) return;
 
         GoNext();
     }
@@ -1419,10 +1292,7 @@ public class Guide : TemplatedControl
 
     private void FinishButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (TryConsumeNavigationClick())
-        {
-            return;
-        }
+        if (TryConsumeNavigationClick()) return;
 
         GoNext();
     }
@@ -1446,10 +1316,7 @@ public class Guide : TemplatedControl
     {
         // Menu/Flyout popups can light-dismiss before Button.Click reaches the guide button.
         // Handle pointer navigation early so dynamic popup-backed guide steps remain clickable.
-        if (!IsPrimaryButtonPressed(sender, e))
-        {
-            return false;
-        }
+        if (!IsPrimaryButtonPressed(sender, e)) return false;
 
         e.Handled = true;
         _suppressNavigationClick = true;
@@ -1469,10 +1336,7 @@ public class Guide : TemplatedControl
 
     private static bool IsPrimaryButtonPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (sender is not Control control)
-        {
-            return false;
-        }
+        if (sender is not Control control) return false;
 
         return e.GetCurrentPoint(control).Properties.IsLeftButtonPressed;
     }
@@ -1498,9 +1362,11 @@ public class Guide : TemplatedControl
         return placement switch
         {
             GuidePlacementMode.Top or GuidePlacementMode.TopLeft or GuidePlacementMode.TopRight => PopupGravity.Top,
-            GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => PopupGravity.Bottom,
+            GuidePlacementMode.Bottom or GuidePlacementMode.BottomLeft or GuidePlacementMode.BottomRight => PopupGravity
+                .Bottom,
             GuidePlacementMode.Left or GuidePlacementMode.LeftTop or GuidePlacementMode.LeftBottom => PopupGravity.Left,
-            GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => PopupGravity.Right,
+            GuidePlacementMode.Right or GuidePlacementMode.RightTop or GuidePlacementMode.RightBottom => PopupGravity
+                .Right,
             _ => PopupGravity.None
         };
     }
@@ -1526,10 +1392,7 @@ public class Guide : TemplatedControl
 
     private void AttachObservedTarget(Control? target)
     {
-        if (ReferenceEquals(_observedTarget, target))
-        {
-            return;
-        }
+        if (ReferenceEquals(_observedTarget, target)) return;
 
         DetachObservedTarget();
         _observedTarget = target;
@@ -1566,18 +1429,12 @@ public class Guide : TemplatedControl
 
     private void ObservedTarget_OnDetachedFromVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
     {
-        if (_isReallyOpen)
-        {
-            ScheduleApplyCurrentStep();
-        }
+        if (_isReallyOpen) ScheduleApplyCurrentStep();
     }
 
     private void AttachObservedTopLevel(TopLevel topLevel)
     {
-        if (ReferenceEquals(_observedTopLevel, topLevel))
-        {
-            return;
-        }
+        if (ReferenceEquals(_observedTopLevel, topLevel)) return;
 
         DetachObservedTopLevel();
         _observedTopLevel = topLevel;
@@ -1597,10 +1454,7 @@ public class Guide : TemplatedControl
 
     private void ObservedTopLevel_OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
-        if (_isReallyOpen && e.Property == TopLevel.ClientSizeProperty)
-        {
-            Refresh();
-        }
+        if (_isReallyOpen && e.Property == TopLevel.ClientSizeProperty) Refresh();
     }
 
     private void ObservedTopLevel_OnClosed(object? sender, EventArgs e)
@@ -1619,20 +1473,11 @@ public class Guide : TemplatedControl
 
     private void ClosePopups()
     {
-        if (_popup is not null)
-        {
-            _popup.IsOpen = false;
-        }
+        if (_popup is not null) _popup.IsOpen = false;
 
-        if (_maskPopup is not null)
-        {
-            _maskPopup.IsOpen = false;
-        }
+        if (_maskPopup is not null) _maskPopup.IsOpen = false;
 
-        if (_targetMaskPopup is not null)
-        {
-            _targetMaskPopup.IsOpen = false;
-        }
+        if (_targetMaskPopup is not null) _targetMaskPopup.IsOpen = false;
     }
 
     private void SetIsOpenSilently(bool isOpen)
@@ -1641,5 +1486,4 @@ public class Guide : TemplatedControl
         SetCurrentValue(IsOpenProperty, isOpen);
         _ignoreOpenChange = false;
     }
-
 }

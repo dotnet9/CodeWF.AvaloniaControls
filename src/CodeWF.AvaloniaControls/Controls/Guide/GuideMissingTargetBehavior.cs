@@ -6,4 +6,3 @@ public enum GuideMissingTargetBehavior
     Skip,
     Close
 }
-

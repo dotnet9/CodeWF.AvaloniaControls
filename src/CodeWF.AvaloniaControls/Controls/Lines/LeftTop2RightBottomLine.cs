@@ -29,10 +29,7 @@ public class LeftTop2RightBottomLine : Control
     public override void Render(DrawingContext context)
     {
         base.Render(context);
-        if (BorderThickness < 1)
-        {
-            return;
-        }
+        if (BorderThickness < 1) return;
 
         var rect = new Rect(Bounds.Size);
 

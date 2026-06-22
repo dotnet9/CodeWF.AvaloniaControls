@@ -16,22 +16,29 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <codewf:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
-        <codewf:IsCollectionEmptyConverter x:Key="IsCollectionEmptyConverter" />
 
         <SolidColorBrush x:Key="UnknownHealthBrush" Color="#F8FAFC" />
 
         <codewf:SwitchCases x:Key="HealthTitleCases">
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Healthy}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthHealthyTitle}}" />
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Delayed}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthDelayedTitle}}" />
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Failed}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthFailedTitle}}" />
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Locked}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthLockedTitle}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Healthy}"
+                               Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthHealthyTitle}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Delayed}"
+                               Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthDelayedTitle}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Failed}"
+                               Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthFailedTitle}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Locked}"
+                               Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthLockedTitle}}" />
         </codewf:SwitchCases>
 
         <codewf:SwitchCases x:Key="HealthDescriptionCases">
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Healthy}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthHealthyDesc}}" />
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Delayed}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthDelayedDesc}}" />
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Failed}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthFailedDesc}}" />
-            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Locked}" Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthLockedDesc}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Healthy}"
+                               Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthHealthyDesc}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Delayed}"
+                               Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthDelayedDesc}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Failed}"
+                               Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthFailedDesc}}" />
+            <codewf:SwitchCase When="{x:Static models:PipelineHealth.Locked}"
+                               Then="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.HealthLockedDesc}}" />
         </codewf:SwitchCases>
 
         <codewf:SwitchCases x:Key="HealthBrushCases">
@@ -69,7 +76,8 @@
                                    FontWeight="SemiBold"
                                    Foreground="#166534"
                                    Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.AutoPublishEnabled}}" />
-                        <TextBlock Foreground="#15803D" Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.AutoPublishEnabledDesc}}" />
+                        <TextBlock Foreground="#15803D"
+                                   Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.AutoPublishEnabledDesc}}" />
                     </StackPanel>
                 </Border>
             </codewf:IfConditionConverter.True>
@@ -84,7 +92,8 @@
                                    FontWeight="SemiBold"
                                    Foreground="#991B1B"
                                    Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.AutoPublishPaused}}" />
-                        <TextBlock Foreground="#B91C1C" Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.AutoPublishPausedDesc}}" />
+                        <TextBlock Foreground="#B91C1C"
+                                   Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.AutoPublishPausedDesc}}" />
                     </StackPanel>
                 </Border>
             </codewf:IfConditionConverter.False>
@@ -112,7 +121,8 @@
                 <Grid RowDefinitions="Auto,Auto,Auto,*" RowSpacing="16">
                     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                         <StackPanel Spacing="4">
-                            <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.PipelineConsole}}" />
+                            <TextBlock Classes="SectionTitle"
+                                       Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.PipelineConsole}}" />
                             <TextBlock Classes="Caption"
                                        Text="{Binding PipelineStatusText}" />
                         </StackPanel>
@@ -188,7 +198,8 @@
                                                 BorderBrush="{DynamicResource ShowcaseBorderBrush}"
                                                 BorderThickness="1"
                                                 CornerRadius="999">
-                                            <TextBlock Foreground="{DynamicResource ShowcaseTextBrush}" Text="{Binding}" />
+                                            <TextBlock Foreground="{DynamicResource ShowcaseTextBrush}"
+                                                       Text="{Binding}" />
                                         </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -201,7 +212,8 @@
             <Border Grid.Column="1" Classes="Panel" Padding="18">
                 <StackPanel Spacing="16">
                     <StackPanel Spacing="5">
-                        <TextBlock Classes="SectionTitle" Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.SwitchSourceTitle}}" />
+                        <TextBlock Classes="SectionTitle"
+                                   Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.SwitchSourceTitle}}" />
                         <TextBlock Classes="Caption"
                                    Text="{i18n:I18n {x:Static pageLangs:MarkupExtensionsDemo.SwitchSourceDesc}}" />
                     </StackPanel>

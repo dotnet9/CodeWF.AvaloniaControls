@@ -8,14 +8,14 @@ public class StatusBadge : TemplatedControl
     public static readonly StyledProperty<string?> LeftTextProperty =
         AvaloniaProperty.Register<StatusBadge, string?>(nameof(LeftText));
 
+    public static readonly StyledProperty<string?> RightTextProperty =
+        AvaloniaProperty.Register<StatusBadge, string?>(nameof(RightText));
+
     public string? LeftText
     {
         get => GetValue(LeftTextProperty);
         set => SetValue(LeftTextProperty, value);
     }
-
-    public static readonly StyledProperty<string?> RightTextProperty =
-        AvaloniaProperty.Register<StatusBadge, string?>(nameof(RightText));
 
     public string? RightText
     {

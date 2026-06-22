@@ -1,10 +1,10 @@
+using System.Globalization;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using CodeWF.AvaloniaControlsDemo.Views;
 using Lang.Avalonia;
 using Lang.Avalonia.Json;
-using System.Globalization;
 
 namespace CodeWF.AvaloniaControlsDemo;
 

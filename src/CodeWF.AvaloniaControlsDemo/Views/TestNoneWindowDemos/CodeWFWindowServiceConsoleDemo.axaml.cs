@@ -15,10 +15,7 @@ public partial class CodeWFWindowServiceConsoleDemo : CodeWFWindow
 
     private void SeedLogs()
     {
-        if (_seededLogs)
-        {
-            return;
-        }
+        if (_seededLogs) return;
 
         _seededLogs = true;
         Logger.EnableConsoleOutput = false;

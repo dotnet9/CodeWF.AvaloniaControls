@@ -79,7 +79,8 @@
                         BorderThickness="1"
                         CornerRadius="10">
                     <StackPanel Spacing="7">
-                        <TextBlock Foreground="White" FontWeight="SemiBold" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarBackgroundLabel}}" />
+                        <TextBlock Foreground="White" FontWeight="SemiBold"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarBackgroundLabel}}" />
                         <TextBlock Foreground="#94A3B8" Text="#111827" />
                     </StackPanel>
                 </Border>
@@ -90,7 +91,8 @@
                         BorderThickness="1"
                         CornerRadius="10">
                     <StackPanel Spacing="7">
-                        <TextBlock Foreground="White" FontWeight="SemiBold" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarForegroundLabel}}" />
+                        <TextBlock Foreground="White" FontWeight="SemiBold"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarForegroundLabel}}" />
                         <TextBlock Foreground="#94A3B8" Text="#F8FAFC" />
                     </StackPanel>
                 </Border>
@@ -101,8 +103,10 @@
                         BorderThickness="1"
                         CornerRadius="10">
                     <StackPanel Spacing="7">
-                        <TextBlock Foreground="White" FontWeight="SemiBold" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.RightContentLabel}}" />
-                        <TextBlock Foreground="#94A3B8" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarContent}}" />
+                        <TextBlock Foreground="White" FontWeight="SemiBold"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.RightContentLabel}}" />
+                        <TextBlock Foreground="#94A3B8"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarContent}}" />
                     </StackPanel>
                 </Border>
             </Grid>

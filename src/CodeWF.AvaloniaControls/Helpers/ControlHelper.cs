@@ -11,10 +11,7 @@ public static class ControlHelper
         while (parent != null)
         {
             parent = parent.GetVisualParent();
-            if (parent is T typedParent)
-            {
-                return typedParent;
-            }
+            if (parent is T typedParent) return typedParent;
         }
 
         return null;

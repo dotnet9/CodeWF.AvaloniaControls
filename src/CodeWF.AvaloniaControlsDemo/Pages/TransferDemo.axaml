@@ -44,12 +44,14 @@
                     <TextBox Grid.Column="1"
                              Text="{CompiledBinding ElementName=MyTransfer, Path=LeftHeader, Mode=TwoWay}" />
 
-                    <TextBlock Grid.Row="1" Classes="FormLabel" Text="{i18n:I18n {x:Static pageLangs:TransferDemo.RightTitleLabel}}" />
+                    <TextBlock Grid.Row="1" Classes="FormLabel"
+                               Text="{i18n:I18n {x:Static pageLangs:TransferDemo.RightTitleLabel}}" />
                     <TextBox Grid.Row="1"
                              Grid.Column="1"
                              Text="{CompiledBinding ElementName=MyTransfer, Path=RightHeader, Mode=TwoWay}" />
 
-                    <TextBlock Grid.Row="2" Classes="FormLabel" Text="{i18n:I18n {x:Static pageLangs:TransferDemo.SelectedLabel}}" />
+                    <TextBlock Grid.Row="2" Classes="FormLabel"
+                               Text="{i18n:I18n {x:Static pageLangs:TransferDemo.SelectedLabel}}" />
                     <Border Grid.Row="2"
                             Grid.Column="1"
                             Padding="12,8"

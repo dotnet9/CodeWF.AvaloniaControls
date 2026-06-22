@@ -30,8 +30,10 @@
                 <Grid RowDefinitions="Auto,*" RowSpacing="14">
                     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                         <StackPanel Spacing="5">
-                            <TextBlock Classes="PanelTitle" Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.HealthOverviewTitle}}" />
-                            <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.HealthOverviewDesc}}" />
+                            <TextBlock Classes="PanelTitle"
+                                       Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.HealthOverviewTitle}}" />
+                            <TextBlock Classes="Caption"
+                                       Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.HealthOverviewDesc}}" />
                         </StackPanel>
                         <Border Grid.Column="1"
                                 Padding="10,5"
@@ -125,21 +127,28 @@
                           RowSpacing="10">
                         <Border Classes="HealthRow">
                             <StackPanel Spacing="4">
-                                <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.CompactView}}" />
-                                <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.CompactViewDesc}}" />
+                                <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}"
+                                           Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.CompactView}}" />
+                                <TextBlock Classes="Caption"
+                                           Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.CompactViewDesc}}" />
                             </StackPanel>
                         </Border>
                         <Border Grid.Column="1" Classes="HealthRow">
                             <StackPanel Spacing="4">
-                                <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.AlertView}}" />
-                                <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.AlertViewDesc}}" />
+                                <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}"
+                                           Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.AlertView}}" />
+                                <TextBlock Classes="Caption"
+                                           Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.AlertViewDesc}}" />
                             </StackPanel>
                         </Border>
                         <Border Grid.Row="1" Grid.ColumnSpan="2" Classes="HealthRow">
                             <StackPanel Spacing="6">
-                                <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.ThemeResources}}" />
-                                <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.Usage2}}" />
-                                <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.Usage3}}" />
+                                <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}"
+                                           Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.ThemeResources}}" />
+                                <TextBlock Classes="Caption"
+                                           Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.Usage2}}" />
+                                <TextBlock Classes="Caption"
+                                           Text="{i18n:I18n {x:Static pageLangs:StatusCardDemo.Usage3}}" />
                             </StackPanel>
                         </Border>
                     </Grid>
@@ -148,4 +157,3 @@
         </Grid>
     </Grid>
 </UserControl>
-

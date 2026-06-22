@@ -4,7 +4,7 @@ namespace CodeWF.AvaloniaControls.Models;
 
 public static class StatusLabelKindBrushes
 {
-    public static Dictionary<StatusLabelKind, string> KindBorderBrushes = new Dictionary<StatusLabelKind, string>()
+    public static Dictionary<StatusLabelKind, string> KindBorderBrushes = new()
     {
         { StatusLabelKind.Debug, "#1890FF" },
         { StatusLabelKind.Info, "#52C41A" },
@@ -13,7 +13,7 @@ public static class StatusLabelKindBrushes
         { StatusLabelKind.Fatal, "#FF4D4F" }
     };
 
-    public static Dictionary<StatusLabelKind, string> KindBackgrounds = new Dictionary<StatusLabelKind, string>()
+    public static Dictionary<StatusLabelKind, string> KindBackgrounds = new()
     {
         { StatusLabelKind.Debug, "#E6F7FF" },
         { StatusLabelKind.Info, "#F6FFED" },
@@ -22,7 +22,7 @@ public static class StatusLabelKindBrushes
         { StatusLabelKind.Fatal, "#19FF4D4F" }
     };
 
-    public static Dictionary<StatusLabelKind, string> KindForCardForegrounds = new Dictionary<StatusLabelKind, string>()
+    public static Dictionary<StatusLabelKind, string> KindForCardForegrounds = new()
     {
         { StatusLabelKind.Debug, "#262626" },
         { StatusLabelKind.Info, "#262626" },

@@ -1,9 +1,7 @@
-﻿using Avalonia.Data.Converters;
+﻿using System.Globalization;
+using Avalonia.Data.Converters;
 using Avalonia.Media;
 using CodeWF.AvaloniaControls.Models;
-using System;
-using System.Globalization;
-using System.Linq;
 
 namespace CodeWF.AvaloniaControls.Themes.Converters;
 

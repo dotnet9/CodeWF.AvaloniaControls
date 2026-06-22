@@ -52,17 +52,21 @@
                                     <Setter Property="CornerRadius" Value="{StaticResource SemiBorderRadiusMedium}" />
                                 </Style>
                                 <Style Selector="ListBoxItem:pointerover">
-                                    <Setter Property="Background" Value="{DynamicResource ColumnDisplayEditorRowHoverBackground}" />
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource ColumnDisplayEditorRowHoverBackground}" />
                                 </Style>
                                 <Style Selector="ListBoxItem:selected">
-                                    <Setter Property="Background" Value="{DynamicResource ColumnDisplayEditorRowSelectedBackground}" />
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource ColumnDisplayEditorRowSelectedBackground}" />
                                 </Style>
                                 <Style Selector="ListBoxItem.drop-before">
-                                    <Setter Property="BorderBrush" Value="{DynamicResource ColumnDisplayEditorDropPreviewBrush}" />
+                                    <Setter Property="BorderBrush"
+                                            Value="{DynamicResource ColumnDisplayEditorDropPreviewBrush}" />
                                     <Setter Property="BorderThickness" Value="0,2,0,0" />
                                 </Style>
                                 <Style Selector="ListBoxItem.drop-after">
-                                    <Setter Property="BorderBrush" Value="{DynamicResource ColumnDisplayEditorDropPreviewBrush}" />
+                                    <Setter Property="BorderBrush"
+                                            Value="{DynamicResource ColumnDisplayEditorDropPreviewBrush}" />
                                     <Setter Property="BorderThickness" Value="0,0,0,2" />
                                 </Style>
                             </ListBox.Styles>

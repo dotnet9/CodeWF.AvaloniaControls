@@ -20,17 +20,19 @@
         x:Class="CodeWF.AvaloniaControlsDemo.Views.TestNoneWindowDemos.NativeWindowStarDemo"
         Title="{i18n:I18n {x:Static windowLangs:WindowDemos.NativeStarTitle}}">
     <Canvas Width="430" Height="430">
-        <Path Data="M 215 28 L 258 156 L 392 156 L 284 235 L 326 365 L 215 286 L 104 365 L 146 235 L 38 156 L 172 156 Z"
-              Fill="#082F49"
-              PointerPressed="Shape_OnPointerPressed"
-              Stroke="#38BDF8"
-              StrokeThickness="3" />
-        <Path Data="M 215 74 L 244 173 L 348 174 L 263 233 L 294 331 L 215 270 L 136 331 L 167 233 L 82 174 L 186 173 Z"
-              Fill="#0F766E"
-              Opacity="0.9"
-              PointerPressed="Shape_OnPointerPressed"
-              Stroke="#99F6E4"
-              StrokeThickness="1.5" />
+        <Path
+            Data="M 215 28 L 258 156 L 392 156 L 284 235 L 326 365 L 215 286 L 104 365 L 146 235 L 38 156 L 172 156 Z"
+            Fill="#082F49"
+            PointerPressed="Shape_OnPointerPressed"
+            Stroke="#38BDF8"
+            StrokeThickness="3" />
+        <Path
+            Data="M 215 74 L 244 173 L 348 174 L 263 233 L 294 331 L 215 270 L 136 331 L 167 233 L 82 174 L 186 173 Z"
+            Fill="#0F766E"
+            Opacity="0.9"
+            PointerPressed="Shape_OnPointerPressed"
+            Stroke="#99F6E4"
+            StrokeThickness="1.5" />
         <Button Canvas.Left="300"
                 Canvas.Top="145"
                 Classes="WindowCaptionButton WindowCloseButton WindowShapeCloseButton"

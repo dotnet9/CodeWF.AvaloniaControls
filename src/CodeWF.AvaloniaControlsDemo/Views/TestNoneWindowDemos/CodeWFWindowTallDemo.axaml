@@ -23,29 +23,40 @@
     <codewf:CodeWFWindow.LeftContent>
         <Grid Height="72" ColumnDefinitions="Auto" IsHitTestVisible="False">
             <Border Width="40" Height="40" VerticalAlignment="Center" Background="#2563EB" CornerRadius="10">
-                <Image Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/logo.png" />
+                <Image Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Source="/Assets/logo.png" />
             </Border>
         </Grid>
     </codewf:CodeWFWindow.LeftContent>
     <codewf:CodeWFWindow.RightContent>
-        <Border Padding="10,4" Background="#2222C55E" BorderBrush="#6622C55E" BorderThickness="1" CornerRadius="999" IsHitTestVisible="False">
+        <Border Padding="10,4" Background="#2222C55E" BorderBrush="#6622C55E" BorderThickness="1" CornerRadius="999"
+                IsHitTestVisible="False">
             <TextBlock FontSize="12" Foreground="#BBF7D0" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.Live}}" />
         </Border>
     </codewf:CodeWFWindow.RightContent>
 
     <Grid Margin="22" RowDefinitions="Auto,*" RowSpacing="16">
-        <Border Padding="18" Background="{DynamicResource ShowcaseCardBackground}" BorderBrush="{DynamicResource ShowcaseBorderBrush}" BorderThickness="1" CornerRadius="12">
+        <Border Padding="18" Background="{DynamicResource ShowcaseCardBackground}"
+                BorderBrush="{DynamicResource ShowcaseBorderBrush}" BorderThickness="1" CornerRadius="12">
             <StackPanel Spacing="8">
-                <TextBlock FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFTallHeading}}" />
-                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFTallDescription}}" TextWrapping="Wrap" />
+                <TextBlock FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFTallHeading}}" />
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CodeWFTallDescription}}"
+                           TextWrapping="Wrap" />
             </StackPanel>
         </Border>
         <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="12">
-            <Border Padding="16" Background="{DynamicResource ShowcaseCardBackground}" BorderBrush="{DynamicResource ShowcaseBorderBrush}" BorderThickness="1" CornerRadius="12">
-                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarContentDesc}}" TextWrapping="Wrap" />
+            <Border Padding="16" Background="{DynamicResource ShowcaseCardBackground}"
+                    BorderBrush="{DynamicResource ShowcaseBorderBrush}" BorderThickness="1" CornerRadius="12">
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarContentDesc}}"
+                           TextWrapping="Wrap" />
             </Border>
-            <Border Grid.Column="1" Padding="16" Background="{DynamicResource ShowcaseCardBackground}" BorderBrush="{DynamicResource ShowcaseBorderBrush}" BorderThickness="1" CornerRadius="12">
-                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.ResizeHotZones}}" TextWrapping="Wrap" />
+            <Border Grid.Column="1" Padding="16" Background="{DynamicResource ShowcaseCardBackground}"
+                    BorderBrush="{DynamicResource ShowcaseBorderBrush}" BorderThickness="1" CornerRadius="12">
+                <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                           Text="{i18n:I18n {x:Static windowLangs:WindowDemos.ResizeHotZones}}" TextWrapping="Wrap" />
             </Border>
         </Grid>
     </Grid>

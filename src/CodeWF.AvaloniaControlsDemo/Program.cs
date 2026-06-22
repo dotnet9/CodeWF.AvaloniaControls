@@ -1,6 +1,6 @@
+using System;
 using Avalonia;
 using ReactiveUI.Avalonia;
-using System;
 
 namespace CodeWF.AvaloniaControlsDemo;
 

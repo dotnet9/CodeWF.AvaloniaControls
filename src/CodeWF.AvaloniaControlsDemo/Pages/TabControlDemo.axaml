@@ -32,7 +32,8 @@
                     <StackPanel Spacing="4">
                         <TextBlock Classes="PanelTitle"
                                    Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.BusinessStyle}}" />
-                        <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.BusinessContentDesc}}" />
+                        <TextBlock Classes="Caption"
+                                   Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.BusinessContentDesc}}" />
                     </StackPanel>
                     <Border Grid.Column="1" Classes="StatusChip" VerticalAlignment="Top">
                         <TextBlock FontSize="12"
@@ -55,12 +56,14 @@
                                     Background="{DynamicResource ShowcaseSubtleBackground}"
                                     CornerRadius="10">
                                 <StackPanel Spacing="6">
-                                    <TextBlock Classes="PanelTitle" Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.DataQuality}}" />
+                                    <TextBlock Classes="PanelTitle"
+                                               Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.DataQuality}}" />
                                     <TextBlock FontSize="24"
                                                FontWeight="SemiBold"
                                                Foreground="{DynamicResource ShowcaseTextBrush}"
                                                Text="98.7%" />
-                                    <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.Last24hPassRate}}" />
+                                    <TextBlock Classes="Caption"
+                                               Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.Last24hPassRate}}" />
                                 </StackPanel>
                             </Border>
                             <Border Grid.Column="1"
@@ -68,12 +71,14 @@
                                     Background="{DynamicResource ShowcaseSubtleBackground}"
                                     CornerRadius="10">
                                 <StackPanel Spacing="6">
-                                    <TextBlock Classes="PanelTitle" Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.Pending}}" />
+                                    <TextBlock Classes="PanelTitle"
+                                               Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.Pending}}" />
                                     <TextBlock FontSize="24"
                                                FontWeight="SemiBold"
                                                Foreground="{DynamicResource ShowcaseWarningBrush}"
                                                Text="17" />
-                                    <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.ManualReviewRecords}}" />
+                                    <TextBlock Classes="Caption"
+                                               Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.ManualReviewRecords}}" />
                                 </StackPanel>
                             </Border>
                             <Border Grid.Column="2"
@@ -81,12 +86,14 @@
                                     Background="{DynamicResource ShowcaseSubtleBackground}"
                                     CornerRadius="10">
                                 <StackPanel Spacing="6">
-                                    <TextBlock Classes="PanelTitle" Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.SyncStatus}}" />
+                                    <TextBlock Classes="PanelTitle"
+                                               Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.SyncStatus}}" />
                                     <TextBlock FontSize="24"
                                                FontWeight="SemiBold"
                                                Foreground="{DynamicResource ShowcasePositiveBrush}"
                                                Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.Normal}}" />
-                                    <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.LastSync2Min}}" />
+                                    <TextBlock Classes="Caption"
+                                               Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.LastSync2Min}}" />
                                 </StackPanel>
                             </Border>
                         </Grid>
@@ -121,7 +128,8 @@
                 <StackPanel Spacing="4">
                     <TextBlock Classes="PanelTitle"
                                Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.BrandStyle}}" />
-                    <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.BrandContentDesc}}" />
+                    <TextBlock Classes="Caption"
+                               Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.BrandContentDesc}}" />
                 </StackPanel>
                 <TabControl Grid.Row="1"
                             Classes="BrandTabs"
@@ -138,8 +146,10 @@
                                 CornerRadius="10">
                             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                                 <StackPanel Spacing="6">
-                                    <TextBlock Classes="PanelTitle" Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.BrandContentTitle}}" />
-                                    <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.BrandContentBody}}" />
+                                    <TextBlock Classes="PanelTitle"
+                                               Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.BrandContentTitle}}" />
+                                    <TextBlock Classes="Caption"
+                                               Text="{i18n:I18n {x:Static pageLangs:TabControlDemo.BrandContentBody}}" />
                                 </StackPanel>
                                 <Button Grid.Column="1"
                                         Padding="14,0"
@@ -157,4 +167,3 @@
         </Border>
     </Grid>
 </UserControl>
-

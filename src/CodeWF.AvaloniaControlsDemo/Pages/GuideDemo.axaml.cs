@@ -1,5 +1,6 @@
 using System;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Threading;
 using CodeWF.AvaloniaControls.Controls;
 
@@ -12,24 +13,24 @@ public partial class GuideDemo : UserControl
         InitializeComponent();
     }
 
-    private void BeginBasicGuide_OnClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void BeginBasicGuide_OnClick(object? sender, RoutedEventArgs e)
     {
         BasicGuide.Show();
     }
 
-    private void BeginNonMaskGuide_OnClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void BeginNonMaskGuide_OnClick(object? sender, RoutedEventArgs e)
     {
         NonMaskGuide.Show();
     }
 
-    private void BeginDynamicGuide_OnClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void BeginDynamicGuide_OnClick(object? sender, RoutedEventArgs e)
     {
         DynamicGuide.GoTo(0);
         GuideThemeMenu.IsSubMenuOpen = false;
         Dispatcher.UIThread.Post(() => DynamicGuide.Show(), DispatcherPriority.Loaded);
     }
 
-    private void SkipBasicGuide_OnClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void SkipBasicGuide_OnClick(object? sender, RoutedEventArgs e)
     {
         BasicGuide.Close();
     }
@@ -47,10 +48,7 @@ public partial class GuideDemo : UserControl
     private void SetDynamicGuideMenuOpen(bool isOpen)
     {
         GuideThemeMenu.IsSubMenuOpen = isOpen;
-        if (!isOpen)
-        {
-            return;
-        }
+        if (!isOpen) return;
 
         Dispatcher.UIThread.Post(() => GuideThemeMenu.IsSubMenuOpen = true, DispatcherPriority.Background);
     }

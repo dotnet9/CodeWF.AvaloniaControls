@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:CodeWF.AvaloniaControlsDemo.ViewModels"
-             xmlns:model="clr-namespace:CodeWF.AvaloniaControlsDemo.Models"
              xmlns:u="https://irihi.tech/ursa"
              xmlns:i18n="https://codewf.com"
              xmlns:pageLangs="clr-namespace:Showcase.Pages"
@@ -38,8 +37,10 @@
                 <Grid RowDefinitions="Auto,Auto,*" RowSpacing="16">
                     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                         <StackPanel Spacing="5">
-                            <TextBlock Classes="PanelTitle" Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.ToolbarTitle}}" />
-                            <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.ToolbarDescription}}" />
+                            <TextBlock Classes="PanelTitle"
+                                       Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.ToolbarTitle}}" />
+                            <TextBlock Classes="Caption"
+                                       Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.ToolbarDescription}}" />
                         </StackPanel>
                         <Border Grid.Column="1" Classes="StatePill" VerticalAlignment="Top">
                             <TextBlock FontSize="12"
@@ -56,21 +57,27 @@
                             BorderThickness="1"
                             CornerRadius="10">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="18">
-                            <u:IconButton Content="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.New}}" IconPlacement="Top" VerticalAlignment="Top" Padding="0">
+                            <u:IconButton Content="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.New}}"
+                                          IconPlacement="Top" VerticalAlignment="Top" Padding="0">
                                 <u:IconButton.Icon>
-                                    <Rectangle Width="24" Height="24" Margin="0,0,0,-4" HorizontalAlignment="Center" Fill="#EF4444" />
+                                    <Rectangle Width="24" Height="24" Margin="0,0,0,-4" HorizontalAlignment="Center"
+                                               Fill="#EF4444" />
                                 </u:IconButton.Icon>
                             </u:IconButton>
 
                             <Grid>
-                                <u:IconButton Content="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Configure}}" IconPlacement="Top">
+                                <u:IconButton Content="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Configure}}"
+                                              IconPlacement="Top">
                                     <u:IconButton.Icon>
-                                        <Rectangle Width="24" Height="24" Margin="0,0,0,5" HorizontalAlignment="Center" Fill="#F59E0B" />
+                                        <Rectangle Width="24" Height="24" Margin="0,0,0,5" HorizontalAlignment="Center"
+                                                   Fill="#F59E0B" />
                                     </u:IconButton.Icon>
                                 </u:IconButton>
-                                <u:PopConfirm PopupHeader="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.PopupHeader}}" Placement="Bottom">
+                                <u:PopConfirm PopupHeader="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.PopupHeader}}"
+                                              Placement="Bottom">
                                     <u:PopConfirm.PopupContent>
-                                        <TextBox Watermark="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.PopupWatermark}}" />
+                                        <TextBox
+                                            Watermark="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.PopupWatermark}}" />
                                     </u:PopConfirm.PopupContent>
                                     <Button VerticalAlignment="Bottom"
                                             HorizontalAlignment="Stretch"
@@ -86,15 +93,19 @@
                                 </u:PopConfirm>
                             </Grid>
 
-                            <u:IconButton Content="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Edit}}" IconPlacement="Top">
+                            <u:IconButton Content="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Edit}}"
+                                          IconPlacement="Top">
                                 <u:IconButton.Icon>
-                                    <Rectangle Width="24" Height="24" Margin="0,0,0,5" HorizontalAlignment="Center" Fill="#3B82F6" />
+                                    <Rectangle Width="24" Height="24" Margin="0,0,0,5" HorizontalAlignment="Center"
+                                               Fill="#3B82F6" />
                                 </u:IconButton.Icon>
                             </u:IconButton>
 
-                            <u:IconButton Content="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Refresh}}" IconPlacement="Top">
+                            <u:IconButton Content="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.Refresh}}"
+                                          IconPlacement="Top">
                                 <u:IconButton.Icon>
-                                    <Rectangle Width="24" Height="24" Margin="0,0,0,5" HorizontalAlignment="Center" Fill="#10B981" />
+                                    <Rectangle Width="24" Height="24" Margin="0,0,0,5" HorizontalAlignment="Center"
+                                               Fill="#10B981" />
                                 </u:IconButton.Icon>
                             </u:IconButton>
 
@@ -139,18 +150,24 @@
                                            Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.FilterResultTitle}}" />
                                 <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
                                     <Ellipse Width="8" Height="8" VerticalAlignment="Center" Fill="#EF4444" />
-                                    <TextBlock Grid.Column="1" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.FilterDelayed}}" />
-                                    <TextBlock Grid.Column="2" Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="12" />
+                                    <TextBlock Grid.Column="1" Foreground="{DynamicResource ShowcaseTextBrush}"
+                                               Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.FilterDelayed}}" />
+                                    <TextBlock Grid.Column="2" Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                               Text="12" />
                                 </Grid>
                                 <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
                                     <Ellipse Width="8" Height="8" VerticalAlignment="Center" Fill="#F59E0B" />
-                                    <TextBlock Grid.Column="1" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.FilterPendingConfig}}" />
-                                    <TextBlock Grid.Column="2" Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="4" />
+                                    <TextBlock Grid.Column="1" Foreground="{DynamicResource ShowcaseTextBrush}"
+                                               Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.FilterPendingConfig}}" />
+                                    <TextBlock Grid.Column="2" Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                               Text="4" />
                                 </Grid>
                                 <Grid Grid.Row="3" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
                                     <Ellipse Width="8" Height="8" VerticalAlignment="Center" Fill="#10B981" />
-                                    <TextBlock Grid.Column="1" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.FilterNormal}}" />
-                                    <TextBlock Grid.Column="2" Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="38" />
+                                    <TextBlock Grid.Column="1" Foreground="{DynamicResource ShowcaseTextBrush}"
+                                               Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.FilterNormal}}" />
+                                    <TextBlock Grid.Column="2" Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                               Text="38" />
                                 </Grid>
                             </Grid>
                         </Border>
@@ -176,7 +193,8 @@
                             <TextBlock FontWeight="SemiBold"
                                        Foreground="{DynamicResource ShowcaseTextBrush}"
                                        Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.CurrentPolicyTitle}}" />
-                            <TextBlock Classes="Caption" Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.CurrentPolicyDescription}}" />
+                            <TextBlock Classes="Caption"
+                                       Text="{i18n:I18n {x:Static pageLangs:VComboBoxDemo.CurrentPolicyDescription}}" />
                             <Border Classes="StatePill" HorizontalAlignment="Left">
                                 <TextBlock FontSize="12"
                                            FontWeight="SemiBold"
@@ -190,5 +208,3 @@
         </Grid>
     </Grid>
 </UserControl>
-
-

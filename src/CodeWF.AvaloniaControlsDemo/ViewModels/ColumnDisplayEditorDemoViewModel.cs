@@ -1,20 +1,20 @@
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
 using CodeWF.AvaloniaControls.Extensions;
 using CodeWF.AvaloniaControls.Models;
 using CodeWF.AvaloniaControlsDemo.Services;
 using Lang.Avalonia;
 using ReactiveUI;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using PageLangs = Showcase.Pages.ColumnDisplayEditorDemo;
 
 namespace CodeWF.AvaloniaControlsDemo.ViewModels;
 
 public sealed class ColumnDisplayEditorDemoViewModel : ReactiveObject
 {
-    private bool _reloadingText;
     private string _previewText = string.Empty;
+    private bool _reloadingText;
 
     public ColumnDisplayEditorDemoViewModel()
     {
@@ -33,26 +33,15 @@ public sealed class ColumnDisplayEditorDemoViewModel : ReactiveObject
 
     private void Items_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        if (_reloadingText)
-        {
-            return;
-        }
+        if (_reloadingText) return;
 
         if (e.OldItems is not null)
-        {
             foreach (ColumnDisplayItem item in e.OldItems)
-            {
                 item.PropertyChanged -= Item_OnPropertyChanged;
-            }
-        }
 
         if (e.NewItems is not null)
-        {
             foreach (ColumnDisplayItem item in e.NewItems)
-            {
                 item.PropertyChanged += Item_OnPropertyChanged;
-            }
-        }
 
         UpdatePreviewText();
     }
@@ -77,10 +66,7 @@ public sealed class ColumnDisplayEditorDemoViewModel : ReactiveObject
                 .Concat(GetColumnDefinitions().Where(item => !orderedKeys.Contains(item.Key)))
                 .ToList();
 
-            foreach (var item in Items)
-            {
-                item.PropertyChanged -= Item_OnPropertyChanged;
-            }
+            foreach (var item in Items) item.PropertyChanged -= Item_OnPropertyChanged;
 
             Items.Clear();
             Items.AddRange(sortedDefinitions.Select(item =>
@@ -89,10 +75,7 @@ public sealed class ColumnDisplayEditorDemoViewModel : ReactiveObject
                     item.DisplayText,
                     currentState.TryGetValue(item.Key, out var visible) ? visible : item.Visible)));
 
-            foreach (var item in Items)
-            {
-                item.PropertyChanged += Item_OnPropertyChanged;
-            }
+            foreach (var item in Items) item.PropertyChanged += Item_OnPropertyChanged;
         }
         finally
         {
@@ -125,18 +108,18 @@ public sealed class ColumnDisplayEditorDemoViewModel : ReactiveObject
     {
         return
         [
-            new("RecordId", LocalizationService.Get(PageLangs.ColumnRecordId), true),
-            new("Title", LocalizationService.Get(PageLangs.ColumnTitle), true),
-            new("Category", LocalizationService.Get(PageLangs.ColumnCategory), true),
-            new("Owner", LocalizationService.Get(PageLangs.ColumnOwner), true),
-            new("Priority", LocalizationService.Get(PageLangs.ColumnPriority), true),
-            new("Status", LocalizationService.Get(PageLangs.ColumnStatus), true),
-            new("CreatedAt", LocalizationService.Get(PageLangs.ColumnCreatedAt), true),
-            new("UpdatedAt", LocalizationService.Get(PageLangs.ColumnUpdatedAt), true),
-            new("DueDate", LocalizationService.Get(PageLangs.ColumnDueDate), false),
-            new("Tags", LocalizationService.Get(PageLangs.ColumnTags), true),
-            new("Summary", LocalizationService.Get(PageLangs.ColumnSummary), true),
-            new("Notes", LocalizationService.Get(PageLangs.ColumnNotes), false)
+            new ColumnDisplayItem("RecordId", LocalizationService.Get(PageLangs.ColumnRecordId)),
+            new ColumnDisplayItem("Title", LocalizationService.Get(PageLangs.ColumnTitle)),
+            new ColumnDisplayItem("Category", LocalizationService.Get(PageLangs.ColumnCategory)),
+            new ColumnDisplayItem("Owner", LocalizationService.Get(PageLangs.ColumnOwner)),
+            new ColumnDisplayItem("Priority", LocalizationService.Get(PageLangs.ColumnPriority)),
+            new ColumnDisplayItem("Status", LocalizationService.Get(PageLangs.ColumnStatus)),
+            new ColumnDisplayItem("CreatedAt", LocalizationService.Get(PageLangs.ColumnCreatedAt)),
+            new ColumnDisplayItem("UpdatedAt", LocalizationService.Get(PageLangs.ColumnUpdatedAt)),
+            new ColumnDisplayItem("DueDate", LocalizationService.Get(PageLangs.ColumnDueDate), false),
+            new ColumnDisplayItem("Tags", LocalizationService.Get(PageLangs.ColumnTags)),
+            new ColumnDisplayItem("Summary", LocalizationService.Get(PageLangs.ColumnSummary)),
+            new ColumnDisplayItem("Notes", LocalizationService.Get(PageLangs.ColumnNotes), false)
         ];
     }
 }

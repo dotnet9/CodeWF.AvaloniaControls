@@ -74,100 +74,100 @@
                                             BorderBrush="{TemplateBinding TitleBarBorderBrush}"
                                             BorderThickness="{TemplateBinding TitleBarBorderThickness}">
                                             <Grid ColumnDefinitions="*,Auto">
-                                            <codewf:CodeWFTitleBar
-                                                Name="PART_TitleBar"
-                                                Grid.Column="0"
-                                                HorizontalAlignment="Stretch"
-                                                VerticalAlignment="Stretch"
-                                                Background="Transparent"
-                                                BorderThickness="0"
-                                                CenterContent="{TemplateBinding TitleBarContent}"
-                                                CenterContentTemplate="{TemplateBinding TitleBarContentTemplate}"
-                                                Foreground="{TemplateBinding TitleBarForeground}"
-                                                Icon="{TemplateBinding Icon}"
-                                                LeftContent="{TemplateBinding LeftContent}"
-                                                LeftContentTemplate="{TemplateBinding LeftContentTemplate}"
-                                                Padding="{StaticResource CodeWFWindowTitleBarContentPadding}"
-                                                RightContent="{TemplateBinding RightContent}"
-                                                RightContentTemplate="{TemplateBinding RightContentTemplate}"
-                                                Title="{TemplateBinding Title}" />
+                                                <codewf:CodeWFTitleBar
+                                                    Name="PART_TitleBar"
+                                                    Grid.Column="0"
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch"
+                                                    Background="Transparent"
+                                                    BorderThickness="0"
+                                                    CenterContent="{TemplateBinding TitleBarContent}"
+                                                    CenterContentTemplate="{TemplateBinding TitleBarContentTemplate}"
+                                                    Foreground="{TemplateBinding TitleBarForeground}"
+                                                    Icon="{TemplateBinding Icon}"
+                                                    LeftContent="{TemplateBinding LeftContent}"
+                                                    LeftContentTemplate="{TemplateBinding LeftContentTemplate}"
+                                                    Padding="{StaticResource CodeWFWindowTitleBarContentPadding}"
+                                                    RightContent="{TemplateBinding RightContent}"
+                                                    RightContentTemplate="{TemplateBinding RightContentTemplate}"
+                                                    Title="{TemplateBinding Title}" />
 
-                                            <StackPanel
-                                                Grid.Column="1"
-                                                HorizontalAlignment="Right"
-                                                VerticalAlignment="Top"
-                                                Height="{StaticResource CaptionButtonHeight}"
-                                                Orientation="Horizontal">
-                                                <Button
-                                                    Name="PART_FullScreenButton"
-                                                    Classes="caption-button"
-                                                    IsVisible="{TemplateBinding IsFullScreenButtonVisible}"
-                                                    WindowDecorationProperties.ElementRole="FullScreenButton">
-                                                    <Grid Width="12" Height="12">
+                                                <StackPanel
+                                                    Grid.Column="1"
+                                                    HorizontalAlignment="Right"
+                                                    VerticalAlignment="Top"
+                                                    Height="{StaticResource CaptionButtonHeight}"
+                                                    Orientation="Horizontal">
+                                                    <Button
+                                                        Name="PART_FullScreenButton"
+                                                        Classes="caption-button"
+                                                        IsVisible="{TemplateBinding IsFullScreenButtonVisible}"
+                                                        WindowDecorationProperties.ElementRole="FullScreenButton">
+                                                        <Grid Width="12" Height="12">
+                                                            <Path
+                                                                Classes="fullscreen-glyph"
+                                                                Data="M 1 5 L 1 1 L 5 1 M 7 1 L 11 1 L 11 5 M 11 7 L 11 11 L 7 11 M 5 11 L 1 11 L 1 7"
+                                                                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                                StrokeLineCap="Round"
+                                                                StrokeThickness="1.4"
+                                                                Stretch="Uniform" />
+                                                            <Path
+                                                                Classes="exit-fullscreen-glyph"
+                                                                Data="M 5 1 L 5 5 L 1 5 M 7 1 L 7 5 L 11 5 M 11 7 L 7 7 L 7 11 M 1 7 L 5 7 L 5 11"
+                                                                IsVisible="False"
+                                                                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                                StrokeLineCap="Round"
+                                                                StrokeThickness="1.4"
+                                                                Stretch="Uniform" />
+                                                        </Grid>
+                                                    </Button>
+                                                    <Button
+                                                        Name="PART_MinimizeButton"
+                                                        Classes="caption-button"
+                                                        IsVisible="{TemplateBinding IsMinimizeButtonVisible}"
+                                                        WindowDecorationProperties.ElementRole="MinimizeButton">
+                                                        <Border
+                                                            Width="12"
+                                                            Height="1.6"
+                                                            Background="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                            CornerRadius="1" />
+                                                    </Button>
+                                                    <Button
+                                                        Name="PART_MaximizeRestoreButton"
+                                                        Classes="caption-button"
+                                                        IsVisible="{TemplateBinding IsRestoreButtonVisible}"
+                                                        WindowDecorationProperties.ElementRole="MaximizeButton">
+                                                        <Grid Width="12" Height="12">
+                                                            <Path
+                                                                Classes="maximize-glyph"
+                                                                Data="M 1 1 L 11 1 L 11 11 L 1 11 Z"
+                                                                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                                StrokeThickness="1.4"
+                                                                Stretch="Uniform" />
+                                                            <Path
+                                                                Classes="restore-glyph"
+                                                                Data="M 4 1 L 11 1 L 11 8 M 1 4 L 8 4 L 8 11 L 1 11 Z"
+                                                                IsVisible="False"
+                                                                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                                StrokeThickness="1.4"
+                                                                Stretch="Uniform" />
+                                                        </Grid>
+                                                    </Button>
+                                                    <Button
+                                                        Name="PART_CloseButton"
+                                                        Classes="caption-button close-button"
+                                                        IsVisible="{TemplateBinding IsCloseButtonVisible}"
+                                                        WindowDecorationProperties.ElementRole="CloseButton">
                                                         <Path
-                                                            Classes="fullscreen-glyph"
-                                                            Data="M 1 5 L 1 1 L 5 1 M 7 1 L 11 1 L 11 5 M 11 7 L 11 11 L 7 11 M 5 11 L 1 11 L 1 7"
+                                                            Width="12"
+                                                            Height="12"
+                                                            Data="M 1 1 L 11 11 M 11 1 L 1 11"
                                                             Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
                                                             StrokeLineCap="Round"
-                                                            StrokeThickness="1.4"
+                                                            StrokeThickness="1.6"
                                                             Stretch="Uniform" />
-                                                        <Path
-                                                            Classes="exit-fullscreen-glyph"
-                                                            Data="M 5 1 L 5 5 L 1 5 M 7 1 L 7 5 L 11 5 M 11 7 L 7 7 L 7 11 M 1 7 L 5 7 L 5 11"
-                                                            IsVisible="False"
-                                                            Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                            StrokeLineCap="Round"
-                                                            StrokeThickness="1.4"
-                                                            Stretch="Uniform" />
-                                                    </Grid>
-                                                </Button>
-                                                <Button
-                                                    Name="PART_MinimizeButton"
-                                                    Classes="caption-button"
-                                                    IsVisible="{TemplateBinding IsMinimizeButtonVisible}"
-                                                    WindowDecorationProperties.ElementRole="MinimizeButton">
-                                                    <Border
-                                                        Width="12"
-                                                        Height="1.6"
-                                                        Background="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                        CornerRadius="1" />
-                                                </Button>
-                                                <Button
-                                                    Name="PART_MaximizeRestoreButton"
-                                                    Classes="caption-button"
-                                                    IsVisible="{TemplateBinding IsRestoreButtonVisible}"
-                                                    WindowDecorationProperties.ElementRole="MaximizeButton">
-                                                    <Grid Width="12" Height="12">
-                                                        <Path
-                                                            Classes="maximize-glyph"
-                                                            Data="M 1 1 L 11 1 L 11 11 L 1 11 Z"
-                                                            Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                            StrokeThickness="1.4"
-                                                            Stretch="Uniform" />
-                                                        <Path
-                                                            Classes="restore-glyph"
-                                                            Data="M 4 1 L 11 1 L 11 8 M 1 4 L 8 4 L 8 11 L 1 11 Z"
-                                                            IsVisible="False"
-                                                            Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                            StrokeThickness="1.4"
-                                                            Stretch="Uniform" />
-                                                    </Grid>
-                                                </Button>
-                                                <Button
-                                                    Name="PART_CloseButton"
-                                                    Classes="caption-button close-button"
-                                                    IsVisible="{TemplateBinding IsCloseButtonVisible}"
-                                                    WindowDecorationProperties.ElementRole="CloseButton">
-                                                    <Path
-                                                        Width="12"
-                                                        Height="12"
-                                                        Data="M 1 1 L 11 11 M 11 1 L 1 11"
-                                                        Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
-                                                        StrokeLineCap="Round"
-                                                        StrokeThickness="1.6"
-                                                        Stretch="Uniform" />
-                                                </Button>
-                                            </StackPanel>
+                                                    </Button>
+                                                </StackPanel>
                                             </Grid>
                                         </Border>
                                     </Border>
@@ -294,7 +294,8 @@
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="CornerRadius" Value="{StaticResource CaptionButtonCornerRadius}" />
-            <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource TemplatedParent}}" />
+            <Setter Property="Foreground"
+                    Value="{Binding TitleBarForeground, RelativeSource={RelativeSource TemplatedParent}}" />
             <Setter Property="Template">
                 <ControlTemplate TargetType="Button">
                     <Border

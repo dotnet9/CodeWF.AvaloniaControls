@@ -8,8 +8,7 @@ using CodeWF.AvaloniaControlsDemo.Pages;
 using Lang.Avalonia;
 using ReactiveUI;
 using Semi.Avalonia;
-
-using MainWindowLangs = global::Showcase.Main.MainWindow;
+using MainWindowLangs = Showcase.Main.MainWindow;
 
 namespace CodeWF.AvaloniaControlsDemo.ViewModels;
 
@@ -29,31 +28,33 @@ public sealed class MainWindowViewModel : ReactiveObject
         Languages = CreateLanguages(I18nManager.Instance.GetLanguages()?.Select(language => language.CultureName));
         ThemeOptions =
         [
-            new("Light", "浅色", ThemeVariant.Light),
-            new("Dark", "深色", ThemeVariant.Dark),
-            new("Aquatic", "水生", Aquatic),
-            new("Desert", "沙漠", SemiTheme.Desert),
-            new("Dusk", "黄昏", Dusk),
-            new("NightSky", "夜空", SemiTheme.NightSky)
+            new ShowcaseThemeOption("Light", "浅色", ThemeVariant.Light),
+            new ShowcaseThemeOption("Dark", "深色", ThemeVariant.Dark),
+            new ShowcaseThemeOption("Aquatic", "水生", Aquatic),
+            new ShowcaseThemeOption("Desert", "沙漠", SemiTheme.Desert),
+            new ShowcaseThemeOption("Dusk", "黄昏", Dusk),
+            new ShowcaseThemeOption("NightSky", "夜空", SemiTheme.NightSky)
         ];
 
         _selectedTheme = ThemeOptions.FirstOrDefault();
         _selectedLanguage = Languages.FirstOrDefault(l => l.CultureName == I18nManager.Instance.Culture?.Name)
-            ?? Languages.FirstOrDefault();
+                            ?? Languages.FirstOrDefault();
 
         _pages =
         [
-            new(MainWindowLangs.TabOverview, "Overview", new OverviewDemo()),
-            new("ColumnDisplayEditor", "Column Display Editor", new ColumnDisplayEditorDemo()),
-            new(MainWindowLangs.TabTransfer, "Transfer", new TransferDemo()),
-            new(MainWindowLangs.TabVComboBox, "VComboBox", new VComboBoxDemo()),
-            new(MainWindowLangs.TabTabControl, "TabControl", new TabControlDemo()),
-            new(MainWindowLangs.TabGuide, "Guide Tour 引导", new GuideDemo()),
-            new(MainWindowLangs.TabStatusBadge, "StatusBadge", new StatusBadgeDemo()),
-            new(MainWindowLangs.TabStatusCard, "StatusCard", new StatusCardDemo()),
-            new(MainWindowLangs.TabMarkup, "MarkupExtensions If Switch Converter", new MarkupExtensionsDemo()),
-            new(MainWindowLangs.TabAnimatedImage, "AnimatedImage GIF", new AnimatedImageDemo()),
-            new(MainWindowLangs.TabWindowDemos, "Window UrsaWindow CodeWFWindow", new TestNoneWindowDemo())
+            new ShowcasePageItem(MainWindowLangs.TabOverview, "Overview", new OverviewDemo()),
+            new ShowcasePageItem("ColumnDisplayEditor", "Column Display Editor", new ColumnDisplayEditorDemo()),
+            new ShowcasePageItem(MainWindowLangs.TabTransfer, "Transfer", new TransferDemo()),
+            new ShowcasePageItem(MainWindowLangs.TabVComboBox, "VComboBox", new VComboBoxDemo()),
+            new ShowcasePageItem(MainWindowLangs.TabTabControl, "TabControl", new TabControlDemo()),
+            new ShowcasePageItem(MainWindowLangs.TabGuide, "Guide Tour 引导", new GuideDemo()),
+            new ShowcasePageItem(MainWindowLangs.TabStatusBadge, "StatusBadge", new StatusBadgeDemo()),
+            new ShowcasePageItem(MainWindowLangs.TabStatusCard, "StatusCard", new StatusCardDemo()),
+            new ShowcasePageItem(MainWindowLangs.TabMarkup, "MarkupExtensions If Switch Converter",
+                new MarkupExtensionsDemo()),
+            new ShowcasePageItem(MainWindowLangs.TabAnimatedImage, "AnimatedImage GIF", new AnimatedImageDemo()),
+            new ShowcasePageItem(MainWindowLangs.TabWindowDemos, "Window UrsaWindow CodeWFWindow",
+                new TestNoneWindowDemo())
         ];
 
         _selectedPage = FilteredPages.FirstOrDefault();
@@ -96,10 +97,7 @@ public sealed class MainWindowViewModel : ReactiveObject
         set
         {
             this.RaiseAndSetIfChanged(ref _selectedLanguage, value);
-            if (value is null)
-            {
-                return;
-            }
+            if (value is null) return;
 
             I18nManager.Instance.Culture = new CultureInfo(value.CultureName);
             this.RaisePropertyChanged(nameof(CurrentCultureName));
@@ -118,19 +116,13 @@ public sealed class MainWindowViewModel : ReactiveObject
         set
         {
             this.RaiseAndSetIfChanged(ref _selectedTheme, value);
-            if (value is not null && Application.Current is { } app)
-            {
-                app.RequestedThemeVariant = value.ThemeVariant;
-            }
+            if (value is not null && Application.Current is { } app) app.RequestedThemeVariant = value.ThemeVariant;
         }
     }
 
     private void OnCultureChanged(object? sender, EventArgs e)
     {
-        foreach (var page in _pages)
-        {
-            page.Refresh();
-        }
+        foreach (var page in _pages) page.Refresh();
 
         this.RaisePropertyChanged(nameof(FilteredPages));
         this.RaisePropertyChanged(nameof(HasNoMatches));
@@ -143,10 +135,7 @@ public sealed class MainWindowViewModel : ReactiveObject
     private void EnsureSelectedPageIsVisible()
     {
         var filteredPages = FilteredPages;
-        if (SelectedPage is not null && filteredPages.Contains(SelectedPage))
-        {
-            return;
-        }
+        if (SelectedPage is not null && filteredPages.Contains(SelectedPage)) return;
 
         SelectedPage = filteredPages.FirstOrDefault();
     }
@@ -185,14 +174,17 @@ public sealed class MainWindowViewModel : ReactiveObject
         }
     }
 
-    private static int GetSortOrder(LocalizationLanguage language) => language.CultureName switch
+    private static int GetSortOrder(LocalizationLanguage language)
     {
-        "zh-CN" => 0,
-        "zh-Hant" => 1,
-        "en-US" => 2,
-        "ja-JP" => 3,
-        _ => 4
-    };
+        return language.CultureName switch
+        {
+            "zh-CN" => 0,
+            "zh-Hant" => 1,
+            "en-US" => 2,
+            "ja-JP" => 3,
+            _ => 4
+        };
+    }
 }
 
 public sealed record ShowcaseThemeOption(string Name, string DisplayName, ThemeVariant ThemeVariant);

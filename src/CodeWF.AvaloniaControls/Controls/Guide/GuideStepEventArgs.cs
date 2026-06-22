@@ -10,4 +10,3 @@ public class GuideStepEventArgs(int index, IGuideStepOption step) : EventArgs
 
     public bool Cancel { get; set; }
 }
-

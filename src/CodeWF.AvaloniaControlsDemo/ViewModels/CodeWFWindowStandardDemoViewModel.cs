@@ -5,19 +5,19 @@ namespace CodeWF.AvaloniaControlsDemo.ViewModels;
 
 public sealed class CodeWFWindowStandardDemoViewModel : ReactiveObject
 {
+    private bool _applyTitleBarMargin;
+    private bool _canMaximize = true;
+    private bool _canResize = true;
+    private bool _contentExtendsIntoTitleBar;
+    private bool _isCloseButtonVisible = true;
     private bool _isFullScreenButtonVisible;
+    private bool _isManagedResizerVisible = true;
     private bool _isMinimizeButtonVisible = true;
     private bool _isRestoreButtonVisible = true;
-    private bool _isCloseButtonVisible = true;
     private bool _isTitleBarVisible = true;
-    private bool _isManagedResizerVisible = true;
-    private bool _canResize = true;
-    private bool _canMaximize = true;
-    private bool _useCustomLeftContent = true;
-    private bool _showTitleBarContent = true;
     private bool _showRightContent = true;
-    private bool _contentExtendsIntoTitleBar;
-    private bool _applyTitleBarMargin;
+    private bool _showTitleBarContent = true;
+    private bool _useCustomLeftContent = true;
 
     public bool IsFullScreenButtonVisible
     {

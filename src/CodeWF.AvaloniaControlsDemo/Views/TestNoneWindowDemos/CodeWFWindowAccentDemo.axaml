@@ -78,15 +78,21 @@
                 <Grid ColumnDefinitions="*,*"
                       ColumnSpacing="14">
                     <StackPanel Spacing="8">
-                        <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CustomProperties}}" />
-                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarBrushes}}" />
-                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarSlotsLabel}}" />
+                        <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.CustomProperties}}" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarBrushes}}" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.TitleBarSlotsLabel}}" />
                     </StackPanel>
                     <StackPanel Grid.Column="1"
                                 Spacing="8">
-                        <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.WindowBehavior}}" />
-                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.DoubleClickMaximize}}" />
-                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}" Text="{i18n:I18n {x:Static windowLangs:WindowDemos.ResizeHotZones}}" />
+                        <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource ShowcaseTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.WindowBehavior}}" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.DoubleClickMaximize}}" />
+                        <TextBlock Foreground="{DynamicResource ShowcaseMutedTextBrush}"
+                                   Text="{i18n:I18n {x:Static windowLangs:WindowDemos.ResizeHotZones}}" />
                     </StackPanel>
                 </Grid>
             </Border>

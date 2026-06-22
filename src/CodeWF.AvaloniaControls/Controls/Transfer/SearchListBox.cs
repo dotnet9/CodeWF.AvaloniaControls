@@ -1,13 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Threading;
 using CodeWF.AvaloniaControls.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
 
 namespace CodeWF.AvaloniaControls.Controls;
 
@@ -98,16 +98,10 @@ public class SearchListBox : TemplatedControl
 
     public void AddRange(IEnumerable<string>? items)
     {
-        if (ItemsSource is null || items is null)
-        {
-            return;
-        }
+        if (ItemsSource is null || items is null) return;
 
         var itemList = items.ToList();
-        if (itemList.Count == 0)
-        {
-            return;
-        }
+        if (itemList.Count == 0) return;
 
         ItemsSource.AddRange(itemList);
         SearchData();
@@ -115,16 +109,10 @@ public class SearchListBox : TemplatedControl
 
     public void RemoveRange(IEnumerable<string>? items)
     {
-        if (ItemsSource is null || items is null)
-        {
-            return;
-        }
+        if (ItemsSource is null || items is null) return;
 
         var itemList = items.ToList();
-        if (itemList.Count == 0)
-        {
-            return;
-        }
+        if (itemList.Count == 0) return;
 
         ItemsSource.RemoveRange(itemList);
         SearchData();
@@ -187,17 +175,11 @@ public class SearchListBox : TemplatedControl
 
     private void OnItemsSourceChanged()
     {
-        if (_observedItemsSource is not null)
-        {
-            _observedItemsSource.CollectionChanged -= ItemsSource_OnCollectionChanged;
-        }
+        if (_observedItemsSource is not null) _observedItemsSource.CollectionChanged -= ItemsSource_OnCollectionChanged;
 
         _observedItemsSource = ItemsSource;
 
-        if (_observedItemsSource is not null)
-        {
-            _observedItemsSource.CollectionChanged += ItemsSource_OnCollectionChanged;
-        }
+        if (_observedItemsSource is not null) _observedItemsSource.CollectionChanged += ItemsSource_OnCollectionChanged;
 
         SearchData();
     }
@@ -223,28 +205,23 @@ public class SearchListBox : TemplatedControl
 
     private void UpdateSearchKey(object? sender)
     {
-        if (sender is TextBox textBox)
-        {
-            _searchKey = textBox.Text?.Trim().ToLowerInvariant();
-        }
+        if (sender is TextBox textBox) _searchKey = textBox.Text?.Trim().ToLowerInvariant();
 
         _searchTimer.Stop();
         _searchTimer.Start();
     }
 
     /// <summary>
-    /// 根据当前搜索关键字刷新绑定集合和筛选计数。
+    ///     根据当前搜索关键字刷新绑定集合和筛选计数。
     /// </summary>
     private void SearchData()
     {
         BindingItemsSource.Clear();
 
         if (ItemsSource is not null)
-        {
             BindingItemsSource.AddRange(string.IsNullOrWhiteSpace(_searchKey)
                 ? ItemsSource
                 : ItemsSource.Where(item => item.ToLowerInvariant().Contains(_searchKey)));
-        }
 
         TotalCount = ItemsSource?.Count ?? 0;
         SearchCount = BindingItemsSource.Count;

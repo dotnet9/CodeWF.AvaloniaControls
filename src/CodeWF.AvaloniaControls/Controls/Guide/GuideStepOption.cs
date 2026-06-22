@@ -73,4 +73,3 @@ public class GuideStepOption : IGuideStepOption
 
     public object? OpeningCommandParameter { get; set; }
 }
-
