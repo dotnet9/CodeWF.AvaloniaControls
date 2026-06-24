@@ -211,3 +211,6 @@ private void DynamicGuide_OnStepOpening(object? sender, GuideStepEventArgs e)
 ### TabControl
 
 ![](docs/Images/TabControl.gif)
+## Package Versioning Convention
+
+Keep NuGet package versions and Central Package Management settings in `Directory.Packages.props`, including shared version properties such as `AvaloniaVersion`. Keep `Directory.Build.props` focused on build, compiler, and NuGet package metadata. When referenced, `VC-LTL` and `YY-Thunks` should use their latest prerelease versions for OS platform compatibility.
