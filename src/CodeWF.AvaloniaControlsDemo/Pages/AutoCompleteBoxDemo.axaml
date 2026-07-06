@@ -16,6 +16,18 @@
         <vm:AutoCompleteBoxDemoViewModel />
     </UserControl.DataContext>
 
+    <UserControl.Styles>
+        <Style Selector="u|AutoCompleteBox">
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+        </Style>
+        <Style Selector="u|AutoCompleteBox /template/ TextBox#PART_TextBox">
+            <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
+            <Setter Property="CaretBrush" Value="{DynamicResource ShowcaseTextBrush}" />
+            <Setter Property="SelectionBrush" Value="{DynamicResource ShowcaseAccentSubtleBrush}" />
+            <Setter Property="SelectionForegroundBrush" Value="{DynamicResource ShowcaseTextBrush}" />
+        </Style>
+    </UserControl.Styles>
+
     <UserControl.Resources>
         <DataTemplate x:Key="AutoCompleteSuggestionTemplate" x:DataType="models:AutoCompleteBoxDemoSuggestion">
             <Grid MinWidth="420"
@@ -66,50 +78,46 @@
                            Text="{Binding Category}" />
             </Grid>
         </DataTemplate>
+
+        <DataTemplate x:Key="SimpleAutoCompleteSuggestionTemplate" x:DataType="models:AutoCompleteBoxDemoSuggestion">
+            <Grid MinWidth="320"
+                  ColumnDefinitions="*,Auto"
+                  ColumnSpacing="10">
+                <TextBlock VerticalAlignment="Center"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{Binding DisplayName}"
+                           TextTrimming="CharacterEllipsis" />
+                <Border Grid.Column="1"
+                        Padding="8,2"
+                        VerticalAlignment="Center"
+                        Background="{DynamicResource ShowcaseSubtleBackground}"
+                        BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="999"
+                        IsVisible="{Binding IsPinned}">
+                    <TextBlock FontSize="11"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource ShowcaseAccentTextBrush}"
+                               Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.PinnedTag}}" />
+                </Border>
+            </Grid>
+        </DataTemplate>
     </UserControl.Resources>
 
     <Grid RowDefinitions="Auto,*" RowSpacing="14">
-        <Border Padding="16"
-                Background="{DynamicResource ShowcaseSubtleBackground}"
-                BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
-                BorderThickness="1"
-                CornerRadius="12">
-            <StackPanel Spacing="6">
-                <TextBlock FontSize="20"
-                           FontWeight="SemiBold"
-                           Foreground="{DynamicResource ShowcaseTextBrush}"
-                           Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.Title}}" />
-                <TextBlock Classes="Caption"
-                           Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.Description}}" />
-            </StackPanel>
-        </Border>
+        <TextBlock FontSize="20"
+                   FontWeight="SemiBold"
+                   Foreground="{DynamicResource ShowcaseTextBrush}"
+                   Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.Title}}" />
 
-        <Grid Grid.Row="1" ColumnDefinitions="1.45*,*" ColumnSpacing="14">
-            <Border Classes="SurfaceCard">
-                <Grid RowDefinitions="Auto,Auto,Auto,*" RowSpacing="16">
-                    <StackPanel Spacing="5">
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="14">
+            <Border Classes="SurfaceCard" DataContext="{Binding DetailedSample}">
+                <StackPanel x:DataType="vm:AutoCompleteBoxSampleViewModel" Spacing="12">
+                    <Grid ColumnDefinitions="*,156" ColumnSpacing="12">
                         <TextBlock Classes="PanelTitle"
-                                   Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.InteractiveTitle}}" />
-                        <TextBlock Classes="Caption"
-                                   Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.InteractiveDescription}}" />
-                    </StackPanel>
-
-                    <Grid Grid.Row="1" ColumnDefinitions="*,180" ColumnSpacing="14">
-                        <StackPanel Spacing="7">
-                            <TextBlock Classes="Caption"
-                                       FontWeight="SemiBold"
-                                       Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.SearchLabel}}" />
-                            <u:AutoCompleteBox Classes="ClearButton"
-                                               FilterMode="None"
-                                               ItemTemplate="{StaticResource AutoCompleteSuggestionTemplate}"
-                                               ItemsSource="{Binding Suggestions}"
-                                               MaxDropDownHeight="320"
-                                               PlaceholderText="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.SearchWatermark}}"
-                                               SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}"
-                                               Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                               ValueMemberBinding="{ReflectionBinding DisplayName}" />
-                        </StackPanel>
-
+                                   VerticalAlignment="Center"
+                                   Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.SearchLabel}}" />
                         <StackPanel Grid.Column="1" Spacing="7">
                             <TextBlock Classes="Caption"
                                        FontWeight="SemiBold"
@@ -123,63 +131,45 @@
                         </StackPanel>
                     </Grid>
 
-                    <Border Grid.Row="2"
-                            Padding="14,12"
-                            Background="{DynamicResource ShowcaseSubtleBackground}"
-                            BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="10">
-                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                            <StackPanel Spacing="4">
-                                <TextBlock FontWeight="SemiBold"
-                                           Foreground="{DynamicResource ShowcaseTextBrush}"
-                                           Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.CurrentRuleTitle}}" />
-                                <TextBlock Classes="Caption"
-                                           Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.CurrentRuleDescription}}" />
-                            </StackPanel>
-                            <Border Grid.Column="1"
-                                    Classes="StatePill"
-                                    VerticalAlignment="Top">
-                                <TextBlock FontSize="12"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource ShowcaseAccentTextBrush}"
-                                           Text="{Binding FilterSummary}" />
-                            </Border>
-                        </Grid>
-                    </Border>
-
-                    <Border Grid.Row="3"
-                            Padding="14"
-                            Background="{DynamicResource ShowcaseSubtleBackground}"
-                            BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="10">
-                        <StackPanel Spacing="8">
-                            <TextBlock FontWeight="SemiBold"
-                                       Foreground="{DynamicResource ShowcaseTextBrush}"
-                                       Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.SelectedTitle}}" />
-                            <TextBlock Classes="Caption"
-                                       Text="{Binding SelectedSuggestion.DisplayName, TargetNullValue='-'}" />
-                        </StackPanel>
-                    </Border>
-                </Grid>
+                    <u:AutoCompleteBox Classes="ClearButton"
+                                       ItemFilter="{Binding ItemFilter}"
+                                       ItemTemplate="{StaticResource AutoCompleteSuggestionTemplate}"
+                                       ItemsSource="{Binding Suggestions}"
+                                       MaxDropDownHeight="320"
+                                       PlaceholderText="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.SearchWatermark}}"
+                                       SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}"
+                                       ValueMemberBinding="{ReflectionBinding DisplayName}" />
+                </StackPanel>
             </Border>
 
-            <Border Grid.Column="1" Classes="SurfaceCard">
-                <Grid RowDefinitions="Auto,*" RowSpacing="12">
-                    <StackPanel Spacing="5">
+            <Border Grid.Column="1" Classes="SurfaceCard" DataContext="{Binding SimpleSample}">
+                <StackPanel x:DataType="vm:AutoCompleteBoxSampleViewModel" Spacing="12">
+                    <Grid ColumnDefinitions="*,156" ColumnSpacing="12">
                         <TextBlock Classes="PanelTitle"
-                                   Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.ResultTitle}}" />
-                        <TextBlock Classes="Caption"
-                                   Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.ResultDescription}}" />
-                    </StackPanel>
+                                   VerticalAlignment="Center"
+                                   Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.SimpleSearchLabel}}" />
+                        <StackPanel Grid.Column="1" Spacing="7">
+                            <TextBlock Classes="Caption"
+                                       FontWeight="SemiBold"
+                                       Text="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.PinnedCountLabel}}" />
+                            <NumericUpDown ClipValueToMinMax="True"
+                                           FormatString="0"
+                                           Increment="1"
+                                           Maximum="{Binding MaxPinnedCount}"
+                                           Minimum="0"
+                                           Value="{Binding PinnedCount, Mode=TwoWay}" />
+                        </StackPanel>
+                    </Grid>
 
-                    <ListBox Grid.Row="1"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             ItemTemplate="{StaticResource AutoCompleteSuggestionTemplate}"
-                             ItemsSource="{Binding Suggestions}" />
-                </Grid>
+                    <u:AutoCompleteBox Classes="ClearButton"
+                                       ItemFilter="{Binding ItemFilter}"
+                                       ItemTemplate="{StaticResource SimpleAutoCompleteSuggestionTemplate}"
+                                       ItemsSource="{Binding Suggestions}"
+                                       MaxDropDownHeight="320"
+                                       PlaceholderText="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.SearchWatermark}}"
+                                       SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}"
+                                       ValueMemberBinding="{ReflectionBinding DisplayName}" />
+                </StackPanel>
             </Border>
         </Grid>
     </Grid>

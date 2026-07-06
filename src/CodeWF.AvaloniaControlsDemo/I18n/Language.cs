@@ -110,6 +110,7 @@ namespace Showcase.Pages
         public static readonly string InteractiveTitle = "Showcase.Pages.AutoCompleteBoxDemo.InteractiveTitle";
         public static readonly string InteractiveDescription = "Showcase.Pages.AutoCompleteBoxDemo.InteractiveDescription";
         public static readonly string SearchLabel = "Showcase.Pages.AutoCompleteBoxDemo.SearchLabel";
+        public static readonly string SimpleSearchLabel = "Showcase.Pages.AutoCompleteBoxDemo.SimpleSearchLabel";
         public static readonly string SearchWatermark = "Showcase.Pages.AutoCompleteBoxDemo.SearchWatermark";
         public static readonly string PinnedCountLabel = "Showcase.Pages.AutoCompleteBoxDemo.PinnedCountLabel";
         public static readonly string PinnedTag = "Showcase.Pages.AutoCompleteBoxDemo.PinnedTag";
