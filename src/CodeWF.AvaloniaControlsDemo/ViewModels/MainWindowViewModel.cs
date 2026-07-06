@@ -45,6 +45,7 @@ public sealed class MainWindowViewModel : ReactiveObject
             new ShowcasePageItem(MainWindowLangs.TabOverview, "Overview", new OverviewDemo()),
             new ShowcasePageItem("ColumnDisplayEditor", "Column Display Editor", new ColumnDisplayEditorDemo()),
             new ShowcasePageItem(MainWindowLangs.TabTransfer, "Transfer", new TransferDemo()),
+            new ShowcasePageItem(MainWindowLangs.TabAutoCompleteBox, "AutoCompleteBox Ursa", new AutoCompleteBoxDemo()),
             new ShowcasePageItem(MainWindowLangs.TabVComboBox, "VComboBox", new VComboBoxDemo()),
             new ShowcasePageItem(MainWindowLangs.TabTabControl, "TabControl", new TabControlDemo()),
             new ShowcasePageItem(MainWindowLangs.TabGuide, "Guide Tour 引导", new GuideDemo()),

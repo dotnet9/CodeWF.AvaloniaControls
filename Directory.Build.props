@@ -5,7 +5,7 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <IncludeSymbols>true</IncludeSymbols>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <Version>12.0.5.2</Version>
+    <Version>12.0.5.3</Version>
     <Authors>沙漠尽头的狼</Authors>
     <RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

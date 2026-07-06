@@ -14,4 +14,9 @@
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Foreground" Value="{DynamicResource ShowcaseTextBrush}" />
     </Style>
+    <Style Selector="Border.StatePill">
+        <Setter Property="Padding" Value="8,3" />
+        <Setter Property="Background" Value="{DynamicResource ShowcaseAccentSubtleBrush}" />
+        <Setter Property="CornerRadius" Value="999" />
+    </Style>
 </Styles>

@@ -16,6 +16,7 @@
         "NoMatches": "沒有相符的控件",
         "TabOverview": "Overview",
         "TabTransfer": "Transfer",
+        "TabAutoCompleteBox": "AutoCompleteBox",
         "TabVComboBox": "VComboBox",
         "TabTabControl": "TabControl",
         "TabGuide": "Guide",
@@ -83,6 +84,21 @@
         "ColumnTags": "標籤",
         "ColumnSummary": "摘要",
         "ColumnNotes": "備註"
+      },
+      "AutoCompleteBoxDemo": {
+        "Title": "AutoCompleteBox 置頂篩選",
+        "Description": "基於 Ursa AutoCompleteBox 展示「預設項置頂且不參與輸入篩選」的下拉規則。",
+        "InteractiveTitle": "互動示例",
+        "InteractiveDescription": "輸入關鍵字或調整置頂數量；下拉內容由 ViewModel 計算，控件自身篩選關閉。",
+        "SearchLabel": "搜尋內容",
+        "SearchWatermark": "輸入 data、status、window 等關鍵字",
+        "PinnedCountLabel": "預設置頂項數",
+        "PinnedTag": "置頂",
+        "CurrentRuleTitle": "目前篩選規則",
+        "CurrentRuleDescription": "前 N 項固定展示在下拉頂部；輸入值只篩選第 N+1 項之後的資料。輸入為空時展示全部。",
+        "SelectedTitle": "目前選擇",
+        "ResultTitle": "即時下拉順序",
+        "ResultDescription": "右側列表與 AutoCompleteBox 下拉保持一致，用於驗證置頂項不會被輸入篩選移除。"
       },
       "VComboBoxDemo": {
         "Title": "VComboBox 與圖示操作",

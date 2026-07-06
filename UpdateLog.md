@@ -1,5 +1,10 @@
 # 更新日志
 
+## 12.0.5.3 (2026-07-06)
+
+- ✨[新增]-新增基于 Ursa `AutoCompleteBox` 的示例页，支持默认项置顶、空输入全量展示和非置顶项过滤。
+- 🔨[优化]-规范 AutoCompleteBox 示例模型命名与 ViewModel 组织，避免 Demo 专用类型使用过泛名称。
+
 ## 12.0.4.11 (2026-06-08)
 
 - 🔨[优化]-补齐根目录 logo.svg、logo.png、logo.ico 三件套，子工程通过 MSBuild Link 引用根 logo，避免维护多份图标副本。

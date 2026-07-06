@@ -16,6 +16,7 @@
         "NoMatches": "没有匹配的控件",
         "TabOverview": "Overview",
         "TabTransfer": "Transfer",
+        "TabAutoCompleteBox": "AutoCompleteBox",
         "TabVComboBox": "VComboBox",
         "TabTabControl": "TabControl",
         "TabGuide": "Guide",
@@ -83,6 +84,21 @@
         "ColumnTags": "标签",
         "ColumnSummary": "摘要",
         "ColumnNotes": "备注"
+      },
+      "AutoCompleteBoxDemo": {
+        "Title": "AutoCompleteBox 置顶过滤",
+        "Description": "基于 Ursa AutoCompleteBox 展示“默认项置顶且不参与输入过滤”的下拉规则。",
+        "InteractiveTitle": "交互示例",
+        "InteractiveDescription": "输入关键字或调整置顶数量；下拉内容由 ViewModel 计算，控件自身过滤关闭。",
+        "SearchLabel": "搜索内容",
+        "SearchWatermark": "输入 data、status、window 等关键字",
+        "PinnedCountLabel": "默认置顶项数",
+        "PinnedTag": "置顶",
+        "CurrentRuleTitle": "当前过滤规则",
+        "CurrentRuleDescription": "前 N 项固定展示在下拉顶部；输入值只过滤第 N+1 项之后的数据。输入为空时展示全部。",
+        "SelectedTitle": "当前选择",
+        "ResultTitle": "实时下拉顺序",
+        "ResultDescription": "右侧列表与 AutoCompleteBox 下拉保持一致，用于验证置顶项不会被输入过滤移除。"
       },
       "VComboBoxDemo": {
         "Title": "VComboBox 与图标操作",

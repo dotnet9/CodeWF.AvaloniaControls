@@ -16,6 +16,7 @@
         "NoMatches": "一致するコントロールはありません",
         "TabOverview": "Overview",
         "TabTransfer": "Transfer",
+        "TabAutoCompleteBox": "AutoCompleteBox",
         "TabVComboBox": "VComboBox",
         "TabTabControl": "TabControl",
         "TabGuide": "Guide",
@@ -83,6 +84,21 @@
         "ColumnTags": "タグ",
         "ColumnSummary": "概要",
         "ColumnNotes": "メモ"
+      },
+      "AutoCompleteBoxDemo": {
+        "Title": "AutoCompleteBox 固定候補フィルター",
+        "Description": "Ursa AutoCompleteBox を使い、既定候補を先頭に固定して入力フィルターから除外する動作を示します。",
+        "InteractiveTitle": "インタラクティブサンプル",
+        "InteractiveDescription": "キーワード入力または固定件数を変更できます。下拉候補は ViewModel が計算し、コントロール側のフィルターは無効です。",
+        "SearchLabel": "検索テキスト",
+        "SearchWatermark": "data、status、window などを入力",
+        "PinnedCountLabel": "既定の固定件数",
+        "PinnedTag": "固定",
+        "CurrentRuleTitle": "現在のルール",
+        "CurrentRuleDescription": "先頭 N 件は下拉の上部に固定表示されます。入力値は N+1 件目以降だけをフィルターします。入力が空ならすべて表示します。",
+        "SelectedTitle": "現在の選択",
+        "ResultTitle": "リアルタイム下拉順序",
+        "ResultDescription": "右側のリストは AutoCompleteBox の下拉と同じ内容で、固定候補が入力で消えないことを確認できます。"
       },
       "VComboBoxDemo": {
         "Title": "VComboBox とアイコン操作",

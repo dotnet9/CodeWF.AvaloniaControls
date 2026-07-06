@@ -20,6 +20,7 @@ namespace Showcase.Main
         public static readonly string NoMatches = "Showcase.Main.MainWindow.NoMatches";
         public static readonly string TabOverview = "Showcase.Main.MainWindow.TabOverview";
         public static readonly string TabTransfer = "Showcase.Main.MainWindow.TabTransfer";
+        public static readonly string TabAutoCompleteBox = "Showcase.Main.MainWindow.TabAutoCompleteBox";
         public static readonly string TabVComboBox = "Showcase.Main.MainWindow.TabVComboBox";
         public static readonly string TabTabControl = "Showcase.Main.MainWindow.TabTabControl";
         public static readonly string TabGuide = "Showcase.Main.MainWindow.TabGuide";
@@ -99,6 +100,24 @@ namespace Showcase.Pages
         public static readonly string ColumnTags = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnTags";
         public static readonly string ColumnSummary = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnSummary";
         public static readonly string ColumnNotes = "Showcase.Pages.ColumnDisplayEditorDemo.ColumnNotes";
+    }
+
+
+    public static class AutoCompleteBoxDemo
+    {
+        public static readonly string Title = "Showcase.Pages.AutoCompleteBoxDemo.Title";
+        public static readonly string Description = "Showcase.Pages.AutoCompleteBoxDemo.Description";
+        public static readonly string InteractiveTitle = "Showcase.Pages.AutoCompleteBoxDemo.InteractiveTitle";
+        public static readonly string InteractiveDescription = "Showcase.Pages.AutoCompleteBoxDemo.InteractiveDescription";
+        public static readonly string SearchLabel = "Showcase.Pages.AutoCompleteBoxDemo.SearchLabel";
+        public static readonly string SearchWatermark = "Showcase.Pages.AutoCompleteBoxDemo.SearchWatermark";
+        public static readonly string PinnedCountLabel = "Showcase.Pages.AutoCompleteBoxDemo.PinnedCountLabel";
+        public static readonly string PinnedTag = "Showcase.Pages.AutoCompleteBoxDemo.PinnedTag";
+        public static readonly string CurrentRuleTitle = "Showcase.Pages.AutoCompleteBoxDemo.CurrentRuleTitle";
+        public static readonly string CurrentRuleDescription = "Showcase.Pages.AutoCompleteBoxDemo.CurrentRuleDescription";
+        public static readonly string SelectedTitle = "Showcase.Pages.AutoCompleteBoxDemo.SelectedTitle";
+        public static readonly string ResultTitle = "Showcase.Pages.AutoCompleteBoxDemo.ResultTitle";
+        public static readonly string ResultDescription = "Showcase.Pages.AutoCompleteBoxDemo.ResultDescription";
     }
 
 

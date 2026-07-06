@@ -16,6 +16,7 @@
         "NoMatches": "No matching controls",
         "TabOverview": "Overview",
         "TabTransfer": "Transfer",
+        "TabAutoCompleteBox": "AutoCompleteBox",
         "TabVComboBox": "VComboBox",
         "TabTabControl": "TabControl",
         "TabGuide": "Guide",
@@ -83,6 +84,21 @@
         "ColumnTags": "Tags",
         "ColumnSummary": "Summary",
         "ColumnNotes": "Notes"
+      },
+      "AutoCompleteBoxDemo": {
+        "Title": "AutoCompleteBox Pinned Filtering",
+        "Description": "Uses Ursa AutoCompleteBox to show pinned default items that stay visible and bypass input filtering.",
+        "InteractiveTitle": "Interactive sample",
+        "InteractiveDescription": "Type a keyword or adjust the pinned count. The ViewModel computes the dropdown items while the control filter is disabled.",
+        "SearchLabel": "Search text",
+        "SearchWatermark": "Try data, status, window",
+        "PinnedCountLabel": "Pinned default items",
+        "PinnedTag": "Pinned",
+        "CurrentRuleTitle": "Current rule",
+        "CurrentRuleDescription": "The first N items stay fixed at the top. Input text only filters items after those defaults. Empty input shows everything.",
+        "SelectedTitle": "Current selection",
+        "ResultTitle": "Live dropdown order",
+        "ResultDescription": "This list mirrors the AutoCompleteBox dropdown so the pinned items can be checked without reopening the popup."
       },
       "VComboBoxDemo": {
         "Title": "VComboBox and Icon Actions",
