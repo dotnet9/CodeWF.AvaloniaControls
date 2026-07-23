@@ -13,7 +13,7 @@
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.AvaloniaEdit" Version="12.0.0" />
     <PackageVersion Include="AnimatedImage.Avalonia" Version="2.1.4" />
-    <PackageVersion Include="CodeWF.LogViewer.Avalonia" Version="12.1.0.1" />
+    <PackageVersion Include="CodeWF.LogViewer.Avalonia" Version="12.1.0.16" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="2.1.0" />
     <PackageVersion Include="Lang.Avalonia.Json" Version="12.1.0.1" />
