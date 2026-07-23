@@ -26,7 +26,7 @@
     <PackageReference Include="Avalonia.Fonts.Inter" />
     <PackageReference Include="Avalonia.Themes.Fluent" />
     <PackageReference Include="AnimatedImage.Avalonia" />
-    <PackageReference Include="CodeWF.LogViewer.Avalonia" />
+    <PackageReference Include="CodeWF.Log.Avalonia" />
     <!--Condition below is needed to remove diagnostics support package from build output in Release configuration.-->
     <PackageReference Include="ReactiveUI.Avalonia" />
     <PackageReference Include="Irihi.Ursa.Themes.Semi" />
