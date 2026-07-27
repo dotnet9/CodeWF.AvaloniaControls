@@ -267,7 +267,6 @@
         </Style>
         <Style Selector="^:native-window-corners /template/ Border.window-frame">
             <Setter Property="CornerRadius" Value="0" />
-            <Setter Property="BorderThickness" Value="0" />
         </Style>
         <Style Selector="^:maximized /template/ Border.window-frame">
             <Setter Property="CornerRadius" Value="0" />
