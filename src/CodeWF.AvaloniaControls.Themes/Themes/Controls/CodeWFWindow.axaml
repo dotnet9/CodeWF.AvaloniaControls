@@ -40,9 +40,7 @@
                             <Border
                                 Classes="window-content"
                                 Margin="0"
-                                Background="{TemplateBinding Background}"
-                                ClipToBounds="True"
-                                CornerRadius="{TemplateBinding WindowCornerRadius}">
+                                Background="Transparent">
                                 <Panel>
                                     <Grid RowDefinitions="Auto,*">
                                         <Border
@@ -267,19 +265,17 @@
             <Setter Property="Grid.Row" Value="0" />
             <Setter Property="Grid.RowSpan" Value="2" />
         </Style>
+        <Style Selector="^:native-window-corners /template/ Border.window-frame">
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
         <Style Selector="^:maximized /template/ Border.window-frame">
             <Setter Property="CornerRadius" Value="0" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
-        <Style Selector="^:maximized /template/ Border.window-content">
-            <Setter Property="CornerRadius" Value="0" />
-        </Style>
         <Style Selector="^:fullscreen /template/ Border.window-frame">
             <Setter Property="CornerRadius" Value="0" />
             <Setter Property="BorderThickness" Value="0" />
-        </Style>
-        <Style Selector="^:fullscreen /template/ Border.window-content">
-            <Setter Property="CornerRadius" Value="0" />
         </Style>
         <Style Selector="^ /template/ Button.caption-button">
             <Setter Property="Width" Value="{StaticResource CaptionButtonWidth}" />

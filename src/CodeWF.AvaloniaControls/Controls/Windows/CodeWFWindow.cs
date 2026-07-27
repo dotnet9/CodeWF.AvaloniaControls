@@ -8,6 +8,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.VisualTree;
+using CodeWF.AvaloniaControls.Helpers;
 
 namespace CodeWF.AvaloniaControls.Controls;
 
@@ -74,6 +75,7 @@ public class CodeWFWindow : Window
         AvaloniaProperty.Register<CodeWFWindow, CornerRadius>(nameof(WindowCornerRadius), new CornerRadius(4));
 
     private readonly Dictionary<Control, WindowEdge> _resizeGrips = new();
+    private readonly bool _usesNativeWindowCorners;
     private Button? _closeButton;
     private Button? _fullScreenButton;
     private Button? _maximizeRestoreButton;
@@ -84,8 +86,11 @@ public class CodeWFWindow : Window
     {
         WindowDecorations = WindowDecorations.None;
         ExtendClientAreaToDecorationsHint = false;
-        TransparencyLevelHint = [WindowTransparencyLevel.Transparent];
+        _usesNativeWindowCorners = WindowsDwmWindowCornerHelper.IsSupported;
+        TransparencyLevelHint =
+            [_usesNativeWindowCorners ? WindowTransparencyLevel.None : WindowTransparencyLevel.Transparent];
         TransparencyBackgroundFallback = Brushes.Transparent;
+        PseudoClasses.Set(":native-window-corners", _usesNativeWindowCorners);
     }
 
     public bool IsFullScreenButtonVisible
@@ -210,6 +215,12 @@ public class CodeWFWindow : Window
 
     protected override Type StyleKeyOverride => typeof(CodeWFWindow);
 
+    protected override void OnOpened(EventArgs e)
+    {
+        base.OnOpened(e);
+        ApplyNativeWindowCornerPreference();
+    }
+
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -251,7 +262,11 @@ public class CodeWFWindow : Window
     {
         base.OnPropertyChanged(change);
 
-        if (change.Property == WindowStateProperty) UpdateWindowStatePseudoClasses();
+        if (change.Property == WindowStateProperty)
+        {
+            UpdateWindowStatePseudoClasses();
+            ApplyNativeWindowCornerPreference();
+        }
 
         if (change.Property == ContentExtendsIntoTitleBarProperty) UpdateContentLayoutPseudoClasses();
 
@@ -356,6 +371,13 @@ public class CodeWFWindow : Window
         PseudoClasses.Set(":maximized", WindowState == WindowState.Maximized);
         PseudoClasses.Set(":normal", WindowState == WindowState.Normal);
         PseudoClasses.Set(":fullscreen", WindowState == WindowState.FullScreen);
+    }
+
+    private void ApplyNativeWindowCornerPreference()
+    {
+        if (!_usesNativeWindowCorners) return;
+
+        WindowsDwmWindowCornerHelper.TryApply(this, WindowState == WindowState.Normal);
     }
 
     private void UpdateContentLayoutPseudoClasses()
