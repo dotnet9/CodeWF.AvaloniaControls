@@ -2,8 +2,8 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-    <AvaloniaVersion>12.1.0</AvaloniaVersion>
-    <ReactiveUIAvaloniaVersion>12.0.3</ReactiveUIAvaloniaVersion>
+    <AvaloniaVersion>12.1.1</AvaloniaVersion>
+    <ReactiveUIAvaloniaVersion>12.1.0</ReactiveUIAvaloniaVersion>
     <SemiAvaloniaVersion>12.1.0</SemiAvaloniaVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -13,14 +13,14 @@
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.AvaloniaEdit" Version="12.0.0" />
     <PackageVersion Include="AnimatedImage.Avalonia" Version="2.1.4" />
-    <PackageVersion Include="CodeWF.Log.Avalonia" Version="12.1.0.23" />
+    <PackageVersion Include="CodeWF.Log.Avalonia" Version="12.1.1.1" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="2.1.0" />
-    <PackageVersion Include="Lang.Avalonia.Json" Version="12.1.0.1" />
+    <PackageVersion Include="Lang.Avalonia.Json" Version="12.1.1.1" />
     <PackageVersion Include="ReactiveUI.Avalonia" Version="$(ReactiveUIAvaloniaVersion)" />
     <PackageVersion Include="Semi.Avalonia" Version="$(SemiAvaloniaVersion)" />
     <PackageVersion Include="VC-LTL" Version="5.3.1" />
-    <PackageVersion Include="YY-Thunks" Version="1.2.1" />
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.300" />
+    <PackageVersion Include="YY-Thunks" Version="1.2.2" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.301" />
   </ItemGroup>
 </Project>
