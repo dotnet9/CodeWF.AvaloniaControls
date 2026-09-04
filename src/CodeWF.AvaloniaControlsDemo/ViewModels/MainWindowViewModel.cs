@@ -43,6 +43,7 @@ public sealed class MainWindowViewModel : ReactiveObject
         _pages =
         [
             new ShowcasePageItem(MainWindowLangs.TabOverview, "Overview", new OverviewDemo()),
+            new ShowcasePageItem(MainWindowLangs.TabColor, "Color ColorPicker Gradient Brush", new ColorDemo()),
             new ShowcasePageItem("ColumnDisplayEditor", "Column Display Editor", new ColumnDisplayEditorDemo()),
             new ShowcasePageItem(MainWindowLangs.TabTransfer, "Transfer", new TransferDemo()),
             new ShowcasePageItem(MainWindowLangs.TabAutoCompleteBox, "AutoCompleteBox Ursa", new AutoCompleteBoxDemo()),

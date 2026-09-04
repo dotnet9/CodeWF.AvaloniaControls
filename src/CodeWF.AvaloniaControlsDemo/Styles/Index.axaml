@@ -13,6 +13,7 @@
     <StyleInclude Source="Pages/Common.axaml" />
     <StyleInclude Source="Pages/AnimatedImageDemo.axaml" />
     <StyleInclude Source="Pages/ColumnDisplayEditorDemo.axaml" />
+    <StyleInclude Source="Pages/ColorDemo.axaml" />
     <StyleInclude Source="Pages/GuideDemo.axaml" />
     <StyleInclude Source="Pages/MarkupExtensionsDemo.axaml" />
     <StyleInclude Source="Pages/OverviewDemo.axaml" />

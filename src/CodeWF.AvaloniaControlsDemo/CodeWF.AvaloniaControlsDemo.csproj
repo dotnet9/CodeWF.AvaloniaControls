@@ -32,6 +32,7 @@
     <PackageReference Include="ReactiveUI.Avalonia" />
     <PackageReference Include="Irihi.Ursa.Themes.Semi" />
     <PackageReference Include="Lang.Avalonia.Json" />
+    <PackageReference Include="Semi.Avalonia.ColorPicker" />
     <PackageReference Include="Avalonia.AvaloniaEdit" />
     <PackageReference Include="YY-Thunks" />
     <PackageReference Include="VC-LTL" />

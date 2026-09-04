@@ -1,0 +1,6 @@
+<Styles xmlns="https://github.com/avaloniaui">
+    <Style Selector="TextBlock.FormLabel">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{DynamicResource ShowcaseMutedTextBrush}" />
+    </Style>
+</Styles>

@@ -1,0 +1,384 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i18n="https://codewf.com"
+             xmlns:local="clr-namespace:CodeWF.AvaloniaControlsDemo.Pages"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pageLangs="clr-namespace:Showcase.Pages"
+             x:Class="CodeWF.AvaloniaControlsDemo.Pages.ColorDemo"
+             d:DesignHeight="720"
+             d:DesignWidth="940"
+             mc:Ignorable="d">
+    <Grid RowDefinitions="Auto,*" RowSpacing="14">
+        <Border Padding="16"
+                Background="{DynamicResource ShowcaseSubtleBackground}"
+                BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="12">
+            <StackPanel Spacing="6">
+                <TextBlock FontSize="20"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource ShowcaseTextBrush}"
+                           Text="{i18n:I18n {x:Static pageLangs:ColorDemo.Title}}" />
+                <TextBlock Classes="Caption"
+                           Text="{i18n:I18n {x:Static pageLangs:ColorDemo.Description}}" />
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="14">
+                <Border Classes="SurfaceCard">
+                    <Grid ColumnDefinitions="1.1*,1.2*" ColumnSpacing="18">
+                        <Border Height="176"
+                                Background="{CompiledBinding $parent[local:ColorDemo].SolidColorBrush}"
+                                CornerRadius="10">
+                            <StackPanel HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Spacing="6">
+                                <TextBlock HorizontalAlignment="Center"
+                                           FontSize="24"
+                                           FontWeight="SemiBold"
+                                           Foreground="White"
+                                           Text="Aa" />
+                                <TextBlock HorizontalAlignment="Center"
+                                           Foreground="White"
+                                           Text="{CompiledBinding $parent[local:ColorDemo].SolidColor}" />
+                            </StackPanel>
+                        </Border>
+
+                        <StackPanel Grid.Column="1" Spacing="8">
+                            <TextBlock Classes="PanelTitle"
+                                       Text="{i18n:I18n {x:Static pageLangs:ColorDemo.SolidTitle}}" />
+                            <TextBlock Classes="Caption"
+                                       Text="{i18n:I18n {x:Static pageLangs:ColorDemo.SolidDescription}}" />
+                            <ColorPicker Width="250"
+                                         HorizontalAlignment="Left"
+                                         Color="{CompiledBinding $parent[local:ColorDemo].SolidColor, Mode=TwoWay}"
+                                         IsAlphaVisible="True"
+                                         IsColorComponentsVisible="True"
+                                         IsColorPaletteVisible="True"
+                                         IsColorSpectrumVisible="True"
+                                         IsHexInputVisible="True" />
+                            <TextBlock Margin="0,8,0,0"
+                                       Classes="PanelTitle"
+                                       Text="XAML" />
+                            <TextBox Height="170"
+                                     AcceptsReturn="True"
+                                     FontFamily="Cascadia Code,Consolas,Microsoft YaHei UI"
+                                     FontSize="12"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                     IsReadOnly="True"
+                                     Text="{CompiledBinding $parent[local:ColorDemo].SolidCode}"
+                                     TextWrapping="NoWrap"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Border Classes="SurfaceCard">
+                    <Grid RowDefinitions="Auto,*" RowSpacing="14">
+                        <StackPanel Spacing="5">
+                            <TextBlock Classes="PanelTitle"
+                                       Text="{i18n:I18n {x:Static pageLangs:ColorDemo.LinearTitle}}" />
+                            <TextBlock Classes="Caption"
+                                       Text="{i18n:I18n {x:Static pageLangs:ColorDemo.LinearDescription}}" />
+                        </StackPanel>
+
+                        <Grid Grid.Row="1" ColumnDefinitions="1.1*,1.3*" ColumnSpacing="18">
+                            <Border Padding="8"
+                                    Background="{DynamicResource ShowcaseSubtleBackground}"
+                                    BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="10">
+                                <Border Background="{CompiledBinding $parent[local:ColorDemo].LinearBrush}"
+                                        CornerRadius="7">
+                                    <TextBlock HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               FontSize="16"
+                                               FontWeight="SemiBold"
+                                               Foreground="White"
+                                               Text="LinearGradientBrush" />
+                                </Border>
+                            </Border>
+
+                            <Grid Grid.Column="1" RowDefinitions="Auto,Auto,Auto,*" RowSpacing="10">
+                                <Grid ColumnDefinitions="Auto,*,Auto,*" ColumnSpacing="8" RowDefinitions="Auto,Auto" RowSpacing="8">
+                                    <TextBlock Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.StartPointX}}" />
+                                    <Slider Grid.Column="1"
+                                            IsSnapToTickEnabled="True"
+                                            Maximum="1"
+                                            Minimum="0"
+                                            TickFrequency="0.05"
+                                            Value="{CompiledBinding $parent[local:ColorDemo].LinearStartX, Mode=TwoWay}" />
+                                    <TextBlock Grid.Column="2"
+                                               Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.StartPointY}}" />
+                                    <Slider Grid.Column="3"
+                                            IsSnapToTickEnabled="True"
+                                            Maximum="1"
+                                            Minimum="0"
+                                            TickFrequency="0.05"
+                                            Value="{CompiledBinding $parent[local:ColorDemo].LinearStartY, Mode=TwoWay}" />
+                                    <TextBlock Grid.Row="1"
+                                               Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.EndPointX}}" />
+                                    <Slider Grid.Row="1"
+                                            Grid.Column="1"
+                                            IsSnapToTickEnabled="True"
+                                            Maximum="1"
+                                            Minimum="0"
+                                            TickFrequency="0.05"
+                                            Value="{CompiledBinding $parent[local:ColorDemo].LinearEndX, Mode=TwoWay}" />
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="2"
+                                               Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.EndPointY}}" />
+                                    <Slider Grid.Row="1"
+                                            Grid.Column="3"
+                                            IsSnapToTickEnabled="True"
+                                            Maximum="1"
+                                            Minimum="0"
+                                            TickFrequency="0.05"
+                                            Value="{CompiledBinding $parent[local:ColorDemo].LinearEndY, Mode=TwoWay}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                    <TextBlock Classes="PanelTitle"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.GradientStops}}" />
+                                    <Button Grid.Column="1"
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            Click="AddLinearStopClick"
+                                            Content="+"
+                                            ToolTip.Tip="{i18n:I18n {x:Static pageLangs:ColorDemo.AddStop}}" />
+                                </Grid>
+
+                                <Grid Grid.Row="2" ColumnDefinitions="28,*,*,32" ColumnSpacing="8">
+                                    <TextBlock Grid.Column="1"
+                                               Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.Color}}" />
+                                    <TextBlock Grid.Column="2"
+                                               Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.Offset}}" />
+                                </Grid>
+
+                                <StackPanel Grid.Row="3" Spacing="10">
+                                    <ItemsControl ItemsSource="{CompiledBinding $parent[local:ColorDemo].LinearGradientStops}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="local:GradientStopEditor">
+                                            <Grid Margin="0,3"
+                                                  ColumnDefinitions="28,*,*,32"
+                                                  ColumnSpacing="8">
+                                                <Border Width="28"
+                                                        Height="28"
+                                                        Background="{CompiledBinding ColorBrush}"
+                                                        BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                                                        BorderThickness="1"
+                                                        CornerRadius="5" />
+                                                <ColorPicker Grid.Column="1"
+                                                             HorizontalAlignment="Stretch"
+                                                             Color="{CompiledBinding Color, Mode=TwoWay}"
+                                                             IsAlphaVisible="True"
+                                                             IsHexInputVisible="True" />
+                                                <Slider Grid.Column="2"
+                                                        IsSnapToTickEnabled="True"
+                                                        Maximum="1"
+                                                        Minimum="0"
+                                                        TickFrequency="0.05"
+                                                        Value="{CompiledBinding Offset, Mode=TwoWay}" />
+                                                <Button Grid.Column="3"
+                                                        Width="32"
+                                                        Height="32"
+                                                        Padding="0"
+                                                        Click="RemoveLinearStopClick"
+                                                        Content="-"
+                                                        Tag="{Binding}"
+                                                        ToolTip.Tip="{i18n:I18n {x:Static pageLangs:ColorDemo.RemoveStop}}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <TextBlock Classes="PanelTitle" Text="XAML" />
+                                    <TextBox Height="190"
+                                             AcceptsReturn="True"
+                                             FontFamily="Cascadia Code,Consolas,Microsoft YaHei UI"
+                                             FontSize="12"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                             IsReadOnly="True"
+                                             Text="{CompiledBinding $parent[local:ColorDemo].LinearCode}"
+                                             TextWrapping="NoWrap"
+                                             ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <Border Classes="SurfaceCard">
+                    <Grid RowDefinitions="Auto,*" RowSpacing="14">
+                        <StackPanel Spacing="5">
+                            <TextBlock Classes="PanelTitle"
+                                       Text="{i18n:I18n {x:Static pageLangs:ColorDemo.RadialTitle}}" />
+                            <TextBlock Classes="Caption"
+                                       Text="{i18n:I18n {x:Static pageLangs:ColorDemo.RadialDescription}}" />
+                        </StackPanel>
+
+                        <Grid Grid.Row="1" ColumnDefinitions="1.1*,1.3*" ColumnSpacing="18">
+                            <Border Padding="8"
+                                    Background="{DynamicResource ShowcaseSubtleBackground}"
+                                    BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="10">
+                                <Border Background="{CompiledBinding $parent[local:ColorDemo].RadialBrush}"
+                                        CornerRadius="7">
+                                    <TextBlock HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               FontSize="16"
+                                               FontWeight="SemiBold"
+                                               Foreground="White"
+                                               Text="RadialGradientBrush" />
+                                </Border>
+                            </Border>
+
+                            <Grid Grid.Column="1" RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="10">
+                                <Grid ColumnDefinitions="Auto,*,Auto,*" ColumnSpacing="8" RowDefinitions="Auto,Auto" RowSpacing="8">
+                                    <TextBlock Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.CenterX}}" />
+                                    <Slider Grid.Column="1"
+                                            IsSnapToTickEnabled="True"
+                                            Maximum="1"
+                                            Minimum="0"
+                                            TickFrequency="0.05"
+                                            Value="{CompiledBinding $parent[local:ColorDemo].RadialCenterX, Mode=TwoWay}" />
+                                    <TextBlock Grid.Column="2"
+                                               Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.CenterY}}" />
+                                    <Slider Grid.Column="3"
+                                            IsSnapToTickEnabled="True"
+                                            Maximum="1"
+                                            Minimum="0"
+                                            TickFrequency="0.05"
+                                            Value="{CompiledBinding $parent[local:ColorDemo].RadialCenterY, Mode=TwoWay}" />
+                                    <TextBlock Grid.Row="1"
+                                               Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.OriginX}}" />
+                                    <Slider Grid.Row="1"
+                                            Grid.Column="1"
+                                            IsSnapToTickEnabled="True"
+                                            Maximum="1"
+                                            Minimum="0"
+                                            TickFrequency="0.05"
+                                            Value="{CompiledBinding $parent[local:ColorDemo].RadialOriginX, Mode=TwoWay}" />
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="2"
+                                               Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.OriginY}}" />
+                                    <Slider Grid.Row="1"
+                                            Grid.Column="3"
+                                            IsSnapToTickEnabled="True"
+                                            Maximum="1"
+                                            Minimum="0"
+                                            TickFrequency="0.05"
+                                            Value="{CompiledBinding $parent[local:ColorDemo].RadialOriginY, Mode=TwoWay}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto,*" ColumnSpacing="8">
+                                    <TextBlock Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.RadiusX}}" />
+                                    <Slider Grid.Column="1"
+                                            IsSnapToTickEnabled="True"
+                                            Maximum="1"
+                                            Minimum="0"
+                                            TickFrequency="0.05"
+                                            Value="{CompiledBinding $parent[local:ColorDemo].RadialRadiusX, Mode=TwoWay}" />
+                                    <TextBlock Grid.Column="2"
+                                               Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.RadiusY}}" />
+                                    <Slider Grid.Column="3"
+                                            IsSnapToTickEnabled="True"
+                                            Maximum="1"
+                                            Minimum="0"
+                                            TickFrequency="0.05"
+                                            Value="{CompiledBinding $parent[local:ColorDemo].RadialRadiusY, Mode=TwoWay}" />
+                                </Grid>
+
+                                <Grid Grid.Row="2" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                    <TextBlock Classes="PanelTitle"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.GradientStops}}" />
+                                    <Button Grid.Column="1"
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            Click="AddRadialStopClick"
+                                            Content="+"
+                                            ToolTip.Tip="{i18n:I18n {x:Static pageLangs:ColorDemo.AddStop}}" />
+                                </Grid>
+
+                                <Grid Grid.Row="3" ColumnDefinitions="28,*,*,32" ColumnSpacing="8">
+                                    <TextBlock Grid.Column="1"
+                                               Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.Color}}" />
+                                    <TextBlock Grid.Column="2"
+                                               Classes="FormLabel"
+                                               Text="{i18n:I18n {x:Static pageLangs:ColorDemo.Offset}}" />
+                                </Grid>
+
+                                <StackPanel Grid.Row="4" Spacing="10">
+                                    <ItemsControl ItemsSource="{CompiledBinding $parent[local:ColorDemo].RadialGradientStops}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="local:GradientStopEditor">
+                                            <Grid Margin="0,3"
+                                                  ColumnDefinitions="28,*,*,32"
+                                                  ColumnSpacing="8">
+                                                <Border Width="28"
+                                                        Height="28"
+                                                        Background="{CompiledBinding ColorBrush}"
+                                                        BorderBrush="{DynamicResource ShowcaseSubtleBorderBrush}"
+                                                        BorderThickness="1"
+                                                        CornerRadius="5" />
+                                                <ColorPicker Grid.Column="1"
+                                                             HorizontalAlignment="Stretch"
+                                                             Color="{CompiledBinding Color, Mode=TwoWay}"
+                                                             IsAlphaVisible="True"
+                                                             IsHexInputVisible="True" />
+                                                <Slider Grid.Column="2"
+                                                        IsSnapToTickEnabled="True"
+                                                        Maximum="1"
+                                                        Minimum="0"
+                                                        TickFrequency="0.05"
+                                                        Value="{CompiledBinding Offset, Mode=TwoWay}" />
+                                                <Button Grid.Column="3"
+                                                        Width="32"
+                                                        Height="32"
+                                                        Padding="0"
+                                                        Click="RemoveRadialStopClick"
+                                                        Content="-"
+                                                        Tag="{Binding}"
+                                                        ToolTip.Tip="{i18n:I18n {x:Static pageLangs:ColorDemo.RemoveStop}}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <TextBlock Classes="PanelTitle" Text="XAML" />
+                                    <TextBox Height="210"
+                                             AcceptsReturn="True"
+                                             FontFamily="Cascadia Code,Consolas,Microsoft YaHei UI"
+                                             FontSize="12"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                             IsReadOnly="True"
+                                             Text="{CompiledBinding $parent[local:ColorDemo].RadialCode}"
+                                             TextWrapping="NoWrap"
+                                             ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

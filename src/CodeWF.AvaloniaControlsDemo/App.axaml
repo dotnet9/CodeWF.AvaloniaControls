@@ -9,6 +9,7 @@
     <Application.Styles>
         <fluent:FluentTheme />
         <semi:SemiTheme Locale="zh-CN" />
+        <semi:ColorPickerSemiTheme />
         <uSemi:SemiTheme Locale="zh-CN" />
         <codewf:ACSemiTheme />
         <StyleInclude Source="Styles/Index.axaml" />

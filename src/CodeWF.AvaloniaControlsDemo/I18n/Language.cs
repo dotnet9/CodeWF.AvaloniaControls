@@ -18,6 +18,7 @@ namespace Showcase.Main
         public static readonly string ThemeLight = "Showcase.Main.MainWindow.ThemeLight";
         public static readonly string ThemeDark = "Showcase.Main.MainWindow.ThemeDark";
         public static readonly string NoMatches = "Showcase.Main.MainWindow.NoMatches";
+        public static readonly string TabColor = "Showcase.Main.MainWindow.TabColor";
         public static readonly string TabOverview = "Showcase.Main.MainWindow.TabOverview";
         public static readonly string TabTransfer = "Showcase.Main.MainWindow.TabTransfer";
         public static readonly string TabAutoCompleteBox = "Showcase.Main.MainWindow.TabAutoCompleteBox";
@@ -49,6 +50,34 @@ namespace Showcase.Pages
         public static readonly string WindowSamplesDesc = "Showcase.Pages.OverviewDemo.WindowSamplesDesc";
         public static readonly string ThemeI18n = "Showcase.Pages.OverviewDemo.ThemeI18n";
         public static readonly string ThemeI18nDesc = "Showcase.Pages.OverviewDemo.ThemeI18nDesc";
+    }
+
+
+    public static class ColorDemo
+    {
+        public static readonly string Title = "Showcase.Pages.ColorDemo.Title";
+        public static readonly string Description = "Showcase.Pages.ColorDemo.Description";
+        public static readonly string SolidTitle = "Showcase.Pages.ColorDemo.SolidTitle";
+        public static readonly string SolidDescription = "Showcase.Pages.ColorDemo.SolidDescription";
+        public static readonly string LinearTitle = "Showcase.Pages.ColorDemo.LinearTitle";
+        public static readonly string LinearDescription = "Showcase.Pages.ColorDemo.LinearDescription";
+        public static readonly string RadialTitle = "Showcase.Pages.ColorDemo.RadialTitle";
+        public static readonly string RadialDescription = "Showcase.Pages.ColorDemo.RadialDescription";
+        public static readonly string StartPointX = "Showcase.Pages.ColorDemo.StartPointX";
+        public static readonly string StartPointY = "Showcase.Pages.ColorDemo.StartPointY";
+        public static readonly string EndPointX = "Showcase.Pages.ColorDemo.EndPointX";
+        public static readonly string EndPointY = "Showcase.Pages.ColorDemo.EndPointY";
+        public static readonly string CenterX = "Showcase.Pages.ColorDemo.CenterX";
+        public static readonly string CenterY = "Showcase.Pages.ColorDemo.CenterY";
+        public static readonly string OriginX = "Showcase.Pages.ColorDemo.OriginX";
+        public static readonly string OriginY = "Showcase.Pages.ColorDemo.OriginY";
+        public static readonly string RadiusX = "Showcase.Pages.ColorDemo.RadiusX";
+        public static readonly string RadiusY = "Showcase.Pages.ColorDemo.RadiusY";
+        public static readonly string GradientStops = "Showcase.Pages.ColorDemo.GradientStops";
+        public static readonly string Color = "Showcase.Pages.ColorDemo.Color";
+        public static readonly string Offset = "Showcase.Pages.ColorDemo.Offset";
+        public static readonly string AddStop = "Showcase.Pages.ColorDemo.AddStop";
+        public static readonly string RemoveStop = "Showcase.Pages.ColorDemo.RemoveStop";
     }
 
 
