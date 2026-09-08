@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <ControlTheme x:Key="VComboBox" TargetType="ComboBox">
+    <ControlTheme x:Key="CodeWFVComboBoxBaseTheme" TargetType="ComboBox">
         <Setter Property="FocusAdorner" Value="{x:Null}" />
         <Setter Property="MaxDropDownHeight" Value="{DynamicResource ComboBoxPopupMaxDropDownHeight}" />
         <Setter Property="Background" Value="{DynamicResource ComboBoxSelectorBackground}" />
@@ -236,4 +236,6 @@
             </Style>
         </Style>
     </ControlTheme>
+    <ControlTheme x:Key="VComboBox" TargetType="ComboBox"
+                  BasedOn="{StaticResource CodeWFVComboBoxBaseTheme}" />
 </ResourceDictionary>
