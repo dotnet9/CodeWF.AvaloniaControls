@@ -22,6 +22,6 @@
     <PackageVersion Include="Semi.Avalonia.ColorPicker" Version="$(SemiAvaloniaVersion)" />
     <PackageVersion Include="VC-LTL" Version="5.3.1" />
     <PackageVersion Include="YY-Thunks" Version="1.2.2" />
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.400" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.401" />
   </ItemGroup>
 </Project>
