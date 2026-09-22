@@ -1,6 +1,8 @@
+using System.Collections;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Templates;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using CodeWF.AvaloniaControls.Extensions;
@@ -58,22 +60,31 @@ public class Transfer : TemplatedControl
 
     #region 数据源属性
 
-    public static readonly StyledProperty<RangeObservableCollection<string>?> LeftItemsSourceProperty =
-        AvaloniaProperty.Register<Transfer, RangeObservableCollection<string>?>(nameof(LeftItemsSource));
+    public static readonly StyledProperty<IList?> LeftItemsSourceProperty =
+        AvaloniaProperty.Register<Transfer, IList?>(nameof(LeftItemsSource));
 
-    public RangeObservableCollection<string>? LeftItemsSource
+    public IList? LeftItemsSource
     {
         get => GetValue(LeftItemsSourceProperty);
         set => SetValue(LeftItemsSourceProperty, value);
     }
 
-    public static readonly StyledProperty<RangeObservableCollection<string>?> RightItemsSourceProperty =
-        AvaloniaProperty.Register<Transfer, RangeObservableCollection<string>?>(nameof(RightItemsSource));
+    public static readonly StyledProperty<IList?> RightItemsSourceProperty =
+        AvaloniaProperty.Register<Transfer, IList?>(nameof(RightItemsSource));
 
-    public RangeObservableCollection<string>? RightItemsSource
+    public IList? RightItemsSource
     {
         get => GetValue(RightItemsSourceProperty);
         set => SetValue(RightItemsSourceProperty, value);
+    }
+
+    public static readonly StyledProperty<IDataTemplate?> ItemTemplateProperty =
+        AvaloniaProperty.Register<Transfer, IDataTemplate?>(nameof(ItemTemplate));
+
+    public IDataTemplate? ItemTemplate
+    {
+        get => GetValue(ItemTemplateProperty);
+        set => SetValue(ItemTemplateProperty, value);
     }
 
     #endregion 数据源属性

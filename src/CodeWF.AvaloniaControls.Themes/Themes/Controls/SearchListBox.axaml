@@ -47,6 +47,7 @@
                             Name="PART_ListBox"
                             Background="Transparent"
                             BorderThickness="0"
+                            ItemTemplate="{TemplateBinding ItemTemplate}"
                             ItemsSource="{Binding BindingItemsSource, RelativeSource={RelativeSource TemplatedParent}}"
                             SelectionMode="Multiple">
                             <ListBox.Styles>

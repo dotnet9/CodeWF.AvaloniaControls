@@ -66,10 +66,14 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
         if (collection == null)
             throw new ArgumentNullException(nameof(collection));
 
+        var items = ReferenceEquals(collection, this) ? this.ToList() : collection.ToList();
+        if (items.Count == 0)
+            return;
+
         _suppressNotification = true;
         try
         {
-            foreach (var item in collection)
+            foreach (var item in items)
                 Add(item);
         }
         finally
@@ -121,12 +125,17 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
         _suppressNotification = true;
         try
         {
-            var indexes = new List<int>();
+            var indexes = new HashSet<int>();
             foreach (var item in itemsToRemove)
             {
-                var index = IndexOf(item);
-                if (index >= 0 && !indexes.Contains(index))
-                    indexes.Add(index);
+                for (var index = 0; index < Count; index++)
+                {
+                    if (!indexes.Contains(index) && EqualityComparer<T>.Default.Equals(this[index], item))
+                    {
+                        indexes.Add(index);
+                        break;
+                    }
+                }
             }
 
             foreach (var index in indexes.OrderByDescending(i => i))

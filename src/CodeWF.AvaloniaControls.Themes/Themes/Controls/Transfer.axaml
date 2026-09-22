@@ -67,6 +67,7 @@
                         <codewf:SearchListBox
                             Name="PART_LeftSearchListBox"
                             Grid.Row="1"
+                            ItemTemplate="{TemplateBinding ItemTemplate}"
                             ItemsSource="{TemplateBinding LeftItemsSource}" />
                     </Grid>
 
@@ -132,6 +133,7 @@
                         <codewf:SearchListBox
                             Name="PART_RightSearchListBox"
                             Grid.Row="1"
+                            ItemTemplate="{TemplateBinding ItemTemplate}"
                             ItemsSource="{TemplateBinding RightItemsSource}" />
                     </Grid>
                 </Grid>

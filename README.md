@@ -9,7 +9,7 @@
 
 ## 仓库规范
 
-- 当前版本：`12.1.2.5`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
+- 当前版本：`12.2.0.0`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
 - NuGet 包项目统一支持 `net8.0;net10.0;net11.0`；Demo、App、测试与内部应用项目统一使用 `net11.0` / `net11.0-windows`。
 - 根目录 `logo.svg`、`logo.png`、`logo.ico` 是唯一图标源，子工程只通过 MSBuild `Link` 引用，不维护图标副本。
 - 运行时帮助、Markdown 示例、内置备忘录、设计说明等业务文档按功能保留；仓库级入口文档使用根目录 `README.md` 和 `UpdateLog.md`。
@@ -64,6 +64,8 @@ ProDataGrid 包与示例已迁移到独立仓库：[CodeWF.AvaloniaControls.ProD
 - `StatusBadge` / `StatusCard`：语义化状态标签与状态概览卡片。
 - `CodeWFWindow` / `CodeWFTitleBar`：自定义窗口外壳和标题栏。
 - TabControl 样式、标记扩展、转换器和小型绘图辅助控件。
+
+`SearchListBox` 和 `Transfer` 的数据源使用可变 `IList`，支持普通 `ObservableCollection<T>`；复杂数据项可通过 `ItemTemplate` 自定义显示。
 
 ## Guide 引导控件
 

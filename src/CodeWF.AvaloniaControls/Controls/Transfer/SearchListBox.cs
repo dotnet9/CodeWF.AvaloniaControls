@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Templates;
 using Avalonia.Input;
 using Avalonia.Threading;
 using CodeWF.AvaloniaControls.Extensions;
@@ -18,7 +20,7 @@ public class SearchListBox : TemplatedControl
     private readonly DispatcherTimer _searchTimer;
     private ListBox? _listBox;
     private TextBox? _searchBox;
-    private RangeObservableCollection<string>? _observedItemsSource;
+    private INotifyCollectionChanged? _observedItemsSource;
     private string? _searchKey;
     private int _searchCount;
     private int _totalCount;
@@ -57,18 +59,27 @@ public class SearchListBox : TemplatedControl
 
     #region 数据源属性
 
-    public static readonly StyledProperty<RangeObservableCollection<string>?> ItemsSourceProperty =
-        AvaloniaProperty.Register<SearchListBox, RangeObservableCollection<string>?>(nameof(ItemsSource));
+    public static readonly StyledProperty<IList?> ItemsSourceProperty =
+        AvaloniaProperty.Register<SearchListBox, IList?>(nameof(ItemsSource));
 
-    public RangeObservableCollection<string>? ItemsSource
+    public IList? ItemsSource
     {
         get => GetValue(ItemsSourceProperty);
         set => SetValue(ItemsSourceProperty, value);
     }
 
-    public RangeObservableCollection<string> BindingItemsSource { get; } = new();
+    public static readonly StyledProperty<IDataTemplate?> ItemTemplateProperty =
+        AvaloniaProperty.Register<SearchListBox, IDataTemplate?>(nameof(ItemTemplate));
 
-    public List<string>? SelectedItems => _listBox?.SelectedItems?.Cast<string>().ToList();
+    public IDataTemplate? ItemTemplate
+    {
+        get => GetValue(ItemTemplateProperty);
+        set => SetValue(ItemTemplateProperty, value);
+    }
+
+    public RangeObservableCollection<object?> BindingItemsSource { get; } = new();
+
+    public List<object?>? SelectedItems => _listBox?.SelectedItems?.Cast<object?>().ToList();
 
     #endregion 数据源属性
 
@@ -96,25 +107,38 @@ public class SearchListBox : TemplatedControl
 
     #region 集合操作
 
-    public void AddRange(IEnumerable<string>? items)
+    public void AddRange(IEnumerable? items)
     {
         if (ItemsSource is null || items is null) return;
 
-        var itemList = items.ToList();
+        var itemList = items.Cast<object?>().ToList();
         if (itemList.Count == 0) return;
 
-        ItemsSource.AddRange(itemList);
+        foreach (var item in itemList) ItemsSource.Add(item);
         SearchData();
     }
 
-    public void RemoveRange(IEnumerable<string>? items)
+    public void RemoveRange(IEnumerable? items)
     {
         if (ItemsSource is null || items is null) return;
 
-        var itemList = items.ToList();
+        var itemList = items.Cast<object?>().ToList();
         if (itemList.Count == 0) return;
 
-        ItemsSource.RemoveRange(itemList);
+        var removedIndexes = new HashSet<int>();
+        foreach (var item in itemList)
+        {
+            for (var index = 0; index < ItemsSource.Count; index++)
+            {
+                if (!removedIndexes.Contains(index) && Equals(ItemsSource[index], item))
+                {
+                    removedIndexes.Add(index);
+                    break;
+                }
+            }
+        }
+
+        foreach (var index in removedIndexes.OrderByDescending(index => index)) ItemsSource.RemoveAt(index);
         SearchData();
     }
 
@@ -177,7 +201,7 @@ public class SearchListBox : TemplatedControl
     {
         if (_observedItemsSource is not null) _observedItemsSource.CollectionChanged -= ItemsSource_OnCollectionChanged;
 
-        _observedItemsSource = ItemsSource;
+        _observedItemsSource = ItemsSource as INotifyCollectionChanged;
 
         if (_observedItemsSource is not null) _observedItemsSource.CollectionChanged += ItemsSource_OnCollectionChanged;
 
@@ -220,8 +244,9 @@ public class SearchListBox : TemplatedControl
 
         if (ItemsSource is not null)
             BindingItemsSource.AddRange(string.IsNullOrWhiteSpace(_searchKey)
-                ? ItemsSource
-                : ItemsSource.Where(item => item.ToLowerInvariant().Contains(_searchKey)));
+                ? ItemsSource.Cast<object?>()
+                : ItemsSource.Cast<object?>().Where(item =>
+                    item?.ToString()?.Contains(_searchKey, StringComparison.OrdinalIgnoreCase) == true));
 
         TotalCount = ItemsSource?.Count ?? 0;
         SearchCount = BindingItemsSource.Count;
