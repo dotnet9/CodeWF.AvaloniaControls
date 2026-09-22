@@ -18,7 +18,6 @@
     <File Path="publish_all.bat" />
     <File Path="publish_AvaloniaControls.bat" />
     <File Path="README.md" />
-    <File Path="UpdateAssemblyVersion.ps1" />
     <File Path="UpdateLog.md" />
   </Folder>
   <Project Path="src/CodeWF.AvaloniaControls.Themes/CodeWF.AvaloniaControls.Themes.csproj" />

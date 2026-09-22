@@ -14,5 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/CodeWF.AvaloniaControls/CodeWF.AvaloniaControls.csproj" />
+    <ProjectReference Include="../../src/CodeWF.AvaloniaControls.Themes/CodeWF.AvaloniaControls.Themes.csproj" />
   </ItemGroup>
 </Project>
