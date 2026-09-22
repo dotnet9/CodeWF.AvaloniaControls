@@ -151,7 +151,7 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
 
     public void RemoveRange(int index, int count)
     {
-        if (index < 0 || index >= Count)
+        if (index < 0 || index > Count)
             throw new ArgumentOutOfRangeException(nameof(index));
         if (count < 0 || index + count > Count)
             throw new ArgumentOutOfRangeException(nameof(count));

@@ -9,7 +9,7 @@
 
 ## 仓库规范
 
-- 当前版本：`12.2.0.0`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
+- 当前版本：`12.2.0.1`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
 - NuGet 包项目统一支持 `net8.0;net10.0;net11.0`；Demo、App、测试与内部应用项目统一使用 `net11.0` / `net11.0-windows`。
 - 根目录 `logo.svg`、`logo.png`、`logo.ico` 是唯一图标源，子工程只通过 MSBuild `Link` 引用，不维护图标副本。
 - 运行时帮助、Markdown 示例、内置备忘录、设计说明等业务文档按功能保留；仓库级入口文档使用根目录 `README.md` 和 `UpdateLog.md`。
@@ -37,6 +37,7 @@ Install-Package CodeWF.AvaloniaControls.Themes
 ## 仓库结构
 
 - `src/`：所有工程的物理目录，包含 NuGet 类库与可运行示例
+- `tests/`：控件核心逻辑和公共集合行为测试
 - `docs/`：截图、GIF 与仓库文档资源
 - `artifacts/`：打包输出与临时构建产物
 - `artifacts/publish/`：一键发布示例后生成的发布目录
