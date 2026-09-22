@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 if "%~1"=="" (
-    set "project_paths=src\Avalonia.MusicStore src\Todo"
+    set "project_paths=src\CodeWF.AvaloniaControlsDemo"
 ) else (
     set "project_paths=%~1"
 )
@@ -70,6 +70,11 @@ set "profile_file=%profile_dir%\%publish_profile%.pubxml"
 set "target_framework="
 set "runtime_identifier="
 set "profile_metadata="
+
+if not exist "%project_path%\*.csproj" (
+    echo Missing project file under: %project_path%
+    exit /b 1
+)
 
 if not exist "%profile_file%" (
     echo Missing publish profile: %profile_file%

@@ -9,8 +9,8 @@
 
 ## 仓库规范
 
-- 当前版本：`12.1.2.3`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
-- NuGet 包项目统一支持 `net8.0;net10.0`；Demo、App、测试与内部应用项目统一使用 `net11.0` / `net11.0-windows`。
+- 当前版本：`12.1.2.4`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
+- NuGet 包项目统一支持 `net8.0;net10.0;net11.0`；Demo、App、测试与内部应用项目统一使用 `net11.0` / `net11.0-windows`。
 - 根目录 `logo.svg`、`logo.png`、`logo.ico` 是唯一图标源，子工程只通过 MSBuild `Link` 引用，不维护图标副本。
 - 运行时帮助、Markdown 示例、内置备忘录、设计说明等业务文档按功能保留；仓库级入口文档使用根目录 `README.md` 和 `UpdateLog.md`。
 
@@ -39,7 +39,7 @@ Install-Package CodeWF.AvaloniaControls.Themes
 - `src/`：所有工程的物理目录，包含 NuGet 类库与可运行示例
 - `docs/`：截图、GIF 与仓库文档资源
 - `artifacts/`：打包输出与临时构建产物
-- `publish/`：一键发布示例后生成的发布目录
+- `artifacts/publish/`：一键发布示例后生成的发布目录
 - `CodeWF.AvaloniaControls.slnx`：按包线和示例用途做逻辑分组的解决方案视图
 
 ## 包线说明
@@ -156,7 +156,7 @@ private void DynamicGuide_OnStepOpening(object? sender, GuideStepEventArgs e)
 ## 脚本
 
 - `pack.bat`：一键还原、构建并打包所有可发布类库到 `artifacts/packages`
-- `publish_all.bat`：一键发布所有示例工程到 `publish/`
+- `publish_all.bat`：一键发布所有示例工程到 `artifacts/publish/`
 - `publishbase.bat`：根目录发布脚本共用的发布辅助脚本
 
 ## 更新日志
@@ -181,7 +181,7 @@ private void DynamicGuide_OnStepOpening(object? sender, GuideStepEventArgs e)
 | `Avalonia` / `Avalonia.Desktop` / `Avalonia.Fonts.Inter` / `Avalonia.Themes.Fluent` | MIT | https://github.com/AvaloniaUI/Avalonia | 通过 |
 | `Avalonia.AvaloniaEdit` | MIT | https://github.com/AvaloniaUI/AvaloniaEdit | 通过 |
 | `AnimatedImage.Avalonia` | Apache-2.0 | https://github.com/whistyun/AnimatedImage | 通过 |
-| `CodeWF.LogViewer.Avalonia` | MIT | https://github.com/dotnet9/CodeWF.LogViewer | 自研开源包 |
+| `CodeWF.Log.Avalonia` | MIT | https://github.com/dotnet9/CodeWF.Log | 自研开源包 |
 | `CommunityToolkit.Mvvm` | MIT | https://github.com/CommunityToolkit/dotnet | 通过 |
 | `Irihi.Ursa.Themes.Semi` | MIT | https://github.com/irihitech/Ursa.Avalonia | 通过 |
 | `Lang.Avalonia.Json` | MIT | https://github.com/dotnet9/Lang.Avalonia | 自研开源包 |
