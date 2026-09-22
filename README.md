@@ -9,7 +9,7 @@
 
 ## 仓库规范
 
-- 当前版本：`12.2.0.3`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
+- 当前版本：`12.2.0.4`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
 - NuGet 包项目统一支持 `net8.0;net10.0;net11.0`；Demo、App、测试与内部应用项目统一使用 `net11.0` / `net11.0-windows`。
 - 核心库、主题库和测试固定使用 C# 12；Demo 保留 `preview`，因为示例中的属性实现使用 C# 预览的 `field` 语法。仓库不维护 `global.json`，CI 使用 .NET 11 SDK 线，本机可使用兼容的 .NET 11 SDK。
 - 根目录 `logo.svg`、`logo.png`、`logo.ico` 是唯一图标源，子工程只通过 MSBuild `Link` 引用，不维护图标副本。
@@ -157,7 +157,7 @@ private void DynamicGuide_OnStepOpening(object? sender, GuideStepEventArgs e)
 - `Publish.Common.pubxml`：共享发布参数
 - `src/*/Properties/PublishProfiles/Publish.Project.pubxml`：每个工程的发布补充配置，例如裁剪保留描述文件
 
-Demo 发布配置使用自包含单文件发布，并明确关闭裁剪和 Native AOT；Avalonia 与 Ursa 的部分运行时能力依赖反射，当前不宣称 Demo 支持裁剪或 Native AOT。
+Demo 发布配置使用自包含单文件发布；Windows profile 启用 Native AOT 和裁剪，Linux profile 启用裁剪。
 
 ## 脚本
 

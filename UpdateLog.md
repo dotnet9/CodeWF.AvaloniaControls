@@ -1,5 +1,10 @@
 # 更新日志
 
+## 12.2.0.4 (2026-09-22)
+
+- 恢复 Demo 的裁剪和 Native AOT 发布配置。
+- Windows 发布 profile 重新启用 Native AOT 及 COM 支持，Linux 发布 profile 重新继承裁剪配置。
+
 ## 12.2.0.3 (2026-09-22)
 
 - 固定核心库、主题库和测试的 C# 语言版本为 12，避免 `latest` 随 SDK 漂移。
