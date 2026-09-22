@@ -71,7 +71,7 @@
                                 </Style>
                             </ListBox.Styles>
                             <ListBox.ItemTemplate>
-                                <DataTemplate x:CompileBindings="False">
+                                <DataTemplate x:DataType="codewf:ColumnDisplayItem">
                                     <Grid ColumnDefinitions="38,72,*" MinHeight="34">
                                         <Button
                                             Name="PART_DragHandle"

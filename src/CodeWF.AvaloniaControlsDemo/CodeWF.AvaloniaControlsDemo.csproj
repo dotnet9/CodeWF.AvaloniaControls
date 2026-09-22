@@ -6,15 +6,10 @@
     <LangVersion>preview</LangVersion>
     <Nullable>enable</Nullable>
     <NoWarn>$(NoWarn);AVLN5001</NoWarn>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     <ApplicationIcon>..\..\logo.ico</ApplicationIcon>
     <Platforms>AnyCPU;x64;x86</Platforms>
-  </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net11.0-windows'))">
-    <IsTrimmable>true</IsTrimmable>
-    <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
   <!--
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

@@ -12,6 +12,8 @@ public sealed record AutoCompleteBoxDemoSuggestion(
 {
     public int DisplayIndex => SourceIndex + 1;
 
+    public override string ToString() => DisplayName;
+
     public bool Matches(string query)
     {
         return DisplayName.Contains(query, StringComparison.OrdinalIgnoreCase)

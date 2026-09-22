@@ -138,7 +138,7 @@
                                        MaxDropDownHeight="320"
                                        PlaceholderText="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.SearchWatermark}}"
                                        SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}"
-                                       ValueMemberBinding="{ReflectionBinding DisplayName}" />
+                                       />
                 </StackPanel>
             </Border>
 
@@ -168,7 +168,7 @@
                                        MaxDropDownHeight="320"
                                        PlaceholderText="{i18n:I18n {x:Static pageLangs:AutoCompleteBoxDemo.SearchWatermark}}"
                                        SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}"
-                                       ValueMemberBinding="{ReflectionBinding DisplayName}" />
+                                       />
                 </StackPanel>
             </Border>
         </Grid>

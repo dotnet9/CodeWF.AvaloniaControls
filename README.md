@@ -9,7 +9,7 @@
 
 ## 仓库规范
 
-- 当前版本：`12.1.2.4`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
+- 当前版本：`12.1.2.5`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
 - NuGet 包项目统一支持 `net8.0;net10.0;net11.0`；Demo、App、测试与内部应用项目统一使用 `net11.0` / `net11.0-windows`。
 - 根目录 `logo.svg`、`logo.png`、`logo.ico` 是唯一图标源，子工程只通过 MSBuild `Link` 引用，不维护图标副本。
 - 运行时帮助、Markdown 示例、内置备忘录、设计说明等业务文档按功能保留；仓库级入口文档使用根目录 `README.md` 和 `UpdateLog.md`。
@@ -152,6 +152,8 @@ private void DynamicGuide_OnStepOpening(object? sender, GuideStepEventArgs e)
 - `Directory.Build.targets`：类库打包时的公共处理逻辑，例如统一补充 README、更新日志与通用打包默认值
 - `Publish.Common.pubxml`：共享发布参数
 - `src/*/Properties/PublishProfiles/Publish.Project.pubxml`：每个工程的发布补充配置，例如裁剪保留描述文件
+
+Demo 发布配置使用自包含单文件发布，并明确关闭裁剪和 Native AOT；Avalonia 与 Ursa 的部分运行时能力依赖反射，当前不宣称 Demo 支持裁剪或 Native AOT。
 
 ## 脚本
 
