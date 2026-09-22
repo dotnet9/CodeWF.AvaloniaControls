@@ -3,7 +3,6 @@
     <Title>CodeWF.AvaloniaControls</Title>
     <TargetFrameworks>net8.0;net10.0;net11.0</TargetFrameworks>
     <Nullable>enable</Nullable>
-    <LangVersion>latest</LangVersion>
     <OutputType>Library</OutputType>
     <IsPackable>true</IsPackable>
     <Description>Avalonia custom control core library for CodeWF controls. It defines control APIs, state models, helpers, and drawing logic; concrete templates and visual resources are provided by CodeWF.AvaloniaControls.Themes.</Description>

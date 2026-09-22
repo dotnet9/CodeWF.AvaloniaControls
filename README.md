@@ -9,8 +9,9 @@
 
 ## 仓库规范
 
-- 当前版本：`12.2.0.2`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
+- 当前版本：`12.2.0.3`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
 - NuGet 包项目统一支持 `net8.0;net10.0;net11.0`；Demo、App、测试与内部应用项目统一使用 `net11.0` / `net11.0-windows`。
+- 核心库、主题库和测试固定使用 C# 12；Demo 保留 `preview`，因为示例中的属性实现使用 C# 预览的 `field` 语法。仓库不维护 `global.json`，CI 使用 .NET 11 SDK 线，本机可使用兼容的 .NET 11 SDK。
 - 根目录 `logo.svg`、`logo.png`、`logo.ico` 是唯一图标源，子工程只通过 MSBuild `Link` 引用，不维护图标副本。
 - 运行时帮助、Markdown 示例、内置备忘录、设计说明等业务文档按功能保留；仓库级入口文档使用根目录 `README.md` 和 `UpdateLog.md`。
 
