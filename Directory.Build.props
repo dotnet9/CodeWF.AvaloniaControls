@@ -9,7 +9,7 @@
     <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts\</ArtifactsPath>
     <PackageOutputPath>$(ArtifactsPath)packages\</PackageOutputPath>
     <LangVersion>12.0</LangVersion>
-    <Version>12.2.0.4</Version>
+    <Version>12.2.0.5</Version>
     <Authors>沙漠尽头的狼</Authors>
     <RepositoryUrl>https://github.com/dotnet9/CodeWF.AvaloniaControls</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
