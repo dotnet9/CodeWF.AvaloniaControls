@@ -1,9 +1,10 @@
-# 更新日志
+﻿# 更新日志
 
 ## 12.3.0
 
 - 🚀[新增]-`WindowedStackPanel` 窗口化堆叠面板：子项数达阈值后只物化「视口 ± overscan」内的子项控件，离屏释放、按索引增删不错位，代码块/表格/图片等大块可标记为始终物化；提供 `EnableVirtualization`/`VirtualizationThreshold`/`OverscanViewports`/`ScrollHost`/`EstimatedItemHeight` 与 `RealizedItemCount`/`RealizeItem`/`TryGetItemTop`。
 - 🚀[新增]-`ContentExpansionAnimator` 内容展开动画控件：单一进度同时驱动尺寸与透明度，支持水平/垂直展开，时长归零即瞬时到终态（便于全局关闭动效）。
+- 🚀[新增]-`TextAutoPair` 自动配对（纯逻辑）：成对符号插入、选区包裹、右半边跳过、空配对退格删除，附 9 项单元测试。
 - 🚀[新增]-`AwaitableAnimation` 动效工具与 `ExpansionOrientation` 枚举；`WindowedRealization` 纯逻辑裁剪判定，附 6 项单元测试。
 
 ## 12.2.0.4 (2026-09-22)
