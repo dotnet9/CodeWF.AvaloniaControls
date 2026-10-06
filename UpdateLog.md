@@ -1,5 +1,9 @@
 ﻿# 更新日志
 
+## 12.3.1 (2026-10-07)
+
+- 🔨[优化]-`TextAutoPair` 自动配对并入 12.3.1 一并发布（成对符号插入、选区包裹、右半边跳过、空配对退格删除，9 项单元测试）。
+
 ## 12.3.0
 
 - 🚀[新增]-`WindowedStackPanel` 窗口化堆叠面板：子项数达阈值后只物化「视口 ± overscan」内的子项控件，离屏释放、按索引增删不错位，代码块/表格/图片等大块可标记为始终物化；提供 `EnableVirtualization`/`VirtualizationThreshold`/`OverscanViewports`/`ScrollHost`/`EstimatedItemHeight` 与 `RealizedItemCount`/`RealizeItem`/`TryGetItemTop`。
