@@ -1,0 +1,10 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ac="https://codewf.com">
+    <ControlTheme x:Key="{x:Type ac:WindowedStackPanel}" TargetType="ac:WindowedStackPanel">
+        <Setter Property="EnableVirtualization" Value="True" />
+        <Setter Property="VirtualizationThreshold" Value="40" />
+        <Setter Property="OverscanViewports" Value="2" />
+        <Setter Property="EstimatedItemHeight" Value="24" />
+    </ControlTheme>
+</ResourceDictionary>

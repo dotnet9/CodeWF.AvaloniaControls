@@ -13,5 +13,6 @@
         <ResourceInclude Source="TabControl.axaml" />
         <ResourceInclude Source="TabStrip.axaml" />
         <ResourceInclude Source="Guide.axaml" />
+        <ResourceInclude Source="WindowedStackPanel.axaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
